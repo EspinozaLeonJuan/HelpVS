@@ -1,0 +1,200 @@
+.overlay {
+position:relative;
+display:inline;
+background-color:#000;
+top:0;
+left:0;
+opacity:0.5;
+-moz-opacity:0.5;
+filter:alpha(opacity=50);
+-ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
+z-index:10000;
+cursor:wait;
+margin:auto;
+}
+
+input[type="button"],input[type="submit"] {
+-webkit-appearance:none;
+-moz-appearance:none;
+width:auto;
+height:30px;
+background:#ddd;
+box-sizing:border-box;
+border-radius:5px;
+padding-left:10px;
+padding-right:10px;
+border:1px solid #bbb;
+color:#444;
+font-weight:700;
+font-family:Arial, Helvetica, sans-serif;
+text-transform:uppercase;
+font-size:14px;
+outline:none;
+cursor:pointer;
+margin:3px;
+}
+
+input[type="button"]:hover,input[type="submit"]:hover {
+background:#77d0ee;
+}
+
+.base {
+width:300px;
+background-color:#F8F8F8;
+border:#38BBE7 solid 4px;
+border-bottom-left-radius:20px 20px;
+border-top-right-radius:20px 20px;
+}
+
+.cellPanelBottom {
+border-top:#38BBE7 solid 2px;
+border-left:#38BBE7 solid 2px;
+border-spacing:0;
+height:100%;
+padding:10px;
+}
+
+.cellPanelTop {
+border-left:#38BBE7 solid 2px;
+border-spacing:0;
+padding-left:10px;
+text-align:left;
+height:100%;
+}
+
+.panel {
+float:left;
+height:100%;
+}
+
+.atAnteriores {
+border-left:#38BBE7 solid 2px;
+font-family:Arial, Helvetica, sans-serif;
+overflow:auto;
+float:left;
+border-spacing:0;
+padding-left:10px;
+text-align:left;
+height:100%;
+}
+
+.tabla {
+width:300px;
+text-align:center;
+font-family:Arial, Helvetica, sans-serif;
+border-spacing:0;
+border:0;
+}
+
+.tablaAtAnteriores {
+width:400px;
+text-align:center;
+font-size:12px;
+font-family:Arial, Helvetica, sans-serif;
+}
+
+.cellHeader {
+background-color:#1797C0;
+border-top:#1797C0 solid 4px;
+padding-bottom:20px;
+padding-top:20px;
+border-top-right-radius:17px 17px;
+}
+
+.tituloSucursal {
+color:#FFF;
+font-size:20px;
+}
+
+.tituloSAC {
+font-size:14px;
+font-weight:700;
+color:#333;
+}
+
+.tituloModulo {
+font-size:14px;
+color:#333;
+}
+
+.cellMid {
+background-color:#F8F8F8;
+height:5px;
+}
+
+.cellBtns {
+padding-top:20px;
+padding-bottom:20px;
+}
+
+.cellEstado {
+background-color:#ccc;
+padding-top:20px;
+padding-bottom:20px;
+}
+
+.cellEstado .labelEstado {
+color:#D90000;
+font-weight:700;
+font-size:24px;
+}
+
+.tablaDetallesCliente {
+width:290px;
+border:0;
+border-spacing:0;
+font-family:Arial, Helvetica, sans-serif;
+font-size:12px;
+border-color:gray;
+}
+
+.tablaDetallesSucursal {
+width:290px;
+border:0;
+border-spacing:0;
+background-color:#F8F8F8;
+padding-left:20px;
+padding-top:20px;
+padding-bottom:10px;
+font-family:Arial, Helvetica, sans-serif;
+font-size:12px;
+border-color:gray;
+}
+
+.tdTitulo {
+height:25px;
+padding:0;
+}
+
+.tdValor {
+font-weight:700;
+border-left:#999 solid 1px;
+padding:0 0 0 8px;
+}
+
+.popupBackground {
+background-color:#000;
+opacity:0.5;
+filter:alpha(opacity=50);
+width:100%;
+height:100%;
+top:0;
+left:0;
+z-index:998;
+position:absolute;
+cursor:wait;
+}
+
+.popupPanel {
+border:#38BBE7 solid 4px;
+background-color:#FFF;
+font-family:Arial, Helvetica, sans-serif;
+display:block;
+width:200px;
+height:auto;
+position:absolute;
+z-index:999;
+text-align:center;
+cursor:wait;
+margin:0 auto;
+}

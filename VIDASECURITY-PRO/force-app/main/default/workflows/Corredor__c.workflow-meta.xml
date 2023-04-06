@@ -1,0 +1,1088 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <rules>
+        <fullName>Presupuesto Anual Segmento Grande Equipo 1</fullName>
+        <actions>
+            <name>Presupuesto_Anual_Corredor_Segmento_Grande_Primer_Semestre</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Presupuesto_Anual_Corredor_Segmento_Grande_Primer_Semestre_Tagini</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Presupuesto_Anual_Corredor_Segmento_Grande_Segundo_Semestre</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Presupuesto_Anual_Corredor_Segmento_Grande_Segundo_Semestre_tagini</name>
+            <type>Task</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1 AND 2 AND 3 AND (4 OR 5)</booleanFilter>
+        <criteriaItems>
+            <field>Corredor__c.Cantidad_de_Polizas_Holding_Activas__c</field>
+            <operation>greaterOrEqual</operation>
+            <value>1</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Corredor__c.Segmento_Corredor__c</field>
+            <operation>equals</operation>
+            <value>Grande</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Corredor__c.Necesita_Presupuesto_Comercial__c</field>
+            <operation>equals</operation>
+            <value>Verdadero</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Corredor__c.OwnerId</field>
+            <operation>equals</operation>
+            <value>Leonardo Moncada</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Corredor__c.OwnerId</field>
+            <operation>equals</operation>
+            <value>Julia Ramirez</value>
+        </criteriaItems>
+        <description>Regla para creación de tareas de presupuesto anual para segmentos grandes.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Presupuesto Anual Segmento Grande Equipo 2</fullName>
+        <actions>
+            <name>Presupuesto_Anual_Corredor_Segmento_Grande_Primer_Semestre</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Presupuesto_Anual_Corredor_Segmento_Grande_Primer_Semestre_Morales</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Presupuesto_Anual_Corredor_Segmento_Grande_Segundo_Semestre</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Presupuesto_Anual_Corredor_Segmento_Grande_Segundo_Semestre_Morales</name>
+            <type>Task</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1 AND 2 AND 3 AND (4 OR 5)</booleanFilter>
+        <criteriaItems>
+            <field>Corredor__c.Cantidad_de_Polizas_Holding_Activas__c</field>
+            <operation>greaterOrEqual</operation>
+            <value>1</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Corredor__c.Segmento_Corredor__c</field>
+            <operation>equals</operation>
+            <value>Grande</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Corredor__c.Necesita_Presupuesto_Comercial__c</field>
+            <operation>equals</operation>
+            <value>Verdadero</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Corredor__c.OwnerId</field>
+            <operation>equals</operation>
+            <value>Claudia Mayegas</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Corredor__c.OwnerId</field>
+            <operation>equals</operation>
+            <value>Francia Vidal</value>
+        </criteriaItems>
+        <description>Regla para creación de tareas de presupuesto anual para segmentos grandes.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Presupuesto Anual Segmento Mediano Equipo 1</fullName>
+        <actions>
+            <name>Presupuesto_Anual_Corredor_Segmento_Mediano_Primer_Semestre</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Presupuesto_Anual_Corredor_Segmento_Mediano_Primer_Semestre_Tagini</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Presupuesto_Anual_Corredor_Segmento_Mediano_Segundo_Semestre</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Presupuesto_Anual_Corredor_Segmento_Mediano_Segundo_Semestre_tagini</name>
+            <type>Task</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1 AND 2 AND 3 AND (4 OR 5)</booleanFilter>
+        <criteriaItems>
+            <field>Corredor__c.Cantidad_de_Polizas_Holding_Activas__c</field>
+            <operation>greaterOrEqual</operation>
+            <value>1</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Corredor__c.Segmento_Corredor__c</field>
+            <operation>equals</operation>
+            <value>Mediano</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Corredor__c.Necesita_Presupuesto_Comercial__c</field>
+            <operation>equals</operation>
+            <value>Verdadero</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Corredor__c.OwnerId</field>
+            <operation>equals</operation>
+            <value>Leonardo Moncada</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Corredor__c.OwnerId</field>
+            <operation>equals</operation>
+            <value>Julia Ramirez</value>
+        </criteriaItems>
+        <description>Regla para creación de tareas de presupuesto anual para segmentos medianos.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Presupuesto Anual Segmento Mediano Equipo 2</fullName>
+        <actions>
+            <name>Presupuesto_Anual_Corredor_Segmento_Mediano_Primer_Semestre</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Presupuesto_Anual_Corredor_Segmento_Mediano_Primer_Semestre_Morales</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Presupuesto_Anual_Corredor_Segmento_Mediano_Segundo_Semestre</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Presupuesto_Anual_Corredor_Segmento_Mediano_Segundo_Semestre_Morales</name>
+            <type>Task</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1 AND 2 AND 3 AND (4 OR 5)</booleanFilter>
+        <criteriaItems>
+            <field>Corredor__c.Cantidad_de_Polizas_Holding_Activas__c</field>
+            <operation>greaterOrEqual</operation>
+            <value>1</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Corredor__c.Segmento_Corredor__c</field>
+            <operation>equals</operation>
+            <value>Mediano</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Corredor__c.Necesita_Presupuesto_Comercial__c</field>
+            <operation>equals</operation>
+            <value>Verdadero</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Corredor__c.OwnerId</field>
+            <operation>equals</operation>
+            <value>Francia Vidal</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Corredor__c.OwnerId</field>
+            <operation>equals</operation>
+            <value>Claudia Mayegas</value>
+        </criteriaItems>
+        <description>Regla para creación de tareas de presupuesto anual para segmentos medianos.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Tareas Jefatura Segmento Grande Corredor Equipo 1</fullName>
+        <actions>
+            <name>Reuni_n_Revisi_n_Siniestralidad</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Reuni_n_Revisi_n_Siniestralidad_1semestre</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Reunion_Planificacion_de_Renovaci_n</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Reunion_Planificacion_de_Renovaci_n_1semestre</name>
+            <type>Task</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1 AND 2 AND 3 AND (4 OR 5)</booleanFilter>
+        <criteriaItems>
+            <field>Corredor__c.Segmento_Corredor__c</field>
+            <operation>equals</operation>
+            <value>Grande</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Corredor__c.Cantidad_de_Polizas_Holding_Activas__c</field>
+            <operation>greaterOrEqual</operation>
+            <value>1</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Corredor__c.Tareas_Comerciales_Programadas__c</field>
+            <operation>equals</operation>
+            <value>Verdadero</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Corredor__c.OwnerId</field>
+            <operation>equals</operation>
+            <value>Julia Ramirez</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Corredor__c.OwnerId</field>
+            <operation>equals</operation>
+            <value>Leonardo Moncada</value>
+        </criteriaItems>
+        <description>Creación de tareas automáticas para corredores segmento grande.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Tareas Jefatura Segmento Grande Corredor Equipo 2</fullName>
+        <actions>
+            <name>Reuni_n_Revisi_n_Siniestralidad_1semestre_eq2</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Reuni_n_Revisi_n_Siniestralidad_eq2</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Reunion_Planificacion_de_Renovaci_n_1semestre_eq2</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Reunion_Planificacion_de_Renovaci_n_eq2</name>
+            <type>Task</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1 AND 2 AND 3 AND (4 OR 5)</booleanFilter>
+        <criteriaItems>
+            <field>Corredor__c.Segmento_Corredor__c</field>
+            <operation>equals</operation>
+            <value>Grande</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Corredor__c.Cantidad_de_Polizas_Holding_Activas__c</field>
+            <operation>greaterOrEqual</operation>
+            <value>1</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Corredor__c.Tareas_Comerciales_Programadas__c</field>
+            <operation>equals</operation>
+            <value>Verdadero</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Corredor__c.OwnerId</field>
+            <operation>equals</operation>
+            <value>Claudia Mayegas</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Corredor__c.OwnerId</field>
+            <operation>equals</operation>
+            <value>Francia Vidal</value>
+        </criteriaItems>
+        <description>Creación de tareas automáticas para corredores segmento grande.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Tareas Jefatura Segmento Mediano Corredor Equipo 1</fullName>
+        <actions>
+            <name>Reuni_n_Revisi_n_Siniestralidad_1semestre</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Reunion_Planificacion_de_Renovaci_n</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Reunion_Planificacion_de_Renovaci_n_1semestre</name>
+            <type>Task</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1 AND 2 AND 3 AND (4 OR 5) AND (6 OR 7)</booleanFilter>
+        <criteriaItems>
+            <field>Corredor__c.Segmento_Corredor__c</field>
+            <operation>equals</operation>
+            <value>Mediano</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Corredor__c.Cantidad_de_Polizas_Holding_Activas__c</field>
+            <operation>greaterOrEqual</operation>
+            <value>1</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Corredor__c.Tareas_Comerciales_Programadas__c</field>
+            <operation>equals</operation>
+            <value>Verdadero</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Corredor__c.OwnerId</field>
+            <operation>equals</operation>
+            <value>Julia Ramirez</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Corredor__c.OwnerId</field>
+            <operation>equals</operation>
+            <value>Leonardo Moncada</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Corredor__c.Name</field>
+            <operation>notEqual</operation>
+            <value>JOSEFA LOZANO Y COMPAÑÍA LIMITADA</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Corredor__c.Name</field>
+            <operation>notEqual</operation>
+            <value>PLEYADE CHILE S.A.</value>
+        </criteriaItems>
+        <description>Creación de tareas automáticas para corredores segmento mediano.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Tareas Jefatura Segmento Mediano Corredor Equipo 2</fullName>
+        <actions>
+            <name>Reuni_n_Revisi_n_Siniestralidad_1semestre_eq2</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Reunion_Planificacion_de_Renovaci_n_1semestre_eq2</name>
+            <type>Task</type>
+        </actions>
+        <actions>
+            <name>Reunion_Planificacion_de_Renovaci_n_eq2</name>
+            <type>Task</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1 AND 2 AND 3 AND (4 OR 5)</booleanFilter>
+        <criteriaItems>
+            <field>Corredor__c.Segmento_Corredor__c</field>
+            <operation>equals</operation>
+            <value>Mediano</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Corredor__c.Cantidad_de_Polizas_Holding_Activas__c</field>
+            <operation>greaterOrEqual</operation>
+            <value>1</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Corredor__c.Tareas_Comerciales_Programadas__c</field>
+            <operation>equals</operation>
+            <value>Verdadero</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Corredor__c.OwnerId</field>
+            <operation>equals</operation>
+            <value>Claudia Mayegas</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Corredor__c.OwnerId</field>
+            <operation>equals</operation>
+            <value>Francia Vidal</value>
+        </criteriaItems>
+        <description>Creación de tareas automáticas para corredores segmento mediano.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Tareas Segmento Grande Corredor</fullName>
+        <active>true</active>
+        <criteriaItems>
+            <field>Corredor__c.Segmento_Corredor__c</field>
+            <operation>equals</operation>
+            <value>Grande</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Corredor__c.Cantidad_de_Polizas_Holding_Activas__c</field>
+            <operation>greaterOrEqual</operation>
+            <value>1</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Corredor__c.Tareas_Comerciales_Programadas__c</field>
+            <operation>equals</operation>
+            <value>Verdadero</value>
+        </criteriaItems>
+        <description>Creación de tareas automáticas para corredores segmento grande</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Planificaci_n_de_Renovaci_n_6</name>
+                <type>Task</type>
+            </actions>
+            <actions>
+                <name>Revisi_n_Siniestralidad_8</name>
+                <type>Task</type>
+            </actions>
+            <offsetFromField>Corredor__c.Primer_D_a_del_A_o__c</offsetFromField>
+            <timeLength>180</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Planificaci_n_de_Renovaci_n_8</name>
+                <type>Task</type>
+            </actions>
+            <actions>
+                <name>Revisi_n_Siniestralidad_6</name>
+                <type>Task</type>
+            </actions>
+            <offsetFromField>Corredor__c.Primer_D_a_del_A_o__c</offsetFromField>
+            <timeLength>8</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Planificaci_n_de_Renovaci_n_5</name>
+                <type>Task</type>
+            </actions>
+            <actions>
+                <name>Revisi_n_Siniestralidad_7</name>
+                <type>Task</type>
+            </actions>
+            <offsetFromField>Corredor__c.Primer_D_a_del_A_o__c</offsetFromField>
+            <timeLength>89</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Planificaci_n_de_Renovaci_n_7</name>
+                <type>Task</type>
+            </actions>
+            <actions>
+                <name>Revisi_n_Siniestralidad_9</name>
+                <type>Task</type>
+            </actions>
+            <offsetFromField>Corredor__c.Primer_D_a_del_A_o__c</offsetFromField>
+            <timeLength>272</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Tareas Segmento Mediano Corredor</fullName>
+        <active>true</active>
+        <booleanFilter>1 AND 2 AND 3 AND (4 OR 5)</booleanFilter>
+        <criteriaItems>
+            <field>Corredor__c.Segmento_Corredor__c</field>
+            <operation>equals</operation>
+            <value>Mediano</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Corredor__c.Cantidad_de_Polizas_Holding_Activas__c</field>
+            <operation>greaterOrEqual</operation>
+            <value>1</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Corredor__c.Tareas_Comerciales_Programadas__c</field>
+            <operation>equals</operation>
+            <value>Verdadero</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Corredor__c.Name</field>
+            <operation>notEqual</operation>
+            <value>JOSEFA LOZANO Y COMPAÑÍA LIMITADA</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Corredor__c.Name</field>
+            <operation>notEqual</operation>
+            <value>PLEYADE CHILE S.A.</value>
+        </criteriaItems>
+        <description>Creación de tareas automáticas para corredores segmento mediano</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Planificaci_n_de_Renovaci_n_2</name>
+                <type>Task</type>
+            </actions>
+            <actions>
+                <name>Revision_Siniestralidad_1</name>
+                <type>Task</type>
+            </actions>
+            <offsetFromField>Corredor__c.Primer_D_a_del_A_o__c</offsetFromField>
+            <timeLength>180</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Planificaci_n_de_Renovaci_n</name>
+                <type>Task</type>
+            </actions>
+            <offsetFromField>Corredor__c.Primer_D_a_del_A_o__c</offsetFromField>
+            <timeLength>89</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Planificaci_n_de_Renovaci_n_3</name>
+                <type>Task</type>
+            </actions>
+            <offsetFromField>Corredor__c.Primer_D_a_del_A_o__c</offsetFromField>
+            <timeLength>271</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Planificaci_n_de_Renovaci_n_4</name>
+                <type>Task</type>
+            </actions>
+            <actions>
+                <name>Revisi_n_Siniestralidad_3</name>
+                <type>Task</type>
+            </actions>
+            <offsetFromField>Corredor__c.Primer_D_a_del_A_o__c</offsetFromField>
+            <timeLength>8</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Tareas Segmento Pequeño Corredor</fullName>
+        <active>true</active>
+        <criteriaItems>
+            <field>Corredor__c.Segmento_Corredor__c</field>
+            <operation>equals</operation>
+            <value>Pequeño</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Corredor__c.Cantidad_de_Polizas_Holding_Activas__c</field>
+            <operation>greaterOrEqual</operation>
+            <value>1</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Corredor__c.Tareas_Comerciales_Programadas__c</field>
+            <operation>equals</operation>
+            <value>Verdadero</value>
+        </criteriaItems>
+        <description>Creación de tareas automáticas para corredores segmento pequeño</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Revisi_n_Siniestralidad_5</name>
+                <type>Task</type>
+            </actions>
+            <offsetFromField>Corredor__c.Primer_D_a_del_A_o__c</offsetFromField>
+            <timeLength>180</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <tasks>
+        <fullName>Planificaci_n_de_Renovaci_n</fullName>
+        <assignedToType>owner</assignedToType>
+        <description>Comenzar planificación de renovación con corredor</description>
+        <dueDateOffset>89</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Corredor__c.Primer_D_a_del_A_o__c</offsetFromField>
+        <priority>Alta</priority>
+        <protected>false</protected>
+        <status>No iniciada</status>
+        <subject>Planificación de Renovación</subject>
+    </tasks>
+    <tasks>
+        <fullName>Planificaci_n_de_Renovaci_n_2</fullName>
+        <assignedToType>owner</assignedToType>
+        <description>Debe realizar la planificación del tercer trimestre de renovación para cartera de corredor</description>
+        <dueDateOffset>180</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Corredor__c.Primer_D_a_del_A_o__c</offsetFromField>
+        <priority>Alta</priority>
+        <protected>false</protected>
+        <status>No iniciada</status>
+        <subject>Planificación de Renovación</subject>
+    </tasks>
+    <tasks>
+        <fullName>Planificaci_n_de_Renovaci_n_2019</fullName>
+        <assignedToType>owner</assignedToType>
+        <description>Planificación de renovación cuarto trimestre del año con corredor segmento grande.</description>
+        <dueDateOffset>273</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Corredor__c.Primer_D_a_del_A_o__c</offsetFromField>
+        <priority>Alta</priority>
+        <protected>false</protected>
+        <status>No iniciada</status>
+        <subject>Planificación de Renovación</subject>
+    </tasks>
+    <tasks>
+        <fullName>Planificaci_n_de_Renovaci_n_20191</fullName>
+        <assignedToType>owner</assignedToType>
+        <description>Planificación de renovación cuarto trimestre del año con corredor segmento grande.</description>
+        <dueDateOffset>273</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Corredor__c.Primer_D_a_del_A_o__c</offsetFromField>
+        <priority>Alta</priority>
+        <protected>false</protected>
+        <status>No iniciada</status>
+        <subject>Planificación de Renovación</subject>
+    </tasks>
+    <tasks>
+        <fullName>Planificaci_n_de_Renovaci_n_20192</fullName>
+        <assignedToType>owner</assignedToType>
+        <description>Planificar renovación cuarto trimestre con corredor segmento mediano.</description>
+        <dueDateOffset>271</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Corredor__c.Primer_D_a_del_A_o__c</offsetFromField>
+        <priority>Alta</priority>
+        <protected>false</protected>
+        <status>No iniciada</status>
+        <subject>Planificación de Renovación</subject>
+    </tasks>
+    <tasks>
+        <fullName>Planificaci_n_de_Renovaci_n_2019med</fullName>
+        <assignedToType>owner</assignedToType>
+        <description>Planificar renovación cuarto trimestre con corredor.</description>
+        <dueDateOffset>271</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Corredor__c.Primer_D_a_del_A_o__c</offsetFromField>
+        <priority>Alta</priority>
+        <protected>false</protected>
+        <status>No iniciada</status>
+        <subject>Planificación de Renovación</subject>
+    </tasks>
+    <tasks>
+        <fullName>Planificaci_n_de_Renovaci_n_3</fullName>
+        <assignedToType>owner</assignedToType>
+        <description>Planificar renovación cuarto trimestre con corredor</description>
+        <dueDateOffset>271</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Corredor__c.Primer_D_a_del_A_o__c</offsetFromField>
+        <priority>Alta</priority>
+        <protected>false</protected>
+        <status>No iniciada</status>
+        <subject>Planificación de Renovación</subject>
+    </tasks>
+    <tasks>
+        <fullName>Planificaci_n_de_Renovaci_n_4</fullName>
+        <assignedToType>owner</assignedToType>
+        <description>Planificación de renovación primer trimestre con el corredor.</description>
+        <dueDateOffset>1</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Corredor__c.Primer_D_a_del_A_o__c</offsetFromField>
+        <priority>Alta</priority>
+        <protected>false</protected>
+        <status>No iniciada</status>
+        <subject>Planificación de Renovación</subject>
+    </tasks>
+    <tasks>
+        <fullName>Planificaci_n_de_Renovaci_n_5</fullName>
+        <assignedToType>owner</assignedToType>
+        <description>Planificación de renovación segundo trimestre del año con corredor segmento grande.</description>
+        <dueDateOffset>90</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Corredor__c.Primer_D_a_del_A_o__c</offsetFromField>
+        <priority>Alta</priority>
+        <protected>false</protected>
+        <status>No iniciada</status>
+        <subject>Planificación de Renovación</subject>
+    </tasks>
+    <tasks>
+        <fullName>Planificaci_n_de_Renovaci_n_6</fullName>
+        <assignedToType>owner</assignedToType>
+        <description>Planificación de renovación tercer trimestre del año con corredor segmento grande.</description>
+        <dueDateOffset>181</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Corredor__c.Primer_D_a_del_A_o__c</offsetFromField>
+        <priority>Alta</priority>
+        <protected>false</protected>
+        <status>No iniciada</status>
+        <subject>Planificación de Renovación</subject>
+    </tasks>
+    <tasks>
+        <fullName>Planificaci_n_de_Renovaci_n_7</fullName>
+        <assignedToType>owner</assignedToType>
+        <description>Planificación de renovación cuarto trimestre del año con corredor segmento grande.</description>
+        <dueDateOffset>273</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Corredor__c.Primer_D_a_del_A_o__c</offsetFromField>
+        <priority>Alta</priority>
+        <protected>false</protected>
+        <status>No iniciada</status>
+        <subject>Planificación de Renovación</subject>
+    </tasks>
+    <tasks>
+        <fullName>Planificaci_n_de_Renovaci_n_8</fullName>
+        <assignedToType>owner</assignedToType>
+        <description>Planificación de renovación primer trimestre del año con corredor segmento grande.</description>
+        <dueDateOffset>1</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Corredor__c.Primer_D_a_del_A_o__c</offsetFromField>
+        <priority>Alta</priority>
+        <protected>false</protected>
+        <status>No iniciada</status>
+        <subject>Planificación de Renovación</subject>
+    </tasks>
+    <tasks>
+        <fullName>Presupuesto_Anual_Corredor_Segmento_Grande_Primer_Semestre</fullName>
+        <assignedToType>owner</assignedToType>
+        <description>Revisión intervigencia de presupuesto con corredor segmento grande primer semestre del año</description>
+        <dueDateOffset>46</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Corredor__c.Primer_D_a_del_A_o__c</offsetFromField>
+        <priority>Alta</priority>
+        <protected>false</protected>
+        <status>No iniciada</status>
+        <subject>Presupuesto Anual Corredor Segmento Grande Primer Semestre</subject>
+    </tasks>
+    <tasks>
+        <fullName>Presupuesto_Anual_Corredor_Segmento_Grande_Primer_Semestre_Morales</fullName>
+        <assignedTo>mmorales@security.cl</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Revisión intervigencia de presupuesto con corredor segmento grande primer semestre del año.</description>
+        <dueDateOffset>46</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Corredor__c.Primer_D_a_del_A_o__c</offsetFromField>
+        <priority>Alta</priority>
+        <protected>false</protected>
+        <status>No iniciada</status>
+        <subject>Presupuesto Anual Corredor Segmento Grande Primer Semestre</subject>
+    </tasks>
+    <tasks>
+        <fullName>Presupuesto_Anual_Corredor_Segmento_Grande_Primer_Semestre_Tagini</fullName>
+        <assignedTo>mmorales@security.cl</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Revisión intervigencia de presupuesto con corredor segmento grande primer semestre del año.</description>
+        <dueDateOffset>46</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Corredor__c.Primer_D_a_del_A_o__c</offsetFromField>
+        <priority>Alta</priority>
+        <protected>false</protected>
+        <status>No iniciada</status>
+        <subject>Presupuesto Anual Corredor Segmento Grande Primer Semestre</subject>
+    </tasks>
+    <tasks>
+        <fullName>Presupuesto_Anual_Corredor_Segmento_Grande_Segundo_Semestre</fullName>
+        <assignedToType>owner</assignedToType>
+        <description>Revisión intervigencia de presupuesto con corredor segmento grande segundo semestre del año</description>
+        <dueDateOffset>182</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Corredor__c.Primer_D_a_del_A_o__c</offsetFromField>
+        <priority>Alta</priority>
+        <protected>false</protected>
+        <status>No iniciada</status>
+        <subject>Presupuesto Anual Corredor Segmento Grande Segundo Semestre</subject>
+    </tasks>
+    <tasks>
+        <fullName>Presupuesto_Anual_Corredor_Segmento_Grande_Segundo_Semestre_Morales</fullName>
+        <assignedTo>mmorales@security.cl</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Revisión intervigencia de presupuesto con corredor segmento grande segundo semestre del año.</description>
+        <dueDateOffset>182</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Corredor__c.Primer_D_a_del_A_o__c</offsetFromField>
+        <priority>Alta</priority>
+        <protected>false</protected>
+        <status>No iniciada</status>
+        <subject>Presupuesto Anual Corredor Segmento Grande Segundo Semestre</subject>
+    </tasks>
+    <tasks>
+        <fullName>Presupuesto_Anual_Corredor_Segmento_Grande_Segundo_Semestre_tagini</fullName>
+        <assignedTo>mmorales@security.cl</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Revisión intervigencia de presupuesto con corredor segmento grande segundo semestre del año</description>
+        <dueDateOffset>182</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Corredor__c.Primer_D_a_del_A_o__c</offsetFromField>
+        <priority>Alta</priority>
+        <protected>false</protected>
+        <status>No iniciada</status>
+        <subject>Presupuesto Anual Corredor Segmento Grande Segundo Semestre</subject>
+    </tasks>
+    <tasks>
+        <fullName>Presupuesto_Anual_Corredor_Segmento_Mediano_Primer_Semestre</fullName>
+        <assignedToType>owner</assignedToType>
+        <description>Revisión intervigencia de presupuesto con corredor segmento mediano primer semestre del año</description>
+        <dueDateOffset>46</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Corredor__c.Primer_D_a_del_A_o__c</offsetFromField>
+        <priority>Alta</priority>
+        <protected>false</protected>
+        <status>No iniciada</status>
+        <subject>Presupuesto Anual Corredor Segmento Mediano Primer Semestre</subject>
+    </tasks>
+    <tasks>
+        <fullName>Presupuesto_Anual_Corredor_Segmento_Mediano_Primer_Semestre_Morales</fullName>
+        <assignedTo>mmorales@security.cl</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Revisión intervigencia de presupuesto con corredor segmento mediano primer semestre del año</description>
+        <dueDateOffset>46</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Corredor__c.Primer_D_a_del_A_o__c</offsetFromField>
+        <priority>Alta</priority>
+        <protected>false</protected>
+        <status>No iniciada</status>
+        <subject>Presupuesto Anual Corredor Segmento Mediano Primer Semestre</subject>
+    </tasks>
+    <tasks>
+        <fullName>Presupuesto_Anual_Corredor_Segmento_Mediano_Primer_Semestre_Tagini</fullName>
+        <assignedTo>mmorales@security.cl</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Revisión intervigencia de presupuesto con corredor segmento mediano primer semestre del año</description>
+        <dueDateOffset>46</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Corredor__c.Primer_D_a_del_A_o__c</offsetFromField>
+        <priority>Alta</priority>
+        <protected>false</protected>
+        <status>No iniciada</status>
+        <subject>Presupuesto Anual Corredor Segmento Mediano Primer Semestre</subject>
+    </tasks>
+    <tasks>
+        <fullName>Presupuesto_Anual_Corredor_Segmento_Mediano_Segundo_Semestre</fullName>
+        <assignedToType>owner</assignedToType>
+        <description>Revisión intervigencia de presupuesto con corredor segmento mediano segundo semestre del año</description>
+        <dueDateOffset>182</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Corredor__c.Primer_D_a_del_A_o__c</offsetFromField>
+        <priority>Alta</priority>
+        <protected>false</protected>
+        <status>No iniciada</status>
+        <subject>Presupuesto Anual Corredor Segmento Mediano Segundo Semestre</subject>
+    </tasks>
+    <tasks>
+        <fullName>Presupuesto_Anual_Corredor_Segmento_Mediano_Segundo_Semestre_Morales</fullName>
+        <assignedTo>mmorales@security.cl</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Revisión intervigencia de presupuesto con corredor segmento mediano segundo semestre del año</description>
+        <dueDateOffset>182</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Corredor__c.Primer_D_a_del_A_o__c</offsetFromField>
+        <priority>Alta</priority>
+        <protected>false</protected>
+        <status>No iniciada</status>
+        <subject>Presupuesto Anual Corredor Segmento Mediano Segundo Semestre</subject>
+    </tasks>
+    <tasks>
+        <fullName>Presupuesto_Anual_Corredor_Segmento_Mediano_Segundo_Semestre_tagini</fullName>
+        <assignedTo>mmorales@security.cl</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Revisión intervigencia de presupuesto con corredor segmento mediano segundo semestre del año</description>
+        <dueDateOffset>182</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Corredor__c.Primer_D_a_del_A_o__c</offsetFromField>
+        <priority>Alta</priority>
+        <protected>false</protected>
+        <status>No iniciada</status>
+        <subject>Presupuesto Anual Corredor Segmento Mediano Segundo Semestre</subject>
+    </tasks>
+    <tasks>
+        <fullName>Reuni_n_Revisi_n_Siniestralidad</fullName>
+        <assignedTo>mmorales@security.cl</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Programar reunión de revisión de siniestralidad con Corredor.</description>
+        <dueDateOffset>182</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Corredor__c.Primer_D_a_del_A_o__c</offsetFromField>
+        <priority>Alta</priority>
+        <protected>false</protected>
+        <status>No iniciada</status>
+        <subject>Reunión Revisión Siniestralidad</subject>
+    </tasks>
+    <tasks>
+        <fullName>Reuni_n_Revisi_n_Siniestralidad_1semestre</fullName>
+        <assignedTo>mmorales@security.cl</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Programar reunión de revisión de siniestralidad con Corredor.</description>
+        <dueDateOffset>45</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Corredor__c.Primer_D_a_del_A_o__c</offsetFromField>
+        <priority>Alta</priority>
+        <protected>false</protected>
+        <status>No iniciada</status>
+        <subject>Reunión Revisión Siniestralidad</subject>
+    </tasks>
+    <tasks>
+        <fullName>Reuni_n_Revisi_n_Siniestralidad_1semestre_eq2</fullName>
+        <assignedTo>mmorales@security.cl</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Programar reunión de revisión de siniestralidad con Corredor.</description>
+        <dueDateOffset>45</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Corredor__c.Primer_D_a_del_A_o__c</offsetFromField>
+        <priority>Alta</priority>
+        <protected>false</protected>
+        <status>No iniciada</status>
+        <subject>Reunión Revisión Siniestralidad</subject>
+    </tasks>
+    <tasks>
+        <fullName>Reuni_n_Revisi_n_Siniestralidad_eq2</fullName>
+        <assignedTo>mmorales@security.cl</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Programar reunión de revisión de siniestralidad con Corredor.</description>
+        <dueDateOffset>182</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Corredor__c.Primer_D_a_del_A_o__c</offsetFromField>
+        <priority>Alta</priority>
+        <protected>false</protected>
+        <status>No iniciada</status>
+        <subject>Reunión Revisión Siniestralidad</subject>
+    </tasks>
+    <tasks>
+        <fullName>Reunion_Planificacion_de_Renovaci_n</fullName>
+        <assignedTo>mmorales@security.cl</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Programar reunión de planificación Renovación Cartera con Corredor.</description>
+        <dueDateOffset>182</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Corredor__c.Primer_D_a_del_A_o__c</offsetFromField>
+        <priority>Alta</priority>
+        <protected>false</protected>
+        <status>No iniciada</status>
+        <subject>Reunión Planificación de Renovación</subject>
+    </tasks>
+    <tasks>
+        <fullName>Reunion_Planificacion_de_Renovaci_n_1semestre</fullName>
+        <assignedTo>mmorales@security.cl</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Programar reunión de planificación Renovación Cartera con Corredor.</description>
+        <dueDateOffset>45</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Corredor__c.Primer_D_a_del_A_o__c</offsetFromField>
+        <priority>Alta</priority>
+        <protected>false</protected>
+        <status>No iniciada</status>
+        <subject>Reunión Planificación de Renovación</subject>
+    </tasks>
+    <tasks>
+        <fullName>Reunion_Planificacion_de_Renovaci_n_1semestre_eq2</fullName>
+        <assignedTo>mmorales@security.cl</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Programar reunión de planificación Renovación Cartera con Corredor.</description>
+        <dueDateOffset>45</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Corredor__c.Primer_D_a_del_A_o__c</offsetFromField>
+        <priority>Alta</priority>
+        <protected>false</protected>
+        <status>No iniciada</status>
+        <subject>Reunión Planificación de Renovación</subject>
+    </tasks>
+    <tasks>
+        <fullName>Reunion_Planificacion_de_Renovaci_n_eq2</fullName>
+        <assignedTo>mmorales@security.cl</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Programar reunión de planificación Renovación Cartera con Corredor.</description>
+        <dueDateOffset>182</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Corredor__c.Primer_D_a_del_A_o__c</offsetFromField>
+        <priority>Alta</priority>
+        <protected>false</protected>
+        <status>No iniciada</status>
+        <subject>Reunión Planificación de Renovación</subject>
+    </tasks>
+    <tasks>
+        <fullName>Revisi_n_Siniestralidad</fullName>
+        <assignedToType>owner</assignedToType>
+        <description>Revisión siniestralidad primer semestre del año con corredor.</description>
+        <dueDateOffset>1</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Corredor__c.Primer_D_a_del_A_o__c</offsetFromField>
+        <priority>Alta</priority>
+        <protected>false</protected>
+        <status>No iniciada</status>
+        <subject>Revisión Siniestralidad</subject>
+    </tasks>
+    <tasks>
+        <fullName>Revisi_n_Siniestralidad_2019</fullName>
+        <assignedToType>owner</assignedToType>
+        <description>Revisión de siniestralidad cuarto trimestre del año con corredor segmento grande.</description>
+        <dueDateOffset>273</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Corredor__c.Primer_D_a_del_A_o__c</offsetFromField>
+        <priority>Alta</priority>
+        <protected>false</protected>
+        <status>No iniciada</status>
+        <subject>Revisión Siniestralidad</subject>
+    </tasks>
+    <tasks>
+        <fullName>Revisi_n_Siniestralidad_20191</fullName>
+        <assignedToType>owner</assignedToType>
+        <description>Revisión de siniestralidad cuarto trimestre del año con corredor segmento grande.</description>
+        <dueDateOffset>273</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Corredor__c.Primer_D_a_del_A_o__c</offsetFromField>
+        <priority>Alta</priority>
+        <protected>false</protected>
+        <status>No iniciada</status>
+        <subject>Revisión Siniestralidad</subject>
+    </tasks>
+    <tasks>
+        <fullName>Revisi_n_Siniestralidad_3</fullName>
+        <assignedToType>owner</assignedToType>
+        <description>Revisión siniestralidad primer semestre del año con corredor.</description>
+        <dueDateOffset>1</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Corredor__c.Primer_D_a_del_A_o__c</offsetFromField>
+        <priority>Alta</priority>
+        <protected>false</protected>
+        <status>No iniciada</status>
+        <subject>Revisión Siniestralidad</subject>
+    </tasks>
+    <tasks>
+        <fullName>Revisi_n_Siniestralidad_5</fullName>
+        <assignedToType>owner</assignedToType>
+        <description>Revisión siniestralidad semestral para corredores segmento pequeño.</description>
+        <dueDateOffset>180</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Corredor__c.Primer_D_a_del_A_o__c</offsetFromField>
+        <priority>Alta</priority>
+        <protected>false</protected>
+        <status>No iniciada</status>
+        <subject>Revisión Siniestralidad</subject>
+    </tasks>
+    <tasks>
+        <fullName>Revisi_n_Siniestralidad_6</fullName>
+        <assignedToType>owner</assignedToType>
+        <description>Revisión de siniestralidad primer trimestre del año con corredor segmento grande.</description>
+        <dueDateOffset>1</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Corredor__c.Primer_D_a_del_A_o__c</offsetFromField>
+        <priority>Alta</priority>
+        <protected>false</protected>
+        <status>No iniciada</status>
+        <subject>Revisión Siniestralidad</subject>
+    </tasks>
+    <tasks>
+        <fullName>Revisi_n_Siniestralidad_7</fullName>
+        <assignedToType>owner</assignedToType>
+        <description>Revisión de siniestralidad segundo trimestre del año con corredor segmento grande.</description>
+        <dueDateOffset>90</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Corredor__c.Primer_D_a_del_A_o__c</offsetFromField>
+        <priority>Alta</priority>
+        <protected>false</protected>
+        <status>No iniciada</status>
+        <subject>Revisión Siniestralidad</subject>
+    </tasks>
+    <tasks>
+        <fullName>Revisi_n_Siniestralidad_8</fullName>
+        <assignedToType>owner</assignedToType>
+        <description>Revisión de siniestralidad tercer trimestre del año con corredor segmento grande.</description>
+        <dueDateOffset>181</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Corredor__c.Primer_D_a_del_A_o__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>No iniciada</status>
+        <subject>Revisión Siniestralidad</subject>
+    </tasks>
+    <tasks>
+        <fullName>Revisi_n_Siniestralidad_9</fullName>
+        <assignedToType>owner</assignedToType>
+        <description>Revisión de siniestralidad cuarto trimestre del año con corredor segmento grande.</description>
+        <dueDateOffset>273</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Corredor__c.Primer_D_a_del_A_o__c</offsetFromField>
+        <priority>Alta</priority>
+        <protected>false</protected>
+        <status>No iniciada</status>
+        <subject>Revisión Siniestralidad</subject>
+    </tasks>
+    <tasks>
+        <fullName>Revision_Siniestralidad_1</fullName>
+        <assignedToType>owner</assignedToType>
+        <description>Revisión de siniestralidad semestral con corredor</description>
+        <dueDateOffset>180</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Corredor__c.Primer_D_a_del_A_o__c</offsetFromField>
+        <priority>Alta</priority>
+        <protected>false</protected>
+        <status>No iniciada</status>
+        <subject>Revisión Siniestralidad</subject>
+    </tasks>
+</Workflow>

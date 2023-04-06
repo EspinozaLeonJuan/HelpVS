@@ -1,0 +1,211 @@
+<!--
+  @Page Name          : SEC_VF_VVC_DetalleCarga.page
+  @Description        : 
+  @Author             : Consultor Salesforce Vida
+  @Group              : 
+  @Last Modified By   : Consultor Salesforce Vida
+  @Last Modified On   : 5/25/2019, 4:15:58 PM
+  @Modification Log   : 
+  ==============================================================================
+  Ver         Date                     Author      		      Modification
+  ==============================================================================
+  1.0    5/22/2019, 12:40:32 PM   Consultor Salesforce Vida     Initial Version
+-->
+
+
+<!--<apex:page controller="CTR_VVC_GestionCarga" action="{!LoadDetalleCarga}" >-->
+      <apex:page controller="CTR_VVC_DetalleCarga"  action="{!LoadDetalleCarga}" docType="html-5.0" lightningStylesheets="true">
+        <style>
+                .ct{
+                        text-align:center;
+                    }
+                 
+            .panel_botones{
+               width: 150px; 
+            }
+    
+            .panel_mensaje{
+               width: 450px; 
+            }
+            
+            .popupBackground {
+                /* Background color */
+                background-color:black;
+                opacity: 0.5;
+                filter: alpha(opacity = 50);
+                
+                /* Dimensions */
+                width: 100%;
+                height: 1000%;       
+                top: 0;
+                left: 50;
+                z-index: 998;
+                position: absolute;        
+                /* Mouse */
+                cursor:wait;
+            }
+            
+            .popupPanel {
+            /* Background color */
+                border: solid 2px orange;
+                background-color: white;        
+                /* Dimensions */
+                display: inline-block;
+                left: 50%;
+                width: 100px;
+                margin-left: 0px;
+                top: 100px;
+                height: 25px;
+                margin-top: -25px;
+                position: absolute;   
+                z-index: 999;        
+                /* Mouse */
+                cursor:pointer;
+            }
+
+         
+      </style>
+<script>
+function SearchEval(error)
+{
+if (error == true)
+{
+    alert('El rango de Fechas a consultar es inválido');
+}
+}
+</script>
+
+<apex:includeScript value="{!$Resource.jquery}"/>
+<apex:actionStatus id="Status">
+        <apex:facet name="start">
+            <apex:outputPanel >
+                <div class="popupBackground" />
+                <div class="popupPanel">
+                    &nbsp; Espere...<img src="/apexpages/devmode/img/saveStatus.gif" />
+                </div>
+            </apex:outputPanel> 
+        </apex:facet>
+    </apex:actionStatus>
+    
+        <apex:form >
+            <apex:pageBlock id="pbk_PanelTarea" title="Detalle de Carga Vale Vista por Cobrar" >
+                  <apex:panelGrid columns="1" style="text-align:right;width:100%">                                            
+                      <apex:commandButton value="Historial de Cargas" action="{!ToHistorial}" />
+                  </apex:panelGrid> 
+                    <apex:panelGrid columns="8" style="width:65%;">
+                        <apex:outputLabel style="font-weight:bold;" >Fecha de Carga</apex:outputLabel>  
+                        <apex:outputField value="{!CargaVVC.CreatedDate}" ></apex:outputField>  
+                        <apex:outputText value="    " id="empty001"/>
+                        <apex:outputText value="    " id="empty002"/>
+                        <apex:outputText value="    " id="empty003"/>
+                        <apex:outputText value="    " id="empty004"/>
+                        <apex:outputLabel style="font-weight:bold;" >Usuario Carga</apex:outputLabel>  
+                        <apex:outputField value="{!CargaVVC.CreatedById}" ></apex:outputField>
+                        <apex:outputLabel style="font-weight:bold;" >Total Registros</apex:outputLabel>  
+                        <apex:outputLabel style="font-weight:bold;color:blue;text-transform: uppercase;" value="{!CargaVVC.Total_Registros_Carga__c}" ></apex:outputLabel>  
+                        <apex:outputText value="    " id="empty005"/> 
+                        <apex:outputLabel style="font-weight:bold;" >Registros OK</apex:outputLabel>  
+                        <apex:outputLabel style="font-weight:bold;color:green;text-transform: uppercase;" value="{!CargaVVC.Total_Registros_Ok__c}" ></apex:outputLabel>  
+                        <apex:outputText value="    " id="empty006"/>
+                        <apex:outputLabel style="font-weight:bold;" >Registros Error</apex:outputLabel>  
+                        <apex:outputLabel style="font-weight:bold;color:red;text-transform: uppercase;" value="{!CargaVVC.Total_Registros_Error__c}" ></apex:outputLabel>  
+                        <apex:outputLabel style="font-weight:bold;" >Registros Notificados</apex:outputLabel>  
+                        <apex:outputLabel style="font-weight:bold;color:green;text-transform: uppercase;" value="{!CargaVVC.Total_Registros_Notificados__c}" ></apex:outputLabel>  
+                    </apex:panelGrid>
+                    <br/>
+
+                    <apex:panelGrid columns="4" style="text-align:left;width:100%">
+                        <apex:outputLabel value="Búsqueda personalizada" style="font-weight:bold;text-decoration:underline;"></apex:outputLabel>                                         
+                                </apex:panelGrid> 
+                                <br/>
+                                <apex:panelGrid columns="6" style="text-align:left;width:75%"  >   
+                                        <apex:outputLabel value="Fecha de Inicio: " style="font-weight:bold;" ></apex:outputLabel>                                         
+                                        <apex:inputField value="{!FDate.Fecha_de_Llamada__c}" label="Fecha de Inicio"   ></apex:inputField>
+                                        <apex:outputLabel value="Fecha de Termino: " style="font-weight:bold;"></apex:outputLabel>                                              
+                                        <apex:inputField value="{!FDate.Fecha_de_cierre__c}" label="Fecha de Termino"></apex:inputField>
+                                        <apex:outputLabel value="RUT Cliente: " style="font-weight:bold;"></apex:outputLabel>
+                                        <apex:input value="{!RutCliente}"  type="text" id="RutCliente"   />
+                                       
+                                        <apex:outputLabel value="Estado Vale Vista: " style="font-weight:bold;"></apex:outputLabel>
+                                        <apex:selectList id="cmd_EstadosVVC" size="1" value="{!EstadoValeVista}"  >
+                                            <apex:selectOptions value="{!EstadosValeVista}" />
+                                            <!--<apex:actionSupport event="onchange" action="{!mostrarIdUsuario}" reRender="otxt_ValorIdUsuario" />-->
+                                            <!--<apex:actionSupport event="onchange" action="{!MostrarListaTareaUsuario}" reRender="pbk_PanelTarea" oncomplete="" status="Status" />-->
+                                        </apex:selectList>
+                                        <apex:outputLabel value="Notificado: " style="font-weight:bold;"></apex:outputLabel>                                              
+
+                                        <apex:selectList id="cmd_Notificado" size="1" value="{!Notificado}"  >
+                                            <apex:selectOptions value="{!Notificaciones}" />
+                                            <!--<apex:actionSupport event="onchange" action="{!mostrarIdUsuario}" reRender="otxt_ValorIdUsuario" />-->
+                                            <!--<apex:actionSupport event="onchange" action="{!MostrarListaTareaUsuario}" reRender="pbk_PanelTarea" oncomplete="" status="Status" />-->
+                                        </apex:selectList>
+                                        <apex:outputLabel value="Estado Carga: " style="font-weight:bold;"></apex:outputLabel>                                              
+                                        <apex:selectList id="cmd_EstadosCarga" size="1" value="{!EstadoCarga}"  >
+                                            <apex:selectOptions value="{!EstadosCarga}" />
+                                            <!--<apex:actionSupport event="onchange" action="{!mostrarIdUsuario}" reRender="otxt_ValorIdUsuario" />-->
+                                            <!--<apex:actionSupport event="onchange" action="{!MostrarListaTareaUsuario}" reRender="pbk_PanelTarea" oncomplete="" status="Status" />-->
+                                        </apex:selectList>
+                                       <!-- 
+                                        <apex:outputText value="    " id="empty008"/>  -->
+
+                                    </apex:panelGrid>
+                              <!--  <apex:panelGrid columns="1" style="text-align:right;width:100%">                                            
+                                        <apex:commandButton title="Carga de archivo CSV" value="Paginacion" action="{!TestPagination}" />
+                                    </apex:panelGrid> -->
+
+
+                                    <apex:panelGrid columns="2">
+                                          <apex:commandButton value="Buscar" rerender="details" action="{!search}" oncomplete="SearchEval({!Ferror});" status="Status" />
+                                          <apex:commandButton value="Limpiar"  action="{!cleanSearch}" />                                      
+                                    </apex:panelGrid>        
+                                </apex:pageBlock>
+
+                                <apex:pageBlock id="details">
+               <apex:pageblocktable value="{!vvclist}" var="vvc">
+                  <apex:column value="{!vvc.RUT__c}" headerClass="ct" style="text-align:center;width:10%;" />
+                  <apex:column value="{!vvc.Cuenta__c}" headerClass="ct" style="width:30%;" />
+                  <apex:column value="{!vvc.Monto__c}" headerClass="ct" style="text-align:center;width:10%;" />
+                  <apex:column value="{!vvc.Fecha_Vale_Vista__c}" headerClass="ct" style="text-align:center;width:10%;" />
+                  <apex:column value="{!vvc.Empresa__c}" headerClass="ct" style="text-align:center;width:20%;"  />
+                  <apex:column value="{!vvc.Tipo__c }" headerClass="ct" style="text-align:center;width:10%;"  />                  
+                  <apex:column value="{!vvc.Resultado__c }" headerClass="ct" style="text-align:center;width:20%;" />
+                  <apex:column value="{!vvc.Notificado__c }" headerClass="ct" style="text-align:center;width:10%;" />
+                  <apex:column value="{!vvc.Tms_Notificacion__c }" headerValue="Fecha Notificación" headerClass="ct" style="text-align:center;width:25%;" />
+            </apex:pageblocktable>
+
+
+            <apex:pageblockButtons >
+                    <apex:commandButton value="Primera Página" rerender="details" action="{!FirstPage}" disabled="{!prev}" status="Status" />
+                    <apex:commandButton value="Anterior" rerender="details" action="{!previous}" disabled="{!prev}" status="Status" />
+                    <apex:commandButton value="Siguiente" rerender="details" action="{!next}" disabled="{!nxt}" status="Status" />
+                    <apex:commandButton value="Última Página" rerender="details" action="{!LastPage}" disabled="{!nxt}" status="Status" />
+                    </apex:pageblockButtons>
+                    <br/>
+
+                    
+                    <apex:outputLabel value="Página"></apex:outputLabel> &nbsp;
+                    <apex:outputLabel value="{!Page}"></apex:outputLabel> &nbsp;
+                    <apex:outputLabel value="de"></apex:outputLabel> &nbsp;
+                    <apex:outputLabel value="{!TotalPage}"></apex:outputLabel>
+                    <br/>
+                    <apex:outputLabel value="{!totalRecs}"></apex:outputLabel> &nbsp;
+                    <apex:outputLabel value="registros encontrados."></apex:outputLabel>
+         
+                    <!--Página&nbsp;
+                    <apex:outputLabel value="{!Page}"></apex:outputLabel>&nbsp;
+                    
+                    de
+                    &nbsp;
+                    <apex:outputLabel value="{!TotalPage}"></apex:outputLabel>
+                    <br/>
+                    <apex:outputLabel value="{!totalRecs}"></apex:outputLabel>
+                    &nbsp;registros encontrados.-->
+         </apex:pageBlock>
+
+         
+       <!--  <apex:panelGrid columns="1"  styleClass="panel_mensaje">
+            <apex:pageMessages id="showmsg" escape="true"></apex:pageMessages>
+    
+         </apex:panelGrid>-->
+       </apex:form>
+    </apex:page>

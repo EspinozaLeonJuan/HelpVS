@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PathAssistant xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <entityName>Lead</entityName>
+    <fieldName>Status</fieldName>
+    <masterLabel>Ventas Fuerza de Venta Dummy</masterLabel>
+    <pathAssistantSteps>
+        <fieldNames>Name</fieldNames>
+        <fieldNames>LeadSource</fieldNames>
+        <fieldNames>Rating</fieldNames>
+        <info>&lt;p&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt;Este cliente ha sido contactado pero aún no existe un interés concreto. &lt;/span&gt;&lt;/p&gt;&lt;p&gt;Usted debe continuar el proceso hasta que exista un interés real por parte del prospecto, donde en ese caso usted debe marcar la etapa como completada y dejarla en Concertada.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Al pasar a la etapa Interesado, se debe crear una Cuenta, un Contacto y la Oportunidad.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;ol&gt;&lt;li&gt;Cuenta: Persona con la que se concretará el negocio.&lt;/li&gt;&lt;li&gt;Contacto: Contacto relacionado a la p&lt;span style=&quot;font-size: 13px;&quot;&gt;ersona con la que se concretará el negocio&lt;/span&gt;.&lt;/li&gt;&lt;li&gt;Oportunidad: Nombre del negocio que se llevará a cabo con el cliente. Esto creará otro flujo en el cuál usted debe ir completando etapas según corresponda (Reuniones, Propuesta, etc.)&lt;/li&gt;&lt;/ol&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Debe continuar el proceso de negociación con la nueva Oportunidad que ha creado.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</info>
+        <picklistValueName>Abierto</picklistValueName>
+    </pathAssistantSteps>
+    <pathAssistantSteps>
+        <fieldNames>Status</fieldNames>
+        <fieldNames>Rating</fieldNames>
+        <info>&lt;p&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt;En esta etapa el usuario debe comenzar con el proceso de ventas con el cliente correspondiente.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt;Es importante que registre todas las actividades relacionadas al prospecto, ya sean llamadas, reuniones, o envío de correos con el registro de actividades a la derecha de esta página.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt;Dentro de la gestión que debe realizar se encuentra:&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;ol&gt;&lt;li&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt;Análisis de la información disponible.&lt;/span&gt;&lt;/li&gt;&lt;li&gt;Inicio del proceso para contactar al cliente.&lt;/li&gt;&lt;li&gt;Cambiar estado según corresponda.&lt;/li&gt;&lt;/ol&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;El estado contactado debe ser utilizado en caso de que se haya comenzado la gestión y aún no haya un OK para comenzar el proceso de negociación.&lt;/p&gt;&lt;p&gt;Si se va a comenzar la negociación, el usuario debe marcar el estado Interesado.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;</info>
+        <picklistValueName>Contactado</picklistValueName>
+    </pathAssistantSteps>
+    <recordTypeName>Prospecto_FFVV</recordTypeName>
+</PathAssistant>

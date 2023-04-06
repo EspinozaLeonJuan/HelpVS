@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Queue xmlns="http://soap.sforce.com/2006/04/metadata">
+    <doesSendEmailToMembers>false</doesSendEmailToMembers>
+    <name>WhatsApp - Reembolsos</name>
+    <queueMembers>
+        <users>
+            <user>rescobar@security.cl</user>
+            <user>daniel.marin@security.cl</user>
+            <user>javier.burgos@security.cl</user>
+            <user>javiera.salfate@ext-security.cl</user>
+            <user>jorge.vidaurre@security.cl</user>
+            <user>sandra.cortez@ext-security.cl</user>
+            <user>sara.macadoo@ext-security.cl</user>
+            <user>serivera@security.cl</user>
+            <user>uvass@security.cl</user>
+        </users>
+    </queueMembers>
+    <queueRoutingConfig>Whatsapp_Reembolsos</queueRoutingConfig>
+    <queueSobject>
+        <sobjectType>MessagingSession</sobjectType>
+    </queueSobject>
+</Queue>

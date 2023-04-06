@@ -1,0 +1,3 @@
+<apex:page controller="CTR_DerivarCaso" action="{!derivarCasos}" >
+    Procesando derivación caso...
+</apex:page>

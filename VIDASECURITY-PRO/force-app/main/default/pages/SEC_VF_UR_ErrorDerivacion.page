@@ -1,0 +1,116 @@
+<apex:page controller="CTR_DerivarCasoError"  action="{!CargaCaso}" lightningStylesheets="true" showHeader="true" sidebar="true" tabStyle="Case"  >
+<style>
+        
+        .popupBackground {
+                /* Background color */
+                background-color:black;
+                opacity: 0.5;
+                filter: alpha(opacity = 50);
+                
+                /* Dimensions */
+                width: 90%;
+                height: 100%;       
+                top: 0;
+                left: 50;
+                z-index: 998;
+                position: absolute;        
+                /* Mouse */
+                cursor:wait;
+            }
+                    
+            .popupPanel {
+                /* Background color */
+                border: solid 2px orange;
+                background-color: white;        
+                /* Dimensions */
+                display: inline-block;
+                    left: 50%;
+                width: 100px;
+                margin-left: 0px;
+                top: 100px;
+                height: 25px;
+                margin-top: -25px;
+                position: absolute;   
+                z-index: 999;        
+                /* Mouse */
+                cursor:pointer;;
+            }
+        
+         </style>
+            
+            
+         <script>
+                
+            function RequerimientoEliminado() {  
+                alert('El Requerimiento número {!IdRequerimiento} ha sido eliminado.');
+                ToCase();
+            }
+            
+            function ConfirmaEliminar() {
+                
+                var seleccion = confirm("Esta seguro de eliminar el Requerimiento número {!IdRequerimiento}?");
+                
+                if (seleccion)
+                {   
+                    
+                }           
+                else
+                {
+                    event.dispose();
+                }        
+            }
+        </script>
+    <apex:form id="Deriva_Form">           
+        <apex:actionFunction action="{!ToCase}" name="ToCase"/>
+        
+        <apex:pageBlock title="Derivar Caso Requerimiento" id="dv_header">
+                      
+
+            <apex:panelGrid columns="5" >
+                <apex:outputLabel style="font-weight:bold;" >Número de Caso:</apex:outputLabel>                      
+                <apex:commandLink action="{!ToCase}"  value="{!Caso.CaseNumber}" />   
+               &nbsp;      &nbsp; &nbsp;      &nbsp; 
+                <apex:outputLabel style="font-weight:bold;" >Negocio:</apex:outputLabel> 
+                <apex:outputLabel value="{!Caso.Negocio__c}"></apex:outputLabel>                        
+                                         
+
+                <apex:outputLabel style="font-weight:bold;" >RUT Titular:</apex:outputLabel>  
+                <apex:outputLabel value="{!Caso.RUT__c}"></apex:outputLabel>                    
+                &nbsp;      &nbsp; &nbsp;      &nbsp; 
+                <apex:outputLabel style="font-weight:bold;" >Nombre Titular:</apex:outputLabel>                            
+                <apex:outputLabel value="{!Caso.Nombre_Completo_Razon_Social__c}"></apex:outputLabel>
+
+                <apex:outputLabel style="font-weight:bold;" >Poliza Titular:</apex:outputLabel>  
+                <apex:outputLabel value="{!Poliza}" ></apex:outputLabel>                    
+                
+            </apex:panelGrid>
+          
+   <hr/>
+            <apex:panelGrid columns="2"  >                    
+
+                    <apex:outputLabel style="font-weight:bold;" >Categoría:</apex:outputLabel>  
+                    <apex:outputLabel value="{!Caso.CASO_Categoria__c}"></apex:outputLabel>                        
+                     
+
+                    <apex:outputLabel style="font-weight:bold;" >Detalle Solicitud:</apex:outputLabel>  
+                    <apex:outputLabel value="{!EtiquetaSolicitud}"></apex:outputLabel>     
+                  
+                   
+                   
+                </apex:panelGrid>
+
+                <br/>
+                <apex:pageMessages id="showmsg" escape="true"></apex:pageMessages>
+
+    </apex:pageBlock>
+    <apex:pageBlock id="pb_ActionVer" >
+            
+           
+            <apex:commandButton id="cmd_Cancelar" title="Cancelar" value="Volver a Caso" action="{!ToCase}"  />
+               
+            </apex:pageBlock>
+    
+    </apex:form>
+          
+     
+</apex:page>

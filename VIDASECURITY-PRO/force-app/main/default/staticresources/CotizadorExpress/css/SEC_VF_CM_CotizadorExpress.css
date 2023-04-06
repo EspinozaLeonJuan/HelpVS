@@ -1,0 +1,78 @@
+.header_inline_left
+        {
+            width:49.5%;
+            display:inline-block;
+            padding: 3px;
+        }
+
+        .header_inline_right
+        {
+            width:49.5%;
+            display:inline-block;
+            text-align:right;
+            padding: 3px;
+        }
+
+    
+        .popupBackground {
+            /* Background color */
+            background-color:black;
+            opacity: 0.5;
+            filter: alpha(opacity = 50);
+            /* Dimensions */
+            width: 100%;
+            height: 1000%;       
+            top: 0;
+            left: 50;
+            z-index: 998;
+            position: absolute;        
+            /* Mouse */
+            cursor:wait;
+        }
+                
+        .popupPanel {
+            /* Background color */
+            border: solid 2px orange;
+            background-color: white;        
+            /* Dimensions */
+            display: inline-block;
+            left: 50%;
+            width: 100px;
+            margin-left: 0px;
+            top: 100px;
+            height: 25px;
+            margin-top: -25px;
+            position: absolute;   
+            z-index: 999;        
+            /* Mouse */
+            cursor:pointer;;
+        } 
+        
+        .derecha
+        {
+            text-align: right;
+        }
+
+        .btnDefault{
+            color:white !important;
+            background:#A2A4A5 !important;
+            margin-right: -8px;
+        }
+
+        .btnSuccess{
+            color:white !important;
+            background:#11862D !important;
+            margin-right: -8px;
+        }
+
+        .btnDanger{
+            color:white !important;
+            background:#E30C0C !important;
+            margin-right: -8px;
+        }
+  
+        .btnInfo{
+            color:white !important;
+            background:rgb(105, 97, 214) !important;
+            margin-right: -8px;
+        }

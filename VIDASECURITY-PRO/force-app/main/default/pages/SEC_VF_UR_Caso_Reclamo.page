@@ -1,0 +1,277 @@
+<!--
+ ************************************************************************************************************
+ |  NOMBRE                 : SEC_VF_UR_Caso_Reclamo                          				    	    	|
+ |  TIPO                   : VISUALFORCE PAGE																|
+ |  REQUERIMIENTO          : MEJORAS UR                                                                  	|
+ |  DESCRIPCION            : Pagina diseñada para soportar el formato de un Caso Reclamo en la Bandeja UR   | 
+ |  																										|
+ ************************************************************************************************************
+ |  VERSIÓN    *    FECHA C/M    *    RESPONSABLE    *    OBSERVACIONES										|
+ |    1.0      *    2019/08/01   *    JUAN ESPINOZA  *    Creación Página									|
+ |     																										|
+ ************************************************************************************************************
+-->
+
+<apex:page controller="CTR_UR_Colaboracion" action="{!cargaCaso}" lightningStylesheets="true" showHeader="true" sidebar="false" tabStyle="Case" docType="html-5.0" >
+    <style>
+             
+.popupBackground {
+        /* Background color */
+        background-color:black;
+        opacity: 0.5;
+        filter: alpha(opacity = 50);
+        
+        /* Dimensions */
+        width: 100%;
+        height: 1000%;       
+        top: 0;
+        left: 0;
+        z-index: 998;
+        position: absolute;        
+        /* Mouse */
+        cursor:wait;
+    }
+            
+    .popupPanel {
+       /* Background color */
+        border: solid 2px orange;
+        background-color: white;        
+        /* Dimensions */
+        display: inline-block;
+        left: 50%;
+        width: 100px;
+        margin-left: 0px;
+        top: 100px;
+        height: 25px;
+        margin-top: -25px;
+        position: absolute;   
+        z-index: 999;        
+        /* Mouse */
+        cursor:pointer;
+    }
+    
+    .ct{
+    text-align:center;
+    }
+
+    .header_inline_left
+    {
+        width:49.5%;
+        display:inline-block;
+        /* position: absolute;*/
+        /*float: left;*/
+        /*text-align:center;*/
+        padding: 3px;
+      /*  margin-top: -30px;*/
+        margin-bottom: 4px;
+    }
+
+    .header_inline_right
+    {
+        width:49.5%;
+        display:inline-block;
+        /* position: absolute;*/
+        /*float: left;*/
+        text-align:right;
+        padding: 3px;
+      /*  margin-top: -30px;*/
+        margin-bottom: 4px;      
+    }
+
+    .checkTable 
+    {
+        /*width: 100%;
+        text-align: center;*/
+    }
+
+
+    .btnDefault{
+        color:white !important;
+        background:#A2A4A5 !important;
+        margin-right: -8px;
+    }
+
+    .btnSuccess{
+        color:white !important;
+        background:#11862D !important;
+        margin-right: -8px;
+    }
+
+    .btnDanger{
+        color:white !important;
+        background:#E30C0C !important;
+        margin-right: -8px;
+    }
+
+    .btnReturn{
+        color:white !important;
+        background:rgb(105, 97, 214) !important;
+        margin-right: -8px;
+    }
+
+    .btnMenuCurrent{
+        color:white !important;
+        background:#8D8E95 !important;
+       /*display: inline-flex;*/
+        /*margin-left: -10px;*/
+        margin-right: -8px;
+    }
+
+    .btnMenu{
+        color:white !important;
+        background:#5260E3 !important;
+        /*display: inline-flex;*/
+        /*margin-left: -10px;*/
+        margin-right: -8px;
+    }
+
+    .btnPopUp{
+        color:black !important;
+        background:#E7D33B !important;
+        /*display: inline-flex;*/
+        /*margin-left: -10px;*/
+        margin-right: -8px;
+        margin-top: 5px;
+    }
+    
+/*
+    body .bPageBlock .pbHeader {
+    background-color: #EF861C; 
+    size: 45px;
+    color: white;
+    padding-left: 15px;
+   
+}*/
+
+    </style>
+    <apex:includeScript value="{!$Resource.jquery}"/>
+    <!--<br/>-->
+    <script type="text/javascript">
+        function colorPageBlock(pageblock, bkcolor, color) {
+            if (pageblock != null) 
+            {
+                pageblock.firstChild.style.cssText = "background-color: " + bkcolor + ";font-weight:bold;color:"+color+";";
+                //pageblock.firstChild.style.
+            }
+        }
+        </script>
+    <div id="dv_CuerpoPrincipal" style="width: 100%; margin-left: auto; margin-right: auto; height: 100%;">
+          <apex:actionStatus id="Status">
+        <apex:facet name="start">
+            <apex:outputPanel >
+                <div class="popupBackground" />
+                <div class="popupPanel">
+                    &nbsp; Espere...<img src="/apexpages/devmode/img/saveStatus.gif" />
+                </div>
+            </apex:outputPanel> 
+        </apex:facet>
+    </apex:actionStatus>
+ 
+    <!--<br/>-->
+    <apex:form id="frm_sup">             
+            <apex:pageBlock id="pbk_PanelCaso">
+                <apex:pageBlockSection title="Información Caso Reclamo" collapsible="false" columns="1" id="pbs_CasoHeader" >
+                    <apex:panelGrid columns="6" style="width:100%;">
+                            <apex:outputLabel style="font-weight:bold;" >Nº Caso</apex:outputLabel> 
+                            <apex:outputLabel value="{!CasoPopup.CaseNumber}" />                               
+                            <apex:outputText value="    " id="empty001"/> 
+                            <apex:outputText value="    " id="empty002"/> 
+                            <apex:outputLabel style="font-weight:bold;"  >Estado</apex:outputLabel>
+                            <apex:outputLabel value="{!CasoPopup.Status}" style="font-weight:bold;color:red;text-transform: uppercase;font-size:12px;" rendered="true" />
+                            
+                            <!--2-->
+                            <apex:outputLabel style="font-weight:bold;" >RUT Cliente</apex:outputLabel>     
+                            <apex:outputLabel value="{!CasoPopup.RUT__c}"/>       
+                            <!-- <label id="" style="font-size:14px">{!verCaso.RUT__c}</label>                   -->               
+                          
+                            <apex:outputLabel style="font-weight:bold;" >Cliente</apex:outputLabel>      
+                            <apex:outputLabel value="{!CasoPopup.Nombre_Completo_Razon_Social__c}"/>  
+
+                            <apex:outputLabel style="font-weight:bold;"  >Nº de Poliza</apex:outputLabel>
+                            <apex:outputLabel value="{!CasoPopup.CASO_Poliza_Asoc__c}" rendered="true" />  
+
+                            <!--3-->
+
+                            <apex:outputLabel style="font-weight:bold;" >Producto</apex:outputLabel>  
+                            <apex:outputField value="{!CasoPopup.Producto__c}" rendered="true" />
+
+                            <apex:outputLabel style="font-weight:bold;" >Tipo de Operación</apex:outputLabel>  
+                            <apex:outputLabel value="{!CasoPopup.Tipo_Operacion__c}"   />                          
+                            
+                            <apex:outputLabel style="font-weight:bold;" >Detalle Operación</apex:outputLabel>  
+                            <apex:outputLabel value="{!CasoPopup.Detalle_Operacion__c}" />     
+                            
+                             <!--4-->
+                            
+                             <apex:outputLabel style="font-weight:bold;" >Negocio</apex:outputLabel>  
+                            <apex:outputLabel value="{!CasoPopup.Negocio__c}" rendered="true" />
+
+                            <apex:outputLabel style="font-weight:bold;" >Fecha/Hora de Creación</apex:outputLabel>  
+                            <apex:outputField value="{!CasoPopup.CreatedDate}" rendered="true" /> 
+
+                            <apex:outputLabel style="font-weight:bold;" >Fecha cierre Tope</apex:outputLabel> 
+                            <apex:outputField value="{!CasoPopup.Fecha_Cierre_Tope__c}" rendered="true" /> 
+                           
+                           
+                           
+                        </apex:panelGrid>
+               
+                      
+                        <apex:panelGrid columns="1"  style="width:100%;">  
+                        <hr/>
+                               <apex:outputLabel style="font-weight:bold;" >Descripción</apex:outputLabel> 
+                              <apex:inputTextarea id="Description" value="{!CasoPopup.Description}" style="resize: none;width:100%;height:150px;" readonly="true"/>                        
+        
+                         </apex:panelGrid> 
+                        <apex:panelGrid columns="1" style="width:100%">
+                        <hr/>
+                                <apex:outputLabel style="font-weight:bold;font-size:14px;" >Comentarios de Caso</apex:outputLabel> 
+                                <apex:outputPanel layout="block" style="overflow:auto;width:100%;height:130px" >
+                                    <apex:pageBlockTable id="pbkt_TablaComentariosCaso" title="Comentarios del Caso" value="{!LST_ComentariosCasoUR}" var="coment"  >
+                                        <apex:column headerValue="Comentario" value="{!coment.CommentBody}"  headerClass="ct" />
+                                        <apex:column headerValue="Fecha Creación" value="{!coment.CreatedDate}"  headerClass="ct"  style="text-align:center;"/>
+                                        <apex:column headerValue="Creado por" value="{!coment.CreatedById}"  headerClass="ct"  style="text-align:center;"/>
+                                    </apex:pageBlockTable>
+                                </apex:outputPanel>
+                        </apex:panelGrid>
+
+                        
+                        <apex:panelGrid columns="1" style="width:100%">
+                        <hr/>
+
+                                <apex:outputLabel style="font-weight:bold;font-size:14px;" >Colaboraciones UR</apex:outputLabel> 
+                                <apex:outputPanel layout="block" style="overflow:auto;width:100%;height:130px" >
+                                    <apex:pageBlockTable id="pbkt_TablaCasos" value="{!LST_ColaboracionesCaso}" var="tarea"  >
+                                        <apex:column style="font-weight:bold;text-align:center;" headerValue="Estado" value="{!tarea.Status}" headerClass="ct"/> 
+                                        <apex:column headerValue="Asunto" value="{!tarea.Detalle_Operacion__c}" style="width:15%;" rendered="true" headerClass="ct"/>
+                                        <apex:column headerValue="Descripción" value="{!tarea.Description}" style="width:25%;" rendered="true" headerClass="ct"/>
+                                        <apex:column headerValue="Fecha Creación" value="{!tarea.CreatedDate}" headerClass="ct" style="text-align:center;width:10%;"/>
+                                        <apex:column headerValue="Fecha de Vencimiento"  value="{!tarea.ActivityDate}" headerClass="ct" style="text-align:center;width:10%;"/>
+                                        <apex:column headerValue="Unidad Resolutora" value="{!tarea.Owner.Name}" headerClass="ct" style="text-align:center;width:10%;"/>
+                                        <apex:column headerValue="Responsable" value="{!tarea.Responsable_Backup__c}" rendered="true" headerClass="ct" style="text-align:center;width:10%;"/>                    
+                                    </apex:pageBlockTable>
+                                </apex:outputPanel>
+                        </apex:panelGrid>
+
+                       
+
+                  
+                       
+                <script>colorPageBlock(document.getElementById("{!$Component.pbs_CasoHeader}"), "gray", "white");</script>
+                </apex:pageBlockSection>
+                
+            </apex:pageBlock>
+    </apex:form>
+    <apex:pageBlock >
+        <apex:pageBlockSection columns="1">
+            <apex:panelGrid columns="1" style="width:100%" >
+                <hr/>
+        
+                      <apex:relatedList subject="{!CasoPopup}" list="CombinedAttachments"  pageSize="15" title="Documentos Adjuntos"  >
+             </apex:relatedList>
+                </apex:panelGrid>
+        
+        </apex:pageBlockSection>
+    </apex:pageBlock>     
+    </div>
+    </apex:page>

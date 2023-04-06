@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldUpdates>
+        <fullName>Fecha_de_hoy</fullName>
+        <field>Fecha_de_hoy__c</field>
+        <formula>TODAY()</formula>
+        <name>Fecha de hoy</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>SEC_Activa_Marca_Prod_Onco_Cliente</fullName>
+        <field>CUENT_Participando_en_Campana_Oncologica__c</field>
+        <literalValue>1</literalValue>
+        <name>SEC - Activa Marca Prod Onco Cliente</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+        <targetObject>Cuenta__c</targetObject>
+    </fieldUpdates>
+    <rules>
+        <fullName>1er Informe Siniestralidad Segmento Grande</fullName>
+        <active>true</active>
+        <criteriaItems>
+            <field>Poliza__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Colectivos</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Poliza__c.Estatus__c</field>
+            <operation>equals</operation>
+            <value>ACTIVA</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Poliza__c.Segmento_P_liza__c</field>
+            <operation>equals</operation>
+            <value>Grande</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Poliza__c.Holding_Comercial_Colectivo__c</field>
+            <operation>equals</operation>
+            <value>Verdadero</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Poliza__c.Fecha_Inicio_de_Poliza__c</field>
+            <operation>greaterThan</operation>
+            <value>6/17/2019</value>
+        </criteriaItems>
+        <description>Tarea automática para creación de 1er informe de siniestralidad para ejecutivos comercial colectivos, se debe 105 días después de inicio vigencia de póliza.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Informe_Siniestralidad_segmento_grande</name>
+                <type>Task</type>
+            </actions>
+            <offsetFromField>Poliza__c.Fecha_Inicio_de_Poliza__c</offsetFromField>
+            <timeLength>100</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>2do Informe Siniestralidad Segmento Grande</fullName>
+        <active>true</active>
+        <criteriaItems>
+            <field>Poliza__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Colectivos</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Poliza__c.Estatus__c</field>
+            <operation>equals</operation>
+            <value>ACTIVA</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Poliza__c.Segmento_P_liza__c</field>
+            <operation>equals</operation>
+            <value>Grande</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Poliza__c.Holding_Comercial_Colectivo__c</field>
+            <operation>equals</operation>
+            <value>Verdadero</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Poliza__c.Fecha_Inicio_de_Poliza__c</field>
+            <operation>greaterThan</operation>
+            <value>3/19/2019</value>
+        </criteriaItems>
+        <description>Tarea automática para creación de 1er informe de siniestralidad para ejecutivos comercial colectivos, se debe 105 días después de inicio vigencia de póliza.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>informe_siniestralidad_2</name>
+                <type>Task</type>
+            </actions>
+            <offsetFromField>Poliza__c.Fecha_Inicio_de_Poliza__c</offsetFromField>
+            <timeLength>192</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Fecha de hoy</fullName>
+        <actions>
+            <name>Fecha_de_hoy</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Poliza__c.Estatus__c</field>
+            <operation>equals</operation>
+            <value>OTRA,ACTIVA,ANULADA,EXCLUIDA,INCOMPLETA,INCLUIDA,LIBERADA,MODIFICADA,PRORROGADA,RENOVADA,SALDADA,VALIDA,CADUCADA</value>
+        </criteriaItems>
+        <description>Completar con la fecha de hoy el campo Fecha de hoy</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Informe Siniestralidad Segmento Mediano</fullName>
+        <active>true</active>
+        <criteriaItems>
+            <field>Poliza__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Colectivos</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Poliza__c.Estatus__c</field>
+            <operation>equals</operation>
+            <value>ACTIVA</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Poliza__c.Segmento_P_liza__c</field>
+            <operation>equals</operation>
+            <value>Mediano</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Poliza__c.Holding_Comercial_Colectivo__c</field>
+            <operation>equals</operation>
+            <value>Verdadero</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Poliza__c.Fecha_Inicio_de_Poliza__c</field>
+            <operation>greaterThan</operation>
+            <value>3/19/2019</value>
+        </criteriaItems>
+        <description>Tarea automática para creación de informe de siniestralidad para ejecutivos comercial colectivos, se debecrear 195 días después de inicio vigencia de póliza.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Informe_Siniestralidad_P_liza_Segmento_Mediano</name>
+                <type>Task</type>
+            </actions>
+            <offsetFromField>Poliza__c.Fecha_Inicio_de_Poliza__c</offsetFromField>
+            <timeLength>192</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Renovación Polizas Segmento Grande</fullName>
+        <active>true</active>
+        <criteriaItems>
+            <field>Poliza__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Colectivos</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Poliza__c.Estatus__c</field>
+            <operation>equals</operation>
+            <value>ACTIVA</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Poliza__c.Segmento_P_liza__c</field>
+            <operation>equals</operation>
+            <value>Grande</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Poliza__c.Holding_Comercial_Colectivo__c</field>
+            <operation>equals</operation>
+            <value>Verdadero</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Poliza__c.Name</field>
+            <operation>notEqual</operation>
+            <value>282758,281610,281010</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Planificaci_n_de_Renovaci_n_segmento_grande</name>
+                <type>Task</type>
+            </actions>
+            <offsetFromField>Poliza__c.Fecha_Termino_de_Poliza__c</offsetFromField>
+            <timeLength>-75</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Renovación Polizas Segmento Mediano</fullName>
+        <active>true</active>
+        <criteriaItems>
+            <field>Poliza__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Colectivos</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Poliza__c.Estatus__c</field>
+            <operation>equals</operation>
+            <value>ACTIVA</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Poliza__c.Segmento_P_liza__c</field>
+            <operation>equals</operation>
+            <value>Mediano</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Poliza__c.Holding_Comercial_Colectivo__c</field>
+            <operation>equals</operation>
+            <value>Verdadero</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Planificaci_n_de_Renovaci_n_segmento_mediano</name>
+                <type>Task</type>
+            </actions>
+            <offsetFromField>Poliza__c.Fecha_Termino_de_Poliza__c</offsetFromField>
+            <timeLength>-45</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>SEC - Activa Cliente con Poliza Oncologica</fullName>
+        <actions>
+            <name>SEC_Activa_Marca_Prod_Onco_Cliente</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Account.CUENT_Participando_en_Campana_Oncologica__c</field>
+            <operation>equals</operation>
+            <value>Falso</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <tasks>
+        <fullName>Informe_Siniestralidad_P_liza_Segmento_Mediano</fullName>
+        <assignedToType>owner</assignedToType>
+        <description>Comenzar creación de informe de siniestralidad para póliza con segmento mediano.</description>
+        <dueDateOffset>197</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Poliza__c.Fecha_Inicio_de_Poliza__c</offsetFromField>
+        <priority>Alta</priority>
+        <protected>false</protected>
+        <status>No iniciada</status>
+        <subject>Informe Siniestralidad Póliza Segmento Mediano</subject>
+    </tasks>
+    <tasks>
+        <fullName>Informe_Siniestralidad_segmento_grande</fullName>
+        <assignedToType>owner</assignedToType>
+        <description>Comenzar creación de informe de siniestralidad para póliza con segmento grande.</description>
+        <dueDateOffset>105</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Poliza__c.Fecha_Inicio_de_Poliza__c</offsetFromField>
+        <priority>Alta</priority>
+        <protected>false</protected>
+        <status>No iniciada</status>
+        <subject>Informe Siniestralidad Póliza Segmento Grande</subject>
+    </tasks>
+    <tasks>
+        <fullName>Planificaci_n_de_Renovaci_n_segmento_grande</fullName>
+        <assignedToType>owner</assignedToType>
+        <description>Comenzar con proceso de renovación de póliza con Segmento Grande</description>
+        <dueDateOffset>-70</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Poliza__c.Fecha_Termino_de_Poliza__c</offsetFromField>
+        <priority>Alta</priority>
+        <protected>false</protected>
+        <status>No iniciada</status>
+        <subject>Planificación de Renovación Segmento Grande</subject>
+    </tasks>
+    <tasks>
+        <fullName>Planificaci_n_de_Renovaci_n_segmento_mediano</fullName>
+        <assignedToType>owner</assignedToType>
+        <description>Comenzar con proceso de renovación de póliza Segmento Mediano</description>
+        <dueDateOffset>-40</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Poliza__c.Fecha_Termino_de_Poliza__c</offsetFromField>
+        <priority>Alta</priority>
+        <protected>false</protected>
+        <status>No iniciada</status>
+        <subject>Planificación de Renovación Segmento Mediano</subject>
+    </tasks>
+    <tasks>
+        <fullName>informe_siniestralidad_2</fullName>
+        <assignedToType>owner</assignedToType>
+        <description>Comenzar creación de informe de siniestralidad para póliza con segmento grande.</description>
+        <dueDateOffset>197</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Poliza__c.Fecha_Inicio_de_Poliza__c</offsetFromField>
+        <priority>Alta</priority>
+        <protected>false</protected>
+        <status>No iniciada</status>
+        <subject>Informe Siniestralidad Póliza Segmento Grande</subject>
+    </tasks>
+</Workflow>

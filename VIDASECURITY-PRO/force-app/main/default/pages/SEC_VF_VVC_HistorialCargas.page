@@ -1,0 +1,165 @@
+<!--
+  @Page Name          : SEC_VF_VVC_HistorialCargas.page
+  @Description        : 
+  @Author             : Consultor Salesforce Vida
+  @Group              : 
+  @Last Modified By   : Consultor Salesforce Vida
+  @Last Modified On   : 5/25/2019, 4:07:50 PM
+  @Modification Log   : 
+  ==============================================================================
+  Ver         Date                     Author      		      Modification
+  ==============================================================================
+  1.0    4/22/2019, 1:56:04 PM   Consultor Salesforce Vida     Initial Version
+-->
+<apex:page controller="CTR_VVC_HistorialCargas" action="{!ListadoCargas}" lightningStylesheets="true" showHeader="true" sidebar="true" docType="html-5.0"  >
+        <style>
+        
+
+                .popupBackground {
+                        /* Background color */
+                        background-color:black;
+                        opacity: 0.5;
+                        filter: alpha(opacity = 50);
+                        
+                        /* Dimensions */
+                        width: 100%;
+                        height: 1000%;       
+                        top: 0;
+                        left: 50;
+                        z-index: 998;
+                        position: absolute;        
+                        /* Mouse */
+                        cursor:wait;
+                    }
+                    
+                    .popupPanel {
+                    /* Background color */
+                        border: solid 2px orange;
+                        background-color: white;        
+                        /* Dimensions */
+                        display: inline-block;
+                        left: 50%;
+                        width: 100px;
+                        margin-left: 0px;
+                        top: 100px;
+                        height: 25px;
+                        margin-top: -25px;
+                        position: absolute;   
+                        z-index: 999;        
+                        /* Mouse */
+                        cursor:pointer;
+                    }
+        
+                    .ct{
+                        text-align:center;
+                    }
+                 
+              </style>
+<script>
+    function SearchEval(error)
+    {
+        if (error == true)
+        {
+            alert('El rango de Fechas a consultar es inválido');
+        }
+    }
+</script>
+<apex:includeScript value="{!$Resource.jquery}"/>
+<apex:actionStatus id="Status">
+        <apex:facet name="start">
+            <apex:outputPanel >
+                <div class="popupBackground" />
+                <div class="popupPanel">
+                    &nbsp; Espere...<img src="/apexpages/devmode/img/saveStatus.gif" />
+                </div>
+            </apex:outputPanel> 
+        </apex:facet>
+    </apex:actionStatus>
+    <apex:form id="frm_inf">
+            <apex:pageBlock id="pbk_Header" title="Historial de Carga Vale Vista por Cobrar" >
+                <apex:panelGrid style="text-align:right;width:100%">    
+                  <!--  <apex:commandButton title="Revisar consulta histórica" value="Consulta Histórica" action="{!ToConsultaHistorica}" />-->
+                    <apex:commandButton title="Carga de archivo CSV" value="Cargar Archivo" action="{!NuevaCargaDatos}" />
+                </apex:panelGrid> 
+             <!--   <apex:panelGrid columns="1" style="text-align:right;width:100%">    
+                    <apex:commandButton title="Revisar consulta histórica" value="Consulta Histórica" action="{!ToConsultaHistorica}" />
+                    <apex:commandButton title="Carga de archivo CSV" value="Cargar Archivo" action="{!NuevaCargaDatos}" />
+                </apex:panelGrid> -->
+<hr/>
+<apex:panelGrid columns="1" style="text-align:left;width:100%">                                            
+        <apex:outputLabel value="Búsqueda por Fecha de Carga" style="font-weight:bold;text-decoration:underline;"></apex:outputLabel>                                         
+                </apex:panelGrid> 
+                <br/>
+                <apex:panelGrid columns="8" style="text-align:right;width:68%" id="fechas" >   
+                    <apex:outputLabel value="Fecha de Inicio: " style="font-weight:bold;" ></apex:outputLabel>                                         
+                        <apex:inputField value="{!FDate.Fecha_de_Llamada__c}" label="Fecha de Inicio"   ></apex:inputField>
+                        <apex:outputLabel value="Fecha de Termino: " style="font-weight:bold;"></apex:outputLabel>                                         
+                        <apex:inputField value="{!FDate.Fecha_de_cierre__c}" label="Fecha de Termino"></apex:inputField>
+                        <apex:commandButton value="Buscar" rerender="details" action="{!search}" oncomplete="SearchEval({!Ferror});" status="Status" />
+                        <apex:commandButton value="Limpiar" action="{!cleanSearch}" />
+                        <apex:outputText value="    " id="empty001"/>  
+                        <apex:commandButton title="Revisar consulta histórica" value="Consulta Histórica" action="{!ToConsultaHistorica}" />
+                     <!--   <apex:outputText value="    " id="empty002"/>
+                        
+                        <apex:commandButton title="Carga de archivo CSV" value="Cargar Archivo" action="{!NuevaCargaDatos}" />-->
+                    </apex:panelGrid>
+              <!--  <apex:panelGrid columns="1" style="text-align:right;width:100%">                                            
+                        <apex:commandButton title="Carga de archivo CSV" value="Paginacion" action="{!TestPagination}" />
+                    </apex:panelGrid> -->
+                
+                </apex:pageBlock>
+
+                
+
+               
+                
+                <apex:pageBlock id="details">
+                <apex:pageBlockTable id="pbkt_TablaCargas" value="{!cvvlist}" var="upload"  >
+                    <apex:column headerValue="Acciones" style="text-align:center;width:10%;" headerClass="ct">
+                        <apex:commandLink value="Detalle Carga" action="{!ToDetalleCarga}" >
+                            <apex:param name="id" value="{!upload.Id}" />
+                        </apex:commandLink> 
+                                        </apex:column>                      
+                    <apex:column headerValue="Correlativo"  rendered="true" headerClass="ct" >
+                            <apex:outputLabel value="{!upload.Name}" />        
+                </apex:column>                    
+                    <apex:column headerValue="Usuario Carga" value="{!upload.OwnerId}" rendered="true" headerClass="ct" style="text-align:center;width:30%;" />                    
+                    <apex:column headerValue="Fecha Carga" value="{!upload.CreatedDate}" rendered="true" headerClass="ct" style="text-align:center;width:20%;" />                    
+                    <apex:column headerValue="Total Registros Carga" value="{!upload.Total_Registros_Carga__c}" rendered="true" headerClass="ct" style="text-align:center;width:10%;" />                    
+                    <apex:column headerValue="Total Registros Ok" value="{!upload.Total_Registros_Ok__c}" rendered="true" headerClass="ct" style="text-align:center;width:10%;" />                    
+                    <apex:column headerValue="Total Registros Error" value="{!upload.Total_Registros_Error__c}" rendered="true" headerClass="ct" style="text-align:center;width:10%;" />                    
+                    <apex:column headerValue="Total Registros Notificados" value="{!upload.Total_Registros_Notificados__c}" rendered="true" headerClass="ct" style="text-align:center;width:10%;" />                    
+                   
+                </apex:pageBlockTable>
+
+                <apex:pageblockButtons >
+                    <apex:commandButton value="Primera Página" rerender="details" action="{!FirstPage}" disabled="{!prev}" status="Status" />
+                    <apex:commandButton value="Anterior" rerender="details" action="{!previous}" disabled="{!prev}" status="Status" />
+                    <apex:commandButton value="Siguiente" rerender="details" action="{!next}" disabled="{!nxt}" status="Status" />
+                    <apex:commandButton value="Última Página" rerender="details" action="{!LastPage}" disabled="{!nxt}" status="Status" />
+                    </apex:pageblockButtons>
+                    <br/>
+
+                    
+                    <apex:outputLabel value="Página"></apex:outputLabel> &nbsp;
+                    <apex:outputLabel value="{!Page}"></apex:outputLabel> &nbsp;
+                    <apex:outputLabel value="de"></apex:outputLabel> &nbsp;
+                    <apex:outputLabel value="{!TotalPage}"></apex:outputLabel>
+                    <br/>
+                    <apex:outputLabel value="{!totalRecs}"></apex:outputLabel> &nbsp;
+                    <apex:outputLabel value="registros encontrados."></apex:outputLabel>
+         
+                    <!--Página&nbsp;
+                    <apex:outputLabel value="{!Page}"></apex:outputLabel>&nbsp;
+                    
+                    de
+                    &nbsp;
+                    <apex:outputLabel value="{!TotalPage}"></apex:outputLabel>
+                    <br/>
+                    <apex:outputLabel value="{!totalRecs}"></apex:outputLabel>
+                    &nbsp;registros encontrados.-->
+            </apex:pageBlock>
+ 
+    </apex:form>
+
+</apex:page>

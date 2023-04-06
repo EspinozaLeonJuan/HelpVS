@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Role xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAccessLevel>Edit</caseAccessLevel>
+    <contactAccessLevel>Edit</contactAccessLevel>
+    <description>Ejecutivas de calidad</description>
+    <mayForecastManagerShare>false</mayForecastManagerShare>
+    <name>Ejecutivas de calidad</name>
+    <opportunityAccessLevel>Edit</opportunityAccessLevel>
+    <parentRole>Jefe_Calidad_y_Reclamo</parentRole>
+</Role>

@@ -1,0 +1,467 @@
+<!--
+ ************************************************************************************************************
+ |  NOMBRE                 : SEC_VF_UR_Casos                                                                |
+ |  TIPO                   : VISUALFORCE PAGE                                                               |
+ |  REQUERIMIENTO          : MEJORAS UR                                                                     |
+ |  DESCRIPCION            : Permite buscar, listar y administrar los casos que han sido recepcionados en   | 
+ |                           la Bandeja UR y que se encuentran en Estado 'En Proceso' o 'Back Office'       | 
+ |                                                                                                          |
+ ************************************************************************************************************
+ |  VERSIÓN    *    FECHA C/M    *    RESPONSABLE    *    OBSERVACIONES                                     |
+ |    1.0      *    2019/08/01   *    JUAN ESPINOZA  *    Creación Página                                   |
+ |                                                                                                          |
+ ************************************************************************************************************
+-->
+
+<apex:page controller="CTR_UR_BandejaCasos" action="{!IniciarBandejaCasos}" lightningStylesheets="true" showHeader="true" sidebar="false" tabStyle="Case" docType="html-5.0" >
+    <style>
+             
+.popupBackground {
+        /* Background color */
+        background-color:black;
+        opacity: 0.5;
+        filter: alpha(opacity = 50);
+        
+        /* Dimensions */
+        width: 100%;
+        height: 1000%;       
+        top: 0;
+        left: 0;
+        z-index: 998;
+        position: absolute;        
+        /* Mouse */
+        cursor:wait;
+    } 
+            
+    .popupPanel {
+       /* Background color */
+        border: solid 2px orange;
+        background-color: white;        
+        /* Dimensions */
+        display: inline-block;
+        left: 50%;
+        width: 100px;
+        margin-left: 0px;
+        top: 100px;
+        height: 25px;
+        margin-top: -25px;
+        position: absolute;   
+        z-index: 999;        
+        /* Mouse */
+        cursor:pointer;
+    } 
+    
+    .ct{
+    text-align:center;
+    }
+
+    .header_inline_left
+    {
+        width:49.5%;
+        display:inline-block;
+        /* position: absolute;*/
+        /*float: left;*/
+        /*text-align:center;*/
+        padding: 3px;
+      /*  margin-top: -30px;*/
+        margin-bottom: 4px;
+    }
+
+    .header_inline_right
+    {
+        width:49.5%;
+        display:inline-block;
+        /* position: absolute;*/
+        /*float: left;*/
+        text-align:right;
+        padding: 3px;
+      /*  margin-top: -30px;*/
+        margin-bottom: 4px;      
+    }
+
+    .checkTable 
+    {
+        /*width: 100%;
+        text-align: center;*/
+    }
+
+
+   
+    .btnSuccess{
+        color:white !important;
+        background:#00CC00 !important;
+    }
+
+    .btnCancel{
+        color:white !important;
+        background:#00CC00 !important;
+    }
+
+    .btnMenuCurrent{
+        color:white !important;
+        background:#8D8E95 !important;
+       /*display: inline-flex;*/
+        /*margin-left: -10px;*/
+        margin-right: -8px;
+    }
+
+    .btnMenu{
+        color:white !important;
+        background:#5260E3 !important;
+        /*display: inline-flex;*/
+        /*margin-left: -10px;*/
+        margin-right: -8px;
+    }
+
+    .btnSearch{
+        color:white !important;
+        background:#48C9F4 !important;
+        margin-right: -6px;
+    }
+
+    .btnClean{
+        color: black !important;
+        background: #DAE3E7 !important;
+        margin-right: -6px;
+    }
+
+    </style>
+    <apex:includeScript value="{!$Resource.jquery}"/>
+
+    <script>    
+        var rutaRecursosEstaticos = '{!URLFOR($Resource.URIconos)}';   
+    </script>
+        
+    <!--<br/>-->
+    <script type="text/javascript">
+        var casos = '';
+        var cantCasos = 0;
+        function colorPageBlock(pageblock, bkcolor, color) {
+            if (pageblock != null) 
+            {
+                pageblock.firstChild.style.cssText = "background-color: " + bkcolor + ";font-weight:bold;color:"+color+";";
+                //pageblock.firstChild.style.
+            }
+        }
+
+        function SeleccionResponsable(uback, area)
+        {            
+            if (cantCasos > 0)
+            {
+                var height = 530;
+                var width = 1100;
+                var y=parseInt((window.screen.height/2) - height/2);
+                var x=parseInt((window.screen.width/2) - width/2); 
+
+                var performance   = 'height='+height+'px,width='+width+'px, top='+y+',left='+x+',toolbar=no,location=no,status=no,menubar=no,scrollbars=no,directories=no,resizable=no';
+       
+                var url = "/apex/SEC_VF_UR_Bandeja_ResponsableMultiple?Tipo=CASOS_UR&Ids="+casos+'&idResponsable=' + uback+'&area='+area;
+
+                var popUp = window.open(url, "_blank", performance);
+            
+                if (popUp == null || typeof(popUp)=='undefined') {  
+                        alert('Por favor deshabilita el bloqueador de ventanas emergentes y vuelve a hacer clic en "Cambio Responsable".');     
+                }
+                else {          
+                        popUp.focus();           
+                }
+            }
+            else
+            {
+                alert("Debe seleccionar al menos un Caso para asignar el Responsable UR.");
+            }
+        }
+
+        function CierreMultiple(uback)
+        {            
+            if (cantCasos > 0)
+            {
+                var height = 530;
+                var width = 1100;
+                var y=parseInt((window.screen.height/2) - height/2);
+                var x=parseInt((window.screen.width/2) - width/2); 
+
+                var performance   = 'height='+height+'px,width='+width+'px, top='+y+',left='+x+',toolbar=no,location=no,status=no,menubar=no,scrollbars=no,directories=no,resizable=no';
+       
+                var url = "/apex/SEC_VF_UR_Bandeja_CierreMultiple?Tipo=CASOS_UR&Ids="+casos+'&idResponsable=' + uback;
+
+                var popUp = window.open(url, "_blank", performance);
+            
+                if (popUp == null || typeof(popUp)=='undefined') {  
+                        alert('Por favor deshabilita el bloqueador de ventanas emergentes y vuelve a hacer clic en "Cerrar Múltiples Casos".');     
+                }
+                else {          
+                        popUp.focus();           
+                }
+            }
+            else
+            {
+                alert("Debe seleccionar al menos un Caso para realizar su Cierre.");
+            }
+        }
+
+        function CasoSeleccionado(cb, Id)
+        {   
+            if (cb.checked == true)
+            {
+                cantCasos++;
+                casos = casos  + Id +  '@';     
+            }
+            else
+            {
+                var res = casos.split("@");
+
+                casos = '';
+                cantCasos = 0;
+                
+                for (x=0; x < res.length; x++)
+                {
+                    if (res[x] != Id && res[x] != '')
+                    {
+                        casos = casos + res[x] + '@';
+                        cantCasos++;
+                    }
+                }   
+            }            
+        }
+
+
+        function checkAll(cb,cbid)
+        {         
+            casos = '';   
+            var inputElem = document.getElementsByTagName("input");                    
+            for(var i=0; i<inputElem.length; i++)
+            {            
+                 if(inputElem[i].id.indexOf(cbid)!=-1){                                       
+                    inputElem[i].checked = cb.checked;
+                    inputElem[i].onchange();
+                }
+            }
+        }
+
+       
+        </script>
+    <div id="dv_CuerpoPrincipal" style="width: 100%; margin-left: auto; margin-right: auto; height: 100%;">
+          <apex:actionStatus id="Status">
+        <apex:facet name="start">
+            <apex:outputPanel >
+                <div class="popupBackground" />
+                <div class="popupPanel">
+                    &nbsp; Espere...<img src="/apexpages/devmode/img/saveStatus.gif" />
+                </div>
+            </apex:outputPanel> 
+        </apex:facet>
+    </apex:actionStatus>
+ 
+    <br/>
+    <apex:form id="frm_sup">     
+        
+            <apex:actionFunction name="busquedaCasos" action="{!busquedaCasosUR}" reRender="details" status="Status">
+                </apex:actionFunction> 
+
+            <div id="title">
+                    <div class="header_inline_left">
+                            <apex:outputLabel style="font-weight:bold;" >Responsable UR:</apex:outputLabel>  
+                            <apex:selectList id="cmd_Usuarios" size="1" value="{!UsuarioBackUp}" style="width:200px;" >
+                                <apex:selectOptions value="{!ListarUsuarios}" />
+                     
+                                <apex:actionSupport event="onchange" action="{!seleccionResponsableUR}" reRender="details" oncomplete="" status="Status" />
+                            </apex:selectList>   
+
+                            &nbsp;
+                            <apex:commandButton value="Reiniciar Búsqueda"  rerender="details"  action="{!limpiabusquedaCasosUR}"  status="Status" immediate="true" styleClass="btnClean"/>                           
+                  
+                    </div>
+                    <div class="header_inline_right" >
+                        <apex:panelGroup style="text-align:right;">
+                          <!--  <apex:commandButton id="cmd_Dashboard" value="Dashboard UR" action="{!BandejaUR}" styleClass="btnMenu"  immediate="true" rendered="true" />-->
+                            <apex:commandButton id="cmd_MenuCasos" value="Casos UR"  disabled="true" styleClass="btnMenuCurrent" rendered="{!Pantalla.Botonera.CasosUR}"/>
+                            <apex:commandButton id="cmd_MenuEnRevision" value="Casos en Revisión Ejecutiva" action="{!BandejaCasosUR_EnRevision}" styleClass="btnMenu" immediate="true" rendered="{!Pantalla.Botonera.CasosUREnRevision}"/>  
+                            <apex:commandButton id="cmd_MenuHistory" value="Histórico Casos UR" styleClass="btnMenu" action="{!BandejaCasosUR_Historico}" immediate="true" rendered="{!Pantalla.Botonera.CasosURHistorico}"/>                              
+                        </apex:panelGroup>
+                    </div>
+                </div>
+            <apex:pageBlock id="pbk_PanelCasos" > 
+                    <apex:pageBlockSection title="Casos UR" collapsible="false" columns="1" id="pbs_CasosUR" >
+
+                        <apex:panelGrid columns="1" style="width:100%;" rendered="{!FiltroVentas == true}" >
+                            <apex:panelGroup >
+                                    <apex:inputCheckbox value="{!RequerimientoVentas}" id="checkVenta" >
+                                            <apex:actionSupport event="onchange" action="{!busquedaCasosUR}" reRender="details" oncomplete="" status="Status" />
+                                    </apex:inputCheckbox>
+                                    <apex:outputLabel style="font-weight:bold;" >Requerimientos Venta</apex:outputLabel>  
+                                    
+                            </apex:panelGroup>
+                           
+                        </apex:panelGrid>
+                            <apex:panelGrid columns="6" style="width:100%;">    
+                                    <apex:outputLabel value="Fecha Derivación (Inicio): " style="font-weight:bold;" rendered="{!Pantalla.Filtro.FechaDerivacion == true}" ></apex:outputLabel>                                     
+                                    <apex:input value="{!FechaInicioDerivacion}"  type="date"  onchange="javascript:busquedaCasos();" rendered="{!Pantalla.Filtro.FechaDerivacion == true}"/>
+                                    <apex:outputLabel value="Fecha Derivación (Termino): " style="font-weight:bold;" rendered="{!Pantalla.Filtro.FechaDerivacion == true}"></apex:outputLabel>  
+                                     <apex:input value="{!FechaTerminoDerivacion}"  type="date" onchange="javascript:busquedaCasos();" rendered="{!Pantalla.Filtro.FechaDerivacion == true}" />   
+                                     
+                                     <apex:outputLabel style="font-weight:bold;" rendered="{!Pantalla.Filtro.EstadoCaso == true}" >Estado Caso:</apex:outputLabel>  
+                                     <apex:selectList id="cmd_Estado" size="1" value="{!Estado}" rendered="{!Pantalla.Filtro.EstadoCaso == true}" style="width:200px;"  >
+                                         <apex:selectOptions value="{!ListarEstados}" />
+                                      <apex:actionSupport event="onchange" action="{!busquedaCasosUR}" reRender="details" oncomplete="" status="Status" />
+                                     </apex:selectList> 
+
+
+                                     <apex:outputLabel value="Hora Derivación (Inicio): " style="font-weight:bold;" rendered="{!Pantalla.Filtro.HoraDerivacion == true}" ></apex:outputLabel>
+                                     <apex:input value="{!HoraInicioDerivacion}"  type="time"  onchange="javascript:busquedaCasos();" rendered="{!Pantalla.Filtro.HoraDerivacion == true}"/>
+                                    
+                                     <apex:outputLabel value="Hora Derivación (Termino): " style="font-weight:bold;" rendered="{!Pantalla.Filtro.HoraDerivacion == true}" ></apex:outputLabel>
+                                     <apex:input value="{!HoraTerminoDerivacion}"  type="time"  onchange="javascript:busquedaCasos();" rendered="{!Pantalla.Filtro.HoraDerivacion == true}"/>
+
+                                     <apex:outputLabel style="font-weight:bold;" rendered="{!Pantalla.Filtro.FiltroBeneficios == true}" >Tipo Categoría:</apex:outputLabel>  
+                                    <apex:selectList id="cmd_categorias_Beneficio" size="1" value="{!Categoria_Beneficios}" style="width:200px;" rendered="{!Pantalla.Filtro.FiltroBeneficios == true}" >
+                                        <apex:selectOptions value="{!ListadoCategoriasBeneficios}" />
+                                        <apex:actionSupport event="onchange" action="{!busquedaCasosUR}" reRender="details" oncomplete="" status="Status" />
+                                    </apex:selectList> 
+                                    
+                                    <apex:outputLabel style="font-weight:bold;" rendered="{!Pantalla.Filtro.Negocio == true}" >Negocio:</apex:outputLabel>
+                                    <apex:inputField value="{!FiltroCaso.Negocio__c}"  rendered="{!Pantalla.Filtro.Negocio == true}" style="width:200px;">
+                                            <apex:actionSupport event="onchange" action="{!busquedaCasosUR}" reRender="details" oncomplete="" status="Status" />
+                                    </apex:inputField>
+
+                                    <apex:outputLabel style="font-weight:bold;" rendered="{!Pantalla.Filtro.Categoria == true}" >Categoría:</apex:outputLabel>
+                                    <apex:inputField value="{!FiltroCaso.CASO_Categoria__c}" rendered="{!Pantalla.Filtro.Categoria == true}"  style="width:200px;" >
+                                        <apex:actionSupport event="onchange" action="{!busquedaCasosUR}" reRender="details" oncomplete="" status="Status" />
+                                    </apex:inputField>
+    
+
+                                    <apex:outputLabel style="font-weight:bold;" rendered="{!Pantalla.Filtro.Solicitud == true}">Solicitud:</apex:outputLabel>
+                                    <apex:inputField value="{!FiltroCaso.Detalle_Solicitud__c}"  rendered="{!Pantalla.Filtro.Solicitud == true}" style="width:200px;" >
+                                            <apex:actionSupport event="onchange" action="{!busquedaCasosUR}" reRender="details" oncomplete="" status="Status" />
+                                    </apex:inputField>
+
+
+                                    <apex:outputLabel value="Número Caso: " style="font-weight:bold;" rendered="{!Pantalla.Filtro.NumeroCaso == true}" ></apex:outputLabel>
+                                    <apex:input value="{!NumeroCaso}"  type="text" id="NumeroCaso"  style="width:200px;" rendered="{!Pantalla.Filtro.NumeroCaso == true}">
+                                            <apex:actionSupport event="onchange" action="{!busquedaCasosUR}" reRender="details" oncomplete="" status="Status" />
+                                    </apex:input>
+        
+                                    <apex:outputLabel value="RUT Caso: " style="font-weight:bold;" rendered="{!Pantalla.Filtro.RUTCaso == true}" ></apex:outputLabel>
+                                    <apex:input value="{!RUT}"  type="text" id="RUT" style="width:200px;" rendered="{!Pantalla.Filtro.RUTCaso == true}" >
+                                            <apex:actionSupport event="onchange" action="{!busquedaCasosUR}" reRender="details" oncomplete="" status="Status"  />
+                                    </apex:input>
+
+                                    <apex:outputLabel style="font-weight:bold;" rendered="{!Pantalla.Filtro.ClienteNoCliente == true}"  >Cliente/No Cliente:</apex:outputLabel>
+                                    <apex:selectList id="cmd_Tipo" size="1" value="{!Tipo}" style="width:200px;"  rendered="{!Pantalla.Filtro.ClienteNoCliente == true}" >
+                                        <apex:selectOptions value="{!ListarTipos}" />
+                                        <apex:actionSupport event="onchange" action="{!busquedaCasosUR}" reRender="details" oncomplete="" status="Status" />
+                                    </apex:selectList> 
+                                    
+                                    <apex:outputLabel value="Poliza: " style="font-weight:bold;" rendered="{!Pantalla.Filtro.Poliza == true}"  ></apex:outputLabel>
+                                    <apex:input value="{!Poliza}"  type="text" id="Poliza"  style="width:200px;" rendered="{!Pantalla.Filtro.Poliza == true}">   
+                                            <apex:actionSupport event="onchange" action="{!busquedaCasosUR}" reRender="details" oncomplete="" status="Status" />
+                                    </apex:input>
+
+                                    <apex:outputLabel value="Propuesta: " style="font-weight:bold;" rendered="{!Pantalla.Filtro.Propuesta == true}"></apex:outputLabel>
+                                    <apex:input value="{!Propuesta}"  type="text" id="Propuesta"  style="width:200px;" rendered="{!Pantalla.Filtro.Propuesta == true}" > 
+                                            <apex:actionSupport event="onchange" action="{!busquedaCasosUR}" reRender="details" oncomplete="" status="Status" />
+                                    </apex:input>
+                                    
+                                    <apex:outputLabel style="font-weight:bold;" rendered="{!Pantalla.Filtro.SubEstadoACSEL == true}" >Estado ACSEL:</apex:outputLabel>  
+                                    <apex:selectList id="cmd_estadosACSEL" size="1" value="{!EstadoACSEL}" style="width:200px;" rendered="{!Pantalla.Filtro.SubEstadoACSEL == true}" >
+                                        <apex:selectOptions value="{!ListarEstadosAcsel}" />
+                                        <apex:actionSupport event="onchange" action="{!busquedaCasosUR}" reRender="details" oncomplete="" status="Status" />
+                                    </apex:selectList> 
+                                
+
+                                   
+
+                                    <apex:outputLabel style="font-weight:bold;" rendered="{!Pantalla.Filtro.Origen == true}"  >Origen:</apex:outputLabel>  
+                                    <apex:selectList id="cmd_origenes" size="1" value="{!Origen}" style="width:200px;" rendered="{!Pantalla.Filtro.Origen == true}"  >
+                                        <apex:selectOptions value="{!ListarOrigenes}" />
+                                        <apex:actionSupport event="onchange" action="{!busquedaCasosUR}" reRender="details" oncomplete="" status="Status" />
+                                    </apex:selectList> 
+
+                                   
+                                    
+                                </apex:panelGrid>  
+
+                                <apex:panelGrid columns="1" style="width:100%;">    
+                                        <apex:panelGroup style="text-align:left;" >  
+                                            
+                                            <apex:commandLink value="Cambio Múltiple Responsable" style="text-align:center;" oncomplete="SeleccionResponsable('{!UsuarioBackUp}', '{!AreaUsuarioLicencia}');" action="{!SeleccionResponsable}" rendered="{!Pantalla.Acciones.ResponsableMultiple == true}"></apex:commandLink>
+&nbsp;
+                                            <apex:commandLink value="Cerrar Múltiples Casos" style="text-align:center;" oncomplete="CierreMultiple('{!UsuarioBackUp}');" action="{!SeleccionResponsable}" rendered="{!Pantalla.Acciones.CierreMultiple == true}"></apex:commandLink>
+                                        </apex:panelGroup>                                 
+                                </apex:panelGrid>
+                                 
+                                
+                            
+                         
+                    <script>colorPageBlock(document.getElementById("{!$Component.pbs_CasosUR}"), "#EF861C", "white");</script>
+                    </apex:pageBlockSection>
+                </apex:pageBlock>
+                <apex:pageBlock id="details">
+                    <apex:pageBlockTable id="pbkt_TablaCasos" value="{!CasosUR}" var="caso"  headerClass="ct" style="font-size:11px;">
+                        
+                            <apex:column headerClass="ct" style="text-align:center;width:70px;" rendered="{!SeleccionMultiple == true}">
+                                <apex:facet name="header" >
+                                        <apex:inputCheckbox onclick="checkAll(this,'checkedone')" title="Todos/Ninguno" />       
+                                        </apex:facet>
+                                <apex:inputCheckbox value="{!caso.Id}"  onchange="CasoSeleccionado(this, '{!caso.Id}');"  styleClass="checkTable" 
+                                id="checkedone"></apex:inputCheckbox>
+                            </apex:column>  
+                            <apex:column headerValue="Estado" value="{!caso.Status}" headerClass="ct" style="font-weight:bold;text-align:center;" rendered="{!Pantalla.Grilla.NumeroCaso == true}"/>
+                            <apex:column headerValue="N° Caso" style="text-align:center;" headerClass="ct">
+                            <apex:commandLink value="{!caso.CaseNumber}" style="text-align:center;" immediate="true" action="{!verCasoUR}">
+                                <apex:param name="Id" value="{!caso.Id}" />
+                            </apex:commandLink>
+                            </apex:column>
+                            <apex:column headerValue="Cliente"  headerClass="ct" style="text-align:center;" rendered="{!Pantalla.Grilla.ClienteNoCliente == true}">
+                                <apex:image url="{!URLFOR($Resource.URIconos, 'iconsur/icon-check.png')}" width="16" height="16" title="Cliente Vida Security" rendered="{!caso.EsNoCliente__c == false}"/>
+                                <apex:image url="{!URLFOR($Resource.URIconos, 'iconsur/icon-uncheck.png')}" width="16" height="16" title="No es Cliente Vida Security" rendered="{!caso.EsNoCliente__c == true}"/>
+                            </apex:column>
+                            <apex:column headerValue="RUT" style="text-align:center;" headerClass="ct" rendered="{!Pantalla.Grilla.RUTCaso == true}">
+                                <apex:outputLabel value="{!caso.RUT__c}" rendered="{!caso.EsNoCliente__c == false}"/>
+                                <apex:outputLabel value="{!caso.RUT_no_Cliente__c}" rendered="{!caso.EsNoCliente__c == true}"/>
+                            </apex:column>  
+                            <apex:column headerValue="Nombre" style="text-align:center;" headerClass="ct" rendered="{!Pantalla.Grilla.Nombre == true}">
+                                <apex:outputLabel value="{!caso.Nombre_Completo_Razon_Social__c}" rendered="{!caso.EsNoCliente__c == false}"/>
+                                <apex:outputLabel value="{!caso.Nombre_no_Cliente__c}" rendered="{!caso.EsNoCliente__c == true}"/>
+                            </apex:column>     
+                            <apex:column headerValue="Poliza" value="{!caso.CASO_Poliza_Asoc__c}"  headerClass="ct" style="text-align:center;" rendered="{!Pantalla.Grilla.Poliza == true}"/>
+                            <apex:column headerValue="Propuesta" value="{!caso.Numero_Propuesta__c}" headerClass="ct" style="text-align:center;" rendered="{!Pantalla.Grilla.Propuesta == true}"/>
+                            <apex:column headerValue="Sub-Estado ACSEL" value="{!caso.Sub_Estado_Acsel__c}" headerClass="ct" style="text-align:center;" rendered="{!Pantalla.Grilla.SubEstadoACSEL == true}"/>
+                            <apex:column headerValue="Monto Rescate" value="{!caso.Monto_Rescate__c}" headerClass="ct" style="text-align:center;" rendered="{!Pantalla.Grilla.MontoRescate == true}"/>
+                            <apex:column headerValue="Negocio" value="{!caso.Negocio__c}" headerClass="ct" style="text-align:center;" rendered="{!Pantalla.Grilla.Negocio == true}"/>
+                            <apex:column headerValue="Categoría" value="{!caso.CASO_Categoria__c}" headerClass="ct" style="text-align:center;" rendered="{!Pantalla.Grilla.Categoria == true}"/>
+                            <apex:column headerValue="Solicitud" value="{!caso.Detalle_Solicitud__c}" title="{!caso.Subject}"  style="text-align:left;" headerClass="ct" rendered="{!Pantalla.Grilla.Solicitud == true}"/>
+                            <apex:column headerValue="Fecha Creación" value="{!caso.CreatedDate}" headerClass="ct" style="text-align:center;" rendered="{!Pantalla.Grilla.FechaCreacion == true}"/>
+                            <apex:column headerValue="Fecha de Derivación"  value="{!caso.Fecha_Derivacion_UR__c}" headerClass="ct" style="text-align:center;" rendered="{!Pantalla.Grilla.FechaDerivacion == true}"/>
+                            <apex:column headerValue="Fecha de Asignación"  value="{!caso.Fecha_Asignacion_UR__c}" headerClass="ct" style="text-align:center;" rendered="{!Pantalla.Grilla.FechaAsignacion == true}"/>
+                            <apex:column headerValue="Fecha Cierre Tope" value="{!caso.Fecha_Cierre_Tope__c}" headerClass="ct" style="text-align:center;" rendered="{!Pantalla.Grilla.FechaCierre == true}"/>
+                            <apex:column headerValue="Agente" value="{!caso.Agente__c}" title="Agente"  style="text-align:left;" headerClass="ct" rendered="{!Pantalla.Grilla.Agente == true}"/>
+                            <!--<apex:column headerValue="Ejecutivo/a" value="{!caso.Parent.OwnerId}" headerClass="ct" style="text-align:center;"  rendered="{!Pantalla.Grilla.Ejecutivo == true}"/>-->
+                            <apex:column headerValue="Ejecutivo/a" value="{!caso.OwnerId__c}" headerClass="ct" style="text-align:center;"  rendered="{!Pantalla.Grilla.Ejecutivo == true}"/>
+                            <apex:column headerValue="Responsable" value="{!caso.CASO_Responsable_UR__c}"  headerClass="ct" style="text-align:center;" rendered="{!Pantalla.Grilla.Responsable == true}"/>
+                            <apex:column headerValue="Origen" value="{!caso.Canal__c}"  headerClass="ct" style="text-align:center;" rendered="{!Pantalla.Grilla.Origen == true}"/>
+                    </apex:pageBlockTable> 
+                    <apex:pageblockButtons location="bottom" >        
+                        <apex:commandButton value="Primera Página" rerender="details" action="{!FirstPage}" disabled="{!prev}" status="Status" immediate="true"/>
+                        <apex:commandButton value="Anterior" rerender="details" action="{!previous}" disabled="{!prev}" status="Status" immediate="true"/>
+                        <apex:commandButton value="Siguiente" rerender="details" action="{!next}" disabled="{!nxt}" status="Status" immediate="true" />
+                        <apex:commandButton value="Última Página" rerender="details" action="{!LastPage}" disabled="{!nxt}" status="Status" immediate="true"/>
+                    </apex:pageblockButtons>
+                    <br/>
+                    <apex:outputLabel value="Página"></apex:outputLabel> &nbsp;
+                    <apex:outputLabel value="{!Page}"></apex:outputLabel> &nbsp;
+                    <apex:outputLabel value="de"></apex:outputLabel> &nbsp;
+                    <apex:outputLabel value="{!TotalPage}"></apex:outputLabel>
+                    <br/>
+                    <apex:outputLabel value="{!totalRecs}"></apex:outputLabel> &nbsp;
+                    <apex:outputLabel value="registros encontrados."></apex:outputLabel>
+                </apex:pageBlock>
+                
+            </apex:form>
+    
+    
+        
+        
+    </div>
+
+</apex:page>

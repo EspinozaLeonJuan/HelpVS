@@ -1,0 +1,6 @@
+<apex:page sidebar="false" showHeader="false">
+    <script>    
+    	alert('Error al subir archivo.');
+    	window.top.close();
+    </script>
+</apex:page>

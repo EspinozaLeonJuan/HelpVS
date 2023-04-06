@@ -1,0 +1,19 @@
+<apex:page controller="CLS_AperturaCierreCaso_Controlador" action="{!AperturaRequerimiento_validaAtencion}"  lightningStylesheets="true" showHeader="true" sidebar="true" tabStyle="Case" >
+    
+   <script>
+    
+    if ('{!CODMENSAJE}' == 'hijos_sin_cerrar')
+    {
+        alert('No es posible cerrar el Caso de Atención ya que existen casos de requerimientos pendientes por resolver.');
+        document.location = "/"+'{!IDCASO}';  
+    }
+    else if ('{!CODMENSAJE}' == 'caso_padre_cerrado')        
+    {
+        alert('No es reabrir el Caso de Requerimiento ya que el Caso de Atención al cual pertenece se encuentra en Estado Cerrado.');
+        document.location = "/"+'{!IDCASO}'; 
+    }
+    
+    </script>
+              
+                
+</apex:page>

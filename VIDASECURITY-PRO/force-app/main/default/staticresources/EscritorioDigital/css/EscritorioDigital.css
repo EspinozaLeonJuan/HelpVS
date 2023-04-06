@@ -1,0 +1,36 @@
+    
+.popupBackground {
+        /* Background color */
+        background-color:black;
+        opacity: 0.5;
+        filter: alpha(opacity = 50);
+        
+        /* Dimensions */
+        width: 90%;
+        height: 100%;       
+        top: 0;
+        left: 50;
+        z-index: 998;
+        position: absolute;        
+        /* Mouse */
+        cursor:wait;
+    }
+            
+    .popupPanel {
+       /* Background color */
+        border: solid 2px orange;
+        background-color: white;        
+        /* Dimensions */
+        display: inline-block;
+  	    left: 50%;
+        width: 100px;
+        margin-left: 0px;
+        top: 100px;
+        height: 25px;
+        margin-top: -25px;
+        position: absolute;   
+        z-index: 999;        
+        /* Mouse */
+        cursor:pointer;;
+    }
+          

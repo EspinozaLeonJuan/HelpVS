@@ -1,0 +1,54 @@
+<apex:page controller="CLS_CasoHijoControlador" action="{!RecuperarIDCasoPrincipal}" lightningStylesheets="true" sidebar="false" showHeader="false" tabStyle="Case">
+    <br/>
+    <div id="dv_RequerimientosHijos" style="width: 97%; margin-left: auto; margin-right: auto;">
+        <apex:form >
+           
+             <apex:pageBlock title="Seleccione tipo de registro Caso" >
+                 <div id="dv_Botones" style="width: 97%; margin-left:110px;;">
+                 		<apex:outputLabel style="font-weight:bold;" >Tipo de nuevo registro</apex:outputLabel>      &nbsp;  &nbsp;           
+                        <apex:selectList id="cmd_TipoRegistro" size="1" value="{!IdTipoRegistro}" >
+                            <apex:selectOptions value="{!ListaTipoRegistro}"/>
+                            <!--<apex:actionSupport event="onchange" action="{!mostrarIdUsuario}" reRender="otxt_ValorIdUsuario" />-->
+                            <apex:actionSupport event="onchange"  reRender="pb_GrillaRequerimientos" />
+                        </apex:selectList>			
+                 </div>
+                <br/>
+                     <br/>
+                    <div id="dv_Botones" style="width: 97%; text-align:center;">
+                       <!-- <apex:commandButton action="{!OpcionRequerimiento}" value="¿Desea continuar?" oncomplete="alert('Debe seleccionar un Tipo de registro para el Caso.')" />  -->
+                         <apex:commandButton action="{!OpcionRequerimiento}" value="¿Desea continuar?" oncomplete="errorSeleccion('{!ErrorCreacion}')" />                        
+                        <input type="button" id="cmd_CerrarVentana" name="cmd_CerrarVentana" value="Cancelar" onclick="cerrarVentana()" class="btn"/>                  
+                    </div> 
+                </apex:pageBlock>   
+                <br/>
+            <!--<apex:pageMessages />-->
+            
+            <script type="text/javascript">                    
+                //Función cerrar ventana...
+                function errorSeleccion(error){
+                    if (error == "ERROR_SIN_LINEA_NEGOCIO")
+                    {
+                        alert('El negocio seleccionado no permite crear Casos para el Tipo de Registro seleccionado.');
+                    }
+                    else if (error == "ERROR_CUENTA_ANONIMO")
+                    {
+                        alert('La cuenta Anónimo no permite crear Casos para el Tipo de Registro seleccionado.');
+                    }
+                    else if (error == "ERROR_TIPO_NOSELEC")
+                    {
+                        alert('Debe seleccionar un Tipo de registro para el Caso.');
+                    }
+                        
+                    /*                    
+                    window.opener.location.href="/{!ID_CasoPrincipal}";
+                    window.top.close(); */                                    
+                } 
+            
+           		function cerrarVentana(){
+                    window.opener.location.href="/{!ID_CasoPrincipal}";
+                    window.top.close();                                     
+                } 
+            </script>            
+        </apex:form>        
+    </div>            
+</apex:page>

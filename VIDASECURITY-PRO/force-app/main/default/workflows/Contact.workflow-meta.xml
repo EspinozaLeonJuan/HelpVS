@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldUpdates>
+        <fullName>Activo</fullName>
+        <field>Activo__c</field>
+        <literalValue>1</literalValue>
+        <name>Activo</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_valor_campo_activo_contacto</fullName>
+        <field>Activo__c</field>
+        <literalValue>0</literalValue>
+        <name>Actualiza valor campo activo contacto</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>Activa Contacto Vigente</fullName>
+        <actions>
+            <name>Activo</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Contact.Estado__c</field>
+            <operation>equals</operation>
+            <value>Vigente</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Desactiva Contacto desvinculado</fullName>
+        <actions>
+            <name>Actualiza_valor_campo_activo_contacto</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>(1 OR 2)</booleanFilter>
+        <criteriaItems>
+            <field>Contact.Estado__c</field>
+            <operation>equals</operation>
+            <value>Desvinculado</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Contact.Estado__c</field>
+            <operation>equals</operation>
+            <value>Cambio de Cargo</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+</Workflow>

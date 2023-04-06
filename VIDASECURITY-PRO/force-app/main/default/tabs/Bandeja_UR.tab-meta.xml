@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomTab xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Bandeja UR</label>
+    <motif>Custom52: Balls</motif>
+    <page>SEC_VF_UR_responsable_login</page>
+</CustomTab>

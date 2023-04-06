@@ -1,0 +1,39 @@
+<apex:page controller="CLS_AperturaCierreCaso_Controlador" action="{!AperturaCaso_cargaCasoSeleccionadoError}"  lightningStylesheets="true" showHeader="true" sidebar="true" tabStyle="Case" >
+    
+    
+         
+        <apex:form id="frm_VerCaso">
+            <apex:actionFunction action="{!ToCase}" name="ToCase"/>        
+           
+        <apex:outputPanel > 
+            
+            <apex:pageBlock id="pbk_EncabezadoCaso" title="Reapertura de Caso de Atención" >                
+                   <apex:panelGrid columns="2">
+                        
+                    <apex:outputLabel >Nº de Caso:</apex:outputLabel>  
+                    <apex:commandLink action="{!ToCase}"  value="{!Caso.CaseNumber}" rendered="true"/>     
+                     <apex:outputLabel >Estado actual:</apex:outputLabel>      
+                    <apex:outputLabel style="font-weight:bold;font-size:14px;" value="{!Caso.Status}"></apex:outputLabel>
+				 
+                       <apex:outputLabel >RUT Titular:</apex:outputLabel>      
+                    <apex:outputLabel value="{!Caso.RUT__c}"></apex:outputLabel>               
+                        <apex:outputLabel >Nombre Titular:</apex:outputLabel>      
+                    <apex:outputLabel value="{!Caso.Nombre_Completo_Razon_Social__c}"></apex:outputLabel>
+                     
+                </apex:panelGrid>
+               
+                
+                
+            </apex:pageBlock>
+            
+          
+<br/>
+           
+             </apex:outputPanel>
+        </apex:form>
+    
+         <apex:pageMessages id="showmsg" escape="true"></apex:pageMessages>
+    
+    
+    
+</apex:page>

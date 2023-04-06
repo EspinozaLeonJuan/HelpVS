@@ -1,0 +1,179 @@
+<!--
+ ************************************************************************************************************
+ |  NOMBRE                 : SEC_VF_UR_Tarea_CambioResponsable		            				            |
+ |  TIPO                   : VISUALFORCE PAGE																|
+ |  REQUERIMIENTO          : MEJORAS UR                                                                  	|
+ |  DESCRIPCION            : Permite reasignar Responsable UR de una Tarea por parte  de Responsable UR     |
+ |                            actual                                                                        | 
+ |  																										|
+ ************************************************************************************************************
+ |  VERSIÓN    *    FECHA C/M    *    RESPONSABLE    *    OBSERVACIONES										|
+ |    1.0      *    2019/08/01   *    JUAN ESPINOZA  *    Creación Página									|
+ |     																										|
+ ************************************************************************************************************
+-->
+
+<apex:page controller="CTR_UR_Tarea" action="{!IniciaCambioResponsable}" docType="html-5.0" lightningStylesheets="true" showHeader="false" sidebar="false" >
+    <style>
+        .popupBackground {
+            /* Background color */
+            background-color:black;
+            opacity: 0.5;
+            filter: alpha(opacity = 50);
+            
+            /* Dimensions */
+            width: 100%;
+            height: 1000%;       
+            top: 0;
+            left: 0;
+            z-index: 998;
+            position: absolute;        
+            /* Mouse */
+            cursor:wait;
+        }
+                
+        .popupPanel {
+            /* Background color */
+            border: solid 2px orange;
+            background-color: white;        
+            /* Dimensions */
+            display: inline-block;
+            left: 50%;
+            width: 100px;
+            margin-left: 0px;
+            top: 100px;
+            height: 25px;
+            margin-top: -25px;
+            position: absolute;   
+            z-index: 999;        
+            /* Mouse */
+            cursor:pointer;
+        }
+
+        .ct{
+        text-align:center;
+        }
+
+        .btnSave{
+        color:white !important;
+        background:#11862D !important;
+        margin-right: -8px;
+        }
+
+    .btnCancel{
+        color:white !important;
+        background:#A9B0BE !important;
+        margin-right: -8px;
+    }
+
+    </style>
+    <script type="text/javascript">
+
+        function colorPageBlock(pageblock, bkcolor, color) {
+            if (pageblock != null) 
+            {
+                pageblock.firstChild.style.cssText = "background-color: " + bkcolor + ";font-weight:bold;color:"+color+";";
+            }
+        }
+
+        function cerrarVentana(result, id, uback, procedencia, mensaje)
+        {
+            if (result == 'true')
+            {
+                alert("Ha sido modificado el Usuario Responsable vinculado a la Tarea seleccionada.");
+                window.opener.location.href="/apex/SEC_VF_UR_Tarea?Id="+id+"&idResponsable="+uback+"&procedencia="+procedencia;
+                window.top.close();
+            }
+            else
+            {
+                alert(mensaje)                
+            }                
+        }
+
+        function CancelarCambio()
+        {             
+            window.top.close();
+        }
+        
+        
+    </script>
+
+<apex:includeScript value="{!$Resource.jquery}"/>
+    <!--<br/>-->
+        
+    <apex:actionStatus id="Status">
+        <apex:facet name="start">
+            <apex:outputPanel >
+                <div class="popupBackground" />
+                <div class="popupPanel">
+                    &nbsp; Espere...<img src="/apexpages/devmode/img/saveStatus.gif" />
+                </div>
+            </apex:outputPanel> 
+        </apex:facet>
+    </apex:actionStatus>
+ 
+    
+
+    <apex:form id="frm_VerCaso">
+            
+               
+       
+ 
+        <apex:pageBlock id="dv_header" >
+            <apex:pageBlockSection title="{!Titulo}" collapsible="false" columns="1" id="pbs_CambioResponsable"  >
+                    <apex:panelGrid columns="4" style="width:100%;">
+
+                            <!--1-->
+                                    <apex:outputLabel style="font-weight:bold;" >Asunto</apex:outputLabel>  
+                                    <apex:outputLabel value="{!TareaPopup.Detalle_Solicitud__c}" ></apex:outputLabel>  
+                                   
+                                    <apex:outputLabel style="font-weight:bold;" >Prioridad Tarea</apex:outputLabel>  
+                                    <apex:outputLabel value="{!TareaPopup.Priority}" rendered="true"></apex:outputLabel>    
+                            <!--2-->
+                                    <apex:outputLabel style="font-weight:bold;" >Nº Caso</apex:outputLabel> 
+                                    <apex:outputLabel value="{!Caso.CaseNumber}" rendered="true"></apex:outputLabel>    
+                                    
+                                    <apex:outputLabel style="font-weight:bold;" >Fecha de Vencimiento Tarea</apex:outputLabel>  
+                                    <apex:outputField value="{!TareaPopup.ActivityDate}" rendered="true"></apex:outputField> 
+                            <!--3-->
+                                    <apex:outputLabel style="font-weight:bold;" rendered="{!Caso.EsNoCliente__c == false}" >RUT Cliente</apex:outputLabel>     
+                                    <apex:outputLabel value="{!Caso.RUT__c}" rendered="{!Caso.EsNoCliente__c == false}"/>     
+                                    
+                                    <apex:outputLabel style="font-weight:bold;" rendered="{!Caso.EsNoCliente__c == true}">RUT No Cliente</apex:outputLabel>     
+                                    <apex:outputLabel value="{!Caso.RUT_no_Cliente__c}" rendered="{!Caso.EsNoCliente__c == true}"/>      
+                                    
+                                    <apex:outputLabel style="font-weight:bold;"  >Nº de Poliza</apex:outputLabel>
+                                    <!--<apex:outputField value="{!Caso.CASO_N_Poliza__c}" rendered="true" />  -->
+                                    <apex:outputLabel value="{!Caso.CASO_Poliza_Asoc__c}" rendered="true" />  
+                            <!--4-->
+                            <apex:outputLabel style="font-weight:bold;" >UR Procedencia</apex:outputLabel> 
+                            <apex:outputLabel value="{!TareaPopup.UR_Origen__c}" />  
+
+                            <apex:outputLabel style="font-weight:bold;" >Solicitante UR</apex:outputLabel> 
+                            <apex:outputLabel value="{!SolicitanteUR}" />   
+                            </apex:panelGrid>
+
+                <hr/>
+                <apex:panelGrid columns="1" style="width:100%">
+                    <apex:panelGroup >
+                            <apex:outputLabel style="font-weight:bold;" >Usuario Responsable</apex:outputLabel> 
+                            <apex:inputField label="Responsable" value="{!TareaPopup.Responsable_Backup__c}" rendered="true" /> 
+                    </apex:panelGroup>
+                    <apex:panelGroup >
+                            <apex:outputLabel style="font-weight:bold;" >Comentario</apex:outputLabel> 
+                            <apex:inputTextarea id="txt_ComentarioNotificacion" label="Comentario" value="{!ComentarioUbk}" style="resize: none;width:100%;height:180px;"  />
+                    </apex:panelGroup>
+                </apex:panelGrid>
+                <apex:panelGroup >
+                        <apex:commandButton id="cmd_CabiarResponsable" value="Guardar" styleClass="btnSave"  action="{!CambioResponsable}" oncomplete="cerrarVentana('{!ResultadoPopup}', '{!IdTarea}', '{!UsuarioBackUp}', '{!Procedencia}','{!MensajePopup}');"/>
+                        <apex:commandButton id="cmd_CerarCambio" value="Cancelar" styleClass="btnCancel"  onclick="CancelarCambio();" />
+                </apex:panelGroup>
+                
+                <script>colorPageBlock(document.getElementById("{!$Component.pbs_CambioResponsable}"), "gray", "white");</script>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+
+        
+    </apex:form>
+        
+</apex:page>

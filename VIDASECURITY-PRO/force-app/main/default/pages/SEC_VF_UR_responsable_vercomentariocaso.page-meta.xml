@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>42.0</apiVersion>
+    <availableInTouch>true</availableInTouch>
+    <confirmationTokenRequired>false</confirmationTokenRequired>
+    <description>Proyecto CRM - ADvigital 2018
+
+Página VF para Visualizar Comentario asociado a un Caso por Responsables de Unidades Resolutoras.</description>
+    <label>SEC_VF_UR_responsable_vercomentariocaso</label>
+</ApexPage>

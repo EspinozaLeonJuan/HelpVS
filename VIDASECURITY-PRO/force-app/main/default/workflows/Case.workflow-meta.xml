@@ -1,0 +1,3207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Alerta_Portabilidad_Financiera_interna</fullName>
+        <description>Alerta Portabilidad Financiera (interna)</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>beatriz.rodriguez@security.cl</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>ksaravia@security.cl</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>mrocha@security.cl</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Nuevas_Plantillas/Portabilidad_Financiera</template>
+    </alerts>
+    <alerts>
+        <fullName>Alerta_de_Comercializaci_n_RRVV</fullName>
+        <description>Alerta de Comercialización RRVV</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>gbussenius@security.cl</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>javier.burgos@security.cl</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>margonzalez@security.cl</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>mrocha@security.cl</recipient>
+            <type>user</type>
+        </recipients>
+        <senderAddress>sfvida@security.cl</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Plantillas_correos_autom_ticos/Notificaci_n_Comercializaci_n_RRVV</template>
+    </alerts>
+    <alerts>
+        <fullName>Alerta_de_Correo_Aviso_Informativo_Hibernacion</fullName>
+        <description>Alerta de Correo Aviso Informativo Hibernación</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Plantillas_Soporte/Aviso_Informativo_Hibernacion_Caso</template>
+    </alerts>
+    <alerts>
+        <fullName>Alerta_de_correo_1newfrontiergroup</fullName>
+        <description>Alerta de correo @newfrontiergroup</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>javier.burgos@security.cl</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>margarita.rengifo@security.cl</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Plantillas_para_Email2Case/Asignaci_n_de_Caso_NewFrontierGroup</template>
+    </alerts>
+    <alerts>
+        <fullName>Alerta_de_correo_newfrontiergroup</fullName>
+        <description>Alerta de correo newfrontiergroup</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>javier.burgos@security.cl</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Plantillas_para_Email2Case/Asignacion_de_CasosSF</template>
+    </alerts>
+    <alerts>
+        <fullName>Aviso_Comentario_Ejecutiva_a_responsable_UR</fullName>
+        <description>Aviso Comentario Ejecutiva a responsable UR</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Email_Responsable_UR__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Respaldo_de_plantillas/Aviso_Comentario_Caso_UR</template>
+    </alerts>
+    <alerts>
+        <fullName>Aviso_Comentario_Ejecutiva_a_responsable_URprod</fullName>
+        <description>Aviso Comentario Ejecutiva a responsable UR</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Email_Responsable_UR__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Respaldo_de_plantillas/Aviso_Comentario_Caso_URv3</template>
+    </alerts>
+    <alerts>
+        <fullName>Aviso_Comentario_de_Responsable_hacia_Ejecutiva</fullName>
+        <description>Aviso Comentario de Responsable hacia Ejecutiva</description>
+        <protected>false</protected>
+        <recipients>
+            <type>creator</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Respaldo_de_plantillas/Aviso_Comentario_Caso_URv3</template>
+    </alerts>
+    <alerts>
+        <fullName>Aviso_de_Caso_Cerrado</fullName>
+        <description>Aviso de Caso Cerrado</description>
+        <protected>false</protected>
+        <recipients>
+            <type>creator</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Plantillas_correos_autom_ticos/Aviso_cierre_de_requerimiento</template>
+    </alerts>
+    <alerts>
+        <fullName>Aviso_de_Caso_Cerrado_al_ejecutivo_creador</fullName>
+        <description>Aviso de Caso Cerrado al ejecutivo creador</description>
+        <protected>false</protected>
+        <recipients>
+            <type>creator</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Respaldo_de_plantillas/Aviso_de_Cierre_de_Caso</template>
+    </alerts>
+    <alerts>
+        <fullName>Creaci_n_de_tarea_autom_tica_a_Ejecutivas_de_Post_Venta</fullName>
+        <description>Creación de tarea automática a Ejecutivas de Post Venta</description>
+        <protected>false</protected>
+        <recipients>
+            <type>accountOwner</type>
+        </recipients>
+        <recipients>
+            <recipient>jose.iribarren@security.cl</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>vvillalobos@security.cl</recipient>
+            <type>user</type>
+        </recipients>
+        <senderAddress>sfvida@security.cl</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Plantillas_correos_autom_ticos/Aviso_tarea_autom_tica_PV_2</template>
+    </alerts>
+    <alerts>
+        <fullName>Envio_Mail_por_Carta</fullName>
+        <description>Envio Mail por Carta</description>
+        <protected>false</protected>
+        <recipients>
+            <field>ContactId</field>
+            <type>contactLookup</type>
+        </recipients>
+        <senderAddress>contactovida@security.cl</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>SC_Plantillas_correos_autom_ticos/Aviso_Caso_Cerrado_Respuesta_por_Carta</template>
+    </alerts>
+    <alerts>
+        <fullName>Envio_a_correo_Instancias_de_Reclamo_Segunda</fullName>
+        <description>Envio a correo Instancias de Reclamo Segunda</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>mpereira@security.cl</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Plantillas_Soporte/Aviso_Reclamo_Repetido</template>
+    </alerts>
+    <alerts>
+        <fullName>Envio_a_correo_Instancias_de_Reclamo_Tercera</fullName>
+        <description>Envio a correo Instancias de Reclamo Tercera</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>margarita.rengifo@security.cl</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Plantillas_Soporte/Aviso_Reclamo_Repetido</template>
+    </alerts>
+    <alerts>
+        <fullName>Envio_correo_a_Cliente_recepcion_de_reclamo</fullName>
+        <description>Envio correo a Cliente - recepcion de reclamo</description>
+        <protected>false</protected>
+        <recipients>
+            <field>ContactId</field>
+            <type>contactLookup</type>
+        </recipients>
+        <recipients>
+            <field>Correo_Cuenta__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>contactovida@security.cl</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>SC_Plantillas_correos_autom_ticos/Aviso_Creacion_de_Caso_Reclamo</template>
+    </alerts>
+    <alerts>
+        <fullName>Envio_mail_Caso_SF_Internet</fullName>
+        <description>Envio mail Caso SF Internet</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Correo_Alerta__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Plantillas_Soporte/Alerta_de_Posible_Fuga_a_Agentes_CasoSF</template>
+    </alerts>
+    <alerts>
+        <fullName>Estado_Aprobacion</fullName>
+        <description>Estado Aprobación</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Plantillas_Soporte/Aviso_Estado_Aprobacion</template>
+    </alerts>
+    <alerts>
+        <fullName>Evaluaci_n_Contact_Center_EPA</fullName>
+        <description>Evaluación Contact Center (EPA)</description>
+        <protected>false</protected>
+        <recipients>
+            <field>ContactId</field>
+            <type>contactLookup</type>
+        </recipients>
+        <senderAddress>contactovida@security.cl</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Plantillas_Epas/Plantilla_Epa_Contact_Center</template>
+    </alerts>
+    <alerts>
+        <fullName>Evaluacion_Sucursal_EPA</fullName>
+        <description>Evaluación Sucursal (EPA)</description>
+        <protected>false</protected>
+        <recipients>
+            <field>ContactId</field>
+            <type>contactLookup</type>
+        </recipients>
+        <senderAddress>contactovida@security.cl</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Plantillas_Epas/Plantilla_Epa_Sucursal</template>
+    </alerts>
+    <alerts>
+        <fullName>Notifica_que_un_Caso_ha_sido_cerrado_en_la_bandeja_UR</fullName>
+        <description>Notifica que un Caso ha sido cerrado en la bandeja UR</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Email_Deriva_Caso__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>contactovida@security.cl</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Respaldo_de_plantillas/Aviso_de_Cierre_de_Caso</template>
+    </alerts>
+    <alerts>
+        <fullName>Notificaci_n_Derivaci_n_de_Caso_Renovar_Poliza_a_UR_Cobranza</fullName>
+        <ccEmails>valeria.donoso@ext-security.cl</ccEmails>
+        <ccEmails>rlpizarro@security.cl</ccEmails>
+        <ccEmails>megonzalez@security.cl</ccEmails>
+        <ccEmails>mshackleford@security.cl</ccEmails>
+        <ccEmails>santileo@security.cl</ccEmails>
+        <description>Notificación Derivación de Caso Renovar Poliza a UR Cobranza</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>juanespinozaleon@ibm.com</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>SEC_UR_Plantillas_Notificaciones/Notificacion_Derivar_Caso_Renovar_P_liza_UR_Cobranza</template>
+    </alerts>
+    <alerts>
+        <fullName>Notificaci_n_posible_Caso_Critico</fullName>
+        <description>Notificación posible Caso Critico</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>beatriz.rodriguez@security.cl</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>mpereira@security.cl</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>mshackleford@security.cl</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Plantillas_correos_autom_ticos/Posible_Caso_Critico</template>
+    </alerts>
+    <alerts>
+        <fullName>Respuesta_automatica_Contacto_Vida</fullName>
+        <description>Respuesta automatica Contacto Vida</description>
+        <protected>false</protected>
+        <recipients>
+            <field>ContactEmail</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>contactovida@security.cl</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Plantillas_correos_autom_ticos/Respuesta_automatica_Contacto_Vida</template>
+    </alerts>
+    <alerts>
+        <fullName>aviso_de_Derivaci_n_Caso_hacia</fullName>
+        <description>aviso de Derivación Caso a Responsable UR</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Email_Responsable_UR__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Respaldo_de_plantillas/Aviso_de_derivacion_Caso_Hijo</template>
+    </alerts>
+    <alerts>
+        <fullName>aviso_de_devolucion_Caso_desde_UR</fullName>
+        <description>aviso de devolucion Caso desde UR</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Email_Deriva_Caso__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>contactovida@security.cl</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Respaldo_de_plantillas/Aviso_de_Devoluci_n_Caso_Hijo</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Actualiza_Aprobado_NO</fullName>
+        <field>Aprobado_Reclamo__c</field>
+        <literalValue>0</literalValue>
+        <name>Actualiza Aprobado NO</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_Aprobado_SI</fullName>
+        <field>Aprobado_Reclamo__c</field>
+        <literalValue>1</literalValue>
+        <name>Actualiza Aprobado SI</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_Atencion_Presencial</fullName>
+        <field>Atencion_Presencial__c</field>
+        <literalValue>0</literalValue>
+        <name>Actualiza Atencion Presencial</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_Canal_2</fullName>
+        <description>Contacto Vida</description>
+        <field>Canal__c</field>
+        <literalValue>Contacto Vida</literalValue>
+        <name>Actualiza Canal</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_Canal_AA</fullName>
+        <field>Canal__c</field>
+        <literalValue>Asistencia Agente</literalValue>
+        <name>Actualiza Canal AA</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_Canal_Contacto_SBS</fullName>
+        <field>Canal__c</field>
+        <literalValue>Contacto SBS</literalValue>
+        <name>Actualiza Canal Contacto SBS</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_Complejidad_1</fullName>
+        <field>Complejidad_del_Reclamo__c</field>
+        <literalValue>1</literalValue>
+        <name>Actualiza Complejidad 1</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_Complejidad_2</fullName>
+        <field>Complejidad_del_Reclamo__c</field>
+        <literalValue>2</literalValue>
+        <name>Actualiza Complejidad 2</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_Complejidad_3</fullName>
+        <field>Complejidad_del_Reclamo__c</field>
+        <literalValue>3</literalValue>
+        <name>Actualiza Complejidad 3</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_Complejidad_4</fullName>
+        <field>Complejidad_del_Reclamo__c</field>
+        <literalValue>4</literalValue>
+        <name>Actualiza Complejidad 4</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_Complejidad_5</fullName>
+        <field>Complejidad_del_Reclamo__c</field>
+        <literalValue>5</literalValue>
+        <name>Actualiza Complejidad 5</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_Concepto</fullName>
+        <field>Concepto__c</field>
+        <literalValue>Clave internet</literalValue>
+        <name>Actualiza Concepto</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_Concepto_2</fullName>
+        <field>Concepto__c</field>
+        <literalValue>Sucursal Virtual</literalValue>
+        <name>Actualiza Concepto 2</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_Concepto_a_Comp_Caduca</fullName>
+        <field>Concepto__c</field>
+        <literalValue>Comprobante Póliza Caduca</literalValue>
+        <name>Actualiza Concepto a Comp. Caduca</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_Concepto_a_Comp_Mandato</fullName>
+        <field>Concepto__c</field>
+        <literalValue>Comprobante Mandato</literalValue>
+        <name>Actualiza Concepto a Comp. Mandato</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_Concepto_a_Comp_Modificaci_n</fullName>
+        <field>Concepto__c</field>
+        <literalValue>Comprobante de Modificación</literalValue>
+        <name>Actualiza Concepto a Comp. Modificación</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_Concepto_a_Comp_Propuesta</fullName>
+        <description>Actualiza Concepto a Comp. Propuesta</description>
+        <field>Concepto__c</field>
+        <literalValue>Comprobante Propuesta</literalValue>
+        <name>Actualiza Concepto a Comp. Propuesta</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_Concepto_a_Comp_Requerimiento</fullName>
+        <field>Concepto__c</field>
+        <literalValue>Comprobante Requerimiento</literalValue>
+        <name>Actualiza Concepto a Comp. Requerimiento</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_Concepto_a_Comp_Rescate</fullName>
+        <field>Concepto__c</field>
+        <literalValue>Comprobante Rescate</literalValue>
+        <name>Actualiza Concepto a Comp. Rescate</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_Concepto_a_Comp_Traslado</fullName>
+        <field>Concepto__c</field>
+        <literalValue>Comprobante Traslado</literalValue>
+        <name>Actualiza Concepto a Comp. Traslado</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_Concepto_a_Comp_Traspaso</fullName>
+        <field>Concepto__c</field>
+        <literalValue>Comprobante Traspaso</literalValue>
+        <name>Actualiza Concepto a Comp. Traspaso</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_Crea_Comentario</fullName>
+        <field>Caso_Crea_Comentario__c</field>
+        <literalValue>0</literalValue>
+        <name>Actualiza Crea Comentario</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_Crea_Comentario_por_UR</fullName>
+        <field>Caso_Crea_Comentario__c</field>
+        <literalValue>0</literalValue>
+        <name>Actualiza Crea Comentario por UR</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_Crea_Comentario_prod</fullName>
+        <field>Caso_Crea_Comentario__c</field>
+        <literalValue>0</literalValue>
+        <name>Actualiza Crea Comentario</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_Deriva_Caso</fullName>
+        <field>CASO_Deriva_a_UR__c</field>
+        <literalValue>0</literalValue>
+        <name>Actualiza Deriva Caso</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_Entrega_Respuesta_True</fullName>
+        <field>Entrega_Respuesta__c</field>
+        <literalValue>1</literalValue>
+        <name>Actualiza Entrega Respuesta True</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_Estado</fullName>
+        <field>Status</field>
+        <literalValue>Basura</literalValue>
+        <name>Actualiza Estado</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_Estado_Campo</fullName>
+        <description>Actualiza estado caso a Nuevo</description>
+        <field>Status</field>
+        <literalValue>Nuevo</literalValue>
+        <name>Actualiza Estado Campo</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_Estado_Cerrado</fullName>
+        <field>Status</field>
+        <literalValue>Cerrado</literalValue>
+        <name>Actualiza Estado Cerrado</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_Estado_Tipificar</fullName>
+        <field>Status</field>
+        <literalValue>En Proceso</literalValue>
+        <name>Actualiza Estado (Tipificar)</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_Estado_en_Proceso</fullName>
+        <field>Status</field>
+        <literalValue>En Proceso</literalValue>
+        <name>Actualiza Estado en Proceso</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_Fecha_Cierre</fullName>
+        <field>Fecha_Hora_de_Cierre__c</field>
+        <formula>NOW()</formula>
+        <name>Actualiza Fecha Cierre</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_Fecha_EPA_contact_Center</fullName>
+        <field>Fecha_de_EPA_Contact_Center_Caso__c</field>
+        <formula>today()</formula>
+        <name>Actualiza Fecha EPA contact Center</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_G_Asistencia_Agentes</fullName>
+        <field>G_Asistencia_Agentes__c</field>
+        <literalValue>1</literalValue>
+        <name>Actualiza G. Asistencia Agentes</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_L_nea_de_Negocio_Individuale</fullName>
+        <field>Linea_Negocio__c</field>
+        <literalValue>Seguros Individuales</literalValue>
+        <name>Actualiza Línea de Negocio (Individuale)</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_Linea</fullName>
+        <field>Linea_Negocio__c</field>
+        <literalValue>Corporativo</literalValue>
+        <name>Actualiza Linea</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_Linea_2</fullName>
+        <field>Linea_Negocio__c</field>
+        <literalValue>Corporativo</literalValue>
+        <name>Actualiza Linea 2</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_Linea_de_Negocio_AA</fullName>
+        <field>Negocio__c</field>
+        <literalValue>Sin Linea de Negocio</literalValue>
+        <name>Actualiza Linea de Negocio AA</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_Mail_Solicitante_con_Mail_Web</fullName>
+        <field>Correo_electronico_Solicitante__c</field>
+        <formula>SuppliedEmail</formula>
+        <name>Actualiza Mail Solicitante con Mail Web</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_Nom_Solicitante_con_Nom_Web</fullName>
+        <field>Nombre_Solicitante__c</field>
+        <formula>SuppliedName</formula>
+        <name>Actualiza Nom. Solicitante con Nom. Web</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_Propietario</fullName>
+        <field>OwnerId</field>
+        <lookupValue>Contacto_Vida_Basura</lookupValue>
+        <lookupValueType>Queue</lookupValueType>
+        <name>Actualiza  Propietario</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_Propietario_CV</fullName>
+        <field>OwnerId</field>
+        <lookupValue>Contacto_Vida</lookupValue>
+        <lookupValueType>Queue</lookupValueType>
+        <name>Actualiza  Propietario CV</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_Propietario_TIPIFICAR</fullName>
+        <field>OwnerId</field>
+        <lookupValue>Contacto_Vida_Por_Tipificar</lookupValue>
+        <lookupValueType>Queue</lookupValueType>
+        <name>Actualiza  Propietario (TIPIFICAR)</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_Propietario_Traslado</fullName>
+        <field>OwnerId</field>
+        <lookupValue>Contacto_Vida_Por_Tipificar</lookupValue>
+        <lookupValueType>Queue</lookupValueType>
+        <name>Actualiza  Propietario Traslado</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_Propietario_Traspaso</fullName>
+        <field>OwnerId</field>
+        <lookupValue>Contacto_Vida_Por_Tipificar</lookupValue>
+        <lookupValueType>Queue</lookupValueType>
+        <name>Actualiza  Propietario Traspaso</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_Propietario_a_Cola_Sin_Asignar</fullName>
+        <field>OwnerId</field>
+        <lookupValue>Reclamos_sin_asignar</lookupValue>
+        <lookupValueType>Queue</lookupValueType>
+        <name>Actualiza Propietario a Cola Sin Asignar</name>
+        <notifyAssignee>true</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_Tipo</fullName>
+        <field>Type</field>
+        <literalValue>Consulta</literalValue>
+        <name>Actualiza Tipo</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_Tipo_Contacto</fullName>
+        <field>Tipo_de_Contacto__c</field>
+        <literalValue>Contratante</literalValue>
+        <name>Actualiza Tipo Contacto</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_Tipo_Contacto_2</fullName>
+        <field>Tipo_de_Contacto__c</field>
+        <literalValue>Contratante</literalValue>
+        <name>Actualiza Tipo Contacto 2</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_Tipo_de_Solicitante_AA</fullName>
+        <field>Tipo_de_Solicitante__c</field>
+        <literalValue>Agente Vida Individual</literalValue>
+        <name>Actualiza Tipo de Solicitante AA</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_Via_AA</fullName>
+        <field>Via_contacto__c</field>
+        <literalValue>Mail</literalValue>
+        <name>Actualiza Via AA</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_correo_de_cuenta</fullName>
+        <field>Correo_Cuenta__c</field>
+        <formula>Correo_Electronico__c</formula>
+        <name>Actualiza correo de cuenta</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actuializar_Canal</fullName>
+        <field>Canal__c</field>
+        <literalValue>Anticipo</literalValue>
+        <name>Actuializar Canal</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Blanquea_Aviso_Informativo</fullName>
+        <field>Aviso_informativo__c</field>
+        <name>Blanquea Aviso Informativo</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Blanquear_Fecha_Aviso_Informativo</fullName>
+        <field>Fecha_aviso_informativo__c</field>
+        <name>Blanquear Fecha Aviso Informativo</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Null</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Blanquear_Fecha_Termino_Hibernacion</fullName>
+        <field>Fecha_termino_hibernacion__c</field>
+        <name>Blanquear Fecha Término Hibernación</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Null</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Borrar_linea_de_negocio_Casos_mod</fullName>
+        <field>Linea_Negocio__c</field>
+        <name>Borrar línea de negocio (Casos mod)</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Cambia_Area_Comercial_a_Colectivos</fullName>
+        <description>Cambia el caso al área &quot;Servicios Colectivos&quot;</description>
+        <field>Area_comercial__c</field>
+        <literalValue>Servicios Colectivos</literalValue>
+        <name>Cambia Area Comercial a Colectivos</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Cambia_Estado_Abierto</fullName>
+        <field>Status</field>
+        <literalValue>Nuevo</literalValue>
+        <name>Cambia Estado (Abierto)</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Cambia_estado_a_En_Proceso</fullName>
+        <description>Cambia el estado del caso de Hibernado a En Proceso</description>
+        <field>Status</field>
+        <literalValue>En Proceso</literalValue>
+        <name>Cambia estado a En Proceso</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Cambio_de_propietario</fullName>
+        <field>OwnerId</field>
+        <lookupValue>margarita.rengifo@security.cl</lookupValue>
+        <lookupValueType>User</lookupValueType>
+        <name>Cambio de propietario</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Canal_CMPC</fullName>
+        <field>Canal__c</field>
+        <literalValue>CMPC</literalValue>
+        <name>Canal CMPC</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Canal_Medimel</fullName>
+        <field>Canal__c</field>
+        <literalValue>Medimel</literalValue>
+        <name>Canal Medimel</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Canal_Seguros_Cerro_Colorado</fullName>
+        <field>Canal__c</field>
+        <literalValue>Seguros Cerro Colorado</literalValue>
+        <name>Canal Seguros Cerro Colorado</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Canal_Seguros_Cono_Sur</fullName>
+        <field>Canal__c</field>
+        <literalValue>Seguros Cono Sur</literalValue>
+        <name>Canal Seguros Cono Sur</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Canal_Seguros_Escondida</fullName>
+        <field>Canal__c</field>
+        <literalValue>Seguros Escondida</literalValue>
+        <name>Canal Seguros Escondida</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Canal_Seguros_Metrogas</fullName>
+        <field>Canal__c</field>
+        <literalValue>Seguros Metrogas</literalValue>
+        <name>Canal Seguros Metrogas</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Canal_Seguros_Spence</fullName>
+        <field>Canal__c</field>
+        <literalValue>Seguros Spence</literalValue>
+        <name>Canal Seguros Spence</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Canal_Servicios_BHP</fullName>
+        <description>Agregar Canal al nuevo Caso</description>
+        <field>Canal__c</field>
+        <literalValue>Servicios BHP</literalValue>
+        <name>Canal Servicios BHP</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Cierra_Caso_SF</fullName>
+        <field>Status</field>
+        <literalValue>Cerrado</literalValue>
+        <name>Cierra Caso SF</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Copia_Origen_del_Caso_a_Canal</fullName>
+        <description>Copia el valor del campo Origen del Caso al campo Canal.</description>
+        <field>Canal__c</field>
+        <literalValue>Servicios Colectivos</literalValue>
+        <name>Copia Origen del Caso a Canal</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Deja_en_1_los_d_as_de_hibernaci_n</fullName>
+        <field>Dias_por_hibernar__c</field>
+        <literalValue>1</literalValue>
+        <name>Deja en 1 los días de hibernación</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Desmarca_Entrega_Respuesta</fullName>
+        <field>Entrega_Respuesta__c</field>
+        <literalValue>0</literalValue>
+        <name>Desmarca Entrega Respuesta</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>En_plazo</fullName>
+        <field>Estado_SLA__c</field>
+        <literalValue>EN PLAZO</literalValue>
+        <name>En plazo</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Fecha_Cierre_10_d_as</fullName>
+        <field>Fecha_Cierre_Tope__c</field>
+        <formula>IF( Dia_de_Creacion__c = &quot;Lunes&quot;, DATEVALUE( CreatedDate ) + 14, 
+IF( Dia_de_Creacion__c = &quot;Martes&quot;, DATEVALUE( CreatedDate ) + 13, 
+
+DATEVALUE( CreatedDate ) + 12) )</formula>
+        <name>Fecha Cierre + 10 días</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Fecha_Cierre_18_d_as</fullName>
+        <field>Fecha_Cierre_Tope__c</field>
+        <formula>IF( Dia_de_Creacion__c = &quot;Lunes&quot;, DATEVALUE( CreatedDate ) + 28, 
+IF( Dia_de_Creacion__c = &quot;Martes&quot;, DATEVALUE( CreatedDate ) + 27, 
+
+DATEVALUE( CreatedDate ) + 26) )</formula>
+        <name>Fecha Cierre + 18 días</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Fecha_Cierre_6_d_as</fullName>
+        <field>Fecha_Cierre_Tope__c</field>
+        <formula>IF( Dia_de_Creacion__c = &quot;Viernes&quot;, DATEVALUE( CreatedDate ) + 10, 
+IF( Dia_de_Creacion__c = &quot;Sábado&quot;, DATEVALUE( CreatedDate ) + 9, 
+
+DATEVALUE( CreatedDate ) + 8) )</formula>
+        <name>Fecha Cierre + 6 días</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Fecha_Cierre_TopeSF</fullName>
+        <field>Fecha_Cierre_Tope__c</field>
+        <formula>TODAY() + 28</formula>
+        <name>Fecha Cierre Tope</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Linea_de_negocio_CMPC</fullName>
+        <field>Negocio__c</field>
+        <literalValue>Seguros Colectivos</literalValue>
+        <name>Linea de negocio CMPC</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Linea_de_negocio_Medimel</fullName>
+        <field>Negocio__c</field>
+        <literalValue>Seguros Colectivos</literalValue>
+        <name>Linea de negocio Medimel</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Linea_de_negocio_Seguros_Cerro_Colorado</fullName>
+        <field>Negocio__c</field>
+        <literalValue>Seguros Colectivos</literalValue>
+        <name>Linea de negocio Seguros Cerro Colorado</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Linea_de_negocio_Seguros_Cono_Sur</fullName>
+        <field>Negocio__c</field>
+        <literalValue>Seguros Colectivos</literalValue>
+        <name>Linea de negocio Seguros Cono Sur</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Linea_de_negocio_Seguros_Escondida</fullName>
+        <field>Negocio__c</field>
+        <literalValue>Seguros Colectivos</literalValue>
+        <name>Linea de negocio Seguros Escondida</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Linea_de_negocio_Seguros_Metrogas</fullName>
+        <field>Negocio__c</field>
+        <literalValue>Seguros Colectivos</literalValue>
+        <name>Linea de negocio Seguros Metrogas</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Linea_de_negocio_Seguros_Spence</fullName>
+        <field>Negocio__c</field>
+        <literalValue>Seguros Colectivos</literalValue>
+        <name>Linea de negocio Seguros Spence</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Linea_negocio_Seguro_Spence</fullName>
+        <field>Negocio__c</field>
+        <literalValue>Seguros Colectivos</literalValue>
+        <name>Linea negocio Seguro Spence</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Linea_negocio_Servicios_BHP</fullName>
+        <field>Negocio__c</field>
+        <literalValue>Seguros Colectivos</literalValue>
+        <name>Linea negocio Servicios BHP</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Por_vencer</fullName>
+        <field>Estado_SLA__c</field>
+        <literalValue>POR VENCER</literalValue>
+        <name>Por vencer</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Por_vencer_1</fullName>
+        <field>Estado_SLA__c</field>
+        <literalValue>POR VENCER</literalValue>
+        <name>Por vencer</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Propietario</fullName>
+        <field>OwnerId</field>
+        <lookupValue>Anticipo</lookupValue>
+        <lookupValueType>Queue</lookupValueType>
+        <name>Propietario</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>TeleventasVida_Canal</fullName>
+        <description>Actualiza el Canal del Caso creado a traves de la casilla televentasvida@security.cl con origen WEB</description>
+        <field>Canal__c</field>
+        <literalValue>WEB</literalValue>
+        <name>TeleventasVida Canal</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Vencido</fullName>
+        <field>Estado_SLA__c</field>
+        <literalValue>VENCIDO</literalValue>
+        <name>Vencido</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>actualiza_correo_resp_UR</fullName>
+        <field>Email_Responsable_UR__c</field>
+        <formula>CASO_Responsable_UR__r.UBAC_Email__c</formula>
+        <name>actualiza correo resp. UR</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>rebotes_correo_basura</fullName>
+        <description>cuando se reintenta el envío de Correo por ContactoVida hay veces que rebotan los correos enviando correos a esta casilla por medio de mailer-daemon@salesforce.com, Salesforce con esta regla creará estos Casos pero cambiando el estado de nuevo a basura.</description>
+        <field>Status</field>
+        <literalValue>Basura</literalValue>
+        <name>rebotes correo basura</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>Abre Caso Normal</fullName>
+        <actions>
+            <name>Actualiza_Estado_en_Proceso</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.Entrega_Respuesta__c</field>
+            <operation>equals</operation>
+            <value>Falso</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Cerrado</value>
+        </criteriaItems>
+        <description>Para todo caso con ER false y Estado Cerrado. Se abre el caso</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Actualiza campos televentasvida%40security%2Ecl</fullName>
+        <actions>
+            <name>TeleventasVida_Canal</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Atención</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Origin</field>
+            <operation>equals</operation>
+            <value>WEB</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.OwnerId</field>
+            <operation>contains</operation>
+            <value>Televentas</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Nuevo</value>
+        </criteriaItems>
+        <description>Para actualizar campos de Casos que lleguen a la casilla televentasvida@security.cl</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>Actualizar campos Anticipo</fullName>
+        <actions>
+            <name>Actuializar_Canal</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Propietario</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.Origin</field>
+            <operation>equals</operation>
+            <value>Anticipo</value>
+        </criteriaItems>
+        <description>Actualiza el propietario del Caso y el Canal a Anticipo</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Asignación de Casos Newfroentiergroup</fullName>
+        <actions>
+            <name>Alerta_de_correo_1newfrontiergroup</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Cambio_de_propietario</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.Correo_Electronico__c</field>
+            <operation>contains</operation>
+            <value>@newfrontiergroup.com</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Atención</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Nuevo</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Origin</field>
+            <operation>equals</operation>
+            <value>Contacto Vida</value>
+        </criteriaItems>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>Aviso Caso deriva a UR</fullName>
+        <actions>
+            <name>aviso_de_Derivaci_n_Caso_hacia</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Actualiza_Deriva_Caso</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Back Office</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Solicitudes</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.CASO_Resultado_Derivaci_n__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <description>Avisa a Responsable UR que se le ha derivado un caso</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Aviso Creación Comentario a Ejecutiva desde Responsable</fullName>
+        <actions>
+            <name>Aviso_Comentario_de_Responsable_hacia_Ejecutiva</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Actualiza_Crea_Comentario_por_UR</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.Caso_Crea_Comentario__c</field>
+            <operation>equals</operation>
+            <value>Verdadero</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>User.USUA_Area_UR__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.CreatedById</field>
+            <operation>notEqual</operation>
+            <value>Salesforce Vida Security,Integracion Servicios</value>
+        </criteriaItems>
+        <description>Avisa cuando se crea un Comentario por parte del Responsable a Ejecutiva</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Aviso Creación Comentario a responsable UR</fullName>
+        <actions>
+            <name>Aviso_Comentario_Ejecutiva_a_responsable_URprod</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Actualiza_Crea_Comentario_prod</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.Caso_Crea_Comentario__c</field>
+            <operation>equals</operation>
+            <value>Verdadero</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>notEqual</operation>
+            <value>Cerrado</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>User.USUA_Area_UR__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Email_Responsable_UR__c</field>
+            <operation>notEqual</operation>
+            <value>sfvida@security.cl</value>
+        </criteriaItems>
+        <description>Aviso de Comentario desde ejecutiva a Responsable UR</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Aviso Informatico Hibernación</fullName>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.Fecha_aviso_informativo__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <description>Manda la alerta de correo de los casos en hibernación.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Alerta_de_Correo_Aviso_Informativo_Hibernacion</name>
+                <type>Alert</type>
+            </actions>
+            <offsetFromField>Case.Fecha_aviso_informativo__c</offsetFromField>
+            <timeLength>0</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Aviso de Cierre de Caso</fullName>
+        <actions>
+            <name>Aviso_de_Caso_Cerrado</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Cerrado</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Tipo_de_Requerimiento__c</field>
+            <operation>equals</operation>
+            <value>Consultas,Reclamos,Solicitudes</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Funci_n_Propietario_del_Caso__c</field>
+            <operation>notEqual</operation>
+            <value>Ejecutiva de Atención Telefónica,Ejecutivo/a Asistencia Agente,Team leader L800,Encargado de Linea 800,Ejecutiva Atención Asegurado STGO,Ejecutiva Atención al Cliente Sucursales,Jefe Servicio al Cliente Sucursales</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Canal__c</field>
+            <operation>equals</operation>
+            <value>Call Center,Contacto Vida,Contacto SBS,Redes Sociales,WEB,Chat,Chat Público,Sucursal</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.CreatorName</field>
+            <operation>notEqual</operation>
+            <value>Función Propietario del Caso</value>
+        </criteriaItems>
+        <description>Envío mail para creador del caso cuando se cierre el caso.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Aviso de Cierre de Caso Owner</fullName>
+        <actions>
+            <name>Notifica_que_un_Caso_ha_sido_cerrado_en_la_bandeja_UR</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Cerrado,Rechazado</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Tipo_de_Requerimiento__c</field>
+            <operation>equals</operation>
+            <value>Solicitudes</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Email_Responsable_UR__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <description>Envío mail para dueño del caso cuando se cierre o rechaza el caso.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Casos Facebook - Linkedin</fullName>
+        <actions>
+            <name>Actualiza_Estado_Campo</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1 AND 2 AND (3 OR 4) AND 5</booleanFilter>
+        <criteriaItems>
+            <field>Case.Tipo_de_Solicitante__c</field>
+            <operation>equals</operation>
+            <value>Prospecto</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Canal__c</field>
+            <operation>equals</operation>
+            <value>Redes Sociales</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.OwnerId</field>
+            <operation>equals</operation>
+            <value>Televentas</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.OwnerId</field>
+            <operation>equals</operation>
+            <value>Segmento</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Subject</field>
+            <operation>contains</operation>
+            <value>Facebook,Linkedin,Discovery</value>
+        </criteriaItems>
+        <description>Cambia estado casos de en proceso a abierto en casos nuevos</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>Cierra Caso Duplic Masivo Basura</fullName>
+        <actions>
+            <name>Actualiza_Entrega_Respuesta_True</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Basura,Cerrado (Correo Duplicado),Cerrado (Correo Masivo)</value>
+        </criteriaItems>
+        <description>Para todo caso con Estado Cerrado Duplicado, Masivo y Basura. Marca el ER a True</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Cierra Caso Normal</fullName>
+        <actions>
+            <name>Actualiza_Estado_Cerrado</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Actualiza_Fecha_Cierre</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.Entrega_Respuesta__c</field>
+            <operation>equals</operation>
+            <value>Verdadero</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>notEqual</operation>
+            <value>Basura,Cerrado (Correo Duplicado),Cerrado (Correo Masivo)</value>
+        </criteriaItems>
+        <description>Para todo caso con ER True y Estado distinto a Duplicado, Masivo y Basura. Se cierra el caso</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Cierre por Respuesta</fullName>
+        <actions>
+            <name>Cierra_Caso_SF</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <booleanFilter>1</booleanFilter>
+        <criteriaItems>
+            <field>Case.Entrega_Respuesta__c</field>
+            <operation>equals</operation>
+            <value>Verdadero</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Comercialización RRVV</fullName>
+        <actions>
+            <name>Alerta_de_Comercializaci_n_RRVV</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.Subject</field>
+            <operation>contains</operation>
+            <value>VALIDACIÓN VENTA NUEVA RENTA VITALICIA</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Atención</value>
+        </criteriaItems>
+        <description>Cuando un caso Atención llegue con el asunto : VALIDACIÓN VENTA NUEVA RENTA VITALICIA se gatillará un correo electronico a: Marión Gonzáles, Marcela Rocha y Gloria Bussenius C</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>Completar campos CMPC</fullName>
+        <actions>
+            <name>Canal_CMPC</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Linea_de_negocio_CMPC</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Case.Origin</field>
+            <operation>equals</operation>
+            <value>CMPC</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Atención</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Nuevo</value>
+        </criteriaItems>
+        <description>Completar campos &quot;Negocio&quot; y &quot;Canal&quot; para los Casos que se generen de origen CMPC</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Completar campos Medimel</fullName>
+        <actions>
+            <name>Canal_Medimel</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Linea_de_negocio_Medimel</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.Origin</field>
+            <operation>equals</operation>
+            <value>Medimel</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Atención</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Nuevo</value>
+        </criteriaItems>
+        <description>Completar campos &quot;Negocio&quot; y &quot;Canal&quot; para los Casos que se generen de origen Medimel</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Completar campos Seguros Cono Sur</fullName>
+        <actions>
+            <name>Canal_Seguros_Cono_Sur</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Linea_de_negocio_Seguros_Cono_Sur</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.Origin</field>
+            <operation>equals</operation>
+            <value>Seguros Cono Sur</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Atención</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Nuevo</value>
+        </criteriaItems>
+        <description>Completar campos &quot;Negocio&quot; y &quot;Canal&quot; para los Casos que se generen de origen Seguros Cono Sur</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Completar campos Seguros Escondida</fullName>
+        <actions>
+            <name>Canal_Seguros_Escondida</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Linea_de_negocio_Seguros_Escondida</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.Origin</field>
+            <operation>equals</operation>
+            <value>Seguros Escondida</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Atención</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Nuevo</value>
+        </criteriaItems>
+        <description>Completar campos &quot;Negocio&quot; y &quot;Canal&quot; para los Casos que se generen de origen Seguros Escondida</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Completar campos Seguros Metrogas</fullName>
+        <actions>
+            <name>Canal_Seguros_Metrogas</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Linea_de_negocio_Seguros_Metrogas</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.Origin</field>
+            <operation>equals</operation>
+            <value>Seguros Metrogas</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Atención</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Nuevo</value>
+        </criteriaItems>
+        <description>Completar campos &quot;Negocio&quot; y &quot;Canal&quot; para los Casos que se generen de origen Seguros Metrogas</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Contestar Mail de Reclamo</fullName>
+        <actions>
+            <name>Envio_Mail_por_Carta</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Reclamos</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Cerrado</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Respuesta_por_Carta__c</field>
+            <operation>equals</operation>
+            <value>Verdadero</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Canal__c</field>
+            <operation>notEqual</operation>
+            <value>Sernac,DDA,Sernac Financiero,Línea Directa Mercurio,Servicios BCI,Servicios Colectivos,Servicios Telefónica,CMF</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Correos rebotes contacto Vida</fullName>
+        <actions>
+            <name>rebotes_correo_basura</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.ContactEmail</field>
+            <operation>equals</operation>
+            <value>mailer-daemon@salesforce.com</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.OwnerId</field>
+            <operation>equals</operation>
+            <value>Contacto Vida</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Nuevo</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Atención</value>
+        </criteriaItems>
+        <description>Cuando se activa la regla &quot;Respuesta automatica Contacto Vida&quot; hay muchas veces que se generan reintentos y se envia a Saleforce estos rebotes con el correo electronico: mailer-daemon@salesforce.com .... Lo que hace la regla es cambiar a estado Basura</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>Crea Mail SF Internet</fullName>
+        <actions>
+            <name>Envio_mail_Caso_SF_Internet</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Actualiza_G_Asistencia_Agentes</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>(1 OR 2)  AND (3 OR ( 4 AND 5 )) AND 6 AND 7 AND 8</booleanFilter>
+        <criteriaItems>
+            <field>Case.Detalle_Solicitud__c</field>
+            <operation>equals</operation>
+            <value>Solicitud cartola,Solicitud copia de póliza</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Concepto__c</field>
+            <operation>equals</operation>
+            <value>Clave Internet,Consulta como solicitar rescate- Retiro APV,Consulta sobre traspaso out,Consulta como renunciar</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Funcion_Propietario_Cuenta__c</field>
+            <operation>notEqual</operation>
+            <value>Ejecutiva de Post Venta,Ejecutiva de Atención Telefónica</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Funcion_Propietario_Cuenta__c</field>
+            <operation>equals</operation>
+            <value>Ejecutiva de Post Venta</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Agente_Vigente_Cuenta__c</field>
+            <operation>equals</operation>
+            <value>Verdadero</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Nombres__c</field>
+            <operation>notEqual</operation>
+            <value>Anónimo</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.P_lizas_Individuales_Vigentes__c</field>
+            <operation>greaterThan</operation>
+            <value>0</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Origin</field>
+            <operation>notEqual</operation>
+            <value>Contacto Vida</value>
+        </criteriaItems>
+        <description>Cliente solicita clave o cartola Internet</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Crea Tareas SF Internet</fullName>
+        <actions>
+            <name>Creaci_n_de_tarea_autom_tica_a_Ejecutivas_de_Post_Venta</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>tareas_de_casoSF_internet</name>
+            <type>Task</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>(1 OR 2) AND 3 AND 4 AND 5 AND 6 AND 7 AND 8 AND (9 OR 10)</booleanFilter>
+        <criteriaItems>
+            <field>Case.Detalle_Solicitud__c</field>
+            <operation>equals</operation>
+            <value>Solicitud cartola,Solicitud copia de póliza,Solicitud renuncia,On Time - Solicitud Renuncia,Solicitud de Rescate Total</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Concepto__c</field>
+            <operation>contains</operation>
+            <value>Clave Internet,Consulta como solicitar rescate- Retiro APV,Consulta sobre traspaso out,Consulta como renunciar</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Propietario_Cuenta__c</field>
+            <operation>notEqual</operation>
+            <value>Administrador del sistema</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Funcion_Propietario_Cuenta__c</field>
+            <operation>equals</operation>
+            <value>Ejecutiva de Post Venta</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Agente_Vigente_Cuenta__c</field>
+            <operation>equals</operation>
+            <value>Verdadero,Falso</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.OwnerId</field>
+            <operation>notContain</operation>
+            <value>Servicio Cliente</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Propietario_Cuenta__c</field>
+            <operation>notEqual</operation>
+            <value>Ana Luisa Arzola Hernandez,Angélica Meza Iturriaga</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Funci_n_Propietario_del_Caso__c</field>
+            <operation>notEqual</operation>
+            <value>Ejecutiva de Post Venta</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Linea_Negocio__c</field>
+            <operation>equals</operation>
+            <value>Seguros Individuales</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Negocio__c</field>
+            <operation>equals</operation>
+            <value>Seguros Individuales</value>
+        </criteriaItems>
+        <description>Solicitud cartola,Solicitud copia de póliza,Solicitud renuncia, UR - On Time - Solicitud Renuncia, Solicitud de Rescate Total y Clave Internet,Consulta como solicitar rescate- Retiro APV,Consulta sobre traspaso out,Consulta como renunciar</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>Creación EPA Contact Center</fullName>
+        <actions>
+            <name>Evaluaci_n_Contact_Center_EPA</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Actualiza_Fecha_EPA_contact_Center</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Account.Pendiente_Envio_Encuesta__c</field>
+            <operation>equals</operation>
+            <value>Verdadero</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Canal__c</field>
+            <operation>equals</operation>
+            <value>Call Center</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Atención</value>
+        </criteriaItems>
+        <description>Genera Evaluación Contact Center cada vez que el cliente realiza una consulta, solicitud  o reclamo al Call Center</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Creación EPA Sucursal</fullName>
+        <actions>
+            <name>Evaluacion_Sucursal_EPA</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Actualiza_Fecha_EPA_contact_Center</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Account.Pendiente_Envio_Encuesta__c</field>
+            <operation>equals</operation>
+            <value>Verdadero</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Canal__c</field>
+            <operation>equals</operation>
+            <value>Sucursal</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Atención</value>
+        </criteriaItems>
+        <description>Genera Evaluación Sucursal cada vez que el cliente realiza una solicitud  o reclamo en la Sucursal</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Cálculo Complejidad 1 de Reclamo</fullName>
+        <actions>
+            <name>Actualiza_Complejidad_1</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <formula>AND( RecordType.Name =&quot;Reclamos&quot;,AND(OR(TEXT(Tipo_Operacion__c) =&quot;Contact center&quot;,AND(TEXT(Tipo_Operacion__c) =&quot;Cargos-Pago primas&quot;, TEXT(Detalle_Operacion__c) = &quot;Disconformidad con ajuste de prima&quot;),TEXT(Tipo_Operacion__c) =&quot;Ejecutiva comercial colectivos&quot;,TEXT(Tipo_Operacion__c) =&quot;Sucursales&quot;,TEXT(Tipo_Operacion__c) =&quot;Crédito&quot;,TEXT(Tipo_Operacion__c) =&quot;Ejecutiva comercial RRVV&quot;,TEXT(Tipo_Operacion__c) =&quot;Agentes de venta&quot;,TEXT(Tipo_Operacion__c) =&quot;Atención post venta&quot;,TEXT(Tipo_Operacion__c) =&quot;Tarjeta Viva Mejor&quot;,TEXT(Tipo_Operacion__c) =&quot;Televentas&quot;),OR(TEXT(Detalle_Operacion__c) &lt;&gt;&quot;Apelación de siniestro&quot;,TEXT(Canal__c)=&quot;Asistencia Agente&quot;, TEXT(Canal__c)=&quot;Call Center&quot;,TEXT(Canal__c)=&quot;WEB&quot;,TEXT(Canal__c)=&quot;Sucursal&quot;, TEXT(Canal__c)=&quot;Post Venta&quot;, TEXT(Canal__c)=&quot;Contacto Vida&quot; )))</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Cálculo Complejidad 2 de Reclamo</fullName>
+        <actions>
+            <name>Actualiza_Complejidad_2</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <formula>AND( RecordType.Name =&quot;Reclamos&quot;,AND(OR( TEXT(Tipo_Operacion__c) =&quot;Apertura nuevo negocio&quot;,TEXT(Tipo_Operacion__c) =&quot;Cierre de producto&quot;,TEXT(Tipo_Operacion__c) =&quot;Sitio web&quot;,TEXT(Tipo_Operacion__c) =&quot;Apertura&quot;,TEXT(Tipo_Operacion__c) =&quot;Información&quot;,TEXT(Tipo_Operacion__c) =&quot;No pago de beneficios&quot;,TEXT(Tipo_Operacion__c) =&quot;Apertura-Venta&quot;,TEXT(Tipo_Operacion__c) =&quot;Valores garantizados&quot;),OR(TEXT(Detalle_Operacion__c) &lt;&gt;&quot;Apelación de siniestro&quot;,TEXT(Canal__c)=&quot;Asistencia Agente&quot;, TEXT(Canal__c)=&quot;Call Center&quot;,TEXT(Canal__c)=&quot;WEB&quot;,TEXT(Canal__c)=&quot;Sucursal&quot;, TEXT(Canal__c)=&quot;Post Venta&quot;, TEXT(Canal__c)=&quot;Contacto Vida&quot; )))</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Cálculo Complejidad 3 de Reclamo</fullName>
+        <actions>
+            <name>Actualiza_Complejidad_3</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <formula>AND( RecordType.Name =&quot;Reclamos&quot;,AND(OR( TEXT(Tipo_Operacion__c) =&quot;Cargos-Cobranza-Movimientos&quot;,TEXT(Tipo_Operacion__c) =&quot;Endosos&quot;,TEXT(Tipo_Operacion__c) =&quot;Siniestros&quot;,TEXT(Tipo_Operacion__c) =&quot;Cargos-Descuentos&quot;,AND(TEXT(Tipo_Operacion__c) =&quot;Cargos-Pago primas&quot;, TEXT(Detalle_Operacion__c) &lt;&gt; &quot;Disconformidad con ajuste de prima&quot;),TEXT(Tipo_Operacion__c) =&quot;Rentabilidad producto&quot;,TEXT(Tipo_Operacion__c) =&quot;Pagos de liquidación&quot;),OR(TEXT(Detalle_Operacion__c) &lt;&gt;&quot;Apelación de siniestro&quot;,TEXT(Canal__c)=&quot;Asistencia Agente&quot;, TEXT(Canal__c)=&quot;Call Center&quot;,TEXT(Canal__c)=&quot;WEB&quot;,TEXT(Canal__c)=&quot;Sucursal&quot;, TEXT(Canal__c)=&quot;Post Venta&quot;, TEXT(Canal__c)=&quot;Contacto Vida&quot; )))</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Cálculo Complejidad 4 de Reclamo</fullName>
+        <actions>
+            <name>Actualiza_Complejidad_4</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <formula>AND( RecordType.Name =&quot;Reclamos&quot;,(and(OR(TEXT(Canal__c) =&quot;Sernac&quot;,TEXT(Canal__c) =&quot;Sernac Financiero&quot;), TEXT(Detalle_Operacion__c) &lt;&gt;&quot;Apelación de siniestro&quot;)))</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Cálculo Complejidad 5 de Reclamo</fullName>
+        <actions>
+            <name>Actualiza_Complejidad_5</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <formula>AND( RecordType.Name =&quot;Reclamos&quot;,OR(TEXT(Canal__c) =&quot;DDA&quot;,TEXT(Canal__c) =&quot;Redes Sociales&quot;, TEXT(Canal__c) =&quot;SVS&quot;, TEXT(Detalle_Operacion__c) =&quot;Apelación de siniestro&quot;))</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Desmarca Entrega Respuesta %28Cambia estado%29</fullName>
+        <actions>
+            <name>Cambia_Estado_Abierto</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <booleanFilter>1</booleanFilter>
+        <criteriaItems>
+            <field>Case.Entrega_Respuesta__c</field>
+            <operation>equals</operation>
+            <value>Falso</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Devolución Caso Hijo</fullName>
+        <actions>
+            <name>aviso_de_devolucion_Caso_desde_UR</name>
+            <type>Alert</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>En Revisión</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.CreatedById</field>
+            <operation>notEqual</operation>
+            <value>Manuel Eduardo Poblete López</value>
+        </criteriaItems>
+        <description>Cuando el Responsable UR devuelve un caso de la bandeja a la ejecutiva</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Entrega Respuesta con Estado</fullName>
+        <actions>
+            <name>Actualiza_Entrega_Respuesta_True</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Cerrado,Basura,Cerrado (Correo Duplicado),Cerrado (Correo Masivo)</value>
+        </criteriaItems>
+        <description>Marca en Verdadero el campo Entrega Respuesta, cada vez que se cambie estado a cerrados.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Entrega Respuesta con Estado %28Abiertos%29</fullName>
+        <actions>
+            <name>Desmarca_Entrega_Respuesta</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>En Proceso,Nuevo</value>
+        </criteriaItems>
+        <description>Marca a falso el campo Entrega Respuesta, cada vez que se cambie estado a abiertos o en Proceso.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Envia Mail2Case SF</fullName>
+        <active>false</active>
+        <criteriaItems>
+            <field>Case.Canal__c</field>
+            <operation>equals</operation>
+            <value>Contacto Vida</value>
+        </criteriaItems>
+        <description>Envia Mail de recepcion de caso</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>Envia correo al cliente por Reclamo</fullName>
+        <actions>
+            <name>Envio_correo_a_Cliente_recepcion_de_reclamo</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Actualiza_correo_de_cuenta</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Reclamos</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Canal__c</field>
+            <operation>notEqual</operation>
+            <value>CMF,DDA,Línea Directa Mercurio,Sernac,Sernac Financiero,Servicios BCI,Servicios Colectivos,Servicios Telefónica,Servicios BHP,Seguros Metrogas,Seguros Cono Sur,Seguros Spence,Seguros Escondida,Medimel,Seguros Cerro Colorado</value>
+        </criteriaItems>
+        <description>Envia correo al cliente informando recepcion del reclamo</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>Envio Mail Instancia Reclamo Segunda</fullName>
+        <actions>
+            <name>Envio_a_correo_Instancias_de_Reclamo_Segunda</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Reclamos</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Instancia_del_Reclamo__c</field>
+            <operation>equals</operation>
+            <value>Segunda</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Origin</field>
+            <operation>notEqual</operation>
+            <value>Servicios Colectivos</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Envio Mail Instancia Reclamo Tercera - Dda</fullName>
+        <actions>
+            <name>Envio_a_correo_Instancias_de_Reclamo_Tercera</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Reclamos</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Instancia_del_Reclamo__c</field>
+            <operation>equals</operation>
+            <value>Tercera o Más,Dda</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Origin</field>
+            <operation>notEqual</operation>
+            <value>Servicios Colectivos</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Fecha Cierre Tope %28Tip%2E 10 días%29</fullName>
+        <actions>
+            <name>Fecha_Cierre_10_d_as</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <booleanFilter>1 AND (2 AND 3) AND 4</booleanFilter>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Reclamos</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Tipo_Operacion__c</field>
+            <operation>notEqual</operation>
+            <value>Siniestros</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Detalle_Operacion__c</field>
+            <operation>notEqual</operation>
+            <value>Disconformidad apelación</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Canal__c</field>
+            <operation>equals</operation>
+            <value>Sernac,DDA,Línea Directa Mercurio,SVS,Sernac Financiero</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Fecha Cierre Tope %28Tip%2E 18 días%29</fullName>
+        <actions>
+            <name>Fecha_Cierre_18_d_as</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <booleanFilter>1 AND ((2 AND 3 AND 4) OR (5 AND 6) OR (7 AND 8))</booleanFilter>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Reclamos</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Tipo_Operacion__c</field>
+            <operation>notEqual</operation>
+            <value>Siniestros</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Detalle_Operacion__c</field>
+            <operation>notEqual</operation>
+            <value>Disconformidad apelación</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Canal__c</field>
+            <operation>equals</operation>
+            <value>Sernac,DDA,Línea Directa Mercurio,SVS,Sernac Financiero</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Tipo_Operacion__c</field>
+            <operation>equals</operation>
+            <value>Siniestros</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Detalle_Operacion__c</field>
+            <operation>notEqual</operation>
+            <value>Disconformidad apelación,Apelación de siniestro</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Tipo_Operacion__c</field>
+            <operation>notEqual</operation>
+            <value>Siniestros</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Canal__c</field>
+            <operation>equals</operation>
+            <value>Asistencia Agente,Call Center,WEB,Sucursal,Post Venta,Contacto Vida,Redes Sociales</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Fecha Cierre Tope %28Tip%2E 6 días%29</fullName>
+        <actions>
+            <name>Fecha_Cierre_6_d_as</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <booleanFilter>1 AND (2 AND 3)</booleanFilter>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Reclamos</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Tipo_Operacion__c</field>
+            <operation>equals</operation>
+            <value>Siniestros</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Detalle_Operacion__c</field>
+            <operation>equals</operation>
+            <value>Disconformidad apelación,Apelación de siniestro</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Fecha Cierre Tope SF</fullName>
+        <actions>
+            <name>Fecha_Cierre_TopeSF</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <booleanFilter>1 or 2</booleanFilter>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Atención de Reclamos y Solicitudes</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Reclamos,Solicitudes</value>
+        </criteriaItems>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>Llenado de Correo Responsable UR</fullName>
+        <actions>
+            <name>actualiza_correo_resp_UR</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Back Office</value>
+        </criteriaItems>
+        <description>Llena el campo con el mail del responsable</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Mail2Case Asistencia Agente</fullName>
+        <actions>
+            <name>Actualiza_Canal_AA</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Actualiza_Linea_de_Negocio_AA</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Actualiza_Tipo_de_Solicitante_AA</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Actualiza_Via_AA</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.Origin</field>
+            <operation>equals</operation>
+            <value>Asistencia Agente</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Atención</value>
+        </criteriaItems>
+        <description>Todo caso de Mail 2 case que viene de asistencia agente</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>Mail2Case Asistencia Agente Cerrar Casos</fullName>
+        <actions>
+            <name>Actualiza_Entrega_Respuesta_True</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Actualiza_Estado_Cerrado</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.Origin</field>
+            <operation>equals</operation>
+            <value>Asistencia Agente</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Atención</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Subject</field>
+            <operation>equals</operation>
+            <value>Aviso: Cliente Solicita Clave WEB y/o Cartola</value>
+        </criteriaItems>
+        <description>Cerrar Caso con asunto: Aviso: Cliente Solicita Clave WEB y/o Cartola</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>Mail2Case Tipificación 1 %28Todos los casos%29</fullName>
+        <actions>
+            <name>Actualiza_Atencion_Presencial</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Actualiza_Canal_2</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Actualiza_Propietario_CV</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Actualiza_Tipo_Contacto</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.Origin</field>
+            <operation>equals</operation>
+            <value>Contacto Vida</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Atención</value>
+        </criteriaItems>
+        <description>Todo caso de Mail 2 case debe llevar tipificado tipo de Contacto</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>Mail2Case Tipificación 10 %28Por tipificar Requerimiento%29</fullName>
+        <actions>
+            <name>Actualiza_Concepto_a_Comp_Requerimiento</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Actualiza_Estado_Tipificar</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Actualiza_L_nea_de_Negocio_Individuale</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Actualiza_Propietario_TIPIFICAR</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.Origin</field>
+            <operation>equals</operation>
+            <value>Contacto Vida</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Canal__c</field>
+            <operation>equals</operation>
+            <value>Contacto Vida</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Subject</field>
+            <operation>startsWith</operation>
+            <value>Solicitud de Antecedentes Póliza</value>
+        </criteriaItems>
+        <description>Tipifica y cambia propietario a Cola Tipificar &quot;Requerimiento&quot;</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Mail2Case Tipificación 11 %28Por tipificar Comp%2E Caducas%29</fullName>
+        <actions>
+            <name>Actualiza_Concepto_a_Comp_Caduca</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Actualiza_Estado_Tipificar</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Actualiza_L_nea_de_Negocio_Individuale</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Actualiza_Propietario_TIPIFICAR</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.Origin</field>
+            <operation>equals</operation>
+            <value>Contacto Vida</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Canal__c</field>
+            <operation>equals</operation>
+            <value>Contacto Vida</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Subject</field>
+            <operation>startsWith</operation>
+            <value>POLIZA CADUCADA</value>
+        </criteriaItems>
+        <description>Tipifica y cambia propietario a Cola Tipificar &quot;Pólizas por Caducar&quot;</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Mail2Case Tipificación 2 %28Claves Sucursal%29</fullName>
+        <actions>
+            <name>Actualiza_Concepto</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Actualiza_Linea</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1 AND 2 AND (3 OR 4 OR 5)</booleanFilter>
+        <criteriaItems>
+            <field>Case.Origin</field>
+            <operation>equals</operation>
+            <value>Contacto Vida</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Canal__c</field>
+            <operation>equals</operation>
+            <value>Contacto Vida</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Subject</field>
+            <operation>contains</operation>
+            <value>CLAVE ACCESO WEB</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Subject</field>
+            <operation>contains</operation>
+            <value>Recuperacion de Clave - Vida Security &amp; Cruz del Sur</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Subject</field>
+            <operation>contains</operation>
+            <value>Solicitud de Asignacion de Clave Internet</value>
+        </criteriaItems>
+        <description>Casos que cumplen las condiciones de ser solicitudes de claves. Si cumple condiciones se llena Linea de negocio y concepto</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Mail2Case Tipificación 3 %28Basura%29</fullName>
+        <actions>
+            <name>Actualiza_Entrega_Respuesta_True</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Actualiza_Estado</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Actualiza_Propietario</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1 AND 2 AND (3 OR 4 OR 5 OR 6 OR 7)</booleanFilter>
+        <criteriaItems>
+            <field>Case.Origin</field>
+            <operation>equals</operation>
+            <value>Contacto Vida</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Canal__c</field>
+            <operation>equals</operation>
+            <value>Contacto Vida</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Subject</field>
+            <operation>equals</operation>
+            <value>Delivery Status Notification (Failure)</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Subject</field>
+            <operation>startsWith</operation>
+            <value>Undeliverable:,Automatic reply: Hemos recibido su requerimiento</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Subject</field>
+            <operation>startsWith</operation>
+            <value>[WARNING : MESSAGE ENCRYPTED]</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Subject</field>
+            <operation>equals</operation>
+            <value>Me gustaría añadirte a mi red profesional en LinkedIn,I&apos;d like to add you to my professional network on LinkedIn</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Subject</field>
+            <operation>equals</operation>
+            <value>Leído: Notificación Estado Mandato Bancario</value>
+        </criteriaItems>
+        <description>Cambia el propietario a cola Basura y Tipifica el Caso</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Mail2Case Tipificación 4 %28Por tipificar Traspaso%29</fullName>
+        <actions>
+            <name>Actualiza_Concepto_a_Comp_Traspaso</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Actualiza_Estado_Tipificar</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Actualiza_L_nea_de_Negocio_Individuale</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Actualiza_Propietario_TIPIFICAR</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1 AND 2 AND (3 OR 4 OR 5)</booleanFilter>
+        <criteriaItems>
+            <field>Case.Origin</field>
+            <operation>equals</operation>
+            <value>Contacto Vida</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Canal__c</field>
+            <operation>equals</operation>
+            <value>Contacto Vida</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Subject</field>
+            <operation>equals</operation>
+            <value>Ingreso Traspaso APV (IN) a Caja Vida Security</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Subject</field>
+            <operation>equals</operation>
+            <value>Solicitud de Traspaso APV (OUT) a otra Institución Autorizada</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Subject</field>
+            <operation>equals</operation>
+            <value>Traspaso APV (IN) Rechazado</value>
+        </criteriaItems>
+        <description>Tipifica y cambia propietario a Cola Tipificar &quot;Traspaso&quot;</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Mail2Case Tipificación 5 %28Por tipificar Traslado%29</fullName>
+        <actions>
+            <name>Actualiza_Concepto_a_Comp_Traslado</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Actualiza_Estado_Tipificar</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Actualiza_L_nea_de_Negocio_Individuale</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Actualiza_Propietario_TIPIFICAR</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1 AND 2 AND 3</booleanFilter>
+        <criteriaItems>
+            <field>Case.Origin</field>
+            <operation>equals</operation>
+            <value>Contacto Vida</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Canal__c</field>
+            <operation>equals</operation>
+            <value>Contacto Vida</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Subject</field>
+            <operation>equals</operation>
+            <value>Comprobante de Traslado de fondos</value>
+        </criteriaItems>
+        <description>Tipifica y cambia propietario a Cola Tipificar &quot;Traslado&quot;</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Mail2Case Tipificación 6 %28Por tipificar Rescate%29</fullName>
+        <actions>
+            <name>Actualiza_Concepto_a_Comp_Rescate</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Actualiza_Estado_Tipificar</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Actualiza_L_nea_de_Negocio_Individuale</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Actualiza_Propietario_TIPIFICAR</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.Origin</field>
+            <operation>equals</operation>
+            <value>Contacto Vida</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Canal__c</field>
+            <operation>equals</operation>
+            <value>Contacto Vida</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Subject</field>
+            <operation>equals</operation>
+            <value>Solicitud de Rescate Total (OUT)</value>
+        </criteriaItems>
+        <description>Tipifica y cambia propietario a Cola Tipificar &quot;Rescate&quot;</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Mail2Case Tipificación 7 %28Por tipificar Mandato%29</fullName>
+        <actions>
+            <name>Actualiza_Concepto_a_Comp_Mandato</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Actualiza_Estado_Tipificar</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Actualiza_L_nea_de_Negocio_Individuale</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Actualiza_Propietario_TIPIFICAR</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1 AND 2 AND (3 OR 4 OR 5)</booleanFilter>
+        <criteriaItems>
+            <field>Case.Origin</field>
+            <operation>equals</operation>
+            <value>Contacto Vida</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Canal__c</field>
+            <operation>equals</operation>
+            <value>Contacto Vida</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Subject</field>
+            <operation>startsWith</operation>
+            <value>El mandato del cliente</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Subject</field>
+            <operation>startsWith</operation>
+            <value>Mandato Bancario RECHAZADO - Identificador</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Subject</field>
+            <operation>startsWith</operation>
+            <value>Mandato Bancario INGRESADO - Identificador</value>
+        </criteriaItems>
+        <description>Tipifica y cambia propietario a Cola Tipificar &quot;Mandato&quot;</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Mail2Case Tipificación 8 %28Por tipificar Mod%2E Póliza%29</fullName>
+        <actions>
+            <name>Actualiza_Concepto_a_Comp_Modificaci_n</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Actualiza_Estado_Tipificar</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Actualiza_L_nea_de_Negocio_Individuale</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Actualiza_Propietario_TIPIFICAR</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.Origin</field>
+            <operation>equals</operation>
+            <value>Contacto Vida</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Canal__c</field>
+            <operation>equals</operation>
+            <value>Contacto Vida</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Subject</field>
+            <operation>startsWith</operation>
+            <value>Notificación de Modificación a Póliza</value>
+        </criteriaItems>
+        <description>Tipifica y cambia propietario a Cola Tipificar &quot;Mod. Póliza&quot;</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Mail2Case Tipificación 9 %28Por tipificar Propuesta%29</fullName>
+        <actions>
+            <name>Actualiza_Concepto_a_Comp_Propuesta</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Actualiza_Estado_Tipificar</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Actualiza_L_nea_de_Negocio_Individuale</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Actualiza_Propietario_TIPIFICAR</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1 AND 2 AND 3</booleanFilter>
+        <criteriaItems>
+            <field>Case.Origin</field>
+            <operation>equals</operation>
+            <value>Contacto Vida</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Canal__c</field>
+            <operation>equals</operation>
+            <value>Contacto Vida</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Subject</field>
+            <operation>startsWith</operation>
+            <value>Propuesta N°</value>
+        </criteriaItems>
+        <description>Tipifica y cambia propietario a Cola Tipificar &quot;Propuesta&quot;</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Mail2Case Tipificación Contacto SBS</fullName>
+        <actions>
+            <name>Actualiza_Canal_Contacto_SBS</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.Origin</field>
+            <operation>equals</operation>
+            <value>Contacto SBS</value>
+        </criteriaItems>
+        <description>Tipificacion de casos con origen Contacto SBS</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>Mail2Case Tipificación Servicios Colectivos</fullName>
+        <actions>
+            <name>Actualiza_Mail_Solicitante_con_Mail_Web</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Actualiza_Nom_Solicitante_con_Nom_Web</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Copia_Origen_del_Caso_a_Canal</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.Origin</field>
+            <operation>equals</operation>
+            <value>Servicios Colectivos</value>
+        </criteriaItems>
+        <description>Utilizada para acciones ejecutadas en la creación para los casos de origen Servicios Colectivos.</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>Modifica Caso Cerrado a Abierto</fullName>
+        <active>false</active>
+        <criteriaItems>
+            <field>Case.Entrega_Respuesta__c</field>
+            <operation>equals</operation>
+            <value>Falso</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Cerrado</value>
+        </criteriaItems>
+        <description>Cada vez que se modifique Entrega Respuesta modificará estado del Caso</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Modificación de Tipo de Registro</fullName>
+        <actions>
+            <name>Borrar_linea_de_negocio_Casos_mod</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>Modifica el tipo de negocio cada vez que cambio de Consultas a Reclamos o Solicitudes</description>
+        <formula>OR(RecordType.Name = &quot;Reclamos&quot;, 
+RecordType.Name = &quot;Solicitudes&quot;)</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Notificacion Derivar Caso Renovar Póliza - UR Cobranza</fullName>
+        <actions>
+            <name>Notificaci_n_Derivaci_n_de_Caso_Renovar_Poliza_a_UR_Cobranza</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.Tipo_de_Requerimiento__c</field>
+            <operation>equals</operation>
+            <value>Solicitudes</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Back Office</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Detalle_Solicitud__c</field>
+            <operation>equals</operation>
+            <value>&quot;UR - Renovar póliza, eliminar y/o generar cobranza&quot;</value>
+        </criteriaItems>
+        <description>Permite notificar la derivación de un Caso Renovar Póliza  la bandeja UR de Cobranza</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Posible Caso Critico</fullName>
+        <actions>
+            <name>Notificaci_n_posible_Caso_Critico</name>
+            <type>Alert</type>
+        </actions>
+        <active>false</active>
+        <booleanFilter>1 AND (2 OR 3 OR 4)</booleanFilter>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Nuevo,En Proceso</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Subject</field>
+            <operation>contains</operation>
+            <value>rol proteccion,rol protección,demanda,juicio,recurso proteccion,recurso protección</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Comments</field>
+            <operation>contains</operation>
+            <value>rol proteccion,rol protección,demanda,juicio,recurso proteccion,recurso protección</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Description</field>
+            <operation>contains</operation>
+            <value>rol proteccion,rol protección,demanda,juicio,recurso proteccion,recurso protección</value>
+        </criteriaItems>
+        <description>Detecta posibles Casos Críticos para la Compañía para así atenderlos mas rápidamente</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Quita Casilla Presencial SF</fullName>
+        <actions>
+            <name>Actualiza_Atencion_Presencial</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>(1 AND 2) OR 3</booleanFilter>
+        <criteriaItems>
+            <field>Case.CaseNumber</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>User.ProfileId</field>
+            <operation>equals</operation>
+            <value>Ejecutivo Call Center,Supervisor Call Center</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Canal__c</field>
+            <operation>equals</operation>
+            <value>Contacto Vida</value>
+        </criteriaItems>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>Respuesta automatica Contacto Vida</fullName>
+        <actions>
+            <name>Respuesta_automatica_Contacto_Vida</name>
+            <type>Alert</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Case.OwnerId</field>
+            <operation>equals</operation>
+            <value>Contacto Vida</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Nuevo</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Atención</value>
+        </criteriaItems>
+        <description>Para responder al Cliente que envió un correo electronico a la Casilla Contacto Vida, de que su requerimiento ya ha sido registrado, detallandole el numero del Caso.</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>Transferir a cola Sin asignar</fullName>
+        <active>true</active>
+        <formula>AND(  RecordType.Name =&quot;Reclamos&quot; ,  
+Funci_n_Propietario_del_Caso__c  &lt;&gt; &quot;Ejecutiva Servicios Colectivos&quot;,  
+Funci_n_Propietario_del_Caso__c  &lt;&gt; &quot;Encargado Servicios Colectivos&quot;,  
+Funci_n_Propietario_del_Caso__c  &lt;&gt; &quot;Jefe Servicios Colectivos&quot;, 	
+Funci_n_Propietario_del_Caso__c  &lt;&gt; &quot;Ejecutivas de calidad&quot; )</formula>
+        <triggerType>onCreateOnly</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Actualiza_Propietario_a_Cola_Sin_Asignar</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <timeLength>1</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Término de Hibernación</fullName>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.Fecha_termino_hibernacion__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <description>Flujo de trabajo que se encarga del término de la hibernación.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Blanquea_Aviso_Informativo</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <actions>
+                <name>Blanquear_Fecha_Aviso_Informativo</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <actions>
+                <name>Blanquear_Fecha_Termino_Hibernacion</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <actions>
+                <name>Cambia_Area_Comercial_a_Colectivos</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <actions>
+                <name>Cambia_estado_a_En_Proceso</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <actions>
+                <name>Deja_en_1_los_d_as_de_hibernaci_n</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <offsetFromField>Case.Fecha_termino_hibernacion__c</offsetFromField>
+            <timeLength>0</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>completar Campos Seguros Cerro Colorado</fullName>
+        <actions>
+            <name>Canal_Seguros_Cerro_Colorado</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Linea_de_negocio_Seguros_Cerro_Colorado</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.Origin</field>
+            <operation>equals</operation>
+            <value>Seguros Cerro Colorado</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Atención</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Nuevo</value>
+        </criteriaItems>
+        <description>Completar campos &quot;Negocio&quot; y &quot;Canal&quot; para los Casos que se generen de origen Seguros Cerro Colorado</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>completar Campos Seguros Spence</fullName>
+        <actions>
+            <name>Canal_Seguros_Spence</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Linea_de_negocio_Seguros_Spence</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Case.Origin</field>
+            <operation>equals</operation>
+            <value>Seguros Spence</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Atención</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Nuevo</value>
+        </criteriaItems>
+        <description>Completar campos &quot;Negocio&quot; y &quot;Canal&quot; para los Casos que se generen de origen Seguros Spence</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>test</fullName>
+        <active>false</active>
+        <criteriaItems>
+            <field>Case.Canal__c</field>
+            <operation>equals</operation>
+            <value>WEB</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <tasks>
+        <fullName>tareas_de_casoSF_internet</fullName>
+        <assignedTo>sfvida@security.cl</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>..Tareas Automaticas&amp;%$..</description>
+        <dueDateOffset>3</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Case.CreatedDate</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Abierta</status>
+        <subject>Llamada</subject>
+    </tasks>
+</Workflow>

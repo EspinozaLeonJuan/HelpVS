@@ -1,0 +1,51 @@
+<apex:page id="pgProductosContratante" controller="CLS_ProductosContratante" action="{!cargaProductos}" lightningStylesheets="true" sidebar="false"
+           showHeader="false" standardStylesheets="true" title="Pólizas Vigentes">
+    <br/>
+    <!--
+    <div id="dv_Mensajes" style="width: 97%; margin-left: auto; margin-right: auto;">
+        <apex:messages rendered="true"/>
+    </div>    
+	-->
+    <div id="dv_ListaPolizasContratante" style="width: 97%; margin-left: auto; margin-right: auto;">
+		<apex:form id="frmProductos" >
+            <apex:pageBlock id="pB_Productos" title="Pólizas Cliente">
+                <apex:pageBlockTable id="pbt_Productos" value="{!LST_POLIZAS_CTE}" var="po" style="font: 12px arial, sans-serif;">
+                    <apex:column headerValue="Mandatoria" style="width: auto;font: bold; backgroung-color: dark-orange;">
+                        <apex:inputCheckbox value="{!pmanEncontrada}" disabled="true" rendered="{!IF(po.Name==polMandatoria,true,false)}" />
+                    </apex:column>
+                    <apex:column headerValue="N° Póliza" style="width: auto;font: bold;" >{!po.Name}</apex:column> <!-- Número Póliza.... -->
+                    <!--<apex:column headerValue="Tipo" style="width: auto;" >{!po.RecordType.Name}</apex:column>-->
+                    <!--<apex:column headerValue="Categoría" style="width: auto;" >{!po.Categoria_Poliza__c}</apex:column>-->
+                    <apex:column headerValue="RUT" style="width: auto;" >{!po.Rut_Contratante__c}</apex:column>
+                    <apex:column headerValue="Estado" style="width: auto;" >{!po.Estatus__c}</apex:column>
+                    <apex:column headerValue="Producto" style="width: auto;" >{!po.Nombre_de_Producto__c}</apex:column>
+                    <apex:column headerValue="Forma de Pago" style="width: auto;" >{!po.Forma_de_Pago__c}</apex:column>                
+                    <!--<apex:column headerValue="Prima Actual" style="width: auto;" >{!po.Prima_Actual__c}</apex:column>-->
+                    <apex:column headerValue="Prima Total" style="width: auto;" >{!po.Prima_Total__c}</apex:column>
+                    <apex:column headerValue="Moneda Poliza" style="width: auto;" >{!po.Moneda_Poliza__c}</apex:column>
+                    <apex:column headerValue="Frecuencia Pago" style="width: auto;" >{!po.Frecuencia_de_Pago__c}</apex:column>
+                    <!--<apex:column headerValue="Institución de Pago" style="width: auto;" >{!po.Institucion_de_Pago__c}</apex:column>-->
+                    <!--<apex:column headerValue="Ejecutivo de Clientes" style="width: auto;" >{!po.Ejecutivo_de_Clientes__c}</apex:column>-->
+                </apex:pageBlockTable>
+                <br/>
+                <!--
+                <apex:pageBlockSection title="Póliza Mandatoria" collapsible="false" columns="2">
+                    <apex:outputText label="N° Póliza Mandatoria" value="{!polMandatoria}" />
+                    <apex:outputField label="Nombre Cliente" value="{!p.Cuenta__c}" />
+                </apex:pageBlockSection>                
+                <br/>
+				-->
+                <div id="dv_Botones" style="width: 97%; margin-left: auto; margin-right: auto;">
+                    <center>
+                        <script>
+                        function cerrarVentana(){
+                            window.close();
+                        }
+                        </script>
+                        <apex:commandButton value="Cerrar" onclick="cerrarVentana()" /> 
+                    </center>                
+                </div>                    
+            </apex:pageBlock>
+        </apex:form>
+    </div> 
+</apex:page>

@@ -1,0 +1,28 @@
+<apex:page controller="CLS_CasoConsulta" action="{!ConsultaSiniestros}"  lightningStylesheets="true" showHeader="true" sidebar="true" tabStyle="Case" >
+  
+    <script>
+    
+    if ('{!Mensaje}' != 'OK')
+    { 
+    	alert('{!Mensaje}');
+    	document.location = "/"+'{!ID}';  
+    }
+    else
+    {
+        
+        var popUp = window.open('{!URL}', "_blank", performance);
+        
+        if (popUp == null || typeof(popUp)=='undefined') {  
+            alert('Por favor deshabilita el bloqueador de ventanas emergentes y vuelve a hacer clic en "Detalle de Solicitud".');     
+        }
+        else {          
+            popUp.focus();           
+        }
+                
+        document.location = "/"+'{!ID}';  
+        
+    }
+     
+    </script>
+    
+</apex:page>

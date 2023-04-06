@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Envio_mail_Caso_Internet</fullName>
+        <description>Envio mail Caso Internet</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Correo_Alerta__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Plantillas_Soporte/Alerta_de_Posible_Fuga_a_Agentes</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Actualiza_Atencion_Presencial</fullName>
+        <field>Atencion_Presencial__c</field>
+        <literalValue>0</literalValue>
+        <name>Actualiza Atencion Presencial</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_Concepto_2</fullName>
+        <field>Concepto__c</field>
+        <literalValue>Sucursal Virtual</literalValue>
+        <name>Actualiza Concepto 2</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_Linea_2</fullName>
+        <field>Linea_Negocio__c</field>
+        <literalValue>Corporativo</literalValue>
+        <name>Actualiza Linea 2</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_Tipo_Contacto_2</fullName>
+        <field>Tipo_Contacto__c</field>
+        <literalValue>Contratante</literalValue>
+        <name>Actualiza Tipo Contacto 2</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>CreaFechaApertura</fullName>
+        <field>Fecha_Hora_de_Apertura__c</field>
+        <formula>NOW()</formula>
+        <name>CreaFechaApertura</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>EliminaFechaCierre</fullName>
+        <field>Fecha_Hora_Cierre__c</field>
+        <name>EliminaFechaCierre</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Null</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Fecha_Cierre_Tope</fullName>
+        <field>Fecha_Cierre_Tope__c</field>
+        <formula>TODAY() + 28</formula>
+        <name>Fecha Cierre Tope</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Fecha_Hora_Cierre</fullName>
+        <field>Fecha_Hora_Cierre__c</field>
+        <formula>NOW()</formula>
+        <name>Fecha/Hora Cierre</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>IngresoFechaCierre</fullName>
+        <field>Fecha_Hora_Cierre__c</field>
+        <formula>NOW()</formula>
+        <name>IngresoFechaCierre</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>Crea Mail Internet</fullName>
+        <actions>
+            <name>Envio_mail_Caso_Internet</name>
+            <type>Alert</type>
+        </actions>
+        <active>false</active>
+        <booleanFilter>(1 OR 2)  AND (3 OR ( 4 AND 5 )) AND 6 AND 7</booleanFilter>
+        <criteriaItems>
+            <field>Caso_Vida_Security__c.Detalle_Solicitud__c</field>
+            <operation>equals</operation>
+            <value>Solicitud Cartola</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Caso_Vida_Security__c.Concepto__c</field>
+            <operation>equals</operation>
+            <value>Solicitud Clave Internet</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Caso_Vida_Security__c.Funcion_Propietario_Cuenta__c</field>
+            <operation>notEqual</operation>
+            <value>Ejecutiva de Post Venta,Ejecutiva de Atención Telefónica</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Caso_Vida_Security__c.Funcion_Propietario_Cuenta__c</field>
+            <operation>equals</operation>
+            <value>Ejecutiva de Post Venta</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Caso_Vida_Security__c.Agente_Vigente_Cuenta__c</field>
+            <operation>equals</operation>
+            <value>Verdadero</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Caso_Vida_Security__c.Nombres__c</field>
+            <operation>notEqual</operation>
+            <value>Anónimo</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Caso_Vida_Security__c.P_lizas_Individuales_Vigentes__c</field>
+            <operation>greaterThan</operation>
+            <value>0</value>
+        </criteriaItems>
+        <description>Cliente solicita clave o catola Internet</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Crea Tareas Internet</fullName>
+        <actions>
+            <name>tareas_de_caso_internet</name>
+            <type>Task</type>
+        </actions>
+        <active>false</active>
+        <booleanFilter>(1 OR 2) AND 3 AND 4 AND 5</booleanFilter>
+        <criteriaItems>
+            <field>Caso_Vida_Security__c.Detalle_Solicitud__c</field>
+            <operation>equals</operation>
+            <value>Solicitud Cartola</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Caso_Vida_Security__c.Concepto__c</field>
+            <operation>equals</operation>
+            <value>Solicitud Clave Internet</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Caso_Vida_Security__c.Propietario_Cuenta__c</field>
+            <operation>notEqual</operation>
+            <value>Administrador del sistema</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Caso_Vida_Security__c.Funcion_Propietario_Cuenta__c</field>
+            <operation>equals</operation>
+            <value>Ejecutiva de Post Venta</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Caso_Vida_Security__c.Agente_Vigente_Cuenta__c</field>
+            <operation>equals</operation>
+            <value>Falso</value>
+        </criteriaItems>
+        <description>Cliente solicita clave o catola Internet</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Envia Mail2Case</fullName>
+        <active>false</active>
+        <criteriaItems>
+            <field>Caso_Vida_Security__c.Canal__c</field>
+            <operation>equals</operation>
+            <value>Contacto Vida</value>
+        </criteriaItems>
+        <description>Envia Mail de recepcion de caso</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>Fecha Cierre Tope</fullName>
+        <actions>
+            <name>Fecha_Cierre_Tope</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <booleanFilter>1 or 2</booleanFilter>
+        <criteriaItems>
+            <field>Caso_Vida_Security__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Atención de Reclamos y Solicitudes</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Caso_Vida_Security__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Reclamos,Solicitudes</value>
+        </criteriaItems>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>Fecha%2FHora Apertura</fullName>
+        <actions>
+            <name>CreaFechaApertura</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Caso_Vida_Security__c.Name</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>Fecha%2FHora Cierre</fullName>
+        <actions>
+            <name>IngresoFechaCierre</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1</booleanFilter>
+        <criteriaItems>
+            <field>Caso_Vida_Security__c.Entrega_Respuesta__c</field>
+            <operation>equals</operation>
+            <value>Verdadero</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Fecha%2FHora Cierre2</fullName>
+        <actions>
+            <name>EliminaFechaCierre</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Caso_Vida_Security__c.Entrega_Respuesta__c</field>
+            <operation>equals</operation>
+            <value>Falso</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Quita Casilla Presencial</fullName>
+        <actions>
+            <name>Actualiza_Atencion_Presencial</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Caso_Vida_Security__c.Name</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>User.ProfileId</field>
+            <operation>equals</operation>
+            <value>Ejecutivo Call Center,Supervisor Call Center</value>
+        </criteriaItems>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>Tipifica Mail2Case 3</fullName>
+        <actions>
+            <name>Actualiza_Tipo_Contacto_2</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <booleanFilter>1 AND 2 AND 3</booleanFilter>
+        <criteriaItems>
+            <field>Caso_Vida_Security__c.Canal__c</field>
+            <operation>equals</operation>
+            <value>Contacto Vida</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Caso_Vida_Security__c.Concepto__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Caso_Vida_Security__c.Linea_Negocio__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Tipifica Mail2Case 4</fullName>
+        <actions>
+            <name>Actualiza_Concepto_2</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Actualiza_Linea_2</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <booleanFilter>1 AND (2 OR (3 AND 5 AND 6) OR 4)</booleanFilter>
+        <criteriaItems>
+            <field>Caso_Vida_Security__c.Canal__c</field>
+            <operation>equals</operation>
+            <value>Contacto Vida</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Caso_Vida_Security__c.Asunto__c</field>
+            <operation>contains</operation>
+            <value>CLAVE ACCESO WEB</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Caso_Vida_Security__c.Asunto__c</field>
+            <operation>contains</operation>
+            <value>Recuperación de Clave</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Caso_Vida_Security__c.Asunto__c</field>
+            <operation>contains</operation>
+            <value>Solicitud de Asignacion de Clave Internet</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Caso_Vida_Security__c.Asunto__c</field>
+            <operation>contains</operation>
+            <value>Vida Security</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Caso_Vida_Security__c.Asunto__c</field>
+            <operation>contains</operation>
+            <value>Cruz del Sur</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <tasks>
+        <fullName>tareas_de_caso_internet</fullName>
+        <assignedTo>mpoblete@security.cl</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>..Tareas Automaticas&amp;%$..</description>
+        <dueDateOffset>7</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Caso_Vida_Security__c.CreatedDate</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>No iniciada</status>
+        <subject>Llamada</subject>
+    </tasks>
+</Workflow>

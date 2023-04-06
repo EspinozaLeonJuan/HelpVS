@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SamlSsoConfig xmlns="http://soap.sforce.com/2006/04/metadata">
+    <errorUrl>https://login.salesforce.com/?login=1</errorUrl>
+    <identityLocation>SubjectNameId</identityLocation>
+    <identityMapping>UserId</identityMapping>
+    <issuer>https://gocode-dev-ed.my.salesforce.com</issuer>
+    <loginUrl>https://gocode-dev-ed.my.salesforce.com/idp/endpoint/HttpPost</loginUrl>
+    <name>gocode-dev-ed SAML SSO Setting</name>
+    <oauthTokenEndpoint>https://vidasecurity.my.salesforce.com/services/oauth2/token?so=00Di0000000XoSJ</oauthTokenEndpoint>
+    <redirectBinding>false</redirectBinding>
+    <requestSigningCertId>0P10H000000k9v2</requestSigningCertId>
+    <salesforceLoginUrl>https://vidasecurity.my.salesforce.com?so=00Di0000000XoSJ</salesforceLoginUrl>
+    <samlEntityId>https://saml.salesforce.com/00Di0000000XoSJEA0</samlEntityId>
+    <samlVersion>SAML2_0</samlVersion>
+    <useConfigRequestMethod>false</useConfigRequestMethod>
+    <useSameDigestAlgoForSigning>false</useSameDigestAlgoForSigning>
+    <userProvisioning>false</userProvisioning>
+    <validationCert>MIIErDCCA5SgAwIBAgIOAUwOZlryAAAAAAkG8UMwDQYJKoZIhvcNAQEFBQAwgZAxKDAmBgNVBAMMH1NlbGZTaWduZWRDZXJ0XzEyTWFyMjAxNV8xNDMyMTAxGDAWBgNVBAsMDzAwREEwMDAwMDAwS0dzTjEXMBUGA1UECgwOU2FsZXNmb3JjZS5jb20xFjAUBgNVBAcMDVNhbiBGcmFuY2lzY28xCzAJBgNVBAgMAkNBMQwwCgYDVQQGEwNVU0EwHhcNMTUwMzEyMTQzMjExWhcNMTcwMzEyMTIwMDAwWjCBkDEoMCYGA1UEAwwfU2VsZlNpZ25lZENlcnRfMTJNYXIyMDE1XzE0MzIxMDEYMBYGA1UECwwPMDBEQTAwMDAwMDBLR3NOMRcwFQYDVQQKDA5TYWxlc2ZvcmNlLmNvbTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzELMAkGA1UECAwCQ0ExDDAKBgNVBAYTA1VTQTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAM0naxGfrhpL4zeHyOdtukPCNAa6KeXHfMSZqAsdh/d6zU3p6/hUk9OgtIohIYdQUmlZNeBnmodu26DPB5aCLWsbku1TDIANsHrAWClZzmEysLZ7dADTrHag1LXAW1aE8OtK4nd65Jr9OKITHHuxfXVD4siZrcSA7KubT3QQTe+uozYtJ56O1PYv2tPxEUAgWoIRwOVXxOlT4mIeKlaPMbg3z2AQ11QtISJLiEmQqwFm5SwYxxJRA/ha0+Kiuqj9AusQFIKYQA1IXDnpaSuEsfvF6lHoCJJfUz7+XKrBIiZwQe/Y3ljNmYCVwP/Jan/QL6OCGYbdxFLiz5gboVRnVGMCAwEAAaOCAQAwgf0wHQYDVR0OBBYEFKcToz1zR52HuArLfDXKhlMnnibgMA8GA1UdEwEB/wQFMAMBAf8wgcoGA1UdIwSBwjCBv4AUpxOjPXNHnYe4Cst8NcqGUyeeJuChgZakgZMwgZAxKDAmBgNVBAMMH1NlbGZTaWduZWRDZXJ0XzEyTWFyMjAxNV8xNDMyMTAxGDAWBgNVBAsMDzAwREEwMDAwMDAwS0dzTjEXMBUGA1UECgwOU2FsZXNmb3JjZS5jb20xFjAUBgNVBAcMDVNhbiBGcmFuY2lzY28xCzAJBgNVBAgMAkNBMQwwCgYDVQQGEwNVU0GCDgFMDmZa8gAAAAAJBvFDMA0GCSqGSIb3DQEBBQUAA4IBAQDEzphoeTuNsCvM/P4qhaPzIv85v5H6xpQM0uu51WHCP6UvLX1QDNB1JXjFgpVnhHez25BmAhD5VsucniEpTiCXsoFTlhDGKY88wJnIk1O6rZDztMeY0iliABpweDFLR1V93WDu4P3MPFq6WO3RIfrxuYiiuAktLLzgHYXGnFJNJasVH8kan607A8JhtcHMu3qjA6uOlVB5osGllULi5MDUeGtXA2NJkgn8C5WPZZDEhAR4gKiqNZhwRvG0DykSmKgkUTJF8ZhRMkxMPGsUdnS3PwzTvlbyfXeh7Yrir4H02KnkZDFXnNtyFxPgo01FYHCp+WDfp8gUtCcXTMWKuOiK</validationCert>
+</SamlSsoConfig>

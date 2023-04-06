@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Role xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAccessLevel>Edit</caseAccessLevel>
+    <contactAccessLevel>Edit</contactAccessLevel>
+    <description>Jefe Servicio al Cliente Sucursales</description>
+    <mayForecastManagerShare>false</mayForecastManagerShare>
+    <name>Jefe Servicio al Cliente Sucursales</name>
+    <opportunityAccessLevel>Edit</opportunityAccessLevel>
+    <parentRole>Subgerente_Servicio_al_Cliente_Lineas_Personales</parentRole>
+</Role>

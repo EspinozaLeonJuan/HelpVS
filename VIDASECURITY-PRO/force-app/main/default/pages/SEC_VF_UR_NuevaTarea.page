@@ -1,0 +1,159 @@
+<apex:page controller="CTR_BandejaResolutorUR" action="{!cargaCaso}" lightningStylesheets="true" showHeader="true" sidebar="false" tabStyle="Case" >
+   
+<style>
+  .popupBackground {
+            /* Background color */
+            background-color:black;
+            opacity: 0.5;
+            filter: alpha(opacity = 50);
+            
+            /* Dimensions */
+            width: 90%;
+            height: 100%;       
+            top: 0;
+            left: 50;
+            z-index: 998;
+            position: absolute;        
+            /* Mouse */
+            cursor:wait;
+        }
+                
+        .popupPanel {
+            /* Background color */
+            border: solid 2px orange;
+            background-color: white;        
+            /* Dimensions */
+            display: inline-block;
+            left: 50%;
+            width: 100px;
+            margin-left: 0px;
+            top: 100px;
+            height: 25px;
+            margin-top: -25px;
+            position: absolute;   
+            z-index: 999;        
+            /* Mouse */
+            cursor:pointer;;
+        }
+   
+    .DivColumn_A {
+        width:40%;
+        float:left;
+    }
+
+    .DivColumn_B {
+        width:12%;
+        float:left;
+    }
+
+    .DivColumn_C {
+        width:48%;
+        float:left;
+    }
+</style>
+ <script>
+    function alerta(mensaje) {
+        if (mensaje != '')
+        {
+            alert(mensaje);
+        }         
+    }
+
+    function finalizar(exito)
+    {
+        if (exito == 'S')
+        {
+            alert('La Tarea UR ingresada ha sido agregada exitosamente al Caso Requerimiento.');
+            ToCase();
+        } 
+        else  if (exito == 'N1')
+        {
+            alert('La Fecha de Vencimiento no puede ser anterior a la Fecha de Hoy.');
+        }
+        else
+        {
+            alert('Ha ocurrido un error la Colaboración de Reclamo ingresada no ha sido generada.');
+        }
+    }
+
+</script>
+
+<apex:includeScript value="{!$Resource.jquery}"/>
+    <div id="dv_CuerpoPrincipal" style="width: 90%; margin-left: auto; margin-right: auto; height: 100%;">
+        <apex:actionStatus id="Status">
+            <apex:facet name="start">
+                <apex:outputPanel >
+                    <div class="popupBackground" />
+                    <div class="popupPanel">
+                        &nbsp; Espere...<img src="/apexpages/devmode/img/saveStatus.gif" />
+                    </div>
+                </apex:outputPanel> 
+            </apex:facet>
+        </apex:actionStatus>
+        <br/><br/>
+    <apex:form id="frm_VerCaso">            
+            <apex:actionFunction action="{!ToCase}" name="ToCase"/>   
+            <apex:commandButton id="cmd_VolverCaso" value="Información Caso" action="{!ToCase}" />            
+            <apex:commandButton id="cmd_CambiaEstadoCasoENPROCESO" value="En Proceso"  disabled="true" />   
+            <apex:commandButton id="cmd_EnviaAEjecutivoCreador" value="Regresar a Ejecutivo" disabled="true" />                  
+            <apex:commandButton id="cmd_CambiaEstadoCasoRechazado"  value="Rechazado"  disabled="true"/>            
+            <apex:commandButton id="cmd_CarmbiEstadoCasoCERRAR"  value="Cerrar Caso" disabled="true"/>          
+            <apex:commandButton id="cmd_Escritorio_Digital" value="Escritorio Digital" disabled="true"/>
+        <!--  <apex:commandButton id="cmd_ListadoColaboraciones" value="Colaboraciones" action="{!ToList}" immediate="true" />
+            <apex:commandButton id="cmd_nuevaColaboracion" value="Nueva Colaboración" disabled="true" />
+        -->
+            
+            <apex:pageBlock id="pbk_EncabezadoCaso" title="Nueva Tarea UR" >
+
+                    <apex:panelGrid columns="8" style="width:100%;">
+                            <apex:outputLabel style="font-weight:bold;" >Asunto</apex:outputLabel>  
+                            <apex:outputLabel style="font-weight:bold;color:blue;" value="{!Caso.Subject}" ></apex:outputLabel>  
+                            <apex:outputText value="    " id="empty001"/> 
+                            <apex:outputText value="    " id="empty002"/> 
+                            <apex:outputText value="    " id="empty003"/> 
+                            <apex:outputText value="    " id="empty004"/> 
+                            <apex:outputLabel style="font-weight:bold;" >Nº Caso</apex:outputLabel> 
+                            <apex:commandLink style="font-weight:bold;" value="{!Caso.CaseNumber}"  action="{!ToCase}"   />
+
+                            <apex:outputLabel style="font-weight:bold;" >RUT Cliente</apex:outputLabel>     
+                            <apex:outputField label="RUT Cliente" value="{!Caso.RUT__c}"/>      
+                            <apex:outputText value="    " id="empty005"/>  
+                            <apex:outputLabel style="font-weight:bold;" >Cliente</apex:outputLabel>      
+                            <apex:outputLabel value="{!Caso.Nombre_Completo_Razon_Social__c}"  /> 
+                                <apex:outputText value="    " id="empty006"/>  
+                            <apex:outputLabel style="font-weight:bold;"  >Nº de Poliza</apex:outputLabel>
+                            <apex:outputField style="font-weight:bold;color:blue;" value="{!Caso.CASO_N_Poliza__c}" rendered="true" />  
+                    </apex:panelGrid>
+
+                </apex:pageBlock>
+                <apex:pageBlock id="pb_CambioResponsable" >
+                        <apex:pageBlockSection id="pbs_DatoCaso" collapsible="false" columns="1" >
+                                <apex:selectList size="1" value="{!IdQueue}" label="Unidad Resolutora:">
+                                        <apex:selectOptions value="{!Unidades}"></apex:selectOptions>
+                                    </apex:selectList>
+                                
+                                    <apex:inputField value="{!NewTask.Priority}" tabOrderHint="2" label="Prioridad:" />
+
+                                <apex:inputField value="{!NewTask.ActivityDate}" label="Fecha de Vencimiento:" tabOrderHint="1" />
+
+                                <apex:inputTextarea id="txt_ComentarioNotificacion"  label="Descripción Tarea:"
+                                    value="{!NewTask.Description}" style="resize: none;width:100%;height:80px;" />
+                        </apex:pageBlockSection> 
+                </apex:pageBlock>
+            
+            <apex:pageBlock id="pb_ActionCaso">
+                <apex:commandButton id="cmd_Guardar" title="Guardar" value="Crear Tarea UR"   status="Status" action="{!SaveTask}"
+                oncomplete="finalizar('{!Exito}');"
+                />
+
+                <apex:commandButton id="cmd_Cancelar" title="Cancelar" value="Cancelar" immediate="true" action="{!ToCase}"  />
+
+          </apex:pageBlock>
+
+        </apex:form>
+
+ 
+
+
+    </div>
+</apex:page>

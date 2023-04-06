@@ -1,0 +1,500 @@
+<!--
+  @description       : 
+  @author            : Juan Espinoza León
+  @group             : 
+  @last modified on  : 04-22-2021
+  @last modified by  : Juan Espinoza León
+  Modifications Log 
+  Ver   Date         Author               Modification
+  1.0   03-06-2021   Juan Espinoza León   Initial Version
+-->
+<apex:page controller="CTR_UR_Caso_Optativo" action="{!IniciaCaso}" lightningStylesheets="true" showHeader="true" sidebar="false"  docType="html-5.0" >
+    <style>
+              
+.popupBackground {
+        /* Background color */
+        background-color:black;
+        opacity: 0.5;
+        filter: alpha(opacity = 50);
+         
+        /* Dimensions */
+        width: 100%;
+        height: 1000%;       
+        top: 0;
+        left: 0;
+        z-index: 998;
+        position: absolute;        
+        /* Mouse */
+        cursor:wait;
+    }
+            
+    .popupPanel {
+       /* Background color */
+        border: solid 2px orange;
+        background-color: white;        
+        /* Dimensions */
+        display: inline-block;
+        left: 50%;
+        width: 100px;
+        margin-left: 0px;
+        top: 100px;
+        height: 25px;
+        margin-top: -25px;
+        position: absolute;   
+        z-index: 999;        
+        /* Mouse */
+        cursor:pointer;
+    }
+    
+    .ct{
+    text-align:center;
+    }
+
+    .header_inline_left
+    {
+        width:49.5%;
+        display:inline-block;
+        /* position: absolute;*/
+        /*float: left;*/
+        /*text-align:center;*/
+        padding: 3px;
+      /*  margin-top: -30px;*/
+        margin-bottom: 4px;
+    }
+
+    .header_inline_right
+    {
+        width:49.5%;
+        display:inline-block;
+        /* position: absolute;*/
+        /*float: left;*/
+        text-align:right;
+        padding: 3px;
+      /*  margin-top: -30px;*/
+        margin-bottom: 4px;      
+    }
+
+    .checkTable 
+    {
+        /*width: 100%;
+        text-align: center;*/
+    }
+
+
+    .btnDefault{
+        color:white !important;
+        background:#A2A4A5 !important;
+        margin-right: -8px;
+    }
+
+    .btnSuccess{
+        color:white !important;
+        background:#11862D !important;
+        margin-right: -8px;
+    }
+
+    .btnDanger{
+        color:white !important;
+        background:#E30C0C !important;
+        margin-right: -8px;
+    }
+/*
+    .btnAction{
+        color:black !important;
+        background:#7FD2E2!important;
+        margin-right: -8px;
+    }
+  */  
+    .btnReturn{
+        color:white !important;
+        background:rgb(105, 97, 214) !important;
+        margin-right: -8px;
+    }
+
+    .btnMenuCurrent{
+        color:white !important;
+        background:#8D8E95 !important;
+       /*display: inline-flex;*/
+        /*margin-left: -10px;*/
+        margin-right: -8px;
+    }
+
+    .btnMenu{
+        color:white !important;
+        background:#5260E3 !important;
+        /*display: inline-flex;*/
+        /*margin-left: -10px;*/
+        margin-right: -8px;
+    }
+
+    .btnPopUp{
+        color:black !important;
+        background:#E7D33B !important;
+        /*display: inline-flex;*/
+        /*margin-left: -10px;*/
+        margin-right: -8px;
+        margin-top: 5px;
+    }
+
+    .btnAttachment{
+        color:white !important;
+        /*background:rgb(105, 97, 214) !important;*/
+        background:rgb(201, 106, 62) !important;
+        margin-right: -8px;
+        margin-top: 5px;
+    }
+    
+    </style>
+    <apex:includeScript value="{!$Resource.jquery}"/>
+    <!--<br/>-->
+    <script type="text/javascript">
+        function colorPageBlock(pageblock, bkcolor, color) {
+            if (pageblock != null) 
+            {
+                pageblock.firstChild.style.cssText = "background-color: " + bkcolor + ";font-weight:bold;color:"+color+";";
+            }
+        }
+
+        //valida si requerimiento esta en Escritorio Digital    
+        function LLamadaEscritorioDigital(Persistencia, IdRequerimiento,RutUsuario, uresponsable)
+        {
+            if (uresponsable != '')
+            {
+                if (IdRequerimiento == 'REQ_ED_PENDING' ) 
+                {
+                    alert ('Para el Caso seleccionado no existe un Requerimiento registrado en Escritorio Digital.');
+                }
+                else if( IdRequerimiento == 'REQ_ED_NOTSUPPORTED')
+                {
+                    alert ('El Caso seleccionado no es soportado por Escritorio Digital.');
+                }
+                else
+                {
+                    if (Persistencia == -6) 
+                    {   
+                        alert('Ha ocurrido un error de Comunicación con Escritorio Digital, no es posible acceder a detalle del Requerimiento.');   
+                    } 
+                    else if (Persistencia == -1) 
+                    {
+                        alert('Error de Auntenticacion en Escritorio Digital.');         
+                    }
+                    else if (Persistencia == -8) 
+                    {   
+                        alert('Usuario debe poseer un RUT válido asociado.');   
+                    }
+                    else if (Persistencia > 0)
+                    {
+                        var height = 768;
+                        var width = 1366;
+                        var y=parseInt((window.screen.height/2) - height/2);
+                        var x=parseInt((window.screen.width/2) - width/2); 
+
+                        var performance   = 'height='+height+'px,width='+width+'px, top='+y+',left='+x+',toolbar=no,location=no,status=no,menubar=no,scrollbars=no,directories=no,resizable=no';
+
+                        var url = "http://kta.vidasecurity.cl/TotalAgility/forms/vs-ed-dev/VS-ED-FormularioFirma.form?IDRequerimiento="+IdRequerimiento+"&Rut="+RutUsuario+"&Persistencia="+Persistencia+"";   
+
+                        var popUp = window.open(url, "_blank", performance);
+                        
+                        if (popUp == null || typeof(popUp)=='undefined') {  
+                            alert('Por favor deshabilita el bloqueador de ventanas emergentes y vuelve a hacer clic en "Detalle de Solicitud".');        
+                        }
+                        else {       
+                            popUp.focus();           
+                        }
+                    }
+                }       
+            }
+            else
+            {
+                alert('El Caso actual no posee un Usuario Responsable asignado.');  
+            }   
+        }
+
+        function AdjuntarArchivoValuetech(Id, idResponsable, procedenciaur, uresponsable)
+        {    
+            if (uresponsable != '')
+            {                  
+                var height = 540;
+                var width = 1150;                     
+                var y=parseInt((window.screen.height/2) - height/2);
+                var x=parseInt((window.screen.width/2) - width/2); 
+
+                var performance   = 'height='+height+'px,width='+width+'px,top='+y+',left='+x+',toolbar=no,location=no,status=no,menubar=no,scrollbars=no,directories=no,resizable=no';
+               // var url = "/apex/SEC_VF_CV_CargaAdjunto?Id="+Id+'&procedencia=caso_ur&idResponsable='+ idResponsable+'&procedenciaur='+procedenciaur; 
+                var url = '/apex/SEC_VF_CS_UploadValuetech?Id='+Id+'&From=caso_ur&idResponsable='+idResponsable+'&FromUR='+procedenciaur; 
+                var popUp = window.open(url, "_blank", performance);
+            
+                if (popUp == null || typeof(popUp)=='undefined') {  
+                        alert('Por favor deshabilita el bloqueador de ventanas emergentes y vuelve a hacer clic en "Agregar Tarea UR".');     
+                }
+                else {          
+                        popUp.focus();           
+                }
+            }
+            else
+            {
+                alert('El Caso actual no posee un Usuario Responsable asignado.');  
+            }   
+        }
+
+        function verAdjuntos(Id) {
+            var url = "http://www.valueweb.cl/vwnet_vidasecurity_visorpost/default.aspx?Archivador=1&compaginado=False&CAJA="+Id;
+            alert(url);
+            window.open(url);
+        }
+
+        
+
+        function VerCasoNativo(Id)
+        {                   
+            var height = 1020;
+            var width = 1200;                  
+            var y=parseInt((window.screen.height/2) - height/2);
+            var x=parseInt((window.screen.width/2) - width/2); 
+
+            var performance   = 'height='+height+'px,width='+width+'px,top='+y+',left='+x+',toolbar=no,location=no,status=no,menubar=no,scrollbars=no,directories=no,resizable=no';
+                //var url = "/apex/SEC_VF_UR_Caso_Solicitud?Id="+Id; 
+                var url = "/"+Id; 
+
+                var popUp = window.open(url, "_blank", performance);
+            
+                if (popUp == null || typeof(popUp)=='undefined') {  
+                        alert('Por favor deshabilita el bloqueador de ventanas emergentes y vuelve a hacer clic en "Agregar Tarea UR".');     
+                }
+                else {          
+                        popUp.focus();           
+                }
+        }
+
+        function AccederDocumento(urlDoc)
+        {                      
+            var height = 588;
+            var width =1000;
+            var y=parseInt((window.screen.height/2) - height/2);
+            var x=parseInt((window.screen.width/2) - width/2); 
+
+            var performance   = 'height='+height+'px,width='+width+'px, top='+y+',left='+x+',toolbar=no,location=no,status=no,menubar=no,scrollbars=no,directories=no,resizable=no';
+                
+                var popUp = window.open(urlDoc, "_blank", performance);
+            
+                if (popUp == null || typeof(popUp)=='undefined') {  
+                        alert('Por favor deshabilita el bloqueador de ventanas emergentes y vuelve a hacer clic en "Detalle Tarea UR".');     
+                }
+                else {          
+                        popUp.focus();           
+                }
+        }
+
+        </script>
+    <div id="dv_CuerpoPrincipal" style="width: 100%; margin-left: auto; margin-right: auto; height: 100%;">
+          <apex:actionStatus id="Status">
+        <apex:facet name="start">
+            <apex:outputPanel >
+                <div class="popupBackground" />
+                <div class="popupPanel">
+                    &nbsp; Espere...<img src="/apexpages/devmode/img/saveStatus.gif" />
+                </div>
+            </apex:outputPanel> 
+        </apex:facet>
+    </apex:actionStatus>
+ 
+    <br/>
+    <apex:form id="frm_sup">             
+                <div id="title">
+                    
+                    <div class="header_inline_left" >
+                       
+                        &nbsp;
+                    </div>
+                    <div class="header_inline_right">
+                        <apex:commandButton id="cmd_CasosUR" value="Casos Optativos" styleClass="btnMenu"   action="{!CasosOptativos}"/>
+                    </div>
+                </div>
+            <apex:pageBlock id="pbk_PanelCaso">
+                <apex:pageBlockSection title="{!Titulo}" collapsible="false" columns="1" id="pbs_CasoHeader" >
+                    <apex:panelGrid columns="6" style="width:100%;">
+
+                            <!--1-->
+
+                            <apex:outputLabel style="font-weight:bold;" >Nº Caso</apex:outputLabel> 
+                            <apex:outputLabel style="font-weight:bold;font-size:14px;color:darkblue" value="{!Caso.CaseNumber}" />                               
+                          
+                            <apex:outputLabel style="font-weight:bold;"  >Estado</apex:outputLabel>
+                            <apex:outputLabel value="{!Caso.Status}" style="font-weight:bold;color:red;text-transform: uppercase;font-size:14px;" rendered="true" />
+                            
+
+                            <apex:outputLabel style="font-weight:bold;" rendered="true" >Responsable UR</apex:outputLabel> 
+                            <apex:outputField value="{!Caso.CASO_Responsable_UR__c}" rendered="true" /> 
+                            <!--2-->
+
+                            <apex:outputLabel style="font-weight:bold;" >RUT </apex:outputLabel>     
+                            <apex:outputLabel value="{!Caso.RUT__c}" rendered="{!Caso.EsNoCliente__c == false}"/>       
+                            <apex:outputLabel value="{!Caso.RUT_no_Cliente__c}" rendered="{!Caso.EsNoCliente__c == true}" /> 
+                          
+                            <apex:outputLabel style="font-weight:bold;" >Nombre</apex:outputLabel>      
+                            <apex:outputField value="{!Caso.Nombre_Completo_Razon_Social__c}" rendered="{!Caso.EsNoCliente__c == false}" /> 
+                            <apex:outputLabel value="{!Caso.Nombre_no_Cliente__c}" rendered="{!Caso.EsNoCliente__c == true}" /> 
+                                  
+                            <apex:outputLabel style="font-weight:bold;"  >Nº de Poliza</apex:outputLabel>
+                            <apex:outputField value="{!Caso.CASO_N_Poliza__c}" rendered="true" />  
+
+                            <!--3-->
+
+                             <apex:outputLabel style="font-weight:bold;" >Negocio</apex:outputLabel>  
+                             <apex:outputField value="{!Caso.Negocio__c}" rendered="true" />
+                           
+                             <apex:outputLabel style="font-weight:bold;" >Categoría</apex:outputLabel>  
+                             <apex:outputLabel style="font-weight:bold;" value="{!Caso.CASO_Categoria__c}"   />                          
+                             
+                             <apex:outputLabel style="font-weight:bold;" >Detalle Solicitud</apex:outputLabel>  
+                             <apex:outputField style="font-weight:bold;" value="{!Caso.Detalle_Solicitud__c}" />     
+                             
+                            <!--optativos-->
+
+                            <apex:outputLabel style="font-weight:bold;" rendered="{!especialTeleventa == true}">Frecuencia de Pago</apex:outputLabel> 
+                            <apex:outputLabel value="{!Caso.Frecuencia_de_Pago__c}"  rendered="{!especialTeleventa == true}" />                       
+                         
+                            <apex:outputLabel style="font-weight:bold;" rendered="{!especialTeleventa == true}" >Prima Total Final</apex:outputLabel> 
+                            <apex:outputLabel value="{!Caso.Prima_Total_Final__c}"  rendered="{!especialTeleventa == true}"/> 
+
+                            <apex:outputLabel style="font-weight:bold;" rendered="{!Pantalla.Eventos.Propuesta == true}" >Número de Propuesta</apex:outputLabel>  
+                            <apex:outputLabel style="font-weight:bold;" value="{!Caso.Numero_Propuesta__c}" rendered="{!Pantalla.Eventos.Propuesta == true}"/>
+
+                            <apex:outputLabel style="font-weight:bold;" rendered="{!Pantalla.Eventos.Asunto == true}" >Asunto</apex:outputLabel>  
+                            <apex:outputField value="{!Caso.Subject}" rendered="{!Pantalla.Eventos.Asunto == true}"  style="font-weight:bold;"/>
+ 
+                            <apex:outputLabel style="font-weight:bold;" rendered="{!Pantalla.Eventos.Contacto == true}">Contacto</apex:outputLabel>    
+                            <apex:outputField value="{!Caso.ContactId}" rendered="{!Pantalla.Eventos.Contacto == true}" />
+
+                            <apex:outputLabel style="font-weight:bold;" rendered="{!Pantalla.Eventos.FechaCreacion == true}">Fecha/Hora de Creación</apex:outputLabel>  
+                            <apex:outputField value="{!Caso.CreatedDate}" rendered="{!Pantalla.Eventos.FechaCreacion == true}"/> 
+
+                            <apex:outputLabel style="font-weight:bold;" rendered="{!Pantalla.Eventos.Ejecutivo == true}" >Ejecutivo</apex:outputLabel>  
+                            <apex:outputLabel value="{!Ejecutivo}" rendered="{!Pantalla.Eventos.Ejecutivo == true}" ></apex:outputLabel>  
+                          
+                            <apex:outputLabel style="font-weight:bold;" rendered="{!Pantalla.Eventos.Canal == true}" >Canal</apex:outputLabel>
+                            <apex:outputField value="{!Caso.Canal__c}" rendered="{!Pantalla.Eventos.Canal == true}" />
+                                                        
+                            <apex:outputLabel style="font-weight:bold;" rendered="{!Pantalla.Eventos.FechaCierre == true}">Fecha cierre Tope</apex:outputLabel> 
+                            <apex:outputField value="{!Caso.Fecha_Cierre_Tope__c}" rendered="{!Pantalla.Eventos.FechaCierre == true}" /> 
+        
+                            
+                            <apex:outputLabel style="font-weight:bold;" rendered="{!Pantalla.Eventos.Agente == true}">Agente</apex:outputLabel>    
+                            <apex:outputField value="{!Caso.Agente__c}" rendered="{!Pantalla.Eventos.Agente == true}" />
+
+                            
+                            <apex:outputLabel style="font-weight:bold;" rendered="{!Pantalla.Eventos.SubEstadoAcsel == true}" >Sub Estado Acsel</apex:outputLabel>    
+                            <apex:outputField value="{!Caso.Sub_Estado_Acsel__c}" rendered="{!Pantalla.Eventos.SubEstadoAcsel == true}" /> 
+
+                            <apex:outputLabel style="font-weight:bold;" rendered="{!Pantalla.Eventos.MontoRescate == true}">Monto Rescate</apex:outputLabel>    
+                            <apex:outputField value="{!Caso.Monto_Rescate__c}" rendered="{!Pantalla.Eventos.MontoRescate == true }" />
+
+                            <apex:outputLabel style="font-weight:bold;" rendered="{!Caso.Detalle_de_Rescate__c != '' }">Detalle Rescate</apex:outputLabel>    
+                            <apex:outputField value="{!Caso.Detalle_de_Rescate__c}" rendered="{!Caso.Detalle_de_Rescate__c != '' }" />
+                     
+                        </apex:panelGrid>
+                        <apex:panelGrid columns="1"  style="width:100%;">  
+                        <hr/>
+
+                               <apex:outputLabel style="font-weight:bold;" >Descripción</apex:outputLabel> 
+                              <apex:inputTextarea id="Description" value="{!Caso.Description}" style="resize: none;width:100%;height:150px;" readonly="true"/>                        
+        
+                         </apex:panelGrid> 
+                        <apex:panelGrid columns="1" style="width:100%" rendered="{!Pantalla.Eventos.Comentarios == true}">
+                        <hr/>
+                        <apex:panelGrid columns="2" style="width:100%;">
+                            <apex:outputLabel style="font-weight:bold;font-size:14px;" >Comentarios de Caso</apex:outputLabel> 
+                              
+                           </apex:panelGrid>
+                                <apex:outputPanel layout="block" style="overflow:auto;width:100%;height:130px" >
+                                    <apex:pageBlockTable id="pbkt_TablaComentariosCaso" title="Comentarios del Caso" value="{!LST_ComentariosCasoUR}" var="coment"  >
+                                        <apex:column headerValue="Comentario" value="{!coment.CommentBody}"  headerClass="ct" />
+                                        <apex:column headerValue="Fecha Creación" value="{!coment.CreatedDate}"  headerClass="ct"  style="text-align:center;"/>
+                                        <apex:column headerValue="Creado por" value="{!coment.CreatedById}"  headerClass="ct"  style="text-align:center;"/>
+                                    </apex:pageBlockTable>
+                                </apex:outputPanel>
+                        </apex:panelGrid>
+                        
+                        <apex:panelGrid columns="1" style="width:100%" rendered="{!Pantalla.Eventos.TareasUR == true}">
+                        <hr/>
+                               <apex:panelGrid columns="2" style="width:100%;">
+                                <apex:outputLabel style="font-weight:bold;font-size:14px;" >Tareas UR</apex:outputLabel> 
+                                
+                               </apex:panelGrid>
+                                <apex:outputPanel layout="block" style="overflow:auto;width:100%;height:130px" >                             
+                                    <apex:pageBlockTable id="pbkt_TablaCasos" value="{!LST_TareasCasoUR}" var="tarea"  >
+                                        <apex:column style="font-weight:bold;text-align:center;" headerValue="Estado" value="{!tarea.Status}" headerClass="ct"/> 
+                                        <apex:column headerValue="Descripción" value="{!tarea.Description}" style="width:25%;" rendered="true" headerClass="ct"/>
+                                        <apex:column headerValue="Fecha Creación" value="{!tarea.CreatedDate}" headerClass="ct" style="text-align:center;width:10%;"/>
+                                        <apex:column headerValue="Fecha de Vencimiento"  value="{!tarea.ActivityDate}" headerClass="ct" style="text-align:center;width:10%;"/>
+                                        <apex:column headerValue="Unidad Resolutora" value="{!tarea.Owner.Name}" headerClass="ct" style="text-align:center;width:10%;"/>
+                                        <apex:column headerValue="Responsable" value="{!tarea.Responsable_Backup__c}" rendered="true" headerClass="ct" style="text-align:center;width:10%;"/>                    
+                                    </apex:pageBlockTable>
+                                </apex:outputPanel>
+                        </apex:panelGrid>
+                        
+                    <apex:panelGrid columns="1" style="width:100%;" rendered="{!Pantalla.Eventos.AdjuntosValuetech == true}">
+                    <hr/>
+
+                    <apex:panelGrid columns="2" style="width:100%;">
+                        <apex:outputLabel style="font-weight:bold;font-size:14px;" >Repositorio Documentos</apex:outputLabel> 
+                        
+                       </apex:panelGrid>
+                        <apex:outputPanel layout="block" style="overflow:auto;width:100%;height:130px" >
+                          
+                            <apex:pageBlockTable id="pbkt_TablaAdjuntosVal" title="Adjuntos Caso" value="{!LST_Adjuntos}" var="adjunto"  >
+                                <!--<apex:column headerValue="Visualizar" value="{!adjunto.UrlTex__c}"  headerClass="ct" style="text-align:center;"/>    -->
+                                <apex:column headerValue="Visualizar" style="text-align:center;width:30%;" headerClass="ct">
+                                    <apex:commandLink value="Acceder a Documento" onclick="AccederDocumento('{!adjunto.UrlDoc__c}');" />
+                                </apex:column>  
+                                <apex:column headerValue="Código Adjunto" value="{!adjunto.Codigo_Adjunto__c}"  headerClass="ct" style="text-align:center;"/>    
+                                <apex:column headerValue="Nombre Documento" value="{!adjunto.Nombre_Documento__c}"  headerClass="ct" style="text-align:center;"/>    
+                                <apex:column headerValue="Fecha Creación" value="{!adjunto.CreatedDate}"  headerClass="ct"  style="text-align:center;"/>
+                                <apex:column headerValue="Creado por" value="{!adjunto.CreatedById}"  headerClass="ct"  style="text-align:center;"/>
+                            </apex:pageBlockTable> 
+                        </apex:outputPanel>
+                        
+                        
+                    </apex:panelGrid>
+
+                    <apex:panelGrid columns="1"  style="width:100%;" rendered="{!Caso.CASO_Deriva_a_UR__c == true}">  
+                        <hr/>
+
+                               <apex:outputLabel style="font-weight:bold;" >Motivo Derivación</apex:outputLabel> 
+                              <apex:inputTextarea id="Motivo" value="{!Caso.Motivo_Derivacion__c}" style="resize: none;width:100%;height:60px;" readonly="true"/>                        
+        
+                         </apex:panelGrid> 
+              
+                <script>colorPageBlock(document.getElementById("{!$Component.pbs_CasoHeader}"), "#EF861C", "white");</script>
+
+            
+                </apex:pageBlockSection>
+                
+            </apex:pageBlock>
+    </apex:form>
+<apex:pageBlock >
+    <apex:pageBlockSection columns="1">
+        <apex:panelGrid columns="1" style="width:100%" rendered="{!Pantalla.Eventos.Adjuntos == true}">
+            <hr/>
+    
+                  <apex:relatedList subject="{!Caso}" list="CombinedAttachments"  pageSize="15" title="Documentos Adjuntos" rendered="{!Pantalla.Eventos.Adjuntos == true}" >
+         </apex:relatedList>
+            </apex:panelGrid>
+    
+            <apex:panelGrid columns="1" style="width:100%" rendered="{!AdjuntoPadre == true}">
+                <hr/>
+    
+                   <apex:relatedList subject="{!Padre}" list="CombinedAttachments"  pageSize="15" title="Documentos Adjuntos Padre" rendered="{!AdjuntoPadre == true}">
+        </apex:relatedList>
+                    
+                </apex:panelGrid>
+    </apex:pageBlockSection>
+</apex:pageBlock>
+   
+
+
+
+  
+   
+    </div>
+    </apex:page>

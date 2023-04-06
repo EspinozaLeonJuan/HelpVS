@@ -1,0 +1,72 @@
+<apex:page controller="CTR_BandejaResolutorUR" action="{!CargaCasoComentario}" lightningStylesheets="true" sidebar="false" showHeader="true" tabStyle="Case">
+	
+      <div id="dv_CuerpoPrincipal" style="width: 90%; margin-left: auto; margin-right: auto; height: 100%;">
+          <br/><br/>
+        <apex:form >
+            
+            <apex:commandButton id="cmd_VolverCaso" value="Información Caso" action="{!volverCaso}" />            
+            <apex:commandButton id="cmd_CambiaEstadoCasoENPROCESO" value="En Proceso"  disabled="true" />   
+            <apex:commandButton id="cmd_EnviaAEjecutivoCreador" value="Regresar a Ejecutivo" disabled="true" />                  
+            <apex:commandButton id="cmd_CambiaEstadoCasoRechazado"  value="Rechazado"  disabled="true"/>            
+            <apex:commandButton id="cmd_CarmbiEstadoCasoCERRAR"  value="Cerrar Caso" disabled="true"/>          
+            <apex:commandButton id="cmd_Escritorio_Digital" value="Escritorio Digital" disabled="true"/>
+                        
+             
+             <apex:pageBlock title="Agregar nuevo Comentario a Caso" id="dv_header">
+                   
+                           <apex:panelGrid columns="5" style="width:80%;">
+                                <apex:outputLabel style="font-weight:bold;" >Caso</apex:outputLabel>  
+                    			<apex:outputLabel style="font-weight:bold;" value="{!verCaso.CaseNumber}" />                               
+								<apex:outputText value="    " id="empty01"/>
+                        		 <apex:outputLabel style="font-weight:bold;"  >Nº de Poliza</apex:outputLabel>
+                                <label id="Poliza" >{!verCaso.CASO_Poliza_Asoc__c}</label>   
+                        		
+                               
+                                <apex:outputLabel style="font-weight:bold;" >RUT Cliente</apex:outputLabel>     
+                    		      <apex:outputField label="RUT Cliente" value="{!verCaso.RUT__c}"/>       
+                    		   <!-- <label id="" style="font-size:14px">{!verCaso.RUT__c}</label>                   -->               
+                       		    <apex:outputText value="    " id="empty02"/>
+                                <apex:outputLabel style="font-weight:bold;" >Cliente</apex:outputLabel>      
+                                <!-- <label id="Nombre_Titular" >{!CASO_PRI.Nombre_Completo_Razon_Social__c}</label>   -->
+                   				<apex:outputField label="Nombre_Titular" value="{!verCaso.AccountId}" rendered="true" />  
+                                 
+                               
+                               <apex:outputLabel style="font-weight:bold;" >Asunto</apex:outputLabel>     
+                    		    <apex:outputField label="Asunto" value="{!verCaso.Subject}"/>   
+                    		   <!-- <label id="" style="font-size:14px">{!verCaso.Subject}</label>                   -->          
+                       		    <apex:outputText value="    " id="empty03"/>
+                                <apex:outputLabel style="font-weight:bold;" >Ejecutivo</apex:outputLabel> 
+                               <apex:outputField label="Ejecutivo" value="{!verCaso.Parent.OwnerId}" />  
+                        	</apex:panelGrid>
+                   
+             </apex:pageBlock>
+            
+            
+            <apex:pageBlock id="pb_IngresoComentario" >
+                
+                <apex:pageBlockSection id="pbs_DatoCaso" collapsible="false" columns="1" >
+                <apex:inputTextarea id="txt_ComentarioNotificacion" label="Comentario" value="{!Ncomentario.CommentBody}" style="resize: none;width:98%;height:180px;"  />
+                 	
+                <!--<apex:inputField value="{!Ncomentario.CommentBody}" style="width: 97%;" />-->
+                     </apex:pageBlockSection> 
+            </apex:pageBlock>    
+            
+            <apex:pageBlock id="pb_ActionCaso">
+                  <apex:commandButton id="cmd_GuardarComentarios" value="Guardar" action="{!GuardarComentario}" />
+                <apex:commandButton id="cmd_CerarComentarios" value="Cancelar" action="{!CancelarComentario}" />
+            </apex:pageBlock>
+        
+            <script type="text/javascript">    
+                      
+                //Función cerrar ventana...
+                function cerrarVentana(){
+                    window.close();                
+                }  
+            
+            </script>
+                
+        </apex:form>
+        
+        
+    </div>    
+</apex:page>

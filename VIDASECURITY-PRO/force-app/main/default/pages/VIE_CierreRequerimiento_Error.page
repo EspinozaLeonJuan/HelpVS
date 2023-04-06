@@ -1,0 +1,51 @@
+<apex:page controller="CLS_AperturaCierreCaso_Controlador" action="{!CierreRequerimiento_cargaCasoSeleccionadoError}"  lightningStylesheets="true" showHeader="true" sidebar="true" tabStyle="Case" >
+    
+    
+         
+        <apex:form id="frm_VerCaso">
+            <apex:actionFunction action="{!ToCase}" name="ToCase"/>        
+           
+        <apex:outputPanel > 
+            
+         <apex:pageBlock id="pbk_EncabezadoCaso" title="Cierre de Caso Requerimiento" >          
+                   <apex:panelGrid columns="2">
+                        
+                    <apex:outputLabel >Nº de Caso:</apex:outputLabel>  
+                    <apex:commandLink action="{!ToCase}"  value="{!Caso.CaseNumber}" rendered="true"/>     
+                     <apex:outputLabel >Estado actual:</apex:outputLabel>      
+                    <apex:outputLabel style="font-weight:bold;font-size:14px;" value="{!Caso.Status}"></apex:outputLabel>
+				 
+                       <apex:outputLabel >RUT Titular:</apex:outputLabel>      
+                    <apex:outputLabel value="{!Caso.RUT__c}"></apex:outputLabel>               
+                        <apex:outputLabel >Nombre Titular:</apex:outputLabel>      
+                    <apex:outputLabel value="{!Caso.Nombre_Completo_Razon_Social__c}"></apex:outputLabel>
+                     
+                </apex:panelGrid>
+             <br/>
+                <apex:panelGrid columns="2" rendered="{!Botonera == true}">
+                                  
+                     <apex:commandButton id="cmd_Cancelar" value="Cancelar" action="{!ToCase}" />                        
+                        <apex:commandButton id="cmd_ToCierre" value="Cerrar Caso Requerimiento" action="{!CierreRequerimiento_guardarCaso}" />   
+                </apex:panelGrid>
+                
+            </apex:pageBlock>
+            
+ 
+
+
+
+          <!--  <apex:pageBlock  >
+                    <div id="dv_Botones" style="width: 97%; margin-left: auto; margin-right: auto;">
+                                             
+                    </div> 
+            </apex:pageBlock> -->
+           
+             </apex:outputPanel>
+        </apex:form>
+    
+         <apex:pageMessages id="showmsg" escape="true"></apex:pageMessages>
+    
+    
+    
+
+</apex:page>

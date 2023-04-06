@@ -1,0 +1,13 @@
+<!--
+  @description       : 
+  @author            : Juan Espinoza León
+  @group             : 
+  @last modified on  : 11-24-2020
+  @last modified by  : Juan Espinoza León
+  Modifications Log 
+  Ver   Date         Author               Modification
+  1.0   11-24-2020   Juan Espinoza León   Initial Version
+-->
+<apex:page standardController="Campaign" extensions="CTR_TV_ProcesarMiembrosCampagna" action="{!volverCampana}">
+    Procesando prospectos nuevos y con problemas en llamadas a WS....
+</apex:page>

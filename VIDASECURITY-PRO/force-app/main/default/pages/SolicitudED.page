@@ -1,0 +1,57 @@
+<apex:page standardController="Solicitud__c" extensions="SolicitudEDController" sidebar="true" >
+  
+    <apex:stylesheet value="{!URLFOR($Resource.EscritorioDigital, 'css/EscritorioDigital.css')}" />    
+    <apex:includeScript value="{!URLFOR($Resource.EscritorioDigital, 'js/EscritorioDigital.js')}"/>
+    <script>
+      	var rutaRecursosEstaticos = '{!URLFOR($Resource.EscritorioDigital)}';
+    </script>
+    
+    <apex:pageMessages id="showmsg" escape="true"></apex:pageMessages>
+    
+  	<apex:actionStatus id="Status">
+        <apex:facet name="start">
+            <apex:outputPanel >
+                <div class="popupBackground" />
+                <div class="popupPanel">
+                    &nbsp; Espere...<img src="/apexpages/devmode/img/saveStatus.gif" />
+                </div>
+            </apex:outputPanel> 
+        </apex:facet>
+    </apex:actionStatus>
+	<apex:form id="SolicitudForm">     
+        <apex:outputPanel > 
+            <apex:sectionHeader title="Solicitud Escritorio Digital"/>  
+            <apex:pageblock id="Panel" > 	    
+            <apex:panelGrid columns="3">
+                
+                &nbsp;
+                <apex:outputLabel >RUT Titular:</apex:outputLabel>      
+                <apex:outputLabel value="{!Solicitud__c.RUT_Titular__c}"></apex:outputLabel>
+                
+                &nbsp;
+                <apex:outputLabel >Nombre Titular:</apex:outputLabel>      
+                <apex:outputLabel value="{!Solicitud__c.Nombre_Titular__c}"></apex:outputLabel>
+                
+                &nbsp;
+                <apex:outputLabel >Detalle Solicitud:</apex:outputLabel>      
+                <apex:outputLabel value="{!Solicitud__c.Detalle_Solicitud__c}"></apex:outputLabel>
+               
+                
+                 &nbsp;
+                <apex:outputLabel >Solicitante:</apex:outputLabel>  
+                  <apex:outputLabel value="{!Solicitud__c.Solicitante__c}"></apex:outputLabel>                  
+            </apex:panelGrid>
+                
+        </apex:pageblock>
+           <apex:pageBlock id="Panel_VER" >
+                &nbsp;
+                     
+                      <apex:commandButton action="{!verRequerimiento}" value="Detalle de Solicitud" status="Status"
+                       oncomplete="verRequerimiento('{!Solicitud.IdRequerimiento__c}','{!Persistencia}','{!RutUsuario}');"/>
+                  <apex:commandButton action="{!VolverCaso}" value="Volver Caso"/>  
+               
+            </apex:pageBlock> 
+        </apex:outputPanel>
+	</apex:form>
+
+</apex:page>

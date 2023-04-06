@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Queue xmlns="http://soap.sforce.com/2006/04/metadata">
+    <doesSendEmailToMembers>false</doesSendEmailToMembers>
+    <name>Portabilidad Financiera</name>
+    <queueMembers>
+        <users>
+            <user>bmeier@security.cl</user>
+            <user>cbielefeldt@security.cl</user>
+            <user>fernanda.lavados@security.cl</user>
+            <user>jaguero@security.cl</user>
+            <user>mrocha@security.cl</user>
+            <user>mmarckmann@security.cl</user>
+            <user>mshackleford@security.cl</user>
+        </users>
+    </queueMembers>
+    <queueSobject>
+        <sobjectType>Case</sobjectType>
+    </queueSobject>
+</Queue>

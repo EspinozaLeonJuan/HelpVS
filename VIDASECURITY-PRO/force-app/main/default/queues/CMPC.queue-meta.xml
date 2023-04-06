@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Queue xmlns="http://soap.sforce.com/2006/04/metadata">
+    <doesSendEmailToMembers>true</doesSendEmailToMembers>
+    <email>rescobar@security.cl</email>
+    <name>CMPC</name>
+    <queueMembers>
+        <roles>
+            <role>Encargado_Servicios_Colectivos</role>
+            <role>Jefe_Colectivos</role>
+        </roles>
+        <users>
+            <user>ana.laine@security.cl</user>
+            <user>javier.burgos@security.cl</user>
+            <user>akmunoz@security.cl</user>
+            <user>mariateresa.rosales@security.cl</user>
+            <user>paola.bravo@security.cl</user>
+            <user>salome.fernandez@security.cl</user>
+        </users>
+    </queueMembers>
+    <queueSobject>
+        <sobjectType>Case</sobjectType>
+    </queueSobject>
+</Queue>

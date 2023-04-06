@@ -1,0 +1,248 @@
+<!--
+ ************************************************************************************************************
+ |  NOMBRE                 : SEC_VF_UR_Caso_CartaSobreprima                               					|
+ |  TIPO                   : VISUALFORCE PAGE																|
+ |  REQUERIMIENTO          : MANENCIONES UR                                                                 |
+ |  DESCRIPCION            : Formulario que permite gestionar el ingreso de una carta de sobreprima         |
+ |                           asociada a un caso                                                             | 
+ |  																										|
+ ************************************************************************************************************
+ |  VERSIÓN    *    FECHA C/M    *    RESPONSABLE    *    OBSERVACIONES										|
+ |    1.0      *    2019/11/04   *    F. MURCIA      *    Creación Página									|
+ |     																										|
+ ************************************************************************************************************
+-->
+<apex:page controller="CTR_UR_Caso_Cartas" action="{!Inicia_Carta_Sobreprima}" docType="html-5.0" lightningStylesheets="true" showHeader="false" sidebar="false" >
+        <style> 
+            .popupBackground {
+                /* Background color */
+                background-color:black;
+                opacity: 0.5;
+                filter: alpha(opacity = 50);
+                
+                /* Dimensions */
+                width: 100%;
+                height: 1000%;       
+                top: 0;
+                left: 0;
+                z-index: 998;
+                position: absolute;        
+                /* Mouse */
+                cursor:wait;
+            }
+                    
+            .popupPanel {
+                /* Background color */
+                border: solid 2px orange;
+                background-color: white;        
+                /* Dimensions */
+                display: inline-block;
+                left: 50%;
+                width: 100px;
+                margin-left: 0px;
+                top: 100px;
+                height: 25px;
+                margin-top: -25px;
+                position: absolute;   
+                z-index: 999;        
+                /* Mouse */
+                cursor:pointer;
+            }
+    
+            .ct{
+            text-align:center;
+            }
+    
+            .btnSave{
+            color:white !important;
+            background:#11862D !important;
+            margin-right: -8px;
+            }
+    
+            .btnLetter{
+            color:white !important;
+            background:#44ABDC !important;
+            margin-right: -8px;
+            }
+
+        .btnCancel{
+            color:white !important;
+            background:#A9B0BE !important;
+            margin-right: -8px;
+        }
+    
+        </style>
+        <script type="text/javascript">
+    
+            function colorPageBlock(pageblock, bkcolor, color) {
+                if (pageblock != null) 
+                {
+                    pageblock.firstChild.style.cssText = "background-color: " + bkcolor + ";font-weight:bold;color:"+color+";";
+                }
+            }
+    
+            function Cancelar()
+            {             
+                window.top.close();
+            }
+
+            function guardarCarta(ingreso, idCaso, uback, procedencia)
+            {
+                alert('La carta de Sobreprima adjunta ha sido creada o modificada.');
+                if (ingreso == 'true')
+                {
+                    window.opener.location.href="/apex/SEC_VF_UR_Caso_CambioEstado?Id="+idCaso+"&idResponsable="+uback+"&procedencia="+procedencia+"&cambio=Retorno&envioCorreo=true"; 
+                    window.top.close();
+                }
+                else
+                {
+                    alert("Faltan parametros que ingresar");
+                }
+            }
+    
+            
+        </script>
+    
+    <apex:includeScript value="{!$Resource.jquery}"/>
+        <!--<br/>-->
+            
+        <apex:actionStatus id="Status">
+            <apex:facet name="start">
+                <apex:outputPanel >
+                    <div class="popupBackground" />
+                    <div class="popupPanel">
+                        &nbsp; Espere...<img src="/apexpages/devmode/img/saveStatus.gif" />
+                    </div>
+                </apex:outputPanel> 
+            </apex:facet>
+        </apex:actionStatus>
+     
+        
+    
+        <apex:form id="frm_VerCaso">
+                
+                   
+           
+    
+            <apex:pageBlock id="dv_header" >
+                <apex:pageBlockSection title="Carta Sobreprima" collapsible="false" columns="1" id="pbs_Carta"  >
+                    <apex:panelGrid columns="6" style="width:100%;">    
+                     <!--1-->      
+                            <apex:outputLabel style="font-weight:bold;" >Nº Caso</apex:outputLabel> 
+                            <apex:outputLabel value="{!Caso.CaseNumber}" />                               
+                           
+                                                             
+                            <apex:outputText value="    " id="empty01"/>
+                            <apex:outputText value="    " id="empty02"/>
+                            
+                            <apex:outputLabel style="font-weight:bold;" >RUT </apex:outputLabel>     
+                            <apex:outputLabel value="{!Caso.RUT__c}" rendered="{!Caso.EsNoCliente__c == false}"/>       
+                            <apex:outputLabel value="{!Caso.RUT_no_Cliente__c}" rendered="{!Caso.EsNoCliente__c == true}" /> 
+                        
+    
+                            <apex:outputLabel style="font-weight:bold;" >Negocio</apex:outputLabel>  
+                            <apex:outputField value="{!Caso.Negocio__c}" rendered="true" />
+                            
+    
+                            <apex:outputLabel style="font-weight:bold;" >Categoría</apex:outputLabel>  
+                            <apex:outputLabel value="{!Caso.CASO_Categoria__c}"   />                          
+                            
+                            <apex:outputLabel style="font-weight:bold;" >Detalle Solicitud</apex:outputLabel>  
+                            <apex:outputField value="{!Caso.Detalle_Solicitud__c}" />                            
+                            
+                                           
+                    </apex:panelGrid>
+                     
+                    <hr/>
+                    <apex:panelGrid columns="1" style="width:100%">
+                        <apex:panelGroup >
+                                <apex:outputLabel style="font-weight:bold;width:120px;" >Nombre:</apex:outputLabel> 
+                                <apex:input value="{!Nombre_Carta}"   style="width:350px;" ></apex:input>
+                        </apex:panelGroup>
+
+                        <apex:panelGroup >
+                                <apex:outputLabel style="font-weight:bold;width:120px;" >Dirección:</apex:outputLabel> 
+                                <apex:input value="{!Direccion_Carta}"   style="width:350px;"></apex:input>
+                        </apex:panelGroup>
+
+                        <apex:panelGroup >
+                                <apex:outputLabel style="font-weight:bold;width:120px;" >Ciudad:</apex:outputLabel> 
+                                <apex:input value="{!Ciudad_Carta}"   style="width:200px;"></apex:input>
+                        </apex:panelGroup>
+
+                        <apex:panelGroup >
+                            <apex:outputLabel style="font-weight:bold;width:120px;" >Comuna:</apex:outputLabel> 
+                            <apex:input value="{!Comuna_Carta}"   style="width:200px;"></apex:input>
+                        </apex:panelGroup>
+
+                    </apex:panelGrid>   
+                    
+                    <hr/>
+                    <apex:panelGrid columns="1" style="width:100%">
+                        <apex:panelGroup >
+                            <apex:outputLabel style="font-weight:bold;width:120px;" >Póliza:</apex:outputLabel> 
+                            <apex:input value="{!Poliza_Carta}"   style="width:200px;"></apex:input>
+                        </apex:panelGroup>
+                    </apex:panelGrid>    
+                    <hr/>
+                    <apex:panelGrid columns="1" style="width:100%">
+                        <apex:panelGroup >
+                            <apex:outputLabel style="font-weight:bold;width:120px;" >Cobertura:</apex:outputLabel> 
+                            <apex:selectList id="cmd_Usuarios" size="1" value="{!Cobertura}" style="width:200px;" >
+                                    <apex:selectOptions value="{!Coberturas_Sobreprima}" />
+                                   <!-- <apex:actionSupport event="onchange" action="{!seleccionCobertura}"  oncomplete="" />-->
+                            </apex:selectList> 
+                            &nbsp; &nbsp;
+                            <apex:outputLabel style="font-weight:bold;width:120px;" >Sobreprima:</apex:outputLabel> 
+                            <apex:outputLabel style="font-weight:bold;" >UF</apex:outputLabel> 
+                            <apex:input value="{!Sobreprima}"   style="width:140px;"></apex:input>
+                            <apex:commandButton id="cmd_agregar_cobertura" value="Agregar Cobertura" styleClass="btnLetter" Status="Status" action="{!AddCobertura_Sobreprima}"/>
+                        </apex:panelGroup>
+                    </apex:panelGrid> 
+                    <apex:outputPanel layout="block" style="overflow:auto;width:100%;height:120px;" >
+                     
+                    <apex:pageBlock id="details">
+                            <apex:pageBlockTable id="pbkt_Tabla" value="{!ListaCoberturas}" var="cob"  headerClass="ct" style="font-size:11px;">
+                                <apex:column headerValue="" style="text-align:center;" headerClass="ct">
+                                    <apex:commandLink value="Eliminar" style="text-align:center;" immediate="true" action="{!DeleteCobertura}">
+                                        <apex:param name="IdCob" value="{!cob.Id}" />
+                                    </apex:commandLink>
+                                </apex:column>
+                                <apex:column headerValue="Cobertura" value="{!cob.Cobertura}" headerClass="ct" style="font-weight:bold;text-align:center;" />
+                                <apex:column headerValue="Sobreprima (UF)" value="{!cob.Sobreprima}" headerClass="ct" style="font-weight:bold;text-align:center;" />
+                            </apex:pageBlockTable>
+                            </apex:pageBlock>
+                    
+                        </apex:outputPanel>
+                    <hr/>
+                    <apex:panelGrid columns="1" style="width:100%">
+                        <apex:panelGroup >
+                            <apex:outputLabel style="font-weight:bold;width:120px;" >Descripción:</apex:outputLabel> 
+                            <apex:inputTextarea id="txt_Descripcion" value="{!Descripcion_Carta}" style="resize: none;width:100%;height:80px;"  />
+                        </apex:panelGroup>
+                    </apex:panelGrid> 
+
+                   
+                    <apex:panelGroup >
+                            <apex:commandButton id="cmd_GenerarCarta" value="Guardar Carta" styleClass="btnSave" Status="Status" action="{!Guarda_Carta_Sobreprima}" oncomplete="guardarCarta('{!IngresoCorrecto}', '{!IdCaso}', '{!UsuarioBackUp}', '{!Procedencia}');"  rendered="{!Actualizar == false}" />
+                            <apex:commandButton id="cmd_ActualizarCarta" value="Actualizar Carta" styleClass="btnSave" Status="Status" action="{!Actualiza_Carta_Sobreprima}" oncomplete="guardarCarta('{!IngresoCorrecto}', '{!IdCaso}', '{!UsuarioBackUp}', '{!Procedencia}');"  rendered="{!Actualizar == true}" />
+                            <apex:commandButton id="cmd_Cancelar" value="Cancelar" styleClass="btnCancel" onclick="Cancelar();" />
+                            &nbsp;&nbsp;
+                            <!--<apex:commandButton id="cmd_letter" value="Generar Carta" styleClass="btnLetter" Status="Status" action="{!Genera_Carta_Sobreprima}" rendered="{!Actualizar == true}" />-->
+                            <apex:commandLink id="cmd_Carta_Sobreprima" target="_blank" value="Ver Carta Sobreprima"  rendered="{!Actualizar == true}" action="{!Genera_Carta_Sobreprima}"/>
+                    </apex:panelGroup>
+
+                    <!--
+                    <apex:panelGroup >
+                            <apex:commandButton id="cmd_GuardarComentarios" value="Guardar" styleClass="btnSave" Status="Status" action="{!GuardarComentario}" oncomplete="cerrarVentana('{!ResultadoPopup}', '{!IdCaso}', '{!UsuarioBackUp}');"/>
+                            <apex:commandButton id="cmd_CerarComentarios" value="Cancelar" styleClass="btnCancel"  onclick="CancelarComentario();" />
+                    </apex:panelGroup>
+                -->
+                    <script>colorPageBlock(document.getElementById("{!$Component.pbs_Carta}"), "gray", "white");</script>
+                </apex:pageBlockSection>
+            </apex:pageBlock>
+    
+            
+        </apex:form>
+            
+    </apex:page>

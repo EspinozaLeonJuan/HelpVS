@@ -1,0 +1,564 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Alerta_pendientes_campa_a_amac</fullName>
+        <description>Alerta pendientes campaña amac</description>
+        <protected>false</protected>
+        <recipients>
+            <type>accountOwner</type>
+        </recipients>
+        <senderAddress>contactovida@security.cl</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Plantillas_Puntuales_PV/Prueba_Aviso_de_Tareas</template>
+    </alerts>
+    <alerts>
+        <fullName>Cada_vez_que_un_cliente_PV_eval_a_con_nota_menor_a_5_a_Ejecutiva</fullName>
+        <description>Cada vez que un cliente PV evalúa con nota menor a 5 a Ejecutiva</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>Jefatura_Post_Venta</recipient>
+            <type>group</type>
+        </recipients>
+        <senderAddress>contactovida@security.cl</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Plantillas_Epas/Correo_Jefes_EPA_PV</template>
+    </alerts>
+    <alerts>
+        <fullName>Correo_Campa_a_Aumento_Prima</fullName>
+        <description>Correo Campaña Aumento Prima Ahorro</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>vidasecurity@security.cl</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Plantillas_para_Campa_as/Plantilla_Aumento_Prima_Ahorro</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_9_meses_Desea_Contacto_PV</fullName>
+        <description>Cada vez que un cliente PV solicita contacto</description>
+        <protected>false</protected>
+        <recipients>
+            <type>accountOwner</type>
+        </recipients>
+        <senderAddress>contactovida@security.cl</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>unfiled$public/Email_9_meses_solicita_contacto</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_PV_Nuevo_Producto</fullName>
+        <description>Cada vez que un cliente PV desea evaluar nuevos productos</description>
+        <protected>false</protected>
+        <recipients>
+            <type>accountOwner</type>
+        </recipients>
+        <senderAddress>contactovida@security.cl</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>unfiled$public/Email_9_meses_evaluar_nuevos_productos</template>
+    </alerts>
+    <alerts>
+        <fullName>Env_o_correo_electr_nico_cliente_Rescate_Traspaso_afp</fullName>
+        <description>Envío correo electrónico cliente Rescate/Traspaso AFP</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>contactovida@security.cl</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Plantillas_para_Campa_as/Plantilla_campana_traspaso_cliente_afp</template>
+    </alerts>
+    <alerts>
+        <fullName>Env_o_correo_electr_nico_cliente_Rescate_Traspaso_cria_seguros</fullName>
+        <description>Envío correo electrónico cliente Rescate/Traspaso Cía Seguros</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>contactovida@security.cl</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Plantillas_para_Campa_as/Plantilla_campana_traspaso_cliente_ciaseguros</template>
+    </alerts>
+    <alerts>
+        <fullName>Env_o_correo_electr_nico_cliente_Rescate_Traspaso_ffmm</fullName>
+        <description>Envío correo electrónico cliente Rescate/Traspaso FFMM</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>contactovida@security.cl</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Plantillas_para_Campa_as/Plantilla_campana_traspaso_cliente_ffmm</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Actualiza_Email_Participante</fullName>
+        <description>Actualiza Email Participante Campaña</description>
+        <field>Email__c</field>
+        <formula>Cuenta__r.PersonContact.Email</formula>
+        <name>Actualiza Email Participante</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_Estado_Cierre</fullName>
+        <description>estado cierre para campaña AMAC</description>
+        <field>Estado_Cierre__c</field>
+        <literalValue>Finalizado</literalValue>
+        <name>Actualiza Estado Cierre</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_Estado_Cierre_Backoffice_TV</fullName>
+        <field>Estado_Cierre__c</field>
+        <literalValue>Backoffice</literalValue>
+        <name>Actualiza Estado Cierre Backoffice TV</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_Estado_Cierre_En_Proceso_TV</fullName>
+        <description>Para campaña cobranzas TV</description>
+        <field>Estado_Cierre__c</field>
+        <literalValue>En proceso</literalValue>
+        <name>Actualiza Estado Cierre En Proceso TV</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_Estado_Cierre_Finalizado_TV</fullName>
+        <description>Para Campaña Cobranzas TV. Se actualiza el estado a cierre &quot;Finalizado&quot;</description>
+        <field>Estado_Cierre__c</field>
+        <literalValue>Finalizado</literalValue>
+        <name>Actualiza Estado Cierre Finalizado TV</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_Propietario_Part_Campa_a</fullName>
+        <field>Ejecutiva_Call_Center__c</field>
+        <formula>LastModifiedBy.FirstName &amp; &apos; &apos; &amp; LastModifiedBy.LastName</formula>
+        <name>Actualiza Propietario Part. Campaña</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>PAC_PV_Actualiza_Fecha_firma_documento</fullName>
+        <field>Fecha_de_firma_del_nuevo_documento__c</field>
+        <formula>IF( Firma_Nuevo_Documento_PAC__c , TODAY(), NULL)</formula>
+        <name>PAC PV Actualiza Fecha firma documento</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>PAC_PV_Fecha_de_contacto</fullName>
+        <field>Fecha_y_Hora_de_Contacto__c</field>
+        <formula>IF( ISPICKVAL(Contactado__c, &quot;Si&quot;),  NOW() , null)</formula>
+        <name>PAC PV Fecha de contacto</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>%C2%BFSe ha trabajado participante campaña amac%3F</fullName>
+        <active>true</active>
+        <description>Regla que evalua si el participante de campaña AMAC ha sido trabajado</description>
+        <formula>AND(Campa_a_Vida_Security__c = &quot;Campaña AMAC&quot;, ISBLANK(LastActivityDate), ISBLANK(TEXT(Estado_de_Gesti_n_AMAC__c)))</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Alerta_pendientes_campa_a_amac</name>
+                <type>Alert</type>
+            </actions>
+            <offsetFromField>Participantes_de_Campa_a__c.CreatedDate</offsetFromField>
+            <timeLength>7</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Actualización Email Asistencia Agente</fullName>
+        <actions>
+            <name>Actualiza_Email_Participante</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Participantes_de_Campa_a__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Rescates,Traspasos In,Traspasos Out,Rescate,Traspaso</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Participantes_de_Campa_a__c.Nombres_del_Cliente__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <description>Actualización Email Campaña Asistencia Agente</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>Cambio de Ejecutiva Call Center</fullName>
+        <actions>
+            <name>Actualiza_Propietario_Part_Campa_a</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>LastModifiedBy.UserRole.Name = &apos;Ejecutiva de Atención Telefónica&apos;</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Cambios Estado en Campaña AMAC</fullName>
+        <actions>
+            <name>Actualiza_Estado_Cierre</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Participantes_de_Campa_a__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>AMAC</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Participantes_de_Campa_a__c.Estado_de_Gesti_n_AMAC__c</field>
+            <operation>equals</operation>
+            <value>Teléfono Malo,Otro: especificar</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Campaña Aumento Prima Televenta Estado BackOffice</fullName>
+        <actions>
+            <name>Actualiza_Estado_Cierre_Backoffice_TV</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Participantes_de_Campa_a__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Aumento Prima Segmentos MKT</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Participantes_de_Campa_a__c.Estado_de_Gesti_n__c</field>
+            <operation>equals</operation>
+            <value>Cliente realiza endoso telefónico de aumento de prima</value>
+        </criteriaItems>
+        <description>Regla para cambiar el estado de cierre a &quot;Backoffice&quot;. Para participantes de campaña Aumento Prima Televenta.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Campaña Aumento Prima Televenta Estado Finalizado</fullName>
+        <actions>
+            <name>Actualiza_Estado_Cierre_Finalizado_TV</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Participantes_de_Campa_a__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Aumento Prima Segmentos MKT</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Participantes_de_Campa_a__c.Estado_de_Gesti_n__c</field>
+            <operation>equals</operation>
+            <value>Teléfono malo,Inubicable,Quiere rescatar su póliza,No volver a llamar,Póliza Anulada,Cliente falleció,Cliente irá a sucursal,No quiere realizar aumento de prima,Solicita contacto con su agente,Otros</value>
+        </criteriaItems>
+        <description>Regla para cambiar el estado de cierre a &quot;Finalizado&quot;. Para participantes de campaña Aumento Prima Televenta.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Campaña Aumento Prima Televenta Estado Proceso</fullName>
+        <actions>
+            <name>Actualiza_Estado_Cierre_En_Proceso_TV</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Participantes_de_Campa_a__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Aumento Prima Segmentos MKT</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Participantes_de_Campa_a__c.Estado_de_Gesti_n__c</field>
+            <operation>equals</operation>
+            <value>Que le devuelvan el llamado,No Contesta</value>
+        </criteriaItems>
+        <description>Regla para cambiar el estado de cierre a &quot;En Proceso&quot;. Para participantes de campaña Aumento Prima Televenta.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Campaña Cobranza Televenta Estado Backoffice</fullName>
+        <actions>
+            <name>Actualiza_Estado_Cierre_Backoffice_TV</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Participantes_de_Campa_a__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Cobranzas Televenta</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Participantes_de_Campa_a__c.Estado_de_Gesti_n__c</field>
+            <operation>equals</operation>
+            <value>Cliente realiza endoso telefónico a PAT,Cliente realiza PAT vía email y los documentos recepcionados son enviados a operaciones,Se recepcionan documentos de MB y son enviados a operaciones para endoso</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Participantes_de_Campa_a__c.Estado_Cierre__c</field>
+            <operation>notEqual</operation>
+            <value>Finalizado (Cierre Administrativo)</value>
+        </criteriaItems>
+        <description>Regla para cambiar el estado de cierre a &quot;Backoffice&quot;. Para participantes de campaña Cobranzas Televenta.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Campaña Cobranza Televenta Estado Finalizado</fullName>
+        <actions>
+            <name>Actualiza_Estado_Cierre_Finalizado_TV</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>Regla para cambiar el estado de cierre a &quot;Finalizado&quot;. Para participantes de campaña Cobranzas Televenta.</description>
+        <formula>AND( RecordType.Name = &quot;Cobranzas Televenta&quot;,
+	AND(
+		OR(
+                ISPICKVAL(Estado_Cierre__c,&quot;Abierto&quot;),
+		ISPICKVAL(Estado_Cierre__c,&quot;En proceso&quot;),
+		ISPICKVAL(Estado_Cierre__c,&quot;Backoffice&quot;)
+		)),    
+	AND(         
+		OR (             
+			ISPICKVAL( Estado_de_Gesti_n__c , &quot;Documentos recibidos por MB no son aceptados por la compañía&quot;),             
+			ISPICKVAL( Estado_de_Gesti_n__c , &quot;Se deriva caso al agente por email, endoso físico a PAT/PAC y/o nuevo SAAP&quot;),             
+			ISPICKVAL( Estado_de_Gesti_n__c , &quot;No quiere Retomar Pagos Nunca Más&quot;),             
+			ISPICKVAL( Estado_de_Gesti_n__c , &quot;Póliza Anulada&quot;),             
+			ISPICKVAL( Estado_de_Gesti_n__c , &quot;Cliente falleció&quot;),             
+			ISPICKVAL( Estado_de_Gesti_n__c , &quot;Teléfono Malo, Cliente Inubicable&quot;),             
+			ISPICKVAL( Estado_de_Gesti_n__c , &quot;Dice tener todo pagado&quot;),             
+			ISPICKVAL( Estado_de_Gesti_n__c , &quot;Solicita contacto con su agente&quot;),             
+			ISPICKVAL( Estado_de_Gesti_n__c , &quot;No volver a llamar&quot;),             
+			ISPICKVAL( Estado_de_Gesti_n__c , &quot;Cliente irá a sucursal&quot;),             
+			ISPICKVAL( Estado_de_Gesti_n__c , &quot;Cliente pagará primas pendientes&quot;),             
+			ISPICKVAL( Estado_de_Gesti_n__c , &quot;Quiere rescatar su póliza&quot;),     
+			ISPICKVAL( Estado_de_Gesti_n__c , &quot;Otros&quot;)            
+		   )
+	   )
+	)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Campaña Cobranza Televenta Estado en Proceso</fullName>
+        <actions>
+            <name>Actualiza_Estado_Cierre_En_Proceso_TV</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Participantes_de_Campa_a__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Cobranzas Televenta</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Participantes_de_Campa_a__c.Estado_de_Gesti_n__c</field>
+            <operation>equals</operation>
+            <value>Que le devuelvan el llamado,No Contesta,Se le envía por email el mandato PAT para realizar endoso,Se agenda MB para endoso físico a PAT o PAC y/o nuevo SAAP,&quot;Agente asignado no puede ir, se coordina MB&quot;</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Participantes_de_Campa_a__c.Estado_Cierre__c</field>
+            <operation>notEqual</operation>
+            <value>Finalizado (Cierre Administrativo)</value>
+        </criteriaItems>
+        <description>Regla para cambiar el estado de cierre a &quot;En Proceso&quot;. Para participantes de campaña Cobranzas Televenta.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Correo Campaña Aumento Prima Ahorro</fullName>
+        <actions>
+            <name>Correo_Campa_a_Aumento_Prima</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Participantes_de_Campa_a__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Aumento Prima Segmentos MKT</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Participantes_de_Campa_a__c.Estado_Cierre__c</field>
+            <operation>equals</operation>
+            <value>Abierto</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Participantes_de_Campa_a__c.Tipo_de_Mail__c</field>
+            <operation>equals</operation>
+            <value>Ahorro</value>
+        </criteriaItems>
+        <description>Correo automatico al momento de carga de campaña aumento prima de ahorro</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>Crea Email Sin PV Solicita Contacto %289 meses%29</fullName>
+        <active>true</active>
+        <formula>OR( AND( ISPICKVAL(  Desea_tomar_contacto_con_su_Ejecutiva__c , &quot;Si&quot;),  Agente_vigente__c = true), AND( ISPICKVAL( Desea_tomar_contacto_con_su_Ejecutiva__c, &quot;Si&quot;), Funcion_Propietario_Cuenta__c  &lt;&gt; &quot;Ejecutiva de Post Venta&quot;,  Agente_vigente__c = false) )</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Crea Tarea PV Nuevos Productos %289 meses%29</fullName>
+        <actions>
+            <name>Tarea_9Meses_Productos</name>
+            <type>Task</type>
+        </actions>
+        <active>true</active>
+        <formula>AND( ISPICKVAL( Evaluar_nuevos_Productos__c, &quot;Si&quot;),  Agente_vigente__c  = false, Funcion_Propietario_Cuenta__c  = &quot;Ejecutiva de Post Venta&quot;, ISPICKVAL(Contactado__c, &quot;Si&quot;) )</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Crea Tarea PV Solicita Contacto %289 meses%29</fullName>
+        <actions>
+            <name>Tarea_9Meses_Solicita_Contacto</name>
+            <type>Task</type>
+        </actions>
+        <active>true</active>
+        <formula>AND( ISPICKVAL( Desea_tomar_contacto_con_su_Ejecutiva__c , &quot;Si&quot;),  Agente_vigente__c = false, Funcion_Propietario_Cuenta__c  = &quot;Ejecutiva de Post Venta&quot;, ISPICKVAL(Contactado__c, &quot;Si&quot;) )</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>EPA PV nota menor a 5</fullName>
+        <actions>
+            <name>Cada_vez_que_un_cliente_PV_eval_a_con_nota_menor_a_5_a_Ejecutiva</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Participantes_de_Campa_a__c.Satisfaccion_con_el_Servicio__c</field>
+            <operation>equals</operation>
+            <value>1,2,3,4</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Participantes_de_Campa_a__c.Name</field>
+            <operation>startsWith</operation>
+            <value>EPA:</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Envío correo campañas rescates%2Ftraspasos AFP</fullName>
+        <actions>
+            <name>Env_o_correo_electr_nico_cliente_Rescate_Traspaso_afp</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Participantes_de_Campa_a__c.Tipo_de_Entidad__c</field>
+            <operation>equals</operation>
+            <value>AFP</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Participantes_de_Campa_a__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Traspasos Out</value>
+        </criteriaItems>
+        <description>Regla que permite envío automático de correos a clientes para campañas de rescate traspaso de asistencia agente según entidad</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Envío correo campañas rescates%2Ftraspasos Cía Seguros</fullName>
+        <actions>
+            <name>Env_o_correo_electr_nico_cliente_Rescate_Traspaso_cria_seguros</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Participantes_de_Campa_a__c.Tipo_de_Entidad__c</field>
+            <operation>equals</operation>
+            <value>Cia. De Seguros</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Participantes_de_Campa_a__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Traspasos Out</value>
+        </criteriaItems>
+        <description>Regla que permite envío automático de correos a clientes para campañas de rescate traspaso de asistencia agente según entidad</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Envío correo campañas rescates%2Ftraspasos FFMM</fullName>
+        <actions>
+            <name>Env_o_correo_electr_nico_cliente_Rescate_Traspaso_ffmm</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Participantes_de_Campa_a__c.Tipo_de_Entidad__c</field>
+            <operation>equals</operation>
+            <value>FFMM</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Participantes_de_Campa_a__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Traspasos Out</value>
+        </criteriaItems>
+        <description>Regla que permite envío automático de correos a clientes para campañas de rescate traspaso de asistencia agente según entidad</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>PAC PV Contactado</fullName>
+        <actions>
+            <name>PAC_PV_Fecha_de_contacto</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>AND(ISCHANGED( Contactado__c ), RecordType.Name = &quot;PAC PV&quot;)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>PAC PV Firma Documento</fullName>
+        <actions>
+            <name>PAC_PV_Actualiza_Fecha_firma_documento</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>AND(ISCHANGED(  Firma_Nuevo_Documento_PAC__c  ), RecordType.Name = &quot;PAC PV&quot;)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <tasks>
+        <fullName>Tarea_9Meses_Productos</fullName>
+        <assignedToType>owner</assignedToType>
+        <description>Cliente solicita cotizar nuevos productos.
+
+Por favor Contactar.</description>
+        <dueDateOffset>7</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Reasignar a Ejec. PV</status>
+        <subject>Llamada</subject>
+    </tasks>
+    <tasks>
+        <fullName>Tarea_9Meses_Solicita_Contacto</fullName>
+        <assignedToType>owner</assignedToType>
+        <description>Cliente solicita contacto con su Ejecutiva.
+Por favor contactar</description>
+        <dueDateOffset>7</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Reasignar a Ejec. PV</status>
+        <subject>Llamada</subject>
+    </tasks>
+</Workflow>

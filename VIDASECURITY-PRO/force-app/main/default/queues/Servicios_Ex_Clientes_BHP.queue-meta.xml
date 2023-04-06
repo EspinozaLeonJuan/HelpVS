@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Queue xmlns="http://soap.sforce.com/2006/04/metadata">
+    <doesSendEmailToMembers>false</doesSendEmailToMembers>
+    <email>rescobar@security.cl</email>
+    <name>Servicios Ex Empleados BHP</name>
+    <queueMembers>
+        <roleAndSubordinates>
+            <roleAndSubordinate>Encargado_Servicios_Colectivos</roleAndSubordinate>
+            <roleAndSubordinate>Jefe_Colectivos</roleAndSubordinate>
+        </roleAndSubordinates>
+    </queueMembers>
+    <queueSobject>
+        <sobjectType>Case</sobjectType>
+    </queueSobject>
+</Queue>

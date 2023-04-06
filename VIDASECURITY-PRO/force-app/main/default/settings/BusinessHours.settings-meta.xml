@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BusinessHoursSettings xmlns="http://soap.sforce.com/2006/04/metadata">
+    <businessHours>
+        <active>true</active>
+        <default>true</default>
+        <fridayEndTime>14:00:00.000Z</fridayEndTime>
+        <fridayStartTime>09:00:00.000Z</fridayStartTime>
+        <mondayEndTime>18:00:00.000Z</mondayEndTime>
+        <mondayStartTime>09:00:00.000Z</mondayStartTime>
+        <name>Predeterminado</name>
+        <thursdayEndTime>18:00:00.000Z</thursdayEndTime>
+        <thursdayStartTime>09:00:00.000Z</thursdayStartTime>
+        <timeZoneId>America/Santiago</timeZoneId>
+        <tuesdayEndTime>18:00:00.000Z</tuesdayEndTime>
+        <tuesdayStartTime>09:00:00.000Z</tuesdayStartTime>
+        <wednesdayEndTime>18:00:00.000Z</wednesdayEndTime>
+        <wednesdayStartTime>09:00:00.000Z</wednesdayStartTime>
+    </businessHours>
+    <holidays>
+        <activityDate>2019-09-20</activityDate>
+        <description>Feriado 20 de Septiembre de 2019</description>
+        <isRecurring>false</isRecurring>
+        <name>20 de Septiembre</name>
+    </holidays>
+    <holidays>
+        <activityDate>2022-06-21</activityDate>
+        <description>Día Nacional de los Pueblos Indígenas</description>
+        <isRecurring>false</isRecurring>
+        <name>Día Nacional de los Pueblos Indígenas</name>
+    </holidays>
+    <holidays>
+        <activityDate>2022-10-31</activityDate>
+        <description>Día de las Iglesias Evangélicas y Protestantes</description>
+        <isRecurring>false</isRecurring>
+        <name>Día de las Iglesias Evangélicas y Protestantes</name>
+    </holidays>
+    <holidays>
+        <activityDate>2022-10-10</activityDate>
+        <isRecurring>false</isRecurring>
+        <name>Encuentro de Dos Mundos</name>
+    </holidays>
+    <holidays>
+        <businessHours>Predeterminado</businessHours>
+        <isRecurring>true</isRecurring>
+        <name>Feriado Asunción de la virgen</name>
+        <recurrenceDayOfMonth>15</recurrenceDayOfMonth>
+        <recurrenceMonthOfYear>August</recurrenceMonthOfYear>
+        <recurrenceStartDate>2017-08-15</recurrenceStartDate>
+        <recurrenceType>RecursYearly</recurrenceType>
+    </holidays>
+    <holidays>
+        <businessHours>Predeterminado</businessHours>
+        <isRecurring>true</isRecurring>
+        <name>Feriado Año nuevo</name>
+        <recurrenceDayOfMonth>1</recurrenceDayOfMonth>
+        <recurrenceMonthOfYear>January</recurrenceMonthOfYear>
+        <recurrenceStartDate>2018-01-01</recurrenceStartDate>
+        <recurrenceType>RecursYearly</recurrenceType>
+    </holidays>
+    <holidays>
+        <activityDate>2017-10-09</activityDate>
+        <businessHours>Predeterminado</businessHours>
+        <isRecurring>false</isRecurring>
+        <name>Feriado Descubrimiento de dos mundos</name>
+    </holidays>
+    <holidays>
+        <activityDate>2018-10-15</activityDate>
+        <isRecurring>false</isRecurring>
+        <name>Feriado Descubrimiento de dos mundos</name>
+    </holidays>
+    <holidays>
+        <businessHours>Predeterminado</businessHours>
+        <isRecurring>true</isRecurring>
+        <name>Feriado Día nacional del trabajo</name>
+        <recurrenceDayOfMonth>1</recurrenceDayOfMonth>
+        <recurrenceMonthOfYear>May</recurrenceMonthOfYear>
+        <recurrenceStartDate>2017-05-01</recurrenceStartDate>
+        <recurrenceType>RecursYearly</recurrenceType>
+    </holidays>
+    <holidays>
+        <businessHours>Predeterminado</businessHours>
+        <isRecurring>true</isRecurring>
+        <name>Feriado Glorias del ejército</name>
+        <recurrenceDayOfMonth>19</recurrenceDayOfMonth>
+        <recurrenceMonthOfYear>September</recurrenceMonthOfYear>
+        <recurrenceStartDate>2017-09-19</recurrenceStartDate>
+        <recurrenceType>RecursYearly</recurrenceType>
+    </holidays>
+    <holidays>
+        <activityDate>2017-10-27</activityDate>
+        <businessHours>Predeterminado</businessHours>
+        <isRecurring>false</isRecurring>
+        <name>Feriado Iglesias evangélicas</name>
+    </holidays>
+    <holidays>
+        <activityDate>2018-11-02</activityDate>
+        <isRecurring>false</isRecurring>
+        <name>Feriado Iglesias evangélicas</name>
+    </holidays>
+    <holidays>
+        <businessHours>Predeterminado</businessHours>
+        <isRecurring>true</isRecurring>
+        <name>Feriado Independencia nacional</name>
+        <recurrenceDayOfMonth>18</recurrenceDayOfMonth>
+        <recurrenceMonthOfYear>September</recurrenceMonthOfYear>
+        <recurrenceStartDate>2017-09-18</recurrenceStartDate>
+        <recurrenceType>RecursYearly</recurrenceType>
+    </holidays>
+    <holidays>
+        <businessHours>Predeterminado</businessHours>
+        <isRecurring>true</isRecurring>
+        <name>Feriado Inmaculada concepción</name>
+        <recurrenceDayOfMonth>8</recurrenceDayOfMonth>
+        <recurrenceMonthOfYear>December</recurrenceMonthOfYear>
+        <recurrenceStartDate>2017-12-08</recurrenceStartDate>
+        <recurrenceType>RecursYearly</recurrenceType>
+    </holidays>
+    <holidays>
+        <businessHours>Predeterminado</businessHours>
+        <isRecurring>true</isRecurring>
+        <name>Feriado Navidad</name>
+        <recurrenceDayOfMonth>25</recurrenceDayOfMonth>
+        <recurrenceMonthOfYear>December</recurrenceMonthOfYear>
+        <recurrenceStartDate>2017-12-25</recurrenceStartDate>
+        <recurrenceType>RecursYearly</recurrenceType>
+    </holidays>
+    <holidays>
+        <businessHours>Predeterminado</businessHours>
+        <isRecurring>true</isRecurring>
+        <name>Feriado Todos los santos</name>
+        <recurrenceDayOfMonth>1</recurrenceDayOfMonth>
+        <recurrenceMonthOfYear>November</recurrenceMonthOfYear>
+        <recurrenceStartDate>2017-11-01</recurrenceStartDate>
+        <recurrenceType>RecursYearly</recurrenceType>
+    </holidays>
+    <holidays>
+        <businessHours>Predeterminado</businessHours>
+        <isRecurring>true</isRecurring>
+        <name>Feriado Virgen del Carmen</name>
+        <recurrenceDayOfMonth>16</recurrenceDayOfMonth>
+        <recurrenceMonthOfYear>July</recurrenceMonthOfYear>
+        <recurrenceStartDate>2017-07-16</recurrenceStartDate>
+        <recurrenceType>RecursYearly</recurrenceType>
+    </holidays>
+    <holidays>
+        <activityDate>2023-01-02</activityDate>
+        <description>Feriado adicional año nuevo 2023</description>
+        <isRecurring>false</isRecurring>
+        <name>Feriado adicional</name>
+    </holidays>
+    <holidays>
+        <activityDate>2022-06-27</activityDate>
+        <description>San Pedro y San Pablo</description>
+        <isRecurring>false</isRecurring>
+        <name>San Pedro y San Pablo</name>
+    </holidays>
+    <holidays>
+        <businessHours>Predeterminado</businessHours>
+        <description>Los fin de semana no son laborables.</description>
+        <isRecurring>true</isRecurring>
+        <name>Todos los Fines de Semana</name>
+        <recurrenceDayOfWeek>Sunday</recurrenceDayOfWeek>
+        <recurrenceDayOfWeek>Saturday</recurrenceDayOfWeek>
+        <recurrenceInterval>1</recurrenceInterval>
+        <recurrenceStartDate>2018-01-06</recurrenceStartDate>
+        <recurrenceType>RecursWeekly</recurrenceType>
+    </holidays>
+</BusinessHoursSettings>

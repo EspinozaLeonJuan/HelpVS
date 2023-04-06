@@ -1,0 +1,165 @@
+<apex:page controller="CTR_BandejaColaboraciones" action="{!CargaColaboracion}" lightningStylesheets="true" sidebar="false" showHeader="true" tabStyle="Case">
+
+    <style>
+
+        .popupBackground {
+            /* Background color */
+            background-color:black;
+            opacity: 0.5;
+            filter: alpha(opacity = 50);
+
+            /* Dimensions */
+            width: 90%;
+            height: 100%;
+            top: 0;
+            left: 50;
+            z-index: 998;
+            position: absolute;
+            /* Mouse */
+            cursor:wait;
+        }
+
+        .popupPanel {
+            /* Background color */
+            border: solid 2px orange;
+            background-color: white;
+            /* Dimensions */
+            display: inline-block;
+            left: 50%;
+            width: 100px;
+            margin-left: 0px;
+            top: 100px;
+            height: 25px;
+            margin-top: -25px;
+            position: absolute;
+            z-index: 999;
+            /* Mouse */
+            cursor:pointer;;
+        }
+        .DivColumn_A {
+            width:40%;
+            float:left;
+        }
+
+        .DivColumn_B {
+            width:12%;
+            float:left;
+        }
+
+        .DivColumn_C {
+            width:48%;
+            float:left;
+        }
+    </style>
+
+    <script>
+
+    function evalua(error)
+    {
+        if (error == 'comentario_no_ingresado')
+        {
+            alert('No ha sido ingresado ningún comentario asociado a la Colaboración de Reclamo.');
+        }
+        else
+        {
+            alert('El Comentario ha sido agregado a la Colaboración de Reclamo.');
+            ToColaboracion();
+        }
+    }
+    </script>
+
+<apex:includeScript value="{!$Resource.jquery}"/>
+<div id="dv_CuerpoPrincipal" style="width: 90%; margin-left: auto; margin-right: auto; height: 100%;">
+ 
+    <apex:actionStatus id="Status">
+        <apex:facet name="start">
+            <apex:outputPanel >
+                <div class="popupBackground" />
+                <div class="popupPanel">
+                    &nbsp; Espere...<img src="/apexpages/devmode/img/saveStatus.gif" />
+                </div>
+            </apex:outputPanel> 
+        </apex:facet>
+    </apex:actionStatus>
+<br/><br/>
+    <apex:form id="frm_Listado">
+        <apex:actionFunction action="{!ToColaboracion}" name="ToColaboracion"/>  
+        <apex:commandButton id="cmd_VolverListado" value="Volver Menú Principal"  disabled="true" />
+        <apex:commandButton id="cmd_DetalleTarea" value="Detalle Colaboración Reclamo"   action="{!ToColaboracion}" />  
+        <apex:commandButton id="cmd_AsignacionResponsable" value="Asignación Responsable UR" action="{!ToResponsable}" disabled="true"/>   
+        <apex:commandButton id="cmd_ActualizacionEstdo" value="Actualización de Estado" action="{!ToEstado}" disabled="true" />   
+
+
+<apex:pageBlock id="pbk_EncabezadoCaso" title="Agregar nuevo Comentario a Colaboración Reclamo" >
+
+        <apex:panelGrid columns="8" style="width:100%;">
+
+                <apex:outputLabel style="font-weight:bold;" >Estado</apex:outputLabel>  
+                <apex:outputLabel style="font-weight:bold;color:red;text-transform: uppercase;" value="{!Tarea.Status}" ></apex:outputLabel>  
+                <apex:outputText value="    " id="empty001"/> 
+                <apex:outputText value="    " id="empty002"/> 
+                <apex:outputText value="    " id="empty003"/> 
+                <apex:outputText value="    " id="empty004"/> 
+                <apex:outputText value="    " id="empty005"/> 
+                <apex:outputText value="    " id="empty006"/> 
+
+
+            <apex:outputLabel style="font-weight:bold;" >Asunto</apex:outputLabel>  
+            <apex:outputLabel style="font-weight:bold;color:blue;" value="{!Tarea.Detalle_Operacion__c}" ></apex:outputLabel>  
+            <apex:outputText value="    " id="empty007"/> 
+            <apex:outputLabel style="font-weight:bold;" >Nº Caso</apex:outputLabel> 
+            <apex:commandLink style="font-weight:bold;" value="{!Caso.CaseNumber}"  action="{!ToCase}"   />
+            
+            <apex:outputText value="    " id="empty008"/>  
+            <apex:outputLabel style="font-weight:bold;" >Ejecutivo</apex:outputLabel> 
+            <apex:outputField value="{!Caso.Parent.OwnerId}" />  
+
+            <apex:outputLabel style="font-weight:bold;" >RUT Cliente</apex:outputLabel>     
+            <apex:outputField label="RUT Cliente" value="{!Caso.RUT__c}"/>      
+            <apex:outputText value="    " id="empty009"/>  
+            <apex:outputLabel style="font-weight:bold;" >Cliente</apex:outputLabel>      
+            <apex:outputLabel value="{!Caso.Nombre_Completo_Razon_Social__c}"  /> 
+
+            <apex:outputText value="    " id="empty010"/>  
+            <apex:outputLabel style="font-weight:bold;"  >Nº de Poliza</apex:outputLabel>
+            <apex:outputField style="font-weight:bold;color:blue;" value="{!Caso.CASO_N_Poliza__c}" rendered="true" />  
+
+            <apex:outputLabel style="font-weight:bold;" >Prioridad</apex:outputLabel>  
+            <apex:outputLabel style="font-weight:bold;color:blue" value="{!Tarea.Priority}" rendered="true"></apex:outputLabel>    
+            <apex:outputText value="    " id="empty011"/>   
+
+            <apex:outputLabel style="font-weight:bold;" >Responsable UR</apex:outputLabel>  
+            <apex:outputLabel style="font-weight:bold;"  value="{!RESPONSABLE_ACTUAL}" rendered="{!IF(RESPONSABLE_ASIGNADO == 'S',true,false)}"></apex:outputLabel> 
+            <apex:outputLabel style="font-weight:bold;" rendered="{!IF(RESPONSABLE_ASIGNADO == 'N',true,false)}" >Responsable no asignado</apex:outputLabel> 
+
+            <apex:outputText value="    " id="empty012"/>   
+            <apex:outputLabel style="font-weight:bold;" >Fecha de Vencimiento</apex:outputLabel>  
+            <apex:outputField style="font-weight:bold;" value="{!Tarea.ActivityDate}" rendered="true"></apex:outputField> 
+
+
+
+
+         </apex:panelGrid>   
+
+
+        </apex:pageBlock>
+        <apex:pageBlock id="pb_IngresoComentario" >
+
+                <apex:pageBlockSection id="pbs_DatoCaso" collapsible="false" columns="1" >
+                    <apex:inputTextarea id="txt_ComentarioNotificacion1" label="Comentario" value="{!ComentTask.Detail__c}" style="resize: none;width:100%;height:80px;"  />
+
+                     </apex:pageBlockSection> 
+            </apex:pageBlock>    
+
+            <apex:pageBlock id="pb_ActionCaso">
+                
+                    <apex:commandButton id="cmd_GuardarComentarios" title="Guardar" value="Guardar"   status="Status" 
+                    action="{!GuardarComentario}"  oncomplete="evalua('{!ErrorOperacion}');"
+                    />
+
+                    <apex:commandButton id="cmd_CerarComentarios" value="Cancelar" action="{!CancelarComentario}" />
+            </apex:pageBlock>
+    </apex:form>
+
+</div>
+</apex:page>

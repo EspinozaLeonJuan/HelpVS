@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Alerta_nueva_Opp_Renovacion</fullName>
+        <description>Alerta nueva Opp Renovacion</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderAddress>vidasecurity@security.cl</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Plantilla_Renovacion/Nueva_Opp_renovacion</template>
+    </alerts>
+    <alerts>
+        <fullName>Env_o_Notificaci_n_Vencimiento_Licitaci_n</fullName>
+        <description>Envío Notificación Vencimiento Licitación</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderAddress>sfvida@security.cl</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Comercial/Noti_Licitacion_Prox_Vencer</template>
+    </alerts>
+    <alerts>
+        <fullName>Notificacion_Cierre_Proceso_Comercial_Nuevo</fullName>
+        <description>Notificación Cierre Proceso Comercial Nuevo</description>
+        <protected>false</protected>
+        <recipients>
+            <field>ContactId</field>
+            <type>contactLookup</type>
+        </recipients>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <recipients>
+            <recipient>javier.burgos@security.cl</recipient>
+            <type>user</type>
+        </recipients>
+        <senderAddress>sfvida@security.cl</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Comercial/Notificacion_Cierre_Proceso_Comercial_Nuevo</template>
+    </alerts>
+    <alerts>
+        <fullName>Notificacion_Cierre_Proceso_Renovacion</fullName>
+        <description>Notificación Cierre Proceso Renovación</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Agente_de_Venta__c</field>
+            <type>contactLookup</type>
+        </recipients>
+        <recipients>
+            <field>ContactId</field>
+            <type>contactLookup</type>
+        </recipients>
+        <recipients>
+            <recipient>Ejecutivo Comercial</recipient>
+            <type>opportunityTeam</type>
+        </recipients>
+        <recipients>
+            <recipient>Ejecutivo Técnico</recipient>
+            <type>opportunityTeam</type>
+        </recipients>
+        <recipients>
+            <recipient>Jefe Comercial</recipient>
+            <type>opportunityTeam</type>
+        </recipients>
+        <recipients>
+            <recipient>Jefe Técnico</recipient>
+            <type>opportunityTeam</type>
+        </recipients>
+        <recipients>
+            <recipient>Suscriptor</recipient>
+            <type>opportunityTeam</type>
+        </recipients>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderAddress>sfvida@security.cl</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Comercial/Notificacion_Cierre_Proceso_Renovacion</template>
+    </alerts>
+    <alerts>
+        <fullName>Notificacion_de_Link_a_PostVenta</fullName>
+        <description>Notificación de Link a PostVenta</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Ejecutivo_Post_Venta__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Plantillas_Televenta/Correo_Link_Postventa</template>
+    </alerts>
+    <alerts>
+        <fullName>Notificacion_nuevo_propietario_oportunidad</fullName>
+        <description>Notificacion nuevo propietario oportunidad</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <recipients>
+            <field>EjecutivoComercial__c</field>
+            <type>userLookup</type>
+        </recipients>
+        <senderAddress>sfvida@security.cl</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Comercial/Notificacion_nuevo_propietario_oportunidad</template>
+    </alerts>
+</Workflow>

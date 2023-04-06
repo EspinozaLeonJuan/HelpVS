@@ -1,0 +1,153 @@
+<!--
+  @Page Name          : SEC_VF_VVC_CargaArchivoCsv.page
+  @Description        : 
+  @Author             : Consultor Salesforce Vida
+  @Group              : 
+  @Last Modified By   : Consultor Salesforce Vida
+  @Last Modified On   : 5/25/2019, 1:57:41 AM
+  @Modification Log   : 
+  ==============================================================================
+  Ver         Date                     Author      		      Modification
+  ==============================================================================
+  1.0    4/22/2019, 1:49:14 PM   Consultor Salesforce Vida     Initial Version
+-->
+
+
+<apex:page controller="CTR_VVC_GestionCarga" lightningStylesheets="true" showHeader="true" sidebar="true" >
+    <style>
+        
+        .ct{
+                        text-align:center;
+                    }
+                 
+        .popupBackground {
+                /* Background color */
+                background-color:black;
+                opacity: 0.5;
+                filter: alpha(opacity = 50);
+                
+                /* Dimensions */
+                width: 100%;
+                height: 100%;       
+                top: 0;
+                left: 50;
+                z-index: 998;
+                position: absolute;        
+                /* Mouse */
+                cursor:wait;
+            }
+            
+            .popupPanel {
+            /* Background color */
+                border: solid 2px orange;
+                background-color: white;        
+                /* Dimensions */
+                display: inline-block;
+                left: 50%;
+                width: 100px;
+                margin-left: 0px;
+                top: 100px;
+                height: 25px;
+                margin-top: -25px;
+                position: absolute;   
+                z-index: 999;        
+                /* Mouse */
+                cursor:pointer;
+            }
+
+            .panel_botones{
+               width: 150px; 
+            }
+
+           .panel_mensaje{
+               width: 60%; 
+           }
+      </style>
+
+<script>
+    function ArchivoProcesado() {  
+       alert('La información válida existente en el archivo csv cargado ha sido procesada exitosamente.');
+       ToHistorial();
+    }
+</script>
+
+<apex:actionStatus id="Status">
+    <apex:facet name="start">
+        <apex:outputPanel >
+            <div class="popupBackground" />
+            <div class="popupPanel">
+                &nbsp; Espere...<img src="/apexpages/devmode/img/saveStatus.gif" />
+            </div>
+        </apex:outputPanel> 
+    </apex:facet>
+</apex:actionStatus>
+
+
+    <apex:form id="form_vv">
+        <apex:actionFunction action="{!ToHistorial}" name="ToHistorial"/>        
+        <apex:pageBlock id="pbk_PanelHeader" title="Carga Csv Notificaciones Vale Vista por Cobrar" >
+                <apex:panelGrid columns="1" style="text-align:right;width:100%">                                            
+                        <apex:commandButton value="Historial de Cargas" action="{!ToHistorial}" />
+                    </apex:panelGrid> 
+          <apex:panelGrid columns="2" rendered="{!CargaOk == false}" styleClass="panel_botones" style="width:28%;">
+                  <apex:inputFile value="{!csvFileBody}"  filename="{!csvAsString}" />
+                  <apex:commandButton value="Cargar Archivo" action="{!importCSVFile}"  id="btn_cargar_archivo" status="Status" />            
+          </apex:panelGrid>
+          <br/>
+          <apex:panelGrid columns="2" rendered="{!CargaOk == true}" styleClass="panel_botones" style="width:20%;" >
+              <apex:commandButton value="Procesar Información Válida" action="{!ProcessUpload}" status="Status" id="btn_procesar_archivo" oncomplete="ArchivoProcesado();"/>                  
+              <apex:commandButton value="Cancelar" action="{!CancelUpload}" id="btn_cancelar_procesar_archivo"/>
+          </apex:panelGrid>
+           
+        </apex:pageBlock>
+        <apex:panelGrid columns="1"  styleClass="panel_mensaje" style="width:100%">
+                <apex:pageMessages id="showmsg" escape="true"></apex:pageMessages>    
+        </apex:panelGrid>
+         
+                <apex:panelGrid columns="1" style="text-align:left;width:100%" rendered="{!CargaOk}">
+                    <apex:outputLabel style="font-weight:bold;text-decoration:underline;">Información Válida a Procesar</apex:outputLabel>                                            
+                    </apex:panelGrid> 
+                    <br/>
+        <apex:outputPanel layout="block" style="overflow:auto;width:100%;height:350px" rendered="{!CargaOk}" >
+        <apex:pageBlock >
+           <apex:pageblocktable value="{!vvclist}" var="vvc">
+              <apex:column value="{!vvc.RUT__c}"  headerClass="ct" style="text-align:center;width:20%;"  />
+              <apex:column value="{!vvc.Monto__c}"  headerClass="ct" style="text-align:center;width:20%;" />
+              <apex:column value="{!vvc.Fecha_Vale_Vista__c}"  headerClass="ct" style="text-align:center;width:20%;" />
+              <apex:column value="{!vvc.Empresa__c}" headerClass="ct" style="text-align:center;width:20%;"  />
+              <apex:column value="{!vvc.Tipo__c }"  headerClass="ct" style="text-align:center;width:20%;"  />
+        </apex:pageblocktable>
+    </apex:pageBlock>
+   
+    </apex:outputPanel>
+<br/>
+<br/>
+<apex:panelGrid columns="1" style="text-align:left;width:100%" rendered="{!CargaOk}">                                            
+        <apex:outputLabel style="font-weight:bold;text-decoration:underline;">Información inválida en CSV cargado</apex:outputLabel>                                            
+    </apex:panelGrid> 
+    <br/>
+        <apex:outputPanel layout="block" style="overflow:auto;width:100%;height:350px" rendered="{!CargaOk}">
+            <apex:pageBlock >
+               <apex:pageblocktable value="{!Errores}" var="error">
+                  <apex:column value="{!error.RUT}"  headervalue="RUT" headerClass="ct" style="text-align:center;width:10%;" />
+                  <apex:column value="{!error.Monto}" headervalue="Monto" headerClass="ct" style="text-align:center;width:10%;" />
+                  <apex:column value="{!error.Fecha}"  headervalue="Fecha Vale Vista" headerClass="ct" style="text-align:center;width:10%;" />
+                  <apex:column value="{!error.Empresa}"  headervalue="Empresa" headerClass="ct" style="text-align:center;width:20%;"  />
+                  <apex:column value="{!error.Tipo}"  headervalue="Tipo" headerClass="ct" style="text-align:center;width:10%;" />
+                  <apex:column value="{!error.Error }"  headervalue="Error" headerClass="ct" style="text-align:center;width:30%;" />
+        </apex:pageblocktable>
+
+       
+     </apex:pageBlock>
+    </apex:outputPanel>
+   
+    <br/>
+    <br/>
+    <!--  <br/>
+    <br/>
+    <apex:panelGrid columns="1"  styleClass="panel_mensaje">
+            <apex:pageMessages id="showmsg" escape="true"></apex:pageMessages>
+    
+         </apex:panelGrid>-->
+   </apex:form>
+</apex:page>

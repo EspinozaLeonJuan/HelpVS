@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QuickAction xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Creación de un nuevo registro manual en la bitácora.</description>
+    <fieldOverrides>
+        <field>Corredor__c</field>
+        <formula>Factura__c.Poliza__r.Corredor__c</formula>
+    </fieldOverrides>
+    <fieldOverrides>
+        <field>Estado__c</field>
+        <literalValue>Correcto</literalValue>
+    </fieldOverrides>
+    <fieldOverrides>
+        <field>Evento__c</field>
+        <literalValue>Manual</literalValue>
+    </fieldOverrides>
+    <fieldOverrides>
+        <field>Factura__c</field>
+        <formula>Factura__c.Id</formula>
+    </fieldOverrides>
+    <fieldOverrides>
+        <field>Filial__c</field>
+        <formula>Factura__c.Filial__c</formula>
+    </fieldOverrides>
+    <label>Nueva Bitácora Manual</label>
+    <optionsCreateFeedItem>true</optionsCreateFeedItem>
+    <quickActionLayout>
+        <layoutSectionStyle>TwoColumnsLeftToRight</layoutSectionStyle>
+        <quickActionLayoutColumns>
+            <quickActionLayoutItems>
+                <emptySpace>false</emptySpace>
+                <field>Glosa__c</field>
+                <uiBehavior>Edit</uiBehavior>
+            </quickActionLayoutItems>
+            <quickActionLayoutItems>
+                <emptySpace>false</emptySpace>
+                <field>Corredor__c</field>
+                <uiBehavior>Edit</uiBehavior>
+            </quickActionLayoutItems>
+        </quickActionLayoutColumns>
+        <quickActionLayoutColumns>
+            <quickActionLayoutItems>
+                <emptySpace>false</emptySpace>
+                <field>Evento__c</field>
+                <uiBehavior>Required</uiBehavior>
+            </quickActionLayoutItems>
+            <quickActionLayoutItems>
+                <emptySpace>false</emptySpace>
+                <field>Estado__c</field>
+                <uiBehavior>Edit</uiBehavior>
+            </quickActionLayoutItems>
+        </quickActionLayoutColumns>
+    </quickActionLayout>
+    <successMessage>Se ha creado un nuevo registro de bitácora manual exitosamente.</successMessage>
+    <targetObject>Bitacora__c</targetObject>
+    <targetParentField>Factura__c</targetParentField>
+    <type>Create</type>
+</QuickAction>

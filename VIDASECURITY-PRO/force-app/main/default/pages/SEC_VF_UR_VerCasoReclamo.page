@@ -1,0 +1,138 @@
+<apex:page controller="CTR_BandejaColaboraciones" action="{!cargaCaso}" lightningStylesheets="true" showHeader="true" sidebar="false" tabStyle="Case" >
+    <style>
+        .ct
+        {
+            text-align:center;
+        }
+    </style>
+    <script>
+
+   
+    
+    </script>
+     
+    
+    <apex:includeScript value="{!$Resource.jquery}"/>
+    <br/>
+    <div id="dv_CuerpoPrincipal" style="width: 90%; margin-left: auto; margin-right: auto; height: 100%;">
+        
+        <apex:messages />
+        <br/>
+        <br/>
+        
+         
+        <apex:form id="frm_Caso">
+            
+            <apex:commandButton id="cmd_VolverTarea" value="Ir a Colaboración Reclamo" action="{!ToColaboracion}" />
+                <apex:pageBlock id="pbk_EncabezadoCaso" title="Caso" >
+                 <apex:panelGrid columns="8" style="width:80%;">
+                      <apex:outputLabel style="font-weight:bold;" >Nº Caso</apex:outputLabel> 
+                     <apex:outputLabel style="font-weight:bold;" value="{!Caso.CaseNumber}" />                               
+                     <apex:outputText value="    " id="empty01"/>
+                     <apex:outputLabel style="font-weight:bold;"  >Nº de Poliza</apex:outputLabel>
+                     <apex:outputField value="{!Caso.CASO_N_Poliza__c}" rendered="true" />  
+                     <apex:outputText value="    " id="empty02"/>
+                     <apex:outputLabel style="font-weight:bold;"  >Estado</apex:outputLabel>
+                     <apex:outputField value="{!Caso.Status}" rendered="true" />
+                   
+                     <apex:outputLabel style="font-weight:bold;" >RUT Cliente</apex:outputLabel>     
+                     <apex:outputField label="RUT Cliente" value="{!Caso.RUT__c}"/>       
+                     <!-- <label id="" style="font-size:14px">{!Caso.RUT__c}</label>                   -->               
+                     <apex:outputText value="    " id="empty03"/>
+                     <apex:outputLabel style="font-weight:bold;" >Cliente</apex:outputLabel>      
+                     <!-- <label id="Nombre_Titular" >{!CASO_PRI.Nombre_Completo_Razon_Social__c}</label>   -->
+                     <apex:outputField value="{!Caso.AccountId}" rendered="true" /> 
+                     <apex:outputText value="    " id="empty04"/>
+                     <apex:outputLabel style="font-weight:bold;" >Contacto</apex:outputLabel>    
+                     <apex:outputField value="{!Caso.ContactId}" rendered="true" />
+                 
+                     <apex:outputLabel style="font-weight:bold;" >Negocio</apex:outputLabel>  
+                     <apex:outputField value="{!Caso.Negocio__c}" rendered="true" />
+                      <apex:outputText value="    " id="empty05"/>
+                     <apex:outputLabel style="font-weight:bold;" >Ejecutiva</apex:outputLabel>  
+                     <apex:outputField value="{!Caso.OwnerId}" rendered="true" /> 
+                     <apex:outputText value="    " id="empty06"/>
+                     <apex:outputLabel style="font-weight:bold;"  >Canal</apex:outputLabel>
+                     <apex:outputField value="{!Caso.Canal__c}" rendered="true" />
+
+                      <apex:outputLabel style="font-weight:bold;" >Tipo de Requerimiento</apex:outputLabel>  
+                     <apex:outputLabel style="font-weight:bold;color:blue;" value="{!Caso.Tipo_de_Requerimiento__c}" rendered="true" />
+                     <apex:outputText value="    " id="empty07"/>                      
+                     <apex:outputText value="    " id="empty08"/>
+                     <apex:outputText value="    " id="empty09"/>
+                     <apex:outputText value="    " id="empty10"/>
+                     <apex:outputLabel style="font-weight:bold;" >Asunto</apex:outputLabel>  
+                     <apex:outputField value="{!Caso.Subject}" rendered="true" />
+                     
+                     <apex:outputLabel style="font-weight:bold;" >Fecha/Hora de Creación</apex:outputLabel>  
+                     <apex:outputField value="{!Caso.CreatedDate}" rendered="true" /> 
+                     <apex:outputText value="    " id="empty11"/>
+                     <apex:outputText value="    " id="empty12"/>
+                     <apex:outputText value="    " id="empty13"/>
+                     <apex:outputText value="    " id="empty14"/>
+                     <apex:outputLabel style="font-weight:bold;" >Fecha cierre Tope</apex:outputLabel> 
+                     <apex:outputField value="{!Caso.Fecha_Cierre_Tope__c}" rendered="true" /> 
+
+                     <apex:outputLabel style="font-weight:bold;"  >Categoría</apex:outputLabel>  
+                     <apex:outputLabel style="font-weight:bold;color:blue;" value="{!Caso.CASO_Categoria__c}"   />                          
+                     <apex:outputText value="    " id="empty15"/>
+                     <apex:outputText value="    " id="empty16"/>
+                     <apex:outputText value="    " id="empty17"/>
+                     <apex:outputText value="    " id="empty18"/>
+                     <apex:outputLabel style="font-weight:bold;"   >Detalle Operación</apex:outputLabel>  
+                     <apex:outputLabel style="font-weight:bold;color:blue;" value="{!Caso.Detalle_Operacion__c}"   />                       
+                 </apex:panelGrid>
+                 
+                 <hr/>
+                <apex:panelGrid columns="2"  style="width:150%;">  
+                       <apex:outputLabel style="font-weight:bold;" >Descripción</apex:outputLabel> 
+                      <apex:inputTextarea id="Description" value="{!Caso.Description}" style="resize: none;width:650px;height:150px;" readonly="true"/>                        
+
+                 </apex:panelGrid> 
+            
+            </apex:pageBlock>
+
+            <apex:pageBlock id="pbk_ComentariosCaso" title="Comentarios del Caso" >
+                <apex:pageBlockTable id="pbkt_TablaComentariosCaso" title="Comentarios del Caso" value="{!LST_ComentariosCasoUR}" var="coment"  >
+                    <apex:column headerValue="Comentario" value="{!coment.CommentBody}"  headerClass="ct" />
+                    <apex:column headerValue="Fecha Creación" value="{!coment.CreatedDate}"  headerClass="ct"/>
+                    <apex:column headerValue="Creado por" value="{!coment.CreatedById}"  headerClass="ct" />
+                   
+                </apex:pageBlockTable>
+
+            </apex:pageBlock>                      
+
+        <apex:pageBlock id="lista_tareas" title="Historial de Colaboraciones Reclamo">
+            <apex:pageBlockTable id="pbkt_TablaCasos" value="{!LST_ColaboracionesCaso}" var="tarea"  >
+                <apex:column style="font-weight:bold;text-align:center;" headerValue="Estado" value="{!tarea.Status}" headerClass="ct"/> 
+
+                <apex:column headerValue="Asunto" value="{!tarea.Detalle_Operacion__c}" style="width:15%;" rendered="true" headerClass="ct"/>
+                <apex:column headerValue="Descripción" value="{!tarea.Description}" style="width:25%;" rendered="true" headerClass="ct"/>
+                <apex:column headerValue="Fecha Creación" value="{!tarea.CreatedDate}" headerClass="ct" style="text-align:right;width:10%;"/>
+                <apex:column headerValue="Fecha de Vencimiento"  value="{!tarea.ActivityDate}" headerClass="ct" style="text-align:right;width:10%;"/>
+                <apex:column headerValue="Unidad Resolutora" value="{!tarea.Owner.Name}" headerClass="ct" style="text-align:center;width:10%;"/>
+                <apex:column headerValue="Responsable" value="{!tarea.Responsable_Backup__c}" rendered="true" headerClass="ct" style="text-align:center;width:10%;"/>                    
+            </apex:pageBlockTable>
+
+
+
+            </apex:pageBlock>
+            
+       
+        <apex:pageBlock id="pbk_AdjuntosCaso" title="Documentos Adjuntos"  >
+                <apex:pageBlockTable id="pbkt_TablaAdjuntosCaso" title="Adjuntos del Caso" value="{!LST_AdjuntosCasoUR}" var="attachment"  >
+                    <apex:column headerValue="Nombre Archivo"  headerClass="ct" value="{!attachment.Name}" onclick="GetAttach('{!attachment.Id}');" style="text-decoration: underline;cursor:pointer;"   />
+                    <apex:column headerValue="Última modificación"  headerClass="ct" value="{!attachment.LastModifiedDate}" />                    
+                    <apex:column headerValue="Creado por"  headerClass="ct" value="{!attachment.CreatedById}" />                    
+                </apex:pageBlockTable>
+              
+        </apex:pageBlock>    
+       
+ 
+            
+         </apex:form>
+
+
+
+    </div>
+</apex:page>

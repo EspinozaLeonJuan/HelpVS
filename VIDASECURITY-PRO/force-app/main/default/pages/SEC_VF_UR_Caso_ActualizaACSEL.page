@@ -1,0 +1,183 @@
+<!--
+  @File Name          : SEC_VF_UR_Caso_ActualizaACSEL.page
+  @Description        : 
+  @Author             : ChangeMeIn@UserSettingsUnder.SFDoc
+  @Group              : 
+  @Last Modified By   : ChangeMeIn@UserSettingsUnder.SFDoc
+  @Last Modified On   : 6/19/2020, 2:02:25 AM
+  @Modification Log   : 
+  Ver       Date            Author      		    Modification
+  1.0    6/18/2020   ChangeMeIn@UserSettingsUnder.SFDoc     Initial Version
+-->
+<apex:page controller="CTR_UR_Caso" action="{!IniciaActualizaACSEL}" docType="html-5.0" lightningStylesheets="true" showHeader="false" sidebar="false" >
+    <style>
+        .popupBackground {
+            /* Background color */
+            background-color:black;
+            opacity: 0.5;
+            filter: alpha(opacity = 50);
+            
+            /* Dimensions */
+            width: 100%;
+            height: 1000%;       
+            top: 0;
+            left: 0;
+            z-index: 998;
+            position: absolute;        
+            /* Mouse */
+            cursor:wait;
+        }
+                
+        .popupPanel {
+            /* Background color */
+            border: solid 2px orange;
+            background-color: white;        
+            /* Dimensions */
+            display: inline-block;
+            left: 50%;
+            width: 100px;
+            margin-left: 0px;
+            top: 100px;
+            height: 25px;
+            margin-top: -25px;
+            position: absolute;   
+            z-index: 999;        
+            /* Mouse */
+            cursor:pointer;
+        }
+
+        .ct{
+        text-align:center;
+        }
+
+        .btnSave{
+        color:white !important;
+        background:#11862D !important;
+        margin-right: -8px;
+        }
+
+        .btnLetter{
+            color:white !important;
+            background:#44ABDC !important;
+            margin-right: -8px;
+            }
+
+    .btnCancel{
+        color:white !important;
+        background:#A9B0BE !important;
+        margin-right: -8px;
+    }
+
+    </style>
+    <apex:includeScript value="{!$Resource.jquery}"/>
+    <script type="text/javascript">
+
+        function colorPageBlock(pageblock, bkcolor, color) {
+            if (pageblock != null) 
+            {
+                pageblock.firstChild.style.cssText = "background-color: " + bkcolor + ";font-weight:bold;color:"+color+";";
+            }
+        }
+
+        function cerrarVentana(result, id, uback, procedencia, mensaje)
+        {
+            
+            if (result == 'true')
+            {             
+                alert(mensaje);
+                window.opener.location.href="/apex/SEC_VF_UR_Caso?Id="+id+"&idResponsable="+uback+"&procedencia="+procedencia;
+                window.top.close();
+            }  
+            else
+            {
+                 alert('Verifique valores ingresados a campos ACSEL.');                
+            }                          
+        }
+
+        function CancelarCambio()
+        {             
+            window.top.close();
+        }
+        
+    </script>
+<script>    
+    var rutaRecursosEstaticos = '{!URLFOR($Resource.URIconos)}';   
+</script>
+    <!--<br/>-->
+        
+    <apex:actionStatus id="Status">
+        <apex:facet name="start">
+            <apex:outputPanel >
+                <div class="popupBackground" />
+                <div class="popupPanel">
+                    &nbsp; Espere...<img src="/apexpages/devmode/img/saveStatus.gif" />
+                </div>
+            </apex:outputPanel> 
+        </apex:facet>
+    </apex:actionStatus>
+ 
+    
+
+    <apex:form id="frm_VerCaso">
+           
+        <apex:pageBlock id="dv_header" >
+            <apex:pageBlockSection title="{!TituloPopup}" collapsible="false" columns="1" id="pbs_Cabecera"  >
+                    <apex:panelGrid columns="6" style="width:100%;">    
+                            
+                           <!--1-->
+           
+                                   <apex:outputLabel style="font-weight:bold;" >Negocio</apex:outputLabel>  
+                                   <apex:outputLabel value="{!CasoPopup.Negocio__c}" rendered="true" />
+                                   
+           
+                                   <apex:outputLabel style="font-weight:bold;" >Categoría</apex:outputLabel>  
+                                   <apex:outputLabel value="{!CasoPopup.CASO_Categoria__c}"   />                          
+                                   
+                                   <apex:outputLabel style="font-weight:bold;" >Detalle Solicitud</apex:outputLabel>  
+                                   <apex:outputField value="{!CasoPopup.Detalle_Solicitud__c}" />                            
+
+                            <!--2-->      
+                                    <apex:outputLabel style="font-weight:bold;" >Nº Caso</apex:outputLabel> 
+                                    <apex:outputLabel value="{!CasoPopup.CaseNumber}" />                               
+                                    <apex:outputLabel style="font-weight:bold;" >Estado</apex:outputLabel> 
+                                    <apex:outputLabel id="txt_EstadoCaso"  style="font-weight:bold;color:blue;" value="{!EstadoCambio}" />
+                                    
+                                    <apex:outputLabel style="font-weight:bold;" >RUT </apex:outputLabel>     
+                                    <apex:outputLabel value="{!CasoPopup.RUT__c}" rendered="{!CasoPopup.EsNoCliente__c == false}"/>       
+                                    <apex:outputLabel value="{!CasoPopup.RUT_no_Cliente__c}" rendered="{!CasoPopup.EsNoCliente__c == true}" /> 
+                           </apex:panelGrid>
+                
+                <script>colorPageBlock(document.getElementById("{!$Component.pbs_Cabecera}"), "gray", "white");</script>
+            </apex:pageBlockSection>
+            <hr/>
+            <apex:pageBlockSection id="pbs_DatoCaso" collapsible="false"  >
+                <apex:panelGrid columns="2" >
+                    <apex:panelGroup >
+                        <apex:outputLabel style="font-weight:bold;" rendered="true" >Sub Estado Acsel</apex:outputLabel>    
+                         
+                        <apex:selectList id="cmd_estadosACSEL" size="1" value="{!CasoPopup.Sub_Estado_Acsel__c}" style="width:200px;" rendered="true"  >
+                            <apex:selectOptions value="{!ListarEstadosAcsel}" />
+                            <apex:actionSupport event="onchange"  status="Status" />
+                        </apex:selectList> 
+                    </apex:panelGroup>
+
+                    <apex:panelGroup >
+                        <apex:outputLabel style="font-weight:bold;" rendered="true">Monto Rescate</apex:outputLabel>    
+                        <apex:inputText value="{!CasoPopup.Monto_Rescate__c}" rendered="true"  />
+                    </apex:panelGroup>
+                </apex:panelGrid>
+               
+                
+            </apex:pageBlockSection>
+
+        </apex:pageBlock>
+        <apex:panelGrid columns="1" >
+            <apex:panelGroup >
+                <apex:commandButton id="cmd_ActualizaACSEL" value="Actualizar Valores" styleClass="btnSave" Status="Status" action="{!ActualizaValoresACSEL}" oncomplete="cerrarVentana('{!ResultadoPopup}', '{!IdCaso}', '{!UsuarioBackUp}', '{!Procedencia}', '{!MensajePopup}');" />
+                <apex:commandButton id="cmd_CancelarCambio" value="Cancelar" styleClass="btnCancel"  onclick="CancelarCambio();" />
+        </apex:panelGroup>
+        </apex:panelGrid>
+        
+    </apex:form>
+        
+</apex:page>

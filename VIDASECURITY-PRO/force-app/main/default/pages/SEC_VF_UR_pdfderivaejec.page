@@ -1,0 +1,82 @@
+<apex:page renderAs="PDF" controller="CLS_generaPDFdevejecutivo" action="{!cargaPDF}">
+    
+    <apex:pageBlock >
+    
+        <div style="font-family:Arial, Helvetica, sans-serif; font-size:14px;">
+            
+       		<div style="text-align:right">
+				
+                Santiago, {!DAY(FECHA_PDF)} de {!MESFE_PDF} de {!YEAR(FECHA_PDF)}
+                
+            </div>
+            
+            <br/>
+            <br/>
+            <br/>
+            
+            <div>
+                
+                Señor(a)
+                <br/>
+                <b>{!CLIEN_PDF}</b>             
+                
+            </div>
+            
+            <br/>
+            <br/>
+            <br/>
+            
+            <div>
+                Presente
+                <br/>
+                <br/>
+                De nuestra consideración
+            </div>
+            
+            <br/>
+            <br/>            
+            
+            <div style="text-align:justify">
+                Continuando con nuestro objetivo de mantener oportunamente informados a nuestros clientes y según lo establecido por el artículo 528 del Código de Comercio, comunicamos a usted que su solicitud de modificación a su póliza de seguro Nº {!NPOLI_PDF} se encuentra pendiente debido a la necesidad de recopilar más antecedentes, los cuales se detallan a continuación.    
+            </div>
+			
+            <br/>
+            <br/>
+			
+			<div>
+                {!ASUNT_PDF}
+                <br/>
+                - {!COMEN_PDF}
+            </div>            
+            
+            <br/>
+            <br/>
+            <br/>
+            
+            <div>
+                Sin otro particular y atentos a cualquier consulta, le saluda.
+            </div>
+            
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            
+            <div>
+                <apex:image value="{!$Resource.SEC_UR_Firma_HernanRiosL}" />
+                <br/>
+                _________________________
+                <br/>
+                {!UNOMB_PDF}
+                <br/>
+                {!UCARG_PDF}
+                <br/>
+                {!COMPA_PDF}
+            </div>
+            
+        </div>
+        
+    </apex:pageBlock>
+    
+</apex:page>

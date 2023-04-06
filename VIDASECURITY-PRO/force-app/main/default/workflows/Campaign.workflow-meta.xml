@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fieldUpdates>
+        <fullName>SEC_Activar_Campa_a_Producto_Oncol_gic</fullName>
+        <field>IsActive</field>
+        <literalValue>1</literalValue>
+        <name>SEC - Activar Campaña Producto Oncológic</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>SEC_Activar_Campa_a_Producto_Oncol_gicV1</fullName>
+        <field>IsActive</field>
+        <literalValue>1</literalValue>
+        <name>SEC - Activar Campaña Producto Oncológic</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>SEC_Actualiza_Estado_Campa_a_Prod_OncV2</fullName>
+        <field>Status</field>
+        <literalValue>En Ejecución</literalValue>
+        <name>SEC - Actualiza Estado Campaña Prod Onc</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>SEC_Actualiza_Estado_Campa_a_Prod_Onco</fullName>
+        <field>Status</field>
+        <literalValue>En Curso</literalValue>
+        <name>SEC - Actualiza Estado Campaña Prod Onco</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>SEC_Actualiza_ID_Externo_Campa_a</fullName>
+        <field>CAMPA_COD_Campa_a__c</field>
+        <formula>CAMPA_Codigo_Campana__c</formula>
+        <name>SEC - Actualiza ID Externo Campaña</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>SEC_Desactiva_Campa_a_Televenta_Oncol</fullName>
+        <field>IsActive</field>
+        <literalValue>0</literalValue>
+        <name>SEC - Desactiva Campaña Televenta Oncoló</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>SEC - Activación Campaña Producto Oncológico</fullName>
+        <active>true</active>
+        <formula>AND(   IsActive = false,    StartDate &gt; TODAY(),    RecordType.Name = &quot;Campaña - Televenta Oncológico&quot;,  ISPICKVAL( Status, &quot;Planificada&quot; ) )</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>SEC_Activar_Campa_a_Producto_Oncol_gic</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <actions>
+                <name>SEC_Actualiza_Estado_Campa_a_Prod_Onco</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <offsetFromField>Campaign.StartDate</offsetFromField>
+            <timeLength>0</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>SEC - Desactiva Campaña Televenta Oncológica Abortada</fullName>
+        <actions>
+            <name>SEC_Desactiva_Campa_a_Televenta_Oncol</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Campaign.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Campaña - Televenta Oncológico</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Campaign.Status</field>
+            <operation>equals</operation>
+            <value>Abortada</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>SEC - Genera Id Externo Único Campaña</fullName>
+        <actions>
+            <name>SEC_Actualiza_ID_Externo_Campa_a</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Campaign.CAMPA_Codigo_Campana__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+</Workflow>

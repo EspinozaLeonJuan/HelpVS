@@ -1,0 +1,238 @@
+<apex:page controller="CTR_BandejaResolutorUR" action="{!cargaCasoSeleccionado}" lightningStylesheets="true" showHeader="true" sidebar="false" tabStyle="Case" >
+    <style>
+        .ct
+        {
+            text-align:center;
+        }
+    </style>
+    <script>
+
+    function generaError()
+    {        
+        alert('Se produjo un error, inténtelo nuevamente, en caso que el error persista comuníquese con el administrador del sistema');        
+    }
+    
+    //valida si requerimiento esta en Escritorio Digital    
+    function verRequerimientoED(Persistencia, IdRequerimiento,RutUsuario)
+    {
+        if (IdRequerimiento == 'NO_REQED' ) 
+        {
+            alert ('Para el Caso seleccionado no existe un Requerimiento registrado en Escritorio Digital.');
+        }
+        else if( IdRequerimiento == 'UNSUP_REQED')
+        {
+            alert ('El Caso seleccionado no es soportado por Escritorio Digital.');
+        }
+        else
+        {
+            if (Persistencia == -6) 
+            {   
+                alert('Ha ocurrido un error de Comunicación con Escritorio Digital, no es posible acceder a detalle del Requerimiento.');   
+            } 
+            else if (Persistencia == -1) 
+            {
+                alert('Error de Auntenticacion en Escritorio Digital.');         
+            }
+            else if (Persistencia == -8) 
+            {   
+                alert('Usuario debe poseer un RUT válido asociado.');   
+            }
+            else if (Persistencia > 0)
+            {
+               var performance   = 'height=768px,width=1366px, center=yes, scrollbars=yes';
+           
+/*               var url = "http://vidasecurity.valueweb.cl/TotalAgility/forms/vs-ed-dev/VS-ED-FormularioFirma.form?IDRequerimiento="+IdRequerimiento+"&Rut="+RutUsuario+"&Persistencia="+Persistencia+"";   
+               var url = "http://kta.vidasecurity.cl/TotalAgility/forms/vs-ed-dev/VS-ED-FormularioFirma.form?IDRequerimiento="+IdRequerimiento+"&Rut="+Rut+"&Persistencia="+Persistencia+"";  
+               */
+               var url = "http://kta.vidasecurity.cl/TotalAgility/forms/vs-ed-dev/VS-ED-FormularioFirma.form?IDRequerimiento="+IdRequerimiento+"&Rut="+RutUsuario+"&Persistencia="+Persistencia+"";   
+              
+              
+               var popUp = window.open(url, "_blank", performance);
+               
+               if (popUp == null || typeof(popUp)=='undefined') {  
+                   alert('Por favor deshabilita el bloqueador de ventanas emergentes y vuelve a hacer clic en "Detalle de Solicitud".');        
+               }
+               else {       
+                   popUp.focus();           
+               }
+            }
+        }        
+    }
+    
+    function GetAttach(Id)
+    {
+        var url = "/"+Id;
+            
+        var popUp = window.open(url, "_blank", performance);    
+    }
+    
+    </script>
+     
+    
+    <apex:includeScript value="{!$Resource.jquery}"/>
+    <br/>
+    <div id="dv_CuerpoPrincipal" style="width: 90%; margin-left: auto; margin-right: auto; height: 100%;">
+        
+        <apex:messages />
+        <br/>
+        <br/>
+        
+         
+        <apex:form id="frm_VerCaso">
+            
+            <apex:commandButton id="cmd_VolverMenuPrincipal" value="Volver Menú Principal" action="{!volverMenuPrincipal}" />
+          <!--   <apex:commandButton id="cmd_CambiaEstadoCasoENPROCESO" value="En Proceso" action="{!CambiarEstadoCasoEnProceso}" disabled="{!IF(verCaso.Status == 'Caso Cerrado' || verCaso.Status == 'Cerrado' || verCaso.Status == 'Revisión' || verCaso.Status == 'En Revisión' || verCaso.Status == 'En Proceso' || verCaso.Status == 'Rechazado',true,false)}" />            
+           <apex:commandButton id="cmd_EnviaAEjecutivoCreador" oncomplete="generaError()" action="{!EnviaEjecutivo}" value="Regresar a Ejecutivo" disabled="{!IF(verCaso.Status == 'Derivación' || verCaso.Status == 'Rechazado' || verCaso.Status == 'Cerrado' || verCaso.Status == 'Revisión' || verCaso.Status == 'En Revisión'|| verCaso.Status == 'Caso Cerrado'|| verCaso.Status == 'Back Office',true,false)}" />
+            <apex:commandButton id="cmd_CambiaEstadoCasoRechazado" oncomplete="generaError()" value="Rechazado" action="{!cambiarEstadoCasoRechazado}" disabled="{!IF(verCaso.Status == 'Revisión'|| verCaso.Status == 'En Revisión' || verCaso.Status == 'Derivación' || verCaso.Status == 'Rechazado' || verCaso.Status == 'Cerrado' || verCaso.Status == 'Caso Cerrado'|| verCaso.Status == 'Back Office',true,false)}"/>            
+            <apex:commandButton id="cmd_CarmbiEstadoCasoCERRAR" oncomplete="generaError()" value="Cerrar Caso" action="{!CambiarEstadoCasoCerrado}" disabled="{!IF(verCaso.Status == 'Derivación' || verCaso.Status == 'Revisión'|| verCaso.Status == 'En Revisión' || verCaso.Status == 'Rechazado' || verCaso.Status == 'Cerrado' || verCaso.Status == 'Caso Cerrado'|| verCaso.Status == 'Back Office',true,false)}"/>  -->        
+            <apex:commandButton id="cmd_Escritorio_Digital" value="Escritorio Digital" onclick="verRequerimientoED('{!Persistencia}','{!IdRequerimiento}','{!RutUsuario}');" />
+             <apex:pageBlock id="pbk_EncabezadoCaso" title="Caso" >
+                 <apex:panelGrid columns="8" style="width:80%;">
+                      <apex:outputLabel style="font-weight:bold;" >Nº Caso</apex:outputLabel> 
+                     <apex:outputLabel style="font-weight:bold;" value="{!verCaso.CaseNumber}" />                               
+                     <apex:outputText value="    " id="empty01"/>
+                     <apex:outputLabel style="font-weight:bold;"  >Nº de Poliza</apex:outputLabel>
+                     <apex:outputField value="{!verCaso.CASO_N_Poliza__c}" rendered="true" />  
+                     <apex:outputText value="    " id="empty02"/>
+                     <apex:outputLabel style="font-weight:bold;"  >Estado</apex:outputLabel>
+                     <apex:outputLabel value="{!verCaso.Status}" style="font-weight:bold;color:red;text-transform: uppercase;" rendered="true" />
+                   
+                     <apex:outputLabel style="font-weight:bold;" >RUT Cliente</apex:outputLabel>     
+                     <apex:outputField label="RUT Cliente" value="{!verCaso.RUT__c}"/>       
+                     <!-- <label id="" style="font-size:14px">{!verCaso.RUT__c}</label>                   -->               
+                     <apex:outputText value="    " id="empty03"/>
+                     <apex:outputLabel style="font-weight:bold;" >Cliente</apex:outputLabel>      
+                     <!-- <label id="Nombre_Titular" >{!CASO_PRI.Nombre_Completo_Razon_Social__c}</label>   -->
+                     <apex:outputField value="{!verCaso.AccountId}" rendered="true" /> 
+                     <apex:outputText value="    " id="empty04"/>
+                     <apex:outputLabel style="font-weight:bold;" >Contacto</apex:outputLabel>    
+                     <apex:outputField value="{!verCaso.ContactId}" rendered="true" />
+                 
+                     <apex:outputLabel style="font-weight:bold;" >Negocio</apex:outputLabel>  
+                     <apex:outputField value="{!verCaso.Negocio__c}" rendered="true" />
+                      <apex:outputText value="    " id="empty05"/>
+                     <apex:outputLabel style="font-weight:bold;" >Ejecutivo</apex:outputLabel>  
+                     <apex:outputField value="{!verCaso.Parent.OwnerId}" rendered="true" /> 
+                     <apex:outputText value="    " id="empty06"/>
+                     <apex:outputLabel style="font-weight:bold;"  >Canal</apex:outputLabel>
+                     <apex:outputField value="{!verCaso.Canal__c}" rendered="true" />
+                   
+                     
+                      <apex:outputLabel style="font-weight:bold;" >Tipo de Requerimiento</apex:outputLabel>  
+                     <apex:outputLabel style="font-weight:bold;color:blue;" value="{!verCaso.Tipo_de_Requerimiento__c}" rendered="true" />
+                     <apex:outputText value="    " id="empty07"/>
+                      <apex:outputLabel style="font-weight:bold;" >Asunto</apex:outputLabel>  
+                     <apex:outputField value="{!verCaso.Subject}" rendered="true" />
+                     <apex:outputText value="    " id="empty08"/>
+                     <apex:outputLabel style="font-weight:bold;" >Unidad Resolutora</apex:outputLabel>  
+                     <apex:outputField value="{!verCaso.OwnerId}" rendered="true" />
+                     
+                     <apex:outputLabel style="font-weight:bold;" >Fecha/Hora de Creación</apex:outputLabel>  
+                     <apex:outputField value="{!verCaso.CreatedDate}" rendered="true" /> 
+                     <apex:outputText value="    " id="empty09" />
+                     <apex:outputText value="    " id="empty10" rendered="{!especialTeleventa == false}"/>
+                     <apex:outputText value="    " id="empty11" rendered="{!especialTeleventa == false}"/>
+                     <apex:outputLabel style="font-weight:bold;" rendered="{!especialTeleventa == true}">Frecuencia de Pago</apex:outputLabel> 
+                     <apex:outputLabel value="{!verCaso.Frecuencia_de_Pago__c}"  rendered="{!especialTeleventa == true}" />                       
+                     <apex:outputText value="    " id="empty12" />
+                  
+                     <apex:outputLabel style="font-weight:bold;" >Fecha cierre Tope</apex:outputLabel> 
+                     <apex:outputField value="{!verCaso.Fecha_Cierre_Tope__c}" rendered="true" /> 
+ 
+                     <apex:outputLabel style="font-weight:bold;" rendered="{!IF(verCaso.Tipo_de_Requerimiento__c == 'Solicitudes',true,false)}"  >Categoría</apex:outputLabel>  
+                     <apex:outputLabel style="font-weight:bold;color:blue;" value="{!verCaso.CASO_Categoria__c}" rendered="{!IF(verCaso.Tipo_de_Requerimiento__c == 'Solicitudes',true,false)}"  />                          
+
+                     <apex:outputText value="    " id="empty13" />
+                     <apex:outputText value="    " id="empty14" rendered="{!especialTeleventa == false}"/>
+                     <apex:outputText value="    " id="empty15" rendered="{!especialTeleventa == false}"/>
+                     <apex:outputLabel style="font-weight:bold;" rendered="{!especialTeleventa == true}" >Prima Total Final</apex:outputLabel> 
+                     <apex:outputLabel value="{!verCaso.Prima_Total_Final__c}"  rendered="{!especialTeleventa == true}"/> 
+                     <apex:outputText value="    " id="empty16" />
+
+                     <apex:outputLabel style="font-weight:bold;" rendered="{!IF(verCaso.Tipo_de_Requerimiento__c == 'Solicitudes',true,false)}"  >Detalle Solicitud</apex:outputLabel>  
+                     <apex:outputLabel style="font-weight:bold;color:blue;" value="{!verCaso.Detalle_Solicitud__c}"  rendered="{!IF(verCaso.Tipo_de_Requerimiento__c == 'Solicitudes',true,false)}" />                       
+                 </apex:panelGrid>
+                 
+                 <hr/>
+                <apex:panelGrid columns="2"  style="width:150%;">  
+                       <apex:outputLabel style="font-weight:bold;" >Descripción</apex:outputLabel> 
+                      <apex:inputTextarea id="Description" value="{!verCaso.Description}" style="resize: none;width:650px;height:150px;" readonly="true"/>                        
+
+                 </apex:panelGrid> 
+                 <hr/>
+                        
+                 <apex:panelGrid columns="3" style="width:36%;" >  
+                      <apex:outputLabel style="font-weight:bold;" >Responsable UR</apex:outputLabel> 
+                     <apex:outputField value="{!verCaso.CASO_Responsable_UR__c}" rendered="true" /> 
+                     <apex:commandButton id="cmd_CambiaResponsableUR" value="Reasignar" action="{!CambiarResponsable}" disabled="{!IF(verCaso.Status == 'Derivación' || verCaso.Status == 'Rechazado' || verCaso.Status == 'Cerrado' || verCaso.Status == 'Caso Cerrado' || verCaso.Status == 'Revisión' || verCaso.Status == 'En Revisión'|| verCaso.Status == 'Back Office',true,false)}" />                    
+                 </apex:panelGrid>   
+                 
+              
+            </apex:pageBlock>
+       
+          
+            <apex:pageBlock id="pbk_ComentariosCaso" title="Información Relacionada" >
+                <apex:pageBlockTable id="pbkt_TablaComentariosCaso" title="Comentarios del Caso" value="{!LST_ComentariosCasoUR}" var="coment"  >
+                    <apex:column headerValue="Comentario" value="{!coment.CommentBody}"  headerClass="ct" />
+                    <apex:column headerValue="Fecha Creación" value="{!coment.CreatedDate}"  headerClass="ct"/>
+                    <apex:column headerValue="Creado por" value="{!coment.CreatedById}"  headerClass="ct" />
+                </apex:pageBlockTable>
+             
+                <br/>      
+                <apex:commandButton id="cmd_AgregarComentario" title="Agregar Comentario" value="Agregar Comentario" action="{!AgregarComentario}" 
+                               rendered="{!OpcionEdicion == true}"     />
+
+            </apex:pageBlock>
+        <apex:pageBlock id="lista_tareas" title="Tareas UR asociadas al Caso">
+            <apex:pageBlockTable id="pbkt_TablaCasos" value="{!LST_TareasCasoUR}" var="tarea"  >
+                <apex:column style="font-weight:bold;text-align:center;" headerValue="Estado" value="{!tarea.Status}" headerClass="ct"/> 
+                <apex:column headerValue="Acciones" style="text-align:center;width:10%;" headerClass="ct">
+                    <apex:commandLink value="Detalle Tarea" action="{!ToViewTask}" >
+                        <apex:param name="idTarea" value="{!tarea.Id}" />
+                    </apex:commandLink>
+                    &nbsp;
+                                    </apex:column>                    
+                <apex:column headerValue="Asunto" value="{!tarea.Detalle_Solicitud__c}" style="width:15%;" rendered="true" headerClass="ct"/>
+                <apex:column headerValue="Descripción" value="{!tarea.Description}" style="width:25%;" rendered="true" headerClass="ct"/>
+                <apex:column headerValue="Fecha Creación" value="{!tarea.CreatedDate}" headerClass="ct" style="text-align:right;width:10%;"/>
+                <apex:column headerValue="Fecha de Vencimiento"  value="{!tarea.ActivityDate}" headerClass="ct" style="text-align:right;width:10%;"/>
+                <apex:column headerValue="Unidad Resolutora" value="{!tarea.Owner.Name}" headerClass="ct" style="text-align:center;width:10%;"/>
+                <apex:column headerValue="Responsable" value="{!tarea.Responsable_Backup__c}" rendered="true" headerClass="ct" style="text-align:center;width:10%;"/>                    
+
+            </apex:pageBlockTable>
+
+
+
+<br/>
+            <apex:commandButton title="Nueva Tarea" value="Nueva Tarea" 
+            action="{!ToNewTask}"
+            rendered="{!OpcionEdicion == true}"  />
+
+            </apex:pageBlock>
+
+        <apex:pageBlock id="pbk_AdjuntosCaso" title="Documentos Adjuntos"  rendered="{!OpcionEdicion == false}">
+                <apex:pageBlockTable id="pbkt_TablaAdjuntosCaso" title="Adjuntos del Caso" value="{!LST_AdjuntosCasoUR}" var="attachment"  >
+                    <apex:column headerValue="Nombre Archivo"  headerClass="ct" value="{!attachment.Name}" onclick="GetAttach('{!attachment.Id}');" style="text-decoration: underline;cursor:pointer;"   />
+                    <apex:column headerValue="Última modificación"  headerClass="ct" value="{!attachment.LastModifiedDate}" />                    
+                    <apex:column headerValue="Creado por"  headerClass="ct" value="{!attachment.CreatedById}" />                    
+                </apex:pageBlockTable>
+              
+        </apex:pageBlock>    
+       
+ 
+            
+         </apex:form>
+
+         <apex:relatedList subject="{!verCaso}" list="CombinedAttachments"  pageSize="5" title="Documentos Adjuntos" rendered="{!OpcionEdicion == true}"
+         />
+
+         <apex:pageBlock id="pbk_AdjuntosCasoPadre" title="Documentos Adjuntos Caso Atención" rendered="{!IF(LST_AdjuntosCasoPadre.size>0, true, false)}">
+                <apex:pageBlockTable id="pbkt_TablaAdjuntosCaso" title="Adjuntos del Caso" value="{!LST_AdjuntosCasoPadre}" var="attachment">           
+                    <apex:column headerValue="Nombre Archivo"  headerClass="ct" style="text-decoration: underline;cursor:pointer;">
+                        <apex:outputLink value="{!URLFOR($Action.Attachment.Download,attachment.id )}}" target="_blank">{!attachment.Name}</apex:outputLink>
+                    </apex:column>
+                    <apex:column headerValue="Última modificación"  headerClass="ct" value="{!attachment.LastModifiedDate}" />
+                </apex:pageBlockTable>                  
+        </apex:pageBlock>
+    </div>
+</apex:page>

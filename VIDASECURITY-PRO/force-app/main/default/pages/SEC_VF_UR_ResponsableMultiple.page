@@ -1,0 +1,239 @@
+<!--
+ ************************************************************************************************************
+ |  NOMBRE                 : SEC_VF_UR_ResponsableMultiple		            						        |
+ |  TIPO                   : VISUALFORCE PAGE																|
+ |  REQUERIMIENTO          : MEJORAS UR                                                                  	|
+ |  DESCRIPCION            : Permite  asignar a multiples casos o tareas o colaboraciones un unico          |
+ |                           responsable UR																    |
+ |  																										|
+ ************************************************************************************************************
+ |  VERSIÓN    *    FECHA C/M    *    RESPONSABLE    *    OBSERVACIONES										|
+ |    1.0      *    2019/08/01   *    JUAN ESPINOZA  *    Creación Página									|
+ |     																										|
+ ************************************************************************************************************
+-->
+
+<apex:page controller="CTR_UR_ResponsableMultiple" action="{!IniciarAsignacion}" docType="html-5.0" lightningStylesheets="true" showHeader="false" sidebar="false" >
+    <style>
+        .popupBackground {
+            /* Background color */
+            background-color:black;
+            opacity: 0.5;
+            filter: alpha(opacity = 50);
+            
+            /* Dimensions */
+            width: 100%;
+            height: 1000%;       
+            top: 0;
+            left: 0;
+            z-index: 998;
+            position: absolute;        
+            /* Mouse */
+            cursor:wait;
+        }
+                
+        .popupPanel {
+            /* Background color */
+            border: solid 2px orange;
+            background-color: white;        
+            /* Dimensions */
+            display: inline-block;
+            left: 50%;
+            width: 100px;
+            margin-left: 0px;
+            top: 100px;
+            height: 25px;
+            margin-top: -25px;
+            position: absolute;   
+            z-index: 999;        
+            /* Mouse */
+            cursor:pointer;
+        }
+
+        .ct{
+        text-align:center;
+        }
+
+        .btnSave{
+        color:white !important;
+        background:#11862D !important;
+        margin-right: -8px;
+        }
+
+    .btnCancel{
+        color:white !important;
+        background:#A9B0BE !important;
+        margin-right: -8px;
+    }
+
+    </style>
+    <script type="text/javascript">
+
+        function colorPageBlock(pageblock, bkcolor, color) {
+            if (pageblock != null) 
+            {
+                pageblock.firstChild.style.cssText = "background-color: " + bkcolor + ";font-weight:bold;color:"+color+";";
+            }
+        }
+
+        function cerrarVentana(responsable, ubackup, tipo)
+        {
+            if (responsable != '0' && responsable != 'Ninguno')
+            {
+                if (tipo == 'CASOS_UR')
+                {
+                    alert("Ha sido modificado el Responsable UR asociado a los Casos seleccionados.");
+                    window.opener.location.href="/apex/SEC_VF_UR_Casos?idResponsable="+ubackup;
+                    window.top.close();
+                }
+                else if (tipo == 'TAREAS_UR')
+                {
+                    alert("Ha sido modificado el Responsable UR asociado a las Tareas seleccionadas.");
+                    window.opener.location.href="/apex/SEC_VF_UR_Tareas?idResponsable="+ubackup;
+                    window.top.close();
+                }
+                else if (tipo == 'COLABORACIONES_UR')
+                {
+                    alert("Ha sido modificado el Responsable UR asociado a las Colaboraciones seleccionadas.");
+                    window.opener.location.href="/apex/SEC_VF_UR_Colaboraciones?idResponsable="+ubackup;
+                    window.top.close();
+                }
+                
+            } 
+            else
+            {
+                if (tipo == 'CASOS_UR')
+                {
+                    alert("Debe elegir un Usuario Responsable asignado a los Casos seleccionados.");
+                }
+                else if (tipo == 'TAREAS_UR')
+                {
+                    alert("Debe elegir un Usuario Responsable asignado a las Tareas seleccionadas.");
+                }
+                else if (tipo == 'COLABORACIONES_UR')
+                {
+                    alert("Debe elegir un Usuario Responsable asignado a las Colaboraciones seleccionadas.");
+                }
+                
+            }                
+        }
+
+        function CancelarCambio()
+        {             
+            window.top.close();
+        }
+
+        
+    </script>
+
+<apex:includeScript value="{!$Resource.jquery}"/>
+    <!--<br/>-->
+        
+    <apex:actionStatus id="Status">
+        <apex:facet name="start">
+            <apex:outputPanel >
+                <div class="popupBackground" />
+                <div class="popupPanel">
+                    &nbsp; Espere...<img src="/apexpages/devmode/img/saveStatus.gif" />
+                </div>
+            </apex:outputPanel> 
+        </apex:facet>
+    </apex:actionStatus>
+ 
+    
+
+    <apex:form id="frm_VerCaso">
+            
+               
+        <apex:pageBlock id="dv_header_sin" rendered="{!SIN_DATA == true}" >
+            <apex:pageBlockSection title="{!Titulo}" collapsible="false" columns="1" id="pbs_ResponsableUR"  >
+            <br/><br/><br/><br/><br/><br/><br/>    
+            <apex:panelGrid columns="1" style="width:100%;height:300px;text-align:center;font-size:22px;font-weigth:bold;color:blue;">    
+                    
+                    Debe seleccionar al menos un Caso para asignar el Responsable UR.
+
+                </apex:panelGrid>
+                <script>colorPageBlock(document.getElementById("{!$Component.pbs_ResponsableUR}"), "#32894F", "white");</script>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+
+        <apex:pageBlock id="dv_header" rendered="{!SIN_DATA == false}">
+            <apex:pageBlockSection title="{!Titulo}" collapsible="false" columns="1" id="pbs_ResponsableUR"  >
+                <apex:panelGrid columns="2" style="width:70%;">    
+                    <apex:panelGroup style="text-align:left;" >
+                        <apex:outputLabel style="font-weight:bold;" >Responsable UR:</apex:outputLabel>  
+                        
+                        <apex:selectList id="cmd_Usuarios" size="1" value="{!ResponsableUR}" style="width:225px;" >
+                                <apex:selectOptions value="{!ListarUsuarios}" />
+                                <apex:actionSupport event="onchange" action="{!SeleccionResponsable}"  reRender="dv_header" status="Status"  />
+                            </apex:selectList>
+
+                    </apex:panelGroup>
+                    <apex:panelGroup >
+                        <apex:commandButton value="Aceptar" action="{!CambiarResponsable}"  oncomplete="cerrarVentana('{!ResponsableUR}','{!UsuarioBackUp}','{!Tipo}');" reRender="dv_header" status="Status" styleClass="btnSave"/>
+                        <apex:commandButton value="Cancelar"   onclick="CancelarCambio();"  styleClass="btnCancel"/>                           
+                    </apex:panelGroup>                          
+                </apex:panelGrid>
+                 
+                <script>colorPageBlock(document.getElementById("{!$Component.pbs_ResponsableUR}"), "gray", "white");</script>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+
+        <apex:outputPanel layout="block" style="overflow:auto;width:100%;height:335px;" rendered="{!CASOS_OK == true}" >
+            <apex:pageBlock id="dcasos">
+                <apex:pageBlockTable id="pbkt_TablaCasos" value="{!CasosUR}" var="caso"  headerClass="ct">
+
+                        <apex:column headerValue="N° Caso" style="text-align:center;" value="{!caso.CaseNumber}"  headerClass="ct"/>
+                        <apex:column headerValue="Responsable" value="{!Caso.CASO_Responsable_UR__c}" rendered="true" headerClass="ct" style="text-align:center;"/>  
+                        <apex:column headerValue="Detalle de Solicitud" value="{!caso.Detalle_Solicitud__c}" title="{!caso.Subject}"  style="text-align:left;" headerClass="ct"/>                             
+                             <apex:column headerValue="Contratante" value="{!caso.AccountId}" headerClass="ct"/ >
+                             <apex:column headerValue="Poliza" value="{!caso.CASO_N_Poliza__c}" headerClass="ct" style="text-align:center;"/>
+                             <apex:column headerValue="Fecha Apertura" value="{!caso.CreatedDate}" headerClass="ct" style="text-align:center;"/>
+                             <apex:column headerValue="Fecha de Asignación"  value="{!caso.Fecha_Asignacion_UR__c}" headerClass="ct" style="text-align:center;"/>
+                             
+                              
+                               
+                
+                </apex:pageBlockTable>
+                </apex:pageBlock>
+            </apex:outputPanel>
+
+
+            <apex:outputPanel layout="block" style="overflow:auto;width:100%;height:335px;" rendered="{!TAREAS_OK == true}" >
+            <apex:pageBlock id="dtareas">
+                <apex:pageBlockTable id="pbkt_TablaTareas" value="{!TareasUR}" var="tarea"  headerClass="ct">
+
+                    <apex:column headerValue="Nº Caso" value="{!tarea.caso_numero__c}" rendered="true" headerClass="ct" style="text-align:center;width:10%;" />                    
+                    
+                    <apex:column headerValue="Asunto" value="{!tarea.Detalle_Solicitud__c}" style="width:15%;" rendered="true" headerClass="ct"/>
+                    <apex:column headerValue="Descripción" value="{!tarea.Description}" style="width:20%;" rendered="true" headerClass="ct"/>
+                    <apex:column headerValue="Fecha Creación" value="{!tarea.CreatedDate}" headerClass="ct" style="text-align:right;width:10%;"/>
+                    <apex:column headerValue="Fecha de Vencimiento"  value="{!tarea.ActivityDate}" headerClass="ct" style="text-align:center;width:10%;"/>
+                    <apex:column headerValue="Unidad Resolutora" value="{!tarea.UR_Origen__c}" headerClass="ct" style="text-align:center;width:10%;"/>
+                    <apex:column headerValue="Responsable" value="{!tarea.Responsable_Backup__c}" rendered="true" headerClass="ct" style="text-align:center;width:10%;"/>                    
+                            
+                
+                </apex:pageBlockTable>
+                </apex:pageBlock>
+            </apex:outputPanel>
+
+            <apex:outputPanel layout="block" style="overflow:auto;width:100%;height:335px;" rendered="{!COLABORACIONES_OK == true}" >
+            <apex:pageBlock id="dcolaboraciones">
+                <apex:pageBlockTable id="pbkt_TablaColaboraciones" value="{!ColaboracionesUR}" var="tarea"  headerClass="ct">
+
+                    <apex:column headerValue="Nº Caso" value="{!tarea.caso_numero__c}" rendered="true" headerClass="ct" style="text-align:center;width:10%;" />                    
+                    
+                    <apex:column headerValue="Asunto" value="{!tarea.Detalle_Operacion__c}" style="width:15%;" rendered="true" headerClass="ct"/>
+                    <apex:column headerValue="Descripción" value="{!tarea.Description}" style="width:20%;" rendered="true" headerClass="ct"/>
+                    <apex:column headerValue="Fecha Creación" value="{!tarea.CreatedDate}" headerClass="ct" style="text-align:right;width:10%;"/>
+                    <apex:column headerValue="Fecha de Vencimiento"  value="{!tarea.ActivityDate}" headerClass="ct" style="text-align:center;width:10%;"/>
+                    <apex:column headerValue="Unidad Resolutora" value="{!tarea.UR_Origen__c}" headerClass="ct" style="text-align:center;width:10%;"/>
+                    <apex:column headerValue="Responsable" value="{!tarea.Responsable_Backup__c}" rendered="true" headerClass="ct" style="text-align:center;width:10%;"/>                    
+                            
+                
+                </apex:pageBlockTable>
+                </apex:pageBlock>
+            </apex:outputPanel>
+    </apex:form>
+        
+</apex:page>

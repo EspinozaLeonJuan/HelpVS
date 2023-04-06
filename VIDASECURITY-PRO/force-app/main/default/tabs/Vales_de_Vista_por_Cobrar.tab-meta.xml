@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomTab xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Vales de Vista por Cobrar</label>
+    <motif>Custom16: Bank</motif>
+    <page>SEC_VF_VVC_HistorialCargas</page>
+</CustomTab>

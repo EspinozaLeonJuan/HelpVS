@@ -1,0 +1,177 @@
+<apex:page controller="CTR_BandejaColaboraciones" action="{!CargaColaboracion}" lightningStylesheets="true" showHeader="true" sidebar="false" tabStyle="Case" >
+    
+    <style>
+    
+        .popupBackground {
+            /* Background color */
+            background-color:black;
+            opacity: 0.5;
+            filter: alpha(opacity = 50);
+            
+            /* Dimensions */
+            width: 90%;
+            height: 100%;       
+            top: 0;
+            left: 50;
+            z-index: 998;
+            position: absolute;        
+            /* Mouse */
+            cursor:wait;
+        }
+                
+        .popupPanel {
+            /* Background color */
+            border: solid 2px orange;
+            background-color: white;        
+            /* Dimensions */
+            display: inline-block;
+            left: 50%;
+            width: 100px;
+            margin-left: 0px;
+            top: 100px;
+            height: 25px;
+            margin-top: -25px;
+            position: absolute;   
+            z-index: 999;        
+            /* Mouse */
+            cursor:pointer;;
+        }
+        .DivColumn_A {
+            width:40%;
+            float:left;
+        }
+    
+        .DivColumn_B {
+            width:12%;
+            float:left;
+        }
+    
+        .DivColumn_C {
+            width:48%;
+            float:left;
+        }
+    </style>
+    
+     <script>
+    
+    function evalua(error)
+    {
+        if (error == 'responsable_no_seleccionado')
+        {
+            alert('Para actualizar el Estado de la Colaboración de Reclamo, esta debe tener asignado un Responsable UR.');
+        } 
+        else  if (error == 'tarea_no_cambia_estado')
+        {
+            alert('Para actualizar el Estado de la Colaboración de Reclamo, debe seleccionar un Estado distinto a "No Iniciada".');
+        }
+        else if (error == 'comentario_final_pendiente')
+        {
+            alert('Para actualizar el Estado de la Colaboración de Reclamo(Completada/Rechazada) debe ingresar un Comentario asociado.');
+        }
+        else if (error == 'a_historial')
+        {
+            alert('El Estado de la Colaboración de Reclamo ha sido actualizado.');
+            ToColaboracion();
+        }
+        else
+        {
+            alert('El Estado de la Colaboración de Reclamo  ha sido actualizado.');
+            ToColaboracion();
+        }
+    }
+
+</script>
+<div id="dv_CuerpoPrincipal" style="width: 90%; margin-left: auto; margin-right: auto; height: 100%;">
+        
+     
+    <apex:actionStatus id="Status">
+        <apex:facet name="start">
+            <apex:outputPanel >
+                <div class="popupBackground" />
+                <div class="popupPanel">
+                    &nbsp; Espere...<img src="/apexpages/devmode/img/saveStatus.gif" />
+                </div>
+            </apex:outputPanel> 
+        </apex:facet>
+    </apex:actionStatus>
+    <br/><br/>
+    <apex:form id="frm_ListadoColaboraciones">        
+        <apex:actionFunction action="{!ToHistorial}" name="ToHistorial"/>
+        	<apex:actionFunction action="{!ToColaboracion}" name="ToColaboracion"/>
+            <apex:commandButton id="cmd_VolverTarea" value="Volver Menú Principal" action="{!ToColaboraciones}" />            
+            <apex:commandButton id="cmd_DetalleTarea" value="Detalle Colaboración" action="{!ToColaboracion}"  />  
+            <apex:commandButton id="cmd_AsignacionResponsable" value="Asignación Responsable UR"  action="{!ToResponsable}" />   
+            <apex:commandButton id="cmd_ActualizacionEstdo" value="Actualización de Estado" disabled="true"  />
+    
+        <apex:pageBlock id="pbk_EncabezadoCaso" title="Actualizar Estado Colaboración  Reclamo" >
+            <apex:panelGrid columns="8" style="width:100%;">
+
+                <apex:outputLabel style="font-weight:bold;" >Estado</apex:outputLabel>  
+                <apex:outputLabel style="font-weight:bold;color:red;text-transform: uppercase;" value="{!Tarea.Status}" ></apex:outputLabel>  
+                <apex:outputText value="    " id="empty001"/> 
+                <apex:outputText value="    " id="empty002"/> 
+                <apex:outputText value="    " id="empty003"/> 
+                <apex:outputText value="    " id="empty004"/> 
+                <apex:outputText value="    " id="empty005"/> 
+                <apex:outputText value="    " id="empty006"/> 
+
+
+            <apex:outputLabel style="font-weight:bold;" >Asunto</apex:outputLabel>  
+            <apex:outputLabel style="font-weight:bold;color:blue;" value="{!Tarea.Detalle_Operacion__c}" ></apex:outputLabel>  
+            <apex:outputText value="    " id="empty007"/> 
+            <apex:outputLabel style="font-weight:bold;" >Nº Caso</apex:outputLabel> 
+            <apex:commandLink style="font-weight:bold;" value="{!Caso.CaseNumber}"  action="{!ToCase}"   />
+            
+            <apex:outputText value="    " id="empty008"/>  
+            <apex:outputLabel style="font-weight:bold;" >Ejecutiva</apex:outputLabel> 
+           <!--  <apex:outputField  value="{!Caso.Parent.OwnerId}" />  -->
+           <apex:outputField value="{!Caso.OwnerId}" />  
+    
+
+            <apex:outputLabel style="font-weight:bold;" >RUT Cliente</apex:outputLabel>     
+            <apex:outputField label="RUT Cliente" value="{!Caso.RUT__c}"/>      
+            <apex:outputText value="    " id="empty009"/>  
+            <apex:outputLabel style="font-weight:bold;" >Cliente</apex:outputLabel>      
+            <apex:outputLabel value="{!Caso.Nombre_Completo_Razon_Social__c}"  /> 
+
+            <apex:outputText value="    " id="empty010"/>  
+            <apex:outputLabel style="font-weight:bold;"  >Nº de Poliza</apex:outputLabel>
+            <apex:outputField style="font-weight:bold;color:blue;" value="{!Caso.CASO_N_Poliza__c}" rendered="true" />  
+
+            <apex:outputLabel style="font-weight:bold;" >Prioridad</apex:outputLabel>  
+            <apex:outputLabel style="font-weight:bold;color:blue" value="{!Tarea.Priority}" rendered="true"></apex:outputLabel>    
+            <apex:outputText value="    " id="empty011"/>   
+
+            <apex:outputLabel style="font-weight:bold;" >Responsable UR</apex:outputLabel>  
+            <apex:outputLabel style="font-weight:bold;"  value="{!RESPONSABLE_ACTUAL}" rendered="{!IF(RESPONSABLE_ASIGNADO == 'S',true,false)}"></apex:outputLabel> 
+            <apex:outputLabel style="font-weight:bold;" rendered="{!IF(RESPONSABLE_ASIGNADO == 'N',true,false)}" >Responsable no asignado</apex:outputLabel> 
+
+            <apex:outputText value="    " id="empty012"/>   
+            <apex:outputLabel style="font-weight:bold;" >Fecha de Vencimiento</apex:outputLabel>  
+            <apex:outputField style="font-weight:bold;" value="{!Tarea.ActivityDate}" rendered="true"></apex:outputField> 
+
+
+
+
+         </apex:panelGrid>   
+
+
+        </apex:pageBlock>
+        <apex:pageBlock id="pb_EstadoTarea" >
+            <apex:pageBlockSection id="pbs_DatoCaso" collapsible="false" columns="1" >
+                        <apex:inputField value="{!Tarea.Status}" label="Estado"  />
+                        <apex:inputTextarea id="txt_ComentarioNotificacion1" label="Comentario" value="{!ComentarioFinal}" style="resize: none;width:98%;height:180px;"  />
+
+            </apex:pageBlockSection> 
+    </apex:pageBlock>
+        <apex:pageBlock id="pb_ActionCaso">
+
+                <apex:commandButton id="cmd_Guardar" title="Guardar" value="Guardar"   status="Status" 
+                action="{!SaveEstado}" oncomplete="evalua('{!ErrorOperacion}');"
+                />
+                <apex:commandButton id="cmd_Cancelar" title="Cancelar" value="Cancelar" immediate="true" action="{!ToColaboracion}"  />
+
+</apex:pageBlock>
+     </apex:form>
+     </div>
+</apex:page>

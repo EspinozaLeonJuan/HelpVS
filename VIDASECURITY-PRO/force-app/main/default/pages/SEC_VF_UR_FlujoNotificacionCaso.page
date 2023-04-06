@@ -1,0 +1,150 @@
+<apex:page controller="CTR_FlujoNotificacion" action="{!cargaCaso}" lightningStylesheets="true" sidebar="false" showHeader="true" tabStyle="Case">
+    <style>
+             
+        .popupBackground {
+                /* Background color */
+                background-color:black;
+                opacity: 0.5;
+                filter: alpha(opacity = 50);
+                
+                /* Dimensions */
+                width: 100%;
+                height: 100%;       
+                top: 0;
+                left: 0;
+                z-index: 998;
+                position: absolute;        
+                /* Mouse */
+                cursor:wait;
+            }
+                    
+            .popupPanel {
+               /* Background color */
+                border: solid 2px orange;
+                background-color: white;        
+                /* Dimensions */
+                display: inline-block;
+                left: 50%;
+                width: 100px;
+                margin-left: 0px;
+                top: 100px;
+                height: 25px;
+                margin-top: -25px;
+                position: absolute;   
+                z-index: 999;        
+                /* Mouse */
+                cursor:pointer;;
+            }
+        
+            </style>
+     <script type="text/javascript">                    
+                //Función cerrar ventana...
+                function cerrarVentana(){  
+                    window.opener.location.href="/{!CASO_ID}";
+                    window.top.close();                                     
+                }  
+            
+            	function alerta(mensaje)
+            	{
+                    var text = "No se ha adjuntado la carta de respuesta, no se puede cerrar el reclamo. El nombre del archivo debe empezar por 'Respuesta'."
+                    alert(mensaje);
+                }
+            
+                function actionBotonGuardar(inputArea, textid){  
+                    if ( inputArea.value.length == 0)
+                        document.getElementById(textid).disabled = true;
+                    else
+                        document.getElementById(textid).disabled = false;
+                } 
+            
+            	document.getElementById('{!$Component.frm_DatoCaso.pb_ActionCaso.cmd_Guardar}').disabled = true;
+            
+           
+            
+            </script>
+            <apex:includeScript value="{!$Resource.jquery}"/>
+    <div id="dv_CuerpoPrincipal" style="width: 90%; margin-left: auto; margin-right: auto; height: 100%;">    
+        <apex:actionStatus id="Status">
+            <apex:facet name="start">
+                <apex:outputPanel >
+                    <div class="popupBackground" />
+                    <div class="popupPanel">
+                        &nbsp; Espere...<img src="/apexpages/devmode/img/saveStatus.gif" />
+                    </div>
+                </apex:outputPanel> 
+            </apex:facet>
+        </apex:actionStatus>
+
+        <br/><br/>
+
+        <apex:form id="frm_DatoCaso">
+           <apex:commandButton id="cmd_VolverCaso" value="Información Caso" action="{!volverCaso}" />            
+            <apex:commandButton id="cmd_CambiaEstadoCasoENPROCESO" value="En Proceso"  disabled="true" /> 
+            <apex:commandButton id="cmd_EnviaAEjecutivoCreador" value="Regresar a Ejecutivo" disabled="true" />   
+            <apex:commandButton id="cmd_CambiaEstadoCasoRechazado"  value="Rechazado"  disabled="true"/>            
+            <apex:commandButton id="cmd_CarmbiEstadoCasoCERRAR"  value="Cerrar Caso" disabled="true"/>          
+            <apex:commandButton id="cmd_Escritorio_Digital" value="Escritorio Digital" disabled="true"/>
+            
+   <apex:pageBlock title="{!Titulo}" id="dv_header">
+                       
+
+                           <apex:panelGrid columns="5" style="width:80%;">
+                               
+                        		<apex:outputLabel style="font-weight:bold;" >Caso</apex:outputLabel>  
+                    			<apex:outputLabel style="font-weight:bold;"  value="{!CASO_PRI.CaseNumber}" />                               
+								<apex:outputText value="    " id="empty01"/>
+                        		 <apex:outputLabel style="font-weight:bold;"  >Nº de Poliza</apex:outputLabel>
+                                <label id="Poliza" >{!CASO_PRI.CASO_Poliza_Asoc__c}</label>   
+                        		
+                               
+                                <apex:outputLabel style="font-weight:bold;" >RUT Cliente</apex:outputLabel> 
+                               <apex:outputField label="RUT Cliente" value="{!CASO_PRI.RUT__c}"/>       
+                    		   <!-- <label id="" style="font-size:14px">{!CASO_PRI.RUT__c}</label>                   -->
+                       		    <apex:outputText value="    " id="empty02"/>
+                                <apex:outputLabel style="font-weight:bold;" >Cliente</apex:outputLabel>      
+                               <!-- <label id="Nombre_Titular" >{!CASO_PRI.Nombre_Completo_Razon_Social__c}</label>   -->
+                   				<apex:outputField label="Nombre_Titular" value="{!CASO_PRI.AccountId}"  />  
+                                
+                                <apex:outputLabel style="font-weight:bold;" >Asunto</apex:outputLabel>    
+                                <apex:outputField label="Asunto" value="{!CASO_PRI.Subject}"/>   
+                    		   <!-- <label id="" style="font-size:14px">{!CASO_PRI.Subject}</label>                   -->
+                       		    <apex:outputText value="    " id="empty03"/>
+                                <apex:outputLabel style="font-weight:bold;" >Ejecutivo</apex:outputLabel> 
+                               <apex:outputField label="Ejecutivo" value="{!CASO_PRI.Parent.OwnerId}" />  
+                              
+                        	</apex:panelGrid>
+                   
+             </apex:pageBlock>
+            
+            <apex:pageBlock id="pb_DatoCaso">
+            
+                <apex:pageBlockSection id="pbs_DatoCaso" collapsible="false" columns="1" >
+                
+                    <!-- <apex:outputField id="cmd_Estado" value="{!CASO_PRI.Status}" label="Estado"  />-->
+                    <apex:outputText id="txt_EstadoCaso" value="{!CASO_PRI.Status}" label="Estado" />
+                    <apex:inputCheckbox id="chk_NotificarCliente" label="Enviar Correo Cliente" value="{!C_NOTIFI}" />
+                    <apex:inputText id="txt_AsuntoNotificacion" label="Asunto" value="{!C_ASUNTO}" style="width:50%;" />
+                    <apex:inputTextarea id="txt_ComentarioNotificacion" label="Comentario" value="{!C_COMENT}" style="resize: none;width:98%;height:180px;" onkeyup="actionBotonGuardar(this,'{!$Component.frm_DatoCaso.pb_ActionCaso.cmd_Guardar}')" />
+                
+                </apex:pageBlockSection>
+            
+            </apex:pageBlock>
+                                     <br/>
+                <apex:pageMessages id="showmsg" escape="true" rendered="true"></apex:pageMessages>
+
+            <apex:pageBlock id="pb_ActionCaso">
+            
+                <apex:commandButton id="cmd_Guardar" title="Guardar" value="Guardar" action="{!guardarCasoCerrado}" 
+                                   oncomplete="alerta('{!Mensaje}');"
+                                    status="Status"  />
+                <apex:commandButton id="cmd_Cancelar" title="Cancelar" value="Cancelar" action="{!cancelarCerrarCaso}"  />
+               
+            </apex:pageBlock>
+            
+            
+                
+        </apex:form>
+        
+        
+    </div>    
+</apex:page>

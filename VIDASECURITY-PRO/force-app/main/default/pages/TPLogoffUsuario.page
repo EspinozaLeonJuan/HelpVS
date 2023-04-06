@@ -1,0 +1,7 @@
+<apex:page standardController="SucursalUsuario__c" extensions="SalesforceTP" title="Logoff Forzado Usuario Totalpack">
+    <apex:form >
+        <apex:commandButton action="{!LogoffForzadoUsuario}" value="Desloguear Usuario" reRender="block">
+        	<apex:param name="usuario" value="{!SucursalUsuario__c.Usuario__c}" assignTo="{!UserLogoffForzadoId}"/>
+        </apex:commandButton>
+    </apex:form>
+</apex:page>

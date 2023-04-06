@@ -1,0 +1,59 @@
+<apex:page controller="CLS_AperturaCierreCaso_Controlador" action="{!CierreRequerimiento_cargaCasoSeleccionado}"  lightningStylesheets="true" showHeader="true" sidebar="true" tabStyle="Case" >
+         
+     <script>
+   /* 
+    if ('{!CODMENSAJE}' == 'adjunto_respuesta')
+    {
+    	alert('No se ha adjuntado la carta de respuesta, no se puede cerrar el reclamo. El nombre del archivo debe empezar por \'Respuesta\'.');
+    	document.location = "/"+'{!IDCASO}';  
+    }
+     */
+    </script>
+    
+    
+        <apex:form id="frm_VerCaso">
+            
+            <apex:actionFunction action="{!ToCase}" name="ToCase"/>        
+           
+        <apex:outputPanel > 
+            
+            <apex:pageBlock id="pbk_EncabezadoCaso" title="Cierre de Caso Requerimiento" >                
+                   <apex:panelGrid columns="2">
+                        
+                    <apex:outputLabel >Nº de Caso:</apex:outputLabel>  
+                    <apex:commandLink action="{!ToCase}"  value="{!Caso.CaseNumber}" rendered="true"/>     
+                     <apex:outputLabel >Estado actual:</apex:outputLabel>      
+                    <apex:outputLabel style="font-weight:bold;font-size:14px;" value="{!Caso.Status}"></apex:outputLabel>
+				 
+                       <apex:outputLabel >RUT Titular:</apex:outputLabel>      
+                    <apex:outputLabel value="{!Caso.RUT__c}"></apex:outputLabel>               
+                        <apex:outputLabel >Nombre Titular:</apex:outputLabel>      
+                    <apex:outputLabel value="{!Caso.Nombre_Completo_Razon_Social__c}"></apex:outputLabel>
+                     
+                </apex:panelGrid>
+                <br/>
+                <hr/>
+                <br/>
+               
+                  
+                <apex:panelGrid columns="3">    
+                    &nbsp;
+                                       
+                        <apex:commandButton id="cmd_Cancelar" value="Cancelar" action="{!ToCase}" /> 
+                     <apex:commandButton id="cmd_CambiarEstado" value="Cerrar Caso Requerimiento" action="{!CierreRequerimiento_guardarCaso}" />    
+                </apex:panelGrid> 
+                
+                
+            </apex:pageBlock>
+            
+          
+<br/>
+           
+             </apex:outputPanel>
+        </apex:form>
+    
+         <apex:pageMessages id="showmsg" escape="true"></apex:pageMessages>
+    
+    
+    
+</apex:page>

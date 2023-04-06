@@ -1,0 +1,85 @@
+<apex:page controller="CLS_DerivarCasos" action="{!cargaCasoSeleccionado}" sidebar="true" lightningStylesheets="true"  >
+    
+    
+         
+        <apex:form id="frm_VerCaso">
+            <apex:actionFunction action="{!ToCase}" name="ToCase"/>        
+           
+        <apex:outputPanel > 
+            
+            <apex:pageBlock id="pbk_EncabezadoCaso" title="{!Titulo}" >                
+                   <apex:panelGrid columns="2">
+                        
+                    <apex:outputLabel >Nº de Caso:</apex:outputLabel>  
+                    <apex:commandLink action="{!ToCase}"  value="{!verCaso.CaseNumber}" rendered="true"/>  
+                    
+                       
+                        <apex:outputLabel >Estado:</apex:outputLabel>      
+                    <apex:outputLabel value="{!verCaso.Status}"></apex:outputLabel>
+			
+                       <apex:outputLabel >RUT Titular:</apex:outputLabel>      
+                    <apex:outputLabel value="{!verCaso.RUT__c}"></apex:outputLabel>
+               
+                        <apex:outputLabel >Nombre Titular:</apex:outputLabel>      
+                    <apex:outputLabel value="{!verCaso.Nombre_Completo_Razon_Social__c}"></apex:outputLabel>
+                   
+                      
+                        <apex:outputLabel >Poliza:</apex:outputLabel>      
+                    <apex:outputLabel value="{!verCaso.CASO_N_Poliza__c}"></apex:outputLabel>
+                 
+                        <apex:outputLabel >Negocio:</apex:outputLabel>      
+                    <apex:outputLabel value="{!verCaso.Negocio__c}"></apex:outputLabel>
+				
+                       
+                        <apex:outputLabel >Tipo Requerimiento:</apex:outputLabel>      
+                    <apex:outputLabel value="{!verCaso.Tipo_de_Requerimiento__c}"></apex:outputLabel>
+                  
+                         <!-- Consultas -->
+                    <apex:outputLabel rendered="{!IF(verCaso.Tipo_de_Requerimiento__c == 'Consultas',true,false)}"  >Concepto:</apex:outputLabel>      
+                    <apex:outputLabel value="{!verCaso.Concepto__c}" rendered="{!IF(verCaso.Tipo_de_Requerimiento__c == 'Consultas',true,false)}"  ></apex:outputLabel>
+                 
+                    
+                     <!-- Consultas -->
+                       
+                        <!-- Reclamos -->
+                    <apex:outputLabel rendered="{!IF(verCaso.Tipo_de_Requerimiento__c == 'Reclamos',true,false)}" >Producto:</apex:outputLabel>      
+                    <apex:outputLabel rendered="{!IF(verCaso.Tipo_de_Requerimiento__c == 'Reclamos',true,false)}" value="{!verCaso.Producto__c}"  ></apex:outputLabel>
+                    
+                    
+                    <apex:outputLabel rendered="{!IF(verCaso.Tipo_de_Requerimiento__c == 'Reclamos',true,false)}" >Tipo Operación:</apex:outputLabel>      
+                    <apex:outputLabel rendered="{!IF(verCaso.Tipo_de_Requerimiento__c == 'Reclamos',true,false)}" value="{!verCaso.Tipo_Operacion__c}"  ></apex:outputLabel>
+                    
+                     <apex:outputLabel rendered="{!IF(verCaso.Tipo_de_Requerimiento__c == 'Reclamos',true,false)}"  >Detalle Operación:</apex:outputLabel>      
+                    <apex:outputLabel rendered="{!IF(verCaso.Tipo_de_Requerimiento__c == 'Reclamos',true,false)}" value="{!verCaso.Detalle_Operacion__c}"  ></apex:outputLabel>
+                     <!-- Reclamos -->
+                    
+                     <!-- Solicitudes -->
+                    <apex:outputLabel rendered="{!IF(verCaso.Tipo_de_Requerimiento__c == 'Solicitudes',true,false)}" >Detalle Solicitud:</apex:outputLabel>      
+                    <apex:outputLabel value="{!verCaso.CASO_Categoria__c}" rendered="{!IF(verCaso.Tipo_de_Requerimiento__c == 'Solicitudes',true,false)}" ></apex:outputLabel>
+                    
+                    <apex:outputLabel rendered="{!IF(verCaso.Tipo_de_Requerimiento__c == 'Solicitudes',true,false)}">Detalle Solicitud:</apex:outputLabel>      
+                    <apex:outputLabel value="{!verCaso.Detalle_Solicitud__c}" rendered="{!IF(verCaso.Tipo_de_Requerimiento__c == 'Solicitudes',true,false)}"></apex:outputLabel>
+                     <!-- Solicitudes -->
+                    <apex:outputLabel >Descripción:</apex:outputLabel>      
+                    <apex:outputLabel value="{!verCaso.Description}"></apex:outputLabel>
+					
+                       
+                </apex:panelGrid>
+                
+                
+                
+                
+            </apex:pageBlock>
+            
+          <!--  <br/>
+            <br/>-->
+<br/>
+           
+             </apex:outputPanel>
+        </apex:form>
+    
+         <apex:pageMessages id="showmsg" escape="true"></apex:pageMessages>
+    
+    
+    
+</apex:page>

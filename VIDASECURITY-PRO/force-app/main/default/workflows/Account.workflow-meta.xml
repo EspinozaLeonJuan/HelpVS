@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Alerta_6_meses_inactividad</fullName>
+        <description>Alerta 6 meses inactividad</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Copia_Correo_electronico_Persona__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>contactovida@security.cl</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Presentaci_n_Ejecutivas/Carta_Recordatoria_Ejecutiva2_0</template>
+    </alerts>
+    <alerts>
+        <fullName>Correo_Aviso_de_Inactividad</fullName>
+        <description>Correo Aviso de Inactividad</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Copia_Correo_electronico_Persona__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>contactovida@security.cl</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>SC_Plantillas_correos_autom_ticos/Carta_Recordatoria_Ejecutiva_Automatica</template>
+    </alerts>
+    <alerts>
+        <fullName>Correo_de_Cumpleanos</fullName>
+        <description>Correo de Cumpleaños</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Copia_Correo_electronico_Persona__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>vidasecurity@security.cl</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>SC_Plantillas_correos_autom_ticos/Saludo_Cumpleanos</template>
+    </alerts>
+    <alerts>
+        <fullName>Correo_de_Cumpleanos_seguimiento</fullName>
+        <ccEmails>sacevedo@security.cl</ccEmails>
+        <description>Correo de Cumpleaños seguimiento</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>juanespinozaleon@ibm.com</recipient>
+            <type>user</type>
+        </recipients>
+        <senderAddress>vidasecurity@security.cl</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>SC_Plantillas_correos_autom_ticos/Saludo_Cumpleanos</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Actualiza_DV_Empresa</fullName>
+        <field>DV__c</field>
+        <formula>DV_contacto__pc</formula>
+        <name>Actualiza DV Empresa</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_Fecha_Cambio</fullName>
+        <field>Fecha_Ultimo_Cambio_Propietario__c</field>
+        <formula>NOW()</formula>
+        <name>Actualiza Fecha Cambio</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_Mail_Persona</fullName>
+        <field>Copia_Correo_electronico_Persona__c</field>
+        <formula>PersonEmail</formula>
+        <name>Actualiza Mail Persona</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualiza_Rut_Empresa</fullName>
+        <field>Rut__c</field>
+        <formula>Rut_contacto__pc</formula>
+        <name>Actualiza Rut Empresa</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualizar_campo_Cliente_Importante</fullName>
+        <field>rrpu__Alert_Message__c</field>
+        <formula>BR() 
+&amp; 
+IF(Firma_pagar__c, &apos;Pensionado pendiente firma de pagaré&apos;, &apos;&apos;) 
+&amp; 
+BR() 
+&amp; 
+IF(Cantidad_de_Reclamos__c&gt;0, &apos;Cliente tiene registrado un reclamo&apos;, &apos;&apos;)</formula>
+        <name>Actualizar campo Cliente Importante</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Actualizar_campo_Cliente_Importante_1</fullName>
+        <field>rrpu__Alert_Message__c</field>
+        <formula>IF(Firma_pagar__c, &apos;Pensionado pendiente firma de pagaré&apos;, &apos;&apos;)</formula>
+        <name>Actualizar campo Cliente Importante 1</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Desmarca_Agente_Vigente</fullName>
+        <field>Agente_vigente__c</field>
+        <literalValue>0</literalValue>
+        <name>Desmarca Agente Vigente</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Desmarca_campo_no_Contactar</fullName>
+        <field>Cliente_No_Contactar__c</field>
+        <literalValue>0</literalValue>
+        <name>Desmarca campo no Contactar</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Marca_Agente_Vigente</fullName>
+        <field>Agente_vigente__c</field>
+        <literalValue>1</literalValue>
+        <name>Marca Agente Vigente</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Resetear_Correo_Cumple</fullName>
+        <field>Proximo_Cumpleanos2__c</field>
+        <formula>IF(DATE(YEAR(TODAY()),MONTH(PersonBirthdate),DAY(PersonBirthdate)) &lt;= TODAY(), DATE(YEAR(TODAY())+1,MONTH(PersonBirthdate),DAY(PersonBirthdate)), DATE(YEAR(TODAY()),MONTH(PersonBirthdate),DAY(PersonBirthdate)))</formula>
+        <name>Resetear Correo Cumple</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Reseteo_Sistema_Correos_Cumple</fullName>
+        <field>Resetear_Sistema_de_Correo_de_Cumplea_os__c</field>
+        <literalValue>0</literalValue>
+        <name>Reseteo Sistema Correos Cumple</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Revisa_Reset_de_Sistema_de_Correo_Cumple</fullName>
+        <field>Resetear_Sistema_de_Correo_de_Cumplea_os__c</field>
+        <literalValue>1</literalValue>
+        <name>Revisa Reset de Sistema de Correo Cumple</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <outboundMessages>
+        <fullName>prueba</fullName>
+        <apiVersion>43.0</apiVersion>
+        <endpointUrl>https://mail.google.com/mail/u/0/#inbox/164c7e1c78fc1718</endpointUrl>
+        <fields>AnnualRevenue</fields>
+        <fields>Id</fields>
+        <includeSessionId>false</includeSessionId>
+        <integrationUser>blueclip@security.cl</integrationUser>
+        <name>prueba</name>
+        <protected>false</protected>
+        <useDeadLetterQueue>false</useDeadLetterQueue>
+    </outboundMessages>
+    <rules>
+        <fullName>Actualiza Mail Persona</fullName>
+        <actions>
+            <name>Actualiza_Mail_Persona</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>OR(ISCHANGED( PersonEmail ),ISNEW(), ISBLANK(  Copia_Correo_electronico_Persona__c  ))</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Actualiza Rut Cuenta Persona</fullName>
+        <actions>
+            <name>Actualiza_DV_Empresa</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Actualiza_Rut_Empresa</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Account.Rut_contacto__pc</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Rut__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Cuenta personal</value>
+        </criteriaItems>
+        <description>Si es cuenta persona actualizar rut empresas</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Actualiza fecha ultima asignación new propietario</fullName>
+        <actions>
+            <name>Actualiza_Fecha_Cambio</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>AND(Owner.Ejecutivo_de_Cliente__c =true, OR(TEXT(Agente_Actual__r.Estado__c) =&quot;Desvinculado&quot;,ISBLANK(TEXT(Agente_Actual__r.Estado__c))))</formula>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>Actualiza fecha ultima asignación propietario</fullName>
+        <actions>
+            <name>Actualiza_Fecha_Cambio</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>OR( AND(ISCHANGED(OwnerId),  Agente_vigente__c = false ),
+AND(ISCHANGED(Agente_vigente__c), Agente_vigente__c = false) )</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Aviso Inactividad Ejecutivo</fullName>
+        <active>false</active>
+        <formula>AND(NOT(ISBLANK(  Fecha_Ultima_Actividad__c )),  Owner.Profile.Name = &quot;Ejecutiva Post Venta&quot;,  RecordType.Name = &quot;Cuenta personal&quot;,NOT(Correo_Pendiente_de_Envio__c),
+Owner.IsActive ,Cantidad_Polizas_Activas__c &gt;0  )</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Correo_Aviso_de_Inactividad</name>
+                <type>Alert</type>
+            </actions>
+            <actions>
+                <name>Recordatorio_Ejecutiva_Vida_Security</name>
+                <type>Task</type>
+            </actions>
+            <offsetFromField>Account.Fecha_Ultima_Actividad_mas_hora__c</offsetFromField>
+            <timeLength>180</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Cambio Cumpleaños</fullName>
+        <actions>
+            <name>Revisa_Reset_de_Sistema_de_Correo_Cumple</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <description>Regla para casos en que se cambie fecha cumpleaños en cuentas</description>
+        <formula>(MONTH( PersonBirthdate ) &lt;&gt; MONTH(Proximo_Cumpleanos2__c) || DAY(PersonBirthdate) &lt;&gt; DAY(Proximo_Cumpleanos2__c))</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Dejar de Recibir Correo de Cumple</fullName>
+        <actions>
+            <name>Revisa_Reset_de_Sistema_de_Correo_Cumple</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <booleanFilter>1 OR 2 OR 3 OR 4</booleanFilter>
+        <criteriaItems>
+            <field>Account.Recibe_Correos_Cumpleanos__c</field>
+            <operation>equals</operation>
+            <value>Falso</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Declarado_Fallecido__c</field>
+            <operation>equals</operation>
+            <value>Verdadero</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Siniestro_Vida__c</field>
+            <operation>equals</operation>
+            <value>Verdadero</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Cantidad_Polizas_Activas_Todas__c</field>
+            <operation>equals</operation>
+            <value>0</value>
+        </criteriaItems>
+        <description>Regla para dejar de recibir correos de cumpleaños</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Desmarca Agente Vigente</fullName>
+        <actions>
+            <name>Desmarca_Agente_Vigente</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>AND(Owner.Ejecutivo_de_Cliente__c = True, Agente_vigente__c = True)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Desmarca Cliente no Contactar %286 Meses%29</fullName>
+        <active>true</active>
+        <criteriaItems>
+            <field>Account.Cliente_No_Contactar__c</field>
+            <operation>equals</operation>
+            <value>Verdadero</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Desmarca_campo_no_Contactar</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <timeLength>180</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Enviar Correo Cumpleaños</fullName>
+        <active>false</active>
+        <booleanFilter>1 AND 2  AND (3 OR 4) and 5</booleanFilter>
+        <criteriaItems>
+            <field>Account.Recibe_Correos_Cumpleanos__c</field>
+            <operation>equals</operation>
+            <value>Verdadero</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Resetear_Sistema_de_Correo_de_Cumplea_os__c</field>
+            <operation>equals</operation>
+            <value>Falso</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Declarado_Fallecido__c</field>
+            <operation>notEqual</operation>
+            <value>Verdadero</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Siniestro_Vida__c</field>
+            <operation>notEqual</operation>
+            <value>Verdadero</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Cantidad_Polizas_Activas_Todas__c</field>
+            <operation>greaterOrEqual</operation>
+            <value>0</value>
+        </criteriaItems>
+        <description>alerta que envía correos de cumpleaños</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Revisa_Reset_de_Sistema_de_Correo_Cumple</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <offsetFromField>Account.Proximo_Cumpleanos__c</offsetFromField>
+            <timeLength>30</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Correo_de_Cumpleanos</name>
+                <type>Alert</type>
+            </actions>
+            <offsetFromField>Account.Proximo_Cumpleanos__c</offsetFromField>
+            <timeLength>6</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Marca Agente Vigente</fullName>
+        <actions>
+            <name>Marca_Agente_Vigente</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <formula>Sin_Agente__c = 0</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Mostrar Popup Cliente Importante</fullName>
+        <actions>
+            <name>Actualizar_campo_Cliente_Importante</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>OR(ISCHANGED(Firma_pagar__c), ISNEW(),ISCHANGED( Cantidad_de_Reclamos__c ))</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>No modificar Cliente Anónimo</fullName>
+        <active>false</active>
+        <criteriaItems>
+            <field>Account.FirstName</field>
+            <operation>equals</operation>
+            <value>Anónimo VS Anónimo</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Recordatorio ejecutiva 6 meses inactividad</fullName>
+        <actions>
+            <name>Alerta_6_meses_inactividad</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Recordatorio_Ejecutiva_Vida_Security</name>
+            <type>Task</type>
+        </actions>
+        <active>true</active>
+        <description>Cuando pasan 6 meses de inactividad se envia mail recordatorio a cliente y se registra en el historial de actividades</description>
+        <formula>AND(    OR(Owner.Profile.Name = &quot;Ejecutiva Post Venta&quot;,       Owner.Profile.Name = &quot;Ejecutiva Post Venta (R)&quot;,       Owner.Profile.Name = &quot;Ejecutiva Post Venta Plus&quot;    ),      RecordType.Name = &quot;Cuenta personal&quot;,    NOT(Correo_Pendiente_de_Envio__c),    Owner.IsActive,    Cantidad_Polizas_Activas__c &gt;0,    MONTH(TODAY()) + 12 - MONTH(IF(ISNULL(Fecha_Ultima_Actividad__c), DATEVALUE(CreatedDate), Fecha_Ultima_Actividad__c)) + 12 * (YEAR(TODAY()) -        YEAR(IF( ISNULL(Fecha_Ultima_Actividad__c) , DATEVALUE(CreatedDate), Fecha_Ultima_Actividad__c)) -1 ) = 6   )</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Resetear Correo de Cumpleaños</fullName>
+        <actions>
+            <name>Resetear_Correo_Cumple</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Account.Recibe_Correos_Cumpleanos__c</field>
+            <operation>equals</operation>
+            <value>Verdadero</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Resetear_Sistema_de_Correo_de_Cumplea_os__c</field>
+            <operation>equals</operation>
+            <value>Verdadero</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Reseteo_Sistema_Correos_Cumple</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <timeLength>1</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <tasks>
+        <fullName>Recordatorio_Ejecutiva_Vida_Security</fullName>
+        <assignedToType>owner</assignedToType>
+        <description>Envio de correo Recordatorio Ejecutiva Vida Security</description>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completada</status>
+        <subject>Correo Electrónico - Recordatorio Ejecutiva Vida Security</subject>
+    </tasks>
+</Workflow>

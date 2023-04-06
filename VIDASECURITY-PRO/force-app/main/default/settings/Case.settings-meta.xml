@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CaseSettings xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAutoProcUser>false</caseAutoProcUser>
+    <caseCloseNotificationTemplate>Plantillas_para_Email2Case/Cierre_de_Casos</caseCloseNotificationTemplate>
+    <caseCreateNotificationTemplate>Plantillas_para_Email2Case/Creacion_de_Casos</caseCreateNotificationTemplate>
+    <caseFeedItemSettings>
+        <characterLimit>400</characterLimit>
+        <displayFormat>Default</displayFormat>
+        <feedItemType>EmailMessageEvent</feedItemType>
+    </caseFeedItemSettings>
+    <caseFeedReadUnreadLtng>false</caseFeedReadUnreadLtng>
+    <caseMergeInLightning>false</caseMergeInLightning>
+    <closeCaseThroughStatusChange>true</closeCaseThroughStatusChange>
+    <defaultCaseFeedLayoutOn>false</defaultCaseFeedLayoutOn>
+    <defaultCaseOwner>sfvida@security.cl</defaultCaseOwner>
+    <defaultCaseOwnerType>User</defaultCaseOwnerType>
+    <defaultCaseUser>sfvida@security.cl</defaultCaseUser>
+    <emailToCase>
+        <enableE2CAttachmentAsFile>false</enableE2CAttachmentAsFile>
+        <enableE2CSourceTracking>true</enableE2CSourceTracking>
+        <enableEmailToCase>true</enableEmailToCase>
+        <enableHtmlEmail>false</enableHtmlEmail>
+        <enableOnDemandEmailToCase>true</enableOnDemandEmailToCase>
+        <enableThreadIDInBody>true</enableThreadIDInBody>
+        <enableThreadIDInSubject>true</enableThreadIDInSubject>
+        <notifyOwnerOnNewCaseEmail>true</notifyOwnerOnNewCaseEmail>
+        <overEmailLimitAction>Bounce</overEmailLimitAction>
+        <preQuoteSignature>true</preQuoteSignature>
+        <routingAddresses>
+            <addressType>EmailToCase</addressType>
+            <caseOrigin>Asistencia Agente</caseOrigin>
+            <caseOwner>Asistencia_Agente</caseOwner>
+            <caseOwnerType>Queue</caseOwnerType>
+            <casePriority>Media</casePriority>
+            <createTask>false</createTask>
+            <emailAddress>asistenciaagente@security.cl</emailAddress>
+            <emailServicesAddress>asistenciaagente@2v9rgnljng5187rix44789qov3gglftu4ylyx2flcb623mrg4t.i-xosjea0.na46.case.salesforce.com</emailServicesAddress>
+            <isVerified>true</isVerified>
+            <routingName>Asistencia Agente</routingName>
+            <saveEmailHeaders>false</saveEmailHeaders>
+        </routingAddresses>
+        <routingAddresses>
+            <addressType>EmailToCase</addressType>
+            <caseOrigin>CMPC</caseOrigin>
+            <caseOwner>CMPC</caseOwner>
+            <caseOwnerType>Queue</caseOwnerType>
+            <casePriority>Media</casePriority>
+            <createTask>false</createTask>
+            <emailAddress>cmpc@security.cl</emailAddress>
+            <emailServicesAddress>cmpc@1e3llzpuwfjaiyof2iqrdlrrrctdq9lba4izavdyhelob07urk.i-xosjea0.na46.case.salesforce.com</emailServicesAddress>
+            <isVerified>true</isVerified>
+            <routingName>CMPC</routingName>
+            <saveEmailHeaders>false</saveEmailHeaders>
+        </routingAddresses>
+        <routingAddresses>
+            <addressType>EmailToCase</addressType>
+            <caseOrigin>Anticipo</caseOrigin>
+            <casePriority>Alta</casePriority>
+            <createTask>false</createTask>
+            <emailAddress>anticipo@security.cl</emailAddress>
+            <emailServicesAddress>anticipo@7-30szqylk3oc9e2h4nc85ee9abterr2s2jqao4cnad3fdnvnhja.i-xosjea0.na168.case.salesforce.com</emailServicesAddress>
+            <isVerified>true</isVerified>
+            <routingName>Casos Anticipo</routingName>
+            <saveEmailHeaders>true</saveEmailHeaders>
+        </routingAddresses>
+        <routingAddresses>
+            <addressType>EmailToCase</addressType>
+            <caseOrigin>Cobranzas Vida</caseOrigin>
+            <caseOwner>urcobranza@security.cl</caseOwner>
+            <caseOwnerType>User</caseOwnerType>
+            <casePriority>Media</casePriority>
+            <createTask>false</createTask>
+            <emailAddress>cobranzasvida@security.cl</emailAddress>
+            <emailServicesAddress>cobranzasvida@8-y4po6owdpy490k0yd3zf8js9ktdnsta4pqwhwntv8y5j4h2px.i-xosjea0.na46.case.salesforce.com</emailServicesAddress>
+            <isVerified>true</isVerified>
+            <routingName>Casos Cobranzas Vida</routingName>
+            <saveEmailHeaders>false</saveEmailHeaders>
+        </routingAddresses>
+        <routingAddresses>
+            <addressType>EmailToCase</addressType>
+            <caseOrigin>Contacto SBS</caseOrigin>
+            <caseOwner>Contacto_SBS</caseOwner>
+            <caseOwnerType>Queue</caseOwnerType>
+            <casePriority>Media</casePriority>
+            <createTask>false</createTask>
+            <emailAddress>contactosbs@security.cl</emailAddress>
+            <emailServicesAddress>contactosbs@x-hatp2f5d7n5jg3pskzuywxtai208d0w79ejrzzsx0bif5xhxq.i-xosjea0.na46.case.salesforce.com</emailServicesAddress>
+            <isVerified>true</isVerified>
+            <routingName>Casos Contacto SBS</routingName>
+            <saveEmailHeaders>false</saveEmailHeaders>
+        </routingAddresses>
+        <routingAddresses>
+            <addressType>EmailToCase</addressType>
+            <caseOrigin>Contacto Vida</caseOrigin>
+            <casePriority>Media</casePriority>
+            <createTask>false</createTask>
+            <emailAddress>contactovida@security.cl</emailAddress>
+            <emailServicesAddress>contactovida@33k0ru2v1xlswmsbd7rifqxot7297ddfa9c3q537pyz1ew2156.i-xosjea0.na46.case.salesforce.com</emailServicesAddress>
+            <isVerified>true</isVerified>
+            <routingName>Casos Contacto Vida</routingName>
+            <saveEmailHeaders>true</saveEmailHeaders>
+        </routingAddresses>
+        <routingAddresses>
+            <addressType>EmailToCase</addressType>
+            <caseOrigin>Producción Individuales</caseOrigin>
+            <caseOwner>urindividuales@security.cl</caseOwner>
+            <caseOwnerType>User</caseOwnerType>
+            <casePriority>Media</casePriority>
+            <createTask>false</createTask>
+            <emailAddress>produccionindividual@security.cl</emailAddress>
+            <emailServicesAddress>produccionindividual@2od5544i72rshcfex6xfqd78qopqdwrm1dlpk4uzfkh02sv0qm.i-xosjea0.na46.case.salesforce.com</emailServicesAddress>
+            <isVerified>true</isVerified>
+            <routingName>Casos Producción Individuales</routingName>
+            <saveEmailHeaders>false</saveEmailHeaders>
+        </routingAddresses>
+        <routingAddresses>
+            <addressType>EmailToCase</addressType>
+            <caseOrigin>Recepción Pagos</caseOrigin>
+            <caseOwner>urcobranza@security.cl</caseOwner>
+            <caseOwnerType>User</caseOwnerType>
+            <casePriority>Media</casePriority>
+            <createTask>false</createTask>
+            <emailAddress>recepcionpagos@security.cl</emailAddress>
+            <emailServicesAddress>recepcionpagos@3-hu9jn0yvsg5ckkcybq9tunlhqv59otunmwykltcoqbnd5tmuf.i-xosjea0.na46.case.salesforce.com</emailServicesAddress>
+            <isVerified>true</isVerified>
+            <routingName>Casos Recepción Pagos</routingName>
+            <saveEmailHeaders>false</saveEmailHeaders>
+        </routingAddresses>
+        <routingAddresses>
+            <addressType>EmailToCase</addressType>
+            <caseOrigin>Servicios BCI</caseOrigin>
+            <caseOwner>Servicios_BCI</caseOwner>
+            <caseOwnerType>Queue</caseOwnerType>
+            <casePriority>Media</casePriority>
+            <createTask>false</createTask>
+            <emailAddress>serviciosbci@security.cl</emailAddress>
+            <emailServicesAddress>serviciosbci@2ni2wzt76vsz7feab7misk3adgq0zctxqdvoxhkhrmsouzjzkw.i-xosjea0.na46.case.salesforce.com</emailServicesAddress>
+            <isVerified>true</isVerified>
+            <routingName>Casos Servicios BCI</routingName>
+            <saveEmailHeaders>false</saveEmailHeaders>
+        </routingAddresses>
+        <routingAddresses>
+            <addressType>EmailToCase</addressType>
+            <caseOrigin>Servicios Colectivos</caseOrigin>
+            <caseOwner>Servicios_Colectivos</caseOwner>
+            <caseOwnerType>Queue</caseOwnerType>
+            <casePriority>Media</casePriority>
+            <createTask>false</createTask>
+            <emailAddress>onclickservicioscolectivos@security.cl</emailAddress>
+            <emailServicesAddress>onclickservicioscolectivos@g-83pb6lexgallnl0ckmm4uez59vk8aacqzg6a98wnz737h3oxj.i-xosjea0.na46.case.salesforce.com</emailServicesAddress>
+            <isVerified>true</isVerified>
+            <routingName>Casos Servicios Colectivos</routingName>
+            <saveEmailHeaders>false</saveEmailHeaders>
+        </routingAddresses>
+        <routingAddresses>
+            <addressType>EmailToCase</addressType>
+            <caseOrigin>WEB</caseOrigin>
+            <caseOwner>Televenta</caseOwner>
+            <caseOwnerType>Queue</caseOwnerType>
+            <casePriority>Media</casePriority>
+            <createTask>false</createTask>
+            <emailAddress>televentasvida@security.cl</emailAddress>
+            <emailServicesAddress>televentasvida@1ubecgxgpki21hrcvmez1jyftd3hkeyh1bzxpfvg5iwrsnax65.i-xosjea0.na46.case.salesforce.com</emailServicesAddress>
+            <isVerified>true</isVerified>
+            <routingName>Casos Televenta</routingName>
+            <saveEmailHeaders>true</saveEmailHeaders>
+        </routingAddresses>
+        <routingAddresses>
+            <addressType>EmailToCase</addressType>
+            <caseOrigin>Medimel</caseOrigin>
+            <caseOwner>Medimel</caseOwner>
+            <caseOwnerType>Queue</caseOwnerType>
+            <casePriority>Media</casePriority>
+            <createTask>false</createTask>
+            <emailAddress>medimel@security.cl</emailAddress>
+            <emailServicesAddress>medimel@ntsw7drjmi6a64m4u5ypn2bjxiw4zfs8wx6mms95mu4x4pf6d.i-xosjea0.na46.case.salesforce.com</emailServicesAddress>
+            <isVerified>true</isVerified>
+            <routingName>Medimel</routingName>
+            <saveEmailHeaders>false</saveEmailHeaders>
+        </routingAddresses>
+        <routingAddresses>
+            <addressType>EmailToCase</addressType>
+            <caseOrigin>Seguro Covid</caseOrigin>
+            <caseOwner>Seguro_Covid</caseOwner>
+            <caseOwnerType>Queue</caseOwnerType>
+            <casePriority>Media</casePriority>
+            <createTask>false</createTask>
+            <emailAddress>seguroscovid@security.cl</emailAddress>
+            <emailServicesAddress>seguroscovid@5-m49rx875mq256qdh5kbt64o21ruo8gh6ekf8fijcbptd58cvw.i-xosjea0.na168.case.salesforce.com</emailServicesAddress>
+            <isVerified>true</isVerified>
+            <routingName>Seguro Covid</routingName>
+            <saveEmailHeaders>false</saveEmailHeaders>
+        </routingAddresses>
+        <routingAddresses>
+            <addressType>EmailToCase</addressType>
+            <caseOrigin>Seguros Cerro Colorado</caseOrigin>
+            <caseOwner>Seguros_Cerro_Colorado</caseOwner>
+            <caseOwnerType>Queue</caseOwnerType>
+            <casePriority>Media</casePriority>
+            <createTask>false</createTask>
+            <emailAddress>segurocerrocolorado@security.cl</emailAddress>
+            <emailServicesAddress>segurocerrocolorado@n62m6187l41vglyfffkryslfxakgu84b21toa03xp7a1aixz8.i-xosjea0.na46.case.salesforce.com</emailServicesAddress>
+            <isVerified>true</isVerified>
+            <routingName>Seguros Cerro Colorado</routingName>
+            <saveEmailHeaders>false</saveEmailHeaders>
+        </routingAddresses>
+        <routingAddresses>
+            <addressType>EmailToCase</addressType>
+            <caseOrigin>Seguros Cono Sur</caseOrigin>
+            <caseOwner>Seguros_Cono_Sur</caseOwner>
+            <caseOwnerType>Queue</caseOwnerType>
+            <casePriority>Media</casePriority>
+            <createTask>false</createTask>
+            <emailAddress>segurosconosur@security.cl</emailAddress>
+            <emailServicesAddress>segurosconosur@f-coiwg5xc9uqrhwn72myzq1ibgy31gem4bvdxvqiexr9q5tvve.i-xosjea0.na46.case.salesforce.com</emailServicesAddress>
+            <isVerified>true</isVerified>
+            <routingName>Seguros Cono Sur</routingName>
+            <saveEmailHeaders>false</saveEmailHeaders>
+        </routingAddresses>
+        <routingAddresses>
+            <addressType>EmailToCase</addressType>
+            <caseOrigin>Seguros Escondida</caseOrigin>
+            <caseOwner>Seguros_Escondida</caseOwner>
+            <caseOwnerType>Queue</caseOwnerType>
+            <casePriority>Media</casePriority>
+            <createTask>false</createTask>
+            <emailAddress>seguroescondida@security.cl</emailAddress>
+            <emailServicesAddress>seguroescondida@2msm1wq1zkwugqyln6ymllskbixi7ook6a8kp24au5lsfet8oo.i-xosjea0.na46.case.salesforce.com</emailServicesAddress>
+            <isVerified>true</isVerified>
+            <routingName>Seguros Escondida</routingName>
+            <saveEmailHeaders>false</saveEmailHeaders>
+        </routingAddresses>
+        <routingAddresses>
+            <addressType>EmailToCase</addressType>
+            <caseOrigin>Seguros Metrogas</caseOrigin>
+            <caseOwner>Seguros_Metrogas</caseOwner>
+            <caseOwnerType>Queue</caseOwnerType>
+            <casePriority>Media</casePriority>
+            <createTask>false</createTask>
+            <emailAddress>segurosmetrogas@security.cl</emailAddress>
+            <emailServicesAddress>segurosmetrogas@n-30c5nitqc4q8nqd91cpegddmfhsdkqn3mwupvg3egji2jpjha9.i-xosjea0.na46.case.salesforce.com</emailServicesAddress>
+            <isVerified>true</isVerified>
+            <routingName>Seguros Metrogas</routingName>
+            <saveEmailHeaders>false</saveEmailHeaders>
+        </routingAddresses>
+        <routingAddresses>
+            <addressType>EmailToCase</addressType>
+            <caseOrigin>Seguros Spence</caseOrigin>
+            <caseOwner>Seguros_Spence</caseOwner>
+            <caseOwnerType>Queue</caseOwnerType>
+            <casePriority>Media</casePriority>
+            <createTask>false</createTask>
+            <emailAddress>segurospence@security.cl</emailAddress>
+            <emailServicesAddress>segurospence@8cthgbe6yocltzm5kqlz0g12g4eee7ksq79e80wspwntmhy3l.i-xosjea0.na46.case.salesforce.com</emailServicesAddress>
+            <isVerified>true</isVerified>
+            <routingName>Seguros Spence</routingName>
+            <saveEmailHeaders>false</saveEmailHeaders>
+        </routingAddresses>
+        <routingAddresses>
+            <addressType>EmailToCase</addressType>
+            <caseOrigin>Servicios BHP</caseOrigin>
+            <caseOwner>Servicios_BHP</caseOwner>
+            <caseOwnerType>Queue</caseOwnerType>
+            <casePriority>Media</casePriority>
+            <createTask>false</createTask>
+            <emailAddress>serviciosbhp@security.cl</emailAddress>
+            <emailServicesAddress>serviciosbhp@w-27ttkj7qw0cu3abif4gn1f2c0dqpunbr0h2hoykbrskh1f5hgp.i-xosjea0.na46.case.salesforce.com</emailServicesAddress>
+            <isVerified>true</isVerified>
+            <routingName>Servicios BHP</routingName>
+            <saveEmailHeaders>false</saveEmailHeaders>
+        </routingAddresses>
+        <routingAddresses>
+            <addressType>EmailToCase</addressType>
+            <caseOrigin>Servicios Bice</caseOrigin>
+            <caseOwner>Servicios_Bice</caseOwner>
+            <caseOwnerType>Queue</caseOwnerType>
+            <casePriority>Media</casePriority>
+            <createTask>false</createTask>
+            <emailAddress>servicios_bice@security.cl</emailAddress>
+            <emailServicesAddress>servicios_bice@0-33eq0uekjoch1s5mww7sizuqn897xh882rpelotnw5ijxgox43.i-xosjea0.na168.case.salesforce.com</emailServicesAddress>
+            <isVerified>true</isVerified>
+            <routingName>Servicios Bice</routingName>
+            <saveEmailHeaders>false</saveEmailHeaders>
+        </routingAddresses>
+        <routingAddresses>
+            <addressType>EmailToCase</addressType>
+            <caseOrigin>Servicios Ex Clientes BHP</caseOrigin>
+            <caseOwner>Servicios_Ex_Clientes_BHP</caseOwner>
+            <caseOwnerType>Queue</caseOwnerType>
+            <casePriority>Media</casePriority>
+            <createTask>false</createTask>
+            <emailAddress>servicios_ex_empleados_bhp@security.cl</emailAddress>
+            <emailServicesAddress>servicios_ex_empleados_bhp@o-146br1ydtpwruprjbas7qnemd8m2seb1vrimrk3pw9ieyvlnjs.i-xosjea0.na168.case.salesforce.com</emailServicesAddress>
+            <isVerified>true</isVerified>
+            <routingName>Servicios Ex Empleados BHP</routingName>
+            <saveEmailHeaders>false</saveEmailHeaders>
+        </routingAddresses>
+        <routingAddresses>
+            <addressType>EmailToCase</addressType>
+            <caseOrigin>Servicios Telefónica</caseOrigin>
+            <caseOwner>Servicios_Telef_nica</caseOwner>
+            <caseOwnerType>Queue</caseOwnerType>
+            <casePriority>Media</casePriority>
+            <createTask>false</createTask>
+            <emailAddress>serviciostelefonica@security.cl</emailAddress>
+            <emailServicesAddress>serviciostelefonica@lxd7thb6ejkopx8cukqcc99f5wwry7sh3322m5v94zc06yz71.i-xosjea0.na46.case.salesforce.com</emailServicesAddress>
+            <isVerified>true</isVerified>
+            <routingName>Servicios Telefónica</routingName>
+            <saveEmailHeaders>false</saveEmailHeaders>
+        </routingAddresses>
+        <routingAddresses>
+            <addressType>EmailToCase</addressType>
+            <caseOrigin>Contacto Vida</caseOrigin>
+            <caseOwner>Contacto_Vida</caseOwner>
+            <caseOwnerType>Queue</caseOwnerType>
+            <casePriority>Media</casePriority>
+            <createTask>false</createTask>
+            <emailAddress>vida@security.cl</emailAddress>
+            <emailServicesAddress>vida@1pqgc2ktlkeglj7fr45i4tckrgax3e60ofhkrmdxyqxfg0ww5r.i-xosjea0.na46.case.salesforce.com</emailServicesAddress>
+            <isVerified>true</isVerified>
+            <routingName>Vida</routingName>
+            <saveEmailHeaders>false</saveEmailHeaders>
+        </routingAddresses>
+        <routingAddresses>
+            <addressType>EmailToCase</addressType>
+            <caseOrigin>Contacto Vida</caseOrigin>
+            <caseOwner>patricio.munoz@security.cl</caseOwner>
+            <caseOwnerType>User</caseOwnerType>
+            <casePriority>Baja</casePriority>
+            <createTask>true</createTask>
+            <emailAddress>pamunoz@security.cl</emailAddress>
+            <emailServicesAddress>pamunoz@1xrtsgz60wzi20sbs8iaqvxbr52dj3tn48kxxvbzo66qpl3q89.i-xosjea0.na46.case.salesforce.com</emailServicesAddress>
+            <isVerified>true</isVerified>
+            <routingName>formulario de contacto</routingName>
+            <saveEmailHeaders>true</saveEmailHeaders>
+            <taskStatus>Abierta</taskStatus>
+        </routingAddresses>
+        <unauthorizedSenderAction>Discard</unauthorizedSenderAction>
+    </emailToCase>
+    <enableCaseFeed>false</enableCaseFeed>
+    <enableCaseSwarming>false</enableCaseSwarming>
+    <enableCollapseEmailThread>false</enableCollapseEmailThread>
+    <enableEarlyEscalationRuleTriggers>false</enableEarlyEscalationRuleTriggers>
+    <enableEscalateQfiToCaseInternal>false</enableEscalateQfiToCaseInternal>
+    <enableMultiLangSolnSrchCSS>false</enableMultiLangSolnSrchCSS>
+    <enableMultiLangSolnSrchPKB>false</enableMultiLangSolnSrchPKB>
+    <enableMultiLangSolution>false</enableMultiLangSolution>
+    <enableSolutionCategory>true</enableSolutionCategory>
+    <enableSolutionInlineCategory>true</enableSolutionInlineCategory>
+    <enableSolutionShortSummary>true</enableSolutionShortSummary>
+    <enableSuggestedSolutions>true</enableSuggestedSolutions>
+    <escalateCaseBefore>false</escalateCaseBefore>
+    <keepRecordTypeOnAssignmentRule>true</keepRecordTypeOnAssignmentRule>
+    <notifyContactOnCaseComment>false</notifyContactOnCaseComment>
+    <notifyDefaultCaseOwner>false</notifyDefaultCaseOwner>
+    <notifyOwnerOnCaseComment>false</notifyOwnerOnCaseComment>
+    <notifyOwnerOnCaseOwnerChange>true</notifyOwnerOnCaseOwnerChange>
+    <showEmailAttachmentsInCaseAttachmentsRL>true</showEmailAttachmentsInCaseAttachmentsRL>
+    <showFewerCloseActions>false</showFewerCloseActions>
+    <systemUserEmail>isaac.salazar@security.cl</systemUserEmail>
+    <useSystemEmailAddress>true</useSystemEmailAddress>
+    <useSystemUserAsDefaultCaseUser>false</useSystemUserAsDefaultCaseUser>
+    <visibleInCssCheckbox>false</visibleInCssCheckbox>
+    <webToCase>
+        <enableWebToCase>false</enableWebToCase>
+    </webToCase>
+</CaseSettings>

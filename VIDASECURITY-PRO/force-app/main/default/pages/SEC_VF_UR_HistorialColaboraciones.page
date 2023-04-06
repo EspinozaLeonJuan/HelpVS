@@ -1,0 +1,120 @@
+<apex:page controller="CTR_BandejaColaboraciones" action="{!Historial}" lightningStylesheets="true" showHeader="true" sidebar="false" tabStyle="Case" >
+     <style>
+             
+.popupBackground {
+        /* Background color */
+        background-color:black;
+        opacity: 0.5;
+        filter: alpha(opacity = 50);
+        
+        /* Dimensions */
+        width: 100%;
+        height: 100%;       
+        top: 0;
+        left: 0;
+        z-index: 998;
+        position: absolute;        
+        /* Mouse */
+        cursor:wait;
+    }
+            
+    .popupPanel {
+       /* Background color */
+        border: solid 2px orange;
+        background-color: white;        
+        /* Dimensions */
+        display: inline-block;
+        left: 50%;
+        width: 100px;
+        margin-left: 0px;
+        top: 100px;
+        height: 25px;
+        margin-top: -25px;
+        position: absolute;   
+        z-index: 999;        
+        /* Mouse */
+        cursor:pointer;;
+    }
+    .ct{
+    text-align:center;
+    }
+
+    </style>
+    <apex:includeScript value="{!$Resource.jquery}"/>
+   
+    <div id="dv_CuerpoPrincipal" style="width: 90%; margin-left: auto; margin-right: auto; height: 100%;">
+        
+        
+          <apex:actionStatus id="Status">
+        <apex:facet name="start">
+            <apex:outputPanel >
+                <div class="popupBackground" />
+                <div class="popupPanel">
+                    &nbsp; Espere...<img src="/apexpages/devmode/img/saveStatus.gif" />
+                </div>
+            </apex:outputPanel> 
+        </apex:facet>
+    </apex:actionStatus>
+  <br/><br/>
+        <apex:form id="frm_SeleccionarUsuario">
+            <apex:commandButton id="cmd_MenuCasos" value="Historial Casos UR" action="{!ToCaseHistory}"/>
+            <apex:commandButton id="cmd_MenuTareas" value="Historial Tareas UR" action="{!ToTaskHistory}" />  
+            <apex:commandButton id="cmd_MenuColaboraciones" value="Historial Colaboraciones Reclamos" disabled="true" />  
+          
+           <apex:pageBlock id="pbk_PanelCasos" title="Historial Colaboraciones Reclamos" >
+             <apex:panelGrid columns="2" style="width:30%;">                        
+                        <apex:outputLabel style="font-weight:bold;" >Usuario:</apex:outputLabel>  
+                    <apex:selectList id="cmd_Usuarios" size="1" value="{!USER_BACKUP_ID}"  >
+                <apex:selectOptions value="{!ListarUsuarios}" />
+                <!--<apex:actionSupport event="onchange" action="{!mostrarIdUsuario}" reRender="otxt_ValorIdUsuario" />-->
+                <apex:actionSupport event="onchange" action="{!mostrarHistorial}" reRender="pbk_PanelCasos" oncomplete="" status="Status" />
+            </apex:selectList>
+                    <apex:outputLabel style="font-weight:bold;" >Estado:</apex:outputLabel>  
+                    <apex:selectList id="cmd_Estados" size="1" value="{!ESTADO}"  >
+                <apex:selectOptions value="{!EstadosTarea}" />
+                <!--<apex:actionSupport event="onchange" action="{!mostrarIdUsuario}" reRender="otxt_ValorIdUsuario" />-->
+                <apex:actionSupport event="onchange" action="{!mostrarHistorial}" reRender="pbk_PanelCasos" oncomplete="" status="Status" />
+            </apex:selectList>
+                 
+                        </apex:panelGrid>
+              
+               
+                        <br/>
+                        <apex:panelGrid style="float:right;" columns="2">
+                                <apex:outputLabel style="font-weight:bold;align:right;"  >Cantidad de Registros:</apex:outputLabel>  
+                                <apex:selectList id="cmd_Registros" size="1" value="{!Registros}"  style="align:right;" >
+                                <apex:selectOptions value="{!ListarNumeroRegistros}" />
+                                <!--<apex:actionSupport event="onchange" action="{!mostrarIdUsuario}" reRender="otxt_ValorIdUsuario" />-->
+                                <apex:actionSupport event="onchange" action="{!mostrarHistorial}" reRender="pbk_PanelCasos" oncomplete="" status="Status" />
+                                </apex:selectList>                         
+                            </apex:panelGrid>
+                
+                             
+                <apex:messages rendered="true" />
+                
+                <apex:pageBlockTable id="pbkt_TablaCasos" value="{!LST_Tareas}" var="tarea"  >
+                    <apex:column style="font-weight:bold;text-align:center;" headerValue="Estado" value="{!tarea.Status}" headerClass="ct"/> 
+                    <apex:column headerValue="Acciones" style="text-align:center;" headerClass="ct">
+                        <apex:commandLink value="Detalle Colaboración" action="{!ToViewColaboracion}">
+                            <apex:param name="idTarea" value="{!tarea.Id}" />
+                        </apex:commandLink>
+                    </apex:column>        
+                    <apex:column headerValue="Nº Caso" value="{!tarea.caso_numero__c}" rendered="true" headerClass="ct" style="text-align:center;width:10%;" />             
+                    <apex:column headerValue="Asunto" value="{!tarea.Detalle_Operacion__c}" rendered="true" headerClass="ct"/>
+                    <apex:column headerValue="Descripción" value="{!tarea.Description}" rendered="true" headerClass="ct"/>
+                    <apex:column headerValue="Fecha Creación" value="{!tarea.CreatedDate}" headerClass="ct" style="text-align:right;"/>
+                    <apex:column headerValue="Fecha de Vencimiento"  value="{!tarea.ActivityDate}" headerClass="ct" style="text-align:right;"/>
+                      <!--<apex:column headerValue="Unidad Resolutora" value="{!tarea.Owner.Name}" headerClass="ct" />-->
+                    <apex:column headerValue="Responsable" value="{!tarea.Responsable_Backup__c}" rendered="true" headerClass="ct" style="text-align:center;"/>                    
+                    
+                    
+                </apex:pageBlockTable>
+            </apex:pageBlock>
+            
+
+            
+        </apex:form>
+        
+    </div>
+
+</apex:page>

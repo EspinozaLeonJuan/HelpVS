@@ -1,0 +1,267 @@
+<apex:page standardController="Contratante__c" 
+           lightningStylesheets="true" 
+           sidebar="false" 
+           showHeader="false" 
+           standardStylesheets="false"
+           docType="HTML-5.0">
+    
+    <html>
+        <head>
+            
+            <script type="text/javascript">            
+
+                function cargaInicial() 
+                {
+    
+                    soapRegiones();
+                    
+                }
+    
+                function soapRegiones()
+                {
+                    
+                    var xmlhttp = new XMLHttpRequest();
+                    // build SOAP request
+                    var sr =
+                        '<?xml version="1.0" encoding="utf-8" ?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">' +
+                        '<soapenv:Body>' +
+                        '<tem:ObtenerListadoRegion>' +
+                        '<tem:usuario>' + document.getElementById('{!$Component.fr.tht_rutUsuario}').value + '</tem:usuario>' +
+                        '</tem:ObtenerListadoRegion>' +
+                        '</soapenv:Body>' +
+                        '</soapenv:Envelope>';
+                    
+                    //alert(sr);
+                    
+                    xmlhttp.open('POST', 'https://servicios.vidasecurity.cl/wsProductoOnco/wsProductoOncologico.asmx?wsdl', true);
+                    // xmlhttp.open('POST', 'https://190.98.205.138:8080/wsProductoOnco/wsProductoOncologico.asmx?wsdl', true);
+                    
+                    // Send the POST request
+                    xmlhttp.setRequestHeader("Content-Type", "text/xml; charset=utf-8");
+                    //alert('paso3');
+                    xmlhttp.send(sr);
+                    var data = xmlhttp.responseXML;                                                                                                   
+                    //FOR TESTING: display results in an alert box once the response is received
+                    xmlhttp.onreadystatechange = function () {
+                        if (xmlhttp.readyState == 4) {
+                            data = xmlhttp.responseText;
+                            //alert("respuesta:" + data);
+                            parser = new DOMParser();
+                            xmlDoc = parser.parseFromString(data,"text/xml");
+                            
+                            //var select = document.getElementById('{!$Component.frm_DatosContratante.pB_CotizadorContratante.pBs_DatosContratante.cmbRegiones}');
+                            var select = document.getElementById('cmbRegiones');
+                            var length = select.options.length;
+                            for (i = 0; i < length; i++) {
+                                select.options.remove(0);
+                            }
+                            
+                            var option = document.createElement('option');
+                            option.value = '';
+                            option.text = '--Ninguno--';
+                            select.add(option, 0);
+                            
+                            for(var i = 0; i < xmlDoc.getElementsByTagName("Codigo").length; i++) {
+                                var option = document.createElement('option');
+                                option.value = xmlDoc.getElementsByTagName("Codigo")[i].childNodes[0].nodeValue + '';
+                                option.text = xmlDoc.getElementsByTagName("Descripcion")[i].childNodes[0].nodeValue + '';
+                                select.add(option, i+1);
+                            }
+                            select.value = '';                                       
+                            
+                        }
+                    };
+                    
+                }
+                
+                function soapCiudades()
+                {
+                    //var idRegion = document.getElementById('{!$Component.frm_DatosContratante.pB_CotizadorContratante.pBs_DatosContratante.cmbRegiones}').value;
+                    var idRegion = document.getElementById('cmbRegiones').value;
+                    document.getElementById('{!$Component.fr.tht_REGION}').value = idRegion;
+                    
+                    if (idRegion != 0 && idRegion != '' )
+                    {
+                        //alert(idRegion);
+                        
+                        var xmlhttp = new XMLHttpRequest();
+                        // build SOAP request
+                        var sr =
+                            '<?xml version="1.0" encoding="utf-8" ?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">' +
+                            '<soapenv:Body>' +
+                            '<tem:ObtenerListadoCiudad>' +
+                            '<tem:usuario>' + document.getElementById('{!$Component.fr.tht_rutUsuario}').value + '</tem:usuario>' +
+                            '<tem:codRegion>' + idRegion + '</tem:codRegion>' +                                           
+                            '</tem:ObtenerListadoCiudad>' +
+                            '</soapenv:Body>' +
+                            '</soapenv:Envelope>';
+                        
+                        //alert(sr);
+                        
+                        xmlhttp.open('POST', 'https://servicios.vidasecurity.cl/wsProductoOnco/wsProductoOncologico.asmx?wsdl', true);
+                        // xmlhttp.open('POST', 'https://190.98.205.138:8080/wsProductoOnco/wsProductoOncologico.asmx?wsdl', true);  
+                        
+                        
+                        // Send the POST request
+                        xmlhttp.setRequestHeader("Content-Type", "text/xml; charset=utf-8");
+                        //alert('paso3');
+                        xmlhttp.send(sr);
+                        var data = xmlhttp.responseXML;                                                                                                   
+                        //FOR TESTING: display results in an alert box once the response is received
+                        xmlhttp.onreadystatechange = function () {
+                            if (xmlhttp.readyState == 4) {
+                                data = xmlhttp.responseText;
+                                //alert("respuesta:" + data);
+                                parser = new DOMParser();
+                                xmlDoc = parser.parseFromString(data,"text/xml");
+                                
+                                //var select = document.getElementById('{!$Component.frm_DatosContratante.pB_CotizadorContratante.pBs_DatosContratante.cmbCiudades}');
+                                var selectComunas = document.getElementById('cmbComunas');
+                                
+                                var length = selectComunas.options.length;
+                                for (i = 0; i < length; i++) {
+                                    selectComunas.options.remove(0);
+                                }
+                                
+                                var selectCiudades = document.getElementById('cmbCiudades');
+                                
+                                var length = selectCiudades.options.length;
+                                for (i = 0; i < length; i++) {
+                                    selectCiudades.options.remove(0);
+                                }
+                                
+                                var option = document.createElement('option');
+                                option.value = '';
+                                option.text = '';
+                                selectCiudades.add(option, 0);
+                                
+                                for(var i = 0; i < xmlDoc.getElementsByTagName("CodigoCiudad").length; i++) {
+                                    var option = document.createElement('option');
+                                    option.value = xmlDoc.getElementsByTagName("CodigoCiudad")[i].childNodes[0].nodeValue;
+                                    option.text = xmlDoc.getElementsByTagName("DescCiudad")[i].childNodes[0].nodeValue;
+                                    selectCiudades.add(option, i+1);
+                                }
+                                //selectCiudades.value = xmlDoc.getElementsByTagName("CodigoCiudad")[0].childNodes[0].nodeValue;
+                                //soapComunas();
+                            }
+                        };
+                        
+                        
+                        
+                    }    
+                }
+                
+                function soapComunas()
+                {
+                    //var idCiudad = document.getElementById('{!$Component.frm_DatosContratante.pB_CotizadorContratante.pBs_DatosContratante.cmbCiudades}').value;
+                    var idCiudad = document.getElementById('cmbCiudades').value;
+                    document.getElementById('{!$Component.fr.tht_CIUDAD}').value = idCiudad;
+                    
+                    if (idCiudad != 0 && idCiudad != '' )
+                    {
+                        //alert(idCiudad);
+                        
+                        var xmlhttp = new XMLHttpRequest();
+                        // build SOAP request
+                        var sr =
+                            '<?xml version="1.0" encoding="utf-8" ?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">' +
+                            '<soapenv:Body>' +
+                            '<tem:ObtenerListadoComuna>' +
+                            '<tem:usuario>' + document.getElementById('{!$Component.fr.tht_rutUsuario}').value + '</tem:usuario>' +
+                            '<tem:codComuna>' + idCiudad + '</tem:codComuna>' +                                           
+                            '</tem:ObtenerListadoComuna>' +
+                            '</soapenv:Body>' +
+                            '</soapenv:Envelope>';
+                        
+                        //alert(sr);
+                        
+                        xmlhttp.open('POST', 'https://servicios.vidasecurity.cl/wsProductoOnco/wsProductoOncologico.asmx?wsdl', true);
+                        //xmlhttp.open('POST', 'https://190.98.205.138:8080/wsProductoOnco/wsProductoOncologico.asmx?wsdl', true); 
+                        
+                        // Send the POST request
+                        xmlhttp.setRequestHeader("Content-Type", "text/xml; charset=utf-8");
+                        //alert('paso3');
+                        xmlhttp.send(sr);
+                        var data = xmlhttp.responseXML;                                                                                                   
+                        //FOR TESTING: display results in an alert box once the response is received
+                        xmlhttp.onreadystatechange = function () {
+                            if (xmlhttp.readyState == 4) {
+                                data = xmlhttp.responseText;
+                                //alert("respuesta:" + data);
+                                parser = new DOMParser();
+                                xmlDoc = parser.parseFromString(data,"text/xml");
+                                
+                                //var select = document.getElementById('{!$Component.frm_DatosContratante.pB_CotizadorContratante.pBs_DatosContratante.cmbComunas}');
+                                var selectComunas = document.getElementById('cmbComunas');
+                                
+                                var length = selectComunas.options.length;
+                                for (i = 0; i < length; i++) {
+                                    selectComunas.options.remove(0);
+                                }
+                                
+                                var option = document.createElement('option');
+                                option.value = '';
+                                option.text = '';
+                                selectComunas.add(option, 0);
+                                
+                                for(var i = 0; i < xmlDoc.getElementsByTagName("CodComuna").length; i++) {
+                                    var option = document.createElement('option');
+                                    option.value = xmlDoc.getElementsByTagName("CodComuna")[i].childNodes[0].nodeValue;
+                                    option.text = xmlDoc.getElementsByTagName("DescComuna")[i].childNodes[0].nodeValue;
+                                    selectComunas.add(option, i+1);
+                                }
+                                //idComuna = xmlDoc.getElementsByTagName("CodComuna")[0].childNodes[0].nodeValue;
+                                //selectComunas.value = idComuna;
+                                //document.getElementById('{!$Component.frm_DatosContratante.tht_COMUNA}').value = idComuna;
+                            }
+                        };
+                        
+                        
+                        
+                    }    
+                }
+                
+                function onChangeComunas()
+                {
+                    
+                    var idComuna =document.getElementById('cmbComunas').options[document.getElementById('cmbComunas').selectedIndex].value;
+                    document.getElementById('{!$Component.fr.tht_COMUNA}').value = idComuna;                          
+                }    
+             
+            </script>            
+            
+        </head>
+        <body>
+            
+            <apex:form id="fr">
+                <apex:pageBlock id="pbk">
+                    <apex:pageBlockSection id="pbks">
+                        <apex:inputText id="txt_DireccionCliente" label="Dirección" />
+                        <apex:pageBlockSectionItem >
+                        </apex:pageBlockSectionItem>
+                        <th class="labelCol empty">Región</th>
+                        <td class="dataCol ">
+                            <select id="cmbRegiones" label="Región" size="1" onchange="soapCiudades();">
+                            </select>
+                        </td>
+                        <apex:pageBlockSectionItem >
+                        </apex:pageBlockSectionItem>
+                        <th class="labelCol empty">Ciudad</th>
+                        <td class="dataCol ">
+                            <select id="cmbCiudades" label="Región" size="1" onchange="soapComunas();">
+                            </select>
+                        </td>
+                        <apex:pageBlockSectionItem >
+                        </apex:pageBlockSectionItem>
+                        <th class="labelCol empty">Comuna</th>
+                        <td class="dataCol ">
+                            <select id="cmbComunas" label="Región" size="1" onchange="onChangeComunas();">
+                            </select>
+                        </td>                    
+                    </apex:pageBlockSection>                                
+                </apex:pageBlock>            
+            </apex:form>
+        </body>
+    </html>
+    
+</apex:page>

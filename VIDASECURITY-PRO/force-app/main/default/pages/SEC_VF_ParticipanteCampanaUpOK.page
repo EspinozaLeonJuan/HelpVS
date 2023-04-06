@@ -1,0 +1,6 @@
+<apex:page sidebar="false" showHeader="false">   
+    <script>    
+    	alert('Archivo cargado.');
+    	window.top.close();    
+    </script> 
+</apex:page>

@@ -1,0 +1,14 @@
+<apex:page standardController="Participantes_de_Campa_a__c" sidebar="false" showHeader="false" extensions="CLS_ParticipanteCampanaFile">
+    <apex:messages />  
+    <apex:form id="theForm">         
+        <apex:pageBlock title="Miembro Resumen">    
+            	<apex:pageBlockButtons location="bottom">                    
+                <apex:commandButton id="btnsave" action="{!Upload}" value="Subir Archivo"  />
+                </apex:pageBlockButtons>
+                <apex:pageBlockSection >                    
+                    Nombre Contratante: {! Participantes_de_Campa_a__c.Nombres_del_Cliente__c } <br/>
+                    <apex:inputFile id="inputFile" value="{!Audio}" fileName="{!NombreArchivo}" />
+                </apex:pageBlockSection>            
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

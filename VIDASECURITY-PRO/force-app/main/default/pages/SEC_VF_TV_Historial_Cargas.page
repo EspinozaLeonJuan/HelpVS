@@ -1,0 +1,274 @@
+<!--
+  @description       : 
+  @author            : Juan Espinoza León
+  @group             : 
+  @last modified on  : 05-31-2021
+  @last modified by  : Juan Espinoza León
+  Modifications Log 
+  Ver   Date         Author               Modification
+  1.0   11-25-2020   Juan Espinoza León   Initial Version
+--> 
+<apex:page controller="CTR_TV_HistorialCargas" action="{!ListadoCargas}"  lightningStylesheets="true" showHeader="true" sidebar="false"  docType="html-5.0">
+    <style>
+    .popupBackground {
+        /* Background color */
+        background-color:black;
+        opacity: 0.5;
+        filter: alpha(opacity = 50);
+        
+        /* Dimensions */
+        width: 100%;
+        height: 1000%;       
+        top: 0;
+        left: 0;
+        z-index: 998;
+        position: absolute;        
+        /* Mouse */
+        cursor:wait;
+    }
+            
+    .popupPanel {
+       /* Background color */
+        border: solid 2px orange;
+        background-color: white;        
+        /* Dimensions */
+        display: inline-block;
+        left: 50%;
+        width: 100px;
+        margin-left: 0px;
+        /*top: 100px;*/
+        height: 25px;
+        margin-top: -25px;
+        position: absolute;   
+        z-index: 999;        
+        /* Mouse */
+        cursor:pointer;
+    }
+    
+    .aleft 
+    {
+        width:64%;
+        float:left;
+        /* height: 100%;*/
+        /*text-align:center;*/
+    }
+
+    .aright {
+        float:right;
+        width:35%;
+        /* height: 100%;*/
+        /*width:200px;*/
+        /*background:#fc0;*/
+    }
+    
+    .inline
+    {
+        width:33.1%;
+        display:inline-block;
+        /* position: absolute;*/
+        /*float: left;*/
+        /*text-align:center;*/
+        padding: 2px;
+    }
+
+    .header_inline_left
+    {
+        width:49.5%;
+        display:inline-block;
+        /* position: absolute;*/
+        /*float: left;*/
+        /*text-align:center;*/
+        padding: 3px;
+        /*  margin-top: -30px;*/
+    }
+
+    .header_inline_right
+    {
+        width:49.5%;
+        display:inline-block;
+        /* position: absolute;*/
+        /*float: left;*/
+        text-align:right;
+        padding: 3px;
+    /*    margin-top: -30px;*/
+    }
+
+    .footer
+    {
+        /*width:33%;
+        display:inline-block;*/
+        /* position: absolute;*/
+        /*float: left;*/
+        text-align:center;
+        padding: 2px;
+    }
+    body .bPageBlock .pbHeader {
+        /*background-color: orangered; */
+        font-weight: bold;
+    }
+
+    .ct{
+            text-align:center;
+    }
+
+    .btnMenuCurrent{
+    color:white !important;
+    background:#8D8E95 !important;
+    /*display: inline-flex;*/
+    /*margin-left: -10px;*/
+    margin-right: -8px;
+    }
+
+    .btnMenu{
+        color:white !important;
+        background:#5260E3 !important;
+        /*display: inline-flex;*/
+        /*margin-left: -10px;*/
+        margin-right: -8px;
+    }
+
+    .btnMenuTmp{
+    color:white !important;
+    background:rgb(201, 106, 62) !important;
+    /*display: inline-flex;*/
+    /*margin-left: -10px;*/
+    margin-right: -8px;
+    }
+    </style>
+
+    <apex:includeScript value="{!$Resource.jquery}"/>
+
+    <script type="text/javascript">
+    
+    function colorPageBlock(pageblock, bkcolor, color) {
+        if (pageblock != null) 
+        {
+            pageblock.firstChild.style.cssText = "background-color: " + bkcolor + ";font-weight:bold;color:"+color+";";
+            //pageblock.firstChild.style.
+        }
+    }
+    </script>
+    
+    <div id="dv_CuerpoPrincipal" style="width: 100%; margin-left: auto; margin-right: auto; height: 100%;">
+   
+        <apex:actionStatus id="Status">
+               <apex:facet name="start">
+                   <apex:outputPanel >
+                       <div class="popupBackground" />
+                       <div class="popupPanel">
+                           &nbsp; Espere...<img src="/apexpages/devmode/img/saveStatus.gif" />
+                       </div>
+                   </apex:outputPanel> 
+               </apex:facet>
+           </apex:actionStatus>
+<br/>
+    <apex:form id="frm_HistorialTV">
+        <div id="title">
+            <div class="header_inline_left">
+                <apex:outputLabel style="font-size:18px;font-weight:bold;" value="Gestión de Miembros de Campaña" ></apex:outputLabel>
+            </div>
+            <div class="header_inline_right">
+              &nbsp;
+            </div>
+        </div>
+        
+        <apex:actionFunction name="busquedaCargas" action="{!search}" reRender="details" status="Status">
+        </apex:actionFunction> 
+    
+        <apex:pageBlock id="pbs_PanelHeader"  >
+            <apex:pageBlockSection id="pbk_PanelFilter" title="Historial Cargas Televentas" collapsible="false" columns="1" >
+              <!--  <apex:panelGrid columns="1" style="text-align:right;width:100%">                                            
+                   
+                </apex:panelGrid> -->
+                <apex:panelGrid columns="5" >    
+                     <apex:panelGroup >
+                        <apex:outputLabel style="font-weight:bold;"  >Campaña:</apex:outputLabel>  
+                        <apex:selectList id="cmd_CMP" size="1" value="{!CampagnaId}"  style="width:200px;"  >
+                            <apex:selectOptions value="{!ListarCampagnas}" />
+                         <apex:actionSupport event="onchange" action="{!search}" oncomplete="" status="Status" />
+                        </apex:selectList> 
+                     </apex:panelGroup>
+
+                     <apex:panelGroup >
+                        <apex:outputLabel style="font-weight:bold;"  >Estado Carga:</apex:outputLabel>  
+                        <apex:selectList id="cmd_Estado" size="1" value="{!Estado}"  style="width:200px;"  >
+                            <apex:selectOptions value="{!ListarEstados}" />
+                         <apex:actionSupport event="onchange" action="{!search}" oncomplete="" status="Status" />
+                        </apex:selectList> 
+                     </apex:panelGroup>
+
+                     <apex:panelGroup >
+                        <apex:outputLabel style="font-weight:bold;" >Fecha Inicio:</apex:outputLabel>
+                        <apex:input value="{!FechaInicio}"  type="date" onchange="javascript:busquedaCargas();"  />
+                     </apex:panelGroup>
+
+                     <apex:panelGroup >
+                        <apex:outputLabel style="font-weight:bold;" >Fecha Termino:</apex:outputLabel>
+                        <apex:input value="{!FechaTermino}"  type="date"  onchange="javascript:busquedaCargas();"   />   
+                     </apex:panelGroup>
+                   
+                     <apex:panelGroup style="text-align: right;">
+                        <apex:commandButton title="Carga de archivo CSV" value="Realizar nueva Cargar de Miembros" action="{!NuevaCargaDatos}"/>  
+                     </apex:panelGroup>
+                       
+
+                      
+
+                  
+
+                  
+              </apex:panelGrid>
+                            
+
+             <script>colorPageBlock(document.getElementById("{!$Component.pbk_PanelFilter}"), "#EF861C", "white");</script> 
+                            
+            </apex:pageBlockSection>
+        
+        </apex:pageBlock>
+
+
+        <apex:pageBlock id="details">
+            <apex:pageblockButtons location="both" >        
+                <apex:commandButton value="Primera Página" rerender="details" action="{!FirstPage}" disabled="{!prev}" status="Status" immediate="true"/>
+                <apex:commandButton value="Anterior" rerender="details" action="{!previous}" disabled="{!prev}" status="Status" immediate="true"/>
+                <apex:commandButton value="Siguiente" rerender="details" action="{!next}" disabled="{!nxt}" status="Status" immediate="true" />
+                <apex:commandButton value="Última Página" rerender="details" action="{!LastPage}" disabled="{!nxt}" status="Status" immediate="true"/>
+            </apex:pageblockButtons>
+            <br/>
+            <apex:outputLabel value="Página"></apex:outputLabel> &nbsp;
+            <apex:outputLabel value="{!Page}"></apex:outputLabel> &nbsp;
+            <apex:outputLabel value="de"></apex:outputLabel> &nbsp;
+            <apex:outputLabel value="{!TotalPage}"></apex:outputLabel>
+            <br/>
+            <apex:outputLabel value="{!totalRecs}"></apex:outputLabel> &nbsp;
+            <apex:outputLabel value="registros encontrados."></apex:outputLabel>
+            <br/>
+     <!--       <apex:outputPanel layout="block" style="overflow:auto;width:100%;height:650px" >-->
+                <apex:pageBlockTable id="pbkt_TablaCasos" value="{!ctvlist}" var="tvc"  headerClass="ct" style="font-size:11px;">
+                        <apex:column headerValue="" style="text-align:center;" headerClass="ct">
+                            <apex:commandLink value="Ver Detalle" style="text-align:center;" immediate="true" action="{!ToDetalleCarga}">
+                            <apex:param name="Id" value="{!tvc.Id}" />
+                            <apex:param name="Estado" value="{!tvc.Estado__c}" />
+                        </apex:commandLink>
+                        </apex:column>
+                        <apex:column headerValue="Campaña" value="{!tvc.Campagna_Name__c}" headerClass="ct" style="font-weight:bold;text-align:center;"  />
+                        <apex:column headerValue="Total Registros Carga" value="{!tvc.Total_Registros_Carga__c}" headerClass="ct" style="font-weight:bold;text-align:center;"  />
+                        <apex:column headerValue="Total Registros Ok" value="{!tvc.Total_Registros_Ok__c}" headerClass="ct" style="font-weight:bold;text-align:center;"  />
+                        <apex:column headerValue="Total Registros Error" value="{!tvc.Total_Registros_Error__c}" headerClass="ct" style="font-weight:bold;text-align:center;"  />
+                        <apex:column headerValue="Total Prospectos" value="{!tvc.Total_Prospectos_Ok__c}" headerClass="ct" style="font-weight:bold;text-align:center;"  />
+                        <apex:column headerValue="Propietario" value="{!tvc.OwnerId}" headerClass="ct" style="text-align:center;" />
+                     <!--   <apex:column headerValue="Email notificación término" value="{!tvc.Email_Notificacion__c}" headerClass="ct" style="text-align:center;" />-->
+                        <apex:column headerValue="Fecha Creación" value="{!tvc.CreatedDate}" headerClass="ct" style="text-align:center;" />        
+                        <apex:column headerValue="Fecha Último Cambio" value="{!tvc.LastModifiedDate}" headerClass="ct" style="text-align:center;" />        
+                        <apex:column headerValue="Estado" value="{!tvc.Estado__c}" headerClass="ct" style="text-align:center;" />        
+                </apex:pageBlockTable>
+
+     <!--       </apex:outputPanel>-->
+           
+        </apex:pageBlock>
+
+
+    </apex:form>
+</div>
+
+</apex:page>

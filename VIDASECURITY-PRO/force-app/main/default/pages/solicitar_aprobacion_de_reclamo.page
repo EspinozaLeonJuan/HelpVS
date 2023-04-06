@@ -1,0 +1,11 @@
+<apex:page standardController="Case" extensions="SolicitarAprobacionDeReclamoController" action="{!init}">
+<apex:sectionHeader title="Solicitar Aprobación" subtitle="No es posible solicitar la aprobación" />
+<apex:form >
+<apex:pageBlock title="Error al solicitar la aprobación para este caso">
+<apex:pageBlockButtons location="bottom">
+<apex:commandButton value="Volver" action="{!cancel}" />
+</apex:pageBlockButtons>
+<apex:pageMessages />
+</apex:pageBlock>
+</apex:form>
+</apex:page>

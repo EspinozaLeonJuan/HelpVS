@@ -1,0 +1,3 @@
+<apex:page standardController="Campaign" extensions="CLS_ProcesarProspTeleController" action="{!volverCampana}">
+    Procesando prospectos nuevos y con problemas en llamadas a WS....
+</apex:page>

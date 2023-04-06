@@ -1,0 +1,10 @@
+<apex:page extensions="CTR_CS_Sincronizar_Ejecutivo" standardController="Account" action="{!actualizar_account}">
+    <script>
+        if ('{!success}' == 'true' ) {
+            window.history.back();
+        } else {
+            alert('{!Msg}');  
+            window.history.back();
+        }
+    </script>          
+</apex:page>

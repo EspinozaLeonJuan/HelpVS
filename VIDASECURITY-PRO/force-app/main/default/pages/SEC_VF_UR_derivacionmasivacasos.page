@@ -1,0 +1,29 @@
+<apex:page standardController="Case" recordSetVar="Cases" action="{!evaluaCasosHijosDerivar}" extensions="CTR_DerivacionSelectivaCasos" >
+    <!--Procesando derivación caso...--> 
+     <script>
+    if ('{!CerradoAtencion}' == 'sin_casos')
+    {
+    	alert('Para proceder a derivar debe seleccionar al menos un requerimiento.');
+    	document.location = "/"+'{!ID}';  
+    }
+    else if ('{!CerradoAtencion}' == 'cerrado')
+    {
+        alert('No se puede derivar un nuevo requerimiento, si el caso esta Cerrado.');
+    	document.location = "/"+'{!ID}';  
+    }
+    else if ('{!CerradoAtencion}' == 'basura')
+    {
+    	alert('No se pueden derivar requerimientos, si el caso de Atención esta Descartado (Basura).');
+    	document.location = "/"+'{!ID}';        
+    }
+    else
+    {
+        if ('{!Correcto}' == 'false')
+        {
+            alert('Dentro de los requerimientos seleccionados existen requerimientos que se encuentran en estado Cerrado o en proceso de Derivación, revise e intente nuevamente.');
+            document.location = "/"+'{!ID}';        
+        }
+    }
+    </script>
+  
+</apex:page>

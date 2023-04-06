@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Prueba_Respuesta_CAT</fullName>
+        <description>Prueba Respuesta CAT</description>
+        <protected>false</protected>
+        <recipients>
+            <type>accountOwner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Plantilla_de_Correo_Electr_nico_PV/Recordatorio_Centro_Atencion_Cliente</template>
+    </alerts>
+    <alerts>
+        <fullName>Prueba_mensaje</fullName>
+        <description>Prueba mensaje</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Plantillas_para_Email2Case/Asignacion_de_Casos</template>
+    </alerts>
+    <outboundMessages>
+        <fullName>WsRespuestaCat</fullName>
+        <apiVersion>31.0</apiVersion>
+        <endpointUrl>http://webservices.vidasecurity.cl/WsRespuestaCAT.asmx</endpointUrl>
+        <fields>Caso_Cat__c</fields>
+        <fields>Comentario_Respuesta__c</fields>
+        <fields>CreatedById</fields>
+        <fields>CreatedDate</fields>
+        <fields>E_mail_Creador__c</fields>
+        <fields>Fecha_Creacion__c</fields>
+        <fields>IDVS__c</fields>
+        <fields>Id</fields>
+        <fields>Id_respuesta_cat__c</fields>
+        <fields>LastActivityDate</fields>
+        <fields>LastModifiedById</fields>
+        <fields>LastModifiedDate</fields>
+        <fields>LastReferencedDate</fields>
+        <fields>LastViewedDate</fields>
+        <fields>Name</fields>
+        <fields>Nombre_usuario_creador__c</fields>
+        <fields>OwnerId</fields>
+        <fields>SystemModstamp</fields>
+        <fields>Tiene_attachement__c</fields>
+        <fields>Tipo_de_Contenido__c</fields>
+        <includeSessionId>false</includeSessionId>
+        <integrationUser>sfvida@security.cl</integrationUser>
+        <name>WsRespuestaCat</name>
+        <protected>false</protected>
+        <useDeadLetterQueue>false</useDeadLetterQueue>
+    </outboundMessages>
+    <rules>
+        <fullName>Respuesta Caso Cat</fullName>
+        <actions>
+            <name>WsRespuestaCat</name>
+            <type>OutboundMessage</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Respuesta__c.Name</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+</Workflow>

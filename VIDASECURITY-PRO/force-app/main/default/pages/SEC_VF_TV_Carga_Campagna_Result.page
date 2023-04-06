@@ -1,0 +1,285 @@
+<!--
+  @description       : 
+  @author            : Juan Espinoza León
+  @group             : 
+  @last modified on  : 05-31-2021
+  @last modified by  : Juan Espinoza León
+  Modifications Log 
+  Ver   Date         Author               Modification
+  1.0   11-27-2020   Juan Espinoza León   Initial Version
+-->
+<apex:page controller="CTR_TV_GestionCarga" action="{!IniciaEnProceso}" lightningStylesheets="true" showHeader="true" sidebar="false"  docType="html-5.0" >
+    <style>
+    .popupBackground {
+        /* Background color */
+        background-color:black;
+        opacity: 0.5;
+        filter: alpha(opacity = 50);
+        
+        /* Dimensions */
+        width: 100%;
+        height: 1000%;       
+        top: 0;
+        left: 0;
+        z-index: 998;
+        position: absolute;        
+        /* Mouse */
+        cursor:wait;
+    }
+            
+    .popupPanel {
+       /* Background color */
+        border: solid 2px orange;
+        background-color: white;        
+        /* Dimensions */
+        display: inline-block;
+        left: 50%;
+        width: 100px;
+        margin-left: 0px;
+        /*top: 100px;*/
+        height: 25px;
+        margin-top: -25px;
+        position: absolute;   
+        z-index: 999;        
+        /* Mouse */
+        cursor:pointer;
+    }
+    
+    .aleft
+    {
+        width:64%;
+        float:left;
+        /* height: 100%;*/
+        /*text-align:center;*/
+    }
+
+    .aright {
+        float:right;
+        width:35%;
+        /* height: 100%;*/
+        /*width:200px;*/
+        /*background:#fc0;*/
+    }
+    
+    .inline
+    {
+        width:33.1%;
+        display:inline-block;
+        /* position: absolute;*/
+        /*float: left;*/
+        /*text-align:center;*/
+        padding: 2px;
+    }
+
+    .header_inline_left
+    {
+        width:49.5%;
+        display:inline-block;
+        /* position: absolute;*/
+        /*float: left;*/
+        /*text-align:center;*/
+        padding: 3px;
+        /*  margin-top: -30px;*/
+    }
+
+    .header_inline_right
+    {
+        width:49.5%;
+        display:inline-block;
+        /* position: absolute;*/
+        /*float: left;*/
+        text-align:right;
+        padding: 3px;
+    /*    margin-top: -30px;*/
+    }
+
+    .footer
+    {
+        /*width:33%;
+        display:inline-block;*/
+        /* position: absolute;*/
+        /*float: left;*/
+        text-align:center;
+        padding: 2px;
+    }
+    body .bPageBlock .pbHeader {
+        /*background-color: orangered; */
+        font-weight: bold;
+    }
+
+    .ct{
+            text-align:center;
+    }
+
+    .btnMenuCurrent{
+    color:white !important;
+    background:#8D8E95 !important;
+    /*display: inline-flex;*/
+    /*margin-left: -10px;*/
+    margin-right: -8px;
+    }
+
+    .btnMenu{
+        color:white !important;
+        background:#5260E3 !important;
+        /*display: inline-flex;*/
+        /*margin-left: -10px;*/
+        margin-right: -8px;
+    }
+
+    .btnMenuTmp{
+    color:white !important;
+    background:rgb(201, 106, 62) !important;
+    /*display: inline-flex;*/
+    /*margin-left: -10px;*/
+    margin-right: -8px;
+    }
+    </style>
+    <script type="text/javascript">
+    
+    function colorPageBlock(pageblock, bkcolor, color) {
+        if (pageblock != null) 
+        {
+            pageblock.firstChild.style.cssText = "background-color: " + bkcolor + ";font-weight:bold;color:"+color+";";
+            //pageblock.firstChild.style.
+        }
+    }
+
+    function ProcesandoCarga() {  
+       alert('La información existente en el archivo csv cargado ha sido procesada exitosamente.');
+       ArchivoProcesado();
+    }
+
+   
+
+   </script>
+    
+    <script type="text/javascript" src="/soap/ajax/20.0/connection.js"></script>
+
+   
+    <div id="dv_CuerpoPrincipal" style="width: 100%; margin-left: auto; margin-right: auto; height: 100%;">
+   
+        <apex:actionStatus id="Status">
+               <apex:facet name="start">
+                   <apex:outputPanel >
+                       <div class="popupBackground" />
+                       <div class="popupPanel">
+                           &nbsp; Espere...<img src="/apexpages/devmode/img/saveStatus.gif" />
+                       </div>
+                   </apex:outputPanel> 
+               </apex:facet>
+           </apex:actionStatus>
+       
+    <apex:form id="frm_CargaTV">
+            
+                <apex:actionFunction name="ArchivoProcesado" action="{!ArchivoProcesadoOk}" reRender="details" status="Status">
+                </apex:actionFunction> 
+          
+            <div id="title">
+                <div class="header_inline_left">
+                    <apex:outputLabel style="font-size:18px;font-weight:bold;" value="Gestión de Miembros de Campaña" ></apex:outputLabel>
+                </div>
+                <div class="header_inline_right">
+                    <apex:panelGrid columns="1" style="text-align:right;width:100%">                                            
+                        <apex:commandButton value="Historial de Cargas"  action="{!ToHistory}" />
+                    </apex:panelGrid> 
+                </div>
+            </div>
+           
+              
+
+                <apex:pageBlock id="pbk_PanelHeader"  >
+                    <apex:pageBlockSection id="pbs_PanelHeader" title="{!Titulo}" collapsible="false"  >
+              <apex:panelGrid columns="2"  style="width:100%;">
+                 <apex:panelGroup >
+                        <apex:outputLabel value="Campaña : " style="font-weight:bold;"></apex:outputLabel>
+                        <apex:outputLabel value="{!NombreCampagna}"  ></apex:outputLabel>
+                 </apex:panelGroup>
+                 <apex:panelGroup >
+                  <apex:commandButton value="Reprocesar Carga" action="{!ProcessUpload}" status="Status" id="btn_reprocesar_archivo" rendered="{!Reprocesar = true}"  oncomplete="ProcesandoCarga();"/>  
+                  <apex:commandButton value="Procesar Carga" action="{!ProcessUpload}" status="Status" id="btn_procesar_archivo"  rendered="{!Reprocesar = false}" oncomplete="ProcesandoCarga();"/>                 
+                    <apex:commandButton value="Cancelar"  id="btn_cancelar_procesar_archivo1" action="{!CancelUpload}"/>
+ <!-- 
+                    <apex:commandButton value="Procesar Carga"  status="Status" id="btn_procesar_archivo"  oncomplete="ProcesandoCarga();"/>                  
+                    <apex:commandButton value="Cancelar"  id="btn_cancelar_procesar_archivo1"/>-->
+                </apex:panelGroup>
+             </apex:panelGrid>
+              
+            </apex:pageBlockSection>
+            <script>colorPageBlock(document.getElementById("{!$Component.pbs_PanelHeader}"), "#EF861C", "white");</script> 
+                </apex:pageBlock>
+
+
+                <apex:pageBlock title="Resultado carga CSV" >
+                    <apex:panelGrid columns="8" >
+                        <apex:outputLabel value="Total Registros Carga: " style="font-weight:bold;"></apex:outputLabel>
+                        <apex:outputLabel value="{!Total_Registros_Carga}"></apex:outputLabel>
+
+ 
+                        <apex:outputLabel value="Total Registros Ok: " style="font-weight:bold;"></apex:outputLabel>
+                        <apex:outputLabel value="{!Total_Registros_Ok}" ></apex:outputLabel>
+
+                        <apex:outputLabel value="Total Registros Error: " style="font-weight:bold;"></apex:outputLabel>
+                        <apex:outputLabel value="{!Total_Registros_Error}" ></apex:outputLabel>
+
+                        <apex:outputLabel value="Total Prospectos: " style="font-weight:bold;"></apex:outputLabel>
+                        <apex:outputLabel value="{!Total_Prospectos_Ok}" ></apex:outputLabel>
+                    </apex:panelGrid>
+                    </apex:pageBlock>
+              <apex:pageBlock id="details" title="Contenido CSV" >
+                <apex:pageblockButtons location="both" >        
+                    <apex:commandButton value="Primera Página" rerender="details" action="{!FirstPage}" disabled="{!prev}" status="Status" immediate="true"/>
+                    <apex:commandButton value="Anterior" rerender="details" action="{!previous}" disabled="{!prev}" status="Status" immediate="true"/>
+                    <apex:commandButton value="Siguiente" rerender="details" action="{!next}" disabled="{!nxt}" status="Status" immediate="true" />
+                    <apex:commandButton value="Última Página" rerender="details" action="{!LastPage}" disabled="{!nxt}" status="Status" immediate="true"/>
+                </apex:pageblockButtons>
+                <br/>
+                <apex:outputLabel value="Página"></apex:outputLabel> &nbsp;
+                <apex:outputLabel value="{!Page}"></apex:outputLabel> &nbsp;
+                <apex:outputLabel value="de"></apex:outputLabel> &nbsp;
+                <apex:outputLabel value="{!TotalPage}"></apex:outputLabel>
+                <br/>
+                <apex:outputLabel value="{!totalRecs}"></apex:outputLabel> &nbsp;
+                <apex:outputLabel value="registros encontrados."></apex:outputLabel>
+                <br/>
+           <!--     <apex:outputPanel layout="block" style="overflow:auto;width:100%;height:800px" >-->
+                     <apex:pageblocktable value="{!Data}" var="tvc" rendered="{!IF(TipoCMP ='Televenta - Oncológico' || TipoCMP ='Televenta - APEG' ,true,false)}">
+                        <apex:column value="{!tvc.RUT__c}"  headerClass="ct" style="text-align:center;" />
+                       <apex:column value="{!tvc.DV__c}"  headerClass="ct" style="text-align:center;" />
+                        <apex:column value="{!tvc.POLIZA_MANDATORIA__c}" headerClass="ct" style="text-align:center;"  />
+                        <apex:column value="{!tvc.TELEFONO_1__c }"  headerClass="ct" style="text-align:center;"  />
+                        <apex:column value="{!tvc.TELEFONO_2__c }"  headerClass="ct" style="text-align:center;"  />
+                        <apex:column value="{!tvc.TELEFONO_3__c }"  headerClass="ct" style="text-align:center;"  />
+                        <apex:column value="{!tvc.TELEFONO_4__c }"  headerClass="ct" style="text-align:center;"  />
+                        <apex:column value="{!tvc.TELEFONO_5__c }"  headerClass="ct" style="text-align:center;"  />
+                        <apex:column value="{!tvc.TELEFONO_6__c }"  headerClass="ct" style="text-align:center;"  />
+                        <apex:column value="{!tvc.TELEFONO_7__c }"  headerClass="ct" style="text-align:center;"  />
+                        <apex:column value="{!tvc.TELEFONO_8__c }"  headerClass="ct" style="text-align:center;"  />
+                        <apex:column value="{!tvc.EMAILTEST__c }"  headerClass="ct" style="text-align:center;"  />
+                        <apex:column value="{!tvc.CORREOENVIADO__c }"  headerClass="ct" style="text-align:center;"  />
+                      </apex:pageblocktable>    
+                      
+                      <apex:pageblocktable value="{!Data}" var="tvc" rendered="{!IF(TipoCMP ='Salud Protegida' ,true,false)}">
+                        <apex:column value="{!tvc.RUT_PROSPECTO__c}"  headerClass="ct" style="text-align:center;" />
+                       <apex:column value="{!tvc.DV_PROSPECTO__c}"  headerClass="ct" style="text-align:center;" />
+                        <apex:column value="{!tvc.NOMBRE_PROSPECTO__c}" headerClass="ct" style="text-align:center;"  />
+                        <apex:column value="{!tvc.APELLIDO_PROSPECTO__c }"  headerClass="ct" style="text-align:center;"  />
+                        <apex:column value="{!tvc.RUT_CONTRATANTE_ORIGINAL__c }"  headerClass="ct" style="text-align:center;"  />
+                        <apex:column value="{!tvc.DV_CONTRATANTE_ORIGINAL__c }"  headerClass="ct" style="text-align:center;"  />
+                        <apex:column value="{!tvc.POLIZA_CONTRATANTE_ORIGINAL__c }"  headerClass="ct" style="text-align:center;"  />
+                        <apex:column value="{!tvc.PLAN_COBERTURA__c }"  headerClass="ct" style="text-align:center;"  />
+                        <apex:column value="{!tvc.INTERMEDIARIO_POLIZA__c }"  headerClass="ct" style="text-align:center;"  />
+                        <apex:column value="{!tvc.TELEFONO__c }"  headerClass="ct" style="text-align:center;"  />
+                        <apex:column value="{!tvc.EMAIL__c }"  headerClass="ct" style="text-align:center;"  />
+                        <apex:column value="{!tvc.FECHA_NACIMIENTO_PROSPECTO__c }"  headerClass="ct" style="text-align:center;"  />
+                        <apex:column value="{!tvc.FECHA_INICIO_VIGENCIA_PROSPECTO__c }"  headerClass="ct" style="text-align:center;"  />
+                      </apex:pageblocktable>    
+         <!--   </apex:outputPanel>-->
+        
+                </apex:pageBlock>
+           
+    </apex:form>
+    
+    </div>
+
+</apex:page>

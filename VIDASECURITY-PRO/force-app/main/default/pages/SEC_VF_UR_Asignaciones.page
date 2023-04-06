@@ -1,0 +1,219 @@
+<!--
+  @File Name          : SEC_VF_UR_Asignaciones.page
+  @Description        : 
+  @Author             : ChangeMeIn@UserSettingsUnder.SFDoc
+  @Group              : 
+  @Last Modified By   : ChangeMeIn@UserSettingsUnder.SFDoc
+  @Last Modified On   : 07-08-2020
+  @Modification Log   : 
+  Ver       Date            Author      		    Modification
+  1.0    6/21/2020   ChangeMeIn@UserSettingsUnder.SFDoc     Initial Version
+-->
+<apex:page controller="CTR_UR_Asignaciones" action="{!IniciaListadoAsignaciones}" docType="html-5.0" lightningStylesheets="true" showHeader="false" sidebar="false" >
+
+    <style>
+             
+        .popupBackground {
+                /* Background color */
+                background-color:black;
+                opacity: 0.5;
+                filter: alpha(opacity = 50);
+                
+                /* Dimensions */
+                width: 100%;
+                height: 1000%;       
+                top: 0;
+                left: 0;
+                z-index: 998;
+                position: absolute;        
+                /* Mouse */
+                cursor:wait;
+            } 
+                    
+            .popupPanel {
+               /* Background color */
+                border: solid 2px orange;
+                background-color: white;        
+                /* Dimensions */
+                display: inline-block;
+                left: 50%;
+                width: 100px;
+                margin-left: 0px;
+                top: 100px;
+                height: 25px;
+                margin-top: -25px;
+                position: absolute;   
+                z-index: 999;        
+                /* Mouse */
+                cursor:pointer;
+            } 
+            
+            .ct{
+            text-align:center;
+            }
+        
+            .header_inline_left
+            {
+                width:49.5%;
+                display:inline-block;
+                /* position: absolute;*/
+                /*float: left;*/
+                /*text-align:center;*/
+                padding: 3px;
+              /*  margin-top: -30px;*/
+                margin-bottom: 4px;
+            }
+        
+            .header_inline_right
+            {
+                width:49.5%;
+                display:inline-block;
+                /* position: absolute;*/
+                /*float: left;*/
+                text-align:right;
+                padding: 3px;
+              /*  margin-top: -30px;*/
+                margin-bottom: 4px;      
+            }
+        
+            .checkTable 
+            {
+                /*width: 100%;
+                text-align: center;*/
+            }
+        
+        
+           
+            .btnSuccess{
+                color:white !important;
+                background:#11862D !important;
+            }
+        
+            .btnMenu{
+                color:white !important;
+                background:#5260E3 !important;
+                /*display: inline-flex;*/
+                /*margin-left: -10px;*/
+                margin-right: -8px;
+            }
+        
+        
+        
+            .btnClean{
+                color: black !important;
+                background: #DAE3E7 !important;
+                margin-right: -6px;
+            }
+        
+            </style>
+<apex:includeScript value="{!$Resource.jquery}"/>
+<script type="text/javascript">
+
+    function colorPageBlock(pageblock, bkcolor, color) {
+        if (pageblock != null) 
+        {
+            pageblock.firstChild.style.cssText = "background-color: " + bkcolor + ";font-weight:bold;color:"+color+";";
+        }
+    }
+</script>
+
+<div id="dv_CuerpoPrincipal" style="width: 100%; margin-left: auto; margin-right: auto; height: 100%;">
+    <apex:actionStatus id="Status">
+  <apex:facet name="start">
+      <apex:outputPanel >
+          <div class="popupBackground" />
+          <div class="popupPanel">
+              &nbsp; Espere...<img src="/apexpages/devmode/img/saveStatus.gif" />
+          </div>
+      </apex:outputPanel> 
+  </apex:facet>
+</apex:actionStatus>
+
+<br/>
+
+<apex:form id="frm_sup">     
+    <div id="title">
+        <div class="header_inline_left">
+             
+      
+        </div>
+        <div class="header_inline_right" >
+            <!--<apex:panelGroup style="text-align:right;">
+                <apex:commandButton id="cmd_Dashboard" value="Dashboard UR" action="{!BandejaUR}" styleClass="btnMenu"  immediate="true" rendered="true" />
+            </apex:panelGroup>-->
+        </div>
+    </div>
+
+    <apex:pageBlock id="header">
+
+        <apex:pageBlockSection title="Asignaciones UR" collapsible="false" columns="1" id="pbs_AsignacionesUR" >
+
+            <apex:panelGrid columns="6" style="width:100%;" id="header" > 
+                
+            
+                <apex:outputLabel style="font-weight:bold;" rendered="true" >Negocio:</apex:outputLabel>
+                <apex:inputField value="{!AsignacionUR.Negocio__c}"  rendered="true" style="width:250px;">
+                       <apex:actionSupport event="onchange"  />
+                </apex:inputField>
+
+                <apex:outputLabel style="font-weight:bold;" rendered="true">Categoría:</apex:outputLabel>
+                <apex:inputField value="{!AsignacionUR.Categor_a__c}" rendered="true" style="width:250px;" >
+                    <apex:actionSupport event="onchange"  />
+                </apex:inputField>
+
+                <apex:outputLabel style="font-weight:bold;" rendered="true">Solicitud:</apex:outputLabel>
+                <apex:inputField value="{!AsignacionUR.Detalle_Solicitud__c}"  rendered="true" style="width:250px;" >
+                         <apex:actionSupport event="onchange"  />
+                </apex:inputField>
+
+                <apex:outputLabel style="font-weight:bold;" rendered="true">Tipo de Asignación:</apex:outputLabel>
+                <apex:inputField value="{!AsignacionUR.Tipo_Asignacion__c}"  rendered="true" style="width:250px;" >
+                    <apex:actionSupport event="onchange"  />
+                </apex:inputField>
+
+                <apex:outputLabel style="font-weight:bold;" rendered="true">Asignación:</apex:outputLabel>
+                <apex:inputField value="{!AsignacionUR.Asignaci_n__c}"  rendered="true" style="width:250px;" >
+                    <apex:actionSupport event="onchange" />
+                </apex:inputField>
+
+                <apex:outputLabel style="font-weight:bold;" rendered="true">Responsable:</apex:outputLabel>
+                <apex:inputField value="{!AsignacionUR.Responsable__c}"  style="width:250px;" >
+                    <apex:actionSupport event="onchange" />
+                </apex:inputField>
+            
+                  <apex:panelGroup >
+                    <apex:commandButton value="Agregar nueva Asignación UR"  reRender="details, header"  status="Status" immediate="true" styleClass="btnSuccess" action="{!GuardaAsignacion}" oncomplete="alert('{!Mensaje}');"/>                           
+                    <apex:commandButton value="Limpiar"   styleClass="btnClean" status="Status" immediate="true"  action="{!LimpiaAsignacion}"/>                           
+        
+                  </apex:panelGroup> 
+            </apex:panelGrid>
+
+            <script>colorPageBlock(document.getElementById("{!$Component.pbs_AsignacionesUR}"), "#EF861C", "white");</script>
+        </apex:pageBlockSection>
+
+    </apex:pageBlock>
+    <apex:outputPanel layout="block" style="overflow:auto;width:100%;height:635px;" >
+    
+    <apex:pageBlock id="details">
+
+
+        <apex:pageBlockTable id="pbkt_TablaCasos" value="{!AsignacionesUR}" var="asignacion"  headerClass="ct" style="font-size:11px;">
+               <apex:column headerValue="" style="text-align:center;" headerClass="ct">
+                <apex:commandLink value="Eliminar" style="text-align:center;" immediate="true" action="{!EliminarAsignacion}" reRender="details" status="Status" oncomplete="alert('Asignación UR Eliminada.')" >
+                    <apex:param name="Id" value="{!asignacion.Id}" />
+                </apex:commandLink>
+                </apex:column>
+                <apex:column headerValue="Negocio" value="{!asignacion.Negocio__c}"  headerClass="ct" style="text-align:center;" rendered="true"/>
+                <apex:column headerValue="Categorīa" value="{!asignacion.Categor_a__c}" headerClass="ct" style="text-align:center;" rendered="true"/>
+                <apex:column headerValue="Solicitud" value="{!asignacion.Detalle_Solicitud__c}" headerClass="ct" style="text-align:center;" rendered="true"/>
+                <apex:column headerValue="Etiqueta" value="{!asignacion.Etiqueta__c}" headerClass="ct" style="text-align:center;" rendered="true"/>
+                <apex:column headerValue="Responsable" value="{!asignacion.Responsable__c}" headerClass="ct" style="text-align:center;" rendered="true"/>
+                <apex:column headerValue="Tipo Asignación" value="{!asignacion.Tipo_Asignacion__c}"   style="text-align:left;" headerClass="ct" rendered="true"/>
+                <apex:column headerValue="Asignación" value="{!asignacion.Asignaci_n__c}" headerClass="ct" style="text-align:center;" rendered="true"/>
+               
+        </apex:pageBlockTable>
+    </apex:pageBlock>
+    </apex:outputPanel>
+</apex:form>
+</div>
+</apex:page>
