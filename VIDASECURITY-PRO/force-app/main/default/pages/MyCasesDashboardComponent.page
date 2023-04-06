@@ -1,0 +1,55 @@
+<apex:page showHeader="true" sidebar="false" controller="MyCasesDashboardComponentController">
+	<style type="text/css">
+		.myCasesListViewContainer .topNav .controls img.pageTitleIcon {
+			display: none;
+		}
+		.myCasesListViewContainer .topNav .controls h2.title {
+			font-size: 1.3em;
+		}
+	</style>
+
+	<apex:outputPanel layout="block" styleClass="myCasesListViewContainer">
+		<apex:enhancedList customizable="false" listId="{! listViewId }" height="300" id="myCasesListView" />
+	</apex:outputPanel>
+	<script type="text/javascript">
+
+		(function() {
+
+			const valueInputsForHide = ['Cambiar estado', 'Cambiar propietario', 'Cerrar'];
+			const retUrl = '%2Fhome%2Fhome.jsp';
+			const valueNewCaseButton = 'Nuevo caso';
+			const newCaseUrl = '/setup/ui/recordtypeselect.jsp?ent=Case&retURL=' + retUrl + '&save_new_url=%2F500%2Fe%3FretURL%3D%252F500%252Fo';
+
+			var previousOnload = window.onload;
+			window.onload = function() {
+				if (previousOnload)
+					previousOnload();
+				for (var i = 0; i < valueInputsForHide.length; i++)
+					hideInputs(getInputsByValue(valueInputsForHide[i]));
+
+				const newCaseInput = getInputsByValue(valueNewCaseButton)[0];
+				newCaseInput.onclick = function(event){
+					top.window.location.href = newCaseUrl;
+					return true;
+				};
+			}
+
+			function hideInputs(inputs){
+				for (var i = 0; i < inputs.length; i++){
+					const input = inputs[i];
+					input.style = 'display:none';
+				}
+			}
+
+			function getInputsByValue(value) {
+				var allInputs = document.getElementsByTagName("input");
+				var results = [];
+				for(var x=0;x<allInputs.length;x++)
+						if(allInputs[x].value == value)
+								results.push(allInputs[x]);
+				return results;
+			}
+
+		})();
+	</script>
+</apex:page>

@@ -1,0 +1,1369 @@
+<apex:page id="pgCotizadorExpress" controller="CLS_CotizadorController" action="{!cargaDatosContratanteCotizadorExpress}"
+           lightningStylesheets="true" sidebar="false" showHeader="false" standardStylesheets="true"
+           docType="HTML-5.0">
+
+        
+    <html>    
+        <head>            
+        </head>
+        <body onload="" >
+
+            <div id="dv_CotizadoOncologico" style="width: 97%; margin-left: auto; margin-right: auto;">
+                <div id="dv_EncabezadoCotizador" style="width: 100%; height: auto;">
+                </div>       
+                <div id="dv_CuerpoCentralCotizador" style="width: 100%; height: auto;">
+                    <input type="hidden" id="cont" value="0" />
+                    <input type="hidden" id="idaborrar" value="0" />              
+                    <script type="text/javascript">            
+                        // Función que permite agregar un asegurado de dependiente de tabla....
+                      
+                        //Devuelve el regex para validar una fecha.
+                        // - dividido en variables para que se entienda y se pueda mantener/editar.
+
+                        var ArrRegion=[];
+                        var ArrCiudad=[];
+                        var ArrComuna=[];
+                        ArrRegion=JSON.parse('{!Region}');
+                        ArrCiudad=JSON.parse('{!Ciudad}');
+                        ArrComuna=JSON.parse('{!Comuna}');
+                        
+                    
+                        function format(nStr) 
+                        {
+                            nStr += '';
+                            var x = nStr.split('.');
+                            var x1 = x[0] + '';
+                            var x2 = x.length > 1 ? ',' + x[1] : '';
+                            var rgx = /(\d+)(\d{3})/;
+                            while (rgx.test(x1)) {
+                                    x1 = x1.replace(rgx, '$1' + '.' + '$2');
+                            }
+                            return x1 + x2;
+                        }
+                        
+                        //Valida que esten todas las preguntas Contestadas
+                        function ValidarPreguntas()
+                        {
+                            var elements = document.querySelectorAll('[name^=cmb]');
+                            var retorno=true;
+                            
+                            for(var i = 0; i<elements.length ; i++)
+                            {
+                                if (elements[i].options[elements[i].selectedIndex].value=="" && elements[i].disabled ==false)
+                                {
+                                    retorno=false;
+                                }
+                            }
+                            
+                            if (!retorno)
+                            {
+                                alert("Hay preguntas sin Contestar");
+                            }
+                            
+                            
+                            return retorno;
+                        }
+                    
+                        function unFormat(nStr) 
+                        {
+                            nStr += '';
+                            nStr = nStr.replace(/\./g,'');
+                            nStr = nStr.replace(/\,/g,'.');
+                            return nStr;
+                        }
+                    
+                        function cargaInicial() 
+                        {
+                            //valorFechaNacimiento = document.getElementById("j_id0:frm_DatosContratante:pB_CotizadorContratante:pBs_DatosContratante:txt_FechaNacimientoContratante").value;
+                            
+                            valorFechaNacimiento = document.getElementById('{!$Component.frm_DatosContratante.pB_CotizadorContratante.pBs_DatosContratante.txt_FechaNacimientoContratante}').value;
+                            
+                            Estado = document.getElementById('pgCotizadorExpress:frm_DatosContratante:tht_Estado').value;
+                            SubEstado = document.getElementById('pgCotizadorExpress:frm_DatosContratante:tht_SubEstado').value;
+                        
+                            if (Estado=='Cerrado' && SubEstado=='Contrata')
+                                {
+                                    alert('Ya tiene una propuesta generada, se cerrara el cotizador express');
+                                    window.close();
+                                }
+                            arrFecha = valorFechaNacimiento.split("-");
+                            if (arrFecha.length == 3 )
+                            {
+                                valorFechaNacimiento =  arrFecha[2] + '-' + arrFecha[1] + '-' + arrFecha[0];
+                                document.getElementById("dt_1_ASDE_FENACIMIENTO").value = valorFechaNacimiento;
+                            }
+                            soapAsegurado(1);
+
+                            var TipoProductoCotizar = '';
+                            TipoProductoCotizar = '{!TipoProducto}';
+                            if(TipoProductoCotizar== '19'){
+                                generaOpciones(0);
+                            }
+                            soapRegiones();
+                            
+                        }
+        
+                        function soapAsegurado(nIndex) 
+                        {
+                            idFechaNacimiento = "dt_" + nIndex + "_ASDE_FENACIMIENTO";
+                            idParentesco = "cmb_" + nIndex + "_ASDE_PARENTESCO";
+                            idValorCLP = "txt_" + nIndex + "_ASDE_VALORCLP";
+                            idValorUF = "txt_" + nIndex + "_ASDE_VALORUF";
+                            idAsegurable = "lbl_" + nIndex + "_ASDE_ASEGURABLE";
+                            nRowIndex = 0;
+                            for(var i = 1; i<document.getElementById("tbl_datoscargas").rows.length - 1; i++)
+                            {
+                                var filaAseguradoDependiente = document.getElementById("tbl_datoscargas").rows[i];
+                                if (filaAseguradoDependiente.id == nIndex) {
+                                    nRowIndex = i;
+                                }
+                            }
+                            soapValidacionUsuarioPorFecNac(idFechaNacimiento,idParentesco,idValorCLP,idValorUF,idAsegurable,nRowIndex) ;
+                        }
+                    
+                        function soapGetTarificacionOncoFechaNacimiento(idFechaNacimiento,idParentesco,idValorCLP,idValorUF) 
+                        {
+
+                            valorFechaNacimiento = document.getElementById(idFechaNacimiento).value;
+                            valorParentesco = document.getElementById(idParentesco).value;
+                            //alert(valorFechaNacimiento);
+                            arrFecha = valorFechaNacimiento.split("-");
+                            if (arrFecha.length == 3 )
+                            {
+                                valorFechaNacimiento =  arrFecha[0] + arrFecha[1] + arrFecha[2];
+                                                                                                   
+                                var xmlhttp = new XMLHttpRequest();
+                                // build SOAP request
+                                var sr =
+                                '<?xml version="1.0" encoding="utf-8" ?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">' +
+                                    '<soapenv:Body>' +
+                                        '<tem:GetTarificacionOncoFechaNacimiento>' +
+                                            '<tem:usuario>' + document.getElementById('{!$Component.frm_DatosContratante.tht_rutUsuario}').value + '</tem:usuario>' +
+                                            '<tem:ramo>' + document.getElementById('{!$Component.frm_DatosContratante.tht_codRamo}').value + '</tem:ramo>' +
+                                            '<tem:prod>' + document.getElementById('{!$Component.frm_DatosContratante.tht_codProducto}').value + '</tem:prod>' +
+                                            '<tem:plan>' + document.getElementById('{!$Component.frm_DatosContratante.tht_codPlan}').value + '</tem:plan>' +
+                                            '<tem:revPlan>' + document.getElementById('{!$Component.frm_DatosContratante.tht_revPlan}').value + '</tem:revPlan>' +
+                                            '<tem:tipoDeAsegurado>' + document.getElementById('{!$Component.frm_DatosContratante.tht_tipoAsegurado}').value + '</tem:tipoDeAsegurado>' +
+                                            '<tem:relacionConTitular>' + valorParentesco + '</tem:relacionConTitular>' +
+                                            '<tem:fecNacimiento>' + valorFechaNacimiento + '</tem:fecNacimiento>' +
+                                        '</tem:GetTarificacionOncoFechaNacimiento>' +
+                                    '</soapenv:Body>' +
+                                '</soapenv:Envelope>';
+                            
+                                //alert(sr);
+                                                              
+                                xmlhttp.open('POST', 'https://servicios.vidasecurity.cl/wsProductoOnco/wsProductoOncologico.asmx?wsdl', true);
+                                // xmlhttp.open('POST', 'https://190.98.205.138:8080/wsProductoOnco/wsProductoOncologico.asmx?wsdl', true);
+                                                                                             
+                                // Send the POST request
+                                xmlhttp.setRequestHeader("Content-Type", "text/xml; charset=utf-8");
+                                //alert('paso3');
+                                xmlhttp.send(sr);
+                                var data = xmlhttp.responseXML;                                                                                                   
+                                //FOR TESTING: display results in an alert box once the response is received
+                                xmlhttp.onreadystatechange = function () {
+                                    if (xmlhttp.readyState == 4) {
+                                        data = xmlhttp.responseText;
+                                        //alert("respuesta:" + data);
+                                        parser = new DOMParser();
+                                        xmlDoc = parser.parseFromString(data,"text/xml");
+                                        
+                                        document.getElementById(idValorUF).value = format(xmlDoc.getElementsByTagName("PrimaBrutaUF")[0].childNodes[0].nodeValue);
+                                        document.getElementById(idValorCLP).value = format(xmlDoc.getElementsByTagName("PrimaBrutaPS")[0].childNodes[0].nodeValue);
+                                        sumarTotalPrimas();
+                                    }
+                                };
+                                
+                                
+                            }                                      
+                        }
+                    
+                        function soapRegiones()
+                        {
+
+                            var select = document.getElementById('cmbRegiones');
+                            var option = document.createElement('option');
+                            option.value = '';
+                            option.text = '--Ninguno--';
+                            select.add(option, 0);
+
+                            for(var i = 0; i < ArrRegion.length; i++) {
+                                var option = document.createElement('option');
+                                option.value = ArrRegion[i].Codigo + '';
+                                option.text = ArrRegion[i].Nombre + '';
+                                select.add(option, i+1);
+                            }
+                            select.value = '';
+                             
+                        }
+                    
+                        function soapCiudades()
+                        {
+                            var idRegion = document.getElementById('cmbRegiones').value;
+                            document.getElementById('{!$Component.frm_DatosContratante.tht_REGION}').value = idRegion;
+                            
+                            /* //var idRegion = document.getElementById('{!$Component.frm_DatosContratante.pB_CotizadorContratante.pBs_DatosContratante.cmbRegiones}').value;
+                            var idRegion = document.getElementById('cmbRegiones').value;
+                            document.getElementById('{!$Component.frm_DatosContratante.tht_REGION}').value = idRegion;
+                            
+                            if (idRegion != 0 && idRegion != '' )
+                            {
+                                //alert(idRegion);
+                                
+                                var xmlhttp = new XMLHttpRequest();
+                                // build SOAP request
+                                var sr =
+                                '<?xml version="1.0" encoding="utf-8" ?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">' +
+                                    '<soapenv:Body>' +
+                                        '<tem:ObtenerListadoCiudad>' +
+                                            '<tem:usuario>' + document.getElementById('{!$Component.frm_DatosContratante.tht_rutUsuario}').value + '</tem:usuario>' +
+                                            '<tem:codRegion>' + idRegion + '</tem:codRegion>' +                                           
+                                        '</tem:ObtenerListadoCiudad>' +
+                                    '</soapenv:Body>' +
+                                '</soapenv:Envelope>';
+                                                        
+                                //alert(sr);
+                                                              
+                                xmlhttp.open('POST', 'https://servicios.vidasecurity.cl/wsProductoOnco/wsProductoOncologico.asmx?wsdl', true);
+                                // xmlhttp.open('POST', 'https://190.98.205.138:8080/wsProductoOnco/wsProductoOncologico.asmx?wsdl', true);  
+                                  
+                                                                                             
+                                // Send the POST request
+                                xmlhttp.setRequestHeader("Content-Type", "text/xml; charset=utf-8");
+                                //alert('paso3');
+                                xmlhttp.send(sr);
+                                var data = xmlhttp.responseXML;                                                                                                   
+                                //FOR TESTING: display results in an alert box once the response is received
+                                xmlhttp.onreadystatechange = function () {
+                                    if (xmlhttp.readyState == 4) {
+                                        data = xmlhttp.responseText;
+                                        //alert("respuesta:" + data);
+                                        parser = new DOMParser();
+                                        xmlDoc = parser.parseFromString(data,"text/xml");
+                                        
+                                        //var select = document.getElementById('{!$Component.frm_DatosContratante.pB_CotizadorContratante.pBs_DatosContratante.cmbCiudades}');
+                                        var selectComunas = document.getElementById('cmbComunas');
+                                        
+                                        var length = selectComunas.options.length;
+                                        for (i = 0; i < length; i++) {
+                                           selectComunas.options.remove(0);
+                                        }
+                                        
+                                        var selectCiudades = document.getElementById('cmbCiudades');
+                                        
+                                        var length = selectCiudades.options.length;
+                                        for (i = 0; i < length; i++) {
+                                          selectCiudades.options.remove(0);
+                                        }
+                                        
+                                        var option = document.createElement('option');
+                                        option.value = '';
+                                        option.text = '';
+                                        selectCiudades.add(option, 0);
+                                        
+                                        for(var i = 0; i < xmlDoc.getElementsByTagName("CodigoCiudad").length; i++) {
+                                            var option = document.createElement('option');
+                                            option.value = xmlDoc.getElementsByTagName("CodigoCiudad")[i].childNodes[0].nodeValue;
+                                            option.text = xmlDoc.getElementsByTagName("DescCiudad")[i].childNodes[0].nodeValue;
+                                            selectCiudades.add(option, i+1);
+                                        }
+                                        //selectCiudades.value = xmlDoc.getElementsByTagName("CodigoCiudad")[0].childNodes[0].nodeValue;
+                                        //soapComunas();
+                                    }
+                                };
+                                
+                               
+                                
+                            }    */
+                            
+                                      var selectComunas = document.getElementById('cmbComunas');
+                                      var length =selectComunas.options.length;                  
+                                      for (i = 0; i < length; i++) {
+                                           selectComunas.options.remove(0);
+                                        }
+                                      var selectCiudades = document.getElementById('cmbCiudades');
+                                      var length =selectCiudades.options.length;                  
+                                      for (i = 0; i <  length; i++) {
+                                           selectCiudades.options.remove(0);
+                                        }
+                                    
+                                   
+
+                            
+                            
+                                        var option = document.createElement('option');
+                                        option.value = '';
+                                        option.text = '';
+                                        selectCiudades.add(option, 0);
+                                        
+                                        for(var i = 0; i < ArrCiudad.length; i++) {
+                                            if(ArrCiudad[i].CodigoRegion==idRegion)
+                                                {
+                                                    var option = document.createElement('option');
+                                                    option.value =ArrCiudad[i].Codigo;
+                                                    option.text = ArrCiudad[i].Nombre;
+                                                    selectCiudades.add(option, i+1);
+                                                }
+                                        }
+                            
+                            
+                        }
+                    
+                        function soapComunas()
+                        {
+                            //var idCiudad = document.getElementById('{!$Component.frm_DatosContratante.pB_CotizadorContratante.pBs_DatosContratante.cmbCiudades}').value;
+                            var idCiudad = document.getElementById('cmbCiudades').value;
+                            var idRegion = document.getElementById('cmbRegiones').value;
+                            document.getElementById('{!$Component.frm_DatosContratante.tht_CIUDAD}').value = idCiudad;
+                            /*
+                            if (idCiudad != 0 && idCiudad != '' )
+                            {
+                                //alert(idCiudad);
+                                
+                                var xmlhttp = new XMLHttpRequest();
+                                // build SOAP request
+                                var sr =
+                                '<?xml version="1.0" encoding="utf-8" ?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">' +
+                                    '<soapenv:Body>' +
+                                        '<tem:ObtenerListadoComuna>' +
+                                            '<tem:usuario>' + document.getElementById('{!$Component.frm_DatosContratante.tht_rutUsuario}').value + '</tem:usuario>' +
+                                            '<tem:codComuna>' + idCiudad + '</tem:codComuna>' +                                           
+                                        '</tem:ObtenerListadoComuna>' +
+                                    '</soapenv:Body>' +
+                                '</soapenv:Envelope>';
+                                                        
+                                //alert(sr);
+                                                              
+                                xmlhttp.open('POST', 'https://servicios.vidasecurity.cl/wsProductoOnco/wsProductoOncologico.asmx?wsdl', true);
+                                //xmlhttp.open('POST', 'https://190.98.205.138:8080/wsProductoOnco/wsProductoOncologico.asmx?wsdl', true); 
+                                                                                             
+                                // Send the POST request
+                                xmlhttp.setRequestHeader("Content-Type", "text/xml; charset=utf-8");
+                                //alert('paso3');
+                                xmlhttp.send(sr);
+                                var data = xmlhttp.responseXML;                                                                                                   
+                                //FOR TESTING: display results in an alert box once the response is received
+                                xmlhttp.onreadystatechange = function () {
+                                    if (xmlhttp.readyState == 4) {
+                                        data = xmlhttp.responseText;
+                                        //alert("respuesta:" + data);
+                                        parser = new DOMParser();
+                                        xmlDoc = parser.parseFromString(data,"text/xml");
+                                        
+                                        //var select = document.getElementById('{!$Component.frm_DatosContratante.pB_CotizadorContratante.pBs_DatosContratante.cmbComunas}');
+                                        var selectComunas = document.getElementById('cmbComunas');
+                                        
+                                        var length = selectComunas.options.length;
+                                        for (i = 0; i < length; i++) {
+                                           selectComunas.options.remove(0);
+                                        }
+                                        
+                                        var option = document.createElement('option');
+                                        option.value = '';
+                                        option.text = '';
+                                        selectComunas.add(option, 0);
+                                        
+                                        for(var i = 0; i < xmlDoc.getElementsByTagName("CodComuna").length; i++) {
+                                            if(idRegion==xmlDoc.getElementsByTagName("CodEstado")[i].childNodes[0].nodeValue)
+                                                {
+                                                    var option = document.createElement('option');
+                                                    option.value = xmlDoc.getElementsByTagName("CodComuna")[i].childNodes[0].nodeValue;
+                                                    option.text = xmlDoc.getElementsByTagName("DescComuna")[i].childNodes[0].nodeValue;
+                                                    selectComunas.add(option, i+1);
+                                                 }
+                                        }
+                                        //idComuna = xmlDoc.getElementsByTagName("CodComuna")[0].childNodes[0].nodeValue;
+                                        //selectComunas.value = idComuna;
+                                        //document.getElementById('{!$Component.frm_DatosContratante.tht_COMUNA}').value = idComuna;
+                                    }
+                                };
+                                
+                               
+                                
+                            }    
+                            */
+                            
+                                     var selectComunas = document.getElementById('cmbComunas');
+                                     var length=selectComunas.options.length;
+                           
+                                        for (i = 0; i <  length; i++) {
+                                           selectComunas.options.remove(0);
+                                        }
+                                        
+                                       
+                                        var option = document.createElement('option');
+                                        option.value = '';
+                                        option.text = '';
+                                        selectComunas.add(option, 0);
+                                        
+                                        for(var i = 0; i < ArrComuna.length; i++) {
+                                            if(idRegion==ArrComuna[i].CodigoRegion && idCiudad==ArrComuna[i].CodigoCiudad )
+                                                {
+                                                    var option = document.createElement('option');
+                                                    option.value =ArrComuna[i].Codigo;
+                                                    option.text = ArrComuna[i].Nombre;
+                                                    selectComunas.add(option, i+1);
+                                                    
+                                                 }
+                                        }
+                                        //idComuna = xmlDoc.getElementsByTagName("CodComuna")[0].childNodes[0].nodeValue;
+                                        //selectComunas.value = idComuna;
+                                        //document.getElementById('{!$Component.frm_DatosContratante.tht_COMUNA}').value = idComuna;
+                        
+                        }
+                               
+                        function onChangeComunas()
+                        {
+                            
+                            var idComuna =document.getElementById('cmbComunas').options[document.getElementById('cmbComunas').selectedIndex].value;
+                            document.getElementById('{!$Component.frm_DatosContratante.tht_COMUNA}').value = idComuna;                          
+                        }    
+                    
+                        function esContratante(nRowIndex)
+                        {
+                            return ( nRowIndex == 1 );                
+                        }
+                    
+                        function habilitarBotonPreDigita(nFlag)
+                        {
+                            document.getElementById('{!$Component.frm_DatosContratante.pB_botonpredigitador.cmd_TransferirPD}').disabled = nFlag; 
+                            if ( nFlag )
+                                {
+                                    alert("No se puede seguir con la Venta, favor cambiar estado a Completada y seleccionar el Sub-Estado.");
+                                    document.getElementById('divPreDigitador').style = 'display:none;' 
+                                }
+                            else
+                                {
+                                    document.getElementById('divPreDigitador').style = 'display:;'                            
+                                }
+                        }
+                    
+                        function actualizaNoEsAsegurable(idAsegurable, idValorUF, idValorCLP, objRow )
+                        {
+                            document.getElementById(idAsegurable).value = "NO";
+                            objRow.style.background ='gray';
+                            document.getElementById(idValorUF).value = 0;
+                            document.getElementById(idValorCLP).value = 0;                                       
+                                            
+                        }
+                    
+                        function soapValidacionUsuarioPorFecNac(idFechaNacimiento,idParentesco,idValorCLP,idValorUF,idAsegurable,nRowIndex) 
+                        {
+
+                            valorFechaNacimiento = document.getElementById(idFechaNacimiento).value;
+                            valorParentesco = document.getElementById(idParentesco).value;
+                            //alert(valorFechaNacimiento);
+                            arrFecha = valorFechaNacimiento.split("-");
+                            if (arrFecha.length == 3 )
+                            {
+                                valorFechaNacimiento =  arrFecha[0] + arrFecha[1] + arrFecha[2];
+                                                                                                   
+                                var xmlhttp = new XMLHttpRequest();
+                                // build SOAP request
+                                var sr =
+                                '<?xml version="1.0" encoding="utf-8" ?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">' +
+                                    '<soapenv:Body>' +
+                                        '<tem:ValidacionUsuarioPorFecNac>' +
+                                            '<tem:usuario>' + document.getElementById('{!$Component.frm_DatosContratante.tht_rutUsuario}').value + '</tem:usuario>' +
+                                            '<tem:ramo>' + document.getElementById('{!$Component.frm_DatosContratante.tht_codRamo}').value + '</tem:ramo>' +
+                                            '<tem:prod>' + document.getElementById('{!$Component.frm_DatosContratante.tht_codProducto}').value + '</tem:prod>' +
+                                            '<tem:plan>' + document.getElementById('{!$Component.frm_DatosContratante.tht_codPlan}').value + '</tem:plan>' +
+                                            '<tem:revPlan>' + document.getElementById('{!$Component.frm_DatosContratante.tht_revPlan}').value + '</tem:revPlan>' +
+                                            '<tem:tipoDeAsegurado>' + document.getElementById('{!$Component.frm_DatosContratante.tht_tipoAsegurado}').value + '</tem:tipoDeAsegurado>' +
+                                            '<tem:relacionConTitular>' + valorParentesco + '</tem:relacionConTitular>' +
+                                            '<tem:fechaNacimiento>' + valorFechaNacimiento + '</tem:fechaNacimiento>' +
+                                        '</tem:ValidacionUsuarioPorFecNac>' +
+                                    '</soapenv:Body>' +
+                                '</soapenv:Envelope>';
+                            
+                                //alert(sr);
+                                                              
+                                xmlhttp.open('POST', 'https://servicios.vidasecurity.cl/wsProductoOnco/wsProductoOncologico.asmx?wsdl', true);
+                                //xmlhttp.open('POST', 'https://190.98.205.138:8080/wsProductoOnco/wsProductoOncologico.asmx?wsdl', true);
+                                                                                             
+                                // Send the POST request
+                                xmlhttp.setRequestHeader("Content-Type", "text/xml; charset=utf-8");
+                                //alert('paso3');
+                                xmlhttp.send(sr);
+                                var data = xmlhttp.responseXML;                                                                                                   
+                                //FOR TESTING: display results in an alert box once the response is received
+                                xmlhttp.onreadystatechange = function () {
+                                    if (xmlhttp.readyState == 4) {
+                                        data = xmlhttp.responseText;
+                                        //alert("respuesta:" + data);
+                                        parser = new DOMParser();
+                                        xmlDoc = parser.parseFromString(data,"text/xml");
+                                        
+                                        //validacionUsuario = xmlDoc.getElementsByTagName("ValidacionUsuarioPorFecNacResult")[0].childNodes[0].nodeValue;
+                                        validacionUsuario = xmlDoc.getElementsByTagName("Respuesta")[0].childNodes[0].nodeValue;
+                                        //alert(validacionUsuario);
+                                        
+                                        if (validacionUsuario == "S" )
+                                        {
+                                            document.getElementById(idAsegurable).value = "SI";
+                                            document.getElementById("tbl_datoscargas").rows[nRowIndex].style.background ='white';                                
+                                            soapGetTarificacionOncoFechaNacimiento(idFechaNacimiento,idParentesco,idValorCLP,idValorUF);
+                                            if ( esContratante(nRowIndex) )
+                                                habilitarBotonPreDigita(false);
+                                            
+                                        }
+                                        else
+                                        {
+                                            actualizaNoEsAsegurable(idAsegurable, idValorUF,idValorCLP, document.getElementById("tbl_datoscargas").rows[nRowIndex] );
+                                            if ( esContratante(nRowIndex) )
+                                                habilitarBotonPreDigita(true);
+                                            
+                                        }
+                                
+                                    }
+                                };
+                                
+                                
+                            }                                      
+                        }
+                        
+                        function agregarFilaAseguradosDependientes() 
+                        {                                                                               
+                            var TABLA_AseguradosDependientes = document.getElementById("tbl_datoscargas");
+                            var cont = parseInt(TABLA_AseguradosDependientes.rows[TABLA_AseguradosDependientes.rows.length-2].id) + 1;
+                            
+                            var FILA_AseguradoDependiente = TABLA_AseguradosDependientes.insertRow(TABLA_AseguradosDependientes.rows.length-1);
+                            var Posicion_FILA = FILA_AseguradoDependiente.rowIndex;
+                            
+                            FILA_AseguradoDependiente.id = cont;
+                            console.log(FILA_AseguradoDependiente.id);
+                            
+                            document.getElementById(FILA_AseguradoDependiente.id).style.borderBottom = '2px';
+                            document.getElementById(FILA_AseguradoDependiente.id).style.borderBottomColor = 'darkorange';
+                            
+                            var c_ACCION = FILA_AseguradoDependiente.insertCell(0); // Acción
+                            var c_ITEM = FILA_AseguradoDependiente.insertCell(1); // N° Item
+                            //var c_RUT = FILA_AseguradoDependiente.insertCell(2); // Rut
+                            //var c_NOMBRE = FILA_AseguradoDependiente.insertCell(3); // Nombre Completo
+                            var c_FECHANACIMIENTO = FILA_AseguradoDependiente.insertCell(2); // Fecha Nacimiento
+                            var c_PARENTESCO = FILA_AseguradoDependiente.insertCell(3); // Parentesco
+                            var c_VALORUF = FILA_AseguradoDependiente.insertCell(4); // Valor Prima UF
+                            var c_VALORCLP = FILA_AseguradoDependiente.insertCell(5); // Valor Prima CLP
+                            var c_ASEGURABLE = FILA_AseguradoDependiente.insertCell(6); // Asegurable
+                            
+                            c_ACCION.innerHTML = '<img src="https://c.na46.content.force.com/servlet/servlet.FileDownload?file=0150H00000GZXhi" id="bt_'+ cont +'" name="bt_'+ cont +'" value="X" onclick="borrarFilaAsegurdadosDependientes(this.id)"/>';
+                            
+                            c_ITEM.innerHTML = cont;
+                            
+                            idFechaNacimiento = "dt_" + cont + "_ASDE_FENACIMIENTO";
+                            idParentesco = "cmb_" + cont + "_ASDE_PARENTESCO";
+                            idValorCLP = "txt_" + cont + "_ASDE_VALORCLP";
+                            idValorUF = "txt_" + cont + "_ASDE_VALORUF";
+                            
+                            c_FECHANACIMIENTO.innerHTML = '<input type="date" id="' + idFechaNacimiento + '" name="' + idFechaNacimiento + '" required="true" onblur="soapAsegurado(' + cont + ')" />';
+                            c_PARENTESCO.innerHTML = '<select id="' + idParentesco + '" name="' + idParentesco + '" onchange="soapAsegurado(' + cont + ')" >' +
+                                                        '<option value="0003">ESPOSO</option>' +
+                                                        '<option value="0004">ESPOSA</option>' +
+                                                        '<option value="0005">HIJO</option>' +
+                                                        '<option value="0006">HIJA</option>' +
+                                                        '<option value="0035">CONVIVIENTE CIVIL HOMBRE</option>' +
+                                                        '<option value="0036">CONVIVIENTE CIVIL MUJER</option>' +                    
+                                                      '</select>';                    
+                            c_VALORCLP.innerHTML = '<input type="text" id="' + idValorCLP + '"  name="' + idValorCLP + '" size="10" maxlength="20" value="0"  readonly="true" />';
+                            c_VALORUF.innerHTML = '<input type="text" id="' + idValorUF + '"  name="' + idValorUF + '" size="10" maxlength="20" value="0"  readonly="true" />';
+                            c_ASEGURABLE.innerHTML = '<input type="text" readonly id="lbl_' + cont + '_ASDE_ASEGURABLE" name="lbl_' + cont + '_ASDE_ASEGURABLE" value="" />';
+                                
+                            document.getElementById("cont").value = cont;
+                            actualizaNItemaAseguradosDependientes();
+                            sumarTotalPrimas();
+                            generaOpciones(FILA_AseguradoDependiente.id);
+                            
+                        }        
+                    
+                        function mostrarAsegurados()
+                        {
+                            var TABLA_AseguradosDependientes = document.getElementById("tbl_datoscargas");
+                            for(var i=0;i++;i<ArrDependientes.length)
+                            {                                
+                                 TABLA_AseguradosDependientes.insertRow(TABLA_AseguradosDependientes.rows.length-1);
+                            }
+                            
+                        }
+                        
+                        // Función que permite eliminar un asegurado de dependiente de tabla....
+                        function borrarFilaAsegurdadosDependientes(IDbotonEliminar)
+                        {
+                            var cont = parseInt(document.getElementById("cont").value);
+                            var IDfila = parseInt(IDbotonEliminar.substring(3,IDbotonEliminar.length));
+                            var POS_fila = 0;
+                            var TABLA_AseguradosDependientes = document.getElementById("tbl_datoscargas");
+                            for(var i = 1; i<TABLA_AseguradosDependientes.rows.length - 1; i++)
+                            {
+                                var FILA_AseguradoDependiente = TABLA_AseguradosDependientes.rows[i];
+                                if(FILA_AseguradoDependiente.id == IDfila){
+                                    POS_fila = FILA_AseguradoDependiente.rowIndex;
+                                    console.log(POS_fila);
+                                }
+                            }
+                            document.getElementById("idaborrar").value = POS_fila;
+                            document.getElementById("tbl_datoscargas").deleteRow(POS_fila);
+                            document.getElementById("cont").value = cont - 1;
+                            var nMaxIndex = TABLA_AseguradosDependientes.rows.length - 2;
+                            generaOpciones(nMaxIndex);
+                            actualizaNItemaAseguradosDependientes();
+                            sumarTotalPrimas();
+                        
+                        }                
+                        
+                        // Función para actualizar Nº de item en pantalla de asegurados dependientes...
+                        function actualizaNItemaAseguradosDependientes()
+                        {
+                            var TABLA_AseguradosDependientes = document.getElementById("tbl_datoscargas");
+                            for(var i = 1; i < TABLA_AseguradosDependientes.rows.length-1; i++)
+                            {
+                                var FILA_AseguradoDependiente = TABLA_AseguradosDependientes.rows[i];
+                                console.log("FILA / CELDA => " + FILA_AseguradoDependiente.cells[1]);
+                                FILA_AseguradoDependiente.cells[1].innerHTML = i;
+                            }
+                        }                
+                        
+                        // Función para sumar valores de primas mensuales de asegurados y totalizar...
+                        function sumarTotalPrimas()
+                        {
+                            var TABLA_AseguradosDependientes = document.getElementById("tbl_datoscargas");
+                            var valorUF = 0;
+                            var valorCLP = 0;
+                            //alert("Total Columnas:" + TABLA_AseguradosDependientes.rows.length);
+                            for(var i = 1; i < TABLA_AseguradosDependientes.rows.length - 1; i++)
+                            {
+                                nIndexTable = TABLA_AseguradosDependientes.rows[i].id;
+                                idValorUF = "txt_" + nIndexTable + "_ASDE_VALORUF";
+                                idValorCLP = "txt_" + nIndexTable + "_ASDE_VALORCLP";
+                                valorUF = valorUF + parseFloat( unFormat(document.getElementById(idValorUF).value) );
+                                valorCLP = valorCLP + parseFloat( unFormat(document.getElementById(idValorCLP).value) );                                
+                                                               
+                            }
+                            
+                            console.log("TOTAL UF => " + valorCLP);
+                            console.log("TOTAL CLP => " + valorUF);
+                            
+                            document.getElementById("txt_TotalUF").value = format(valorUF.toFixed(4));
+                            document.getElementById("txt_TotalCLP").value = format(valorCLP.toFixed()); 
+                            document.getElementById('{!$Component.frm_DatosContratante.tht_TOTALUF}').value=valorUF;
+                            document.getElementById('{!$Component.frm_DatosContratante.tht_TOTALCLP}').value=valorCLP;
+                            
+                        }
+                        
+                        function generaOpciones(idas)
+                        {
+                            //Función para agregar comboBox en la tabla de preguntas             
+                            var lista = new Array();
+                            var lista_1 = new Array();
+                            var lista_2 = new Array();                                                         
+                            var lista_3 = new Array();
+                            var lista_4 = new Array();
+                        
+                            var tabla1 = document.getElementById("tbl_datoscuestionarioDPS");
+                            console.log(tabla1.rows.length);
+                            
+                            var fila1 = tabla1.rows[0];
+                            var celda2_fila1 = fila1.cells[1];
+                            
+                            var fila1_2 = tabla1.rows[1];
+                            var celda2_2_fila1_2 = fila1_2.cells[1];
+                            
+                            var fila1_3 = tabla1.rows[2];
+                            var celda2_3_fila1_3 = fila1_3.cells[1];
+
+                            var fila1_4 = tabla1.rows[3];
+                            var celda2_4_fila1_4 = fila1_4.cells[1];
+
+                            var fila1_5 = tabla1.rows[4];
+                            var celda2_5_fila1_5 = fila1_5.cells[1];
+                            
+                            var texto = "";
+                            var texto_1 = "";
+                            var texto_2 = "";
+                            var texto_3 = "";
+                            var texto_4 = "";                            
+                            
+                            //Guardado de datos html
+                            for(var i=0;i<idas-1;i++){
+                                
+                                  lista[i] = '&nbsp Aseg '+(i+1)+':  &nbsp<select id="cmb_' + (i + 2) + '" name="cmb_' + (i + 2) + '" onchange="verificar(' + (i+2) + ',this.value)"><option value="" style="display:none;">Opción</option><option value="SI">SI</option><option value="NO">NO</option></select>&nbsp; ';
+                                lista_1[i] = '&nbsp Aseg '+(i+1)+':  &nbsp<select id="cmb1' + (i + 2) + '" name="cmb1' + (i + 2) + '" onchange="verificar('+ (i+2) +',this.value)"><option value="" style="display:none;">Opción</option><option value="SI">SI</option><option value="NO">NO</option></select>&nbsp; ';
+                                lista_2[i] = '&nbsp Aseg '+(i+1)+':  &nbsp<select id="cmb2' + (i + 2) + '" name="cmb2' + (i + 2) + '" onchange="verificar('+ (i+2) +',this.value)"><option value="" style="display:none;">Opción</option><option value="SI">SI</option><option value="NO">NO</option></select>&nbsp; ';
+                                
+                                if(document.getElementById('{!$Component.frm_DatosContratante.tht_cargaCliente}').value == 'Nuevo'){
+                                
+                                    lista_3[i] = '&nbsp Aseg '+(i+1)+':  &nbsp<select id="cmb3' + (i + 2) + '" name="cmb3' + (i + 2) + '" onchange="verificar('+ (i+2) +',this.value)"><option value="" style="display:none;">Opción</option><option value="SI">SI</option><option value="NO">NO</option></select>&nbsp; ';
+                                    lista_4[i] = '&nbsp Aseg '+(i+1)+':  &nbsp<select id="cmb4' + (i + 2) + '" name="cmb4' + (i + 2) + '" onchange="verificar('+ (i+2) +',this.value)"><option value="" style="display:none;">Opción</option><option value="SI">SI</option><option value="NO">NO</option></select>&nbsp; ';
+                                    
+                                }
+                            } 
+                            texto = " ";
+                            texto_1 = " ";
+                            texto_2 = " ";
+                            
+                            if(document.getElementById('{!$Component.frm_DatosContratante.tht_cargaCliente}').value == 'Nuevo'){
+                                
+                                texto_3 = " ";
+                                texto_4 = " ";
+                            
+                            }
+                            
+                            if(idas > -1){
+                                //texto = '&nbsp Contratante : <br> &nbsp<select id="cmb_0" onchange="verificar(this.id,this.value)"><option value="" style="display:none;">Opción</option><option value="SI">SI</option><option value="NO">NO</option></select>&nbsp; <br>';
+                                texto = '&nbsp Contratante : &nbsp<select id="cmb_0" name="cmb_0" onchange="verificar(1,this.value)"><option value="" style="display:none;">Opción</option><option value="SI">SI</option><option value="NO">NO</option></select>&nbsp; ';
+                                texto_1 = '&nbsp Contratante : &nbsp<select id="cmb1" name="cmb1" onchange="verificar(1,this.value)"><option value="" style="display:none;">Opción</option><option value="SI">SI</option><option value="NO">NO</option></select>&nbsp; ';
+                                texto_2 = '&nbsp Contratante : &nbsp<select id="cmb2" name="cmb2" onchange="verificar(1,this.value)"><option value="" style="display:none;">Opción</option><option value="SI">SI</option><option value="NO">NO</option></select>&nbsp; ';
+                                
+                                if(document.getElementById('{!$Component.frm_DatosContratante.tht_cargaCliente}').value == 'Nuevo'){
+                                    texto_3 = '&nbsp Contratante : &nbsp<select id="cmb3" name="cmb3" onchange="verificar(1,this.value)"><option value="" style="display:none;">Opción</option><option value="SI">SI</option><option value="NO">NO</option></select>&nbsp; ';
+                                    texto_4 = '&nbsp Contratante : &nbsp<select id="cmb4" name="cmb4" onchange="verificar(1,this.value)"><option value="" style="display:none;">Opción</option><option value="SI">SI</option><option value="NO">NO</option></select>&nbsp; ';
+                                }
+                            }
+                            
+                            
+                            
+                            //Ingreso de datos en los array concatenando los array en un texto
+                            if(idas => 0){
+                                for(var i=0;i<idas-1;i++){
+                                    texto = texto + lista[i];
+                                    texto_1 = texto_1 + lista_1[i];
+                                    texto_2 = texto_2 + lista_2[i];
+                                    if(document.getElementById('{!$Component.frm_DatosContratante.tht_cargaCliente}').value == 'Nuevo'){
+                                        texto_3 = texto_3 + lista_3[i];
+                                        texto_4 = texto_4 + lista_4[i];                                     
+                                    }
+                                }
+                            }
+                            
+                            //Texto a mostrar por pantalla
+                            celda2_fila1.innerHTML = texto;
+                            celda2_2_fila1_2.innerHTML = texto_1;
+                            celda2_3_fila1_3.innerHTML = texto_2;
+                            
+                            if(document.getElementById('{!$Component.frm_DatosContratante.tht_cargaCliente}').value == 'Nuevo'){
+                            
+                                celda2_4_fila1_4.innerHTML = texto_3;
+                                celda2_5_fila1_5.innerHTML = texto_4;
+                                
+                            }
+                            
+                            
+                         }
+                        
+                        function verificar(idFila,valorCombo)
+                        {
+                            
+                            var tabla = document.getElementById("tbl_datoscargas");
+                            
+                            console.log("IdCombo => " + idFila);
+                  
+                            if(valorCombo == "SI")
+                            {
+                                idAsegurable = "lbl_" +  tabla.rows[idFila].id + "_ASDE_ASEGURABLE";
+                                idValorUF = "txt_" +  tabla.rows[idFila].id + "_ASDE_VALORUF";
+                                idValorCLP = "txt_" +  tabla.rows[idFila].id + "_ASDE_VALORCLP";                                
+                                actualizaNoEsAsegurable(idAsegurable, idValorUF,idValorCLP, tabla.rows[idFila] );                                            
+                                if ( esContratante(idFila) )
+                                    {
+                                    habilitarBotonPreDigita(true);
+                                    VerificarRespuestaContratante();
+                                    }
+                                else
+                                    VerificarRespuestaAsegurado(idFila);
+                                    
+                                
+                            }
+                            else
+                            {
+                                tabla.rows[idFila].style.background = 'white';
+                                document.getElementById("lbl_" +  tabla.rows[idFila].id + "_ASDE_ASEGURABLE").value="";     
+                                soapAsegurado(tabla.rows[idFila].id);
+                                if ( esContratante(idFila) )
+                                    {
+                                    habilitarBotonPreDigita(false);
+                                    VerificarRespuestaContratante();
+                                    }
+                                else
+                                    VerificarRespuestaAsegurado(idFila);
+                            }
+                              
+                            sumarTotalPrimas();
+                                     
+                         }
+                    
+                   function VerificarRespuestaAsegurado(idFila)
+                    {
+                        var Combo1 = document.getElementById('cmb_' + idFila);
+                        var Combo2 = document.getElementById('cmb1' + idFila);
+                        var Combo3 = document.getElementById('cmb2' + idFila); 
+                        var Combo4 = document.getElementById('cmb3' + idFila);
+                        var Combo5 = document.getElementById('cmb4' + idFila);
+                       
+                        if (Combo1.options[Combo1.selectedIndex].value!="")
+                           {
+                            if (Combo1.options[Combo1.selectedIndex].value=="SI")
+                               {
+                                Combo2.disabled = true;
+                                Combo3.disabled = true;
+
+                                if(document.getElementById('{!$Component.frm_DatosContratante.tht_cargaCliente}').value == 'Nuevo'){
+                                    Combo4.disabled = true;
+                                    Combo5.disabled = true;
+                                }
+                                                                      
+                               }
+                             else
+                               {
+                                Combo2.disabled = false;
+                                Combo3.disabled = false;   
+                                   
+                                if(document.getElementById('{!$Component.frm_DatosContratante.tht_cargaCliente}').value == 'Nuevo'){
+                                    Combo4.disabled = false;
+                                    Combo5.disabled = false;
+                                }                                   
+                                   
+                               }
+                           }
+                        if (Combo2.options[Combo2.selectedIndex].value!="")
+                           {
+                             if (Combo2.options[Combo2.selectedIndex].value=="SI")
+                                {
+                                Combo1.disabled = true;
+                                Combo3.disabled = true;
+                                    
+                                if(document.getElementById('{!$Component.frm_DatosContratante.tht_cargaCliente}').value == 'Nuevo'){
+                                    Combo4.disabled = true;
+                                    Combo5.disabled = true;
+                                }                                    
+                                    
+                                }
+                            else
+                                {
+                                Combo1.disabled = false;
+                                Combo3.disabled = false; 
+                                    
+                                if(document.getElementById('{!$Component.frm_DatosContratante.tht_cargaCliente}').value == 'Nuevo'){
+                                    Combo4.disabled = false;
+                                    Combo5.disabled = false;
+                                }                                    
+                                    
+                                }
+                         }
+                        
+                        if (Combo3.options[Combo3.selectedIndex].value!="")
+                           {
+                            if (Combo3.options[Combo3.selectedIndex].value=="SI")
+                                {
+                                Combo1.disabled = true;
+                                Combo2.disabled = true;
+                                    
+                                if(document.getElementById('{!$Component.frm_DatosContratante.tht_cargaCliente}').value == 'Nuevo'){
+                                    Combo4.disabled = true;
+                                    Combo5.disabled = true;
+                                }                                    
+                                    
+                                }
+                            else
+                                {
+                                Combo1.disabled = false;
+                                Combo2.disabled = false;
+                                    
+                                if(document.getElementById('{!$Component.frm_DatosContratante.tht_cargaCliente}').value == 'Nuevo'){
+                                    Combo4.disabled = false;
+                                    Combo5.disabled = false;
+                                }                                    
+                                    
+                                }
+                            }
+                        
+                        if(document.getElementById('{!$Component.frm_DatosContratante.tht_cargaCliente}').value == 'Nuevo'){
+                        
+                            if (Combo4.options[Combo4.selectedIndex].value!=""){
+                                if (Combo4.options[Combo4.selectedIndex].value=="SI"){
+                                    
+                                    Combo1.disabled = true;
+                                    Combo2.disabled = true;
+                                    Combo3.disabled = true;
+                                    Combo5.disabled = true;                                  
+                                    
+                                }else{
+                                    
+                                    Combo1.disabled = false;
+                                    Combo2.disabled = false; 
+                                    Combo3.disabled = false;
+                                    Combo5.disabled = false;                                    
+                                    
+                                }
+                            }
+                            
+                            if (Combo5.options[Combo5.selectedIndex].value!=""){
+                                if (Combo5.options[Combo5.selectedIndex].value=="SI"){
+                                    
+                                    Combo1.disabled = true;
+                                    Combo2.disabled = true;
+                                    Combo3.disabled = true;
+                                    Combo4.disabled = true;                                  
+                                    
+                                }else{
+                                    
+                                    Combo1.disabled = false;
+                                    Combo2.disabled = false; 
+                                    Combo3.disabled = false;
+                                    Combo4.disabled = false;                                    
+                                    
+                                }
+                            }                            
+                            
+                        }                        
+                        
+                        
+                        
+                        
+                    }
+                    
+                    function VerificarRespuestaContratante()
+                    {
+                        var Combo1 = document.getElementById('cmb_0');
+                        var Combo2 = document.getElementById('cmb1');
+                        var Combo3 = document.getElementById('cmb2'); 
+                        var Combo4 = document.getElementById('cmb3');
+                        var Combo5 = document.getElementById('cmb4');
+                        
+                         if (Combo1.options[Combo1.selectedIndex].value!="")
+                           {
+                            if (Combo1.options[Combo1.selectedIndex].value=="SI")
+                               {
+                                Combo2.disabled = true;
+                                Combo3.disabled = true;
+                                if(document.getElementById('{!$Component.frm_DatosContratante.tht_cargaCliente}').value == 'Nuevo'){
+                                    Combo4.disabled = true;
+                                    Combo5.disabled = true;
+                                }                                 
+                               }
+                             else
+                               {
+                                Combo2.disabled = false;
+                                Combo3.disabled = false;  
+                                if(document.getElementById('{!$Component.frm_DatosContratante.tht_cargaCliente}').value == 'Nuevo'){
+                                    Combo4.disabled = false;
+                                    Combo5.disabled = false;
+                                }                                    
+                               }
+                           }
+                        if (Combo2.options[Combo2.selectedIndex].value!="")
+                           {
+                             if (Combo2.options[Combo2.selectedIndex].value=="SI")
+                                {
+                                Combo1.disabled = true;
+                                Combo3.disabled = true;
+                                if(document.getElementById('{!$Component.frm_DatosContratante.tht_cargaCliente}').value == 'Nuevo'){
+                                    Combo4.disabled = true;
+                                    Combo5.disabled = true;
+                                }                                     
+                                }
+                            else
+                                {
+                                Combo1.disabled = false;
+                                Combo3.disabled = false; 
+                                if(document.getElementById('{!$Component.frm_DatosContratante.tht_cargaCliente}').value == 'Nuevo'){
+                                    Combo4.disabled = false;
+                                    Combo5.disabled = false;
+                                }                                     
+                                }
+                         }
+                        
+                        if (Combo3.options[Combo3.selectedIndex].value!="")
+                           {
+                            if (Combo3.options[Combo3.selectedIndex].value=="SI")
+                                {
+                                Combo1.disabled = true;
+                                Combo2.disabled = true;
+                                if(document.getElementById('{!$Component.frm_DatosContratante.tht_cargaCliente}').value == 'Nuevo'){
+                                    Combo4.disabled = true;
+                                    Combo5.disabled = true;
+                                }                                     
+                                }
+                            else
+                                {
+                                Combo1.disabled = false;
+                                Combo2.disabled = false; 
+                                if(document.getElementById('{!$Component.frm_DatosContratante.tht_cargaCliente}').value == 'Nuevo'){
+                                    Combo4.disabled = false;
+                                    Combo5.disabled = false;
+                                }                                     
+                                }
+                            }
+                        
+                        if(document.getElementById('{!$Component.frm_DatosContratante.tht_cargaCliente}').value == 'Nuevo'){
+                        
+                            if (Combo4.options[Combo4.selectedIndex].value!=""){
+                                if (Combo4.options[Combo4.selectedIndex].value=="SI"){
+                                    
+                                    Combo1.disabled = true;
+                                    Combo2.disabled = true;
+                                    Combo3.disabled = true;
+                                    Combo5.disabled = true;                                  
+                                    
+                                }else{
+                                    
+                                    Combo1.disabled = false;
+                                    Combo2.disabled = false; 
+                                    Combo3.disabled = false;
+                                    Combo5.disabled = false;                                    
+                                    
+                                }
+                            }
+                            
+                            if (Combo5.options[Combo5.selectedIndex].value!=""){
+                                if (Combo5.options[Combo5.selectedIndex].value=="SI"){
+                                    
+                                    Combo1.disabled = true;
+                                    Combo2.disabled = true;
+                                    Combo3.disabled = true;
+                                    Combo4.disabled = true;                                  
+                                    
+                                }else{
+                                    
+                                    Combo1.disabled = false;
+                                    Combo2.disabled = false; 
+                                    Combo3.disabled = false;
+                                    Combo4.disabled = false;                                    
+                                    
+                                }
+                            }                            
+                            
+                        }                        
+
+                        
+                        
+                    }
+                                                
+                    </script>
+                    
+                    <!-- FORMULARIO COTIZADOR -->
+                    <apex:form id="frm_DatosContratante"  >
+                        
+                        <!-- Campos auxiliares -->
+                        <apex:inputHidden id="tht_rutUsuario" value="{!UsuaroTvta}" />
+                        <apex:inputHidden id="tht_codRamo" value="{!MC_CLIENTE.MCAMP_Ramo__c}" />
+                        <apex:inputHidden id="tht_codProducto" value="{!MC_CLIENTE.MCAMP_Codigo_Producto__c}" />
+                        <apex:inputHidden id="tht_codPlan" value="{!MC_CLIENTE.MCAMP_Plan__c}" />
+                        <apex:inputHidden id="tht_revPlan" value="{!MC_CLIENTE.MCAMP_Revision__c}" />
+                        <apex:inputHidden id="tht_tipoAsegurado" value="{!tipoCliente}" />
+                        <apex:inputHidden id="tht_TOTALUF" value="{!TOTAL_UF}" />
+                        <apex:inputHidden id="tht_TOTALCLP" value="{!TOTAL_CLP}" />
+                        <apex:inputHidden id="tht_REGION" value="{!COD_RegionSeleccionada}" />
+                        <apex:inputHidden id="tht_CIUDAD" value="{!COD_CiudadSeleccionada}" />
+                        <apex:inputHidden id="tht_COMUNA" value="{!COD_ComunaSeleccionada}" />
+                        <apex:inputHidden id="tht_Estado" value="{!TAREA_Contratante.Status}" />
+                        <apex:inputHidden id="tht_SubEstado" value="{!TAREA_Contratante.TASK_Sub_Estado__c}" />
+                        <apex:inputHidden id="tht_cargaCliente" value="{!cargaCliente}" />
+                        
+                        <apex:inputHidden id="tht_OcultarBotonPredigitador" value="{!activaBotonPD}" />
+                        
+                        <!--
+                        <div id="dv_Mensajes" style="width: 97%; margin-left: auto; margin-right: auto;">
+                    
+                            <apex:messages rendered="true"/>
+                            
+                        </div>                                 
+                        -->
+                        <apex:pageBlock id="pB_CotizadorContratante">                    
+                            <!-- INFO CONTRATANTE -->
+                            <apex:pageBlockSection title="CONTRATANTE" columns="1" id="pBs_DatosContratante">                        
+                                <apex:outputField value="{!MC_CLIENTE.MCAMP_Carga_RUT__c}" />
+                                <apex:outputField value="{!MC_CLIENTE.MCAMP_Carga_Dv__c}" label="Carga - DV"/>
+                              <!--  <apex:pageBlockSectionItem >
+
+                                </apex:pageBlockSectionItem>-->
+                                <apex:outputField value="{!MC_CLIENTE.Firstname}"/>
+                                <apex:outputField value="{!MC_CLIENTE.Lastname}"/>
+                                <apex:outputField value="{!MC_CLIENTE.MCAMP_Carga_Email_1__c}" label="Email" />
+                                <apex:outputText value="{!TelefonosCliente}" label="Teléfonos" />
+                                <apex:inputText id="txt_TelefonoCliente" value="{!TelefonoCliente}" label="Teléfono" />
+                                <apex:inputField id="txt_FechaNacimientoContratante" value="{!MC_CLIENTE.MCAMP_Carga_Fecha_Nacimiento__c}" />
+                                <apex:inputField value="{!CUENTA_Contratante.Estado_Civil__pc}"/>
+                                <!--<apex:inputField value="{!DireccionCliente}"/>  -->
+                                <apex:inputText id="txt_DireccionCliente" label="Dirección" value="{!DireccionCliente}" size="100" />
+                                <tr>
+                                <th class="labelCol vfLabelColTextWrap">Región</th>
+                                    <td class="dataCol ">
+                                        <select id="cmbRegiones" label="Región" size="1" onchange="soapCiudades();">
+                                        </select>
+                                    </td>                               
+                                </tr>
+                                
+                               <tr>
+                               <th class="labelCol vfLabelColTextWrap">Ciudad</th>
+                                    <td class="dataCol ">
+                                        <select id="cmbCiudades" label="Región" size="1" onchange="soapComunas();">
+                                        </select>
+                                    </td>
+                                </tr>     
+                                
+                                <tr>
+                                <th class="labelCol vfLabelColTextWrap">Comuna</th>
+                                    <td class="dataCol ">
+                                        <select id="cmbComunas" label="Región" size="1" onchange="onChangeComunas();">
+                                        </select>
+                                    </td>
+                               </tr>
+                            </apex:pageBlockSection>
+                            <apex:pageBlockSection collapsible="false" columns="2" title="MANDATO PAGO PRIMA" rendered="{!if(cargaCliente='Existente',true,false)}">
+                                <apex:outputField label="Póliza Mandatoria" value="{!MC_CLIENTE.MCAMP_Carga_Poliza_Mandatoria__c}" />
+                                <!--
+                                <apex:selectList id="cmbTarjeta" label="Medio Pago" value="{!COD_TarjetaSeleccionada}" size="1" disabled="{!IF(ISBLANK(MC_CLIENTE.MCAMP_Carga_Poliza_Mandatoria__c),false,true)}" >
+                                    <apex:selectOptions value="{!CargaTarjeta}" />
+                                </apex:selectList>                                
+                                -->
+                            </apex:pageBlockSection>
+                            
+                            <br/>
+                            <div id="dv_Botones" style="width: 97%; margin-left: auto; margin-right: auto; display: {!if(cargaCliente='Existente','show','none')}">
+                                <center>
+                                    <!--<apex:commandButton id="cmd_ListaPolizas" onclick="window.open('/apex/SEC_VF_ONCO_ProductosActualesContratante?rutContratante='+'{!CUENTA_Contratante.Rut__c}'+'&PolizaMandatoria='+'{!MC_CLIENTE.MCAMP_Carga_Poliza_Mandatoria__c}','Pólizas Contratante', 'directories=no, location=no, menubar=no, scrollbars=yes, statusbar=no, tittlebar=no, width=1150, height=500', 1)" value="Pólizas Vigentes" /> -->                               
+                                    <!--<apex:commandLink id="cmdListaPolizas" onclick="window.open('/apex/SEC_VF_ONCO_ProductosActualesContratante?rutContratante='+'{!CUENTA_Contratante.Rut__c}'+'&PolizaMandatoria='+'{!MC_CLIENTE.MCAMP_Carga_Poliza_Mandatoria__c}','Pólizas Contratante', 'directories=no, location=no, menubar=no, scrollbars=yes, statusbar=no, tittlebar=no, width=1150, height=500', 1)" value="Pólizas Vigentes" /> -->
+                                    <input type="button" class="btn" onclick="javascript:window.open('/apex/SEC_VF_ONCO_ProductosActualesContratante?rutContratante='+'{!CUENTA_Contratante.Rut__c}'+'&PolizaMandatoria='+'{!MC_CLIENTE.MCAMP_Carga_Poliza_Mandatoria__c}','Pólizas Contratante', 'directories=no, location=no, menubar=no, scrollbars=yes, statusbar=no, tittlebar=no, width=1150, height=500', 1)" value="Pólizas Vigentes" />
+                                </center>
+                            </div>
+                        </apex:pageBlock>
+                        <br/>                       
+                        <apex:pageBlock id="pB_CotizadorAsegurados" >
+                            
+                            <!-- INFO TARIFAS -->
+                            <apex:pageBlockSection title="ASEGURADO DEPENDIENTE" columns="1" id="pBs_Cargas" rendered="true">
+                                
+                                <center>
+                                    <!-- Validamos si Producto Oferta Campaña sea Oncológico o APEG (19 = Oncológico ; 66 = APEG) -->
+                                    <div style="display:{!IF(TipoProducto='19','show','none')}">
+                                        <br/>
+                                        AGREGAR
+                                        <br/>
+                                        <img src="https://c.na46.content.force.com/servlet/servlet.ImageServer?id=0150H00000GZXhd&oid=00Di0000000XoSJ&lastMod=1535120253000" onclick="agregarFilaAseguradosDependientes()" />
+                                        <!-- <input type="button" id="cmd_Agregarcarga" name="cmd_Agregarcarga" value="Agregar" onClick="agregarFilaAseguradosDependientes()" /> -->
+                                        <br/>
+                                        <br/>
+                                    </div>
+                                    
+                                </center>
+                                
+                                <table id="tbl_datoscargas" width="100%" border="0">
+                                    
+                                    <tr id="10000" style="background-color:lightgrey;">
+                                        
+                                        <th width="5%" align="center">
+                                            Acción
+                                        </th>
+                                        
+                                        <th width="5%" align="center">
+                                            #
+                                        </th>
+                                        
+                                        <th width="20%" align="left">
+                                            Fecha Nacimiento
+                                        </th>
+                                        
+                                        <th width="20%" align="left">
+                                            Parentesco
+                                        </th>
+                                        
+                                        <th width="20%" align="left">
+                                            Prima Mensual UF
+                                        </th>
+                                        
+                                        <th width="20%" align="left">
+                                            Prima Mensual CLP
+                                        </th> 
+                                        
+                                        <th width="10%" align="left">
+                                            ¿Es Asegurable?
+                                        </th>                              
+                                        
+                                    </tr>
+                                    <tr id="1" style="borderBottom = 2px; borderBottomColor = darkorange;">
+                                        <td width="5%" align="center">
+                                            <!--
+                                            <img src="https://c.na46.content.force.com/servlet/servlet.FileDownload?file=0150H00000GZXhi" id="bt_1" name="bt_1" value="X" onclick="borrarFilaAsegurdadosDependientes(this.id)"/>
+                                            -->
+                                        </td>
+                                        
+                                        <td width="10%" align="left">
+                                            1
+                                        </td> 
+                                        
+                                        <td width="20%" align="left">                                            
+                                            <input type="date" id="dt_1_ASDE_FENACIMIENTO"  name="dt_1_ASDE_FENACIMIENTO" value="" readonly="true" />
+                                        </td>
+                                        
+                                        <td width="20%" align="left">
+                                            <select id="cmb_1_ASDE_PARENTESCO" name="cmb_1_ASDE_PARENTESCO">
+                                                        <option value="0001">CONTRATANTE</option>                   
+                                            </select> 
+                                        </td>
+                                        
+                                        <td width="20%" align="left">
+                                            <input type="text" id="txt_1_ASDE_VALORUF"  name="txt_1_ASDE_VALORUF" size="10" maxlength="20" value="0"    readonly="true" />
+                                        </td>
+                                        
+                                        <th width="20%" align="left">
+                                            <input type="text" id="txt_1_ASDE_VALORCLP"  name="txt_1_ASDE_VALORCLP" size="10" maxlength="20" value="0"  readonly="true" />
+                                        </th>
+                                        
+                                        <td width="10%" align="left">
+                                            <input type="text" readonly="true" id="lbl_1_ASDE_ASEGURABLE" name="lbl_1_ASDE_ASEGURABLE" value="" />
+                                        </td> 
+                                        
+                                                                   
+                                    </tr>
+                                    
+                                    <!-- FILAS AGREGADAS POR CÓDIGO -->
+                                    
+                                    <tr id="10001" style="background-color: lightgrey; border-top: 2px solid darkorange;">
+                                        
+                                        <th width="5%" align="center">
+                                            
+                                        </th>
+                                        
+                                        <th width="5%" align="center">
+                                            
+                                        </th>
+                                                                    
+                                        <th width="20%" align="left">
+                                            
+                                        </th>
+                                        
+                                        <th width="20%" align="left">
+                                            <b>
+                                                Total
+                                            </b>
+                                        </th>
+                                        
+                                        <th width="20%" align="left">
+                                            <b>
+                                                <input type="text" id="txt_TotalUF" name="txt_TotalUF" size="10" value="0"  readonly="true"/>                            
+                                            </b>    
+                                        </th>
+                                        
+                                        <th width="20%" align="left">
+                                            <b>
+                                                <input type="text" id="txt_TotalCLP" name="txt_TotalCLP" size="10" value="0"  readonly="true"/>
+                                            </b>
+                                        </th>
+                                        
+                                        <th width="10%" align="left">
+                                        
+                                        </th>
+                                        
+                                    </tr>                              
+                                    
+                                </table>
+                                
+                                <br/>
+                                <br/>
+                                
+                            
+                            </apex:pageBlockSection>            
+                            
+                        </apex:pageBlock>            
+                        <br/>
+
+                        <!-- Validamos si Producto Oferta Campaña sea Oncológico o APEG (19 = Oncológico ; 66 = APEG) -->
+                        <apex:pageBlock id="pB_CotizadorDPS" rendered="{!IF(TipoProducto='19',true,false)}">
+                            <!-- INFO CUESTIONARIO VENTA -->
+                            <apex:pageBlockSection title="VENTA (DPS)" columns="1" id="pBs_DPS" rendered="true">                    
+                                <div style="width: 100%; margin-left: auto; margin-right: auto; border-bottom: 1px solid darkorange;">
+                                    <table id="tbl_datoscuestionarioDPS" width="100%" border="0">
+                        
+                                        <tr id="tr_pregDPS_1" style="border-bottom: 2px solid darkorange;">
+                                            
+                                            <th id="celda_PREG_1" width="35%" align="center">
+                                                A) ¿Usted o alguno de los asegurados propuestos ha sido diagnosticado alguna vez por cáncer, leucemia, linfoma, o tumor maligno de cualquier tipo?
+                                            </th>
+                                            
+                                            <th id="celda_RESP_PREG_1" width="65%" align="center">
+                                            </th>     
+                                            
+                                        </tr>
+                                        
+                                        <tr id="tr_pregDPS_2" style="border-bottom: 2px solid darkorange;">
+                                            
+                                            <th id="celda_PREG_2" width="35%" align="center">
+                                                B) ¿Usted o alguno de los asegurados propuestos tiene 2 o más parientes directos (padres o hermanos) que haya sido diagnosticado con lo indicado anteriormente?
+                                            </th>
+                                            
+                                            <th id="celda_RESP_PREG_2" width="65%" align="center">
+                                            </th>                      
+                                            
+                                        </tr>
+                        
+                                        <tr id="tr_pregDPS_3" style="border-bottom: 2px solid darkorange;">
+                                            
+                                            <th id="celda_PREG_3" width="35%" align="center">
+                                                C) ¿Usted o alguno de los asegurados propuestos ha sido diagnosticado alguna vez por Hepatitis B o C, SIDA, o es portador del VIH y/o Virus Papiloma Humano?
+                                            </th>
+                                            
+                                            <th id="celda_RESP_PREG_3" width="65%" align="center">
+                                            </th>                      
+                                            
+                                        </tr>  
+                                        
+                                        <tr id="tr_pregDPS_4" style="border-bottom: 2px solid darkorange; display: {!if(cargaCliente='Nuevo','show','none')}">
+                                            
+                                            <th id="celda_PREG_4" width="35%" align="center">
+                                                D) ¿Ud. o alguno de los asegurados propuestos ha sido diagnosticado alguna vez por presentar algún nódulo o tumor benigno de la próstata, <br/>
+                                                de las mamas, de la tiroides, del cerebro, del riñón, de la piel o una lesión precancerosa en el cuello del útero (como por ejemplo, NIE)?
+                                            </th>
+                                            
+                                            <th id="celda_RESP_PREG_4" width="65%" align="center">
+                                            </th>                      
+                                            
+                                        </tr>   
+                                        
+                                        <tr id="tr_pregDPS_5" style="border-bottom: 2px solid darkorange; display: {!if(cargaCliente='Nuevo','show','none')}">
+                                            
+                                            <th id="celda_PREG_5" width="35%" align="center">
+                                                E) ¿Ud. o alguno de los asegurados propuestos ha tenido una disminución de peso no intencional de más de 5 kilos en el último año?
+                                            </th>
+                                            
+                                            <th id="celda_RESP_PREG_5" width="65%" align="center">
+                                            </th>                      
+                                            
+                                        </tr>                                         
+                                        
+                                    </table>                            
+                                </div>
+                                <!--
+                                <center>                        
+                                    <br/>                            
+                                    <input id="cmd_AbrirPredigitador" type="button" onclick="window.open('/apex/SEC_VF_ONCO_DigitadorOncologico?rutContratante='+'{!CUENTA_Contratante.Rut__c}','Pólizas Contratante', 'directories=no, location=no, menubar=no, scrollbars=yes, statusbar=no, tittlebar=no, width=1000, height=600', 1)" value="Transferir Pre-Digitador" />                       
+                                    <br/>                        
+                                </center>
+                                -->
+                            </apex:pageBlockSection>
+                        </apex:pageBlock>
+                        <br/>
+                        
+                        <div id="divPreDigitador" style="display:;">
+                            <apex:pageBlock id="pB_botonpredigitador">
+                                <apex:commandLink target="_blank" id="cmd_TransferirPD" value="Transferir Pre-Digitador" action="{!AbrirPreDigita}" 
+                                                  onclick="return ValidarPreguntas();"/>
+                                <!--<apex:commandButton id="cmd_TransferirPD" value="Transferir Pre-Digitador" action="{!AbrirPreDigita2}" />-->
+                                
+                            </apex:pageBlock>
+                        </div>
+                        
+                    </apex:form>
+                    <!-- FIN FORMULARIO COTIZADOR -->
+                
+                </div>           
+                <div id="dv_PieCotizador" style="width: 100%; height: auto;">
+                    
+                </div>
+             
+            </div>
+        </body>
+        <script>
+            cargaInicial();        
+        </script>
+    </html>
+        
+</apex:page>

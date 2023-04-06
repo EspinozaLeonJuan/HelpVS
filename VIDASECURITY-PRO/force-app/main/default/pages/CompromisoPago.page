@@ -1,0 +1,42 @@
+<apex:page standardController="Factura__c" recordSetVar="facturas2" docType="html-5.0" extensions="CompromisoPagoController"
+    lightningStylesheets="true" sideBar="false" action="{!init}">
+    <apex:sectionHeader title="Compromiso de Pago" subtitle="Establecer Compromiso de Pago" />
+    <apex:form >
+        <apex:pageBlock id="block" title="Facturas Seleccionadas">
+            <apex:pageBlockButtons location="bottom">
+                <apex:commandButton value="Aceptar" action="{!establecerCompromiso}" reRender="continuationResult,block" rendered="{! showSections }"
+                    status="status" />
+                <apex:commandButton value="Volver" action="{!cancel}" />
+            </apex:pageBlockButtons>
+            <apex:pageMessages />
+            <apex:pageBlockSection columns="1" rendered="{! showSections }">
+                <apex:pageBlockTable value="{!facturas}" var="factura">
+                    <apex:column value="{!factura.Numero_Factura__c}" />
+                    <apex:column value="{!factura.Rut_Empresa__c}" />
+                    <apex:column value="{!factura.Razon_Social__c}" />
+                    <apex:column value="{!factura.Periodo_Cobranza__c}" />
+                    <apex:column value="{!factura.Filial__r.Name}" headerValue="Filial" />
+                    <apex:column value="{! factura.Fecha_Bloqueo_Beneficios__c }" />
+                </apex:pageBlockTable>
+                <br/>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection columns="1" title="Seleccionar Fecha Comprometida" id="selectDateSection" rendered="{! showSections }">
+                <apex:input type="date" value="{!fecha}" label="Fecha Compromiso" />
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+
+        <apex:actionStatus id="status">
+            <apex:facet name="start">
+                <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.75; z-index: 1000; background-color: black;">
+                    &nbsp;
+                </div>
+                <div style="position: fixed; left: 0; top: 0; bottom: 0; right: 0; z-index: 1001; width: 100%; heigth: 100%;">
+                    <img src="{!URLFOR($Resource.ajax_loading_icon)}" style="position: relative; top: calc(50% - 100px); left: calc(50% - 100px); width: 200px !important; height: 200px !important;"
+                    />
+                </div>
+            </apex:facet>
+        </apex:actionStatus>
+    </apex:form>
+
+    <apex:outputText id="continuationResult" value="{!continuationResult}" style="display:none;" />
+</apex:page>

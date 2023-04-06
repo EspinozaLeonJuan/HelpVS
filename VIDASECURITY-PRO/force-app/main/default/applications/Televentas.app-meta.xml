@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <defaultLandingTab>standard-home</defaultLandingTab>
+    <description>Aplicación personalizada para gestionar tareas de llamadas de campañas para Producto Oncológico.</description>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
+    <label>Televentas</label>
+    <logo>App_Oncologico_VS/Logo_VS01.png</logo>
+    <tabs>Participantes_de_Campa_a__c</tabs>
+    <tabs>Bandeja_Tareas2</tabs>
+    <tabs>standard-Campaign</tabs>
+    <tabs>standard-Lead</tabs>
+    <tabs>standard-Account</tabs>
+    <tabs>standard-Case</tabs>
+    <tabs>Bandeja_Propuestas</tabs>
+    <tabs>asignacion_UR__c</tabs>
+    <tabs>Escritorio__c</tabs>
+    <tabs>standard-report</tabs>
+    <tabs>standard-Dashboard</tabs>
+</CustomApplication>

@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <layouts>
+        <layout>Comercial Nuevo</layout>
+        <sections>
+            <label></label>
+            <section>Información Cuenta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información Entregada</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información Oportunidad</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información Póliza - Historicos</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Cierre</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información del Sistema</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Comercial Nuevo - Admin</layout>
+        <sections>
+            <label></label>
+            <section>Información Cuenta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información Entregada</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información Oportunidad</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Cierre</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información del Sistema</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Comercial Renovación</layout>
+        <sections>
+            <label></label>
+            <section>Información Cuenta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información Oportunidad</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información Póliza - Historicos y de Referencia</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Cierre</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información del Sitema</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Comercial Renovación - Admin</layout>
+        <sections>
+            <label></label>
+            <section>Información Cuenta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información Entregada</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información Oportunidad</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Cierre</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información del Sitema</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Cotización Alto Patrimonio</layout>
+        <sections>
+            <label></label>
+            <section>Información Cuenta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información Oportunidad</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Renta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información del Sistema</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato Covid con Cliente</layout>
+        <sections>
+            <label></label>
+            <section>Información Cuenta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información Entregada</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información Oportunidad</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Cierre</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información del Sistema</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato Covid sin Cliente</layout>
+        <sections>
+            <label></label>
+            <section>Información Cuenta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información Entregada</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información Oportunidad</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Cierre</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información del Sistema</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Oportunidad - Links</layout>
+        <sections>
+            <label></label>
+            <section>Información adicional</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de entrevista</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Oportunidad - Links - Admin</layout>
+        <sections>
+            <label></label>
+            <section>Información adicional</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de entrevista</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Oportunidad - Links CL</layout>
+        <sections>
+            <label></label>
+            <section>Información adicional</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de entrevista</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Oportunidad - Salud Protegida</layout>
+        <sections>
+            <label></label>
+            <section>Datos Propuesta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información Negocio</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información Póliza</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Validación Audios / Calidad</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Oportunidad - Ventas Oncológico</layout>
+        <sections>
+            <label></label>
+            <section>Datos Propuesta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información Negocio</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información Póliza</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Validación Audios / Calidad</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Oportunidad - Ventas Oncológico - Admin</layout>
+        <sections>
+            <label></label>
+            <section>Datos Propuesta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información Negocio</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información Póliza</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Validación Audios / Calidad</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Oportunidad Supervisor - Venta Oncológico</layout>
+        <sections>
+            <label></label>
+            <section>Datos Propuesta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información Negocio</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información Póliza</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Validación Audios / Calidad</section>
+        </sections>
+    </layouts>
+    <quickActions>
+        <label></label>
+        <name>Env_ar_Email_para_Cerrar</name>
+    </quickActions>
+</CustomObjectTranslation>

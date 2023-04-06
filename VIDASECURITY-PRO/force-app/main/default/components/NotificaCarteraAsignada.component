@@ -1,0 +1,11 @@
+<apex:component controller="NotificaCarteraAsignadaController" access="global">
+<apex:attribute name="propietarioId" description="Id del ejecutivo propietario de la cartera" type="Id" required="true" assignTo="{!ownerId}" access="global"/>
+<apex:dataTable value="{!accounts}" var="account" style="margin: 0 auto;padding:5px;border:1px solid #000000;width:800px;" border="1">
+	<apex:column value="{!account.Categoria_del_Cliente__r.Name}" headerValue="Categoría" />
+	<apex:column value="{!account.Rut_con_dv__c}" headerValue="RUT" />
+	<apex:column value="{!account.Name}" headerValue="Nombre Cliente" />
+	<apex:column value="{!account.PersonHomePhone}" headerValue="Teléfono" />
+	<apex:column value="{!account.PersonMobilePhone}" headerValue="Celular" />
+	<apex:column value="{!account.Ciudad_particular_B__r.Name}" headerValue="Ciudad particular" />
+</apex:dataTable>
+</apex:component>

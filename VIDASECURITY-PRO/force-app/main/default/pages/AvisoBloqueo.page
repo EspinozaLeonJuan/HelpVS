@@ -1,0 +1,25 @@
+<apex:page standardController="Corredor__c" extensions="AvisoBloqueoController">
+<apex:outputPanel layout="none" rendered="{! notificarAvisoBloqueo }" >
+<!--<c:AvisoBloqueo _corredor="{!Corredor__c}" />-->
+
+<br/>
+<apex:form >
+<apex:pageBlock title="Envío de Notificación de Bloqueo" rendered="{! notificarAvisoBloqueo }">
+<apex:commandButton value="Enviar Notificación" action="{!sendEmail}" />
+</apex:pageBlock>
+</apex:form>
+</apex:outputPanel>
+
+<apex:outputPanel layout="Block" rendered="{! !hasFiliales }" >
+No hay filiales asociadas a este corredor
+</apex:outputPanel>
+
+<apex:outputPanel layout="Block" rendered="{! hasFiliales && filialesBloqueadas }" >
+Filial ya se encuentra bloqueada
+</apex:outputPanel>
+
+<apex:outputPanel layout="Block" rendered="{! hasFiliales && !filialesBloqueadas && !notificarAvisoBloqueo}" >
+No hay filiales que cumplan con los criterios de aviso de bloqueo.
+</apex:outputPanel>
+
+</apex:page>

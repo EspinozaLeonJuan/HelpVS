@@ -1,0 +1,12 @@
+<apex:page sidebar="false" showHeader="false">
+    
+    <script>
+    function OpenPanelTP2(){
+        window.open("/apex/PanelTP2","Panel","Width=200px, Height=350px, center=yes, scrollbars=no, toolbar=no, menubar=no, resizable=yes "); 
+    }
+    </script>
+    
+    <apex:form >
+        <apex:commandButton value="Iniciar Totalpack 2" onclick="OpenPanelTP2();"/>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Asignacion de Cartera</label>
+    <protected>false</protected>
+    <values>
+        <field>Tamano_Paginacion__c</field>
+        <value xsi:type="xsd:double">50.0</value>
+    </values>
+    <values>
+        <field>URL_Asignacion_Masiva__c</field>
+        <value xsi:type="xsd:string">https://vidasecurity.my.salesforce.com/a0y0H00000HC9K7</value>
+    </values>
+    <values>
+        <field>URL_Informe_Cartera_Desvinculada__c</field>
+        <value xsi:type="xsd:string">/00O0H000006lmqP</value>
+    </values>
+    <values>
+        <field>URL_Informe_Cartera_Vinculada__c</field>
+        <value xsi:type="xsd:string">/00O0H000006lmqM</value>
+    </values>
+</CustomMetadata>

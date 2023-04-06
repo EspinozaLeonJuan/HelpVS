@@ -1,0 +1,13 @@
+<!--
+  @description       : 
+  @author            : Juan Espinoza León
+  @group             : 
+  @last modified on  : 04-22-2021
+  @last modified by  : Juan Espinoza León
+  Modifications Log 
+  Ver   Date         Author               Modification
+  1.0   03-06-2021   Juan Espinoza León   Initial Version
+-->
+<apex:page controller="CTR_CS_DerivarCaso" action="{!derivarCasos}" >
+    Procesando derivación caso...
+</apex:page>

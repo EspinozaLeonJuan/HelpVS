@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Aviso de Bloqueo</fullName>
+        <default>false</default>
+        <label>Aviso de Bloqueo</label>
+    </customValue>
+    <customValue>
+        <fullName>Aviso de Desbloqueo</fullName>
+        <default>false</default>
+        <label>Aviso de Desbloqueo</label>
+    </customValue>
+    <customValue>
+        <fullName>Bloqueo de Beneficios</fullName>
+        <default>false</default>
+        <label>Bloqueo de Beneficios</label>
+    </customValue>
+    <customValue>
+        <fullName>Desbloqueo de Beneficios</fullName>
+        <default>false</default>
+        <label>Desbloqueo de Beneficios</label>
+    </customValue>
+    <customValue>
+        <fullName>Compromiso de Pago</fullName>
+        <default>false</default>
+        <label>Compromiso de Pago</label>
+    </customValue>
+    <customValue>
+        <fullName>Anulación Póliza</fullName>
+        <default>false</default>
+        <label>Anulación Póliza</label>
+    </customValue>
+    <customValue>
+        <fullName>Recordatorio de Bloqueo</fullName>
+        <default>false</default>
+        <label>Recordatorio de Bloqueo</label>
+    </customValue>
+    <customValue>
+        <fullName>Manual</fullName>
+        <default>false</default>
+        <label>Manual</label>
+    </customValue>
+    <customValue>
+        <fullName>Anulación Cliente</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Anulación Cliente</label>
+    </customValue>
+    <customValue>
+        <fullName>Anulación Corredor</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Anulación Corredor</label>
+    </customValue>
+    <masterLabel>Eventos de Notificación</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

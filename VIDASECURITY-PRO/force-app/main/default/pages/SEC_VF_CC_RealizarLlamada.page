@@ -1,0 +1,20 @@
+<!--
+  @description       : 
+  @author            : Juan Espinoza Leon
+  @group             : 
+  @last modified on  : 04-30-2021
+  @last modified by  : Juan Espinoza León
+  Modifications Log 
+  Ver   Date         Author               Modification
+  1.0   10-06-2020   Juan Espinoza Leon   Initial Version
+-->
+<apex:page tabStyle="Case" controller="CTR_CC_RealizarLlamada"  action="{!postCall}" docType="html-5.0" sidebar="false" showHeader="false" showChat="false">
+    <apex:form >
+        <apex:pageBlock title="Realizando LLamada">
+            <apex:messages style="font-weight: bold;" />
+            <apex:pageBlockButtons >
+                <apex:commandButton value="Volver"></apex:commandButton>
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

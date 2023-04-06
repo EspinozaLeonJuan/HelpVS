@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Agente</fullName>
+        <default>false</default>
+        <label>Agente</label>
+    </customValue>
+    <customValue>
+        <fullName>Supervisor</fullName>
+        <default>false</default>
+        <label>Supervisor</label>
+    </customValue>
+    <customValue>
+        <fullName>Subgerente</fullName>
+        <default>false</default>
+        <label>Subgerente</label>
+    </customValue>
+    <customValue>
+        <fullName>Corredor</fullName>
+        <default>false</default>
+        <label>Corredor</label>
+    </customValue>
+    <customValue>
+        <fullName>Comisionista</fullName>
+        <default>false</default>
+        <label>Comisionista</label>
+    </customValue>
+    <customValue>
+        <fullName>CONSULTOR MASTER (SUPERVISOR IND.)</fullName>
+        <default>false</default>
+        <label>CONSULTOR MASTER (SUPERVISOR IND.)</label>
+    </customValue>
+    <customValue>
+        <fullName>JEFE DE INVERSIONES</fullName>
+        <default>false</default>
+        <label>JEFE DE INVERSIONES</label>
+    </customValue>
+    <customValue>
+        <fullName>SUPERVISOR MANTENEDOR</fullName>
+        <default>false</default>
+        <label>SUPERVISOR MANTENEDOR</label>
+    </customValue>
+    <customValue>
+        <fullName>EJECUTIVO DE INVERSIONES</fullName>
+        <default>false</default>
+        <label>EJECUTIVO DE INVERSIONES</label>
+    </customValue>
+    <customValue>
+        <fullName>CONSULTOR MASTER (AS)</fullName>
+        <default>false</default>
+        <label>CONSULTOR MASTER (AS)</label>
+    </customValue>
+    <customValue>
+        <fullName>ASISTENTES COMERCIALES COLECTIVOS</fullName>
+        <default>false</default>
+        <label>ASISTENTES COMERCIALES COLECTIVOS</label>
+    </customValue>
+    <customValue>
+        <fullName>JEFE DE POST VENTA</fullName>
+        <default>false</default>
+        <label>JEFE DE POST VENTA</label>
+    </customValue>
+    <customValue>
+        <fullName>GERENTE COLECTIVOS</fullName>
+        <default>false</default>
+        <label>GERENTE COLECTIVOS</label>
+    </customValue>
+    <customValue>
+        <fullName>JEFE VENTAS</fullName>
+        <default>false</default>
+        <label>JEFE VENTAS</label>
+    </customValue>
+    <customValue>
+        <fullName>AGENTE RRVV</fullName>
+        <default>false</default>
+        <label>AGENTE RRVV</label>
+    </customValue>
+    <customValue>
+        <fullName>GERENTE REGIONAL SANTIAGO</fullName>
+        <default>false</default>
+        <label>GERENTE REGIONAL SANTIAGO</label>
+    </customValue>
+    <description>Contacto utilizado para AMAC</description>
+    <masterLabel>Tipo de Contacto</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

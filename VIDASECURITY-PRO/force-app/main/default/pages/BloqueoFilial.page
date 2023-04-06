@@ -1,0 +1,31 @@
+<apex:page standardController="Filial__c" extensions="BloqueoController" action="{!init}" >
+    <apex:sectionHeader title="Bloqueo Beneficios" subtitle="Filial" />
+    <apex:form >
+        <apex:pageBlock id="block" title="Confirmación de Bloqueo">
+            <apex:pageBlockButtons location="bottom">
+                <apex:commandButton value="Volver" action="{! cancel}" />
+                <apex:commandButton value="Bloquear Filial" action="{!bloquearFilial}" reRender="continuationResult,block" rendered="{! showSections }" status="status" />
+            </apex:pageBlockButtons>
+            <apex:pageMessages />
+            <apex:pageBlockSection columns="1" rendered="{! showSections }" >
+                <apex:outputField value="{!filial.Name}" />
+                <apex:outputField value="{!filial.Estado_Beneficio__c}" />
+                <apex:pageMessage id="WarningMsg" escape="0" summary="Está a punto de bloquear la filial, está seguro?" severity="warning" strength="3"/>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+
+        <apex:actionStatus id="status">
+            <apex:facet name="start">
+                <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.75; z-index: 1000; background-color: black;">
+                    &nbsp;
+                </div>
+                <div style="position: fixed; left: 0; top: 0; bottom: 0; right: 0; z-index: 1001; width: 100%; heigth: 100%;">
+                    <img src="{!URLFOR($Resource.ajax_loading_icon)}" style="position: relative; top: calc(50% - 100px); left: calc(50% - 100px); width: 200px !important; height: 200px !important;"
+                    />
+                </div>
+            </apex:facet>
+        </apex:actionStatus>
+    </apex:form>
+
+    <apex:outputText id="continuationResult" value="{!continuationResult}" style="display:none;" />
+</apex:page>

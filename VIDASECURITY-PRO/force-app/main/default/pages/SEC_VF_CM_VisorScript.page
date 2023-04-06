@@ -1,0 +1,440 @@
+<!--
+  @description       : 
+  @author            : Juan Espinoza León
+  @group             : 
+  @last modified on  : 02-16-2021
+  @last modified by  : Juan Espinoza León
+  Modifications Log 
+  Ver   Date         Author               Modification
+  1.0   01-19-2021   Juan Espinoza León   Initial Version
+-->
+<apex:page id="pgVisor" controller="CTR_CM_VisorScript" action="{!iniciaVisorScript}"  lightningStylesheets="true" sidebar="false" showHeader="true"  docType="HTML-5.0">
+    <div id="dv_CuerpoPrincipal" style="width: 100%; margin-left: auto; margin-right: auto; height: 90%;">                        
+        <apex:form id="frm_Visor">
+        <!--      <apex:pageBlock id="pbk_PanelVisor">-->
+                <apex:panelGrid columns="1"  style="width:100%;" rendered="{!Tipo='C'}">  
+                    <h4 style="text-align:center;">
+                        INTRODUCCION
+                    </h4>
+                    <p style="text-align:justify;">Muy buenas tardes hablo con {!nombreContratante}.</p>
+                    <p style="text-align:justify;">
+                        Don {!nombreContratante} mucho gusto usted habla con {!nombreEjecutiva}, estoy llamando de Vida Security. 
+                        Le comento que el motivo de mi llamada es para contarle que {!nombreAsegurado}, a quien tiene como asegurado 
+                        dependiente en la cobertura catastrófica de salud {!cobertura} de su seguro {!nombreProducto}, cumplirá el máximo de la edad permitida, 
+                        por lo que será excluido de su póliza. Para continuar protegido, le queremos ofrecer el seguro  catastrófico Salud Protegida donde el 
+                        asegurado titular será {!nombreAsegurado}, quien contará con condiciones similares a su cobertura de salud actual y sin necesidad de completar una nueva
+                        declaración de salud. Este último punto es muy importante tenerlo en cuenta, pues si quiere contratar un seguro catastrófico de salud en otra compañía,
+                        volverá a ser evaluado y es posible que sea rechazado, o que tenga un costo mayor por alguna preexistencia o enfermedad o que simplemente no sea cubierta.
+                    </p>
+                    <p style="text-align:justify;">
+                        Salud Protegida le entrega un capital de hasta $ {!capitalHasta} aproximadamente, por evento y por  asegurado lo que le permitirá reembolsar 
+                        los gastos médicos de alto costo que nos sean cubiertos  por su sistema de salud. A partir de los 76 años, el capital es de hasta $ {!capitalHasta76} aproximadamente. Si 
+                            {!nombreAsegurado} ya ha usado parte del capital de su cobertura de salud actual, su capital disponible en Salud Protegida será el saldo restante.
+                    </p>
+                    <p style="text-align:justify;">
+                        El precio mensual de este seguro para {!nombreAsegurado} es de UF {!precioMensualUF} equivalente a aproximadamente $ {!precioMensualCLP} pesos.   
+                    </p>
+                    <p style="text-align:justify;">
+                        Esta tarifa se reajustará en cada aniversario de la póliza, según la edad del asegurado o cuando incorpore adicionales a su póliza.
+                    </p>
+                    <p style="text-align:justify;">
+                        Una vez contratada la póliza, {!nombreAsegurado} podrá incorporar a su grupo familiar por una prima adicional y cada uno contará con un capital
+                        de $ {!capitalPrimaAdic} aproximadamente, por evento. {!nombreAsegurado} y su cónyuge o conviviente
+                        civil estarán protegidos hasta cumplir los 100 años y sus hijos hasta antes de cumplir los 25 años.
+                        Esta póliza le entrega cobertura ante accidentes y enfermedades de alto costo con libre elección de médicos y centro de atención, 
+                        reembolsando hasta el 100% de los gastos luego de usar Isapre/Fonasa, en Chile y hasta el 80% de los gastos médicos incurridos en el extranjero.
+                    </p>
+                    <p style="text-align:justify;">
+                        El deducible a pagar es UF 100 por evento y asegurado o UF 50 en caso que la póliza tenga vigencia mayor a 24 meses, contando desde la póliza original. 
+                        Al cumplir los 70 años, el deducible será de UF 150. Sin embargo, este deducible no se cobrará si:
+                    </p>
+                    <ul>
+                        <li type="square">Activa cobertura GES o CAEC y,</li>
+                        <li type="square">Ante el primer diagnóstico de alguna de las siguientes enfermedades, considerando la póliza original:</li>
+                        <ul>
+                            <li type="circle">Cáncer</li>
+                            <li type="circle">Infarto agudo al miocardio</li>
+                            <li type="circle">Enfermedad de las coronarias que requieren cirugía</li>
+                            <li type="circle">Accidente Vascular Encefálico</li>
+                            <li type="circle">Insuficiencia Renal Crónica</li>
+                        </ul>
+                    </ul>
+                    <p style="text-align:justify;">
+                        Cabe destacar que {!nombreAsegurado} será excluido de su póliza el {!fechaExluido} y  la cobertura de este seguro comienza a regir desde el {!fechaRegir}    
+                    </p>
+                    <p style="text-align:justify;">
+                    ¿Le interesa que {!nombreAsegurado} continúe protegido con este seguro Salud Protegida?                      
+                    </p>
+                    <ol type="a">
+                        <li> No: Desea que contactemos a “nombrecarga” directamente para ofrecerle este Seguro? </li>
+                        <li> Yo no lo quiero contratar, pero pueden llamar a “nombrecarga” por si le interesa a él contratarlo </li>
+                        <li> Sí </li>                                
+                    </ol>
+                    <p style="text-align:justify;">
+                        Si la respuesta es a) o b), entonces:
+                    </p>
+                    <p style="text-align:justify;">
+                        Me podrías indicar el correo electrónico y nro de teléfono de {!nombreAsegurado} para contactarlo?
+                    </p>
+                        <p style="text-align:justify;color:gray;">
+                        (En este caso la ejecutiva debe marcar sub estado Llamar al asegurado dependiente y en los comentarios incorporar información entregada por contratante.)
+                    </p>                            
+                    <p style="text-align:justify;">
+                        Si la respuesta es c), continuar con el script 
+                    </p>
+                    <p style="text-align:justify;">
+                        El detalle de las coberturas de este seguro al igual que las exclusiones detalladas de este producto se encuentran en el email que recibió de la compañía. 
+                        Si tiene alguna duda podemos revisarlas en conjunto, o si no lo ha recibido se lo puedo enviar inmediatamente.
+                    </p>
+                    <p style="text-align:justify;">
+                        NOTA (Si el cliente quisiera agregar algún asegurado dependiente se le debe explicar que podrá hacerlo vía endoso una vez que se encuentre vigente la póliza.) 
+                    </p>
+                    <br/>
+                    <h4 style="text-align:center;">
+                        OBLIGATORIO
+                    </h4>
+                    <p style="text-align:justify;">
+                        Don  {!nombreContratante} entonces le resumo la cobertura del seguro que usted acaba de contratar y le recuerdo también que esta llamada está siendo 
+                        grabada con el respaldo de grabación {!nombreGrabacion} tal como lo exige la Comisión para el Mercado Financiero. Si después quiere acceder a esta 
+                        grabación o modificar sus datos personales puede llamar a nuestro call center al 800 222 100.
+                    </p>
+                    <p style="text-align:justify;">
+                        Salud Protegida es un Seguro de salud Catastrófico que le permitirá reembolsar hasta en un 100% gastos médicos de alto costo que no sean cubiertos por su sistema de salud, 
+                        con un capital equivalente a {!capitalEquivalente} UF. 
+                    </p>
+                    <p style="text-align:justify;">
+                        El valor de la prima mensual será de UF {!precioMensualUF} , equivalente a aproximadamente $ {!precioMensualCLP} pesos. Con esto {!nombreAsegurado} estará cubierto hasta los 99 años y 
+                        podrá incorporar a su grupo familiar cuando lo desee.                                
+                    </p>                            
+                    <p style="text-align:justify;">
+                        Para terminar don {!nombreContratante} <strong>le confirmaré</strong> sus datos personales. Entonces con fecha de contratación  {!fechaContratacion}, necesito que me indique por favor:
+                    </p>
+                    <p style="text-align:justify;">
+                        Sus nombres y apellidos completos son: __________________________________
+                        </p>
+                    <p style="text-align:justify;">
+                        Su fecha de nacimiento es: _____________________________________________
+                    </p>
+                    <p style="text-align:justify;">
+                        Su Rut por favor: _____________________________________________________
+                    </p>
+                    <p style="text-align:justify;">
+                        Su estado civil es: _____________________________________________________
+                    </p>
+                    <p style="text-align:justify;">
+                        Su correo electrónico: _________________________________ (sólo al Contratante)
+                        </p>
+                    <p style="text-align:justify;">
+                        Me da otro teléfono en caso de que no lo podamos ubicar en éste: _____________
+                    </p>
+                    <p style="text-align:justify;">
+                        Su dirección sigue siendo/ es (si el contratante es distinto al de la póliza original): _______________________________________________
+                    </p>                            
+                    <p style="text-align:justify;">
+                        Don/ Sra  la prima de ésta póliza será cargada mensualmente junto a la de su producto actual. 
+                        ¿Usted  nos autoriza  a que la prima sea cargada en la misma CUENTA CORRIENTE  O TARJETA DE CREDITO  de su producto {!nombreProducto}?
+                    </p>                            
+                    <p style="text-align:justify;">
+                        Si el cliente dice que NO, o no tiene mandato vigente recaudando, entonces continuar con: 
+                    </p>                            
+                    <p style="text-align:justify;">
+                        Entonces será cargada a la Tarjeta de crédito <strong>(SOLO PUEDE SER PAT)</strong>  que usted nos indique. Para esto necesito me entregue los siguientes datos:
+                    </p>                          
+                    <ul>
+                        <li type="square">SE TOMA DATOS DE TARJETA: Tipo de Tarjeta, Número de Tarjeta y fecha de vencimiento.</li>
+                    </ul>
+                    <p style="text-align:justify;">
+                        Además le informo que esta póliza cuenta con una Garantía de Satisfacción de 30 días, contados desde la recepción de su Póliza, período en el cual usted puede retractarse de la contratación del Seguro sin expresión de causa ni penalización alguna llamando a nuestro Call Center 800 222 100.
+                    </p>                            
+                    <p style="text-align:justify;">
+                        La cobertura terminará cuando el asegurado titular no pague su prima correspondiente, haga uso por completo del monto indemnizatorio, fallezca o cumpla la edad máxima de permanencia. do. En caso que usted no esté de acuerdo, podrá dar término al contrato.                                 
+                    </p>                            
+                    <p style="text-align:justify;">
+                        Esta póliza es anual y se renueva automáticamente. En cada renovación la compañía podrá revisar  el monto de  prima pactada y tendrá la facultad de modificarla para el siguiente período. En caso que usted no esté de acuerdo, podrá dar término al contrato. 
+                    </p>
+                    <p style="text-align:justify;">
+                        Don {!nombreContratante} dado que esta es una transacción económica y para su seguridad, ahora le comunicaré con el certificador que en algunos segundos confirmará la contratación del seguro. Espere un momento por favor no corte.
+                    </p>                            
+                    <br/>
+                    <h4 style="text-align:center;">
+                        CERTIFICACION (PENDIENTE)
+                    </h4>
+                    <p style="text-align:justify;">
+                        Buenos días o tardes
+                    </p>
+                    <p style="text-align:justify;">
+                        Don/sra {!nombreContratante}
+                    </p>
+                    <p style="text-align:justify;">
+                        Mi nombre es………………………. certificador de ventas telefónicas de Vida Security.
+                    </p>                            
+                    <p style="text-align:justify;">
+                        Con fecha {!fechaContratacion_sinAgno} del {!fechaContratacion_Agno},  resumo las coberturas:
+                    </p>
+                    <p style="text-align:justify;">
+                        Salud Protegida es un Seguro de salud Catastrófico que le permitirá reembolsar hasta en un 100% gastos médicos de alto costo que no sean cubiertos 
+                        por su sistema de salud, con un capital de hasta {!capitalHasta_Cert} UF y deducible de UF {!deducible_Cert}. 
+                    </p>
+                    <p style="text-align:justify;">
+                            Como ya le indicó (Yasna Ganga/Maritza Darlic) la cobertura que le acabo de mencionar, comienza  a regir desde el {!fechaInicioVigencia}.
+                        </p>
+                    <p style="text-align:justify;">
+                        El precio mensual de este seguro para {!nombreAsegurado} es de {!precioMensualUF} UF 
+                    </p>
+                    <p style="text-align:justify;">
+                        Para finalizar, 3 datos:
+                    </p>
+                    <ol>
+                        <li type="square"> Su nombre completo </li>
+                        <li type="square"> su fecha de nacimiento</li>
+                        <li type="square"> su Rut</li>
+                    </ol>
+                    <p style="text-align:justify;">
+                            ¿Usted ha autorizado para que esta prima sea cargada en la misma (tarjeta/cuenta corriente) del producto_______________, póliza n°_________
+                    </p>
+                    <p style="text-align:justify;">
+                            NOTA: En caso de que el pago no esté asociado a la póliza madre corroborar datos de pago.
+                    </p>
+                    <p style="text-align:justify;">
+                            La dirección de despacho de la póliza es al correo electrónico (_____@______)
+                    </p>
+                    <p style="text-align:justify;">
+                        Eso es todo por mi parte, lo dejo con la ejecutiva, muchas gracias.
+                    </p>                            
+                    <h4 style="text-align:left;">
+                        Ejecutiva
+                    </h4>           
+                    <p style="text-align:justify;">
+                        Felicitaciones, hemos terminado la contratación de Salud Protegida. Dentro de unos minutos le llegará la póliza a su correo electrónico.
+                    </p>
+                    <p style="text-align:justify;">
+                        Tiene alguna duda?
+                    </p>
+                    <p style="text-align:justify;">
+                        Muchas gracias. 
+                    </p>
+                </apex:panelGrid>     
+                  
+                <apex:panelGrid columns="1"  style="width:100%;" rendered="{!Tipo='A'}">  
+                    <h4 style="text-align:center;">
+                        INTRODUCCION
+                    </h4>
+                    <p style="text-align:justify;">Muy buenas tardes hablo con {!nombreAsegurado}?</p>
+                    <p style="text-align:justify;">
+                        Don {!nombreAsegurado} mucho gusto usted habla con (nombre ejecutiva), estoy llamando de Vida Security. 
+                        Le comento que el motivo de mi llamada es para contarle que pronto cumplirá la edad máxima de permanencia en la cobertura catastrófica de salud del seguro {!nombreProducto}, 
+                        donde se encuentra como asegurado dependiente, por lo que será excluido de la póliza. Para continuar protegido, le queremos ofrecer el seguro catastrófico Salud Protegida
+                        donde usted será el asegurado titular y contará con condiciones similares a su cobertura de salud actual y sin necesidad de completar una nueva declaración de salud.  
+                        Este último punto es muy importante tenerlo en cuenta, pues si quiere contratar un seguro catastrófico de salud en otra compañía, volverá a ser evaluado y es posible que sea
+                        rechazado, o que tenga un costo mayor por alguna preexistencia o enfermedad o que simplemente no sea cubierta.
+                    </p>	
+                    <p style="text-align:justify;">
+                        Salud Protegida le entrega un capital de hasta $ {!capitalHasta} aproximadamente, por evento y por asegurado lo que le permitirá reembolsar los gastos médicos de alto costo que nos sean 
+                        cubiertos por su sistema de salud. A partir de los 76 años, el capital es de hasta $ {!capitalHasta76} aproximadamente. Si usted ya ha usado parte del capital de su cobertura de salud actual,
+                        el capital disponible en Salud Protegida será el saldo restante.
+                    </p>
+                    <p style="text-align:justify;">
+                        El precio mensual de este seguro es de UF {!precioMensualUF} equivalente a  aproximadamente $ {!precioMensualCLP} pesos.  
+                    </p>
+                    
+                    <p style="text-align:justify;">
+                        Esta tarifa se reajustará en cada aniversario de la póliza, según su edad o cuando incorpore adicionales a su póliza.
+                    </p>
+                    
+                    <p style="text-align:justify;">
+                        Una vez contratada la póliza, usted podrá incorporar a su grupo familiar por una prima adicional y cada uno contará con un capital de ${!capitalPrimaAdic} aproximadamente, por evento. 
+                        Usted, su cónyuge o conviviente civil estarán protegidos hasta cumplir los 100 años y sus hijos hasta antes de cumplir los 25 años. 
+                    </p>
+                    
+                    <p style="text-align:justify;">
+                        Esta póliza le entrega cobertura ante accidentes y enfermedades de alto costo con libre elección de médicos y centro de atención, reembolsando hasta el 100% de los gastos 
+                        luego de usar Isapre/Fonasa, en Chile y hasta el 80% de los gastos médicos incurridos en el extranjero.
+                    </p>
+                    
+                    <p style="text-align:justify;">
+                        El deducible a pagar es UF 100 por evento y asegurado o UF 50 en caso que la póliza tenga vigencia mayor a 24 meses, contando desde la fecha de inicio de vigencia de la 
+                        póliza original. Al cumplir los 70 años, el deducible será de UF 150. Sin embargo, este deducible no se cobrará si:
+                    </p>
+                    
+                    <ul>
+                        <li type="square">Activa cobertura GES o CAEC y,
+                        </li>
+                        <li type="square">Ante el primer diagnóstico de alguna de las siguientes enfermedades, considerando la póliza original:
+                            <ol>
+                                <li type="circle">Cáncer</li>
+                                <li type="circle">Infarto agudo al miocardio</li>
+                                <li type="circle">Enfermedad de las coronarias que requieren cirugía</li>
+                                <li type="circle">Accidente Vascular Encefálico</li>
+                                <li type="circle">Insuficiencia Renal Crónica</li>                                    
+                            </ol>                          
+                        </li>
+                        
+                        
+                    </ul>
+                    
+                    <p style="text-align:justify;">
+                        Cabe destacar que su cobertura terminará el {!fechaExluido} y  la cobertura de este seguro comienza a regir desde el {!fechaRegir}
+                    </p>
+                    
+                    <p style="text-align:justify;">
+                        ¿Le interesa que continuar protegido con este seguro Salud Protegida? 
+                    </p>
+                    <ol type="a">
+                        <li>No, gracias </li>
+                        <li>Si </li>
+                    </ol>
+                    
+                    <p style="text-align:justify;">
+                        Si la respuesta es a) terminar llamada
+                    </p>
+                    
+                    <p style="text-align:justify;">
+                        Si la respuesta es b), continuar con el script 
+                    </p>
+                    <p style="text-align:justify;">
+                        Perfecto, indíqueme un correo electrónico en el que le enviaré en este momento el detalle de las coberturas de este seguro al igual que las exclusiones detalladas 
+                        para este producto. Si tiene alguna duda podemos revisarlas en conjunto.
+                    </p>
+                    <p style="text-align:justify;">
+                        NOTA (Si el cliente quisiera agregar algún asegurado dependiente se le debe explicar que podrá hacerlo vía endoso una vez que se encuentre vigente la póliza.) 
+                    </p>
+                    <p style="text-align:justify;">
+                        Don {!nombreAsegurado} entonces le resumo la cobertura del seguro que usted acaba de contratar y le recuerdo también que esta llamada está siendo grabada con el 
+                        respaldo de grabación {!nombreGrabacion} tal como lo exige la Comisión para el Mercado Financiero. Si después quiere acceder a esta grabación o modificar sus datos personales puede 
+                        llamar a nuestro call center al 800 222 100:
+                    </p>
+                    
+                    <br/>
+                    <h4 style="text-align:center;">
+                        OBLIGATORIO
+                    </h4>                      
+                    <p style="text-align:justify;">
+                        Salud Protegida es un Seguro de salud Catastrófico que le permitirá reembolsar hasta en un 100% gastos médicos de alto costo que no sean cubiertos por su sistema de salud, 
+                        con un capital equivalente a {!capitalEquivalente} UF. 
+                    </p>
+                    <p style="text-align:justify;">
+                        El valor de la prima mensual será de UF {!precioMensualUF}, equivalente a aproximadamente $ {!precioMensualCLP} pesos. Con esto usted estará cubierto hasta los 99 años y podrá incorporar a su grupo familiar
+                        cuando lo desee.
+                    </p>
+                    <p style="text-align:justify;">
+                        Para terminar don (nombre carga) <strong style="text-decoration:underline;">le confirmaré</strong> sus datos personales. Entonces con fecha de contratación  XX/XX/XXX, necesito que me indique por favor:
+                    </p>
+                    <p style="text-align:justify;">
+                        Sus nombres y apellidos completos son: __________________________________
+                    </p>
+                    <p style="text-align:justify;">
+                        Su fecha de nacimiento es: _____________________________________________
+                    </p>
+                    <p style="text-align:justify;">
+                        Su Rut por favor: _____________________________________________________
+                    </p>
+                    <p style="text-align:justify;">
+                        Su estado civil es: _____________________________________________________
+                    </p>
+                    <p style="text-align:justify;">
+                        Su correo electrónico: _________________________________ (sólo al Contratante)
+                    </p>
+                    <p style="text-align:justify;">
+                        Me da otro teléfono en caso de que no lo podamos ubicar en éste: _____________
+                    </p>
+                    <p style="text-align:justify;">
+                        Su dirección es: _______________________________________________
+                    </p>
+                    <p style="text-align:justify;">
+                        Debemos registrar su medio de pago para la prima mensual, esta debe ser solo a través de una tarjeta de crédito, la puede tener a mano para entregarme unos datos? <strong>(SOLO PUEDE SER PAT)</strong> 
+                    </p>
+                    <ul>
+                        <li type="square">
+                            SE TOMA DATOS DE TARJETA: Tipo de Tarjeta, Número de Tarjeta y fecha de vencimiento.
+                        </li>
+                    </ul>
+                    <p style="text-align:justify;">
+                        Además le informo que esta póliza cuenta con una Garantía de Satisfacción de 30 días, contados desde la recepción de su Póliza, período en el cual usted puede retractarse de la contratación del Seguro sin expresión de causa ni 
+                        penalización alguna llamando a nuestro Call Center 800 222 100.
+                    </p>
+                    <p style="text-align:justify;">
+                        La cobertura terminará cuando no pague su prima correspondiente, haga uso por completo del monto indemnizatorio, fallezca o cumpla la edad máxima de permanencia. 
+                    </p>
+                    <p style="text-align:justify;">
+                        Esta póliza es anual y se renueva automáticamente. En cada renovación la compañía podrá revisar  el monto de  prima pactada y tendrá la facultad de modificarla para el siguiente período. 
+                        En caso que usted no esté de acuerdo, podrá dar término al contrato. 
+                    </p>
+                    <p style="text-align:justify;">
+                        Don (nombre carga) dado que esta es una transacción económica y para su seguridad, ahora le comunicaré con el certificador que en algunos segundos confirmará la contratación del seguro. 
+                        Espere un momento por favor no corte.
+                    </p>
+                                        <br/>
+                    <h4 style="text-align:center;">
+                        CERTIFICACION (PENDIENTE)
+                    </h4> 
+                    <p style="text-align:justify;">
+                        Buenos días o tardes
+                    </p>
+                    <p style="text-align:justify;">
+                        Don/sra {!nombreAsegurado}
+                    </p>
+                    <p style="text-align:justify;">
+                        Mi nombre es………………………. certificador de ventas telefónicas de vida security.
+
+                    </p>
+                    <p style="text-align:justify;">
+                        Con fecha {!fechaContratacion_sinAgno} del {!fechaContratacion_Agno},  resumo las coberturas:
+                    </p>
+                    <p style="text-align:justify;">
+                        Salud Protegida es un Seguro de salud Catastrófico que le permitirá reembolsar hasta en un 100% gastos médicos de alto costo que no sean cubiertos por su sistema de salud, 
+                        con un capital de hasta {!capitalHasta_Cert} UF y deducible de UF {!deducible_Cert}. 
+                    </p>
+                    <p style="text-align:justify;">
+                        Como ya le indicó (Yasna Ganga/Maritza Darlic) la cobertura que le acabo de mencionar, comienza  a regir desde el {!fechaInicioVigencia}.
+                    </p>
+                    
+                    <p style="text-align:justify;">
+                        El precio mensual de este seguro para usted es de {!precioMensualUF} UF 
+                    </p>
+                    <p style="text-align:justify;">
+                        Para finalizar, 3 datos:
+                    </p>
+                    <ol type="1">
+                        <li>su nombre completo</li>
+                        <li>su fecha de nacimiento</li>
+                        <li>su Rut</li>
+                    </ol>
+                    
+                    <p style="text-align:justify;">
+                        ¿Usted ha autorizado para que esta prima sea cargada mensualmente en la tarjeta n°_________ fecha de vencimiento ______ tipo de tarjeta______
+                    </p>
+                    <p style="text-align:justify;">
+                        La dirección de despacho de la póliza es al correo electrónico (_____@______)
+                    </p>
+                    
+                    <p style="text-align:justify;">
+                        Eso es todo por mi parte, lo dejo con la ejecutiva, muchas gracias.
+                    </p>
+                    <h4 style="text-align:left;">
+                        Ejecutiva
+                    </h4>  
+                    <p style="text-align:justify;">
+                        Felicitaciones, hemos terminado la contratación de Salud Protegida. Dentro de unos minutos le llegará la póliza a su correo electrónico.
+                    </p>
+                    
+                    <p style="text-align:justify;">
+                        Tiene alguna duda?
+                    </p>
+                    
+                    <p style="text-align:justify;">                           
+                        Muchas gracias. 
+                    </p>
+                    
+                </apex:panelGrid>
+
+                <apex:panelGrid columns="1"  style="width:100%;" rendered="{!Tipo=''}">  
+                    <h4 style="text-align:center;">
+                        VISIBLE SOLO CUANDO EL ESTADO DEL PROSPECTO ES:                        
+                    </h4>
+                </apex:panelGrid>
+        <!--    </apex:pageBlock>-->
+                 
+        </apex:form>
+    </div>
+    
+</apex:page>

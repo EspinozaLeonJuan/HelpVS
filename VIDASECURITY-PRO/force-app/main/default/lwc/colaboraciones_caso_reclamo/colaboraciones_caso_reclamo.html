@@ -1,0 +1,335 @@
+<!--
+  @description       :
+  @author            : Juan Espinoza León
+  @group             :
+  @last modified on  : 06-15-2022
+  @last modified by  : Juan Espinoza León
+-->
+<template>
+
+    <lightning-card  style="height: 100%;" >
+        <div class="slds-m-around_medium">
+            <template if:true={showLoading}>
+                <lightning-spinner alternative-text="Loading" size="medium" ></lightning-spinner>
+              </template>
+
+              <div class="slds-grid">
+                <div class="slds-col slds-size_1-of-2" style="text-align: left;">
+                    &nbsp;
+                </div>
+                <div class="slds-col slds-size_1-of-2" style="text-align: right;">
+
+                <lightning-button label="Nueva Colaboración Reclamo" variant="brand" onclick={handleClick_new_colaboracion_reclamo} ></lightning-button>
+                </div>
+
+            </div>
+            <br/>
+
+                <div style="height: 100%;">
+
+                    <template if:true = {tasks}>
+                        <lightning-datatable key-field="Id"
+                        data={tasks}
+                        columns={columns}
+                        hide-checkbox-column="true"
+                        show-row-number-column="true"
+                        onrowaction={callRowAction}>
+                    </lightning-datatable>
+                    </template>
+                    <template if:true = {error}>
+                        {error}>
+                    </template>
+                </div>
+    </div>
+    </lightning-card>
+
+<!--inicio new colaboracion -->
+<template if:true={open_modal_new}>
+    <div class="demo-only" >
+        <template if:true={showLoading_changeStatus}>
+            <lightning-spinner alternative-text="Loading" size="medium" class="spinnerClass"></lightning-spinner>
+          </template>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-02" aria-modal="true" aria-describedby="modal-content-id-2" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={handleClick_close_NewColaboration}>
+                        <lightning-icon icon-name="utility:close" size="medium">
+                        </lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-02" class="slds-text-heading_medium slds-hyphenate">Nueva Colaboración de Reclamo</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium modalBody" id="modal-content-id-2" >
+                    <lightning-record-view-form record-id={recordId} object-api-name="Case">
+                        <div class="slds-grid" >
+                            <div class="slds-col slds-size_1-of-6">
+                                <label class="slds-form-element__label label-bold" >RUT</label>
+                            </div>
+                            <div class="slds-col slds-size_1-of-6">
+                                <lightning-output-field class="output-bold"   variant="label-hidden" field-name="RUT__c"></lightning-output-field>
+                            </div>
+                            <div class="slds-col slds-size_1-of-6">
+                                <label class="slds-form-element__label label-bold" >Cliente</label>
+                            </div>
+                            <div class="slds-col slds-size_1-of-6">
+                                <lightning-output-field  variant="label-hidden" field-name="AccountId"></lightning-output-field>
+                            </div>
+                            <div class="slds-col slds-size_1-of-6">
+                                <label class="slds-form-element__label label-bold" >Póliza</label>
+                            </div>
+                            <div class="slds-col slds-size_1-of-6">
+                                <lightning-output-field  variant="label-hidden" field-name="CASO_N_Poliza__c"></lightning-output-field>
+                            </div>
+                        </div>
+
+                        <div class="slds-grid" >
+                            <div class="slds-col slds-size_1-of-6">
+                                <label class="slds-form-element__label label-bold" >Negocio</label>
+                            </div>
+                            <div class="slds-col slds-size_1-of-6">
+                                <lightning-output-field   variant="label-hidden" field-name="Negocio__c"></lightning-output-field>
+                            </div>
+                            <div class="slds-col slds-size_1-of-6">
+                                <label class="slds-form-element__label label-bold" >Canal</label>
+                            </div>
+                            <div class="slds-col slds-size_1-of-6">
+                                <lightning-output-field  variant="label-hidden" field-name="Canal__c"></lightning-output-field>
+                            </div>
+                            <div class="slds-col slds-size_1-of-6">
+                                <label class="slds-form-element__label label-bold" >Producto</label>
+                            </div>
+                            <div class="slds-col slds-size_1-of-6">
+                                <lightning-output-field   variant="label-hidden" field-name="Producto__c"></lightning-output-field>
+                            </div>
+                        </div>
+                        <div class="slds-grid" >
+                            <div class="slds-col slds-size_1-of-6">
+                                <label class="slds-form-element__label label-bold" >Asunto</label>
+                            </div>
+                            <div class="slds-col slds-size_1-of-6">
+                                <lightning-output-field   variant="label-hidden" field-name="Subject"></lightning-output-field>
+                            </div>
+                            <div class="slds-col slds-size_1-of-6">
+                                <label class="slds-form-element__label label-bold" >Tipo de Operación</label>
+                            </div>
+                            <div class="slds-col slds-size_1-of-6">
+                                <lightning-output-field   variant="label-hidden" field-name="Tipo_Operacion__c"></lightning-output-field>
+                            </div>
+                            <div class="slds-col slds-size_1-of-6">
+                                <label class="slds-form-element__label label-bold" >Detalle Operación</label>
+                            </div>
+                            <div class="slds-col slds-size_1-of-6">
+                                <lightning-output-field  variant="label-hidden" field-name="Detalle_Operacion__c"></lightning-output-field>
+                            </div>
+
+                        </div>
+                        <div class="slds-grid" >
+                            <div class="slds-col slds-size_1-of-6">
+                                <label class="slds-form-element__label label-bold" >Fecha/Hora de Creación</label>
+                            </div>
+                            <div class="slds-col slds-size_1-of-6">
+                                <lightning-output-field  variant="label-hidden" field-name="CreatedDate"></lightning-output-field>
+                            </div>
+                            <div class="slds-col slds-size_1-of-6">
+                                &nbsp;
+                            </div>
+                            <div class="slds-col slds-size_1-of-6">
+                                &nbsp;
+                            </div>
+                            <div class="slds-col slds-size_1-of-6">
+                                <label class="slds-form-element__label label-bold" >Fecha Cierre Tope</label>
+                            </div>
+                            <div class="slds-col slds-size_1-of-6">
+                                <lightning-output-field  variant="label-hidden" field-name="Fecha_Cierre_Tope__c"></lightning-output-field>
+                            </div>
+                        </div>
+                </lightning-record-view-form>
+                    <br/>
+                    <hr/>
+                    <div class="slds-grid" >
+
+                        <div class="slds-col slds-size_1-of-6">
+                            <label class="slds-form-element__label label-bold" >Unidades Resolutoras</label>
+                            <lightning-checkbox-group name="Unidades Resolutoras"
+                            options={unidadesResolutoras}
+                            value={URSelect}
+                            class="validate"
+                            onchange={handle_unidades_resolutoras}></lightning-checkbox-group>
+                        </div>
+
+                        <div class="slds-col slds-size_3-of-6">
+                           <label class="slds-form-element__label label-bold" >Descripción</label>
+                            <lightning-textarea name="descripcion" class="textarea" style="height: 150px;"  value={descripcionValue} onchange={handle_Descripcion_Change} ></lightning-textarea>
+                        </div>
+                        <div class="slds-col slds-size_1-of-6">
+                            <label class="slds-form-element__label label-bold" >Prioridad</label>
+                            <lightning-combobox
+                                        name="filter_task_priority"
+                                        value={priorityValue}
+                                        options={prioridadesTarea}
+                                        onchange={handlePicklist_TaskPriority_Change}
+                                        placeholder="Seleccione una Prioridad"
+                                        class="combobox"
+                                        >
+                                    </lightning-combobox>
+                        </div>
+
+                        <div class="slds-col slds-size_1-of-6">
+                            <label class="slds-form-element__label label-bold" >Fecha de Vencimiento</label>
+                            <lightning-input type="date" class="input-date" name="fechaVencimiento" value={fechaVencimientoValue} onchange={handle_FechaVencimiento_Change}></lightning-input>
+                        </div>
+                    </div>
+
+                </div>
+                <footer class="slds-modal__footer" >
+                    <lightning-button label="Cancelar" variant="neutral" onclick={handleClick_close_NewColaboration}></lightning-button>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <lightning-button label="Crear Colaboración Reclamo" variant="brand" onclick={handleClick_create_NewColaboration}></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </div>
+</template>
+
+<!--inicio new colaboracion -->
+
+
+<!-- inicio detalle colaboracion-->
+<template if:true={open_modal_det}>
+    <div class="demo-only" >
+        <template if:true={showLoading_changeStatus}>
+            <lightning-spinner alternative-text="Loading" size="medium" class="spinnerClass"></lightning-spinner>
+          </template>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={handleClick_close_Colaboration}>
+                        <lightning-icon icon-name="utility:close" size="medium">
+                        </lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Colaboración de Caso Reclamo</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium modalBody" id="modal-content-id-1" >
+                    <div class="slds-grid" >
+                        <div class="slds-col slds-size_1-of-6">
+                            <label class="slds-form-element__label label-bold" >Estado</label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-6">
+                            <label class="slds-form-element__label" for="form-element-02" style="font-size:12px;font-weight: bold;"  >{Task_Status}  </label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-6">
+                            <label class="slds-form-element__label label-bold" >Número Caso</label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-6">
+                            <label class="slds-form-element__label" for="form-element-02" style="font-size:12px;"  >{Task_CaseNumber}  </label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-6">
+                            <label class="slds-form-element__label label-bold" >UR Ejecutora</label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-6">
+                            <label class="slds-form-element__label" for="form-element-02" style="font-size:12px;"  >{Task_OwnerName}  </label>
+                        </div>
+                    </div>
+                    <div class="slds-grid" >
+                        <div class="slds-col slds-size_1-of-6">
+                            <label class="slds-form-element__label label-bold" >Asunto</label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-6">
+                            <label class="slds-form-element__label" for="form-element-02" style="font-size:12px;font-weight: bold;"  >{Task_Subject}</label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-6">
+                            <label class="slds-form-element__label label-bold" >Cliente</label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-6">
+                            <label class="slds-form-element__label" for="form-element-02" style="font-size:12px;"  >{Task_Cliente}  </label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-6">
+                            <label class="slds-form-element__label label-bold" >Póliza</label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-6">
+                            <label class="slds-form-element__label" for="form-element-02" style="font-size:12px;"  >{Task_Poliza}  </label>
+                        </div>
+                    </div>
+                    <div class="slds-grid" >
+                        <div class="slds-col slds-size_1-of-6">
+                            <label class="slds-form-element__label label-bold" >Prioridad Tarea</label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-6">
+                            <label class="slds-form-element__label" for="form-element-02" style="font-size:12px;"  >{Task_Priority}</label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-6">
+                            <label class="slds-form-element__label label-bold" >Responsable UR</label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-6">
+                            <label class="slds-form-element__label" for="form-element-02" style="font-size:12px;color:blue;font-weight: bold;"  >{Task_ResponsableUR}  </label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-6">
+                            <label class="slds-form-element__label label-bold" >Fecha de Vencimiento Tarea</label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-6">
+                            <label class="slds-form-element__label" for="form-element-02" style="font-size:12px;"  >{Task_FechaVencimiento}  </label>
+                        </div>
+                    </div>
+<br/>
+                    <div class="slds-grid" >
+                        <div class="slds-col slds-size_1-of-1" >
+                            <label class="slds-form-element__label label-bold">Descripción</label>
+                             <lightning-textarea name="descripcion" class="textarea"  style="resize: none;" value={Task_Description} readonly="true" ></lightning-textarea>
+                         </div>
+                    </div>
+
+                    <template if:true={ResponsableOK}>
+
+
+                     <hr/>
+                            <div class="slds-grid" >
+                                <div class="slds-col slds-size_1-of-1">
+                            <label class="slds-form-element__label label-bold" >Comentarios de Tarea</label>
+                                </div>
+                            </div>
+                            <br/>
+                            <div class="slds-grid" >
+                                <div class="slds-col slds-size_1-of-1">
+
+                                    <div style="height: 150px;">
+                                        <template if:true = {tasks}>
+                                            <lightning-datatable key-field="Id"
+                                            data={taskcomments}
+                                            columns={columns_tc}
+                                            hide-checkbox-column="true"
+                                            show-row-number-column="true"
+                                           >
+                                        </lightning-datatable>
+                                        </template>
+                                        <template if:true = {error}>
+                                            {error}>
+                                        </template>
+                                    </div>
+                                </div>
+                            </div>
+                        <br/>
+                        <div class="slds-grid" >
+                             <div class="slds-col slds-size_1-of-1">
+                                <label class="slds-form-element__label label-bold" >Nuevo Comentario Tarea</label>
+                                 <lightning-textarea name="comentario" class="textarea"  style="resize: none;" value={comentarioValue} onchange={handle_Comentario_Change} ></lightning-textarea>
+                                 <br/>
+                                 <div>
+                                    <lightning-button label="Cancelar" variant="neutral" onclick={handleClick_cancel_NewComment}></lightning-button>&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <lightning-button label="Crear Comentario Tarea" variant="brand" onclick={handleClick_create_NewComment}></lightning-button>
+                                 </div>
+                             </div>
+                        </div>
+                    </template>
+
+                </div>
+                <footer class="slds-modal__footer" >
+                    &nbsp;
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </div>
+</template>
+<!-- fin detalle colaboracion-->
+</template>

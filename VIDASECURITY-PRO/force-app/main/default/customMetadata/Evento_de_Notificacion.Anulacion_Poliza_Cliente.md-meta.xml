@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Anulación Póliza</label>
+    <protected>false</protected>
+    <values>
+        <field>Glosa__c</field>
+        <value xsi:type="xsd:string">Correo de Notificación de Anulación de Póliza de Colectivos al Cliente</value>
+    </values>
+    <values>
+        <field>Plantilla_de_Correo__c</field>
+        <value xsi:type="xsd:string">Notificacion_de_Anulacion_Cliente</value>
+    </values>
+    <values>
+        <field>Tipo_de_Evento__c</field>
+        <value xsi:type="xsd:string">Cobranza</value>
+    </values>
+    <values>
+        <field>Tipo_de_Notificaci_n__c</field>
+        <value xsi:type="xsd:string">Cliente</value>
+    </values>
+</CustomMetadata>

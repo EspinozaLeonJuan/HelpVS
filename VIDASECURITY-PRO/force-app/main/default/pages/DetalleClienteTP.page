@@ -1,0 +1,36 @@
+<apex:page sidebar="false" showHeader="false" controller="SalesforceTP" cache="false" action="{!getInfoCliente}">
+    <script>
+    function OpenParent(url){
+        window.open(url);
+        return false;
+    }
+    </script>
+
+    <apex:form style="Width:400px; height: 200px; background-color:lightgrey;">
+        <apex:panelGroup >
+            <apex:outputText value="{!ClienteNombre}" style="font-size: large; font-weight: bold;"/><br/>
+            <apex:outputText value="Cliente desde "/><apex:outputText value="{!ClienteFechaInicioRelacion}" style="font-weight: bold;"/><br/>
+            <apex:outputText value="Última visita a sucursal: {!ClienteUltimaVisitaSucursal}"/><br/>
+            <apex:outputText value="Último caso: "/><apex:outputLink onclick="OpenParent('{!ClienteUrlUltimoCaso}');" style="font-weight: bold;">{!ClienteFechaUltimoCaso}</apex:outputLink><br/>
+            <apex:outputText value="Pólizas activas en Salesforce: {!ClienteCantidadPolizasActivas}"/><br/>
+        </apex:panelGroup>
+        <hr/>
+    	<apex:panelGrid columns="3" border="0" cellpadding="2" cellspacing="2" bgcolor="Lightgray" style="text-align: right">
+            <apex:outputText value=""/>
+            <apex:outputText value="Este Año"/>
+            <apex:outputText value="Anteriores"/>
+            
+            <apex:outputText value="Reclamos"/>
+            <apex:outputText value="{!ClienteReclamosAno}"/>
+            <apex:outputText value="{!ClienteReclamosAnteriores}"/>
+            
+            <apex:outputText value="Consultas"/>
+            <apex:outputText value="{!ClienteConsultasAno}"/>
+            <apex:outputText value="{!ClienteConsultasAnteriores}"/>
+            
+            <apex:outputText value="Solicitudes"/>
+            <apex:outputText value="{!ClienteSolicitudesAno}"/>
+            <apex:outputText value="{!ClienteSolicitudesAnteriores}"/>
+        </apex:panelGrid>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <layouts>
+        <layout>Campaña - Salud Protegida</layout>
+        <sections>
+            <label></label>
+            <section>Script Guía</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Campaña - Venta Oncológico Televenta</layout>
+        <sections>
+            <label></label>
+            <section>Script Guía</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Campaña - Venta Oncológico Televenta Lightning</layout>
+        <sections>
+            <label></label>
+            <section>Script Guía</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Campaña MKT</layout>
+        <sections>
+            <label></label>
+            <section>Campos</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+</CustomObjectTranslation>

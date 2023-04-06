@@ -1,0 +1,41 @@
+<aura:component>
+    <!-- Registrar Eventos -->
+    <aura:registerEvent name="parametroSolucionModal" type="c:BaseConocimientoEvents" />
+    <aura:registerEvent name="eliminarSolucion" type="c:BaseConocimientoEvents" />
+    <!-- Registrar Eventos -->
+    <aura:attribute name="solucion" type="Solution" />
+    <aura:attribute name="isSolutionEditable" type="boolean" default="false" />
+    <aura:attribute name="isSolutionDeleteable" type="boolean" default="false" />
+
+    <aura:attribute name="tags" type="String[]" />
+    
+    <ltng:require scripts="{!join(',',
+        $Resource.jQuery2,
+        $Resource.jQueryDotDotDot + '/jQuery.dotdotdot/src/jquery.dotdotdot.min.js') }"
+        afterScriptsLoaded="{!c.scriptsLoaded}" />
+
+    <lightning:card variant="Narrow" iconName="standard:solution">
+        <aura:set attribute="title">
+            <p class="wrapper" id="titulo" onclick="{!c.irAlRegistro}"> <strong name="view"> {!v.solucion.SolutionName} </strong></p>
+        </aura:set>
+        <aura:set attribute="actions">
+            <aura:if isTrue="{!v.isSolutionEditable}">
+                <lightning:button name="edit" label="Editar" onclick="{!c.goToRecord}" />
+            </aura:if>
+             <aura:if isTrue="{!v.isSolutionDeleteable}">
+            <lightning:button name="delete" variant="destructive" label="Eliminar" onclick="{!c.deleteRecord}" />
+            </aura:if>
+        </aura:set>
+        <aura:set attribute="footer">
+            <aura:if isTrue="{!not(empty(v.solucion.Categoria_Solucion__c))}">
+                <lightning:badge label="{!v.solucion.Categoria_Solucion__r.Name}" />
+            </aura:if>
+        </aura:set>
+        <p class="slds-p-horizontal--small wrapper">
+            <ui:outputRichText value="{!v.solucion.SolutionNote}" />
+        </p>
+        <h6 class="slds-p-horizontal--small">
+			Estado : {!v.solucion.Status}
+		</h6>
+    </lightning:card>
+</aura:component>

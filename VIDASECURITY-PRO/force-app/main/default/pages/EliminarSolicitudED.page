@@ -1,0 +1,27 @@
+<apex:page standardController="Solicitud__c"  extensions="EliminarSolicitudEDController"  >
+    <apex:stylesheet value="{!URLFOR($Resource.EscritorioDigital, 'css/EscritorioDigital.css')}" />    
+    <apex:includeScript value="{!URLFOR($Resource.EscritorioDigital, 'js/EscritorioDigital.js')}"/>
+    <script>
+      	var rutaRecursosEstaticos = '{!URLFOR($Resource.EscritorioDigital)}';
+       
+    window.onload = function() { 	   
+       var Persistencia =  '{!Persistencia}';
+        
+       if (Persistencia > 0)
+       {
+           eliminarSolicitud();
+       }
+       else
+       {
+           errorPersistencia(Persistencia);
+           toBack();
+           
+       }      
+	}
+    
+    </script>
+    <apex:form >
+      <apex:actionFunction action="{!eliminarSolicitud}" name="eliminarSolicitud"/>
+        <apex:actionFunction action="{!toBack}" name="toBack"/>
+  </apex:form>
+</apex:page>

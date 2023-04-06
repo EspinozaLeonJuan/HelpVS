@@ -1,0 +1,1784 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <layouts>
+        <layout>Cas0 - Jefatura Calidad</layout>
+        <sections>
+            <label></label>
+            <section>Complete esta sección sólo si el Solicitante no corresponde al Contratante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Detalle Caso Contacto Vida (Uso Exclusivo Casilla Contacto Vida)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Nueva sección</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Sección solo para el pensionado - Solicitud Anticipo</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Caso - Atención Asistencia Agente</layout>
+        <sections>
+            <label></label>
+            <section>Contratante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Datos Agente/Solicitante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Nueva sección</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Caso - Atención Colectivo UR</layout>
+        <sections>
+            <label></label>
+            <section>Contratante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Detalle Caso Contacto Vida (Uso Exclusivo Casilla Contacto Vida).</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Nueva sección</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Caso - Atención Sucursal Operaciones</layout>
+        <sections>
+            <label></label>
+            <section>Complete esta sección sólo si el Solicitante no corresponde al Contratante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Detalle Caso Contacto Vida (Uso Exclusivo Casilla Contacto Vida)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Nueva sección</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Sección solo para el pensionado - Solicitud Anticipo</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Caso - Atención Total Pack</layout>
+        <sections>
+            <label></label>
+            <section>Complete esta sección sólo si el Solicitante no corresponde al Contratante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Detalle Caso Contacto Vida (Uso Exclusivo Casilla Contacto Vida)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Nueva sección</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Sección solo para el pensionado - Solicitud Anticipo</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Caso - Atención UR</layout>
+        <sections>
+            <label></label>
+            <section>Complete esta sección sólo si el Solicitante no corresponde al Contratante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Contratante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Detalle Caso Contacto Vida (Uso Exclusivo Casilla Contacto Vida)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Nueva sección</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Sección solo para el pensionado - Solicitud Anticipo</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Caso - Atención UR - Responsable</layout>
+        <sections>
+            <label></label>
+            <section>Complete esta sección sólo si el Solicitante no corresponde al Contratante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Contratante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Detalle Caso Contacto Vida (Uso Exclusivo Casilla Contacto Vida)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Nueva sección</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Caso - Atención UR - Usuario</layout>
+        <sections>
+            <label></label>
+            <section>Complete esta sección sólo si el Solicitante no corresponde al Contratante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Contratante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Detalle Caso Contacto Vida (Uso Exclusivo Casilla Contacto Vida)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Nueva sección</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Sección solo para el pensionado - Solicitud anticipo</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Caso - Atención UR Calidad</layout>
+        <sections>
+            <label></label>
+            <section>Complete esta sección sólo si el Solicitante no corresponde al Contratante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Contratante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Detalle Caso Contacto Vida (Uso Exclusivo Casilla Contacto Vida)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Nueva sección</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Sección solo para el pensionado - Solicitud anticipo</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Caso - Atención UR Colectivo</layout>
+        <sections>
+            <label></label>
+            <section>Complete esta sección sólo si el Solicitante no corresponde al Contratante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Detalle Caso Contacto Vida (Uso Exclusivo Casilla Contacto Vida).</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Nueva sección</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Sección solo para el pensionado - Solicitud anticipo</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Caso - Atención UR PV</layout>
+        <sections>
+            <label></label>
+            <section>Complete esta sección sólo si el Solicitante no corresponde al Contratante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Contratante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Nueva sección</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Sección solo para el pensionado - Solicitud anticipo</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Caso - Atención UR SAC</layout>
+        <sections>
+            <label></label>
+            <section>Complete esta sección sólo si el Solicitante no corresponde al Contratante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Detalle Caso Contacto Vida (Uso Exclusivo Casilla Contacto Vida)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Nueva sección</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Sección solo para el pensionado - Solicitud anticipo</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Caso - Atención UR SAC (gerencia)</layout>
+        <sections>
+            <label></label>
+            <section>Complete esta sección sólo si el Solicitante no corresponde al Contratante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Detalle Caso Contacto Vida (Uso Exclusivo Casilla Contacto Vida)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Nueva sección</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Sección solo para el pensionado - Solicitud anticipo</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Caso - Atención UR SAC - Lightning</layout>
+        <sections>
+            <label></label>
+            <section>Complete esta sección sólo si el Solicitante no corresponde al Contratante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Detalle Caso Contacto Vida (Uso Exclusivo Casilla Contacto Vida)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Nueva sección</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Sección solo para el pensionado - Solicitud anticipo</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Caso - Atención UR SAC Lightning</layout>
+        <sections>
+            <label></label>
+            <section>Complete esta sección sólo si el Solicitante no corresponde al Contratante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Detalle Caso Contacto Vida (Uso Exclusivo Casilla Contacto Vida)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Nueva sección</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Sección solo para el pensionado - Solicitud anticipo</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Caso - Atención UR Televenta</layout>
+        <sections>
+            <label></label>
+            <section>Complete esta sección sólo si el Solicitante no corresponde al Contratante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Detalle Caso Contacto Vida (Uso Exclusivo Casilla Contacto Vida)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Nueva sección</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Sección solo para el pensionado - Solicitud anticipo</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Caso - Atención UR Televenta (segmento)</layout>
+        <sections>
+            <label></label>
+            <section>Complete esta sección sólo si el Solicitante no corresponde al Contratante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Detalle Caso Contacto Vida (Uso Exclusivo Casilla Contacto Vida)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Nueva sección</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Sección solo para el pensionado - Solicitud anticipo</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Caso - Reclamo Colectivo UR</layout>
+        <sections>
+            <label></label>
+            <section>Complete esta sección sólo si el Solicitante no corresponde al Contratante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Contratante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Detalle Caso Contacto Vida (Uso Exclusivo Casilla Contacto Vida)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Envío de Respuesta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Gestión SLA</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información Reclamos</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Tiempo SLA</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Tipificación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Copia de Caso - Atención colectivo UR TEST</layout>
+        <sections>
+            <label></label>
+            <section>Complete esta sección sólo si el Solicitante no corresponde al Contratante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Detalle Caso Contacto Vida (Uso Exclusivo Casilla Contacto Vida)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Nueva sección</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Sección solo para el pensionado - Solicitud Anticipo</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Copia de Formato de Solicitud - Asistencia Agente2</layout>
+        <sections>
+            <label></label>
+            <section>Contratante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Datos Agente</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información Solicitud</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Tipificación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Copia de Formato de Solicitud - UR BAN</layout>
+        <sections>
+            <label></label>
+            <section>Detalle Caso Contacto Vida (Uso Exclusivo Casilla Contacto Vida)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Envío de Respuesta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Tipificación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Copia de Formato de Solicitud - UR SACasdasdasdadas</layout>
+        <sections>
+            <label></label>
+            <section>Detalle Caso Contacto Vida (Uso Exclusivo Casilla Contacto Vida)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Envío de Respuesta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Tipificación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato Caso</layout>
+        <sections>
+            <label></label>
+            <section>Detalle Caso Correo de Contacto (Uso Exclusivo de Casos por Correo)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información Extra (No modificar)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Tipificación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato Caso Consulta Colectivo</layout>
+        <sections>
+            <label></label>
+            <section>Hibernación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Solicitante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información del Cliente</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información del caso</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información del contacto</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información del corredor</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Tipificación de Colectivos</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato Cierre Caso</layout>
+        <layoutType>CaseClose</layoutType>
+        <sections>
+            <label></label>
+            <section>Cierre de Caso</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Tipificación</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Consulta - Asistencia Agente</layout>
+        <sections>
+            <label></label>
+            <section>Datos Agente/Solicitante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Detalle Caso Contacto Vida (Uso Exclusivo Casilla Contacto Vida)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Envío de Respuesta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Tipificación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Consulta - Call Center</layout>
+        <sections>
+            <label></label>
+            <section>Detalle Caso Contacto Vida (Uso Exclusivo Casilla Contacto Vida)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Envío de Respuesta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Tipificación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Consulta - TV</layout>
+        <sections>
+            <label></label>
+            <section>Detalle Caso Contacto Vida (Uso Exclusivo Casilla Contacto Vida)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Envío de Respuesta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Tipificación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Consulta - TV Lightning</layout>
+        <sections>
+            <label></label>
+            <section>Detalle Caso Contacto Vida (Uso Exclusivo Casilla Contacto Vida)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Envío de Respuesta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Tipificación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Consulta - TotalPack</layout>
+        <sections>
+            <label></label>
+            <section>Detalle Caso Contacto Vida (Uso Exclusivo Casilla Contacto Vida)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Envío de Respuesta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Tipificación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Consulta - UR</layout>
+        <sections>
+            <label></label>
+            <section>Complete esta sección sólo si el Solicitante no corresponde al Contratante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Contratante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Detalle Caso Contacto Vida (Uso Exclusivo Casilla Contacto Vida)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Envío de Respuesta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información Consulta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Tipificación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Consulta - UR  PV</layout>
+        <sections>
+            <label></label>
+            <section>Complete esta sección sólo si el Solicitante no corresponde al Contratante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Contratante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Envío de Respuesta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Tipificación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Consulta - UR - Usuario</layout>
+        <sections>
+            <label></label>
+            <section>Complete esta sección sólo si el Solicitante no corresponde al Contratante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Contratante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Detalle Caso Contacto Vida (Uso Exclusivo Casilla Contacto Vida)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Envío de Respuesta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información Consulta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Tipificación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Consulta - UR Colectivo</layout>
+        <sections>
+            <label></label>
+            <section>Complete esta sección sólo si el Solicitante no corresponde al Contratante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Detalle Caso Contacto Vida (Uso Exclusivo Casilla Contacto Vida)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información Consulta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Tipificación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Consulta - UR SAC</layout>
+        <sections>
+            <label></label>
+            <section>Detalle Caso Contacto Vida (Uso Exclusivo Casilla Contacto Vida)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Envío de Respuesta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Tipificación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Consulta - UR SAC (gerencia)</layout>
+        <sections>
+            <label></label>
+            <section>Detalle Caso Contacto Vida (Uso Exclusivo Casilla Contacto Vida)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Envío de Respuesta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Tipificación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Consulta - UR SAC - Lightning</layout>
+        <sections>
+            <label></label>
+            <section>Detalle Caso Contacto Vida (Uso Exclusivo Casilla Contacto Vida)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Envío de Respuesta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Tipificación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Reclamos</layout>
+        <sections>
+            <label></label>
+            <section>Complejidad</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Complete esta sección sólo si el Solicitante no corresponde al Contratante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Contratante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Detalle Caso Contacto Vida (Uso Exclusivo Casilla Contacto Vida)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Envío de Respuesta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Tipificación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Reclamos - Asistencia Agente</layout>
+        <sections>
+            <label></label>
+            <section>Asistencia Agente</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Detalle Caso Contacto Vida (Uso Exclusivo Casilla Contacto Vida)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Envío de Respuesta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Tiempo SLA</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Tipificación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Reclamos - TotalPack</layout>
+        <sections>
+            <label></label>
+            <section>Detalle Caso Contacto Vida (Uso Exclusivo Casilla Contacto Vida)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Envío de Respuesta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Tiempo SLA</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Tipificación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Reclamos - UR</layout>
+        <sections>
+            <label></label>
+            <section>Complete esta sección sólo si el Solicitante no corresponde al Contratante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Contratante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Detalle Caso Contacto Vida (Uso Exclusivo Casilla Contacto Vida)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Envío de Respuesta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Gestión SLA</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información Reclamos</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Tiempo SLA</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Tipificación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Reclamos - UR - Usuario</layout>
+        <sections>
+            <label></label>
+            <section>Complete esta sección sólo si el Solicitante no corresponde al Contratante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Contratante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Detalle Caso Contacto Vida (Uso Exclusivo Casilla Contacto Vida)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Envío de Respuesta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Gestión SLA</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información Reclamos</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Tiempo SLA</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Tipificación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Reclamos - UR Calidad</layout>
+        <sections>
+            <label></label>
+            <section>Complete esta sección sólo si el Solicitante no corresponde al Contratante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Contratante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Detalle Caso Contacto Vida (Uso Exclusivo Casilla Contacto Vida)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Envío de Respuesta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Gestión SLA</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información Reclamos</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Tipificación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Reclamos - UR Colectivo</layout>
+        <sections>
+            <label></label>
+            <section>Detalle Caso Contacto Vida (Uso Exclusivo Casilla Contacto Vida).</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Nueva sección</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Reclamos - UR PV</layout>
+        <sections>
+            <label></label>
+            <section>Complete esta sección sólo si el Solicitante no corresponde al Contratante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Contratante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Envío de Respuesta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información Reclamos</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Tiempo SLA</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Tipificación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Reclamos - UR SAC</layout>
+        <sections>
+            <label></label>
+            <section>Detalle Caso Contacto Vida (Uso Exclusivo Casilla Contacto Vida)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Envío de Respuesta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Tiempo SLA</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Tipificación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Reclamos - UR SAC (gerencia)</layout>
+        <sections>
+            <label></label>
+            <section>Detalle Caso Contacto Vida (Uso Exclusivo Casilla Contacto Vida)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Envío de Respuesta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Tiempo SLA</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Tipificación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Reclamos - UR SAC - Lightning</layout>
+        <sections>
+            <label></label>
+            <section>Detalle Caso Contacto Vida (Uso Exclusivo Casilla Contacto Vida)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Envío de Respuesta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Tiempo SLA</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Tipificación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Reclamos - UR SAC Lightning</layout>
+        <sections>
+            <label></label>
+            <section>Detalle Caso Contacto Vida (Uso Exclusivo Casilla Contacto Vida)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Envío de Respuesta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Tiempo SLA</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Tipificación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Reclamos Colectivo</layout>
+        <sections>
+            <label></label>
+            <section>Hibernación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información del Cliente</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información del Contacto</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información del Solicitante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información del corredor</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Tipificación  Colectivos</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Solicitud</layout>
+        <sections>
+            <label></label>
+            <section>Complete esta sección sólo si el Solicitante no corresponde al Contratante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Contratante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Detalle Caso Contacto Vida (Uso Exclusivo Casilla Contacto Vida)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Envío de Respuesta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Tipificación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Solicitud - Asistencia Agente</layout>
+        <sections>
+            <label></label>
+            <section>Datos Agente/Solicitante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Detalle Caso Contacto Vida (Uso Exclusivo Casilla Contacto Vida)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Envío de Respuesta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Repositorio de Documentos</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Tipificación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Solicitud - Call center</layout>
+        <sections>
+            <label></label>
+            <section>Detalle Caso Contacto Vida (Uso Exclusivo Casilla Contacto Vida)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Envío de Respuesta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Institución Financiera</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Repositorio de Documentos</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Tipificación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Solicitud - RPA</layout>
+        <sections>
+            <label></label>
+            <section>Complete esta sección sólo si el Solicitante no corresponde al Contratante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Contratante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Detalle Caso Contacto Vida (Uso Exclusivo Casilla Contacto Vida)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Envío de Respuesta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información Solicitud</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información del Rescate</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Tipificación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Solicitud - Sucursal Operaciones</layout>
+        <sections>
+            <label></label>
+            <section>Detalle Caso Contacto Vida (Uso Exclusivo Casilla Contacto Vida)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Envío de Respuesta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Tipificación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Solicitud - Total Pack</layout>
+        <sections>
+            <label></label>
+            <section>Detalle Caso Contacto Vida (Uso Exclusivo Casilla Contacto Vida)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Envío de Respuesta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Institución Financiera</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Repositorio de Documentos</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Tipificación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Solicitud - UR</layout>
+        <sections>
+            <label></label>
+            <section>Complete esta sección sólo si el Solicitante no corresponde al Contratante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Contratante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Detalle Caso Contacto Vida (Uso Exclusivo Casilla Contacto Vida)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Detalle Rescates RPA</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Envío de Respuesta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información Solicitud</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Institución Financiera</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Repositorio de Documentos</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Tipificación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Solicitud - UR Colectivo</layout>
+        <sections>
+            <label></label>
+            <section>Complete esta sección sólo si el Solicitante no corresponde al Contratante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Detalle Caso Contacto Vida (Uso Exclusivo Casilla Contacto Vida)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información Solicitud</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Repositorio de Documentos</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Tipificación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Solicitud - UR Lectura</layout>
+        <sections>
+            <label></label>
+            <section>Complete esta sección sólo si el Solicitante no corresponde al Contratante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Contratante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Detalle Caso Contacto Vida (Uso Exclusivo Casilla Contacto Vida)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Envío de Respuesta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información Solicitud</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Tipificación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Solicitud - UR Lightning</layout>
+        <sections>
+            <label></label>
+            <section>Complete esta sección sólo si el Solicitante no corresponde al Contratante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Contratante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Detalle Caso Contacto Vida (Uso Exclusivo Casilla Contacto Vida)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Detalle Rescates RPA</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Envío de Respuesta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información Solicitud</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Institución Financiera</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Repositorio de Documentos</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Tipificación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Solicitud - UR PV</layout>
+        <sections>
+            <label></label>
+            <section>Complete esta sección sólo si el Solicitante no corresponde al Contratante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Contratante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Envío de Respuesta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Repositorio de Documentos</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Tipificación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Solicitud - UR Responsable</layout>
+        <sections>
+            <label></label>
+            <section>Detalle Caso Contacto Vida (Uso Exclusivo Casilla Contacto Vida)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Envío de Respuesta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Tipificación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Solicitud - UR SAC</layout>
+        <sections>
+            <label></label>
+            <section>Detalle Caso Contacto Vida (Uso Exclusivo Casilla Contacto Vida)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Envío de Respuesta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Institución Financiera</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Repositorio de Documentos</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Tipificación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Solicitud - UR SAC - Lightning</layout>
+        <sections>
+            <label></label>
+            <section>Detalle Caso Contacto Vida (Uso Exclusivo Casilla Contacto Vida)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Envío de Respuesta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Institución Financiera</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Tipificación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Solicitud - UR SAC LIGH</layout>
+        <sections>
+            <label></label>
+            <section>Detalle Caso Contacto Vida (Uso Exclusivo Casilla Contacto Vida)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Envío de Respuesta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Tipificación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Solicitud - UR SAC(gerencia)</layout>
+        <sections>
+            <label></label>
+            <section>Detalle Caso Contacto Vida (Uso Exclusivo Casilla Contacto Vida)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Envío de Respuesta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Institución Financiera</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Repositorio de Documentos</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Tipificación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Solicitud Colectivo</layout>
+        <sections>
+            <label></label>
+            <section>Hibernación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información del Cliente</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información del Contacto</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información del Corredor</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información del Solicitante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Tipificación Colectivos</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Solicitud UR- Usuario</layout>
+        <sections>
+            <label></label>
+            <section>Complete esta sección sólo si el Solicitante no corresponde al Contratante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Contratante</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Detalle Caso Contacto Vida (Uso Exclusivo Casilla Contacto Vida)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Envío de Respuesta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información Solicitud</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Tipificación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Solicitud - Asistencia agente</layout>
+        <sections>
+            <label></label>
+            <section>Detalle Caso Contacto Vida (Uso Exclusivo Casilla Contacto Vida)</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Envío de Respuesta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Institución Financiera</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Repositorio de Documentos</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Tipificación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos</section>
+        </sections>
+    </layouts>
+    <quickActions>
+        <label></label>
+        <name>Cambiar_estado_casos_CV</name>
+    </quickActions>
+    <quickActions>
+        <label></label>
+        <name>Enviar_Mail</name>
+    </quickActions>
+    <quickActions>
+        <label></label>
+        <name>NewChildCase</name>
+    </quickActions>
+    <quickActions>
+        <label></label>
+        <name>NuevaTarea</name>
+    </quickActions>
+    <quickActions>
+        <label></label>
+        <name>NuevaTarea1</name>
+    </quickActions>
+    <workflowTasks>
+        <description></description>
+        <name>tareas_de_casoSF_internet</name>
+        <subject></subject>
+    </workflowTasks>
+</CustomObjectTranslation>

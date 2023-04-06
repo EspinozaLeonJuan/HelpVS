@@ -1,0 +1,33 @@
+<aura:component controller="BaseConocimientosController">
+	<!-- Registrar Eventos -->
+	<aura:registerEvent name="cerrarModalEliminarSolucion" type="c:BaseConocimientoEvents"/>
+	<aura:registerEvent name="eliminarSolucion" type="c:BaseConocimientoEvents"/>
+	<aura:registerEvent name="actualizarListado" type="c:BaseConocimientoEvents"/>
+	<!-- Registrar Eventos -->
+	<aura:attribute name="solucion" type="Solution" />
+	<aura:attribute name="recordError" type="String"/>
+	<aura:attribute name="display" type="String" default="display:none"/>
+	<div role="dialog" tabindex="-1" aria-labelledby="header99" class="slds-modal slds-fade-in-open">
+		<div class="slds-modal__container">
+	 		<div class="slds-modal__header">
+				<button class="slds-button slds-modal__close slds-button--icon-inverse" title="Cerrar" onclick="{!c.cerrarModalEliminarSolucion}">X<span class="slds-assistive-text">Cerrar</span></button>
+				<h2 class="slds-text-heading--medium"> Eliminar Solución</h2>
+			</div>
+			<div class="slds-modal__content slds-p-around--medium">  
+				<aura:if isTrue="{!not(empty(v.recordError))}">
+					<div aura:id="text" style="{!v.display}">
+						<ui:message title="Error" severity="error" closable="false">{!v.recordError} </ui:message>
+					</div>
+				</aura:if>
+				<p>
+					Esta seguro que desea eliminar la solución {!v.solucion.SolutionNumber} de Titulo <strong> {!v.solucion.SolutionName} </strong>?
+				</p>
+				<div class="slds-modal__footer">
+					<lightning:button label="Cancelar" onclick="{!c.cerrarModalEliminarSolucion}" variant="neutral" class="slds-m-top--medium"/>
+					<lightning:button label="Si" onclick="{!c.eliminarSolucion}" variant="destructive" class="slds-m-top--medium"/>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="slds-backdrop slds-backdrop--open"></div>
+</aura:component>

@@ -1,0 +1,97 @@
+<apex:page standardController="Solicitud__c"  extensions="NuevaSolicitudEDController" sidebar="true" >
+ 
+    <apex:stylesheet value="{!URLFOR($Resource.EscritorioDigital, 'css/EscritorioDigital.css')}" />        
+    <apex:includeScript value="{!URLFOR($Resource.EscritorioDigital, 'js/EscritorioDigital.js')}"/>   
+    
+    <script>
+       var rutaRecursosEstaticos = '{!URLFOR($Resource.EscritorioDigital)}';
+    
+    function crearSolicitud_2(IdRequerimiento, Persistencia, CasoId) {                    
+        if (Persistencia == -6) 
+        {   
+            alert('Ha ocurrido un error de Comunicación con Escritorio Digital, la Solicitud no ha sido generada.');   
+        } 
+        else if (Persistencia == -1) 
+        {
+            alert('Error de Auntenticacion en Escritorio Digital.');         
+        }
+            else if (Persistencia == 0)           
+            {
+                alert('Ha ocurrido un error, la Solicitud no ha sido generada en Escritorio Digital.');         
+            }
+                else
+                {       
+                    if (IdRequerimiento == -1)
+                    {
+                        alert('El RUT de Contratante utilizado en la Solicitud no se encuentra registrado en Escritorio Digital.');           
+                    }
+                    else if (IdRequerimiento == -2)
+                    {
+                        alert('El RUT de Contratante utilizado no posee beneficiarios asociados en Escritorio Digital que permitan satisfacer la solicitud realizada.');           
+                    }
+                        else
+                        {
+                            toView();
+                        }
+                }
+    }
+    </script>
+  
+    <apex:actionStatus id="Status">
+        <apex:facet name="start">
+            <apex:outputPanel >
+                <div class="popupBackground" />
+                <div class="popupPanel">
+                    &nbsp; Espere...<img src="/apexpages/devmode/img/saveStatus.gif" />
+                </div>
+            </apex:outputPanel> 
+        </apex:facet>
+    </apex:actionStatus>
+
+    <apex:form id="SolicitudForm">
+     
+      <apex:actionFunction action="{!toBack}" name="toBack"/>
+        <apex:actionFunction action="{!toView}" name="toView"/>
+        <apex:outputPanel > 
+           
+            <apex:sectionHeader title="Nueva Solicitud Escritorio Digital"/>              
+            <apex:pageblock id="Panel" rendered="true"> 	                 
+                <apex:panelGrid columns="3">
+			       &nbsp;
+                    <apex:outputLabel >RUT Titular:</apex:outputLabel>      
+                    <apex:outputLabel value="{!RUTTitular}"></apex:outputLabel>
+                    
+                    &nbsp;
+                    <apex:outputLabel >Nombre Titular:</apex:outputLabel>      
+                    <apex:outputLabel value="{!NombreTitular}"></apex:outputLabel>
+                    
+                    &nbsp;
+                    <apex:outputLabel >Detalle Solicitud:</apex:outputLabel>      
+                     <apex:selectList value="{!CodigoSolicitud}" size="1" id="solicitudes_values"  >                  
+                       <apex:actionsupport event="onchange" rerender="solicitantes_values"/>
+                        <apex:selectOptions value="{!ListaSolicitudes}"/>
+                    </apex:selectList>
+                    
+                     &nbsp;
+                    <apex:outputLabel >Solicitante:</apex:outputLabel>      
+                     <apex:selectList value="{!TipoRequerimiento}" size="1" id="solicitantes_values">
+                        <apex:actionSupport event="onchange" reRender="newvalue" />
+                        <apex:selectOptions value="{!ListaSolicitantes}"/>
+                    </apex:selectList>             
+                                    
+                 </apex:panelGrid>
+                <apex:panelGrid columns="2">
+                    
+                     <apex:commandButton action="{!crearSolicitud}" status="Status" value="Guardar" 
+                                         oncomplete="crearSolicitud_2('{!IdRequerimiento}','{!Persistencia}','{!CasoId}');"/>    
+                     <apex:commandButton action="{!cancelarSolicitud}" value="Cancelar"/>                       
+                    
+                </apex:panelGrid>
+                
+        	</apex:pageblock>
+          
+        </apex:outputPanel>
+        
+	 </apex:form>
+
+</apex:page>

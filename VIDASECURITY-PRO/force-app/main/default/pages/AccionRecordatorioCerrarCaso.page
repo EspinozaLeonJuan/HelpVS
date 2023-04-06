@@ -1,0 +1,27 @@
+<apex:page standardController="Case" showHeader="true">
+    
+    <apex:stylesheet value="{!URLFOR($Resource.EstilosSalesforce, 'salesforce-common.css')}" />
+    <apex:stylesheet value="{!URLFOR($Resource.EstilosSalesforce, 'salesforce-extended.css')}" />
+    
+    <div class="body">
+        <apex:pageBlock title="Cerrar Caso" >
+            <apex:pageBlockSection columns="1">
+                <div >
+                    Recuerde que para cerrar un caso es necesario realizar los siguientes pasos:
+                    <br/>
+                    <ul>
+                        <li>Modificar el caso</li>
+                        <li>Marcar con un ticket el campo <b>"Entrega Respuesta"</b></li>
+                        <li>Hacer clic en el botón <b>Guardar</b></li>
+                    </ul> 
+                    
+                    <br/>
+                    <button onclick="window.history.back();">Volver</button>    
+                </div>
+                
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        
+    </div>
+    
+</apex:page>

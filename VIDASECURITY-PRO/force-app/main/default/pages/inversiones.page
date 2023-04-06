@@ -1,0 +1,45 @@
+<apex:page standardController="Account" extensions="InversionesController">
+  <apex:sectionHeader title="Resumen de Productos CDS" subtitle="Resumen de Productos CDS"/>
+  <apex:form >
+    <apex:pageMessages />
+    <apex:pageBlock title="Resumen de Productos Vigentes">
+			<apex:pageBlockButtons >
+				<input type="button" value="Volver" onclick="javascript:history.back();" />
+			</apex:pageBlockButtons>
+			<apex:repeat value="{! resumenConsolidados }" var="titulo">
+				<apex:pageBlock title="{! titulo.fila.Col_1 }" rendered="{! titulo.tipo == 'T1' }">
+					<apex:repeat value="{! titulo.detalles }" var="subtitulo">
+						<apex:pageBlockSection title="{! subtitulo.fila.Col_2 }" rendered="{! subtitulo.tipo == 'T2' }" collapsible="false" columns="1">
+							<apex:repeat value="{! subtitulo.detalles }" var="subsubtitulo">
+								<apex:pageBlockSection title="{! subsubtitulo.fila.Col_3 }">
+									<apex:pageBlockTable value="{! subsubtitulo.detalles }" var="producto">
+										<apex:column headerValue="Numero Poliza" value="{! producto.fila.Col_4 }" />
+										<apex:column headerValue="Descripción" value="{! producto.fila.Col_5 }" />
+										<apex:column headerValue="Total" value="{! producto.fila.Col_6 }" />
+									</apex:pageBlockTable>
+								</apex:pageBlockSection>							
+							</apex:repeat>
+						</apex:pageBlockSection>
+						<apex:pageBlockSection collapsible="false" columns="1" rendered="{! subtitulo.tipo == 'S2' }">
+							<apex:pageBlockSectionItem >
+								<apex:outputLabel value="{! subtitulo.fila.Col_2 }" />
+								<apex:outputText value="{! subtitulo.total }" />
+							</apex:pageBlockSectionItem>
+						</apex:pageBlockSection>
+					</apex:repeat>
+				</apex:pageBlock>
+				<apex:pageBlockSection collapsible="false" columns="1" rendered="{! titulo.tipo == 'S1' }">
+					<apex:pageBlockSectionItem >
+						<apex:outputLabel value="{! titulo.fila.Col_1 }" />
+						<apex:outputText value="{! titulo.total }" />
+					</apex:pageBlockSectionItem>
+				</apex:pageBlockSection>
+				<apex:outputPanel rendered="{! titulo.tipo == 'S1' }">
+					<hr />
+					<br />
+					<br />
+				</apex:outputPanel>
+			</apex:repeat>
+  	</apex:pageBlock>
+	</apex:form>
+</apex:page>

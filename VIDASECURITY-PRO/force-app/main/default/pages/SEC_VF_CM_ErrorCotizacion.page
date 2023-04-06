@@ -1,0 +1,27 @@
+<apex:page id="pgCotizadorExpress" controller="CTR_CM_CotizadorExpress" action="{!ErrorCotizador}"  lightningStylesheets="true" sidebar="false" showHeader="true"  docType="HTML-5.0">
+    <apex:includeScript value="{!$Resource.jquery}"/>
+    <script type="text/javascript">    
+
+    function cargaInicial() 
+    { 
+        alert('{!MensajeError}');
+        window.close();
+    }
+
+    </script>
+          
+    <br/>
+    
+    <div id="dv_CuerpoPrincipal" style="width: 100%; margin-left: auto; margin-right: auto; height: 90%;">
+           
+        <apex:form id="frm_DatosContratante">
+            
+        
+
+        </apex:form>
+    </div>
+
+    <script>
+        cargaInicial();        
+    </script>
+</apex:page>

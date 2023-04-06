@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AutoResponseRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <autoResponseRule>
+        <fullName>Contacto Vida</fullName>
+        <active>false</active>
+    </autoResponseRule>
+    <autoResponseRule>
+        <fullName>Servicios BCI</fullName>
+        <active>false</active>
+        <ruleEntry>
+            <criteriaItems>
+                <field>Case.Origin</field>
+                <operation>equals</operation>
+                <value>Servicios BCI</value>
+            </criteriaItems>
+            <notifyCcRecipients>false</notifyCcRecipients>
+            <replyToEmail>serviciosbci@security.cl</replyToEmail>
+            <senderEmail>sfvida@security.cl</senderEmail>
+            <senderName>Servicios BCI</senderName>
+            <template>Plantillas_para_Email2Case/Creacion_de_Casos_Colectivos</template>
+        </ruleEntry>
+    </autoResponseRule>
+    <autoResponseRule>
+        <fullName>Servicios Colectivos</fullName>
+        <active>true</active>
+        <ruleEntry>
+            <criteriaItems>
+                <field>Case.Origin</field>
+                <operation>equals</operation>
+                <value>Servicios Colectivos</value>
+            </criteriaItems>
+            <notifyCcRecipients>false</notifyCcRecipients>
+            <replyToEmail>onclickservicioscolectivos@security.cl</replyToEmail>
+            <senderEmail>sfvida@security.cl</senderEmail>
+            <senderName>Servicios Colectivos</senderName>
+            <template>Plantillas_para_Email2Case/Creacion_de_Casos_Colectivos</template>
+        </ruleEntry>
+        <ruleEntry>
+            <criteriaItems>
+                <field>Case.Origin</field>
+                <operation>equals</operation>
+                <value>Servicios Telefónica</value>
+            </criteriaItems>
+            <notifyCcRecipients>false</notifyCcRecipients>
+            <replyToEmail>serviciostelefonica@security.cl</replyToEmail>
+            <senderEmail>sfvida@security.cl</senderEmail>
+            <senderName>Servicios Telefónica</senderName>
+            <template>Plantillas_para_Email2Case/Creacion_de_Casos_Colectivos</template>
+        </ruleEntry>
+        <ruleEntry>
+            <criteriaItems>
+                <field>Case.Origin</field>
+                <operation>equals</operation>
+                <value>Servicios BCI</value>
+            </criteriaItems>
+            <notifyCcRecipients>false</notifyCcRecipients>
+            <replyToEmail>serviciosbci@security.cl</replyToEmail>
+            <senderEmail>sfvida@security.cl</senderEmail>
+            <senderName>Servicios BCI</senderName>
+            <template>Plantillas_para_Email2Case/Creacion_de_Casos_Colectivos</template>
+        </ruleEntry>
+        <ruleEntry>
+            <criteriaItems>
+                <field>Case.Origin</field>
+                <operation>equals</operation>
+                <value>Servicios BHP</value>
+            </criteriaItems>
+            <notifyCcRecipients>false</notifyCcRecipients>
+            <senderEmail>sfvida@security.cl</senderEmail>
+            <senderName>Servicios BHP</senderName>
+            <template>Plantillas_para_Email2Case/Creacion_de_Casos_Colectivos</template>
+        </ruleEntry>
+        <ruleEntry>
+            <criteriaItems>
+                <field>Case.Origin</field>
+                <operation>equals</operation>
+                <value>Seguros Spence</value>
+            </criteriaItems>
+            <notifyCcRecipients>false</notifyCcRecipients>
+            <senderEmail>sfvida@security.cl</senderEmail>
+            <senderName>Seguros Spence</senderName>
+            <template>Plantillas_para_Email2Case/Creacion_de_Casos_Colectivos</template>
+        </ruleEntry>
+        <ruleEntry>
+            <criteriaItems>
+                <field>Case.Origin</field>
+                <operation>equals</operation>
+                <value>Seguros Cerro Colorado</value>
+            </criteriaItems>
+            <notifyCcRecipients>false</notifyCcRecipients>
+            <senderEmail>sfvida@security.cl</senderEmail>
+            <senderName>Seguros Cerro Colorado</senderName>
+            <template>Plantillas_para_Email2Case/Creacion_de_Casos_Colectivos</template>
+        </ruleEntry>
+        <ruleEntry>
+            <criteriaItems>
+                <field>Case.Origin</field>
+                <operation>equals</operation>
+                <value>Seguros Escondida</value>
+            </criteriaItems>
+            <notifyCcRecipients>false</notifyCcRecipients>
+            <senderEmail>sfvida@security.cl</senderEmail>
+            <senderName>Seguros Escondida</senderName>
+            <template>Plantillas_para_Email2Case/Creacion_de_Casos_Colectivos</template>
+        </ruleEntry>
+        <ruleEntry>
+            <criteriaItems>
+                <field>Case.Origin</field>
+                <operation>equals</operation>
+                <value>Seguros Metrogas</value>
+            </criteriaItems>
+            <notifyCcRecipients>false</notifyCcRecipients>
+            <senderEmail>sfvida@security.cl</senderEmail>
+            <senderName>Seguros Metrogas</senderName>
+            <template>Plantillas_para_Email2Case/Creacion_de_Casos_Colectivos</template>
+        </ruleEntry>
+        <ruleEntry>
+            <criteriaItems>
+                <field>Case.Origin</field>
+                <operation>equals</operation>
+                <value>Seguros Cono Sur</value>
+            </criteriaItems>
+            <notifyCcRecipients>false</notifyCcRecipients>
+            <senderEmail>sfvida@security.cl</senderEmail>
+            <senderName>Seguros Cono Sur</senderName>
+            <template>Plantillas_para_Email2Case/Creacion_de_Casos_Colectivos</template>
+        </ruleEntry>
+        <ruleEntry>
+            <criteriaItems>
+                <field>Case.Origin</field>
+                <operation>equals</operation>
+                <value>Medimel</value>
+            </criteriaItems>
+            <notifyCcRecipients>false</notifyCcRecipients>
+            <senderEmail>sfvida@security.cl</senderEmail>
+            <senderName>Medimel</senderName>
+            <template>Plantillas_para_Email2Case/Creacion_de_Casos_Colectivos</template>
+        </ruleEntry>
+        <ruleEntry>
+            <criteriaItems>
+                <field>Case.Origin</field>
+                <operation>equals</operation>
+                <value>CMPC</value>
+            </criteriaItems>
+            <notifyCcRecipients>false</notifyCcRecipients>
+            <senderEmail>sfvida@security.cl</senderEmail>
+            <senderName>CMPC</senderName>
+            <template>Plantillas_para_Email2Case/Creacion_de_Casos_Colectivos</template>
+        </ruleEntry>
+        <ruleEntry>
+            <criteriaItems>
+                <field>Case.Origin</field>
+                <operation>equals</operation>
+                <value>Asistencia Agente</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Subject</field>
+                <operation>notEqual</operation>
+                <value>Traspaso APV (IN) Rechazado,Solicitud de Traspaso APV (OUT) a otra Institución Autorizada,Solicitud de Rescate Total (OUT),Ingreso Traspaso APV (IN) a Caja Vida Security,Aviso: Cliente Solicita Clave WEB y/o Cartola</value>
+            </criteriaItems>
+            <notifyCcRecipients>false</notifyCcRecipients>
+            <replyToEmail>asistenciaagente@security.cl</replyToEmail>
+            <senderEmail>sfvida@security.cl</senderEmail>
+            <senderName>Asistencia Agente</senderName>
+            <template>Plantillas_para_Email2Case/Creacion_de_Casos_Asistencia_Agente</template>
+        </ruleEntry>
+    </autoResponseRule>
+    <autoResponseRule>
+        <fullName>Servicios Telefónica</fullName>
+        <active>false</active>
+        <ruleEntry>
+            <criteriaItems>
+                <field>Case.Origin</field>
+                <operation>equals</operation>
+                <value>Servicios Telefónica</value>
+            </criteriaItems>
+            <notifyCcRecipients>false</notifyCcRecipients>
+            <replyToEmail>serviciostelefonica@security.cl</replyToEmail>
+            <senderEmail>sfvida@security.cl</senderEmail>
+            <senderName>Servicios Telefónica</senderName>
+            <template>Plantillas_para_Email2Case/Creacion_de_Casos_Colectivos</template>
+        </ruleEntry>
+    </autoResponseRule>
+</AutoResponseRules>

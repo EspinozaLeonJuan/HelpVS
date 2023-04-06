@@ -1,0 +1,25 @@
+<apex:page standardController="Account" extensions="CreditoConsumoIdcController" lightningStylesheets="true"
+    showHeader="false" sidebar="false">
+    <!-- se usa apex:message pq pageMessage no funciona con Continuation: https://success.salesforce.com/ideaView?id=08730000000Dq8mAAC -->
+    <apex:messages style="font-weight: bold;"/>
+
+    <!-- <apex:outputPanel rendered="{! hasPolizaToCheckCredit && creditoConsumo.CreditAvailable  }"> -->
+        <apex:pageBlock >
+            <apex:pageBlockSection >
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Monto"></apex:outputLabel>
+                    <apex:outputText value="{!Monto_Maximo_Credito}"></apex:outputText>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Cuotas"></apex:outputLabel>
+                    <apex:outputText value="{!cuenta.Numero_Cuotas_Credito_RV__c}"></apex:outputText>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Valor Cuota"></apex:outputLabel>
+                    <apex:outputText value="{!Monto_Cuota_Credito}"></apex:outputText>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    <!-- </apex:outputPanel> -->
+
+</apex:page>

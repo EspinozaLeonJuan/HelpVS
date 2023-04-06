@@ -1,0 +1,11 @@
+<apex:component controller="AvisoBloqueoController" access="global">
+<apex:attribute required="true" name="_corredor" description="Corredor a Notificar" type="Corredor__c"  assignTo="{! corredor }" access="global"/>
+<div style="text-align: center; margin:0 auto">
+    <apex:dataTable value="{! filiales }" var="filial" border="1px" cellpadding="1px" width="100%" align="center">
+                <apex:column value="{!filial.Numero_Poliza__c}" headerValue="Póliza" style="text-align: center"/>
+                <apex:column value="{!filial.Rut_Filial__c}" headerValue="RUT Filial" style="width:20%; text-align: center"/>
+        <apex:column value="{!filial.Razon_Social__c}" headerValue="Razón Social" style="text-align: center"/>
+        <apex:column value="{! filial.Fecha_Bloqueo_de_Beneficios__c }" headerValue="Fecha Bloqueo" style="width:20%; text-align: center"/> 
+    </apex:dataTable>
+</div>
+</apex:component>

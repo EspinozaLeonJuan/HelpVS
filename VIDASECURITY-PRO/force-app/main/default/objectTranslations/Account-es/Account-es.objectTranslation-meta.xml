@@ -1,0 +1,812 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <layouts>
+        <layout>Cuenta Personal Cumplimiento</layout>
+        <layoutType>PersonAccount</layoutType>
+        <sections>
+            <label></label>
+            <section>Datos Comerciales</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Datos de Referencia</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Ejecutivo de Atención Vigente</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Eventualidades Relacionadas</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información Adicional</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Dirección</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Marcas</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Otros Datos Personales</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Valor Potencial</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Cuenta personal Calidad LGN</layout>
+        <layoutType>PersonAccount</layoutType>
+        <sections>
+            <label></label>
+            <section>Crédito Disponible</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Datos Comerciales</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Ejecutivo de Atención Vigente</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Dirección</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato Cuenta Corporativa Cumplimiento</layout>
+        <sections>
+            <label></label>
+            <section>Cuentas Relacionadas</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Ejecutivo Clientes</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Eventualidades Relacionadas</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Dirección</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Marcas</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato Cuenta empresa - Call Center</layout>
+        <sections>
+            <label></label>
+            <section>Información de Dirección</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Marcas</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Notificación de Cuenta</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato Cuenta empresa - Call Center LGN</layout>
+        <sections>
+            <label></label>
+            <section>Información de Dirección</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Marcas</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Notificación de Cuenta</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato consulta cuentas</layout>
+        <sections>
+            <label></label>
+            <section>Ejecutivo Clientes</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Eventualidades Relacionadas</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Dirección</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Marcas</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato cuenta personal consulta</layout>
+        <layoutType>PersonAccount</layoutType>
+        <sections>
+            <label></label>
+            <section>Datos Comerciales</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Datos de Referencia</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Ejecutivo de Atención Vigente</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Eventualidades Relacionadas</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información Adicional</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Dirección</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Marcas</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Otros Datos Personales</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Valor Potencial</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato cuentas Corporativa Comercial Colectivo</layout>
+        <sections>
+            <label></label>
+            <section>Ejecutivo Clientes</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información Cuenta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Dirección</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Cuenta Persona Links</layout>
+        <layoutType>PersonAccount</layoutType>
+        <sections>
+            <label></label>
+            <section>Datos Comerciales</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Datos de Referencia</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Ejecutivo de Atención Vigente</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Eventualidades Relacionadas</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información Adicional</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Dirección</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Marcas</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Otros Datos Personales</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Proyecto Links</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Valor Potencial</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de cuenta empresa GJ SAC</layout>
+        <sections>
+            <label></label>
+            <section>Información de Dirección</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Marcas</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Notificación de Cuenta</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de cuenta empresa SAC</layout>
+        <sections>
+            <label></label>
+            <section>Información de Dirección</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Marcas</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Notificación de Cuenta</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de cuenta empresa SAC LGN</layout>
+        <sections>
+            <label></label>
+            <section>Información de Dirección</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Marcas</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Notificación de Cuenta</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de cuenta empresa TotalPack</layout>
+        <sections>
+            <label></label>
+            <section>Información de Dirección</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Marcas</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Notificación de Cuenta</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de cuenta empresa TotalPack LGN</layout>
+        <sections>
+            <label></label>
+            <section>Información de Dirección</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Marcas</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Notificación de Cuenta</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de cuenta empresa UR Responsable</layout>
+        <sections>
+            <label></label>
+            <section>Información de Dirección</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Notificación de Cuenta</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de cuenta personal</layout>
+        <layoutType>PersonAccount</layoutType>
+        <sections>
+            <label></label>
+            <section>Datos Comerciales</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Datos de Referencia</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Ejecutivo de Atención Vigente</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Eventualidades Relacionadas</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información Adicional</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Dirección</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Marcas</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Otros Datos Personales</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Valor Potencial</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de cuenta personal Alto Patrimonio</layout>
+        <layoutType>PersonAccount</layoutType>
+        <sections>
+            <label></label>
+            <section>Notificación de Cuenta</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de cuenta personal Calidad</layout>
+        <layoutType>PersonAccount</layoutType>
+        <sections>
+            <label></label>
+            <section>Crédito Disponible</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Datos Comerciales</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Ejecutivo de Atención Vigente</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Dirección</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de cuenta personal Calidad LGN</layout>
+        <layoutType>PersonAccount</layoutType>
+        <sections>
+            <label></label>
+            <section>Crédito Disponible</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Datos Comerciales</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Ejecutivo de Atención Vigente</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Dirección</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de cuenta personal Call-Sucursal</layout>
+        <layoutType>PersonAccount</layoutType>
+        <sections>
+            <label></label>
+            <section>Marcas</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de cuenta personal Colectivo</layout>
+        <layoutType>PersonAccount</layoutType>
+        <sections>
+            <label></label>
+            <section>Ejecutivo Clientes</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Dirección</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de cuenta personal GJ SAC</layout>
+        <layoutType>PersonAccount</layoutType>
+        <sections>
+            <label></label>
+            <section>Información de Dirección</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de cuenta personal LGN</layout>
+        <layoutType>PersonAccount</layoutType>
+        <sections>
+            <label></label>
+            <section>Datos Comerciales</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Datos de Referencia</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Ejecutivo de Atención Vigente</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Eventualidades Relacionadas</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información Adicional</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Dirección</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Marcas</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Otros Datos Personales</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Valor Potencial</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de cuenta personal PV</layout>
+        <layoutType>PersonAccount</layoutType>
+        <sections>
+            <label></label>
+            <section>Datos Comerciales</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Datos Relacionales</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Datos de Referencia</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Ejecutivo de Atención Vigente</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Dirección</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Notificación de Cuenta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Valor Potencial</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de cuenta personal PV LGN</layout>
+        <layoutType>PersonAccount</layoutType>
+        <sections>
+            <label></label>
+            <section>Datos Comerciales</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Datos Relacionales</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Datos de Referencia</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Ejecutivo de Atención Vigente</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Dirección</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Notificación de Cuenta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Valor Potencial</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de cuenta personal Responsable UR</layout>
+        <layoutType>PersonAccount</layoutType>
+        <sections>
+            <label></label>
+            <section>Datos Comerciales</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Datos de Referencia</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Ejecutivo de Atención Vigente</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Eventualidades Relacionadas</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información Adicional</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Dirección</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Marcas</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Otros Datos Personales</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Valor Potencial</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de cuenta personal SAC</layout>
+        <layoutType>PersonAccount</layoutType>
+        <sections>
+            <label></label>
+            <section>Información de Dirección</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de cuenta personal SAC LGN</layout>
+        <layoutType>PersonAccount</layoutType>
+        <sections>
+            <label></label>
+            <section>Información de Dirección</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de cuenta personal Total Pack</layout>
+        <layoutType>PersonAccount</layoutType>
+        <sections>
+            <label></label>
+            <section>Información de Dirección</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de cuenta personal Total Pack LGN</layout>
+        <layoutType>PersonAccount</layoutType>
+        <sections>
+            <label></label>
+            <section>Información de Dirección</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de cuenta personal-Usuario UR</layout>
+        <layoutType>PersonAccount</layoutType>
+        <sections>
+            <label></label>
+            <section>Datos Comerciales</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Datos de Referencia</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Ejecutivo Clientes</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Eventualidades Relacionadas</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información Adicional</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Dirección</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Otros Datos Personales</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de cuentas</layout>
+        <sections>
+            <label></label>
+            <section>Cuentas Relacionadas</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Ejecutivo Clientes</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Eventualidades Relacionadas</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Dirección</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Marcas</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Valor Potencial</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de cuentas Corporativa Cobranza</layout>
+        <sections>
+            <label></label>
+            <section>Ejecutivo Clientes</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Dirección</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de cuentas Corporativa Colectivo</layout>
+        <sections>
+            <label></label>
+            <section>Ejecutivo Clientes</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información Cuenta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Dirección</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de cuentas Corporativa Colectivo LGN</layout>
+        <sections>
+            <label></label>
+            <section>Ejecutivo Clientes</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Dirección</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de cuentas LGN</layout>
+        <sections>
+            <label></label>
+            <section>Cuentas Relacionadas</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Ejecutivo Clientes</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Eventualidades Relacionadas</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Dirección</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Marcas</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Valor Potencial</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de cuentas empresa PV</layout>
+        <sections>
+            <label></label>
+            <section>Ejecutivo Clientes</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Eventualidades Relacionadas</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Dirección</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Marcas</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Notificación de Cuenta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Valor Potencial</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de cuentas-UsuarioUR</layout>
+        <sections>
+            <label></label>
+            <section>Ejecutivo Clientes</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Eventualidades Relacionadas</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Dirección</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Oncologico</layout>
+        <sections>
+            <label></label>
+            <section>Ejecutivo Clientes</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Eventualidades Relacionadas</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Dirección</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Marcas</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Prueba Cuenta Personal Total Pack</layout>
+        <sections>
+            <label></label>
+            <section>Información de Dirección</section>
+        </sections>
+    </layouts>
+    <quickActions>
+        <label></label>
+        <name>Nueva_Notificacion_de_Cuenta_Lightning</name>
+    </quickActions>
+    <workflowTasks>
+        <description></description>
+        <name>Recordatorio_Ejecutiva_Vida_Security</name>
+        <subject></subject>
+    </workflowTasks>
+</CustomObjectTranslation>

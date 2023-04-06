@@ -1,0 +1,29 @@
+<!--
+  @description       : 
+  @author            : Juan Espinoza León
+  @group             : 
+  @last modified on  : 05-28-2021
+  @last modified by  : Juan Espinoza León
+  Modifications Log 
+  Ver   Date         Author               Modification
+  1.0   03-02-2021   Juan Espinoza León   Initial Version
+-->
+<apex:page controller="CTR_CM_SendEmail" action="{!inicio}" lightningStylesheets="true" showHeader="true" sidebar="true"  docType="html-5.0" title="Envío de Correo Campaña" >
+  
+    <apex:includeScript value="{!$Resource.jquery}"/>
+    <!--<br/>-->
+    <script type="text/javascript">
+
+    if ('{!Call}' == "L")
+    {
+        window.open( "/flow/Envio_correo_presentacion_Salud_Protegida?Id_Lead={!Id}&Id_Campagna={!IdCmp}&retURL=/{!Id}", "_parent");
+    }
+    else if ('{!Call}' == "T")
+    {
+        window.open( "/flow/Envio_de_Nuevo_Correo_Seguro_Oncologico?Id_Tarea={!Id}&retURL=/{!Id}", "_parent");
+    }
+     
+    </script>
+<!-- Begin Default Content REMOVE THIS -->
+
+</apex:page>

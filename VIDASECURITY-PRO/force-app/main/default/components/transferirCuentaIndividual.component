@@ -1,0 +1,66 @@
+<apex:component controller="TransferirCuentaController" allowDML="true">
+<apex:sectionHeader title="Transferir Cuenta Individual" subtitle="Asignación Individual por Cuenta" />
+<apex:form >
+<apex:actionFunction name="seleccionar" action="{!seleccionar}" rerender="select,confirm">
+	<apex:param name="accountId" value="" />
+</apex:actionFunction>
+<apex:outputPanel id="inputs" layout="none">
+<apex:pageBlock title="Transferir Cuenta" mode="edit" rendered="{! (ISNULL(accounts) || accounts.size = 0) && ISNULL(account) && NOT(resultado) }">
+<apex:pageBlockButtons location="bottom">
+<apex:commandButton value="Asignar Cuenta" action="{! buscar }" rerender="inputs,select,confirm"/>
+</apex:pageBlockButtons>
+<apex:pageBlockSection columns="1">
+<apex:pageMessages />
+<apex:inputText value="{!rut}" label="Rut" />
+<apex:selectList value="{!transferirA}" multiselect="false" size="1" label="Transferir A" style="width:220px;">
+	<apex:selectOptions value="{!transferirAOptions}"/>
+</apex:selectList>
+</apex:pageBlockSection>
+</apex:pageBlock>
+</apex:outputPanel>
+<apex:outputPanel layout="none" id="select">
+<apex:pageBlock title="Selección de Cuenta a Transferir" mode="edit" rendered="{! !ISNULL(accounts) && accounts.size > 1 && NOT(resultado) }">
+<apex:pageBlockButtons location="bottom">
+<apex:commandButton value="Cancelar" action="{!cancelar}" />
+</apex:pageBlockButtons>
+<apex:pageBlockTable value="{!accounts}" var="a">
+<apex:column headerValue="Seleccionar">
+<apex:outputLink value="#1" onclick="javascript:seleccionar('{!a.Id}');">Seleccionar</apex:outputLink>
+</apex:column>
+<apex:column value="{!a.Rut_con_dv__c}" />
+<apex:column value="{!a.Name}" />
+<apex:column value="{!a.Owner.Name}" />
+<apex:column value="{!a.CreatedDate}" />
+</apex:pageBlockTable>
+</apex:pageBlock>
+</apex:outputPanel>
+<apex:outputPanel layout="none" id="confirm">
+<apex:pageBlock title="Advertencia" mode="edit" rendered="{! !ISNULL(account) && !ISNULL(transferirA) && NOT(resultado) }">
+<apex:pageBlockButtons location="bottom">
+<apex:commandButton value="Sí" action="{!transferir}" rerender="confirm,results" status="status"/>
+<apex:commandButton value="No" action="{! cancelar }" rerender="inputs,confirm"/>
+</apex:pageBlockButtons>
+<apex:pageBlockSection columns="1">
+<apex:pageMessages />
+<apex:outputLabel value="Se transferirá la cuenta {! account.Name } del ejecutivo {!account.Owner.Name} al ejecutivo {!ejecutivoA.Name}" />
+<apex:outputLabel value="¿Desea continuar con la operación?" />
+</apex:pageBlockSection>
+</apex:pageBlock>
+<apex:actionStatus id="status" stopText="">
+<apex:facet name="start">
+<blink>Transfiriendo Cuenta</blink>
+</apex:facet>
+</apex:actionStatus>
+</apex:outputPanel>
+<apex:outputPanel layout="none" id="results">
+<apex:pageBlock title="Resultados de Transferencia de Cuenta" rendered="{! resultado }">
+<apex:pageBlockButtons location="bottom">
+<apex:commandButton value="Aceptar" action="{!volverAForm }" rerender="inputs,results"/>
+</apex:pageBlockButtons>
+<apex:pageBlockSection columns="1">
+<apex:pageMessages />
+</apex:pageBlockSection>
+</apex:pageBlock>
+</apex:outputPanel>
+</apex:form>
+</apex:component>

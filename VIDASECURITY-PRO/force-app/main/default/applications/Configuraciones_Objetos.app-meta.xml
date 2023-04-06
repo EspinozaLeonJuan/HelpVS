@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <defaultLandingTab>standard-home</defaultLandingTab>
+    <formFactors>Large</formFactors>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
+    <label>Configuraciones Objetos</label>
+    <tabs>standard-Entitlement</tabs>
+    <tabs>Escritorio__c</tabs>
+    <tabs>Cola_Usuario__c</tabs>
+    <tabs>asignacion_UR__c</tabs>
+    <tabs>OBJ_Adjunto__c</tabs>
+    <tabs>OBJ_Requerimiento__c</tabs>
+    <tabs>REL_Requerimiento_Adjunto__c</tabs>
+    <tabs>OBJ_Parameter__c</tabs>
+    <tabs>OBJ_BandejaUR_Configuracion__c</tabs>
+    <tabs>Adjunto__c</tabs>
+    <tabs>Adjunto_Valuetech__c</tabs>
+    <tabs>Requerimiento_UR__c</tabs>
+</CustomApplication>

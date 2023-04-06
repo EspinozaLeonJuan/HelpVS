@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>49.0</apiVersion>
+    <description>Actualiza estado miembro de campaña asociado con la actividad</description>
+    <interviewLabel>Actualizacion estado MC {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Actualizacion estado MC</label>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>Actividad_relacionada</name>
+        <label>Actividad relacionada</label>
+        <locationX>283</locationX>
+        <locationY>53</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Actualizacion_estado</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>IdTarea</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Status</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>StatusTask</elementReference>
+            </value>
+        </filters>
+        <object>Task</object>
+        <outputAssignments>
+            <assignToReference>IdTareaCompletada</assignToReference>
+            <field>Id</field>
+        </outputAssignments>
+    </recordLookups>
+    <recordLookups>
+        <name>Miembro_de_la_campa_a</name>
+        <label>Miembro de la campaña</label>
+        <locationX>93</locationX>
+        <locationY>52</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Actividad_relacionada</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>IdMiembroCampana</elementReference>
+            </value>
+        </filters>
+        <object>CampaignMember</object>
+        <outputAssignments>
+            <assignToReference>IdTarea</assignToReference>
+            <field>MCAMP_ID_Tarea_Llamada_Venta_Prod_Onco__c</field>
+        </outputAssignments>
+    </recordLookups>
+    <recordUpdates>
+        <name>Actualizacion_estado</name>
+        <label>Actualizacion estado</label>
+        <locationX>467</locationX>
+        <locationY>52</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>MCAMP_ID_Tarea_Llamada_Venta_Prod_Onco__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>IdTareaCompletada</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <elementReference>StatusTask</elementReference>
+            </value>
+        </inputAssignments>
+        <object>CampaignMember</object>
+    </recordUpdates>
+    <startElementReference>Miembro_de_la_campa_a</startElementReference>
+    <status>Obsolete</status>
+    <variables>
+        <description>Estado el miembro de campaña</description>
+        <name>EstadoMC</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+    <variables>
+        <description>Estado de la tarea</description>
+        <name>EstadoTarea</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+    <variables>
+        <description>Almacena el id miembro campaña</description>
+        <name>IdMiembroCampana</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+    <variables>
+        <description>Actividad asociada al miembro de la campaña</description>
+        <name>IdTarea</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+    <variables>
+        <description>Id de tarea completada</description>
+        <name>IdTareaCompletada</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+    <variables>
+        <description>Estado de la tarea</description>
+        <name>StatusTask</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

@@ -1,0 +1,85 @@
+<aura:component implements="force:appHostable" controller="BaseConocimientosController">
+    <!-- Registrar Eventos -->
+    <aura:registerEvent name="cerrarModalCategoria" type="c:BaseConocimientoEvents" />
+    <aura:registerEvent name="eliminarCategoria" type="c:BaseConocimientoEvents" />
+    <!-- Registrar Eventos -->
+    <!-- Manejar Eventos -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:handler name="cerrarModalEliminarCategoria" event="c:BaseConocimientoEvents" action="{!c.cerrarModalEliminarCategoria}" />
+    <!-- Manejar Eventos -->
+    <!-- Atributos -->
+    <aura:attribute name="isCategoryEditable" type="boolean" default="false" />
+    <aura:attribute name="isCategoryCreatable" type="boolean" default="false" />
+    <aura:attribute name="isCategoryAccesible" type="boolean" default="false" />
+    <aura:attribute name="isCategoryDeleteable" type="boolean" default="false" />
+    <aura:attribute name="recordItem" type="Object" />
+    <aura:attribute name="itemId" type="String" />
+    <aura:attribute name="itemParentId" type="String" />
+    <aura:attribute name="display" type="String" default="display:none" />
+    <aura:attribute name="recordItemParent" type="Object" />
+    <aura:attribute name="items" type="Object" />
+    <aura:attribute name="itemSelected" type="Object" />
+    <aura:attribute name="recordError" type="String" />
+    <aura:attribute name="recordInfo" type="String" />
+    <aura:attribute name="recordMode" type="String" />
+    <aura:attribute name="operation" type="String" default="view" />
+    <aura:attribute name="titleModal" type="String" />
+    <aura:attribute name="titleTree" type="String" />
+    <aura:attribute name="mostrarSpinner" type="Boolean" default="false" />
+    <aura:attribute name="countRequest" type="Integer" default="0" />
+    <!-- Atributos -->
+    <div role="dialog" tabindex="-1" aria-labelledby="header99" class="slds-modal slds-fade-in-open" id="modal-content">
+        <div class="slds-modal__container">
+            <div class="slds-modal__header">
+                <button class="slds-button slds-modal__close slds-button--icon-inverse" title="Cerrar" onclick="{!c.cerrarModal}">X<span class="slds-assistive-text">Cerrar</span></button>
+                <h2 class="slds-text-heading--medium">{!v.titleModal}</h2>
+            </div>
+            <div class="slds-modal__content slds-p-around--medium">
+                <aura:if isTrue="{!not(empty(v.recordError))}">
+                    <div aura:id="text" style="{!v.display}">
+                        <ui:message title="Error" severity="error" closable="false"> {!v.recordError} </ui:message>
+                    </div>
+                </aura:if>
+                <aura:if isTrue="{!not(empty(v.recordInfo))}">
+                    <div aura:id="text" style="{!v.display}">
+                        <ui:message title="Información" severity="info" closable="false">{!v.recordInfo} </ui:message>
+                    </div>
+                </aura:if>
+                <p style="margin: 10px">
+                    <label> {! v.titleTree} </label>
+                    <lightning:tree items="{! v.items }" header="Categorías" onselect="{!c.handleSelect}" />
+                </p>
+                <p style="padding:10px">
+                    <aura:if isTrue="{! v.isCategoryCreatable }">
+                        <div onclick="{!c.newCategory}" class="iconsParentCategory" style="display: block">
+                            <lightning:icon iconName="action:new" title="Nueva Categoría" size="xx-small" />
+                        </div>
+                    </aura:if>
+                    <aura:if isTrue="{! or(v.recordMode=='edit', v.recordMode=='new')  }">
+                        <lightning:input aura:id="CategoryNameParent" id="{!v.recordItemParent.identificador}" name="CategoryNameParent" label="Nombre de la categoria Superior" value="{!v.recordItemParent.label}" disabled="true" style="display : inline-block; width: 85%" />
+                        <div onclick="{!c.editParentCategory}" class="iconsParentCategory" style="display: inline">
+                            <lightning:icon iconName="action:edit" title="Editar Categoría Superior" size="xx-small" />
+                        </div>
+                        <div onclick="{!c.deleteParentCategory}" class="iconsParentCategory" style="display: inline">
+                            <lightning:icon iconName="action:delete" title="Sin Categoría Superior" size="xx-small" />
+                        </div>
+                    </aura:if>
+                    <aura:if isTrue="{! or(v.recordMode=='edit', v.recordMode=='new')  }">
+                        <lightning:input aura:id="CategoryName" id="{!v.recordItem.identificador}" name="CategoryName" label="Nombre de la categoria" value="{!v.recordItem.label}" />
+                    </aura:if>
+                </p>
+                <div class="slds-modal__footer">
+                    <aura:if isTrue="{! and( or(v.recordItem.identificador != null, v.recordItem.identificador!=undefined), v.isCategoryDeleteable) }">
+                        <lightning:button name="delete" label="Eliminar" onclick="{!c.eliminarCategoria}" variant="destructive" class="slds-m-top--medium" />
+                    </aura:if>
+                    <lightning:button label="Cancelar" onclick="{!c.cerrarModal}" variant="neutral" class="slds-m-top--medium" />
+                    <aura:if isTrue="{! and( or(v.recordMode =='edit',v.recordMode =='new'), or(v.isCategoryCreatable, visCategoryEditable) ) }">
+                        <lightning:button label="Guardar" onclick="{!c.guardarCategoria}" variant="brand" class="slds-m-top--medium" />
+                    </aura:if>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="slds-backdrop slds-backdrop--open"></div>
+</aura:component>

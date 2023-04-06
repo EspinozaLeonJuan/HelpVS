@@ -1,0 +1,53 @@
+<apex:page controller="EscritorioDigital_Deriva_Controller"  action="{!CargaCaso}" sidebar="true" lightningStylesheets="true"  >
+  
+    <apex:form id="EscritorioDigital_Form">           
+    
+        <apex:actionFunction action="{!ToCase}" name="ToCase"/>        
+           
+        <apex:outputPanel > 
+            <apex:sectionHeader title="Escritorio Digital"/>  
+            <apex:pageblock id="VerRequerimiento"> 	    
+           
+                <apex:panelGrid columns="3"> 
+                    &nbsp;
+                    <apex:outputLabel >Número de Caso:</apex:outputLabel>      
+                    <apex:commandLink action="{!ToCase}"  value="{!NumeroCaso}" />    
+                                      
+			       &nbsp;
+                    <apex:outputLabel >RUT Titular:</apex:outputLabel>      
+                    <apex:outputLabel value="{!RUTTitular}"></apex:outputLabel>
+                    
+                    &nbsp;
+                    <apex:outputLabel >Nombre Titular:</apex:outputLabel>      
+                    <apex:outputLabel value="{!NombreTitular}"></apex:outputLabel>
+                    
+                    &nbsp;
+                    <apex:outputLabel >Poliza Titular:</apex:outputLabel>      
+                    <apex:outputLabel value="{!Poliza}" ></apex:outputLabel>
+                    
+                    
+                    &nbsp;
+                    <apex:outputLabel >Detalle Solicitud:</apex:outputLabel>     
+                    <apex:outputLabel value="{!Etiqueta}"></apex:outputLabel>
+                    
+                   
+                                
+                                    
+                 </apex:panelGrid>
+                 
+                <apex:panelGrid columns="2">
+                                  
+                     <apex:commandButton action="{!ToEscritorioDigital}" value="Crear Requerimiento" />    
+                    
+                    <apex:commandButton action="{!ToDerivar}"  value="Continuar Proceso Derivación" />
+                </apex:panelGrid>
+            </apex:pageblock>
+            
+           
+            
+           </apex:outputPanel>
+    </apex:form>
+           <apex:pageMessages id="showmsg" escape="true"></apex:pageMessages>
+    
+     
+</apex:page>

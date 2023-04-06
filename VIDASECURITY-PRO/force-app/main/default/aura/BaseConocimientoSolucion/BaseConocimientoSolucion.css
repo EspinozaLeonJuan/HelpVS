@@ -1,0 +1,26 @@
+.THIS {}
+
+.THIS h6,
+.THIS p {
+    margin-top: 20px;
+}
+
+.THIS h6 {
+    font-style: italic;
+    font-weight: bold;
+}
+
+.THIS .slds-p-horizontal--small.wrapper {
+    max-height: 100px;
+}
+
+.THIS p#titulo {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.THIS .wrapper {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}

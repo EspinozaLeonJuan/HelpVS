@@ -1,0 +1,17 @@
+<apex:page showHeader="true" sidebar="true" standardController="Case" extensions="CasoHibernacionControllerExtension">
+	<apex:sectionHeader title="Crear Hibernación" subtitle="Hibernar Caso" />
+	<apex:form >
+		<apex:pageBlock title="Crear Hibernación">
+			<apex:pageBlockButtons >
+				<apex:commandButton value="Guardar" action="{! hibernarCaso }" />
+				<apex:commandButton value="Cancelar" action="{! volverADetalleCaso }" />
+			</apex:pageBlockButtons>
+			<apex:pageMessages />
+			<apex:pageBlockSection columns="1" collapsible="false">
+				<apex:inputField value="{! caso.Dias_por_hibernar__c }" />
+				<apex:inputField value="{! caso.Area_comercial__c }" />
+				<apex:inputField value="{! caso.Aviso_informativo__c }" />
+			</apex:pageBlockSection>
+		</apex:pageBlock>
+	</apex:form>
+</apex:page>

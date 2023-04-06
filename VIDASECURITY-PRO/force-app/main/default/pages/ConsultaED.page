@@ -1,0 +1,17 @@
+<apex:page standardController="Solicitud__c"  extensions="ConsultaEDController"  >
+     <apex:includeScript value="{!URLFOR($Resource.EscritorioDigital, 'js/EscritorioDigital.js')}"/>   
+    <script>
+    
+       var rutaRecursosEstaticos = '{!URLFOR($Resource.EscritorioDigital)}';
+    
+       window.onload = function() {
+            verRequerimiento('{!Solicitud__c.IdRequerimiento__c}','{!Persistencia}','{!RutUsuario}');
+            toCaso();
+       };
+    
+    </script>
+    
+  <apex:form >
+      <apex:actionFunction action="{!toCaso}" name="toCaso"/>
+  </apex:form>
+</apex:page>

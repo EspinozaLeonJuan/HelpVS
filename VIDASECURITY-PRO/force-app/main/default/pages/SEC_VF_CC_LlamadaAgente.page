@@ -1,0 +1,228 @@
+<!--
+  @description       : 
+  @author            : Juan Espinoza Leon
+  @group             : 
+  @last modified on  : 12-20-2021
+  @last modified by  : Juan Espinoza León
+  Modifications Log 
+  Ver   Date         Author               Modification
+  1.0   10-06-2020   Juan Espinoza Leon   Initial Version
+-->
+<apex:page controller="CTR_CC_LlamadaAgente" action="{!cargaInformacionLlamada}" lightningStylesheets="true"
+ showHeader="false" sidebar="false"  docType="html-5.0"  >
+ <body onload = "moveTo (600,450); resizeTo (750,435);">
+    <style>              
+        .popupBackground {
+            /* Background color */
+            background-color:black;
+            opacity: 0.5;
+            filter: alpha(opacity = 50);
+            
+            /* Dimensions */
+            width: 100%;
+            height: 100%;       
+            top: 0;
+            left: 0;
+            z-index: 998;
+            position: absolute;        
+            /* Mouse */
+            cursor:wait;
+        }
+                    
+        .popupPanel {
+            /* Background color */
+            border: solid 2px orange;
+            background-color: white;        
+            /* Dimensions */
+            display: inline-block;
+            left: 50%;
+            width: 100px;
+            margin-left: 0px;
+            /*top: 100px;*/
+            height: 25px;
+            margin-top: -25px;
+            position: absolute;   
+            z-index: 999;        
+            /* Mouse */
+            cursor:pointer;
+        }
+        
+        .ct{
+        text-align:center;
+        }
+    
+        .btnDefault{
+            color:white !important;
+            background:#A2A4A5 !important;
+            margin-right: -8px;
+        }
+
+        .btnSuccess{
+            color:white !important;
+            background:#11862D !important;
+            margin-right: -8px;
+        }
+
+        .btnDanger{
+            color:white !important;
+            background:#E30C0C !important;
+            margin-right: -8px;
+        }
+
+        .btnReturn{
+            color:white !important;
+            background:rgb(105, 97, 214) !important;
+            margin-right: -8px;
+        }
+    </style>
+
+    <script type="text/javascript">
+    
+        function colorPageBlock(pageblock, bkcolor, color) {
+            if (pageblock != null) 
+            {
+                pageblock.firstChild.style.cssText = "background-color: " + bkcolor + ";font-weight:bold;color:"+color+";";
+            }
+        }
+
+        function Cancelar()
+        {             
+            window.top.close();
+        }
+    
+      
+        if ('{!Error}' != '')
+        {
+            if ('{!Procedencia}' == 'Account')
+            {
+                if ('{!Error}' == 'ACCOUNT_NOT_FOUND')
+                {
+                    alert('La Cuenta ingresada no ha sido encontrada.');
+                }            
+            }
+            else if ('{!Procedencia}' == 'Case')
+            {
+                if ('{!Error}' == 'ACCOUNT_NOT_FOUND')
+                {
+                    alert('La Cuenta ingresada no ha sido encontrada.');
+                }
+                else if ('{!Error}' == 'CASE_NOT_FOUND')
+                {
+                    alert('El Caso ingresado no ha sido encontrada.');
+                }
+                    else if ('{!Error}' == 'CALLBACK_ERROR')
+                    {
+                        alert('El Caso seleccionado no es un Caso que requiera llamado a Cliente.');
+                        
+                    }
+            }
+            else if ('{!Procedencia}' == 'Task')
+            {
+                if ('{!Error}' == 'TASK_NOT_ASSIGNED')
+                {
+                    alert('La Tarea ingresada no esta vinculada a un Prospecto o Cuenta.');
+                }
+                else if ('{!Error}' == 'TASK_NOT_FOUND')
+                {
+                    alert('La Tarea ingresada no ha sido encontrada.');
+                }
+            } 
+            window.top.close();
+        }
+
+        if ('{!Error}' == '' && '{!UsuarioHabilitado}' == 'false')
+        {
+            alert('Usuario no tiene Anexo ingresado, no puede realizar llamadas.');
+            window.top.close();
+        }
+    
+     	function evaluaErrorLlamada(mensaje)
+     	{
+        	if (mensaje != '')
+            {
+            	if (mensaje == 'NUMBER_ERROR_NINE')
+                {
+                    alert('El número ingresado debe comenzar por un 9 para realizar la llamada.');
+                }
+                else if (mensaje == 'NUMBER_IS_BLANK')
+                {
+                	alert('Debe ingresar un número para realizar la llamada.');
+                }
+                else if (mensaje == 'ANEXO_IS_BLANK')
+                {
+                	alert('Debe seleccionar un número de Anexo para realizar la llamada.');
+                }
+             }
+        }
+     
+    </script>
+   
+
+    <div id="dv_CuerpoPrincipal" style="width: 100%; margin-left: auto; margin-right: auto; height: 100%;">
+
+        <apex:form id="frm_sup">      
+          <!--  <apex:actionFunction name="clickNumber" action="{!clickTeclado}" status="Status"  reRender="PanelNumero,PanelSeleccion">
+                <apex:param name="number" value="" />
+            </apex:actionFunction>
+        -->
+            <apex:pageBlock >
+                <apex:pageBlockSection title="{!Title}" collapsible="false" columns="1" id="pbs_CallHeader" >      
+                    <apex:panelGrid columns="1">
+                        <apex:panelGroup >    
+                        <apex:outputLabel style="font-weight:bold;" >RUT</apex:outputLabel> 
+                        <apex:outputLabel style="font-weight:bold;font-size:14px;color:darkblue" value="{!RUT}" />         
+                    </apex:panelGroup>                      
+                        <apex:panelGroup >
+                        <apex:outputLabel style="font-weight:bold;" >Cliente</apex:outputLabel> 
+                        <apex:outputLabel style="font-weight:bold;font-size:14px;color:darkblue" value="{!Name}" />  
+                        </apex:panelGroup>
+                    </apex:panelGrid>
+            <script>colorPageBlock(document.getElementById("{!$Component.pbs_CallHeader}"), "#EF861C", "white");</script>
+                
+                </apex:pageBlockSection>
+<hr/>
+                <apex:pageBlockSection collapsible="false" columns="1"  >
+                    <apex:panelGrid columns="1" style="width:100%;"  id="PanelAnexo">
+                        <apex:outputLabel style="font-weight:bold;width:180px;font-weight:bold;font-size:16px;" >Anexo: </apex:outputLabel> 
+                    
+                                <apex:selectList id="cmd_Anexo" size="1" value="{!Anexo}" style="width:200px;height:23px;font-weight:bold;font-size:16px;"  >
+                                    <apex:selectOptions value="{!ListadoAnexos}" />
+                                 <!--   <apex:actionSupport event="onchange" action="{!seleccionNumero}" reRender="PanelNumero,PanelSeleccion" oncomplete="" status="Status" />-->
+                                </apex:selectList> 
+                    </apex:panelGrid>
+                    <apex:panelGrid columns="1" style="width:100%;" id="PanelNumero">
+                        <apex:outputLabel style="font-weight:bold;width:180px;font-weight:bold;font-size:16px;">Llamar a:</apex:outputLabel> 
+                        <apex:panelGroup >
+                            <apex:inputText id="TelefonoLlamada" value="{!NumeroLlamada}" style="font-weight:bold;font-size:16px;width:250px;height:23px;"  onkeypress="return event.charCode >= 48 && event.charCode <= 57"  maxlength="15"/>
+                            &nbsp;&nbsp;
+                            <apex:selectList id="cmd_Telefono" size="1" value="{!Telefono}" style="width:200px;height:23px;"  >
+                                <apex:selectOptions value="{!ListadoTelefonos}" />
+                                <apex:actionSupport event="onchange" action="{!seleccionNumero}" reRender="TelefonoLlamada" oncomplete="" status="Status" />
+                            </apex:selectList> 
+                        </apex:panelGroup>
+                    </apex:panelGrid>
+                    <apex:panelGrid columns="1" style="width:100%;" id="PanelBotones">
+                        <apex:panelGroup >
+                           <apex:commandButton id="btnLlamar" value="Llamar"  styleClass="btnSuccess"  style="width: 120px;height: 25px;" action="{!btnLlamar}" oncomplete="evaluaErrorLlamada('{!MensajeError}');" status="Status"/>
+                        <apex:commandButton id="btnLimpiar" value="Limpiar"  styleClass="btnDefault" style="width: 120px;height: 25px;" action="{!btnLimpiar}" />
+                        <apex:commandButton id="btnCancelar" value="Cancelar"  styleClass="btnDanger" style="width: 120px;height: 25px;" onclick="Cancelar();"/>
+                        </apex:panelGroup>
+                    </apex:panelGrid>
+                
+            </apex:pageBlockSection>
+
+            </apex:pageBlock>
+        </apex:form>
+        <apex:actionStatus id="Status">
+            <apex:facet name="start">
+                <apex:outputPanel >
+                    <div class="popupBackground" />
+               
+                </apex:outputPanel> 
+            </apex:facet>
+        </apex:actionStatus> 
+        </div>
+    
+    </body>
+
+</apex:page>

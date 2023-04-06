@@ -1,0 +1,323 @@
+<!--
+  @description       :
+  @author            : Juan Espinoza León
+  @group             :
+  @last modified on  : 12-08-2021
+  @last modified by  : Juan Espinoza León
+-->
+<apex:page controller="CTR_CS_EscritorioDigital" action="{!CargaCaso}" lightningStylesheets="true" showHeader="true" sidebar="false"  docType="html-5.0" >
+    <style>
+        .popupBackground {
+        /* Background color */
+        background-color:black;
+        opacity: 0.5;
+        filter: alpha(opacity = 50);
+
+        /* Dimensions */
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 50;
+        z-index: 998;
+        position: absolute;
+        /* Mouse */
+        cursor:wait;
+    }
+
+    .popupPanel {
+       /* Background color */
+        border: solid 2px orange;
+        background-color: white;
+        /* Dimensions */
+        display: inline-block;
+        left: 50%;
+        width: 100px;
+        margin-left: 0px;
+        top: 100px;
+        height: 25px;
+        margin-top: -25px;
+        position: absolute;
+        z-index: 999;
+        /* Mouse */
+        cursor:pointer;;
+    }
+            .ct{
+            text-align:center;
+            }
+
+            .header_inline_left
+            {
+                width:49.5%;
+                display:inline-block;
+                padding: 3px;
+                margin-bottom: 4px;
+            }
+
+            .header_inline_right
+            {
+                width:49.5%;
+                display:inline-block;
+                text-align:right;
+                padding: 3px;
+                margin-bottom: 4px;
+            }
+
+            .btnDefault{
+                color:white !important;
+                background:#A2A4A5 !important;
+                margin-right: -8px;
+            }
+
+            .btnSuccess{
+                color:white !important;
+                background:#11862D !important;
+                margin-right: -8px;
+            }
+
+            .btnDanger{
+                color:white !important;
+                background:#E30C0C !important;
+                margin-right: -8px;
+            }
+
+            .btnReturn{
+                color:white !important;
+                background:rgb(105, 97, 214) !important;
+                margin-right: -8px;
+            }
+
+            </style>
+             <apex:includeScript value="{!$Resource.jquery}"/>
+             <!--<br/>-->
+             <script type="text/javascript">
+                 function colorPageBlock(pageblock, bkcolor, color) {
+                     if (pageblock != null)
+                     {
+                         pageblock.firstChild.style.cssText = "background-color: " + bkcolor + ";font-weight:bold;color:"+color+";";
+                     }
+                 }
+
+                 function verRequerimiento(IdRequerimiento, Persistencia, Rut, IsNew) {
+
+                    if (IdRequerimiento > 0 && Persistencia > 0)
+                    {
+                            var performance   = 'height=768px,width=1366px, center=yes, scrollbars=yes';
+
+                            var url = "http://kta.vidasecurity.cl/TotalAgility/forms/vs-ed-dev/VS-ED-FormularioFirma.form?IDRequerimiento="+IdRequerimiento+"&Rut="+Rut+"&Persistencia="+Persistencia+"";
+                                var popUp = window.open(url, "_blank", performance);
+
+                                if (popUp == null || typeof(popUp)=='undefined') {
+                                    alert('Por favor deshabilita el bloqueador de ventanas emergentes y vuelve a hacer clic en "Detalle de Solicitud".');
+                                }
+                                else {
+                                    popUp.focus();
+                                }
+
+                                if (IsNew == true)
+                                {
+                                    window.opener.location.href='/{!Caso.Id}';
+                                }
+
+                                window.top.close();
+                    }
+                }
+
+                function RequerimientoEliminado() {
+                    alert('El Requerimiento número {!IdRequerimiento} ha sido eliminado.');
+                    window.opener.location.href='/{!Caso.Id}';
+                    window.top.close();
+                }
+
+                function ConfirmaEliminar() {
+
+                    var seleccion = confirm("Esta seguro de eliminar el Requerimiento número {!IdRequerimiento}?");
+
+                    if (seleccion  == false)
+                    {
+                        event.dispose();
+                    }
+                }
+            </script>
+
+<div id="dv_CuerpoPrincipal" style="width: 100%; margin-left: auto; margin-right: auto; height: 100%;">
+    <apex:actionStatus id="Status">
+  <apex:facet name="start">
+      <apex:outputPanel >
+          <div class="popupBackground" />
+          <div class="popupPanel">
+              &nbsp; Espere...<img src="/apexpages/devmode/img/saveStatus.gif" />
+          </div>
+      </apex:outputPanel>
+  </apex:facet>
+</apex:actionStatus>
+
+<br/>
+<apex:form id="frm_sup">
+          <div id="title">
+              &nbsp;
+          </div>
+
+          <apex:pageBlock id="pbk_Req_create" rendered="{!Operation == 'NEW'}">
+            <apex:pageBlockSection title="Crear Requerimiento Escritorio Digital" collapsible="false" columns="1" id="pbs_Req_create" >
+                <apex:panelGrid columns="4" style="width:100%;">
+                        <!--1-->
+                        <apex:outputLabel style="font-weight:bold;" >Nº Caso</apex:outputLabel>
+                        <apex:outputLabel style="font-weight:bold;font-size:14px;color:darkblue" value="{!Caso.CaseNumber}" />
+
+                        <apex:outputLabel style="font-weight:bold;" >Negocio</apex:outputLabel>
+                        <apex:outputField value="{!Caso.Negocio__c}" rendered="true" />
+
+                        <apex:outputLabel style="font-weight:bold;"  >Estado</apex:outputLabel>
+                        <apex:outputLabel value="{!Caso.Status}" style="font-weight:bold;color:red;text-transform: uppercase;font-size:14px;" rendered="true" />
+
+                        <!--2-->
+
+                        <apex:outputLabel style="font-weight:bold;" >RUT </apex:outputLabel>
+                        <apex:outputLabel value="{!Caso.RUT__c}" />
+
+                        <apex:outputLabel style="font-weight:bold;" >Nombre</apex:outputLabel>
+                        <apex:outputField value="{!Caso.Nombre_Completo_Razon_Social__c}"  />
+
+                        <apex:outputLabel style="font-weight:bold;"  >Nº de Poliza</apex:outputLabel>
+                        <apex:outputField value="{!Caso.CASO_N_Poliza__c}" rendered="{!Caso.CASO_N_Poliza__c != ''}" />
+                        <apex:outputLabel value="Póliza no seleccionada" rendered="{!Caso.CASO_N_Poliza__c == ''}" />
+
+                        <!--3-->
+
+                         <apex:outputLabel style="font-weight:bold;" >Categoría</apex:outputLabel>
+                         <apex:outputLabel style="font-weight:bold;" value="{!Caso.CASO_Categoria__c}"   />
+
+                         <apex:outputLabel style="font-weight:bold;" >Detalle Solicitud</apex:outputLabel>
+                         <apex:outputLabel value="{!Solicitud}"></apex:outputLabel>
+                         <apex:outputLabel style="font-weight:bold;" >Solicitante:</apex:outputLabel>
+                         <apex:selectList value="{!TipoRequerimientoED}" size="1" id="solicitantes_values">
+                            <apex:actionSupport event="onchange" reRender="newvalue" />
+                            <apex:selectOptions value="{!ListaSolicitantes}"/>
+                        </apex:selectList>
+                </apex:panelGrid>
+                <apex:panelGrid columns="1" style="text-align:right;">
+                    <apex:panelGroup >
+                    <apex:commandButton id="cmd_Guardar" title="Guardar" value="Crear Requerimiento"  action="{!crearRequerimiento}" status="Status"
+                    oncomplete="verRequerimiento('{!IdRequerimiento}','{!Persistencia}','{!RutUsuario}', true);" />
+
+                    <apex:commandButton id="cmd_Cancelar" title="Cancelar" value="Cancelar" onclick="window.close();"  />
+                    </apex:panelGroup>
+
+
+                </apex:panelGrid>
+                <script>colorPageBlock(document.getElementById("{!$Component.pbs_Req_create}"), "#EF861C", "white");</script>
+
+            </apex:pageBlockSection>
+          </apex:pageBlock>
+          <apex:pageBlock id="pbk_Req_view" rendered="{!Operation == 'VIEW'}">
+            <apex:pageBlockSection title="Ver Requerimiento Escritorio Digital" collapsible="false" columns="1" id="pbs_Req_view" >
+                <apex:panelGrid columns="4" style="width:100%;">
+                        <!--1-->
+
+                        <apex:outputLabel style="font-weight:bold;" >Nº Caso</apex:outputLabel>
+                        <apex:outputLabel style="font-weight:bold;font-size:14px;color:darkblue" value="{!Caso.CaseNumber}" />
+
+                        <apex:outputLabel style="font-weight:bold;" >Negocio</apex:outputLabel>
+                        <apex:outputField value="{!Caso.Negocio__c}" rendered="true" />
+
+                        <apex:outputLabel style="font-weight:bold;"  >Estado</apex:outputLabel>
+                        <apex:outputLabel value="{!Caso.Status}" style="font-weight:bold;color:red;text-transform: uppercase;font-size:14px;" rendered="true" />
+
+                        <!--2-->
+
+                        <apex:outputLabel style="font-weight:bold;" >RUT </apex:outputLabel>
+                        <apex:outputLabel value="{!Caso.RUT__c}" />
+
+                        <apex:outputLabel style="font-weight:bold;" >Nombre</apex:outputLabel>
+                        <apex:outputField value="{!Caso.Nombre_Completo_Razon_Social__c}"  />
+
+                        <apex:outputLabel style="font-weight:bold;"  >Nº de Poliza</apex:outputLabel>
+                        <apex:outputField value="{!Caso.CASO_N_Poliza__c}" rendered="{!Caso.CASO_N_Poliza__c != ''}" />
+                        <apex:outputLabel value="Póliza no seleccionada" rendered="{!Caso.CASO_N_Poliza__c == ''}" />
+
+                        <!--3-->
+
+                         <apex:outputLabel style="font-weight:bold;" >Categoría</apex:outputLabel>
+                         <apex:outputLabel style="font-weight:bold;" value="{!Caso.CASO_Categoria__c}"   />
+
+                         <apex:outputLabel style="font-weight:bold;" >Detalle Solicitud</apex:outputLabel>
+                         <apex:outputLabel value="{!Solicitud}"></apex:outputLabel>
+
+                         <apex:outputLabel style="font-weight:bold;" >Solicitante:</apex:outputLabel>
+                         <apex:outputLabel value="{!Solicitante}"></apex:outputLabel>
+
+                         <apex:outputLabel style="font-weight:bold;" >Nº Requerimiento:</apex:outputLabel>
+                         <apex:outputLabel value="{!IdRequerimiento}"></apex:outputLabel>
+
+                </apex:panelGrid>
+
+                <apex:panelGrid columns="1" style="text-align:right;">
+                    <apex:panelGroup >
+
+                        <apex:commandButton action="{!verRequerimiento}" status="Status" value="Ver Requerimiento"  id="cmd_Ver"
+                        oncomplete="verRequerimiento('{!IdRequerimiento}','{!Persistencia}','{!RutUsuario}', false);"/>
+
+                        <apex:commandButton status="Status" value="Eliminar Requerimiento"  id="cmd_Eliminar"
+                        onclick="ConfirmaEliminar();" action="{!eliminarRequerimiento}"   oncomplete="RequerimientoEliminado();"/>
+
+                        <!-- <apex:commandButton id="cmd_Cancelar_2" title="Cancelar" value="Volver a Caso" action="{!ToCase}"  /> -->
+
+                    </apex:panelGroup>
+                </apex:panelGrid>
+
+
+                <script>colorPageBlock(document.getElementById("{!$Component.pbs_Req_view}"), "#EF861C", "white");</script>
+
+            </apex:pageBlockSection>
+          </apex:pageBlock>
+          <apex:pageBlock id="pbk_Req_not_support" rendered="{!Operation == 'NOT_SUPPORT'}">
+            <apex:pageBlockSection title="Requerimiento Escritorio Digital no soportado" collapsible="false" columns="1" id="pbs_Req_not_support" >
+                <apex:panelGrid columns="4" style="width:100%;">
+                        <!--1-->
+
+                        <apex:outputLabel style="font-weight:bold;" >Nº Caso</apex:outputLabel>
+                        <apex:outputLabel style="font-weight:bold;font-size:14px;color:darkblue" value="{!Caso.CaseNumber}" />
+
+                        <apex:outputLabel style="font-weight:bold;" >Negocio</apex:outputLabel>
+                        <apex:outputField value="{!Caso.Negocio__c}" rendered="true" />
+
+                        <apex:outputLabel style="font-weight:bold;"  >Estado</apex:outputLabel>
+                        <apex:outputLabel value="{!Caso.Status}" style="font-weight:bold;color:red;text-transform: uppercase;font-size:14px;" rendered="true" />
+
+                        <!--2-->
+
+                        <apex:outputLabel style="font-weight:bold;" >RUT </apex:outputLabel>
+                        <apex:outputLabel value="{!Caso.RUT__c}" />
+
+                        <apex:outputLabel style="font-weight:bold;" >Nombre</apex:outputLabel>
+                        <apex:outputField value="{!Caso.Nombre_Completo_Razon_Social__c}"  />
+
+                        <apex:outputLabel style="font-weight:bold;"  >Nº de Poliza</apex:outputLabel>
+                        <apex:outputField value="{!Caso.CASO_N_Poliza__c}" rendered="{!Caso.CASO_N_Poliza__c != ''}" />
+                        <apex:outputLabel value="Póliza no seleccionada" rendered="{!Caso.CASO_N_Poliza__c == ''}" />
+
+                        <!--3-->
+
+                         <apex:outputLabel style="font-weight:bold;" >Categoría</apex:outputLabel>
+                         <apex:outputLabel style="font-weight:bold;" value="{!Caso.CASO_Categoria__c}"   />
+
+                         <apex:outputLabel style="font-weight:bold;" >Detalle Solicitud</apex:outputLabel>
+                         <apex:outputLabel value="{!Solicitud}"></apex:outputLabel>
+
+
+                         <!-- <apex:outputLabel style="font-weight:bold;" >Solicitante:</apex:outputLabel>
+                         <apex:outputLabel value="{!Solicitante}"></apex:outputLabel>
+
+                         <apex:outputLabel style="font-weight:bold;" >Nº Requerimiento:</apex:outputLabel>
+                         <apex:outputLabel value="{!IdRequerimiento}"></apex:outputLabel> -->
+
+                </apex:panelGrid>
+
+                <script>colorPageBlock(document.getElementById("{!$Component.pbs_Req_not_support}"), "#EF861C", "white");</script>
+
+            </apex:pageBlockSection>
+          </apex:pageBlock>
+
+</apex:form>
+</div>
+</apex:page>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <defaultLandingTab>standard-report</defaultLandingTab>
+    <description>Administración de integración Salesforce-Totalpack</description>
+    <formFactors>Large</formFactors>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
+    <label>Totalpack</label>
+    <logo>SharedDocuments/logo_Vida_Totalpack.gif</logo>
+    <tabs>Area__c</tabs>
+    <tabs>Sucursal__c</tabs>
+    <tabs>SucursalUsuario__c</tabs>
+    <tabs>standard-OtherUserProfile</tabs>
+    <tabs>TPSesion__c</tabs>
+    <tabs>TPAtencion__c</tabs>
+    <tabs>TPEvento__c</tabs>
+    <tabs>standard-report</tabs>
+    <tabs>standard-Case</tabs>
+    <tabs>asignacion_UR__c</tabs>
+    <tabs>Escritorio__c</tabs>
+</CustomApplication>

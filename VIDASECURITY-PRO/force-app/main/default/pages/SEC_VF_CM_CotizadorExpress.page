@@ -1,0 +1,2040 @@
+<!--
+  @description       :
+  @author            : Juan Espinoza León
+  @group             :
+  @last modified on  : 07-09-2021
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+  Modifications Log
+  Ver   Date         Author               Modification
+  1.0   02-23-2021   Juan Espinoza León   Initial Version
+-->
+<apex:page id="pgCotizadorExpress" controller="CTR_CM_CotizadorExpress" action="{!iniciaCotizadorExpress}" lightningStylesheets="true" sidebar="false" showHeader="true"  docType="HTML-5.0">
+
+    <apex:includeScript value="{!$Resource.jquery}"/>
+
+    <script type="text/javascript">
+
+        var rutaRecursosEstaticos = '{!URLFOR($Resource.CotizadorExpress)}';
+
+        function cargaInicial()
+        {
+            var Error = document.getElementById('pgCotizadorExpress:frm_DatosContratante:tht_ErrorInicio').value;
+
+            if (Error == 'false')
+            {
+                carga_datos_Grilla();
+                suma_Total_Primas();
+                ShowSpinner();
+            }
+            else
+            {
+                alert('Ha ocurrido un  error de comunicación con el Web Services, intente nuevamente.');
+                window.close();
+            }
+        }
+
+        function carga_datos_Grilla()
+        {
+            var Asegurados =JSON.parse('{!GrillaAsegurados}');
+
+            console.log("Asegurados.length "+Asegurados.length);
+
+            if (Asegurados.length > 0)
+            {
+                agrega_fila_Contratante(Asegurados[0]);
+            }
+
+            console.log("Asegurados[0].FechaNacimiento "+Asegurados[0].FechaNacimiento);
+            console.log("Asegurados[0].PrimaUF "+Asegurados[0].PrimaUF);
+            console.log("Asegurados[0].PrimaCLP "+Asegurados[0].PrimaCLP);
+
+            for(var i = 1; i <Asegurados.length; i++)
+            {
+                agrega_fila_Asegurado(Asegurados[i]);
+            }
+
+            if(document.getElementById('{!$Component.frm_DatosContratante.tht_TipoProducto}').value== '19'){
+                gpreguntas(Asegurados);
+
+                for(var i = 1; i <= Asegurados.length; i++)
+                {
+                    Verificar_Respuesta(i, Asegurados[i-1].Asegurable, Asegurados[i-1].Pregunta_1, Asegurados[i-1].Pregunta_2, Asegurados[i-1].Pregunta_3, Asegurados[i-1].Pregunta_4, Asegurados[i-1].Pregunta_5);
+                }
+            }
+        }
+
+        function agrega_fila_Contratante(Asegurado)
+        {
+            document.getElementById("dt_1_ASDE_FENACIMIENTO").value = Asegurado.FechaNacimiento;
+            if (Asegurado.Asegurable == 'SI')
+            {
+                document.getElementById("txt_1_ASDE_VALORUF").value = format(Asegurado.PrimaUF);
+                document.getElementById("txt_1_ASDE_VALORUF").style.background ='white';
+                document.getElementById("txt_1_ASDE_VALORCLP").value = format(Asegurado.PrimaCLP);
+                document.getElementById("txt_1_ASDE_VALORCLP").style.background ='white';
+                document.getElementById("lbl_1_ASDE_ASEGURABLE").value = "SI";
+                document.getElementById("lbl_1_IDSALESFORCE").value = Asegurado.IdSalesforce;
+                document.getElementById("tbl_datoscargas").rows[1].style.background ='white';
+                document.getElementById("lbl_1_ASDE_ASEGURABLE").style.fontWeight ='normal';
+                document.getElementById("lbl_1_ASDE_ASEGURABLE").style.color ='black';
+            }
+            else if (Asegurado.Asegurable == 'NO')
+            {
+                document.getElementById("lbl_1_ASDE_ASEGURABLE").value = "NO";
+                document.getElementById("tbl_datoscargas").rows[1].style.background = '#F3BDB5';
+                document.getElementById("txt_1_ASDE_VALORUF").value = 0;
+                document.getElementById("txt_1_ASDE_VALORUF").style.background = '#F3BDB5';
+                document.getElementById("txt_1_ASDE_VALORCLP").value = 0;
+                document.getElementById("lbl_1_IDSALESFORCE").value = Asegurado.IdSalesforce;
+                document.getElementById("txt_1_ASDE_VALORCLP").style.background = '#F3BDB5';
+                document.getElementById("lbl_1_ASDE_ASEGURABLE").style.fontWeight ='normal';
+                document.getElementById("lbl_1_ASDE_ASEGURABLE").style.color ='black';
+            }
+            else
+            {//er?
+                document.getElementById("lbl_1_ASDE_ASEGURABLE").value = "NO";
+                document.getElementById("lbl_1_ASDE_ASEGURABLE").value = "NO";
+                document.getElementById("tbl_datoscargas").rows[1].style.background = '#B5D2F3';
+                document.getElementById("txt_1_ASDE_VALORUF").value = 0;
+                document.getElementById("lbl_1_IDSALESFORCE").value = Asegurado.IdSalesforce;
+                document.getElementById("txt_1_ASDE_VALORUF").style.background = '#B5D2F3';
+                document.getElementById("txt_1_ASDE_VALORCLP").value = 0;
+                document.getElementById("txt_1_ASDE_VALORCLP").style.background = '#B5D2F3';
+                document.getElementById("lbl_1_ASDE_ASEGURABLE").style.fontWeight ='normal';
+            }
+
+            document.getElementById("cont").value =  1;
+        }
+
+        function agrega_fila_Asegurado(Asegurado)
+        {
+            ShowSpinner();
+            response_ValidacionUsuario_FechaNac = "";
+            valorCLP = "";
+            valorUF = "";
+
+            var TABLA_AseguradosDependientes = document.getElementById("tbl_datoscargas");
+            var cont = parseInt(TABLA_AseguradosDependientes.rows[TABLA_AseguradosDependientes.rows.length-2].id) + 1;
+
+            var FILA_AseguradoDependiente = TABLA_AseguradosDependientes.insertRow(TABLA_AseguradosDependientes.rows.length-1);
+            var Posicion_FILA = FILA_AseguradoDependiente.rowIndex;
+
+            FILA_AseguradoDependiente.id = cont;
+            console.log(FILA_AseguradoDependiente.id);
+
+            document.getElementById(FILA_AseguradoDependiente.id).style.borderBottom = '2px';
+            document.getElementById(FILA_AseguradoDependiente.id).style.borderBottomColor = 'darkorange';
+
+            var c_ACCION = FILA_AseguradoDependiente.insertCell(0); // Acción
+            var c_ITEM = FILA_AseguradoDependiente.insertCell(1); // N° Item
+            var c_FECHANACIMIENTO = FILA_AseguradoDependiente.insertCell(2); // Fecha Nacimiento
+            var c_PARENTESCO = FILA_AseguradoDependiente.insertCell(3); // Parentesco
+            var c_VALORUF = FILA_AseguradoDependiente.insertCell(4); // Valor Prima UF
+            var c_VALORCLP = FILA_AseguradoDependiente.insertCell(5); // Valor Prima CLP
+            var c_ASEGURABLE = FILA_AseguradoDependiente.insertCell(6); // Asegurable
+            var c_IDSALESFORCE = FILA_AseguradoDependiente.insertCell(7); // Id Salesforce
+            //c_ASEGURABLE.innerHTML = '<input type="text" id="lbl_' + cont + '_IDSALESFORCE" name="lbl_' + cont + '_IDSALESFORCE" value="" style="border:none;text-align: center;" />';
+
+            c_ACCION.innerHTML = '<img src="{!URLFOR($Resource.CotizadorExpress,"images/idelete.png")}" style="width:16px;heigth:16px;" id="bt_'+ cont +'" name="bt_'+ cont +'" value="'+Asegurado.IdSalesforce+'" onclick="eliminar_fila_Grilla_Asegurado(this.id)"/>'+
+            '<img src="{!URLFOR($Resource.CotizadorExpress,"images/refresh.png")}" style="width:16px;heigth:16px;display:none;" id="btr_'+ cont +'" name="btr_'+ cont +'" value="'+Asegurado.IdSalesforce+'" onclick="consulta_Asegurado(' + cont + ')"/>';
+
+            if (Asegurado.Asegurable == 'ER')
+            {
+                c_ACCION.innerHTML = '<img src="{!URLFOR($Resource.CotizadorExpress,"images/idelete.png")}" style="width:16px;heigth:16px;" id="bt_'+ cont +'" name="bt_'+ cont +'" value="'+Asegurado.IdSalesforce+'" onclick="eliminar_fila_Grilla_Asegurado(this.id)"/>'+
+                '<img src="{!URLFOR($Resource.CotizadorExpress,"images/refresh.png")}" style="width:16px;heigth:16px;display:inline;" id="btr_'+ cont +'" name="btr_'+ cont +'" value="'+Asegurado.IdSalesforce+'" onclick="consulta_Asegurado(' + cont + ')"/>';
+            }
+
+            c_ACCION.style = "text-align:center";
+
+            c_ITEM.innerHTML = cont;
+
+            idFechaNacimiento = "dt_" + cont + "_ASDE_FENACIMIENTO";
+            idParentesco = "sel_" + cont + "_ASDE_PARENTESCO";
+            idValorCLP = "txt_" + cont + "_ASDE_VALORCLP";
+            idValorUF = "txt_" + cont + "_ASDE_VALORUF";
+
+            c_FECHANACIMIENTO.innerHTML = '<input type="date" id="' + idFechaNacimiento + '" name="' + idFechaNacimiento + '" required="true" value="'+Asegurado.FechaNacimiento+'" onblur="consulta_Asegurado(' + cont + ')" style="width:170px;"/>';
+
+            var select_esposo = '<option value="0003">ESPOSO</option>';
+            var select_esposa = '<option value="0004">ESPOSA</option>';
+            var select_hijo =   '<option value="0005">HIJO</option>' ;
+            var select_hija =  '<option value="0006">HIJA</option>';
+            var select_conviviente_hombre = '<option value="0035">CONVIVIENTE CIVIL HOMBRE</option>';
+            var select_conviviente_mujer =  '<option value="0036">CONVIVIENTE CIVIL MUJER</option>';
+
+            if (Asegurado.Parentesco == '0003')
+            {
+                select_esposo = '<option value="0003" selected>ESPOSO</option>';
+            }
+            else if (Asegurado.Parentesco == '0004')
+            {
+                select_esposa = '<option value="0004" selected>ESPOSA</option>';
+            }
+            else if (Asegurado.Parentesco == '0005')
+            {
+                select_hijo =   '<option value="0005" selected>HIJO</option>' ;
+            }
+            else if (Asegurado.Parentesco == '0006')
+            {
+                select_hija =  '<option value="0006" selected>HIJA</option>';
+            }
+            else if (Asegurado.Parentesco == '0035')
+            {
+                select_conviviente_hombre = '<option value="0035" selected>CONVIVIENTE CIVIL HOMBRE</option>';
+            }
+            else if (Asegurado.Parentesco == '0036')
+            {
+                select_conviviente_mujer =  '<option value="0036" selected>CONVIVIENTE CIVIL MUJER</option>';
+            }
+
+            var style = 'background:white;color:black;'
+
+            var primaUF = 0;
+            var primaCLP = 0;
+
+            if (Asegurado.Asegurable == 'NO')
+            {
+                document.getElementById(cont).style.background = '#F3BDB5';
+                document.getElementById(cont).style.color ='black';
+                document.getElementById(cont).style.fontWeight ='normal';
+
+                style = 'background:#F3BDB5;color:black;'
+                c_ASEGURABLE.innerHTML = '<input type="text" readonly id="lbl_' + cont + '_ASDE_ASEGURABLE" name="lbl_' + cont + '_ASDE_ASEGURABLE" value="NO" style="border:none;text-align: center;'+style+'" />';
+            }
+            else if (Asegurado.Asegurable == 'SI')
+            {
+                document.getElementById(cont).style.background ='white';
+                document.getElementById(cont).style.color ='black';
+                document.getElementById(cont).style.fontWeight ='normal';
+                primaUF = Asegurado.PrimaUF;
+                primaCLP = Asegurado.PrimaCLP;
+                c_ASEGURABLE.innerHTML = '<input type="text" readonly id="lbl_' + cont + '_ASDE_ASEGURABLE" name="lbl_' + cont + '_ASDE_ASEGURABLE" value="SI" style="border:none;text-align: center;'+style+'" />';
+            }
+            else //error ER
+            {
+                document.getElementById(cont).style.background ='#B5D2F3';
+                document.getElementById(cont).style.color ='black';
+                document.getElementById(cont).style.fontWeight ='normal';
+                style = 'background:#B5D2F3;color:black;'
+                primaUF = Asegurado.PrimaUF;
+                primaCLP = Asegurado.PrimaCLP;
+                c_ASEGURABLE.innerHTML = '<input type="text" readonly id="lbl_' + cont + '_ASDE_ASEGURABLE" name="lbl_' + cont + '_ASDE_ASEGURABLE" value="ERWS" style="border:none;text-align: center;'+style+'" />';
+            }
+
+            c_PARENTESCO.innerHTML = '<select id="' + idParentesco + '" name="' + idParentesco + '" onchange="consulta_Asegurado(' + cont + ')" style="width:250px;'+style+'">' +
+                                        select_esposo +
+                                        select_esposa +
+                                        select_hijo +
+                                        select_hija +
+                                        select_conviviente_hombre +
+                                        select_conviviente_mujer +
+                                        '</select>';
+
+            c_VALORCLP.innerHTML = '<input type="text" id="' + idValorCLP + '"  name="' + idValorCLP + '" size="10" maxlength="20" value="'+format(primaCLP)+'"  readonly="true" style="border:none;text-align: right;'+style+'" />';
+            c_VALORUF.innerHTML = '<input type="text" id="' + idValorUF + '"  name="' + idValorUF + '" size="10" maxlength="20" value="'+format(primaUF)+'"  readonly="true" style="border:none;text-align: right;'+style+'" />';
+
+            c_IDSALESFORCE.innerHTML = '<input type="hidden" id="lbl_' + cont + '_IDSALESFORCE" name="lbl_' + cont + '_IDSALESFORCE" value="'+Asegurado.IdSalesforce+'" style="border:none;text-align: center;'+style+'" />';
+
+            document.getElementById("cont").value = cont;
+        }
+
+        function agrega_nueva_fila_Grilla_Asegurado() //invocado por boton 'Agregar Asegurado'
+        {
+            ShowSpinner();
+
+            var TABLA_AseguradosDependientes = document.getElementById("tbl_datoscargas");
+            var cont = parseInt(document.getElementById("cont").value) + 1;
+            //parseInt(TABLA_AseguradosDependientes.rows[TABLA_AseguradosDependientes.rows.length-2].id) + 1;
+
+            var FILA_AseguradoDependiente = TABLA_AseguradosDependientes.insertRow(TABLA_AseguradosDependientes.rows.length-1);
+            var Posicion_FILA = FILA_AseguradoDependiente.rowIndex;
+
+            FILA_AseguradoDependiente.id = cont;
+            console.log(FILA_AseguradoDependiente.id);
+
+            document.getElementById(FILA_AseguradoDependiente.id).style.borderBottom = '2px';
+            document.getElementById(FILA_AseguradoDependiente.id).style.borderBottomColor = 'darkorange';
+
+            var c_ACCION = FILA_AseguradoDependiente.insertCell(0); // Acción
+            var c_ITEM = FILA_AseguradoDependiente.insertCell(1); // N° Item
+            var c_FECHANACIMIENTO = FILA_AseguradoDependiente.insertCell(2); // Fecha Nacimiento
+            var c_PARENTESCO = FILA_AseguradoDependiente.insertCell(3); // Parentesco
+            var c_VALORUF = FILA_AseguradoDependiente.insertCell(4); // Valor Prima UF
+            var c_VALORCLP = FILA_AseguradoDependiente.insertCell(5); // Valor Prima CLP
+            var c_ASEGURABLE = FILA_AseguradoDependiente.insertCell(6); // Asegurable
+            var c_IDSALESFORCE = FILA_AseguradoDependiente.insertCell(7); // Id Salesforce
+
+            c_ACCION.innerHTML = '<img src="{!URLFOR($Resource.CotizadorExpress,"images/idelete.png")}" style="width:16px;heigth:16px;" id="bt_'+ cont +'" name="bt_'+ cont +'" value="X" onclick="eliminar_fila_Grilla_Asegurado(this.id)"/>'+
+            '<img src="{!URLFOR($Resource.CotizadorExpress,"images/refresh.png")}" style="width:16px;heigth:16px;display:none;" id="btr_'+ cont +'" name="btr_'+ cont +'" value="X" onclick="consulta_Asegurado(' + cont + ')"/>';
+
+            c_ACCION.style = "text-align:center";
+            c_ITEM.innerHTML = cont;
+
+            idFechaNacimiento = "dt_" + cont + "_ASDE_FENACIMIENTO";
+            idParentesco = "sel_" + cont + "_ASDE_PARENTESCO";
+            idValorCLP = "txt_" + cont + "_ASDE_VALORCLP";
+            idValorUF = "txt_" + cont + "_ASDE_VALORUF";
+
+            c_FECHANACIMIENTO.innerHTML = '<input type="date" id="' + idFechaNacimiento + '" name="' + idFechaNacimiento + '" required="true" onblur="consulta_Asegurado(' + cont + ')" style="width:170px;"/>';
+            c_PARENTESCO.innerHTML = '<select id="' + idParentesco + '" name="' + idParentesco + '" onchange="consulta_Asegurado(' + cont + ')" style="width:250px;">' +
+                                        '<option value="0000">--Seleccione--</option>' +
+                                        '<option value="0003">ESPOSO</option>' +
+                                        '<option value="0004">ESPOSA</option>' +
+                                        '<option value="0005">HIJO</option>' +
+                                        '<option value="0006">HIJA</option>' +
+                                        '<option value="0035">CONVIVIENTE CIVIL HOMBRE</option>' +
+                                        '<option value="0036">CONVIVIENTE CIVIL MUJER</option>' +
+                                        '</select>';
+            c_VALORCLP.innerHTML = '<input type="text" id="' + idValorCLP + '"  name="' + idValorCLP + '" size="10" maxlength="20" value="0"  readonly="true" style="border:none;text-align: right;" />';
+            c_VALORUF.innerHTML = '<input type="text" id="' + idValorUF + '"  name="' + idValorUF + '" size="10" maxlength="20" value="0"  readonly="true" style="border:none;text-align: right;" />';
+            c_ASEGURABLE.innerHTML = '<input type="text" readonly id="lbl_' + cont + '_ASDE_ASEGURABLE" name="lbl_' + cont + '_ASDE_ASEGURABLE" value="" style="border:none;text-align: center;" />';
+            c_IDSALESFORCE.innerHTML = '<input type="hidden" id="lbl_' + cont + '_IDSALESFORCE" name="lbl_' + cont + '_IDSALESFORCE" value="X" style="border:none;text-align: center;" />';
+
+            document.getElementById("cont").value = cont;
+        }
+
+        //invocado desde boton Eliminar (grilla)
+        function eliminar_fila_Grilla_Asegurado(IDbotonEliminar)
+        {
+            ShowSpinner();
+
+            var cont = parseInt(document.getElementById("cont").value);
+            var IDfila = parseInt(IDbotonEliminar.substring(3,IDbotonEliminar.length));
+            console.log("IDfila "+IDfila);
+
+            idSf = "lbl_"+IDfila+"_IDSALESFORCE";
+
+            Id_Salesforce = document.getElementById(idSf).value;
+
+            var POS_fila = 0;
+            var TABLA_AseguradosDependientes = document.getElementById("tbl_datoscargas");
+
+            for(var i = 1; i<TABLA_AseguradosDependientes.rows.length - 1; i++)
+            {
+                var FILA_AseguradoDependiente = TABLA_AseguradosDependientes.rows[i];
+                if(FILA_AseguradoDependiente.id == IDfila){
+                    POS_fila = FILA_AseguradoDependiente.rowIndex;
+                    console.log(POS_fila);
+                }
+            }
+
+            console.log("IdSalesforce "+Id_Salesforce);
+            if (Id_Salesforce != 'X')
+            {
+                EliminaAsegurado(Id_Salesforce);
+            }
+
+            document.getElementById("idaborrar").value = POS_fila;
+            document.getElementById("tbl_datoscargas").deleteRow(POS_fila);
+            document.getElementById("cont").value = cont - 1;
+            var nMaxIndex = TABLA_AseguradosDependientes.rows.length - 2;
+
+            actualiza_Items_Grilla();
+        }
+
+        function actualiza_Items_Grilla()
+        {
+            var TABLA_AseguradosDependientes = document.getElementById("tbl_datoscargas");
+            for(var i = 1; i < TABLA_AseguradosDependientes.rows.length-1; i++)
+            {
+                var FILA_AseguradoDependiente = TABLA_AseguradosDependientes.rows[i];
+                console.log("FILA / CELDA => " + FILA_AseguradoDependiente.cells[1]);
+                FILA_AseguradoDependiente.cells[1].innerHTML = i;
+            }
+        }
+
+        // Función para sumar valores de primas mensuales de asegurados y totalizar...
+        function suma_Total_Primas()
+        {
+            var TABLA_AseguradosDependientes = document.getElementById("tbl_datoscargas");
+            var valorUF = 0;
+            var valorCLP = 0;
+
+            for(var i = 1; i < TABLA_AseguradosDependientes.rows.length - 1; i++)
+            {
+                nIndexTable = TABLA_AseguradosDependientes.rows[i].id;
+                idValorUF = "txt_" + nIndexTable + "_ASDE_VALORUF";
+                idValorCLP = "txt_" + nIndexTable + "_ASDE_VALORCLP";
+                valorUF = valorUF + parseFloat( unFormat(document.getElementById(idValorUF).value) );
+                valorCLP = valorCLP + parseFloat( unFormat(document.getElementById(idValorCLP).value));
+            }
+
+            console.log("TOTAL UF => " + valorCLP);
+            console.log("TOTAL CLP => " + valorUF);
+
+            document.getElementById("txt_TotalUF").value = format(valorUF.toFixed(4));
+            document.getElementById("txt_TotalCLP").value = format(valorCLP.toFixed());
+            document.getElementById('{!$Component.frm_DatosContratante.tht_TOTALCLP}').value=valorCLP;
+            document.getElementById('{!$Component.frm_DatosContratante.tht_TOTALUF}').value=valorUF;
+        }
+
+        function consulta_Asegurado(nIndex)
+        {
+            if (nIndex != "NULL")
+            {
+                document.getElementById("AseguradoId").value = nIndex;
+            }
+
+            idFechaNacimiento = "dt_" + document.getElementById("AseguradoId").value + "_ASDE_FENACIMIENTO";
+            idParentesco = "sel_" + document.getElementById("AseguradoId").value + "_ASDE_PARENTESCO";
+            idValorCLP = "txt_" + document.getElementById("AseguradoId").value + "_ASDE_VALORCLP";
+            idValorUF = "txt_" + document.getElementById("AseguradoId").value + "_ASDE_VALORUF";
+            idAsegurable = "lbl_" + document.getElementById("AseguradoId").value + "_ASDE_ASEGURABLE";
+            valorFechaNacimiento = document.getElementById(idFechaNacimiento).value;
+            valorParentesco = document.getElementById(idParentesco).value;
+            lbl_id_salesforce = "lbl_" + document.getElementById("AseguradoId").value + "_IDSALESFORCE";
+            Id_Salesforce = document.getElementById(lbl_id_salesforce).value;
+
+            console.log("valorParentesco --> "+ valorParentesco);
+            console.log("valorFechaNacimiento --> "+ valorFechaNacimiento);
+
+            arrFecha = valorFechaNacimiento.split("-");
+
+            console.log("arrFecha --> "+ arrFecha);
+
+            console.log("valorParentesco --> "+ valorParentesco);
+            console.log("valorFechaNacimiento --> "+ valorFechaNacimiento);
+
+            arrFecha = valorFechaNacimiento.split("-");
+
+            console.log("arrFecha --> "+ arrFecha);
+
+            if (arrFecha.length == 3 && valorParentesco != '0000' )
+            {
+                valorFechaNacimiento =  arrFecha[0] + arrFecha[1] + arrFecha[2];
+                var FechaNacimiento =  arrFecha[2]+'-'+arrFecha[1] +'-'+arrFecha[0];
+                console.log("valorParentesco --> "+ valorParentesco);
+                console.log("valorFechaNacimiento --> "+ valorFechaNacimiento);
+
+                ConsultaAsegurado(document.getElementById("AseguradoId").value, Id_Salesforce, valorParentesco, FechaNacimiento, valorFechaNacimiento);
+                ShowSpinner();
+            }
+        }
+
+        var process_Consulta = function(isValidDate, valueCLP, valueUF, ListaAsegurados, IdSalesforce){
+            ShowSpinner();
+            if (isValidDate == 'S')
+            {
+                actualiza_es_Asegurable(valueUF,valueCLP, IdSalesforce);
+            }
+            else if (isValidDate == 'N')
+            {
+                actualizaNoEsAsegurable(IdSalesforce);
+            }
+            else if (isValidDate == '')
+            {
+                actualizaErrorWS(IdSalesforce);
+            }
+
+            suma_Total_Primas();
+
+            if(document.getElementById('{!$Component.frm_DatosContratante.tht_TipoProducto}').value== '19'){
+                var Asegurados =JSON.parse(ListaAsegurados);
+                gpreguntas(Asegurados);
+            }
+
+            ConsultaFechaCambio();
+        };
+
+        var process_Eliminar = function(ListaAsegurados){
+            ShowSpinner();
+            if(document.getElementById('{!$Component.frm_DatosContratante.tht_TipoProducto}').value== '19'){
+                console.log('lista   '+ListaAsegurados);
+                var Asegurados =JSON.parse(ListaAsegurados);
+                gpreguntas(Asegurados);
+            }
+            suma_Total_Primas();
+            ConsultaFechaCambio();
+        };
+
+        var process_Respuesta = function(ListaAsegurados, respuesta, wsvalorUF, wsvalorCLP, id){
+            ShowSpinner();
+
+            if(document.getElementById('{!$Component.frm_DatosContratante.tht_TipoProducto}').value== '19'){
+                var Asegurados =JSON.parse(ListaAsegurados);
+                gpreguntas(Asegurados);
+                for(var i = 1; i <= Asegurados.length; i++)
+                {
+                    Verificar_Respuesta(i, Asegurados[i-1].Asegurable, Asegurados[i-1].Pregunta_1, Asegurados[i-1].Pregunta_2, Asegurados[i-1].Pregunta_3, Asegurados[i-1].Pregunta_4, Asegurados[i-1].Pregunta_5);
+                }
+            }
+
+            if (respuesta == 'SI')
+            {
+                actualiza_es_Asegurable(wsvalorUF, wsvalorCLP, id);
+                ConsultaFechaCambio();
+            }
+            else
+            {
+                actualizaNoEsAsegurable(id);
+                ConsultaFechaCambio();
+            }
+
+            suma_Total_Primas();
+
+        };
+
+        function actualiza_es_Asegurable(valorUF, valorCLP, idSalesforce)
+        {
+            idAsegurable = "lbl_" + document.getElementById("AseguradoId").value + "_ASDE_ASEGURABLE";
+            idValorCLP = "txt_" + document.getElementById("AseguradoId").value + "_ASDE_VALORCLP";
+            idValorUF = "txt_" + document.getElementById("AseguradoId").value + "_ASDE_VALORUF";
+            idFechaNacimiento = "dt_" + document.getElementById("AseguradoId").value + "_ASDE_FENACIMIENTO";
+            idParentesco = "sel_" + document.getElementById("AseguradoId").value + "_ASDE_PARENTESCO";
+            idSf =  "lbl_" + document.getElementById("AseguradoId").value + "_IDSALESFORCE";
+            idBtn = 'btr_' + document.getElementById("AseguradoId").value;
+
+            document.getElementById(idAsegurable).value = "SI";
+            document.getElementById(idValorUF).value = format(valorUF);
+            document.getElementById(idValorCLP).value = format(valorCLP);
+            document.getElementById(idSf).value = idSalesforce;
+
+            document.getElementById("tbl_datoscargas").rows[document.getElementById("AseguradoId").value].style.background ='white';
+            //document.getElementById(idFechaNacimiento).style.background ='white';
+            document.getElementById(idValorCLP).style.background ='white';
+            document.getElementById(idValorUF).style.background ='white';
+            document.getElementById(idParentesco).style.background ='white';
+            document.getElementById(idAsegurable).style.background ='white';
+            document.getElementById(idAsegurable).style.color ='black';
+            document.getElementById(idAsegurable).style.fontWeight ='normal';
+
+            if (idBtn != 'btr_1')
+            {
+                document.getElementById(idBtn).style.display ='none';
+            }
+
+            if (esContratante(document.getElementById("AseguradoId").value))
+            {
+                //habilita_BotonPreDigita(false);
+            }
+        }
+
+        function actualizaNoEsAsegurable(idSalesforce)
+        {
+            idAsegurable = "lbl_" + document.getElementById("AseguradoId").value + "_ASDE_ASEGURABLE";
+            idValorCLP = "txt_" + document.getElementById("AseguradoId").value + "_ASDE_VALORCLP";
+            idValorUF = "txt_" + document.getElementById("AseguradoId").value + "_ASDE_VALORUF";
+            idFechaNacimiento = "dt_" + document.getElementById("AseguradoId").value + "_ASDE_FENACIMIENTO";
+            idParentesco = "sel_" + document.getElementById("AseguradoId").value + "_ASDE_PARENTESCO";
+            idSf =  "lbl_" + document.getElementById("AseguradoId").value + "_IDSALESFORCE";
+            idBtn = 'btr_' + document.getElementById("AseguradoId").value;
+
+            document.getElementById(idAsegurable).value = "NO";
+            document.getElementById("tbl_datoscargas").rows[document.getElementById("AseguradoId").value].style.background ='#F3BDB5';
+            document.getElementById(idValorUF).value = 0;
+            document.getElementById(idValorCLP).value = 0;
+            document.getElementById(idSf).value = idSalesforce;
+
+            //document.getElementById(idFechaNacimiento).style.background ='#F3BDB5';
+            document.getElementById(idValorCLP).style.background ='#F3BDB5';
+            document.getElementById(idValorUF).style.background ='#F3BDB5';
+            document.getElementById(idParentesco).style.background ='#F3BDB5';
+            document.getElementById(idAsegurable).style.background ='#F3BDB5';
+            document.getElementById(idAsegurable).style.color ='black';
+            document.getElementById(idAsegurable).style.fontWeight ='normal';
+
+            if (idBtn != 'btr_1')
+            {
+                document.getElementById(idBtn).style.display ='none';
+            }
+
+            if ( esContratante( parseInt(document.getElementById("AseguradoId").value)) )
+            {
+                // habilita_BotonPreDigita(true);
+            }
+        }
+
+        function actualizaErrorWS(idSalesforce)
+        {
+            idAsegurable = "lbl_" + document.getElementById("AseguradoId").value + "_ASDE_ASEGURABLE";
+            idValorCLP = "txt_" + document.getElementById("AseguradoId").value + "_ASDE_VALORCLP";
+            idValorUF = "txt_" + document.getElementById("AseguradoId").value + "_ASDE_VALORUF";
+            idFechaNacimiento = "dt_" + document.getElementById("AseguradoId").value + "_ASDE_FENACIMIENTO";
+            idParentesco = "sel_" + document.getElementById("AseguradoId").value + "_ASDE_PARENTESCO";
+            idSf =  "lbl_" + document.getElementById("AseguradoId").value + "_IDSALESFORCE";
+            idBtn = 'btr_' + document.getElementById("AseguradoId").value;
+
+            document.getElementById(idAsegurable).value = "ERWS";
+            document.getElementById("tbl_datoscargas").rows[document.getElementById("AseguradoId").value].style.background ='#B5D2F3';
+            document.getElementById(idValorUF).value = 0;
+            document.getElementById(idValorCLP).value = 0;
+            document.getElementById(idSf).value = idSalesforce;
+             document.getElementById(idValorCLP).style.background ='#B5D2F3';
+            document.getElementById(idValorUF).style.background ='#B5D2F3';
+            document.getElementById(idParentesco).style.background ='#B5D2F3';
+            document.getElementById(idAsegurable).style.background ='#B5D2F3';
+            document.getElementById(idAsegurable).style.color ='black';
+            document.getElementById(idAsegurable).style.fontWeight ='normal';
+            document.getElementById(idBtn).style.display ='inline';
+
+            if ( esContratante( parseInt(document.getElementById("AseguradoId").value)) )
+            {
+                // habilita_BotonPreDigita(true);
+            }
+        }
+
+        function esContratante(nRowIndex)
+        {
+            return ( nRowIndex == 1 );
+        }
+
+        function format(nStr)
+        {
+            nStr += '';
+            var x = nStr.split('.');
+            var x1 = x[0] + '';
+            var x2 = x.length > 1 ? ',' + x[1] : '';
+            var rgx = /(\d+)(\d{3})/;
+            while (rgx.test(x1)) {
+                    x1 = x1.replace(rgx, '$1' + '.' + '$2');
+            }
+            return x1 + x2;
+        }
+
+        function unFormat(nStr)
+        {
+            nStr += '';
+            nStr = nStr.replace(/\./g,'');
+            nStr = nStr.replace(/\,/g,'.');
+            return nStr;
+        }
+
+        function colorPageBlock(pageblock, bkcolor, color)
+        {
+            if (pageblock != null)
+            {
+                pageblock.firstChild.style.cssText = "background-color: " + bkcolor + ";color:"+color+";";
+            }
+        }
+
+        /******  PREGUNTAS ********/
+        function gpreguntas(Asegurados)
+        {
+            console.log("preguntas" + Asegurados.length);
+            console.log(Asegurados);
+            var lista = new Array();
+            var lista_1 = new Array();
+            var lista_2 = new Array();
+            var lista_3 = new Array();
+            var lista_4 = new Array();
+
+            var tabla1 = document.getElementById("tbl_datoscuestionarioDPS");
+            // console.log(tabla1.rows.length);
+
+            var fila1 = tabla1.rows[0];
+            var celda2_fila1 = fila1.cells[1];
+
+            var fila1_2 = tabla1.rows[1];
+            var celda2_2_fila1_2 = fila1_2.cells[1];
+
+            var fila1_3 = tabla1.rows[2];
+            var celda2_3_fila1_3 = fila1_3.cells[1];
+
+            var fila1_4 = tabla1.rows[3];
+            var celda2_4_fila1_4 = fila1_4.cells[1];
+
+            var fila1_5 = tabla1.rows[4];
+            var celda2_5_fila1_5 = fila1_5.cells[1];
+
+            var texto = "";
+            var texto_1 = "";
+            var texto_2 = "";
+            var texto_3 = "";
+            var texto_4 = "";
+
+            for(var i = 0; i < Asegurados.length; i++)
+            {
+                console.log(Asegurados[i].AseguradoId+'  '+Asegurados[i].Asegurable+'  '+Asegurados[i].ValidaFechaNacimiento+'  '+Asegurados[i].Pregunta_1);
+                /* pregunta 1*/
+                if (Asegurados[i].Pregunta_1 == 'SI')
+                {
+                    lista[i] = '<table><tr><th> Asegurado '+Asegurados[i].AseguradoId+': &nbsp;</th><th><select id="cmb0' + (i + 1) + '" name="cmb0' + (i + 1) + '" onchange="verificar(' + (i+1) + ', this.value, 1)"><option value="" style="display:none;">Opción</option><option value="SI" selected>SI</option><option value="NO">NO</option></select>&nbsp;</th></tr></table>';
+                }
+                else if (Asegurados[i].Pregunta_1 == 'NO')
+                {
+                    lista[i] = '<table><tr><th> Asegurado '+Asegurados[i].AseguradoId+': &nbsp;</th><th><select id="cmb0' + (i + 1) + '" name="cmb0' + (i + 1) + '" onchange="verificar(' + (i+1) + ', this.value, 1)"><option value="" style="display:none;">Opción</option><option value="SI">SI</option><option value="NO" selected>NO</option></select>&nbsp;</th></tr></table>';
+                }
+                else
+                {
+                    if (Asegurados[i].Asegurable == 'SI')
+                    {
+                        lista[i] = '<table><tr><th> Asegurado '+Asegurados[i].AseguradoId+': &nbsp;</th><th><select id="cmb0' + (i + 1) + '" name="cmb0' + (i + 1) + '" onchange="verificar(' + (i+1) + ', this.value, 1)"><option value="" style="display:none;">Opción</option><option value="SI">SI</option><option value="NO">NO</option></select>&nbsp;</th></tr></table>';
+                    }
+                    else if (Asegurados[i].Asegurable == 'NO')
+                    {
+                        if (Asegurados[i].NoAsegurable == 'W')
+                        {
+                            lista[i] = '<table><tr><th> Asegurado '+Asegurados[i].AseguradoId+': &nbsp;</th><th><select id="cmb0' + (i + 1) + '" name="cmb0' + (i + 1) + '" onchange="verificar(' + (i+1) + ', this.value, 1)"><option value="" style="display:none;">Opción</option></select>&nbsp;</th></tr></table>';
+                        }
+                        else //P
+                        {
+                            lista[i] = '<table><tr><th> Asegurado '+Asegurados[i].AseguradoId+': &nbsp;</th><th><select id="cmb0' + (i + 1) + '" name="cmb0' + (i + 1) + '" onchange="verificar(' + (i+1) + ', this.value, 1)"><option value="" style="display:none;">Opción</option><option value="SI">SI</option><option value="NO">NO</option></select>&nbsp;</th></tr></table>';
+                        }
+                    }
+                    else if (Asegurados[i].Asegurable == 'ER')
+                    {
+                        lista[i] = '<table><tr><th> Asegurado '+Asegurados[i].AseguradoId+': &nbsp;</th><th><label for="other">Error WS</label>&nbsp;</th></tr></table>';
+                    }
+                }
+                /* pregunta 1*/
+                /* pregunta 2*/
+                if (Asegurados[i].Pregunta_2 == 'SI')
+                {
+                    lista_1[i] = '<table><tr><th> Asegurado '+Asegurados[i].AseguradoId+': &nbsp;</th><th><select id="cmb1' + (i + 1) + '" name="cmb1' + (i + 1) + '" onchange="verificar('+ (i+1) +', this.value, 2)"><option value="" style="display:none;">Opción</option><option value="SI" selected>SI</option><option value="NO">NO</option></select>&nbsp;</th></tr></table>';
+                }
+                else if (Asegurados[i].Pregunta_2 == 'NO')
+                {
+                    lista_1[i] = '<table><tr><th> Asegurado '+Asegurados[i].AseguradoId+': &nbsp;</th><th><select id="cmb1' + (i + 1) + '" name="cmb1' + (i + 1) + '" onchange="verificar('+ (i+1) +', this.value, 2)"><option value="" style="display:none;">Opción</option><option value="SI">SI</option><option value="NO" selected>NO</option></select>&nbsp;</th></tr></table>';
+                }
+                else
+                {
+                    if (Asegurados[i].Asegurable == 'SI')
+                    {
+                        lista_1[i] = '<table><tr><th> Asegurado '+Asegurados[i].AseguradoId+': &nbsp;</th><th><select id="cmb1' + (i + 1) + '" name="cmb1' + (i + 1) + '" onchange="verificar(' + (i+1) + ', this.value, 2)"><option value="" style="display:none;">Opción</option><option value="SI">SI</option><option value="NO">NO</option></select>&nbsp;</th></tr></table>';
+                    }
+                    else if (Asegurados[i].Asegurable == 'NO')
+                    {
+                        if (Asegurados[i].NoAsegurable == 'W')
+                        {
+                            lista_1[i] = '<table><tr><th> Asegurado '+Asegurados[i].AseguradoId+': &nbsp;</th><th><select id="cmb1' + (i + 1) + '" name="cmb1' + (i + 1) + '" onchange="verificar(' + (i+1) + ', this.value, 2)"><option value="" style="display:none;">Opción</option></select>&nbsp;</th></tr></table>';
+                        }
+                        else //P
+                        {
+                            lista_1[i] = '<table><tr><th> Asegurado '+Asegurados[i].AseguradoId+': &nbsp;</th><th><select id="cmb1' + (i + 1) + '" name="cmb1' + (i + 1) + '" onchange="verificar('+ (i+1) +', this.value, 2)"><option value="" style="display:none;">Opción</option><option value="SI">SI</option><option value="NO">NO</option></select>&nbsp;</th></tr></table>';
+                        }
+                    }
+                    else if (Asegurados[i].Asegurable == 'ER')
+                    {
+                        lista_1[i] = '<table><tr><th> Asegurado '+Asegurados[i].AseguradoId+': &nbsp;</th><th><label for="other">Error WS</label>&nbsp;</th></tr></table>';
+                    }
+                }
+                /* pregunta 2*/
+                /* pregunta 3*/
+                if (Asegurados[i].Pregunta_3 == 'SI')
+                {
+                    lista_2[i] = '<table><tr><th> Asegurado '+Asegurados[i].AseguradoId+': &nbsp;</th><th><select id="cmb2' + (i + 1) + '" name="cmb2' + (i + 1) + '" onchange="verificar('+ (i+1) +', this.value, 3)"><option value="" style="display:none;">Opción</option><option value="SI" selected>SI</option><option value="NO">NO</option></select>&nbsp;</th></tr></table>';
+                }
+                else if (Asegurados[i].Pregunta_3 == 'NO')
+                {
+                    lista_2[i] = '<table><tr><th> Asegurado '+Asegurados[i].AseguradoId+': &nbsp;</th><th><select id="cmb2' + (i + 1) + '" name="cmb2' + (i + 1) + '" onchange="verificar('+ (i+1) +', this.value, 3)"><option value="" style="display:none;">Opción</option><option value="SI">SI</option><option value="NO" selected>NO</option></select>&nbsp;</th></tr></table>';
+                }
+                else
+                {
+                    if (Asegurados[i].Asegurable == 'SI')
+                    {
+                        lista_2[i] = '<table><tr><th> Asegurado '+Asegurados[i].AseguradoId+': &nbsp;</th><th><select id="cmb2' + (i + 1) + '" name="cmb2' + (i + 1) + '" onchange="verificar(' + (i+1) + ', this.value, 3)"><option value="" style="display:none;">Opción</option><option value="SI">SI</option><option value="NO">NO</option></select>&nbsp;</th></tr></table>';
+                    }
+                    else if (Asegurados[i].Asegurable == 'NO')
+                    {
+                        if (Asegurados[i].NoAsegurable == 'W')
+                        {
+                            lista_2[i] = '<table><tr><th> Asegurado '+Asegurados[i].AseguradoId+': &nbsp;</th><th><select id="cmb2' + (i + 1) + '" name="cmb2' + (i + 1) + '" onchange="verificar(' + (i+1) + ', this.value, 3)"><option value="" style="display:none;">Opción</option></select>&nbsp;</th></tr></table>';
+                        }
+                        else //P
+                        {
+                            lista_2[i] = '<table><tr><th> Asegurado '+Asegurados[i].AseguradoId+': &nbsp;</th><th><select id="cmb2' + (i + 1) + '" name="cmb2' + (i + 1) + '" onchange="verificar('+ (i+1) +', this.value, 3)"><option value="" style="display:none;">Opción</option><option value="SI">SI</option><option value="NO">NO</option></select>&nbsp;</th></tr></table>';
+                        }
+                    }
+                    else if (Asegurados[i].Asegurable == 'ER')
+                    {
+                        lista_2[i] = '<table><tr><th> Asegurado '+Asegurados[i].AseguradoId+': &nbsp;</th><th><label for="other">Error WS</label>&nbsp;</th></tr></table>';
+                    }
+                }
+                /* pregunta 3*/
+                if(document.getElementById('{!$Component.frm_DatosContratante.tht_CargaCliente}').value == 'Nuevo')
+                {
+                    /* pregunta 4*/
+                    if (Asegurados[i].Pregunta_4 == 'SI')
+                    {
+                        lista_3[i] = '<table><tr><th> Asegurado '+Asegurados[i].AseguradoId+':  &nbsp;</th><th><select id="cmb3' + (i + 1) + '" name="cmb3' + (i + 1) + '" onchange="verificar('+ (i+1) +', this.value, 4)"><option value="" style="display:none;">Opción</option><option value="SI" selected>SI</option><option value="NO">NO</option></select>&nbsp;</th></tr></table>';
+                    }
+                    else if (Asegurados[i].Pregunta_4 == 'NO')
+                    {
+                        lista_3[i] = '<table><tr><th> Asegurado '+Asegurados[i].AseguradoId+':  &nbsp;</th><th><select id="cmb3' + (i + 1) + '" name="cmb3' + (i + 1) + '" onchange="verificar('+ (i+1) +', this.value, 4)"><option value="" style="display:none;">Opción</option><option value="SI">SI</option><option value="NO" selected>NO</option></select>&nbsp;</th></tr></table>';
+                    }
+                    else
+                    {
+                        if (Asegurados[i].Asegurable == 'SI')
+                        {
+                            lista_3[i] = '<table><tr><th> Asegurado '+Asegurados[i].AseguradoId+': &nbsp;</th><th><select id="cmb3' + (i + 1) + '" name="cmb3' + (i + 1) + '" onchange="verificar(' + (i+1) + ', this.value, 4)"><option value="" style="display:none;">Opción</option><option value="SI">SI</option><option value="NO">NO</option></select>&nbsp;</th></tr></table>';
+                        }
+                        else if (Asegurados[i].Asegurable == 'NO')
+                        {
+                            if (Asegurados[i].NoAsegurable == 'W')
+                            {
+                                lista_3[i] = '<table><tr><th> Asegurado '+Asegurados[i].AseguradoId+': &nbsp;</th><th><select id="cmb3' + (i + 1) + '" name="cmb3' + (i + 1) + '" onchange="verificar(' + (i+1) + ', this.value, 4)"><option value="" style="display:none;">Opción</option></select>&nbsp;</th></tr></table>';
+                            }
+                            else //P
+                            {
+                                lista_3[i] = '<table><tr><th> Asegurado '+Asegurados[i].AseguradoId+':  &nbsp;</th><th><select id="cmb3' + (i + 1) + '" name="cmb3' + (i + 1) + '" onchange="verificar('+ (i+1) +', this.value, 4)"><option value="" style="display:none;">Opción</option><option value="SI">SI</option><option value="NO">NO</option></select>&nbsp;</th></tr></table>';
+                            }
+                        }
+                        else if (Asegurados[i].Asegurable == 'ER')
+                        {
+                            lista_3[i] = '<table><tr><th> Asegurado '+Asegurados[i].AseguradoId+': &nbsp;</th><th><label for="other">Error WS</label>&nbsp;</th></tr></table>';
+                        }
+                    }
+                    /* pregunta 4*/
+                    /* pregunta 5*/
+                    if (Asegurados[i].Pregunta_5 == 'SI')
+                    {
+                        lista_4[i] = '<table><tr><th> Asegurado '+Asegurados[i].AseguradoId+':  &nbsp;</th><th><select id="cmb4' + (i + 1) + '" name="cmb4' + (i + 1) + '" onchange="verificar('+ (i+1) +', this.value, 5)"><option value="" style="display:none;">Opción</option><option value="SI" selected>SI</option><option value="NO">NO</option></select>&nbsp;</th></tr></table>';
+                    }
+                    else if (Asegurados[i].Pregunta_5 == 'NO')
+                    {
+                        lista_4[i] = '<table><tr><th> Asegurado '+Asegurados[i].AseguradoId+':  &nbsp;</th><th><select id="cmb4' + (i + 1) + '" name="cmb4' + (i + 1) + '" onchange="verificar('+ (i+1) +', this.value, 5)"><option value="" style="display:none;">Opción</option><option value="SI">SI</option><option value="NO" selected>NO</option></select>&nbsp;</th></tr></table>';
+                    }
+                    else
+                    {
+                        if (Asegurados[i].Asegurable == 'SI')
+                        {
+                            lista_4[i] = '<table><tr><th> Asegurado '+Asegurados[i].AseguradoId+': &nbsp;</th><th><select id="cmb4' + (i + 1) + '" name="cmb4' + (i + 1) + '" onchange="verificar(' + (i+1) + ', this.value, 5)"><option value="" style="display:none;">Opción</option><option value="SI">SI</option><option value="NO">NO</option></select>&nbsp;</th></tr></table>';
+                        }
+                        else if (Asegurados[i].Asegurable == 'NO')
+                        {
+                            if (Asegurados[i].NoAsegurable == 'W')
+                            {
+                                lista_4[i] = '<table><tr><th> Asegurado '+Asegurados[i].AseguradoId+': &nbsp;</th><th><select id="cmb4' + (i + 1) + '" name="cmb4' + (i + 1) + '" onchange="verificar(' + (i+1) + ', this.value, 5)"><option value="" style="display:none;">Opción</option></select>&nbsp;</th></tr></table>';
+                            }
+                            else //P
+                            {
+                                lista_4[i] = '<table><tr><th> Asegurado '+Asegurados[i].AseguradoId+':  &nbsp;</th><th><select id="cmb4' + (i + 1) + '" name="cmb4' + (i + 1) + '" onchange="verificar('+ (i+1) +', this.value, 5)"><option value="" style="display:none;">Opción</option><option value="SI">SI</option><option value="NO">NO</option></select>&nbsp;</th></tr></table>';
+                            }
+                        }
+                        else if (Asegurados[i].Asegurable == 'ER')
+                        {
+                            lista_4[i] = '<table><tr><th> Asegurado '+Asegurados[i].AseguradoId+': &nbsp;</th><th><label for="other">Error WS</label>&nbsp;</th></tr></table>';
+                        }
+                    }
+                    /* pregunta 5*/
+                }
+            }
+            console.log('lista: '+lista);
+            //Ingreso de datos en los array concatenando los array en un texto
+            for(var i=0;i<Asegurados.length;i++){
+                    texto = texto + lista[i];// + text_prueba;
+                    texto_1 = texto_1 + lista_1[i];
+                    texto_2 = texto_2 + lista_2[i];
+                    if(document.getElementById('{!$Component.frm_DatosContratante.tht_CargaCliente}').value  == 'Nuevo'){
+                        texto_3 = texto_3 + lista_3[i];
+                        texto_4 = texto_4 + lista_4[i];
+                    }
+            }
+
+            console.log('Texto: '+texto);
+            //Texto a mostrar por pantalla
+            celda2_fila1.innerHTML = texto;
+            celda2_2_fila1_2.innerHTML = texto_1;
+            celda2_3_fila1_3.innerHTML = texto_2;
+
+            if(document.getElementById('{!$Component.frm_DatosContratante.tht_CargaCliente}').value == 'Nuevo'){
+                celda2_4_fila1_4.innerHTML = texto_3;
+                celda2_5_fila1_5.innerHTML = texto_4;
+            }
+        }
+
+        function Verificar_Respuesta(idFila, asegurable, pregunta1, pregunta2, pregunta3, pregunta4, pregunta5)
+        {
+            var Combo1 = document.getElementById('cmb0' + idFila);
+            var Combo2 = document.getElementById('cmb1' + idFila);
+            var Combo3 = document.getElementById('cmb2' + idFila);
+            var Combo4 = document.getElementById('cmb3' + idFila);
+            var Combo5 = document.getElementById('cmb4' + idFila);
+
+            Combo1.disabled = false;
+            Combo2.disabled = false;
+            Combo3.disabled = false;
+
+            if(document.getElementById('{!$Component.frm_DatosContratante.tht_CargaCliente}').value == 'Nuevo'){
+                Combo4.disabled = false;
+                Combo5.disabled = false;
+            }
+
+            if (asegurable == 'NO')
+            {
+                if (pregunta1 != 'SI')
+                {
+                    Combo1.disabled = true;
+                }
+
+                if (pregunta2 != 'SI')
+                {
+                    Combo2.disabled = true;
+                }
+
+                if (pregunta3 != 'SI')
+                {
+                    Combo3.disabled = true;
+                }
+
+                if(document.getElementById('{!$Component.frm_DatosContratante.tht_CargaCliente}').value  == 'Nuevo'){
+                    if (pregunta4 != 'SI')
+                    {
+                        Combo4.disabled = true;
+                    }
+
+                    if (pregunta5 != 'SI')
+                    {
+                        Combo5.disabled = true;
+                    }
+                }
+            }
+
+        }
+
+        function verificar(idFila, valorCombo, pregunta)
+        {
+            ShowSpinner();
+            var tabla = document.getElementById("tbl_datoscargas");
+            console.log("idFila => " + idFila);
+
+            document.getElementById("AseguradoId").value = tabla.rows[idFila].id;
+
+            idSf =  "lbl_" + document.getElementById("AseguradoId").value + "_IDSALESFORCE";
+            IdSalesforce = document.getElementById(idSf).value;
+
+            ActualizaPregunta(IdSalesforce, pregunta, valorCombo);
+        }
+
+        function actualiza_Direccion()
+        {
+            ActualizaDireccion();
+            ShowSpinner();
+        }
+
+
+        function actualiza_Direccion_Contratante()
+        {
+            ActualizaDireccion_Contratante();
+            ShowSpinner();
+        }
+
+
+        function actualiza_Direccion_Tercero()
+        {
+            ActualizaDireccion_Tercero();
+            ShowSpinner();
+        }
+
+        function validarPreguntas()
+        {
+            var elements = document.querySelectorAll('[name^=cmb]');
+            console.log("elements -->"+elements.length);
+
+            var retorno=true;
+
+            for(var i = 0; i<elements.length ; i++)
+            {
+                console.log("elements[i] -->"+elements[i].id);
+                if (elements[i].options[elements[i].selectedIndex].value=="" && elements[i].disabled ==false)
+                {
+                    retorno=false;
+                }
+            }
+
+            if (!retorno)
+            {
+                alert("Existen preguntas sin Responder.");
+            }
+
+            if(document.getElementById('{!$Component.frm_DatosContratante.tht_TipoProducto}').value== '19')
+            {
+                var Combo1 = document.getElementById('cmb01');
+                var Combo2 = document.getElementById('cmb11');
+                var Combo3 = document.getElementById('cmb21');
+
+                if(document.getElementById('{!$Component.frm_DatosContratante.tht_CargaCliente}').value== 'Nuevo')
+                {
+                    var Combo4 = document.getElementById('cmb31');
+                    var Combo5 = document.getElementById('cmb41');
+
+                    if(Combo1.value == 'SI' || Combo3.value == 'SI' || Combo3.value == 'SI' || Combo4.value == 'SI' || Combo5.value == 'SI')
+                    {
+                        retorno = false;
+                    }
+                }
+                else
+                {
+                    if(Combo1.value == 'SI' || Combo3.value == 'SI' || Combo3.value == 'SI')
+                    {
+                        retorno = false;
+                    }
+                }
+            }
+
+           /* if (retorno == true)
+            {
+                ActualizaPasoPredigitador();
+            }*/
+
+            return retorno;
+        }
+
+        function PolizasContratante(rutContratante, polizaMandatoria)
+        {
+            var height = 470;
+            var width = 1200;
+            var y=parseInt((window.screen.height/2) - height/2);
+            var x=parseInt((window.screen.width/2) - width/2);
+
+            var performance   = 'height='+height+'px,width='+width+'px, top='+y+',left='+x+',toolbar=no,location=no,status=no,menubar=no,scrollbars=no,directories=no,resizable=no';
+            var url = "/apex/SEC_VF_CM_PolizasVigentes?rutContratante="+rutContratante+"&PolizaMandatoria="+polizaMandatoria;
+
+            var popUp = window.open(url, "_blank", performance);
+
+            if (popUp == null || typeof(popUp)=='undefined') {
+                    alert('Por favor deshabilita el bloqueador de ventanas emergentes y vuelve a hacer clic en "Agregar Comentario".');
+            }
+            else {
+                    popUp.focus();
+            }
+        }
+
+        function actualiza_ContratanteEmail()
+        {
+            Actualiza_Contratante_Email();
+            ShowSpinner();
+        }
+
+        function actualiza_ContratanteTelefono()
+        {
+            Actualiza_Contratante_Telefono();
+            ShowSpinner();
+        }
+
+        function actualiza_TerceroRUT()
+        {
+            var obj = document.getElementById("{!$Component.pgCotizadorExpress:frm_DatosContratante:pB_SaludProtegida:pBs_DatosTercero_SP:RUTTercero}");
+
+            ShowSpinner();
+
+            if(Fn.validaRut(obj.value) == true)
+            {
+                Actualiza_Tercero_RUT();
+                ShowSpinner();
+            }
+            else
+            {
+                alert ('RUT Otro Contratante inválido');
+                obj.value = '';
+                Actualiza_Tercero_RUT();
+                ShowSpinner();
+                obj.focus();
+            }
+
+        }
+
+        function actualiza_TerceroNombre()
+        {
+            Actualiza_Tercero_Nombre();
+            ShowSpinner();
+        }
+
+        function actualiza_TerceroEmail()
+        {
+            Actualiza_Tercero_Email();
+            ShowSpinner();
+        }
+
+        function actualiza_TerceroTelefono()
+        {
+            Actualiza_Tercero_Telefono();
+            ShowSpinner();
+        }
+
+        function Actualiza_EmailAsegurado()
+        {
+            Actualiza_Email_Asegurado();
+            ShowSpinner();
+        }
+
+        function Actualiza_TelefonoAsegurado()
+        {
+            Actualiza_Telefono_Asegurado();
+            ShowSpinner();
+        }
+
+        function Actualiza_CelularAsegurado()
+        {
+            Actualiza_Celular_Asegurado();
+            ShowSpinner();
+        }
+
+
+        var Fn = {
+            validaRut: function(rutCompleto) {
+                if (!/^[0-9]+-[0-9kK]{1}$/.test(rutCompleto))
+                    return false;
+                var tmp = rutCompleto.split('-');
+                var digv = tmp[1];
+                var rut = tmp[0];
+                if (digv == 'K') digv = 'k';
+                return (Fn.dv(rut) == digv);
+            },
+            dv: function(T) {
+                var M = 0,
+                    S = 1;
+                for (; T; T = Math.floor(T / 10))
+                    S = (S + T % 10 * (9 - M++ % 6)) % 11;
+                return S ? S - 1 : 'k';
+            }
+        }
+
+    </script>
+
+    <apex:stylesheet value="{!URLFOR($Resource.CotizadorExpress, 'css/SEC_VF_CM_CotizadorExpress.css')}" />
+
+    <!-- BODY PAGE-->
+
+    <div id="dv_CuerpoPrincipal" style="width: 100%; margin-left: auto; margin-right: auto; height: 90%;">
+            <input type="hidden" id="AseguradoId" name="AseguradoId" />
+            <input type="hidden" id="idaborrar" value="0" />
+            <input type="hidden" id="cont" value="0" />
+
+            <apex:actionStatus id="Status"  >
+                <apex:facet name="start">
+                    <apex:outputPanel >
+                        <div class="popupBackground" />
+                        <div class="popupPanel">
+                            &nbsp; Espere...<img src="/apexpages/devmode/img/saveStatus.gif" />
+                        </div>
+                    </apex:outputPanel>
+                </apex:facet>
+            </apex:actionStatus>
+            <br/>
+        <apex:form id="frm_DatosContratante">
+            <div id="title">
+                <div class="header_inline_left">
+                   &nbsp;&nbsp; <apex:outputLabel style="font-size:24px;" value="Cotizador Express {!NombreCampagna}" ></apex:outputLabel>
+                </div>
+                <div class="header_inline_right">
+
+                </div>
+            </div>
+            <hr/>
+            <div id="title2" style="margin-bottom:10px;">
+                <div class="header_inline_left" style="text-align:left;">
+                        <apex:panelGroup id="acciones">
+                            <apex:commandButton id="cmd_Consultar" title="Reiniciar Cotización" value="Reiniciar Cotización"  action="{!ReiniciarCotizacion}" styleClass="btnInfo"  />
+                        </apex:panelGroup>
+
+                </div>
+                <div class="header_inline_right">
+
+                  <!--  <apex:commandButton id="cmd_Transferir" title="Transferir Pre-Digitador"   onclick="return validarPreguntas();"
+                     value="Transferir Pre-Digitador"  rerender="datosCotizacion,acciones,pB_CotizadorContratante" action="{!ActualizaPasoPredigitador}" oncomplete="CargaPredigitador('{!Cotizador.Id}', '{!Campagna_SaludProtegida}');" styleClass="btnSuccess" />
+                  -->
+                 <!--  <apex:commandLink target="_blank" id="cmd_TransferirPD_SP" value="Transferir Pre-Digitador" action="{!PasoPredigitador}" oncomplete="alert('Debe verificar si el Cliente o Prospecto es asegurable?');"
+                  rendered="{!AND(Cotizador.Tipo_Campagna__c == 'Salud Protegida', Cotizador.Asegurable__c == 'SI')}" style="color:green;font-size:14px;"/>
+                  <apex:commandLink target="_blank" id="cmd_TransferirPD_AP" value="Transferir Pre-Digitador" action="{!PasoPredigitador}" oncomplete="alert('Debe verificar si el Cliente o Prospecto es asegurable?');"
+                  rendered="{!AND(Cotizador.Tipo_Campagna__c == 'Televenta - APEG', Cotizador.Asegurable__c == 'SI')}" style="color:green;font-size:14px;"/>
+
+                   <apex:commandLink target="_blank" id="cmd_TransferirPD_ON" value="Transferir Pre-Digitador" action="{!PasoPredigitador}" oncomplete="alert('Debe verificar si el Cliente o Prospecto es asegurable?');"
+                    onclick="return validarPreguntas();" rendered="{!AND(Cotizador.Tipo_Campagna__c == 'Televenta - Oncológico', Cotizador.Asegurable__c == 'SI')}" style="color:green;font-size:14px;"/>-->
+
+
+                    <apex:commandLink target="_blank" id="cmd_TransferirPD_SP" value="Transferir Pre-Digitador" action="{!PasoPredigitador}"
+                    rendered="{!AND(Cotizador.Tipo_Campagna__c == 'Salud Protegida', Cotizador.Asegurable__c == 'SI')}" style="color:green;font-size:14px;"/>
+
+                    <apex:commandLink target="_blank" id="cmd_TransferirPD_AP" value="Transferir Pre-Digitador" action="{!PasoPredigitador}"
+                    rendered="{!AND(Cotizador.Tipo_Campagna__c == 'Televenta - APEG', Cotizador.Asegurable__c == 'SI')}" style="color:green;font-size:14px;"/>
+
+                    <apex:commandLink target="_blank" id="cmd_TransferirPD_ON" value="Transferir Pre-Digitador" action="{!PasoPredigitador}"
+                    onclick="return validarPreguntas();" rendered="{!AND(Cotizador.Tipo_Campagna__c == 'Televenta - Oncológico', Cotizador.Asegurable__c == 'SI')}" style="color:green;font-size:14px;"/>
+
+
+                </div>
+            </div>
+
+            <apex:actionFunction action="{!ActualizaPasoPredigitador}" name="ActualizaPasoPredigitador" rerender="datosCotizacion,acciones,pB_CotizadorContratante" >
+            </apex:actionFunction>
+            <apex:actionFunction name="ShowSpinner" reRender="rerender,datosCotizacion" status="Status" />
+            <apex:actionFunction action="{!ConsultaFechaCambio}" name="ConsultaFechaCambio" rerender="datosCotizacion" >
+            </apex:actionFunction>
+            <apex:actionFunction action="{!ConsultaAsegurado}" name="ConsultaAsegurado" rerender="pBs_DPS" oncomplete="process_Consulta('{!RespuestaAsegurado_FechaNac}', '{!RespuestaAsegurado_ValorCLP}', '{!RespuestaAsegurado_ValorUF}', '{!GrillaAsegurados}','{!RespuestaAsegurado_IdSalesforce}');" >
+                <apex:param id="idAsegurado" name="idAsegurado" value=""></apex:param>
+                <apex:param id="IdSalesforce" name="IdSalesforce" value=""></apex:param>
+                <apex:param id="parentesco" name="parentesco" value=""></apex:param>
+                <apex:param id="fechaNacimiento" name="fechaNacimiento" value=""></apex:param>
+                <apex:param id="fechaNacimientoInt" name="fechaNacimientoInt" value=""></apex:param>
+            </apex:actionFunction>
+
+
+            <apex:actionFunction action="{!EliminaAsegurado}" name="EliminaAsegurado" rerender="pBs_DPS" oncomplete="process_Eliminar('{!GrillaAsegurados}');" >
+                <apex:param id="IdSalesforce1" name="IdSalesforce1" value=""></apex:param>
+            </apex:actionFunction>
+            <apex:actionFunction action="{!ActualizaPregunta}" name="ActualizaPregunta" rerender="pBs_DPS" oncomplete="process_Respuesta('{!GrillaAsegurados}', '{!RespuestaAsegurado_Asegurable}', '{!RespuestaAsegurado_ValorUF}', '{!RespuestaAsegurado_ValorCLP}','{!RespuestaAsegurado_IdSalesforce}');" >
+                <apex:param id="IdSalesforce2" name="IdSalesforce2" value=""></apex:param>
+                <apex:param id="Pregunta" name="Pregunta" value=""></apex:param>
+                <apex:param id="Respuesta" name="Respuesta" value=""></apex:param>
+            </apex:actionFunction>
+
+            <apex:actionFunction action="{!ActualizaDireccion}" name="ActualizaDireccion" status="Status"  >
+            </apex:actionFunction>
+
+            <apex:actionFunction action="{!ActualizaDireccion_Tercero}" name="ActualizaDireccion_Tercero" status="Status"  >
+            </apex:actionFunction>
+
+            <apex:actionFunction action="{!ActualizaDireccion_Contratante}" name="ActualizaDireccion_Contratante" status="Status"  >
+            </apex:actionFunction>
+
+            <apex:actionFunction action="{!Actualiza_Contratante_Email}" name="Actualiza_Contratante_Email" status="Status"  >
+            </apex:actionFunction>
+
+            <apex:actionFunction action="{!Actualiza_Contratante_Telefono}" name="Actualiza_Contratante_Telefono" status="Status"  >
+            </apex:actionFunction>
+
+            <apex:actionFunction action="{!Actualiza_Tercero_RUT}" name="Actualiza_Tercero_RUT" status="Status"  >
+            </apex:actionFunction>
+
+            <apex:actionFunction action="{!Actualiza_Tercero_Nombre}" name="Actualiza_Tercero_Nombre" status="Status"  >
+            </apex:actionFunction>
+
+            <apex:actionFunction action="{!Actualiza_Tercero_Email}" name="Actualiza_Tercero_Email" status="Status"  >
+            </apex:actionFunction>
+
+            <apex:actionFunction action="{!Actualiza_Tercero_Telefono}" name="Actualiza_Tercero_Telefono" status="Status"  >
+            </apex:actionFunction>
+
+            <apex:actionFunction action="{!Actualiza_Email_Asegurado}" name="Actualiza_Email_Asegurado" status="Status"  >
+            </apex:actionFunction>
+
+            <apex:actionFunction action="{!Actualiza_Telefono_Asegurado}" name="Actualiza_Telefono_Asegurado" status="Status"  >
+            </apex:actionFunction>
+
+            <apex:actionFunction action="{!Actualiza_Celular_Asegurado}" name="Actualiza_Celular_Asegurado" status="Status"  >
+            </apex:actionFunction>
+
+            <apex:inputHidden id="tht_TOTALUF" value="{!TOTAL_UF}" />
+            <apex:inputHidden id="tht_TOTALCLP" value="{!TOTAL_CLP}" /> <!-- -->
+            <apex:inputHidden id="tht_CargaCliente" value="{!Cotizador.Carga_Cliente__c}" />
+            <apex:inputHidden id="tht_ErrorInicio" value="{!ErrorInicio}" />
+            <!--<apex:inputHidden id="tht_ErrorCarga" value="{!ErrorCarga}" />-->
+            <apex:inputHidden id="tht_TipoProducto" value="{!Cotizador.Tipo_Producto__c}" />
+
+<!-- SALUD PROTEGIDA -->
+     <apex:pageBlock id="pB_SaludProtegida" rendered="{!Cotizador.Tipo_Campagna__c == 'Salud Protegida'}">
+
+                <apex:pageBlockSection title="Asegurado Titular" columns="1" id="pBs_DatosAsegurado_SP" collapsible="false" rendered="{!Cotizador.Asegurable__c == 'SI'}"   >
+                    <apex:panelGrid columns="6" >
+                        <apex:outputLabel value="RUT Asegurado: "  style="" ></apex:outputLabel>
+                        <apex:outputText value="{!Cotizador.RUT_Asegurado__c}" style="width: 350px;font-weight: bold;" />
+                        <apex:outputLabel value="Nombres: " style="" ></apex:outputLabel>
+                        <apex:outputText value="{!Cotizador.Nombres_Asegurado__c}" style="width: 350px;font-weight: bold;"   />
+
+                        <apex:outputLabel value="Apellidos: " style="" ></apex:outputLabel>
+                        <apex:outputText value="{!Cotizador.Apellidos_Asegurado__c}" style="width: 350px;font-weight: bold;" />
+
+                        <apex:outputLabel value="Email: "  style="" ></apex:outputLabel>
+                        <apex:inputField value="{!Cotizador.Email_Asegurado__c}" style="width: 350px;" onchange="Actualiza_EmailAsegurado();" />
+
+                        <apex:outputLabel value="Región: " style="" ></apex:outputLabel>
+                        <apex:selectList value="{!Cotizador.Codigo_Region__c}" size="1" id="lregiones" style="width: 350px;" >
+                            <apex:actionSupport event="onchange"   status="Status" reRender="lciudades,lcomunas"  action="{!SeleccionRegion}"/>
+                            <apex:selectOptions value="{!ListadoRegiones}"/>
+                        </apex:selectList>
+                        <apex:outputLabel value="Ciudad: " style="" ></apex:outputLabel>
+                        <apex:selectList value="{!Cotizador.Codigo_Ciudad__c}" size="1" id="lciudades" style="width: 350px;" >
+                            <apex:actionSupport event="onchange"   status="Status"  reRender="lcomunas" action="{!SeleccionCiudad}"/>
+                            <apex:selectOptions value="{!ListadoCiudades}"/>
+                        </apex:selectList>
+                        <apex:outputLabel value="Comuna: " style="" ></apex:outputLabel>
+                        <apex:selectList value="{!Cotizador.Codigo_Comuna__c}" size="1" id="lcomunas" style="width: 350px;" >
+                            <apex:actionSupport event="onchange"   status="Status" reRender="lcomunas" action="{!SeleccionComuna}"  />
+                            <apex:selectOptions value="{!ListadoComunas}"/>
+                        </apex:selectList>
+
+                        <apex:outputLabel value="Dirección: " style="" ></apex:outputLabel>
+                        <apex:inputText id="txt_DireccionCliente"  value="{!Cotizador.Direccion__c}"   style="width: 350px;" onchange="actualiza_Direccion();" />
+                        <apex:outputLabel value="Fecha de Nacimiento: " style="" ></apex:outputLabel>
+                        <apex:outputField value="{!Cotizador.Fecha_Nacimiento__c}" id="txt_FechaNacimientoContratante" style="width: 350px;"/>
+                        <apex:outputLabel value="Estado Civil: " style="" ></apex:outputLabel>
+                        <apex:selectList value="{!Cotizador.Estado_Civil__c}" size="1" id="estado_values" style="width: 350px;">
+                            <apex:actionSupport event="onchange" status="Status" action="{!SeleccionEstadoCivil}" reRender="estado_values"/>
+                            <apex:selectOptions value="{!ListadoEstadoCivil}"/>
+                        </apex:selectList>
+
+                        <apex:outputLabel value="Telefóno: " style=""  ></apex:outputLabel>
+                        <apex:inputField value="{!Cotizador.Telefono_Asegurado__c}" style="width: 350px;"  onchange="Actualiza_TelefonoAsegurado();"  ></apex:inputField>
+
+                        <apex:outputLabel value="Contratante Salud Protegida: " style="font-weight: bold;"  ></apex:outputLabel>
+                        <apex:outputText value="{!Cotiza}"  style="width: 350px;color:green;font-weight: bold;" />
+
+
+
+                            <apex:outputLabel value="Valor Prima UF: "  ></apex:outputLabel>
+                            <apex:outputText value="{!Cotizador.WS_Valor_UF__c}" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.WS_Valor_UF__c != ''}" />
+                            <apex:outputText value="-" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.WS_Valor_UF__c == ''}" />
+
+                            <apex:outputLabel value="Valor Prima CLP: "  ></apex:outputLabel>
+                            <apex:outputText value="{!Cotizador.WS_Valor_CLP__c}" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.WS_Valor_CLP__c != ''}" />
+                            <apex:outputText value="-" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.WS_Valor_CLP__c == ''}" />
+
+                              <apex:outputLabel value="¿Es Asegurable? : "  ></apex:outputLabel>
+                            <apex:outputText value="{!Cotizador.Asegurable__c}"  style="width: 350px;font-weight:bold;" rendered="{!Cotizador.Asegurable__c != ''}"/>
+                            <apex:outputText value="-" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.Asegurable__c == ''}" />
+                            <!--<apex:commandButton id="btnverificarsp" value="Verificar" rendered="{!Cotizador.Asegurable__c == ''}" action="{!loadCotizadorExpress}" styleClass="btnDanger" status="Status" oncomplete="" reRender="pBs_DatosAsegurado_SP"></apex:commandButton>
+                            -->
+
+                    </apex:panelGrid>
+                    <script>
+                        colorPageBlock(document.getElementById("{!$Component.pBs_DatosAsegurado_SP}"), "#EF861C", "white");
+                        </script>
+                </apex:pageBlockSection>
+
+                <apex:pageBlockSection title="Asegurado Titular" columns="1" id="pBs_DatosAsegurado_SP_ND" collapsible="false" rendered="{!Cotizador.Asegurable__c == '' || Cotizador.Asegurable__c == 'NO'}"   >
+                    <apex:panelGrid columns="6" >
+                        <apex:outputLabel value="RUT Asegurado: "  style="" ></apex:outputLabel>
+                        <apex:outputText value="{!Cotizador.RUT_Asegurado__c}" style="width: 350px;font-weight: bold;" />
+
+                        <apex:outputLabel value="Nombres: " style="" ></apex:outputLabel>
+                        <apex:outputText value="{!Cotizador.Nombres_Asegurado__c}" style="width: 350px;font-weight: bold;"   />
+
+                        <apex:outputLabel value="Apellidos: " style="" ></apex:outputLabel>
+                        <apex:outputText value="{!Cotizador.Apellidos_Asegurado__c}" style="width: 350px;font-weight: bold;" />
+
+                        <apex:outputLabel value="Email: "  style="" ></apex:outputLabel>
+                        <apex:outputText value="{!Cotizador.Email_Asegurado__c}" style="width: 350px;font-weight: bold;" rendered="{!Cotizador.Email_Asegurado__c != ''}"/>
+                        <apex:outputText value="-" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.Email_Asegurado__c == ''}" />
+
+                        <apex:outputLabel value="Región: " style="" ></apex:outputLabel>
+                        <apex:outputText value="{!Cotizador.Codigo_Region__c}" style="width: 350px;font-weight: bold;" rendered="{!Cotizador.Codigo_Region__c != ''}"  />
+                        <apex:outputText value="-" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.Codigo_Region__c == ''}" />
+
+                        <apex:outputLabel value="Ciudad: " style="" ></apex:outputLabel>
+                        <apex:outputText value="{!Cotizador.Codigo_Ciudad__c}" style="width: 350px;font-weight: bold;"  rendered="{!Cotizador.Codigo_Ciudad__c != ''}" />
+                        <apex:outputText value="-" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.Codigo_Ciudad__c == ''}" />
+
+                        <apex:outputLabel value="Comuna: " style="" ></apex:outputLabel>
+                        <apex:outputText value="{!Cotizador.Codigo_Comuna__c}" style="width: 350px;font-weight: bold;"  rendered="{!Cotizador.Codigo_Comuna__c != ''}" />
+                        <apex:outputText value="-" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.Codigo_Comuna__c == ''}" />
+
+                        <apex:outputLabel value="Dirección: " style="" ></apex:outputLabel>
+                        <apex:outputText value="{!Cotizador.Direccion__c}" style="width: 350px;font-weight: bold;"  rendered="{!Cotizador.Direccion__c != ''}" />
+                        <apex:outputText value="-" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.Direccion__c == ''}" />
+
+                        <apex:outputLabel value="Fecha de Nacimiento: " style="" ></apex:outputLabel>
+                        <apex:outputField value="{!Cotizador.Fecha_Nacimiento__c}" id="txt_FechaNacimientoContratante" style="width: 350px;" rendered="{!Cotizador.Fecha_Nacimiento__c != null}"/>
+                        <apex:outputText value="-" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.Fecha_Nacimiento__c == null}" />
+
+                        <apex:outputLabel value="Estado Civil: " style="" ></apex:outputLabel>
+                        <apex:outputText value="{!Cotizador.Estado_Civil__c}" style="width: 350px;font-weight: bold;"  rendered="{!Cotizador.Estado_Civil__c != ''}" />
+                        <apex:outputText value="-" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.Estado_Civil__c == ''}" />
+
+                        <apex:outputLabel value="Telefóno: " style=""  ></apex:outputLabel>
+                        <apex:outputText value="{!Cotizador.Telefono_Asegurado__c}" style="width: 350px;font-weight: bold;"  rendered="{!Cotizador.Telefono_Asegurado__c != ''}" />
+                        <apex:outputText value="-" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.Telefono_Asegurado__c == ''}" />
+
+                        <apex:outputLabel value="Contratante Salud Protegida: " style="font-weight: bold;"  ></apex:outputLabel>
+                        <apex:outputText value="{!Cotiza}"  style="width: 350px;color:green;font-weight: bold;" />
+
+                            <apex:outputLabel value="Valor Prima UF: "  ></apex:outputLabel>
+                            <apex:outputText value="{!Cotizador.WS_Valor_UF__c}" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.WS_Valor_UF__c != ''}" />
+                            <apex:outputText value="-" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.WS_Valor_UF__c == ''}" />
+
+                            <apex:outputLabel value="Valor Prima CLP: "  ></apex:outputLabel>
+                            <apex:outputText value="{!Cotizador.WS_Valor_CLP__c}" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.WS_Valor_CLP__c != ''}" />
+                            <apex:outputText value="-" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.WS_Valor_CLP__c == ''}" />
+
+                              <apex:outputLabel value="¿Es Asegurable? : "  ></apex:outputLabel>
+                            <apex:outputText value="{!Cotizador.Asegurable__c}"  style="width: 350px;font-weight:bold;color:red;" rendered="{!Cotizador.Asegurable__c != ''}"/>
+                            <apex:commandButton id="btnverificarsp" value="Verificar" rendered="{!Cotizador.Asegurable__c == ''}" action="{!loadCotizadorExpress}" styleClass="btnDanger" status="Status" oncomplete="alert('Error en respuesta desde Web Services, intente nuevamente mas tarde.');" ></apex:commandButton>
+
+                    </apex:panelGrid>
+                    <script>
+                        colorPageBlock(document.getElementById("{!$Component.pBs_DatosAsegurado_SP_ND}"), "#EF861C", "white");
+                        </script>
+                </apex:pageBlockSection>
+
+
+                <apex:pageBlockSection title="Contratante Anterior" columns="1" id="pBs_DatosContratante_SP" rendered="{!AND(Cotizador.Contrata__c == 'C', Cotizador.Asegurable__c == 'SI')}" collapsible="false">
+                        <apex:panelGrid columns="6" >
+                            <apex:outputLabel value="RUT Contratante: " style=""  ></apex:outputLabel>
+                            <apex:outputLabel value="{!Cotizador.RUT_Contratante__c} " style="width: 350px;font-weight: bold;"  ></apex:outputLabel>
+                            <apex:outputLabel value="Nombres: " style="" ></apex:outputLabel>
+                            <apex:outputLabel value="{!Cotizador.Nombres__c}"  style="width: 350px;font-weight: bold;" ></apex:outputLabel>
+                            <apex:outputLabel value="Apellidos: " style="" ></apex:outputLabel>
+                            <apex:outputLabel value="{!Cotizador.Apellidos__c}" style="width: 350px;font-weight: bold;"  ></apex:outputLabel>
+                            <apex:outputLabel value="Email: "  style="" ></apex:outputLabel>
+                            <apex:inputField value="{!Cotizador.Email_Contratante_2__c}" onchange="actualiza_ContratanteEmail();" style="width: 350px;"  />
+                            <apex:outputLabel value="Telefóno: " style=""  ></apex:outputLabel>
+                            <apex:inputField value="{!Cotizador.Telefono_Contratante__c}" onchange="actualiza_ContratanteTelefono();"  style="width: 350px;" ></apex:inputField>
+
+                            <apex:outputLabel value="Región: " style=""  ></apex:outputLabel>
+                            <apex:selectList value="{!Cotizador.Codigo_Region_Contratante__c}" size="1" id="lregiones_contratante" style="width: 350px;" >
+                                <apex:actionSupport event="onchange"   status="Status" reRender="lciudades_contratante,lcomunas_contratante"  action="{!SeleccionRegion_Contratante}"/>
+                                <apex:selectOptions value="{!ListadoRegiones}"/>
+                            </apex:selectList>
+
+                            <apex:outputLabel value="Ciudad: " style=""  ></apex:outputLabel>
+                            <apex:selectList value="{!Cotizador.Codigo_Ciudad_Contratante__c}" size="1" id="lciudades_contratante" style="width: 350px;" >
+                                <apex:actionSupport event="onchange"   status="Status"  reRender="lcomunas_contratante" action="{!SeleccionCiudad_Contratante}"/>
+                                <apex:selectOptions value="{!ListadoCiudades_Contratante}"/>
+                            </apex:selectList>
+
+                            <apex:outputLabel value="Comuna: " style=""  ></apex:outputLabel>
+                            <apex:selectList value="{!Cotizador.Codigo_Comuna_Contratante__c}" size="1" id="lcomunas_contratante" style="width: 350px;" >
+                                <apex:actionSupport event="onchange"   status="Status" reRender="lcomunas_contratante" action="{!SeleccionComuna_Contratante}"  />
+                                <apex:selectOptions value="{!ListadoComunas_Contratante}"/>
+                            </apex:selectList>
+
+                            <apex:outputLabel value="Dirección: " style=""  ></apex:outputLabel>
+                            <apex:inputField value="{!Cotizador.Direccion_Contratante__c}" style="width: 350px;" onchange="actualiza_Direccion_Contratante();" ></apex:inputField>
+
+                       </apex:panelGrid>
+                       <script>
+                       colorPageBlock(document.getElementById("{!$Component.pBs_DatosContratante_SP}"), "#EF861C", "white");
+                       </script>
+                </apex:pageBlockSection>
+                <apex:pageBlockSection title="Contratante Anterior" columns="1" id="pBs_DatosContratante_SP_ND" rendered="{!AND(Cotizador.Contrata__c == 'C', OR(Cotizador.Asegurable__c == 'NO', Cotizador.Asegurable__c == ''))}" collapsible="false">
+                    <apex:panelGrid columns="6" >
+                        <apex:outputLabel value="RUT Contratante: " style=""  ></apex:outputLabel>
+                        <apex:outputText value="{!Cotizador.RUT_Contratante__c}" style="width: 350px;font-weight: bold;"  rendered="{!Cotizador.RUT_Contratante__c != ''}" />
+                        <apex:outputText value="-" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.RUT_Contratante__c == ''}" />
+
+                        <apex:outputLabel value="Nombres: " style="" ></apex:outputLabel>
+                        <apex:outputText value="{!Cotizador.Nombres__c}" style="width: 350px;font-weight: bold;"  rendered="{!Cotizador.Nombres__c != ''}" />
+                        <apex:outputText value="-" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.Nombres__c == ''}" />
+
+                        <apex:outputLabel value="Apellidos: " style="" ></apex:outputLabel>
+                        <apex:outputText value="{!Cotizador.Apellidos__c}" style="width: 350px;font-weight: bold;"  rendered="{!Cotizador.Apellidos__c != ''}" />
+                        <apex:outputText value="-" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.Apellidos__c == ''}" />
+
+
+                        <apex:outputLabel value="Email: "  style="" ></apex:outputLabel>
+                        <apex:outputText value="{!Cotizador.Email_Contratante_2__c}" style="width: 350px;font-weight: bold;"  rendered="{!Cotizador.Email_Contratante_2__c != ''}" />
+                        <apex:outputText value="-" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.Email_Contratante_2__c == ''}" />
+
+
+                        <apex:outputLabel value="Telefóno: " style=""  ></apex:outputLabel>
+                        <apex:outputText value="{!Cotizador.Telefono_Contratante__c}" style="width: 350px;font-weight: bold;"  rendered="{!Cotizador.Telefono_Contratante__c != ''}" />
+                        <apex:outputText value="-" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.Telefono_Contratante__c == ''}" />
+
+                        <apex:outputLabel value="Región: " style=""  ></apex:outputLabel>
+                        <apex:outputText value="{!Cotizador.Region_Contratante__c}" style="width: 350px;font-weight: bold;"  rendered="{!Cotizador.Region_Contratante__c != ''}" />
+                        <apex:outputText value="-" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.Region_Contratante__c == ''}" />
+
+                            <apex:outputLabel value="Ciudad: " style=""  ></apex:outputLabel>
+                            <apex:outputText value="{!Cotizador.Ciudad_Contratante__c}" style="width: 350px;font-weight: bold;"  rendered="{!Cotizador.Ciudad_Contratante__c != ''}" />
+                            <apex:outputText value="-" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.Ciudad_Contratante__c == ''}" />
+
+                            <apex:outputLabel value="Comuna: " style=""  ></apex:outputLabel>
+                            <apex:outputText value="{!Cotizador.Comuna_Contratante__c}" style="width: 350px;font-weight: bold;"   rendered="{!Cotizador.Comuna_Contratante__c != ''}" />
+                            <apex:outputText value="-" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.Comuna_Contratante__c == ''}" />
+
+
+                            <apex:outputLabel value="Dirección: " style=""  ></apex:outputLabel>
+                            <apex:outputText value="{!Cotizador.Direccion_Contratante__c}" style="width: 350px;font-weight: bold;"   rendered="{!Cotizador.Direccion_Contratante__c != ''}" />
+                            <apex:outputText value="-" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.Direccion_Contratante__c == ''}" />
+
+                   </apex:panelGrid>
+                   <script>
+                   colorPageBlock(document.getElementById("{!$Component.pBs_DatosContratante_SP_ND}"), "#EF861C", "white");
+                   </script>
+                </apex:pageBlockSection>
+
+            <apex:pageBlockSection title="Otro Contratante" columns="1" id="pBs_DatosTercero_SP" rendered="{!AND(Cotizador.Contrata__c == 'T', Cotizador.Asegurable__c == 'SI')}" collapsible="false">
+                <apex:panelGrid columns="6" >
+                    <apex:outputLabel value="RUT: " style=""  ></apex:outputLabel>
+                    <apex:inputField id="RUTTercero" value="{!Cotizador.RUT_Tercero__c}" onchange="actualiza_TerceroRUT();" style="width: 350px;" ></apex:inputField>
+
+                    <apex:outputLabel value="Nombre Completo: " style="" ></apex:outputLabel>
+                    <apex:inputField value="{!Cotizador.Nombre_Tercero__c}"  onchange="actualiza_TerceroNombre();" style="width: 350px;" ></apex:inputField>
+
+                    <apex:outputLabel value="Email: "  style="" ></apex:outputLabel>
+                    <apex:inputField value="{!Cotizador.Correo_Electronico_Tercero__c}" onchange="actualiza_TerceroEmail();" style="width: 350px;"  />
+
+                    <apex:outputLabel value="Telefóno: " style=""  ></apex:outputLabel>
+                    <apex:inputField value="{!Cotizador.Telefono_Tercero__c}" style="width: 350px;" onchange="actualiza_Direccion_Tercero();" ></apex:inputField>
+
+                   <apex:outputLabel value="Región: " style=""  ></apex:outputLabel>
+                    <apex:selectList value="{!Cotizador.Codigo_Region_Tercero__c}" size="1" id="lregiones_tercero" style="width: 350px;" >
+                        <apex:actionSupport event="onchange"   status="Status" reRender="lciudades_tercero,lcomunas_tercero"  action="{!SeleccionRegion_Tercero}"/>
+                        <apex:selectOptions value="{!ListadoRegiones}"/>
+                    </apex:selectList>
+
+                    <apex:outputLabel value="Ciudad: " style=""  ></apex:outputLabel>
+                    <apex:selectList value="{!Cotizador.Codigo_Ciudad_Tercero__c}" size="1" id="lciudades_tercero" style="width: 350px;" >
+                        <apex:actionSupport event="onchange"   status="Status"  reRender="lcomunas_tercero" action="{!SeleccionCiudad_Tercero}"/>
+                        <apex:selectOptions value="{!ListadoCiudades_Tercero}"/>
+                    </apex:selectList>
+
+                    <apex:outputLabel value="Comuna: " style=""  ></apex:outputLabel>
+                    <apex:selectList value="{!Cotizador.Codigo_Comuna_Tercero__c}" size="1" id="lcomunas_tercero" style="width: 350px;" >
+                        <apex:actionSupport event="onchange"   status="Status" reRender="lcomunas_tercero" action="{!SeleccionComuna_Tercero}"  />
+                        <apex:selectOptions value="{!ListadoComunas_Tercero}"/>
+                    </apex:selectList>
+
+                    <apex:outputLabel value="Dirección: " style=""  ></apex:outputLabel>
+                    <apex:inputField value="{!Cotizador.Direccion_Tercero__c}" style="width: 350px;" onchange="actualiza_Direccion_Tercero();" ></apex:inputField>
+
+                </apex:panelGrid>
+                <script>
+                colorPageBlock(document.getElementById("{!$Component.pBs_DatosTercero_SP}"), "#EF861C", "white");
+                </script>
+            </apex:pageBlockSection>
+
+            <apex:pageBlockSection title="Otro Contratante" columns="1" id="pBs_DatosTercero_SP_ND" rendered="{!AND(Cotizador.Contrata__c == 'T', OR(Cotizador.Asegurable__c == 'NO', Cotizador.Asegurable__c == ''))}" collapsible="false">
+                <apex:panelGrid columns="6" >
+
+                    <apex:outputLabel value="RUT: " style=""  ></apex:outputLabel>
+                    <apex:outputText value="{!Cotizador.RUT_Tercero__c}" style="width: 350px;font-weight: bold;"  rendered="{!Cotizador.RUT_Tercero__c != ''}" />
+                    <apex:outputText value="-" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.RUT_Tercero__c == ''}" />
+
+                    <apex:outputLabel value="Nombre Completo: " style="" ></apex:outputLabel>
+                    <apex:outputText value="{!Cotizador.Nombre_Tercero__c}" style="width: 350px;font-weight: bold;"  rendered="{!Cotizador.Nombre_Tercero__c != ''}" />
+                    <apex:outputText value="-" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.Nombre_Tercero__c == ''}" />
+
+                    <apex:outputLabel value="Email: "  style="" ></apex:outputLabel>
+                    <apex:outputText value="{!Cotizador.Correo_Electronico_Tercero__c}" style="width: 350px;font-weight: bold;"  rendered="{!Cotizador.Correo_Electronico_Tercero__c != ''}" />
+                    <apex:outputText value="-" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.Correo_Electronico_Tercero__c == ''}" />
+
+                    <apex:outputLabel value="Telefóno: " style=""  ></apex:outputLabel>
+                    <apex:outputText value="{!Cotizador.Telefono_Tercero__c}" style="width: 350px;font-weight: bold;"  rendered="{!Cotizador.Telefono_Tercero__c != ''}" />
+                    <apex:outputText value="-" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.Telefono_Tercero__c == ''}" />
+
+                    <apex:outputLabel value="Región: " style=""  ></apex:outputLabel>
+                    <apex:outputText value="{!Cotizador.Region_Tercero__c}" style="width: 350px;font-weight: bold;"  rendered="{!Cotizador.Region_Tercero__c != ''}" />
+                    <apex:outputText value="-" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.Region_Tercero__c == ''}" />
+
+                    <apex:outputLabel value="Ciudad: " style=""  ></apex:outputLabel>
+                    <apex:outputText value="{!Cotizador.Ciudad_Tercero__c}" style="width: 350px;font-weight: bold;"  rendered="{!Cotizador.Ciudad_Tercero__c != ''}" />
+                    <apex:outputText value="-" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.Ciudad_Tercero__c == ''}" />
+
+                    <apex:outputLabel value="Comuna: " style=""  ></apex:outputLabel>
+                    <apex:outputText value="{!Cotizador.Comuna_Tercero__c}" style="width: 350px;font-weight: bold;"  rendered="{!Cotizador.Comuna_Tercero__c != ''}" />
+                    <apex:outputText value="-" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.Comuna_Tercero__c == ''}" />
+
+                    <apex:outputLabel value="Dirección: " style=""  ></apex:outputLabel>
+                    <apex:outputText value="{!Cotizador.Direccion_Tercero__c}" style="width: 350px;font-weight: bold;"  rendered="{!Cotizador.Direccion_Tercero__c != ''}" />
+                    <apex:outputText value="-" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.Direccion_Tercero__c == ''}" />
+
+                </apex:panelGrid>
+                <script>
+                colorPageBlock(document.getElementById("{!$Component.pBs_DatosTercero_SP_ND}"), "#EF861C", "white");
+                </script>
+            </apex:pageBlockSection>
+
+            <apex:pageBlockSection title="Pólizas Vigentes" columns="1" id="pBs_PolizasVigentes_SaludProtegida" collapsible="false"  rendered="{!Cotiza == 'Contratante Original'}" >
+                <apex:panelGrid style="text-align: left;" columns="2">
+                    <apex:panelGroup >
+                        <apex:outputLabel value="Póliza Mandatoria: "  style="" ></apex:outputLabel>
+                        <apex:outputLabel value="{!Cotizador.Poliza_Mandatoria__c}" style="font-weight: bold;" ></apex:outputLabel>
+                    </apex:panelGroup>
+                    <apex:commandButton id="cmd_PólizasVigentes" title="Pólizas Vigentes" value="Pólizas Vigentes"  onclick="PolizasContratante('{!Cotizador.RUT_Contratante__c}', '{!Cotizador.Poliza_Mandatoria__c}');" />
+                </apex:panelGrid>
+                <script>
+                colorPageBlock(document.getElementById("{!$Component.pBs_PolizasVigentes_SaludProtegida}"), "#EF861C", "white");
+            </script>
+            </apex:pageBlockSection>
+    </apex:pageBlock>
+
+<!-- SALUD PROTEGIDA -->
+
+
+<!-- APEG -->
+            <apex:pageBlock id="pB_TV_Apeg" rendered="{!Cotizador.Tipo_Campagna__c == 'Televenta - APEG'}">
+                <apex:pageBlockSection title="Información Contratante" columns="1" id="pBs_DatosAsegurado_APEG" collapsible="false"  rendered="{!AND(Cotizador.Validado_WS__c == true,Cotizador.Asegurable__c == 'SI')}" >
+                    <apex:panelGrid columns="6" >
+                        <apex:outputLabel value="RUT Contratante: "  style="" ></apex:outputLabel>
+                        <apex:outputText value="{!Cotizador.RUT_Contratante__c}"  style="width: 350px;font-weight: bold;" />
+                        <apex:outputLabel value="Nombres: " style="" ></apex:outputLabel>
+                        <apex:outputText value="{!Cotizador.Nombres__c}" style="width: 350px;font-weight: bold;"  />
+                        <apex:outputLabel value="Apellidos: " style="" ></apex:outputLabel>
+                        <apex:outputText value="{!Cotizador.Apellidos__c}" style="width: 350px;font-weight: bold;"  />
+                        <apex:outputLabel value="Email: "  style="" ></apex:outputLabel>
+                        <apex:inputField value="{!Cotizador.Email__c}" style="width: 350px;" />
+                        <apex:outputLabel value="Región: " style="" ></apex:outputLabel>
+                        <apex:selectList value="{!Cotizador.Codigo_Region__c}" size="1" id="lregiones" style="width: 350px;" >
+                            <apex:actionSupport event="onchange"   status="Status" reRender="lciudades,lcomunas"  action="{!SeleccionRegion}"/>
+                            <apex:selectOptions value="{!ListadoRegiones}"/>
+                        </apex:selectList>
+                        <apex:outputLabel value="Ciudad: " style="" ></apex:outputLabel>
+                        <apex:selectList value="{!Cotizador.Codigo_Ciudad__c}" size="1" id="lciudades" style="width: 350px;" >
+                            <apex:actionSupport event="onchange"   status="Status"  reRender="lcomunas" action="{!SeleccionCiudad}"/>
+                            <apex:selectOptions value="{!ListadoCiudades}"/>
+                        </apex:selectList>
+                        <apex:outputLabel value="Comuna: " style="" ></apex:outputLabel>
+                        <apex:selectList value="{!Cotizador.Codigo_Comuna__c}" size="1" id="lcomunas" style="width: 350px;" >
+                            <apex:actionSupport event="onchange"   status="Status" reRender="lcomunas" action="{!SeleccionComuna}"  />
+                            <apex:selectOptions value="{!ListadoComunas}"/>
+                        </apex:selectList>
+                        <apex:outputLabel value="Dirección: " style="" ></apex:outputLabel>
+                        <apex:inputText id="txt_DireccionCliente"  value="{!Cotizador.Direccion__c}"   style="width: 350px;" onchange="actualiza_Direccion();" />
+                        <apex:outputLabel value="Fecha de Nacimiento: " style="" ></apex:outputLabel>
+                        <apex:outputField value="{!Cotizador.Fecha_Nacimiento__c}" id="txt_FechaNacimientoContratante" style="width: 350px;"/>
+                        <apex:outputLabel value="Estado Civil: " style="" ></apex:outputLabel>
+                        <apex:selectList value="{!Cotizador.Estado_Civil__c}" size="1" id="estado_values" style="width: 350px;">
+                            <apex:actionSupport event="onchange" status="Status" action="{!SeleccionEstadoCivil}" reRender="estado_values"/>
+                            <apex:selectOptions value="{!ListadoEstadoCivil}"/>
+                        </apex:selectList>
+                        <apex:outputLabel value="Teléfono: " style=""   ></apex:outputLabel>
+
+                        <apex:panelGroup >
+                            <apex:selectList value="{!TelefonoAsegurado}" size="1" id="telefonos_values"  style="width: 180px;"   >
+                                <apex:actionSupport event="onchange"    status="Status"  action="{!SeleccionTelefono}" reRender="telefono_contratante"/>
+                                <apex:selectOptions value="{!ListadoTelefonos}"/>
+                                </apex:selectList>
+                                <apex:inputText value="{!Cotizador.Telefono__c}" style="width: 175px;font-weight: bold;" id="telefono_contratante"  onchange="Actualiza_TelefonoAsegurado();" />
+                        </apex:panelGroup>
+
+
+                        <apex:outputLabel value="Celular: " style="" ></apex:outputLabel>
+                        <apex:panelGroup >
+                            <apex:selectList value="{!CelularAsegurado}" size="1" id="celulares_values" style="width: 180px;"   >
+                            <apex:actionSupport event="onchange"   status="Status" action="{!SeleccionCelular}" reRender="celular_contratante"/>
+                            <apex:selectOptions value="{!ListadoCelulares}"/>
+                        </apex:selectList>
+                        <apex:inputText value="{!Cotizador.Celular__c}" style="width: 175px;font-weight: bold;" id="celular_contratante" onchange="Actualiza_CelularAsegurado();" />
+                        </apex:panelGroup>
+
+                        <apex:outputLabel value="Valor Prima UF: "  ></apex:outputLabel>
+                        <apex:outputText value="{!Cotizador.WS_Valor_UF__c}" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.WS_Valor_UF__c != ''}" />
+                        <apex:outputText value="-" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.WS_Valor_UF__c == ''}" />
+
+                        <apex:outputLabel value="Valor Prima CLP: "  ></apex:outputLabel>
+                        <apex:outputText value="{!Cotizador.WS_Valor_CLP__c}" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.WS_Valor_CLP__c != ''}" />
+                        <apex:outputText value="-" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.WS_Valor_CLP__c == ''}" />
+
+                          <apex:outputLabel value="¿Es Asegurable? : "  ></apex:outputLabel>
+                        <apex:outputText value="{!Cotizador.Asegurable__c}"  style="width: 350px;font-weight:bold;" rendered="{!Cotizador.Asegurable__c != ''}"/>
+
+                   <!--  <apex:commandButton id="btnverificarapeg" value="Verificar" rendered="{!Cotizador.Asegurable__c == ''}" action="{!loadCotizadorExpress}" styleClass="btnDanger" status="Status" oncomplete="alert('Error en respuesta desde Web Services, intente nuevamente mas tarde.');"></apex:commandButton> -->
+
+
+                   <!--     <apex:outputLabel value="Valor Prima UF: "  ></apex:outputLabel>
+                        <apex:outputText value="{!Cotizador.WS_Valor_UF__c}" style="width: 350px;font-weight:bold;" />
+                        <apex:outputLabel value="Valor Prima CLP: " ></apex:outputLabel>
+                        <apex:outputText value="{!Cotizador.WS_Valor_CLP__c}" style="width: 350px;font-weight:bold;" />
+                        <apex:outputLabel value="¿Es Asegurable? : " ></apex:outputLabel>
+                        <apex:outputText value="{!Cotizador.Asegurable__c}"  style="width: 350px;font-weight:bold;" />    -->
+                    </apex:panelGrid>
+                    <script>
+                        colorPageBlock(document.getElementById("{!$Component.pBs_DatosAsegurado_APEG}"), "#EF861C", "white");
+                    </script>
+                </apex:pageBlockSection>
+
+                <apex:pageBlockSection title="Información Contratante" columns="1" id="pBs_DatosAsegurado_APEG_ND" collapsible="false"  rendered="{!Cotizador.Asegurable__c == '' || Cotizador.Asegurable__c == 'NO'}" >
+                    <apex:panelGrid columns="6" >
+                        <apex:outputLabel value="RUT Contratante: "  style="" ></apex:outputLabel>
+                        <apex:outputText value="{!Cotizador.RUT_Contratante__c}"  style="width: 350px;font-weight: bold;" />
+                        <apex:outputLabel value="Nombres: " style="" ></apex:outputLabel>
+                        <apex:outputText value="{!Cotizador.Nombres__c}" style="width: 350px;font-weight: bold;"  />
+                        <apex:outputLabel value="Apellidos: " style="" ></apex:outputLabel>
+                        <apex:outputText value="{!Cotizador.Apellidos__c}" style="width: 350px;font-weight: bold;"  />
+                        <apex:outputLabel value="Email: "  style="" ></apex:outputLabel>
+                        <apex:outputText value="{!Cotizador.Email__c}" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.Email__c != ''}" />
+                        <apex:outputText value="-" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.Email__c == ''}" />
+
+                        <apex:outputLabel value="Región: " style="" ></apex:outputLabel>
+                        <apex:outputText value="{!Cotizador.Region__c}" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.Region__c != ''}" />
+                        <apex:outputText value="-" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.Region__c == ''}" />
+
+                        <apex:outputLabel value="Ciudad: " style="" ></apex:outputLabel>
+                        <apex:outputText value="{!Cotizador.Ciudad__c}" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.Ciudad__c != ''}" />
+                        <apex:outputText value="-" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.Ciudad__c == ''}" />
+
+                        <apex:outputLabel value="Comuna: " style="" ></apex:outputLabel>
+                        <apex:outputText value="{!Cotizador.Comuna__c}" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.Comuna__c != ''}" />
+                        <apex:outputText value="-" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.Comuna__c == ''}" />
+
+                        <apex:outputLabel value="Dirección: " style="" ></apex:outputLabel>
+                        <apex:outputText value="{!Cotizador.Direccion__c}" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.Direccion__c != ''}" />
+                        <apex:outputText value="-" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.Direccion__c == ''}" />
+
+                        <apex:outputLabel value="Fecha de Nacimiento: " style="" ></apex:outputLabel>
+                        <apex:outputField value="{!Cotizador.Fecha_Nacimiento__c}" id="txt_FechaNacimientoContratante" style="width: 350px;" rendered="{!Cotizador.Fecha_Nacimiento__c != null}"/>
+                        <apex:outputText value="-" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.Fecha_Nacimiento__c == null}" />
+
+                        <apex:outputLabel value="Estado Civil: " style="" ></apex:outputLabel>
+                        <apex:outputText value="{!Cotizador.Estado_Civil__c}" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.Estado_Civil__c != ''}" />
+                        <apex:outputText value="-" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.Estado_Civil__c == ''}" />
+
+                        <apex:outputLabel value="Teléfono: " style=""   ></apex:outputLabel>
+                        <apex:outputText value="{!Cotizador.Telefono__c}" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.Telefono__c != ''}" />
+                        <apex:outputText value="-" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.Telefono__c == ''}" />
+
+                        <apex:outputLabel value="Celular: " style="" ></apex:outputLabel>
+                        <apex:outputText value="{!Cotizador.Celular__c}" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.Celular__c != ''}" />
+                        <apex:outputText value="-" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.Celular__c == ''}" />
+
+                        <apex:outputLabel value="Valor Prima UF: "  ></apex:outputLabel>
+                        <apex:outputText value="{!Cotizador.WS_Valor_UF__c}" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.WS_Valor_UF__c != ''}" />
+                        <apex:outputText value="-" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.WS_Valor_UF__c == ''}" />
+
+                        <apex:outputLabel value="Valor Prima CLP: "  ></apex:outputLabel>
+                        <apex:outputText value="{!Cotizador.WS_Valor_CLP__c}" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.WS_Valor_CLP__c != ''}" />
+                        <apex:outputText value="-" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.WS_Valor_CLP__c == ''}" />
+
+                          <apex:outputLabel value="¿Es Asegurable? : "  ></apex:outputLabel>
+                        <apex:outputText value="{!Cotizador.Asegurable__c}"  style="width: 350px;font-weight:bold;" rendered="{!Cotizador.Asegurable__c != ''}"/>
+                        <apex:commandButton id="btnverificarapeg" value="Verificar" rendered="{!Cotizador.Asegurable__c == ''}" action="{!loadCotizadorExpress}" styleClass="btnDanger" status="Status" oncomplete="alert('Error en respuesta desde Web Services, intente nuevamente mas tarde.');"></apex:commandButton>
+<!--
+                        <apex:outputText value="{!Cotizador.Asegurable__c}"  style="width: 350px;font-weight:bold;color:red;" rendered="{!Cotizador.Asegurable__c != ''}"/>
+                        <apex:commandButton id="btnverificarsp" value="Verificar" rendered="{!Cotizador.Asegurable__c == ''}" action="{!loadCotizadorExpress}" styleClass="btnDanger" status="Status" oncomplete="" reRender="pBs_DatosAsegurado_SP"></apex:commandButton>
+-->
+                    </apex:panelGrid>
+                    <script>
+                        colorPageBlock(document.getElementById("{!$Component.pBs_DatosAsegurado_APEG_ND}"), "#EF861C", "white");
+                    </script>
+                </apex:pageBlockSection>
+
+                <apex:pageBlockSection title="Pólizas Vigentes" columns="1" id="pBs_PolizasVigentes_APEG" collapsible="false"    rendered="{!Cotizador.Carga_Cliente__c == 'Existente'}">
+                    <apex:panelGrid style="text-align: left;" columns="2">
+                        <apex:panelGroup >
+                            <apex:outputLabel value="Póliza Mandatoria: "  style="" ></apex:outputLabel>
+                            <apex:outputLabel value="{!Cotizador.Poliza_Mandatoria__c}" style="font-weight: bold;" ></apex:outputLabel>
+                        </apex:panelGroup>
+                        <apex:commandButton id="cmd_PólizasVigentes" title="Pólizas Vigentes" value="Pólizas Vigentes"  onclick="PolizasContratante('{!Cotizador.RUT_Contratante__c}', '{!Cotizador.Poliza_Mandatoria__c}');" />
+                   </apex:panelGrid>
+                   <script>
+                    colorPageBlock(document.getElementById("{!$Component.pBs_PolizasVigentes_APEG}"), "#EF861C", "white");
+                </script>
+                </apex:pageBlockSection>
+            </apex:pageBlock>
+
+<!-- APEG -->
+
+<!-- ONCO -->
+            <apex:pageBlock id="pB_TV_Oncologico" rendered="{!Cotizador.Tipo_Campagna__c == 'Televenta - Oncológico'}">
+                <apex:pageBlockSection title="Asegurado Titular" columns="1" id="pBs_DatosAseguradoOncologico" collapsible="false"  rendered="{!AND(Cotizador.Validado_WS__c == true,Cotizador.Asegurable__c == 'SI')}"  >
+                    <apex:panelGrid columns="6" >
+                        <apex:outputLabel value="RUT Contratante: "  style="" ></apex:outputLabel>
+                        <apex:outputText value="{!Cotizador.RUT_Contratante__c}"  style="width: 350px;font-weight: bold;" />
+                        <apex:outputLabel value="Nombres: " style="" ></apex:outputLabel>
+                        <apex:outputText value="{!Cotizador.Nombres__c}" style="width: 350px;font-weight: bold;"  />
+                        <apex:outputLabel value="Apellidos: " style="" ></apex:outputLabel>
+                        <apex:outputText value="{!Cotizador.Apellidos__c}" style="width: 350px;font-weight: bold;"  />
+                        <apex:outputLabel value="Email: "  style="" ></apex:outputLabel>
+                        <apex:inputField value="{!Cotizador.Email__c}" style="width: 350px;" />
+                        <apex:outputLabel value="Región: " style="" ></apex:outputLabel>
+                        <apex:selectList value="{!Cotizador.Codigo_Region__c}" size="1" id="lregiones" style="width: 350px;" >
+                            <apex:actionSupport event="onchange"   status="Status" reRender="lciudades,lcomunas"  action="{!SeleccionRegion}"/>
+                            <apex:selectOptions value="{!ListadoRegiones}"/>
+                        </apex:selectList>
+                        <apex:outputLabel value="Ciudad: " style="" ></apex:outputLabel>
+                        <apex:selectList value="{!Cotizador.Codigo_Ciudad__c}" size="1" id="lciudades" style="width: 350px;" >
+                            <apex:actionSupport event="onchange"   status="Status"  reRender="lcomunas" action="{!SeleccionCiudad}"/>
+                            <apex:selectOptions value="{!ListadoCiudades}"/>
+                        </apex:selectList>
+                        <apex:outputLabel value="Comuna: " style="" ></apex:outputLabel>
+                        <apex:selectList value="{!Cotizador.Codigo_Comuna__c}" size="1" id="lcomunas" style="width: 350px;" >
+                            <apex:actionSupport event="onchange"   status="Status" reRender="lcomunas" action="{!SeleccionComuna}"  />
+                            <apex:selectOptions value="{!ListadoComunas}"/>
+                        </apex:selectList>
+                        <apex:outputLabel value="Dirección: " style="" ></apex:outputLabel>
+                        <apex:inputText id="txt_DireccionCliente"  value="{!Cotizador.Direccion__c}"   style="width: 350px;" onchange="actualiza_Direccion();" />
+                        <apex:outputLabel value="Fecha de Nacimiento: " style="" ></apex:outputLabel>
+                        <apex:outputField value="{!Cotizador.Fecha_Nacimiento__c}" id="txt_FechaNacimientoContratante" style="width: 350px;"/>
+                        <apex:outputLabel value="Estado Civil: " style="" ></apex:outputLabel>
+                        <apex:selectList value="{!Cotizador.Estado_Civil__c}" size="1" id="estado_values" style="width: 350px;">
+                            <apex:actionSupport event="onchange" status="Status" action="{!SeleccionEstadoCivil}" reRender="estado_values"/>
+                            <apex:selectOptions value="{!ListadoEstadoCivil}"/>
+                        </apex:selectList>
+                        <apex:outputLabel value="Teléfono: " style=""   ></apex:outputLabel>
+                        <!-- <apex:selectList value="{!Cotizador.Telefono__c}" size="1" id="telefonos_values"  style="width: 350px;"   >
+                        <apex:actionSupport event="onchange"    status="Status"  action="{!SeleccionTelefono}"/>
+                        <apex:selectOptions value="{!ListadoTelefonos}"/>
+                        </apex:selectList> -->
+
+                        <apex:panelGroup >
+                            <apex:selectList value="{!TelefonoAsegurado}" size="1" id="telefonos_values"  style="width: 180px;"   >
+                                <apex:actionSupport event="onchange"    status="Status"  action="{!SeleccionTelefono}" reRender="telefono_contratante"/>
+                                <apex:selectOptions value="{!ListadoTelefonos}"/>
+                                </apex:selectList>
+                                <apex:inputText value="{!Cotizador.Telefono__c}" style="width: 175px;font-weight: bold;" id="telefono_contratante"  onchange="Actualiza_TelefonoAsegurado();" />
+                        </apex:panelGroup>
+
+                        <apex:outputLabel value="Celular: " style="" ></apex:outputLabel>
+                        <!-- <apex:selectList value="{!Cotizador.Celular__c}" size="1" id="celulares_values" style="width: 350px;"   >
+                            <apex:actionSupport event="onchange"   status="Status" action="{!SeleccionCelular}" />
+                            <apex:selectOptions value="{!ListadoCelulares}"/>
+                        </apex:selectList> -->
+
+                        <apex:panelGroup >
+                            <apex:selectList value="{!CelularAsegurado}" size="1" id="celulares_values" style="width: 180px;"   >
+                            <apex:actionSupport event="onchange"   status="Status" action="{!SeleccionCelular}" reRender="celular_contratante"/>
+                            <apex:selectOptions value="{!ListadoCelulares}"/>
+                        </apex:selectList>
+                        <apex:inputText value="{!Cotizador.Celular__c}" style="width: 175px;font-weight: bold;" id="celular_contratante" onchange="Actualiza_CelularAsegurado();" />
+                        </apex:panelGroup>
+
+                       <!-- <apex:commandButton id="btnverificaron" value="¿es Asegurable?" rendered="{!Cotizador.Validado_WS__c == false}" action="{!loadCotizadorExpress}" styleClass="btnDanger" status="Status"  oncomplete="alert('Error en respuesta desde Web Services, intente nuevamente mas tarde.');"></apex:commandButton>-->
+
+                    </apex:panelGrid>
+                    <script>
+                        colorPageBlock(document.getElementById("{!$Component.pBs_DatosAseguradoOncologico}"), "#EF861C", "white");
+                    </script>
+                </apex:pageBlockSection>
+                <apex:pageBlockSection title="Asegurado Titular" columns="1" id="pBs_DatosAseguradoOncologico_ND" collapsible="false"   rendered="{!Cotizador.Asegurable__c == '' || Cotizador.Asegurable__c == 'NO'}" >
+                    <apex:panelGrid columns="6" >
+                        <apex:outputLabel value="RUT Contratante: "  style="" ></apex:outputLabel>
+                        <apex:outputText value="{!Cotizador.RUT_Contratante__c}"  style="width: 350px;font-weight: bold;" />
+                        <apex:outputLabel value="Nombres: " style="" ></apex:outputLabel>
+                        <apex:outputText value="{!Cotizador.Nombres__c}" style="width: 350px;font-weight: bold;"  />
+                        <apex:outputLabel value="Apellidos: " style="" ></apex:outputLabel>
+                        <apex:outputText value="{!Cotizador.Apellidos__c}" style="width: 350px;font-weight: bold;"  />
+                        <apex:outputLabel value="Email: "  style="" ></apex:outputLabel>
+                        <apex:outputText value="{!Cotizador.Email__c}" style="width: 350px;font-weight: bold;"  />
+
+                        <apex:outputLabel value="Región: " style="" ></apex:outputLabel>
+                        <apex:outputText value="{!Cotizador.Region__c}" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.Region__c != ''}" />
+                        <apex:outputText value="-" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.Region__c == ''}" />
+
+                        <apex:outputLabel value="Ciudad: " style="" ></apex:outputLabel>
+                        <apex:outputText value="{!Cotizador.Ciudad__c}" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.Ciudad__c != ''}" />
+                        <apex:outputText value="-" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.Ciudad__c == ''}" />
+
+                        <apex:outputLabel value="Comuna: " style="" ></apex:outputLabel>
+                        <apex:outputText value="{!Cotizador.Comuna__c}" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.Comuna__c != ''}" />
+                        <apex:outputText value="-" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.Comuna__c == ''}" />
+
+                        <apex:outputLabel value="Dirección: " style="" ></apex:outputLabel>
+                        <apex:outputText value="{!Cotizador.Direccion__c}" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.Direccion__c != ''}" />
+                        <apex:outputText value="-" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.Direccion__c == ''}" />
+
+                        <apex:outputLabel value="Fecha de Nacimiento: " style="" ></apex:outputLabel>
+                         <apex:outputField value="{!Cotizador.Fecha_Nacimiento__c}" id="txt_FechaNacimientoContratante" style="width: 350px;" rendered="{!Cotizador.Fecha_Nacimiento__c != null}"/>
+                        <apex:outputText value="-" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.Fecha_Nacimiento__c == null}" />
+
+                        <apex:outputLabel value="Estado Civil: " style="" ></apex:outputLabel>
+                        <apex:outputText value="{!Cotizador.Estado_Civil__c}" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.Estado_Civil__c != ''}" />
+                        <apex:outputText value="-" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.Estado_Civil__c == ''}" />
+
+                        <apex:outputLabel value="Teléfono: " style=""   ></apex:outputLabel>
+                        <apex:outputText value="{!Cotizador.Telefono__c}" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.Telefono__c != ''}" />
+                        <apex:outputText value="-" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.Telefono__c == ''}" />
+
+                        <apex:outputLabel value="Celular: " style="" ></apex:outputLabel>
+                        <apex:outputText value="{!Cotizador.Celular__c}" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.Celular__c != ''}" />
+                        <apex:outputText value="-" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.Celular__c == ''}" />
+
+                        <apex:outputLabel value="¿Es Asegurable? : "  rendered="{!Cotizador.Validado_WS__c == true}"></apex:outputLabel>
+                        <apex:commandButton id="btnverificaron" value="¿es Asegurable?" rendered="{!Cotizador.Validado_WS__c == false}" action="{!loadCotizadorExpress}" styleClass="btnDanger" status="Status"  oncomplete="alert('Error en respuesta desde Web Services, intente nuevamente mas tarde.');"></apex:commandButton>
+                        <apex:outputText value="NO" style="width: 350px;font-weight:bold;" rendered="{!Cotizador.Validado_WS__c == true}" />
+
+                    </apex:panelGrid>
+                    <script>
+                        colorPageBlock(document.getElementById("{!$Component.pBs_DatosAseguradoOncologico_ND}"), "#EF861C", "white");
+                    </script>
+                </apex:pageBlockSection>
+
+                <apex:pageBlockSection title="Pólizas Vigentes" columns="1" id="pBs_PolizasVigentes_Oncologico" collapsible="false"  rendered="{!Cotizador.Carga_Cliente__c == 'Existente'}">
+                    <apex:panelGrid style="text-align: left;" columns="1">
+                        <apex:panelGroup >
+                            <apex:outputLabel value="Póliza Mandatoria: "  style="" ></apex:outputLabel>
+                            <apex:outputLabel value="{!Cotizador.Poliza_Mandatoria__c}" style="font-weight: bold;widht:350px;" ></apex:outputLabel>
+                        </apex:panelGroup>
+                        <br/>
+                        <apex:commandButton id="cmd_PólizasVigentes" title="Pólizas Vigentes" value="Pólizas Vigentes"  onclick="PolizasContratante('{!Cotizador.RUT_Contratante__c}', '{!Cotizador.Poliza_Mandatoria__c}');" />
+                   </apex:panelGrid>
+                   <script>
+                    colorPageBlock(document.getElementById("{!$Component.pBs_PolizasVigentes_Oncologico}"), "#EF861C", "white");
+                </script>
+                </apex:pageBlockSection>
+
+                <apex:pageBlockSection title="Asegurados Dependientes" columns="1" id="pBs_DatosAsegurado_OncoCargas"  collapsible="false"  rendered="{!AND(Cotizador.Validado_WS__c == true,Cotizador.Asegurable__c == 'SI')}">
+                    <center>
+                        <!-- Validamos si Producto Oferta Campaña sea Oncológico o APEG (19 = Oncológico ; 66 = APEG) -->
+                        <div style="display:{!IF(Cotizador.Tipo_Producto__c='19','show','none')}">
+                            <img onclick="agrega_nueva_fila_Grilla_Asegurado()" src="{!URLFOR($Resource.CotizadorExpress,'images/iadd.png')}" style="height: 24px; width: 24px;"  />
+                            <br/>
+                            Agregar Asegurado
+
+                            <br/>
+                        </div>
+                    </center>
+                    <br/>
+                    <table id="tbl_datoscargas" width="100%" border="0">
+                        <tr id="10000" style="background-color:lightgrey;">
+                            <th width="5%" align="center">
+                                Acción
+                            </th>
+                            <th width="5%" align="center">
+                                #
+                            </th>
+                            <th width="20%" align="center">
+                                Fecha Nacimiento
+                            </th>
+                            <th width="20%" align="center">
+                                Parentesco
+                            </th>
+                            <th width="20%" align="center">
+                                Prima Mensual UF
+                            </th>
+                            <th width="20%" align="center">
+                                Prima Mensual CLP
+                            </th>
+                            <th width="10%" align="center">
+                                ¿Es Asegurable?
+                            </th>
+                            <th width="10%" align="center" style="display:none;" >
+                                Id IdSalesforce
+                            </th>
+                        </tr>
+                        <tr id="1" style="borderBottom = 2px; borderBottomColor = darkorange;">
+                            <td width="5%" align="center" style="text-align:center;">
+                                &nbsp;
+                            </td>
+                            <td width="10%" align="left">
+                                1
+                            </td>
+                            <td width="20%" align="left">
+                                <input type="date" id="dt_1_ASDE_FENACIMIENTO"  name="dt_1_ASDE_FENACIMIENTO" value="" readonly="true" style="border:none;text-align: right;" />
+                            </td>
+                            <td width="20%" align="left">
+                                <input type="text" id="sel_1_ASDE_PARENTESCO"  name="sel_1_ASDE_PARENTESCO"  maxlength="20"  value="CONTRATANTE"   readonly="true" style="border:none;text-align: left;" />
+                            </td>
+                            <td width="20%" align="left">
+                                <input type="text" id="txt_1_ASDE_VALORUF"  name="txt_1_ASDE_VALORUF" size="10" maxlength="20" value="0"    readonly="true" style="border:none;text-align: right;" />
+                            </td>
+                            <th width="20%" align="left">
+                                <input type="text" id="txt_1_ASDE_VALORCLP"  name="txt_1_ASDE_VALORCLP" size="10" maxlength="20" value="0"  readonly="true" style="border:none;text-align: right;" />
+                            </th>
+                            <td width="10%" align="left">
+                                <input type="text" readonly="true" id="lbl_1_ASDE_ASEGURABLE" name="lbl_1_ASDE_ASEGURABLE" value="" style="border:none;text-align: center;"/>
+                            </td>
+                            <td width="10%" align="left" style="display:none;">
+                                <input type="text" readonly="true" id="lbl_1_IDSALESFORCE" name="lbl_1_IDSALESFORCE" value="" style="border:none;text-align: center;"/>
+                            </td>
+                        </tr>
+                        <!-- FILAS AGREGADAS POR CÓDIGO -->
+                        <tr id="10001" style="background-color: lightgrey; border-top: 2px solid darkorange;">
+                            <th width="5%" align="center" >
+                            </th>
+                            <th width="5%" align="center">
+                            </th>
+                            <th width="20%" align="left">
+                            </th>
+                            <th width="20%" align="left">
+                                <b>
+                                    Total
+                                </b>
+                            </th>
+                            <th width="20%" align="left">
+                                <b>
+                                    <input type="text" id="txt_TotalUF" name="txt_TotalUF" size="10" value="0"  readonly="true" style="border:none;text-align: right; font-weight: bold; background: lightgrey;" />
+                                </b>
+                            </th>
+                            <th width="20%" align="left">
+                                <b>
+                                    <input type="text" id="txt_TotalCLP" name="txt_TotalCLP" size="10" value="0"  readonly="true" style="border:none;text-align: right; font-weight: bold; background: lightgrey;" />
+                                </b>
+                            </th>
+                            <th width="10%" align="left">
+                            </th>
+                        </tr>
+                    </table>
+                    <br/>
+                    <script>
+                            colorPageBlock(document.getElementById("{!$Component.pBs_DatosAsegurado_OncoCargas}"), "#EF861C", "white");
+                    </script>
+                </apex:pageBlockSection>
+
+                      <!-- Validamos si Producto Oferta Campaña sea Oncológico o APEG (19 = Oncológico ; 66 = APEG) -->
+                        <!-- INFO CUESTIONARIO VENTA -->
+                <apex:pageBlockSection title="Cuestionario VENTA (DPS)" columns="1" id="pBs_DPS"  rendered="{!Cotizador.Asegurable__c == 'SI'}">
+                    <div style="width: 100%; margin-left: auto; margin-right: auto;">
+                        <table id="tbl_datoscuestionarioDPS" width="100%" border="0">
+
+                            <tr id="tr_pregDPS_1">
+
+                                <th id="celda_PREG_1" width="70%" align="center" style="border-bottom: 1px solid darkorange;">
+                                    <p>
+                                        A) ¿Usted o alguno de los asegurados propuestos ha sido diagnosticado alguna vez por cáncer, leucemia, linfoma, o tumor maligno de cualquier tipo?
+                                    </p>
+                                </th>
+
+                                <th id="celda_RESP_PREG_1" width="30%" align="center" style="border-bottom: 1px solid darkorange;">
+                                </th>
+
+                            </tr>
+
+                            <tr id="tr_pregDPS_2">
+
+                                <th id="celda_PREG_2" width="70%" align="center" style="border-bottom: 1px solid darkorange;">
+                                        B) ¿Usted o alguno de los asegurados propuestos tiene <strong>2 o más</strong> parientes directos (padres o hermanos) que haya sido diagnosticado con lo indicado anteriormente?
+                                </th>
+
+                                <th id="celda_RESP_PREG_2" width="30%" align="center" style="border-bottom: 1px solid darkorange;">
+                                </th>
+
+                            </tr>
+
+                            <tr id="tr_pregDPS_3">
+
+                                <th id="celda_PREG_3" width="70%" align="center" style="border-bottom: 1px solid darkorange;">
+                                    C) ¿Usted o alguno de los asegurados propuestos ha sido diagnosticado alguna vez por Hepatitis B o C, SIDA, o es portador del <strong>VIH</strong> y/o Virus Papiloma Humano?
+                                </th>
+
+                                <th id="celda_RESP_PREG_3" width="30%" align="center" style="border-bottom: 1px solid darkorange;">
+                                </th>
+
+                            </tr>
+
+                            <tr id="tr_pregDPS_4" style="display: {!IF(Cotizador.Carga_Cliente__c ='Nuevo', 'show', 'none')}">
+
+                                <th id="celda_PREG_4" width="70%" align="center" style="border-bottom: 1px solid darkorange;">
+                                    D) ¿Ud. o alguno de los asegurados propuestos ha sido diagnosticado alguna vez por presentar algún <strong>nódulo</strong> o tumor benigno de la próstata, de las mamas,<br/>
+                                    de la tiroides, del cerebro, del riñón, de la piel o una lesión precancerosa en el cuello del útero (como por ejemplo, NIE)?
+                                </th>
+
+                                <th id="celda_RESP_PREG_4" width="30%" align="center" style="border-bottom: 1px solid darkorange;">
+                                </th>
+
+                            </tr>
+
+                            <tr id="tr_pregDPS_5" style="display: {!if(Cotizador.Carga_Cliente__c ='Nuevo', 'show', 'none')}">
+
+                                <th id="celda_PREG_5" width="70%" align="center" style="border-bottom: 1px solid darkorange;">
+                                    E) ¿Ud. o alguno de los asegurados propuestos ha tenido una disminución de peso no intencional de más de 5 kilos en el último año?
+                                </th>
+
+                                <th id="celda_RESP_PREG_5" width="30%" align="center" style="border-bottom: 1px solid darkorange;">
+                                </th>
+
+                            </tr>
+
+                        </table>
+                    </div>
+                    <script>
+                        colorPageBlock(document.getElementById("{!$Component.pBs_DPS}"), "#EF861C", "white");
+                        </script>
+                </apex:pageBlockSection>
+            </apex:pageBlock>
+<!-- ONCO -->
+
+<!-- FOOTER -->
+            <apex:pageBlock id="pB_InformacionCotizacion" >
+                    <apex:pageBlockSection title="Información Cotizacion" columns="1" id="pBs_DatosCotizacion" collapsible="false"  >
+
+                        <apex:panelGrid columns="6" id="datosCotizacion" >
+                            <apex:outputLabel value="Fecha de Creación: "   ></apex:outputLabel>
+                            <apex:outputText style="font-weight:bold;" value="{!FechaCreacion}" />
+
+                            <apex:outputLabel value="Fecha último Cambio: "  ></apex:outputLabel>
+                            <apex:outputText style="font-weight:bold;" value="{!FechaActualizacion}" />
+
+                            <apex:outputLabel value="Estado: "  ></apex:outputLabel>
+                            <apex:outputText style="font-weight:bold;" value="{!EstadoCotizacion}" />
+
+                        </apex:panelGrid>
+                        <script>
+                            colorPageBlock(document.getElementById("{!$Component.pBs_DatosCotizacion}"), "#A8CDF7", "white");
+                            </script>
+                    </apex:pageBlockSection>
+                </apex:pageBlock>
+<!-- FOOTER -->
+
+        </apex:form>
+    </div>
+
+    <script>
+        //alert('{!Cotizador.Tipo_Campagna__c}');
+        if ('{!Cotizador.Tipo_Campagna__c}' == 'Televenta - Oncológico')
+        {
+            cargaInicial();
+        }
+ //     else{alert('{!Cotizador.Contrata__c}');}
+    </script>
+</apex:page>

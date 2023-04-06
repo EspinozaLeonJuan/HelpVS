@@ -1,0 +1,14 @@
+<apex:page standardController="Account">
+
+  <script type="text/javascript">   
+   
+    var a = "{!Account.Cantidad_Polizas_RV_Activas__c}";
+    var b = "{!Account.Edad_cliente__c}"; 
+    if (a > 0 && b < 78)
+    { 
+      window.alert("Cliente es pensionado, revisar oferta de crédito en 'Crédito Disponible'.");
+    } 
+
+  </script> 
+  
+</apex:page>

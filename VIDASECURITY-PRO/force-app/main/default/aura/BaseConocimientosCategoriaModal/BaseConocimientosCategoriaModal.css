@@ -1,0 +1,12 @@
+.THIS {
+}
+
+.THIS .iconsParentCategory{
+	display: inline;
+	cursor: pointer;
+	margin-left: 5px;
+}
+
+.THIS .slds-modal__footer {
+	margin: 10px;
+}

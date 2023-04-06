@@ -1,0 +1,176 @@
+<apex:page standardController="Case" extensions="EscritorioDigitalError_Controller" sidebar="true" lightningStylesheets="true">
+    <style>
+             
+.popupBackground {
+        /* Background color */
+        background-color:black;
+        opacity: 0.5;
+        filter: alpha(opacity = 50);
+        
+        /* Dimensions */
+        width: 90%;
+        height: 100%;       
+        top: 0;
+        left: 50;
+        z-index: 998;
+        position: absolute;        
+        /* Mouse */
+        cursor:wait;
+    }
+            
+    .popupPanel {
+       /* Background color */
+        border: solid 2px orange;
+        background-color: white;        
+        /* Dimensions */
+        display: inline-block;
+  	    left: 50%;
+        width: 100px;
+        margin-left: 0px;
+        top: 100px;
+        height: 25px;
+        margin-top: -25px;
+        position: absolute;   
+        z-index: 999;        
+        /* Mouse */
+        cursor:pointer;;
+    }
+
+    </style>
+    
+    
+    <script>
+      
+    function RequerimientoEliminado() {  
+        alert('El Requerimiento número {!IdRequerimiento} ha sido eliminado.');
+        ToCase();
+    }
+    
+    function ConfirmaEliminar() {
+        
+        var seleccion = confirm("Esta seguro de eliminar el Requerimiento número {!IdRequerimiento}?");
+        
+        if (seleccion)
+        {   
+           
+        }           
+        else
+        {
+            event.dispose();
+        }        
+    }
+</script>
+    
+     <apex:actionStatus id="Status">
+        <apex:facet name="start">
+            <apex:outputPanel >
+                <div class="popupBackground" />
+                <div class="popupPanel">
+                    &nbsp; Espere...<img src="/apexpages/devmode/img/saveStatus.gif" />
+                </div>
+            </apex:outputPanel> 
+        </apex:facet>
+    </apex:actionStatus>
+    <apex:form id="EscritorioDigitalError_Form">
+           
+          <!-- 
+
+<apex:actionFunction action="{!ToRefresh}" name="ToRefresh"/> 
+-->
+        <apex:actionFunction action="{!ToCase}" name="ToCase"/>
+         <apex:actionFunction action="{!eliminarRequerimiento}" name="eliminarRequerimiento"/>        
+                
+        
+           
+        <apex:outputPanel > 
+            <apex:sectionHeader title="Escritorio Digital"/>  
+            
+            <apex:pageblock id="ConRequerimiento" rendered="{!Panel == 'REQ_DETAIL' }"> 	    
+           
+                <apex:panelGrid columns="3">
+                    &nbsp;
+                    <apex:outputLabel >Número de Caso:</apex:outputLabel>      
+                  <apex:commandLink action="{!ToCase}" value="{!NumeroCaso}" />                       
+                    
+                    &nbsp;
+                    <apex:outputLabel >Id Requerimiento:</apex:outputLabel>      
+                    <apex:outputLabel value="{!IdRequerimiento}"></apex:outputLabel>
+                    
+			       &nbsp;
+                    <apex:outputLabel >RUT Titular:</apex:outputLabel>      
+                    <apex:outputLabel value="{!RUTTitular}"></apex:outputLabel>
+                    
+                    &nbsp;
+                    <apex:outputLabel >Nombre Titular:</apex:outputLabel>      
+                    <apex:outputLabel value="{!NombreTitular}"></apex:outputLabel>
+                    
+                    &nbsp;
+                    <apex:outputLabel >Poliza Titular:</apex:outputLabel>      
+                    <apex:outputLabel value="{!Poliza}" ></apex:outputLabel>
+                    
+                    &nbsp;
+                    <apex:outputLabel >Tipo Requerimiento Caso:</apex:outputLabel>     
+                    <apex:outputLabel value="{!TipoRequerimientoSF}"></apex:outputLabel>
+                   
+                    
+                    &nbsp;
+                    <apex:outputLabel >Detalle Solicitud:</apex:outputLabel>     
+                    <apex:outputLabel value="{!DetalleSolicitud}"></apex:outputLabel>
+                    
+                       &nbsp;
+                    <apex:outputLabel >Solicitante:</apex:outputLabel>      
+                    <apex:outputLabel value="{!Solicitante}"></apex:outputLabel>
+                
+                                    
+                 </apex:panelGrid>
+
+               
+            </apex:pageblock>
+            
+             <apex:pageblock id="SinRequerimiento" rendered="{!Panel == 'REQ_NOT_FOUND' }"> 	    
+           
+                <apex:panelGrid columns="3">
+                    &nbsp;
+                    <apex:outputLabel >Número de Caso:</apex:outputLabel>      
+                  <apex:commandLink action="{!ToCase}" value="{!NumeroCaso}" />                       
+                      
+			       &nbsp;
+                    <apex:outputLabel >RUT Titular:</apex:outputLabel>      
+                    <apex:outputLabel value="{!RUTTitular}"></apex:outputLabel>
+                    
+                    &nbsp;
+                    <apex:outputLabel >Nombre Titular:</apex:outputLabel>      
+                    <apex:outputLabel value="{!NombreTitular}"></apex:outputLabel>
+                    
+                    &nbsp;
+                    <apex:outputLabel >Poliza Titular:</apex:outputLabel>      
+                    <apex:outputLabel value="{!Poliza}" ></apex:outputLabel>
+                    
+                    &nbsp;
+                    <apex:outputLabel >Tipo Requerimiento Caso:</apex:outputLabel>     
+                    <apex:outputLabel value="{!TipoRequerimientoSF}"></apex:outputLabel>
+                   
+                    &nbsp;
+                    <apex:outputLabel >Detalle Solicitud:</apex:outputLabel>     
+                    <apex:outputLabel value="{!EtiquetaSolicitud}"></apex:outputLabel>
+                       &nbsp;
+                    <apex:outputLabel >Solicitante:</apex:outputLabel>      
+                    <apex:outputLabel value="{!Solicitante}"></apex:outputLabel>
+                 </apex:panelGrid>
+            </apex:pageblock>
+             <apex:pageblock id="ErrorDeriva" rendered="{!ErrorDerivacion == 'SI' }"> 	    
+                 <apex:panelGrid columns="2">
+                    <!-- <input type="button" onclick="ConfirmaEliminar();"  class="btn" value="Eliminar Requerimiento" />-->
+                         <apex:commandButton status="Status" value="Eliminar Requerimiento"  
+                             onclick="ConfirmaEliminar();" action="{!eliminarRequerimiento}"   oncomplete="RequerimientoEliminado();"/>     
+              
+   <!-- <apex:commandButton onclick="ConfirmaEliminar()" action="{!eliminarRequerimiento}" status="Status" value="Eliminar Requerimiento" 
+                                          oncomplete="RequerimientoEliminado();"/>   -->                  
+                 </apex:panelGrid>
+            </apex:pageblock>
+           </apex:outputPanel>
+           
+    </apex:form>
+           
+       <apex:pageMessages id="showmsg" escape="true"></apex:pageMessages>
+</apex:page>

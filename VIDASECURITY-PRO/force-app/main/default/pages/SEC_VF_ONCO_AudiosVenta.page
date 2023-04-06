@@ -1,0 +1,33 @@
+<apex:page standardController="Opportunity" 
+           lightningStylesheets="true" 
+           sidebar="false" 
+           showHeader="false" 
+           standardStylesheets="false">
+<!--	<apex:iframe id="ifr_AudioPropuestaTeleventa" 
+                 src="http://www.valueweb.cl/vwnet_vidasecurity_visorpost/default.aspx?Archivador=1&TIPODEDOCUMENTO=PROPSAAP&compaginado=False&PROPUESTA={!Opportunity.OPOR_N_Propuesta__c}"
+                 frameborder="false"
+                 rendered="true"
+                 width="auto"
+                 height="300px"
+                 scrolling="true">
+  		</apex:iframe>
+-->
+        
+ 
+         
+
+    
+    <button  class="btn" onclick="myFunction()">
+        Documentos Digitalizados
+    </button>
+ 
+    <script>
+function myFunction() {
+    window.open("http://www.valueweb.cl/vwnet_vidasecurity_visorpost/default.aspx?Archivador=1&TIPODEDOCUMENTO=PROPSAAP&compaginado=False&PROPUESTA={!Opportunity.OPOR_N_Propuesta__c}");
+}
+</script>
+
+    
+    
+    
+</apex:page>

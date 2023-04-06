@@ -1,0 +1,84 @@
+<!--
+  @description       :
+  @author            : Juan Espinoza León
+  @group             :
+  @last modified on  : 09-04-2022
+  @last modified by  : Juan Espinoza León
+-->
+<template>
+    <template if:true={showLoadingSpinner}>
+        <div style="z-index: 10000 !important;">
+            <lightning-spinner alternative-text="Uploading......" size="medium" style="z-index: 10000 !important;"></lightning-spinner>
+        </div>
+    </template>
+
+
+    <lightning-card title="Carga de Remesas a Valuetech">
+
+        <div class="slds-grid">
+
+            <div class="slds-col slds-size_2-of-7" style="text-align: left;">
+                    <div style="margin-left:4%; margin:0px auto; width: 300px;">
+                        <div>
+                            <lightning-input label="" name="file uploader" onchange={handleFilesChange} type="file"  if:false={uploadCompleted} ></lightning-input>
+                        </div><br/>
+                        <div class="slds-text-body_small slds-text-color_error">
+                            <label class="slds-form-element__label"  style="color:red" if:false={uploadCompleted} for="form-element-01">{fileName}</label>
+
+                        </div>
+
+                        <div class="slds-grid">
+                            <div class="slds-col slds-size_1-of-1" style="text-align: left;">
+                                 <label class="slds-form-element__label"  style="color:red" for="form-element-01">Total registros cargados: </label>
+                                 <label class="slds-form-element__label" for="form-element-02" style="font-size:12px;color:blue;font-weight: bold;"  >{totalRegistros_Query}  </label>
+                            </div>
+                        </div>
+                        <br/>
+                        <div>
+                            <lightning-button class="slds-m-top--medium" label="Reiniciar Carga" if:true={uploadCompleted} onclick={handleRestart} variant="neutral" disabled={isTrue}></lightning-button>
+                            <lightning-button class="slds-m-top--medium" label={UploadFile} if:false={uploadCompleted} onclick={handleUpload} variant="brand" disabled={isTrue}></lightning-button>&nbsp;
+                            <lightning-button class="slds-m-top--medium" label="Procesar Carga" if:true={uploadCompleted}  onclick={handleProccessFile} variant="brand" disabled={isTrue}></lightning-button>
+                        </div>
+                    </div>
+              <br/>
+              <br/>
+            </div>
+
+            <div class="slds-col slds-size_5-of-7" style="text-align: left;">
+
+                <div style="width: auto;">
+
+                    <template if:true={data}>
+                        <div style="height: 100%;width:98%;">
+                            <br/>
+                            <lightning-datatable
+                                    data={data}
+                                    show-row-number-column
+                                    hide-checkbox-column
+                                    columns={columns}
+                                    key-field="id">
+                            </lightning-datatable>
+                        </div>
+                        <br/>
+                        <!-- <lightning-layout horizontal-align="space">
+                            <lightning-layout-item flexibility="auto">
+                                <lightning-button label="Previous" icon-name="utility:chevronleft" onclick={previousHandler}>
+                                </lightning-button>
+                            </lightning-layout-item>
+                            <lightning-layout-item flexibility="auto">
+                                Page {page} of {totalPage}
+                            </lightning-layout-item>
+                            <lightning-layout-item flexibility="auto">
+                                <lightning-button label="Next" icon-name="utility:chevronright" icon-position="right"
+                                    onclick={nextHandler}></lightning-button>
+                            </lightning-layout-item>
+                        </lightning-layout> -->
+                    </template>
+                </div>
+            </div>
+        </div>
+
+    </lightning-card>
+
+
+</template>

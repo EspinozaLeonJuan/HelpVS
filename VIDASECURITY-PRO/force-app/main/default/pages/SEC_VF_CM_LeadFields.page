@@ -1,0 +1,81 @@
+<!--
+  @description       : 
+  @author            : Juan Espinoza León
+  @group             : 
+  @last modified on  : 05-06-2021
+  @last modified by  : Juan Espinoza León
+  Modifications Log 
+  Ver   Date         Author               Modification
+  1.0   01-19-2021   Juan Espinoza León   Initial Version
+-->
+<apex:page id="pgGrilla" controller="CTR_CM_LeadFields" action="{!iniciaLeadFields}"  lightningStylesheets="true" sidebar="false" showHeader="true"  docType="HTML-5.0">
+   <style>
+     .ct{
+             /*text-align:left;*/
+             display: none;
+        }
+       
+        .popupBackground {
+            /* Background color */
+            background-color:black;
+            opacity: 0.5;
+            filter: alpha(opacity = 50);
+            /* Dimensions */
+            width: 100%;
+            height: 1000%;       
+            top: 0;
+            left: 50;
+            z-index: 998;
+            position: absolute;        
+            /* Mouse */
+            cursor:wait;
+        }
+                
+        .popupPanel {
+            /* Background color */
+            border: solid 2px orange;
+            background-color: white;        
+            /* Dimensions */
+            display: inline-block;
+            left: 50%;
+            width: 100px;
+            margin-left: 0px;
+            top: 100px;
+            height: 25px;
+            margin-top: -25px;
+            position: absolute;   
+            z-index: 999;        
+            /* Mouse */
+            cursor:pointer;;
+        } 
+    </style>
+    <div id="dv_CuerpoPrincipal" style="width: 100%; margin-left: auto; margin-right: auto; height: 100%;auto;margin-top: -30px; ">
+        <apex:actionStatus id="Status"  >
+            <apex:facet name="start">
+                <apex:outputPanel >
+                    <div class="popupBackground" />
+                    <div class="popupPanel">
+                        &nbsp; Espere...<img src="/apexpages/devmode/img/saveStatus.gif" />
+                    </div>
+                </apex:outputPanel> 
+            </apex:facet>
+        </apex:actionStatus>
+        <br/>
+
+        <apex:form id="frm_Grilla">
+            <apex:pageBlock id="pbk_Grilla">                
+                <apex:pageBlockTable id="pbkt_TablaCasos" value="{!Fields}" var="data"  headerClass="ct" style="font-size:11px;">
+                    <apex:column headerValue=""   value="{!data.Field}" headerClass="ct" style="font-weight:bold;text-align:left;widht:50%;" />
+                    <apex:column headerValue="" value="{!data.Value}" headerClass="ct" style="font-weight:bold;text-align:left;widht:50%;" />
+                </apex:pageBlockTable>
+            </apex:pageBlock>
+            <br/>
+            <br/>
+            <apex:panelGrid columns="1" style="text-align: center;width: 100%;" rendered="{!Cerrado == false}">
+                <apex:commandButton id="cmd_"  oncomplete="" status="Status" value="Actualizar Información Adicional"  action="{!refreshLeadFields}" />
+            </apex:panelGrid>
+
+        
+        </apex:form>
+    </div>
+</apex:page>

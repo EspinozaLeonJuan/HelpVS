@@ -1,0 +1,203 @@
+<apex:page sidebar="false" showHeader="false" controller="SalesforceTP" cache="false" action="{!InicializaActualiza}" standardStylesheets="true"> 
+    <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" />
+    
+    <script>
+    j$ = jQuery.noConflict();
+    
+    function OpenVfpage(accion){
+        window.open("/apex/PopupTP?accion="+accion,"Popup","Width=400px, Height=500px, center=yes, scrollbars=yes");
+    }
+    
+    function OpenDetalleCliente(){
+        window.open("/apex/DetalleClienteTP", "DetalleCliente","Width=400px, Height=300px, center=yes, scrollbars=yes");
+    }
+    
+    function OpenRecordatorioCierre(){
+        window.open("/apex/PopupTP?accion=RECORDATORIOCIERREATENCION", "RecordatorioCierre","Width=400px, Height=200px, center=yes, scrollbars=no");
+    }
+    
+    function OpenParent(url){
+        window.open(url);
+        return false;
+    }
+    
+    function checkTituloVentana() {
+        if(this.document) { 
+            this.document.title = "Totalpack (Salesforce)";
+        } else { 
+            setTimeout(checkTituloVentana, 1000);
+        }
+    }
+    
+    function alertas() {
+        var estado = j$("[id$='lblEstado']").html();
+        
+        console.log(estado);
+        
+        if (estado == "LLAMANDO") {
+            setTimeout('self.focus()',1000);
+        }
+        else if (estado == "ATENDIENDO") {
+            var timerVal = j$("[id$='hTimerRecordatorio']").val();
+            var timer = parseInt(timerVal);
+            
+            console.log(timer);
+
+            if (timer > 0){
+                console.log('timeout futuro');
+            	setTimeout(OpenRecordatorioCierre, Math.abs(timer));    
+            }
+            else {
+                console.log('abrir popup');
+            	OpenRecordatorioCierre();    
+            }                
+        }
+    }
+    
+    j$(document).ready(function() {
+    	alertas();
+        checkTituloVentana(); 
+    });
+    </script>
+    
+    <style type="text/css"> <!--Popup-->
+        .popupBackground {
+        /* Background color */
+        background-color:black;
+        opacity: 0.5;
+        filter: alpha(opacity = 50);
+        
+        /* Dimensions */
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 998;
+        position: absolute;
+        
+        /* Mouse */
+        cursor:wait;
+        }
+        
+        .popupPanel {
+        /* Background color */
+        border: solid 2px orange;
+        background-color: white;
+        
+        /* Dimensions */
+        display: inline-block;
+        left: 20%;
+        width: 100px;
+        margin-left: 0px;
+        top: 50%;
+        height: 25px;
+        margin-top: -25px;
+        position: absolute;
+        z-index: 999;
+        
+        /* Mouse */
+        cursor:pointer;
+        }
+    </style>
+    
+    <apex:form id="pagina" style="Width:200px; background-color:lightgrey;">
+        
+        <apex:actionStatus id="Status">
+            <apex:facet name="start">
+                <apex:outputPanel >
+                    <div class="popupBackground" />
+                    <div class="popupPanel">
+                        &nbsp; Espere...<img src="/apexpages/devmode/img/saveStatus.gif" />
+                    </div>
+                </apex:outputPanel> 
+            </apex:facet>
+        </apex:actionStatus>
+        
+        <apex:actionFunction action="{!getRegresoPopup}" name="fRegresoPopup" oncomplete="window.location.reload(false);"/>
+        
+        <apex:outputPanel id="Panel">
+            
+            <apex:inputHidden id="hTimerRecordatorio" value="{!RecordatorioCierreAtencionMsecs}"/>
+            
+            <apex:actionPoller action="{!InicializaActualiza}" enabled="{!OR(Estado='ESPERANDO', Estado='PAUSA')}" interval="10" status="Status" reRender="Panel"  />
+            <apex:actionPoller action="{!InicializaActualiza}" enabled="{!IF(Estado='REINTENTANDO LOGIN', true, false)}" interval="10" status="Status" reRender="Panel" />
+            <apex:actionPoller action="{!InicializaActualiza}" enabled="{!IF(Estado='ATENDIENDO', true, false)}" interval="180" status="Status" reRender="Panel" />
+            
+            <apex:panelGrid columns="1" style="Width:200px;text-align:center">
+                <apex:panelGroup >
+                    <b>{!Sucursal}</b><br />
+                    SERVICIO AL CLIENTE<br />
+                    Módulo: {!IdEscritorio}&nbsp;<apex:commandButton action="{!MostrarPopup}" oncomplete="OpenVfpage('CAMBIOESC');" value="Cambiar" status="Status" reRender="Panel" rendered="{!IF(Estado='LOGOFF', true, false)}"/><br/>                   
+                </apex:panelGroup>
+                
+                <apex:pageMessages />
+                <hr /> 
+                
+                <apex:panelGroup >
+                    <apex:commandButton value="Ingresar" action="{!LoginPausa}" status="Status" reRender="Panel" rendered="{!DisplayBotonLogin}" /> 
+                    <apex:commandButton value="Inicia Atención" action="{!PidoTurno}" status="Status" reRender="Panel" rendered="{!DisplayBotonIniciaAtencion}" /> 
+                    <apex:commandButton value="Cierra Atención" action="{!FinTurno}" status="Status" reRender="Panel" rendered="{!DisplayBotonCierraAtencion}"/>
+                    <apex:commandButton value="Pausa" action="{!MostrarPopup}" status="Status" reRender="Panel" oncomplete="OpenVfpage('PAUSA');" rendered="{!DisplayBotonPausa}"/>
+                    <apex:commandButton value="Cliente Llegó" action="{!ProcesoTurno}" status="Status" reRender="Panel" rendered="{!DisplayBotonClienteLlego}" oncomplete="OpenDetalleCliente();" />
+                    <apex:commandButton value="Rellamada" action="{!Rellamo}" rendered="{!DisplayBotonRellamada}" status="Status" reRender="Panel"/>
+                    <apex:commandButton value="Anular" action="{!Anulo}" status="Status" reRender="Panel" rendered="{!DisplayBotonAnular}"/>
+                    <apex:commandButton value="Urgencia" action="{!MostrarPopup}" status="Status" oncomplete="OpenVfpage('URGENCIA');" rendered="{!DisplayBotonUrgencia}"/>
+                </apex:panelGroup>
+                <hr />
+                
+                <apex:panelGroup >
+                    <apex:outputText value="{!Estado}" id="lblEstado" style="color:red; font-weight: bold;"/>
+                </apex:panelGroup>
+                
+                <apex:panelGroup rendered="{!DisplayCuadroDetallesTurno}">
+                    <apex:panelGroup >
+                        <apex:outputText value="Turno"/>&nbsp;
+                        <apex:outputText value="{!Turno}" style="font-weight: bold;"/><br/>
+                    </apex:panelGroup>
+                    
+                    <apex:panelGroup >
+                        <apex:outputText value="Espera"/>&nbsp;
+                        <apex:outputText value="{!Espera}" style="font-weight: bold;"/><br/>
+                    </apex:panelGroup>
+                    
+                    <apex:panelGroup >
+                        <apex:outputText value="Atención"/>&nbsp;
+                        <apex:outputText value="{!TiempoAtencion}" style="font-weight: bold;"/><br/>
+                    </apex:panelGroup>
+                    
+                    <apex:panelGroup >
+                        <apex:outputText value="Cliente"/>&nbsp;
+                        <apex:outputLink rendered="{!DisplayLinkCaso}" onclick="OpenParent('{!UrlCaso}'); return false;" style="font-weight: bold;">{!ClienteRut}</apex:outputLink>&nbsp;<apex:outputText value="{!ClienteRut}" style="font-weight: bold;" rendered="{!IF(DisplayLinkCaso, false, true)}"/>
+                        <apex:commandButton action="{!MostrarPopup}" oncomplete="OpenVfpage('CAMBIORUT');" value="Cambiar" status="Status" reRender="Panel" rendered="{!DisplayBotonCambiaRut}"/><br/>
+                    </apex:panelGroup>
+                    
+                </apex:panelGroup>
+                <hr />
+            </apex:panelGrid>
+            
+            <apex:panelGrid columns="3" border="0" cellpadding="2" cellspacing="2" bgcolor="lightGray" style="border-color:gray" rendered="{!DisplayCuadroDetallesSucursal}">
+                <apex:outputText value="Estado" style="font-weight: bold;"/>
+                <apex:outputText value="Oficina"/>
+                <apex:outputText value="Escritorio"/>
+                <apex:outputText value="En espera:"/>
+                <apex:outputText value="{!OficinaEspera}"/>
+                <apex:outputText value="{!EscritorioEspera}"/>
+                <apex:outputText value="Tiempo Espera:"/>
+                <apex:outputText value="{!OficinaTiempoEspera}"/>
+                <apex:outputText value="{!EscritorioTiempoEspera}"/>
+                
+            </apex:panelGrid>
+            
+            <br/>
+            <div align="center" draggable="false" >
+                <apex:CommandButton value="Salir" style="float:center" action="{!Logoff}" status="Status" reRender="Panel" rendered="{!DisplayBotonSalir}"/>
+            </div>
+        </apex:outputPanel>
+        
+        <!--opacidad panel-->
+        <apex:outputPanel id="tstpopup">
+            <apex:outputPanel styleClass="popupBackground" layout="block" rendered="{!DisplayPopUp}"/>
+        </apex:outputPanel>
+        
+    </apex:form>
+</apex:page>

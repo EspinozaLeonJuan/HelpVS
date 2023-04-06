@@ -1,0 +1,169 @@
+<apex:page standardController="Filial__c" extensions="CertificadoDeudaPDFController" sideBar="false" renderAs="PDF" docType="html-5.0"
+    standardStylesheets="false" applyBodyTag="false">
+
+    <head>
+        <style type="text/css" media="print">
+            @page {
+                @top-center {
+                    content: element(header);
+                }
+
+                @bottom-center {
+                    content: element(footer);
+                }
+            }
+
+            div.footer {
+                display: block;
+                padding: 5px;
+                position: running(footer);
+                text-align: center;
+                font-family: Arial, Helvetica, sans-serif;
+                line-height: 16px;
+            }
+
+            div.content {
+                font-family: Arial, Helvetica, sans-serif;
+                line-height: 16px;
+            }
+        </style>
+    </head>
+    <div class="header">
+        <div style="float: right;">
+            <img src="{!$Resource.vsHeaderDocLogo}" />
+        </div>
+    </div>
+    <div id="document" class="content">
+
+
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+
+        <!-- Titulo del Documento -->
+        <h2 style="text-align: center;">CERTIFICADO DE DEUDA</h2>
+        <br/>
+        <br/>
+        <!-- Header del Documento -->
+        <table id="headerDoc" class="table" width="100%">
+            <tr>
+                <td width="30%">
+                    <strong>POLIZA:</strong>
+                </td>
+                <td>
+                    {!filial.Numero_Poliza__c}
+                </td>
+            </tr>
+            <tr>
+                <td width="30%">
+                    <strong>CONTRATANTE:</strong>
+                </td>
+                <td>
+                    {!filial.Poliza__r.Cuenta__r.Rut_con_dv__c} {!filial.Poliza__r.Cuenta__r.Name}
+                </td>
+            </tr>
+            <tr>
+                <td width="30%">
+                    <strong>FILIAL:</strong>
+                </td>
+                <td>
+                    {!filial.Rut_Filial__c} {!filial.Name}
+                </td>
+            </tr>
+        </table>
+
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+
+        <!-- Cuerpo del Documento -->
+        <table id="Details" class="table" width="100%">
+            <tr>
+                <td width="50%">
+                    <strong>Último período pagado</strong>
+                </td>
+                <td>
+                    {! IF(ultimoPeriodoPagado != null && ultimoPeriodoPagado != 0,ultimoPeriodoPagado,'SIN PAGO')}
+                </td>
+            </tr>
+            <tr>
+                <td width="50%">
+                    <strong>Monto del período pagado</strong>
+                </td>
+                <td>
+                    <c:decimalOutputText value="{!montoPeriodoPagado}" numberDecimal="0" trailingZeros="false" rendered="{!montoPeriodoPagado != null && montoPeriodoPagado != 0}"/>
+                    <apex:outputText rendered="{!montoPeriodoPagado == null || montoPeriodoPagado == 0}" value="SIN PAGO" />
+                </td>
+            </tr>
+            <tr>
+                <td width="50%">
+                    <strong>Próximo Período Pago</strong>
+                </td>
+                <td>
+                    {! IF(periodoSiguiente != null && periodoSiguiente != 0,periodoSiguiente,'SIN COBRANZA')}
+                </td>
+            </tr>
+            <tr>
+                <td width="50%">
+                    <strong>Monto de prima</strong>
+                </td>
+                <td>
+                    <c:decimalOutputText value="{!montoPrima}" numberDecimal="0" trailingZeros="false" rendered="{!montoPrima != null && montoPrima != 0}"/>
+                    <apex:outputText rendered="{!montoPrima == null || montoPrima == 0}" value="SIN COBRANZA" />
+                </td>
+            </tr>
+            <tr>
+                <td width="50%">
+                    <strong>Estado de deuda</strong>
+                </td>
+                <td>
+                    {!filial.Estado_Pago__c}
+                </td>
+            </tr>
+            <tr>
+                <td width="50%">
+                    <strong>Días vencidos (0)</strong>
+                </td>
+                <td>
+                    {!diasVencidos}
+                </td>
+            </tr>
+            <tr>
+                <td width="50%">
+                    <strong>Períodos Vencidos</strong>
+                </td>
+                <td>
+                    {!periodosVencidos}
+                </td>
+            </tr>
+            <tr>
+                <td width="50%">
+                    <strong>Estado beneficios</strong>
+                </td>
+                <td>
+                    {!filial.Estado_Beneficio__c}
+                </td>
+            </tr>
+            <tr>
+                <td width="50%">
+                    <strong>Fecha Posible Bloqueo</strong>
+                </td>
+                <td>
+                    <apex:outputText value="{0, date, dd/MM/YYYY}">
+                        <apex:param value="{!filial.Fecha_Bloqueo_de_Beneficios__c}" />
+                    </apex:outputText>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+
+    <div class="footer">
+        Fecha emisión documento:&nbsp;
+        <apex:outputText value="{0, date, dd/MM/yyyy HH:mm}" id="docDate">
+            <apex:param value="{!NOW()+(timeZone/24)}" />
+        </apex:outputText>
+    </div>
+</apex:page>

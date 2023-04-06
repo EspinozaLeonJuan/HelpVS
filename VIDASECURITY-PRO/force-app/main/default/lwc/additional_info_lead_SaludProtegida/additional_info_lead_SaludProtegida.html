@@ -1,0 +1,184 @@
+<!--
+  @description       :
+  @author            : Juan Espinoza León
+  @group             :
+  @last modified on  : 05-24-2022
+  @last modified by  : Juan Espinoza León
+-->
+<template>
+    <div class="slds-card homeAssistant">
+        <template if:true={showLoading}>
+            <lightning-spinner alternative-text="Loading" size="medium" class="spinnerClass"></lightning-spinner>
+        </template>
+        <div class="slds-page-header">
+            <header class="header-title-container slds-has-flexi-truncate" id="modal-principal-id-1">
+                <!-- <div class="slds-text-heading_small" style="font-weight: bold;">Campos personalizados</div> -->
+                <h3 class="slds-text-heading_small">
+                    <lightning-icon icon-name="utility:advertising" size="small"></lightning-icon> <strong> Información adicional Prospecto</strong>
+                    </h3>
+            </header>
+        </div>
+        <div class="slds-card__body slds-card__body_inner"  >
+            <lightning-record-view-form record-id={recordId} object-api-name="Lead">
+
+                <div class="slds-form__row">
+                    <div class="slds-form__item" role="listitem">
+                      <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                          <span class="slds-form-element__label">Cobertura original del prospecto</span>
+                        <div class="slds-form-element__control">
+                          <div class="slds-form-element__static">
+                            <!-- <strong>{RUT}</strong> -->
+                            <lightning-output-field variant="label-hidden" field-name="Cobertura__c"></lightning-output-field>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                <div class="slds-form__row">
+                    <div class="slds-form__item" role="listitem">
+                      <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                          <span class="slds-form-element__label">Capital remanente del prospecto (UF)</span>
+                        <div class="slds-form-element__control">
+                          <div class="slds-form-element__static">
+                            <!-- <strong>{RUT}</strong> -->
+                            <!-- <lightning-output-field variant="label-hidden" currency-display-as="symbol" format-style="currency" currency-code="CLF" field-name="Capital_Remanente_Asegurado__c"></lightning-output-field> -->
+                            <label>{CAPITAL_REMANENTE}</label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+
+                <div class="slds-form__row">
+                    <div class="slds-form__item" role="listitem">
+                      <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                          <span class="slds-form-element__label">Exclusiones del prospecto</span>
+                        <div class="slds-form-element__control">
+                          <div class="slds-form-element__static">
+                            <lightning-output-field variant="label-hidden" class="outputFont"  field-name="Exclusiones__c"></lightning-output-field>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                <div class="slds-form__row">
+                    <div class="slds-form__item" role="listitem">
+                      <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                          <span class="slds-form-element__label">Producto a contratar para el prospecto</span>
+                        <div class="slds-form-element__control">
+                          <div class="slds-form-element__static">
+                            <lightning-output-field variant="label-hidden" class="outputFont"  field-name="Plan__c"></lightning-output-field>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                <div class="slds-form__row">
+                    <div class="slds-form__item" role="listitem">
+                      <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                          <span class="slds-form-element__label">Fecha de inicio vigencia nuevo producto</span>
+                        <div class="slds-form-element__control">
+                          <div class="slds-form-element__static">
+                            <lightning-output-field variant="label-hidden" class="outputFont"  field-name="PROSPE_Carga_Fecha_Inicio_Vigencia__c"></lightning-output-field>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                <div class="slds-form__row">
+                    <div class="slds-form__item" role="listitem">
+                      <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                          <span class="slds-form-element__label">Prima nuevo producto (UF)</span>
+                        <div class="slds-form-element__control">
+                          <div class="slds-form-element__static">
+                            <lightning-output-field variant="label-hidden" class="outputFont"  field-name="Prima_Nuevo_Producto__c"></lightning-output-field>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                <div class="slds-form__row">
+                    <div class="slds-form__item" role="listitem">
+                      <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                          <span class="slds-form-element__label">Disminución prima final póliza original (al excluir hijo) (UF)</span>
+                        <div class="slds-form-element__control">
+                          <div class="slds-form-element__static">
+                            <lightning-output-field variant="label-hidden" class="outputFont"  field-name="Prima_Final_Poliza_Original__c"></lightning-output-field>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                <!-- <div  class="slds-grid">
+                    <div class="slds-col slds-size_1-of-2">
+                        <label class="slds-form-element__label" >Cobertura original del prospecto</label>
+                    </div>
+                    <div class="slds-col slds-size_1-of-2">
+                        <lightning-output-field  variant="label-hidden" class="outputFont"  field-name="Cobertura__c"></lightning-output-field>
+                    </div>
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-2">
+                        <label class="slds-form-element__label" >Capital remanente del prospecto (UF)</label>
+                    </div>
+                    <div class="slds-col slds-size_1-of-2">
+                        <lightning-output-field variant="label-hidden" class="outputFont"  field-name="Capital_Remanente_Asegurado__c"></lightning-output-field>
+                    </div>
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-2">
+                        <label class="slds-form-element__label" >Exclusiones del prospecto</label>
+                    </div>
+                    <div class="slds-col slds-size_1-of-2">
+                        <lightning-output-field variant="label-hidden" class="outputFont"  field-name="Exclusiones__c"></lightning-output-field>
+                    </div>
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-2">
+                        <label class="slds-form-element__label" >Producto a contratar para el prospecto</label>
+                    </div>
+                    <div class="slds-col slds-size_1-of-2">
+                        <lightning-output-field variant="label-hidden" class="outputFont"  field-name="Plan__c"></lightning-output-field>
+                    </div>
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-2">
+                        <label class="slds-form-element__label" >Fecha de inicio vigencia nuevo producto</label>
+                    </div>
+                    <div class="slds-col slds-size_1-of-2">
+                        <lightning-output-field variant="label-hidden" class="outputFont"  field-name="PROSPE_Carga_Fecha_Inicio_Vigencia__c"></lightning-output-field>
+                    </div>
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-2">
+                        <label class="slds-form-element__label" >Prima nuevo producto (UF)</label>
+                    </div>
+                    <div class="slds-col slds-size_1-of-2">
+                        <lightning-output-field variant="label-hidden" class="outputFont"  field-name="Prima_Nuevo_Producto__c"></lightning-output-field>
+                    </div>
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-2">
+                        <label class="slds-form-element__label" >Disminución prima final póliza original (al excluir hijo) (UF)</label>
+                    </div>
+                    <div class="slds-col slds-size_1-of-2">
+                        <lightning-output-field variant="label-hidden" class="outputFont"  field-name="Prima_Final_Poliza_Original__c"></lightning-output-field>
+                    </div>
+                </div>-->
+            </lightning-record-view-form>
+            <br/>
+            <div class="slds-grid" if:true={REFRESH_OK}>
+
+                <div class="slds-col slds-size_1-of-1" style="text-align: center;">
+                    <lightning-button
+                    name="fields_refresh"
+                    label="Actualizar Informacion Adicional"
+                    onclick={to_refresh_info}
+                >
+                </lightning-button>
+                </div>
+            </div>
+        </div>
+      </div>
+
+</template>

@@ -1,0 +1,46 @@
+<!--
+  @description       : 
+  @author            : Juan Espinoza Leon
+  @group             : 
+  @last modified on  : 04-30-2021
+  @last modified by  : Juan Espinoza León
+  Modifications Log 
+  Ver   Date         Author               Modification
+  1.0   10-06-2020   Juan Espinoza Leon   Initial Version
+-->
+<apex:page lightningStylesheets="true" controller="CTR_CC_RealizarLlamada"  action="{!loadResponse}"
+ showHeader="false" sidebar="false"  docType="html-5.0"  >
+ <apex:includeScript value="{!$Resource.jquery}"/>
+     
+  <script type="text/javascript">
+    
+    $(document).ready(function() {
+      var code = '{!Code}';
+     
+      if (code == 201)
+      {
+          alert('Llamada Realizada Correctamente.');
+      }
+      else if (code == 400)
+      {
+          alert('No se puede realizar la llamada. Request incorrecto.');
+      }
+      else if (code == 428)
+      {
+          alert('No se puede realizar la llamada. Favor verifique si se encuentra conectado a la central telefonica o el origen es un anexo válido.');
+      }
+      else if (code == 500)
+      {
+          alert('No se puede realizar la llamada. Ha ocurrido un error.');            
+      }
+      else
+      {
+        alert('Error no identificado');
+      }
+
+      window.top.close();
+    });
+    
+  </script>
+
+</apex:page>

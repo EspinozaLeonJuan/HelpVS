@@ -1,0 +1,29 @@
+<!--
+  @File Name          : comercialCloneQuote.html
+  @Description        : 
+  @Author             : Brayan Mullor S
+  @Group              : 
+  @Modification Log   : 
+  Ver       Date            Author      		    Modification
+  1.0    24-06-2020     Brayan Mullor S     Initial Version
+-->
+<template >
+    <lightning-button
+    variant="neutral"
+    label="Nueva Versión"
+    onclick={Clonar}
+    title="Nueva Versión"
+    class="slds-m-left_x-small"
+    ></lightning-button>
+
+    <template if:true={showSpinner}>
+      <div class="slds-grid slds-wrap slds-grid_align-center">
+        <lightning-spinner 
+        alternative-text="Loading" 
+        size="small"
+        style="position:relative; display:inline-block; width:80px; height:80px"
+        ></lightning-spinner>
+      </div>
+  </template>
+
+</template>

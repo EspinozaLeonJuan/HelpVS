@@ -1,0 +1,10 @@
+<apex:page standardController="Account" extensions="CreditoConsumoIdcController" action="{!checkCreditAvailableInit}" lightningStylesheets="true">
+    <apex:form >
+        <apex:pageBlock title="Resultado Consulta Crédito">
+            <apex:messages style="font-weight: bold;" />
+            <apex:pageBlockButtons >
+                <apex:commandButton action="{!Cancel}" value="Volver"></apex:commandButton>
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

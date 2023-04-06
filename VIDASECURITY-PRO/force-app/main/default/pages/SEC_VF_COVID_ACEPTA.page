@@ -1,0 +1,13 @@
+<apex:page standardController="Quote" extensions="SEC_CTRL_AceptaCommunication" action="{!doPDF}">
+    <body>
+        <div id="content" style="text-align: center;">
+            <br/>
+            <br/>
+            <apex:form >
+                    <apex:image value="{!URLFOR($Resource.SEC_Logo_v01)}" height="50"/>
+                	<br/>
+                    <h4>{!message}</h4>
+            </apex:form>            
+        </div>            
+    </body>
+</apex:page>

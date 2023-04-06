@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Community xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <emailNotificationUrl>https://na15.salesforce.com/_ui/chatter/service/ChatterAnswersUi?id={!entityId}&amp;fromEmail=1</emailNotificationUrl>
+    <enableChatterAnswers>true</enableChatterAnswers>
+    <enablePrivateQuestions>false</enablePrivateQuestions>
+    <expertsGroup>Expertos_Salesforce</expertsGroup>
+    <reputationLevels>
+        <chatterAnswersReputationLevels>
+            <name>Principiante</name>
+            <value>0</value>
+        </chatterAnswersReputationLevels>
+        <chatterAnswersReputationLevels>
+            <name>Sabelotodo</name>
+            <value>500</value>
+        </chatterAnswersReputationLevels>
+        <chatterAnswersReputationLevels>
+            <name>Profesional</name>
+            <value>2000</value>
+        </chatterAnswersReputationLevels>
+        <chatterAnswersReputationLevels>
+            <name>Cinco estrellas</name>
+            <value>5000</value>
+        </chatterAnswersReputationLevels>
+    </reputationLevels>
+</Community>

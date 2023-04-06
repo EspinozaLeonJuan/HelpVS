@@ -1,0 +1,230 @@
+<apex:page standardController="Case"  extensions="EscritorioDigital_Controller" sidebar="true" lightningStylesheets="true"  >
+ 
+    <style>
+             
+.popupBackground {
+        /* Background color */
+        background-color:black;
+        opacity: 0.5;
+        filter: alpha(opacity = 50);
+        
+        /* Dimensions */
+        width: 90%;
+        height: 100%;       
+        top: 0;
+        left: 50;
+        z-index: 998;
+        position: absolute;        
+        /* Mouse */
+        cursor:wait;
+    }
+            
+    .popupPanel {
+       /* Background color */
+        border: solid 2px orange;
+        background-color: white;        
+        /* Dimensions */
+        display: inline-block;
+        left: 50%;
+        width: 100px;
+        margin-left: 0px;
+        top: 100px;
+        height: 25px;
+        margin-top: -25px;
+        position: absolute;   
+        z-index: 999;        
+        /* Mouse */
+        cursor:pointer;;
+    }
+
+    </style>
+    
+    <script>
+     function RequerimientoEliminado() {  
+        alert('El Requerimiento número {!IdRequerimiento} ha sido eliminado.');
+        ToCase();
+     }
+    
+    function ConfirmaEliminar() {
+        
+        var seleccion = confirm("Esta seguro de eliminar el Requerimiento número {!IdRequerimiento}?");
+        
+        if (seleccion)
+        {   
+          
+        }           
+        else
+        {
+            event.dispose();
+        }        
+    }
+    
+    function verRequerimiento(IdRequerimiento, Persistencia, Rut) {  
+       if (Persistencia > 0)
+       {       
+            var performance   = 'height=768px,width=1366px, center=yes, scrollbars=yes';
+           
+            var url = "http://vidasecurity.valueweb.cl/TotalAgility/forms/vs-ed-dev/VS-ED-FormularioFirma.form?IDRequerimiento="+IdRequerimiento+"&Rut="+Rut+"&Persistencia="+Persistencia+"";  
+            
+                var popUp = window.open(url, "_blank", performance);
+            
+                if (popUp == null || typeof(popUp)=='undefined') {  
+                      alert('Por favor deshabilita el bloqueador de ventanas emergentes y vuelve a hacer clic en "Detalle de Solicitud".');     
+                }
+                else {          
+                      popUp.focus();           
+                }
+                
+                ToCase();
+       }         
+    }
+   
+    </script>
+
+    <apex:actionStatus id="Status">
+        <apex:facet name="start">
+            <apex:outputPanel >
+                <div class="popupBackground" />
+                <div class="popupPanel">
+                    &nbsp; Espere...<img src="/apexpages/devmode/img/saveStatus.gif" />
+                </div>
+            </apex:outputPanel> 
+        </apex:facet>
+    </apex:actionStatus>
+  
+    
+    <apex:form id="EscritorioDigital_Form">           
+    
+        <apex:actionFunction action="{!ToCase}" name="ToCase"/>        
+           
+        <apex:outputPanel > 
+            <apex:sectionHeader title="Escritorio Digital" />  
+            
+            <apex:pageblock id="NuevoRequerimiento" rendered="{!Panel == 'NEW_REQ_DETAIL' }">       
+                
+                <apex:panelGrid columns="3">
+                    &nbsp;
+                    <apex:outputLabel >Número de Caso:</apex:outputLabel>  
+                    <apex:commandLink action="{!ToCase}"  value="{!NumeroCaso}" />    
+                   &nbsp;
+                    <apex:outputLabel >RUT Titular:</apex:outputLabel>      
+                    <apex:outputLabel value="{!RUTTitular}"></apex:outputLabel>
+                    
+                    &nbsp;
+                    <apex:outputLabel >Nombre Titular:</apex:outputLabel>      
+                    <apex:outputLabel value="{!NombreTitular}"></apex:outputLabel>
+                    
+                     &nbsp;
+                    <apex:outputLabel >Poliza Titular:</apex:outputLabel>      
+                    <apex:outputLabel value="{!Poliza}" ></apex:outputLabel>                    
+                    
+                    &nbsp;
+                    <apex:outputLabel >Tipo Requerimiento Caso:</apex:outputLabel>     
+                    <apex:outputLabel value="{!TipoRequerimientoSF}"></apex:outputLabel>
+                    
+                    &nbsp;
+                    <apex:outputLabel >Detalle Solicitud:</apex:outputLabel>     
+                    <apex:outputLabel value="{!EtiquetaSolicitud}"></apex:outputLabel>
+                    
+                     &nbsp;
+                    <apex:outputLabel >Solicitante:</apex:outputLabel>      
+                     <apex:selectList value="{!TipoRequerimientoED}" size="1" id="solicitantes_values">
+                        <apex:actionSupport event="onchange" reRender="newvalue" />
+                        <apex:selectOptions value="{!ListaSolicitantes}"/>
+                    </apex:selectList>             
+                                    
+                 </apex:panelGrid>
+
+                <apex:panelGrid columns="2" rendered="{!ResponsableUR == '' }">
+                                  
+                     <apex:commandButton action="{!crearRequerimiento}" status="Status" value="Crear Requerimiento" 
+                                          oncomplete="verRequerimiento('{!IdRequerimiento}','{!Persistencia}','{!RutUsuario}');"/>    
+                         
+                    
+                </apex:panelGrid>
+            </apex:pageblock>
+            
+            <apex:pageblock id="VerRequerimiento" rendered="{!Panel == 'REQ_DETAIL' }">         
+           
+                <apex:panelGrid columns="3">
+                    &nbsp;
+                    <apex:outputLabel >Número de Caso:</apex:outputLabel>      
+                    <apex:commandLink action="{!ToCase}"  value="{!NumeroCaso}" />    
+                    &nbsp;
+                    <apex:outputLabel >Id Requerimiento:</apex:outputLabel>      
+                    <apex:outputLabel value="{!IdRequerimiento}"></apex:outputLabel>
+                    
+                   &nbsp;
+                    <apex:outputLabel >RUT Titular:</apex:outputLabel>      
+                    <apex:outputLabel value="{!RUTTitular}"></apex:outputLabel>
+                    
+                    &nbsp;
+                    <apex:outputLabel >Nombre Titular:</apex:outputLabel>      
+                    <apex:outputLabel value="{!NombreTitular}"></apex:outputLabel>
+                    
+                    &nbsp;
+                    <apex:outputLabel >Poliza Titular:</apex:outputLabel>      
+                    <apex:outputLabel value="{!Poliza}" ></apex:outputLabel>
+                    
+                    &nbsp;
+                    <apex:outputLabel >Tipo Requerimiento Caso:</apex:outputLabel>     
+                    <apex:outputLabel value="{!TipoRequerimientoSF}"></apex:outputLabel>
+                   
+                    &nbsp;
+                    <apex:outputLabel >Detalle Solicitud:</apex:outputLabel>     
+                    <apex:outputLabel value="{!EtiquetaSolicitud}"></apex:outputLabel>
+                    
+                     &nbsp;
+                    <apex:outputLabel >Solicitante:</apex:outputLabel>      
+                    <apex:outputLabel value="{!Solicitante}"></apex:outputLabel>
+                                
+                                    
+                 </apex:panelGrid>
+                 
+                <apex:panelGrid columns="2">
+                                  
+                     <apex:commandButton action="{!verRequerimiento}" status="Status" value="Ver Requerimiento" 
+                                          oncomplete="verRequerimiento('{!IdRequerimiento}','{!Persistencia}','{!RutUsuario}');"/>    
+                    <apex:commandButton status="Status" value="Eliminar Requerimiento"  
+                             onclick="ConfirmaEliminar();" action="{!eliminarRequerimiento}"   oncomplete="RequerimientoEliminado();"/>     
+                </apex:panelGrid>
+            </apex:pageblock>
+            
+             <apex:pageblock id="ErrorRequerimiento"  rendered="{!Panel == 'REQ_NOT_FOUND' }">      
+               <apex:panelGrid columns="3">
+                    &nbsp;
+                    <apex:outputLabel >Número de Caso:</apex:outputLabel>      
+                    <apex:commandLink action="{!ToCase}"  value="{!NumeroCaso}" />    
+                    
+                   &nbsp;
+                    <apex:outputLabel >RUT Titular:</apex:outputLabel>      
+                    <apex:outputLabel value="{!RUTTitular}"></apex:outputLabel>
+                    
+                    &nbsp;
+                    <apex:outputLabel >Nombre Titular:</apex:outputLabel>      
+                    <apex:outputLabel value="{!NombreTitular}"></apex:outputLabel>
+                    
+                   &nbsp;
+                    <apex:outputLabel >Poliza Titular:</apex:outputLabel>      
+                    <apex:outputLabel value="{!Poliza}" ></apex:outputLabel>
+                   
+                    &nbsp;
+                    <apex:outputLabel >Tipo Requerimiento Caso:</apex:outputLabel>     
+                    <apex:outputLabel value="{!TipoRequerimientoSF}"></apex:outputLabel>
+                   
+                    &nbsp;
+                    <apex:outputLabel >Detalle Solicitud:</apex:outputLabel>     
+                    <apex:outputLabel value="{!EtiquetaSolicitud}"></apex:outputLabel>
+                                    
+                 </apex:panelGrid>
+            
+            </apex:pageblock>
+            
+           
+            
+           </apex:outputPanel>
+    </apex:form>
+           <apex:pageMessages id="showmsg" escape="true"></apex:pageMessages>
+    
+     
+</apex:page>

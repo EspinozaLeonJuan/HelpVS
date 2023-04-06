@@ -1,0 +1,579 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Participante de Campaña</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Participantes de Campaña</value>
+    </caseValues>
+    <gender>Masculine</gender>
+    <layouts>
+        <layout>Formato 9 Meses Vigencia</layout>
+        <sections>
+            <label></label>
+            <section>Beneficios Club Viva Mejor</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Datos Cierre</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información del Sistema</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Productos y Atención virtual</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Satisfacción Cliente</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato Agente Retirado</layout>
+        <sections>
+            <label></label>
+            <section>Datos Cierre</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato Aumento Prima Segmentos</layout>
+        <sections>
+            <label></label>
+            <section>Información</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Resultados de Gestión</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Simulación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Teléfonos</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato Bienvenida</layout>
+        <sections>
+            <label></label>
+            <section>Datos Cierre</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Encuesta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato Bienvenida CC</layout>
+        <sections>
+            <label></label>
+            <section>Datos Cierre</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Encuesta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato Bienvenida GJSAC</layout>
+        <sections>
+            <label></label>
+            <section>Datos Cierre</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Encuesta</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato Campaña AMAC</layout>
+        <sections>
+            <label></label>
+            <section>Información</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Resultados de Gestión</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato Cobranza</layout>
+        <sections>
+            <label></label>
+            <section>Datos Agente</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Datos Cierre</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información Póliza</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato Cobranzas PV</layout>
+        <sections>
+            <label></label>
+            <section>Información</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Resultados de Gestión</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato Cobranzas Televenta</layout>
+        <sections>
+            <label></label>
+            <section>Campos</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Mandato PAT</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Resultados de Gestión</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato Contacto Proactivo</layout>
+        <sections>
+            <label></label>
+            <section>Campos</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Cierre de Campaña</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato Costo 0</layout>
+        <sections>
+            <label></label>
+            <section>Información al Contactar al Cliente</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Cierre de Campaña</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información del Participante de Campaña</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato Devolución Cargo por Rescate</layout>
+        <sections>
+            <label></label>
+            <section>Campos</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Detalle de Devolución</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Detalles de Cierre</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Detalles de Devolución</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato EPA</layout>
+        <sections>
+            <label></label>
+            <section>Comentarios Ejecutiva</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Detalle de Participante de Campaña</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Evaluación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información del Sistema</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato PAC PV</layout>
+        <sections>
+            <label></label>
+            <section>Campos</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Cierre</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Contacto telefónico</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Firma nuevo documento</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato Participante de Campaña</layout>
+        <sections>
+            <label></label>
+            <section>Detalle Reunión</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Evaluación Ejecutivo</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato Primera Prima Empleador</layout>
+        <sections>
+            <label></label>
+            <section>Campos</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Mandato Empleador</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Resultados de Gestión</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato Primera Prima PAC Firma Rechazada</layout>
+        <sections>
+            <label></label>
+            <section>Campos</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Resultados de Gestión</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato Primera Prima PAC Otros</layout>
+        <sections>
+            <label></label>
+            <section>Campos</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Resultados de Gestión</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato Profundización</layout>
+        <sections>
+            <label></label>
+            <section>Campos</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Cierre de Campaña</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato Recuperación</layout>
+        <sections>
+            <label></label>
+            <section>Información</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Mandato PAT</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Resultados de Gestión</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato Recuperación Post Venta</layout>
+        <sections>
+            <label></label>
+            <section>Campos</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Resultados de Gestión</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato Recuperación Primera Prima</layout>
+        <sections>
+            <label></label>
+            <section>Información</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Mandato PAT</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Resultados de Gestión</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato Recuperación Producción</layout>
+        <sections>
+            <label></label>
+            <section>Campos</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Mandato PAT</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Resultados de Gestión</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato Rescate</layout>
+        <sections>
+            <label></label>
+            <section>Campos</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Datos Cierre</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato Rescates</layout>
+        <sections>
+            <label></label>
+            <section>Detalle Rescates</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Resultados de Gestión</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato Rescates´- Asistencia Agente</layout>
+        <sections>
+            <label></label>
+            <section>Detalle Rescates</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información Personal</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Resultados de Gestión</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato Traspaso</layout>
+        <sections>
+            <label></label>
+            <section>Campos</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Datos Cierre</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato Traspaso - Asistencia Agente</layout>
+        <sections>
+            <label></label>
+            <section>Detalle Rescates</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información Personal</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Resultados de Gestión</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato Traspasos In</layout>
+        <sections>
+            <label></label>
+            <section>Campos</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Detalle Traspaso In</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Resultados de Gestión</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato Traspasos Out</layout>
+        <sections>
+            <label></label>
+            <section>Campos</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Detalle Traspaso Out</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Resultados de Gestión</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <quickActions>
+        <label></label>
+        <name>Cambiar_Estado_Cierre</name>
+    </quickActions>
+    <workflowTasks>
+        <description></description>
+        <name>Tarea_9Meses_Productos</name>
+        <subject></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <description></description>
+        <name>Tarea_9Meses_Solicita_Contacto</name>
+        <subject></subject>
+    </workflowTasks>
+</CustomObjectTranslation>

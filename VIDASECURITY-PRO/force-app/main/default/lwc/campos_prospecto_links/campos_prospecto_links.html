@@ -1,0 +1,2003 @@
+<!--
+  @description       :
+  @author            : Juan Espinoza León
+  @group             :
+  @last modified on  : 06-17-2022
+  @last modified by  : Juan Espinoza León
+-->
+<template >
+
+
+  <template if:true={modoEdicion}>
+    <div class="slds-section" role="list" style="margin-left: 10px;">
+      <template if:true={showLoading}>
+        <lightning-spinner alternative-text="Loading" size="medium" class="spinnerClass"></lightning-spinner>
+    </template>
+      <lightning-record-edit-form record-id={recordId} object-api-name="Lead">
+        <div class={sectionClass_informacionPersonalProspecto}>
+          <h3 class="slds-section__title">
+              <button class="slds-button slds-section__title-action" onclick={handleClick_informacionPersonalProspecto}>
+                  <lightning-icon
+                      icon-name="utility:switch"
+                      class="slds-button__icon slds-button__icon_left slds-section__title-action-icon"
+                      size="x-small"
+                  ></lightning-icon>
+                  <span class="slds-truncate" title="Información Personal Prospecto">Información Personal Prospecto</span>
+              </button>
+          </h3>
+          <div class="slds-section__content">
+            <slot>
+               <div class="slds-form__row">
+                  <div class="slds-form__item" role="listitem">
+                    <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                        <span class="slds-form-element__label">RUT</span>
+                      <div class="slds-form-element__control">
+                        <div class="slds-form-element__static">
+                          <lightning-output-field variant="label-hidden" field-name="RUT_DV__c"></lightning-output-field>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="slds-form__item" role="listitem">
+                    <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                      <span class="slds-form-element__label">Propietario</span>
+                      <div class="slds-form-element__control">
+                        <div class="slds-form-element__static">
+                          <lightning-output-field  variant="label-hidden" field-name="OwnerId"></lightning-output-field>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+               </div>
+            <div class="slds-form__row">
+                <div class="slds-form__item" role="listitem">
+                  <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                      <span style="font-weight: bold;" class="slds-form-element__label">Nombre completo</span>
+                      <div class="slds-form-element__control">
+                        <span class="slds-form-element__label">Tratamiento</span>
+                        <div class="slds-form-element__static">
+                          <lightning-input-field  variant="label-hidden" value={saludation} onchange={handle_value_saludation}  field-name="Salutation"></lightning-input-field>
+                        </div>
+                      </div>
+
+                    <div class="slds-form-element__control">
+                      <span class="slds-form-element__label">Nombre</span>
+                      <div class="slds-form-element__static">
+                        <lightning-input-field  variant="label-hidden" value={firstName} onchange={handle_value_firstName}  field-name="FirstName"></lightning-input-field>
+                      </div>
+                    </div>
+
+                    <div class="slds-form-element__control">
+                      <span class="slds-form-element__label">Segundo nombre</span>
+                      <div class="slds-form-element__static">
+                        <lightning-input-field  variant="label-hidden" value={middleName} onchange={handle_value_middleName}  field-name="MiddleName"></lightning-input-field>
+                      </div>
+                    </div>
+
+                    <div class="slds-form-element__control">
+                      <span class="slds-form-element__label">Apellidos</span>
+                      <div class="slds-form-element__static">
+                        <lightning-input-field  variant="label-hidden" value={lastName} onchange={handle_value_lastName}  field-name="LastName"></lightning-input-field>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="slds-form__item" role="listitem">
+                </div>
+            </div>
+            <div class="slds-form__row">
+              <div class="slds-form__item" role="listitem">
+                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                    <span class="slds-form-element__label">Fecha de nacimiento</span>
+                  <div class="slds-form-element__control">
+                    <div class="slds-form-element__static">
+                      <lightning-input-field type="date"  variant="label-hidden"  value={fechaNacimiento} onchange={handle_value_fechaNacimiento}
+                      data-name="PROSPE_Carga_Fecha_Nacimiento__c"
+                      field-name="PROSPE_Carga_Fecha_Nacimiento__c"></lightning-input-field>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="slds-form__item" role="listitem">
+                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                  <span class="slds-form-element__label">Edad</span>
+                  <div class="slds-form-element__control">
+                    <div class="slds-form-element__static">
+                      <lightning-output-field  variant="label-hidden" field-name="Edad__c"></lightning-output-field>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="slds-form__row">
+              <div class="slds-form__item" role="listitem">
+                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                    <span class="slds-form-element__label">Cargo</span>
+                  <div class="slds-form-element__control">
+                    <div class="slds-form-element__static">
+                      <lightning-input-field  variant="label-hidden"  value={cargo} onchange={handle_value_cargo} field-name="Title"></lightning-input-field>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="slds-form__item" role="listitem">
+                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                  <span class="slds-form-element__label">Renta</span>
+                  <div class="slds-form-element__control">
+                    <div class="slds-form-element__static">
+                      <lightning-input-field  variant="label-hidden" value={renta} onchange={handle_value_renta} field-name="Renta__c"></lightning-input-field>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="slds-form__row">
+              <div class="slds-form__item" role="listitem">
+                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                  <span class="slds-form-element__label" style="color: red;">*</span>
+                  <span class="slds-form-element__label">Estado del Prospecto</span>
+                  <div class="slds-form-element__control">
+                    <div class="slds-form-element__static">
+                      <lightning-input-field  variant="label-hidden" class="validate_status"  required value={status} onchange={handle_value_status} field-name="Status"></lightning-input-field>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="slds-form__item" role="listitem">
+                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                  <span class="slds-form-element__label" style="color: red;">*</span>
+                  <span class="slds-form-element__label">Sub - Estado del Prospecto</span>
+                  <div class="slds-form-element__control">
+                    <div class="slds-form-element__static">
+                      <lightning-input-field  variant="label-hidden" class="validate_subestado"  required value={subEstado} onchange={handle_value_subEstado}  field-name="Sub_Estado__c"></lightning-input-field>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </slot>
+        </div>
+        </div>
+
+        <div class={sectionClass_ubicacionProspecto}>
+          <h3 class="slds-section__title">
+              <button class="slds-button slds-section__title-action" onclick={handleClick_ubicacionProspecto}>
+                  <lightning-icon
+                      icon-name="utility:switch"
+                      class="slds-button__icon slds-button__icon_left slds-section__title-action-icon"
+                      size="x-small"
+                  ></lightning-icon>
+                  <span class="slds-truncate" title="Ubicación Prospecto">Ubicación Prospecto</span>
+              </button>
+          </h3>
+          <div class="slds-section__content">
+            <slot>
+                <div class="slds-form__row">
+
+                  <div class="slds-form__item" role="listitem">
+                    <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                        <span class="slds-form-element__label">Email</span>
+                      <div class="slds-form-element__control">
+                        <div class="slds-form-element__static">
+                          <lightning-input-field  variant="label-hidden" value={email} onchange={handle_value_email} field-name="Email"></lightning-input-field>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="slds-form__item" role="listitem"></div>
+                </div>
+                <div class="slds-form__row">
+
+                  <div class="slds-form__item" role="listitem">
+                    <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                        <span class="slds-form-element__label">Teléfono 1</span>
+                      <div class="slds-form-element__control">
+                        <div class="slds-form-element__static">
+                          <lightning-input-field  variant="label-hidden" value={telefono_1} onchange={handle_value_telefono_1} field-name="Phone"></lightning-input-field>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="slds-form__item" role="listitem">
+                    <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                        <span class="slds-form-element__label">Teléfono 2</span>
+                      <div class="slds-form-element__control">
+                        <div class="slds-form-element__static">
+                          <lightning-input-field  variant="label-hidden" value={telefono_2} onchange={handle_value_telefono_2} field-name="PROSP_Carga_Tel_fono_2__c"></lightning-input-field>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="slds-form__row">
+                  <div class="slds-form__item" role="listitem">
+                    <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                        <span class="slds-form-element__label">Teléfono 3</span>
+                      <div class="slds-form-element__control">
+                        <div class="slds-form-element__static">
+                          <lightning-input-field  variant="label-hidden" value={telefono_3} onchange={handle_value_telefono_3} field-name="Telefono_3__c"></lightning-input-field>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="slds-form__item" role="listitem">
+                    <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                        <span class="slds-form-element__label">Teléfono 4</span>
+                      <div class="slds-form-element__control">
+                        <div class="slds-form-element__static">
+                          <lightning-input-field  variant="label-hidden" value={telefono_4} onchange={handle_value_telefono_4} field-name="Telefono_4__c"></lightning-input-field>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="slds-form__row">
+                  <div class="slds-form__item" role="listitem">
+                    <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                        <span class="slds-form-element__label">Teléfono 5</span>
+                      <div class="slds-form-element__control">
+                        <div class="slds-form-element__static">
+                          <lightning-input-field  variant="label-hidden" value={telefono_5} onchange={handle_value_telefono_5} field-name="Telefono_5__c"></lightning-input-field>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="slds-form__item" role="listitem">
+                    <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                        <span class="slds-form-element__label">Teléfono 6</span>
+                      <div class="slds-form-element__control">
+                        <div class="slds-form-element__static">
+                          <lightning-input-field  variant="label-hidden" value={telefono_6} onchange={handle_value_telefono_6} field-name="Telefono_6__c"></lightning-input-field>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="slds-form__row">
+                  <div class="slds-form__item" role="listitem">
+                    <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                        <span class="slds-form-element__label">Teléfono 7</span>
+                      <div class="slds-form-element__control">
+                        <div class="slds-form-element__static">
+                          <lightning-input-field  variant="label-hidden" value={telefono_7} onchange={handle_value_telefono_7} field-name="Telefono_7__c"></lightning-input-field>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="slds-form__item" role="listitem">
+                    <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                        <span class="slds-form-element__label">Teléfono 8</span>
+                      <div class="slds-form-element__control">
+                        <div class="slds-form-element__static">
+                          <lightning-input-field  variant="label-hidden" value={telefono_8} onchange={handle_value_telefono_8} field-name="Telefono_8__c"></lightning-input-field>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="slds-form__row">
+                  <div class="slds-form__item" role="listitem">
+                    <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                        <span class="slds-form-element__label">Dirección</span>
+                      <div class="slds-form-element__control">
+                        <div class="slds-form-element__static">
+                          <lightning-input-field  variant="label-hidden" value={direccion} onchange={handle_value_direccion} field-name="Direccion__c"></lightning-input-field>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="slds-form__item" role="listitem">
+                    <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                        <span class="slds-form-element__label">Comuna</span>
+                      <div class="slds-form-element__control">
+                        <div class="slds-form-element__static">
+                          <lightning-input-field  variant="label-hidden" value={comuna} onchange={handle_value_comuna} field-name="Comuna__c"></lightning-input-field>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="slds-form__row">
+                  <div class="slds-form__item" role="listitem">
+                    <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                        <span class="slds-form-element__label">Ciudad</span>
+                      <div class="slds-form-element__control">
+                        <div class="slds-form-element__static">
+                          <lightning-input-field  variant="label-hidden" value={ciudad} onchange={handle_value_ciudad} field-name="Ciudad__c"></lightning-input-field>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="slds-form__item" role="listitem">
+                    <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                        <span class="slds-form-element__label">Región</span>
+                      <div class="slds-form-element__control">
+                        <div class="slds-form-element__static">
+                          <lightning-input-field  variant="label-hidden" value={region} onchange={handle_value_region} field-name="Region__c"></lightning-input-field>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="slds-form__row">
+                  <div class="slds-form__item" role="listitem">
+                    <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                        <span class="slds-form-element__label">Teléfono Activo</span>
+                      <div class="slds-form-element__control">
+                        <div class="slds-form-element__static">
+                          <lightning-input-field  variant="label-hidden" value={telefono_activo} onchange={handle_value_telefono_activo} field-name="Telefono_activo__c"></lightning-input-field>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="slds-form__item" role="listitem">
+                    &nbsp;
+                  </div>
+                </div>
+          </slot>
+        </div>
+        </div>
+
+        <div class={sectionClass_gestionProspecto}>
+              <h3 class="slds-section__title">
+                  <button class="slds-button slds-section__title-action" onclick={handleClick_gestionProspecto}>
+                      <lightning-icon
+                          icon-name="utility:switch"
+                          class="slds-button__icon slds-button__icon_left slds-section__title-action-icon"
+                          size="x-small"
+                      ></lightning-icon>
+                      <span class="slds-truncate" title="Información gestión Prospecto">Información gestión Prospecto</span>
+                  </button>
+              </h3>
+              <div class="slds-section__content">
+                  <slot>
+
+                    <div class="slds-form__row">
+                      <div class="slds-form__item" role="listitem">
+                        <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                            <span class="slds-form-element__label">Reprogramación</span>
+                          <div class="slds-form-element__control">
+                            <div class="slds-form-element__static">
+                              <lightning-input-field  variant="label-hidden" value={reprogramacion} onchange={handle_value_reprogramacion} field-name="Reprogramacion__c"></lightning-input-field>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="slds-form__item" role="listitem">
+                        <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                          <span class="slds-form-element__label">Acepta Contacto Futuro</span>
+                        <div class="slds-form-element__control">
+                          <div class="slds-form-element__static">
+                            <lightning-input-field  variant="label-hidden" value={nomaceptaContactoFuturobreBase} onchange={handle_value_aceptaContactoFuturo} field-name="Acepta_Contacto_Futuro__c"></lightning-input-field>
+                          </div>
+                        </div>
+                      </div>
+                      </div>
+
+                    </div>
+
+                    <div class="slds-form__row">
+                      <div class="slds-form__item" role="listitem">
+                        <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                            <span class="slds-form-element__label">Agente o Supervisor FFVV</span>
+                          <div class="slds-form-element__control">
+                            <div class="slds-form-element__static">
+                              <lightning-input-field  variant="label-hidden"  value={agenteVenta} onchange={handle_value_agenteVenta} field-name="Agente_Venta__c"></lightning-input-field>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="slds-form__item" role="listitem">
+                        <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                            <span class="slds-form-element__label">Ejecutivo PostVenta</span>
+                          <div class="slds-form-element__control">
+                            <div class="slds-form-element__static">
+                              <lightning-input-field  variant="label-hidden"  value={ejecutivoPostVenta} onchange={handle_value_ejecutivoPostVenta} field-name="Ejecutivo_PostVenta__c"></lightning-input-field>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="slds-form__row" style="margin-bottom: 5px;;">
+                      <div class="slds-form__item" role="listitem">
+                        <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                            <span class="slds-form-element__label">Perfil de asignación</span>
+                          <div class="slds-form-element__control">
+                            <div class="slds-form-element__static">
+                              <lightning-input-field  variant="label-hidden"   value={perfilAsignacion} onchange={handle_value_perfilAsignacion} field-name="Perfil_asignacion__c"></lightning-input-field>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="slds-form__item" role="listitem">
+                        <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                            <span class="slds-form-element__label">Tipo de Cliente</span>
+                          <div class="slds-form-element__control">
+                            <div class="slds-form-element__static">
+                              <lightning-input-field  variant="label-hidden"   value={tipoCliente} onchange={handle_value_tipoCliente} field-name="Tipo_Cliente__c"></lightning-input-field>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+
+                  </slot>
+              </div>
+        </div>
+
+        <div class={sectionClass_informacionEntrevista}>
+            <h3 class="slds-section__title">
+                <button class="slds-button slds-section__title-action" onclick={handleClick_informacionEntrevista}>
+                    <lightning-icon
+                        icon-name="utility:switch"
+                        class="slds-button__icon slds-button__icon_left slds-section__title-action-icon"
+                        size="x-small"
+                    ></lightning-icon>
+                    <span class="slds-truncate" title="Información de la Entrevista">Información de Entrevista</span>
+                </button>
+            </h3>
+            <div class="slds-section__content">
+
+              <slot>
+                  <div class="slds-form__row">
+                    <div class="slds-form__item" role="listitem">
+                      <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                          <span class="slds-form-element__label">Fecha de Entrevista</span>
+                        <div class="slds-form-element__control">
+                          <div class="slds-form-element__static">
+                            <lightning-input-field  variant="label-hidden" value={fechaEntrevista} onchange={handle_value_fechaEntrevista} field-name="Fecha_Entrevista__c"></lightning-input-field>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="slds-form__item" role="listitem">
+                      <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                        <span class="slds-form-element__label"  if:true={permisoEdicion}  style="color: red;">*</span>
+                          <span class="slds-form-element__label">Tipo de Link</span>
+                        <div class="slds-form-element__control">
+                          <div class="slds-form-element__static">
+                            <lightning-output-field  if:false={permisoEdicion} variant="label-hidden" field-name="Tipo_Link__c"></lightning-output-field>
+                            <lightning-input-field  if:true={permisoEdicion} variant="label-hidden" class="validate_tipolink" required value={tipoLink} onchange={handle_value_tipoLink} field-name="Tipo_Link__c"></lightning-input-field>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="slds-form__row">
+                    <div class="slds-form__item" role="listitem">
+                      <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                          <span class="slds-form-element__label">Hora de Entrevista</span>
+                        <div class="slds-form-element__control">
+                          <div class="slds-form-element__static">
+                            <lightning-input-field  variant="label-hidden" value={horaEntrevista} onchange={handle_value_horaEntrevista} field-name="Hora_Entrevista__c"></lightning-input-field>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="slds-form__item" role="listitem">
+                      <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                        <span class="slds-form-element__label"  if:true={permisoEdicion}  style="color: red;">*</span>
+                          <span class="slds-form-element__label">Tipo de Base</span>
+                        <div class="slds-form-element__control">
+                          <div class="slds-form-element__static">
+                            <lightning-output-field  if:false={permisoEdicion} variant="label-hidden" field-name="Tipo_Base__c"></lightning-output-field>
+                            <lightning-input-field  if:true={permisoEdicion} variant="label-hidden" class="validate_tipobase"  required value={tipoBase} onchange={handle_value_tipoBase} field-name="Tipo_Base__c"></lightning-input-field>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="slds-form__row">
+                    <div class="slds-form__item" role="listitem">
+                      <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                          <span class="slds-form-element__label">Fecha de Concertación</span>
+                        <div class="slds-form-element__control">
+                          <div class="slds-form-element__static">
+                            <lightning-input-field  variant="label-hidden"  value={fechaConcertacion} onchange={handle_value_fechaConcertacion} field-name="Fecha_Concertacion__c"></lightning-input-field>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="slds-form__item" role="listitem">
+                      <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                        <span class="slds-form-element__label"  if:true={permisoEdicion}  style="color: red;">*</span>
+                          <span class="slds-form-element__label">Nombre de Base</span>
+                        <div class="slds-form-element__control">
+                          <div class="slds-form-element__static">
+                            <lightning-output-field  variant="label-hidden" if:false={permisoEdicion} field-name="Nombre_Base__c"></lightning-output-field>
+                            <lightning-input-field  if:true={permisoEdicion} variant="label-hidden" class="validate_nombrebase" required value={nombreBase} onchange={handle_value_nombreBase} field-name="Nombre_Base__c"></lightning-input-field>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="slds-form__row">
+
+                    <div class="slds-form__item" role="listitem">
+                      <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                          <span class="slds-form-element__label">Fecha de Creación</span>
+                        <div class="slds-form-element__control">
+                          <div class="slds-form-element__static">
+                            <lightning-output-field  variant="label-hidden" field-name="Fecha_de_creacion__c"></lightning-output-field>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="slds-form__item" role="listitem">
+                      <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal   slds-form-element_stacked slds-hint-parent">
+                        <span class="slds-form-element__label">Asunto</span>
+                      <div class="slds-form-element__control">
+                        <div class="slds-form-element__static">
+                          <lightning-output-field  variant="label-hidden"  if:false={permisoEdicion} field-name="Subject_Link__c"></lightning-output-field>
+                          <lightning-input-field   if:true={permisoEdicion} variant="label-hidden"  value={subjectLink} onchange={handle_value_subjectLink} field-name="Subject_Link__c"></lightning-input-field>
+                        </div>
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                </slot>
+
+            </div>
+        </div>
+
+        <div class={sectionClass_informacionAdicional}>
+            <h3 class="slds-section__title">
+                <button class="slds-button slds-section__title-action" onclick={handleClick_informacionAdicional}>
+                    <lightning-icon
+                        icon-name="utility:switch"
+                        class="slds-button__icon slds-button__icon_left slds-section__title-action-icon"
+                        size="x-small"
+                    ></lightning-icon>
+                    <span class="slds-truncate" title="Información de la Entrevista">Información adicional</span>
+                </button>
+            </h3>
+            <div class="slds-section__content">
+                <slot>
+                  <div class="slds-form__row" >
+                    <div class="slds-form__item" role="listitem">
+                      <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                          <span class="slds-form-element__label">Tipo de Intermediario Final</span>
+                        <div class="slds-form-element__control">
+                          <div class="slds-form-element__static">
+                            <lightning-input-field  variant="label-hidden"   value={tipoIntermediario} onchange={handle_value_tipoIntermediario} field-name="Tipo_Intermediario_Final__c"></lightning-input-field>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="slds-form__item" role="listitem">
+                      <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                          <span class="slds-form-element__label">Nombre Intermediario Final</span>
+                        <div class="slds-form-element__control">
+                          <div class="slds-form-element__static">
+                            <lightning-input-field  variant="label-hidden"   value={nombreIntermediario} onchange={handle_value_nombreIntermediario} field-name="Nombre_intermediario_Final__c"></lightning-input-field>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <div class="slds-form__row">
+                    <div class="slds-form__item" role="listitem">
+                      <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                          <span class="slds-form-element__label">Email Intermediario Final</span>
+                        <div class="slds-form-element__control">
+                          <div class="slds-form-element__static">
+                            <lightning-input-field  variant="label-hidden"   value={emailIntermediario} onchange={handle_value_emailIntermediario} field-name="Email_intermediario_final__c"></lightning-input-field>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="slds-form__item" role="listitem">
+                      <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                          <span class="slds-form-element__label">Sucursal</span>
+                        <div class="slds-form-element__control">
+                          <div class="slds-form-element__static">
+                            <lightning-input-field  variant="label-hidden"   value={sucursal} onchange={handle_value_sucursal} field-name="Sucursal__c"></lightning-input-field>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="slds-form__row">
+                    <div class="slds-form__item" role="listitem">
+                      <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                          <span class="slds-form-element__label">Origen del Prospecto</span>
+                        <div class="slds-form-element__control">
+                          <div class="slds-form-element__static">
+                            <lightning-input-field  variant="label-hidden"  value={origen} onchange={handle_value_origen} field-name="LeadSource" style="text-align: left;"></lightning-input-field>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="slds-form__item" role="listitem">
+                      <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                          <span class="slds-form-element__label">Observación</span>
+                        <div class="slds-form-element__control">
+                          <div class="slds-form-element__static">
+                            <lightning-input-field  variant="label-hidden" value={observacion} onchange={handle_value_observacion} field-name="Observacion__c" style="text-align: left;"></lightning-input-field>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </slot>
+            </div>
+        </div>
+      <div class={sectionClass_informacionSistema}>
+        <h3 class="slds-section__title">
+            <button class="slds-button slds-section__title-action" onclick={handleClick_informacionSistema}>
+                <lightning-icon
+                    icon-name="utility:switch"
+                    class="slds-button__icon slds-button__icon_left slds-section__title-action-icon"
+                    size="x-small"
+                ></lightning-icon>
+                <span class="slds-truncate" title="Información de la Entrevista">Información del Sistema</span>
+            </button>
+        </h3>
+        <div class="slds-section__content">
+            <slot>
+              <div class="slds-form__row">
+                <div class="slds-form__item" role="listitem">
+                  <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                      <span class="slds-form-element__label">Creado por</span>
+                    <div class="slds-form-element__control">
+                      <div class="slds-form-element__static">
+                        <lightning-output-field  variant="label-hidden" field-name="CreatedById"></lightning-output-field>
+                        <lightning-output-field  variant="label-hidden" field-name="CreatedDate"></lightning-output-field>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="slds-form__item" role="listitem">
+                  <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                      <span class="slds-form-element__label">Última modificación por</span>
+                    <div class="slds-form-element__control">
+                      <div class="slds-form-element__static">
+                        <lightning-output-field  variant="label-hidden" field-name="LastModifiedById"></lightning-output-field>
+                        <lightning-output-field  variant="label-hidden" field-name="LastModifiedDate"></lightning-output-field>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="slds-form__row">
+                <div class="slds-form__item" role="listitem">
+                  <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                      <span class="slds-form-element__label">Tipo de registro de prospecto</span>
+                    <div class="slds-form-element__control">
+                      <div class="slds-form-element__static">
+                        <lightning-output-field  variant="label-hidden" field-name="RecordTypeId"></lightning-output-field>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="slds-form__item" role="listitem">
+                  <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                      <span class="slds-form-element__label">Divisa del prospecto</span>
+                    <div class="slds-form-element__control">
+                      <div class="slds-form-element__static">
+                        <lightning-output-field  variant="label-hidden" field-name="CurrencyIsoCode"></lightning-output-field>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </slot>
+        </div>
+      </div>
+      <div class="slds-docked-form-footer stickyFooter bottomfooter">
+        <lightning-button label="Cancelar" variant="neutral" onclick={handleClick_ver}></lightning-button>&nbsp;&nbsp;
+        <lightning-button label="Guardar" variant="brand" onclick={handleClick_save}></lightning-button>
+      </div>
+    </lightning-record-edit-form>
+    </div>
+</template>
+
+
+    <template if:false={modoEdicion}>
+      <div class="slds-form" role="list" style="margin-left: 10px;">
+        <template if:true={showLoading}>
+          <lightning-spinner alternative-text="Loading" size="medium" class="spinnerClass"></lightning-spinner>
+      </template>
+        <lightning-record-view-form record-id={recordId} object-api-name="Lead">
+
+          <div class={sectionClass_informacionPersonalProspecto}>
+            <h3 class="slds-section__title">
+                <button class="slds-button slds-section__title-action" onclick={handleClick_informacionPersonalProspecto}>
+                    <lightning-icon
+                        icon-name="utility:switch"
+                        class="slds-button__icon slds-button__icon_left slds-section__title-action-icon"
+                        size="x-small"
+                    ></lightning-icon>
+                    <span class="slds-truncate" title="Información Personal Prospecto">Información Personal Prospecto</span>
+                </button>
+            </h3>
+            <div class="slds-section__content">
+              <slot>
+                <div class="slds-form__row">
+                  <div class="slds-form__item" role="listitem">
+                    <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                        <span class="slds-form-element__label">RUT</span>
+                      <div class="slds-form-element__control">
+                        <div class="slds-grid slds-gutters">
+                          <div class="slds-col slds-size_1-of-2" style="text-align: left;">
+                            <lightning-output-field  variant="label-hidden" field-name="RUT_DV__c"></lightning-output-field>
+                          </div>
+                          <div class="slds-col slds-size_1-of-2" style="text-align: right;">
+
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                  <div class="slds-form__item" role="listitem">
+                  </div>
+                </div>
+
+                  <div class="slds-form__row">
+                      <div class="slds-form__item" role="listitem">
+                        <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                            <span class="slds-form-element__label">Nombre completo</span>
+                          <div class="slds-form-element__control">
+
+                            <div class="slds-grid slds-gutters">
+                              <div class="slds-col slds-size_1-of-2" style="text-align: left;">
+                                <lightning-output-field  variant="label-hidden" field-name="Name"></lightning-output-field>
+                              </div>
+                              <div class="slds-col slds-size_1-of-2" style="text-align: right;">
+                                <button class="slds-button slds-button_icon" onclick={handleClick_editar} title="Modificar Nombre completo">
+                                  <svg class="slds-button__icon slds-button__icon_hint" aria-hidden="true">
+                                    <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#edit"></use>
+                                    <!-- <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#edit"></use> -->
+                                  </svg>
+                                  <span class="slds-assistive-text">Modificar Nombre completo</span>
+                                </button>
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                      <div class="slds-form__item" role="listitem">
+                        <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                          <span class="slds-form-element__label">Propietario</span>
+                          <div class="slds-form-element__control">
+                            <div class="slds-grid slds-gutters">
+                              <div class="slds-col slds-size_1-of-2" style="text-align: left;">
+                                <lightning-output-field  variant="label-hidden" field-name="OwnerId"></lightning-output-field>
+                              </div>
+                              <div class="slds-col slds-size_1-of-2" style="text-align: right;">
+                                <button class="slds-button slds-button_icon"  onclick={handleClick_changeOwner} title="Cambiar Propietario">
+                                  <svg class="slds-button__icon slds-button__icon_hint" aria-hidden="true">
+                                    <use xlink:href="/slds/icons/utility-sprite/svg/symbols.svg#change_owner"></use>
+                                    <!-- <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#edit"></use> -->
+                                  </svg>
+                                  <span class="slds-assistive-text">Cambiar Propietario</span>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                      </div>
+                    </div>
+
+
+                  </div>
+
+
+                  <div class="slds-form__row">
+                    <div class="slds-form__item" role="listitem">
+                      <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                          <span class="slds-form-element__label">Fecha de nacimiento</span>
+                        <div class="slds-form-element__control">
+                          <div class="slds-grid slds-gutters">
+                            <div class="slds-col slds-size_1-of-2" style="text-align: left;">
+                              <lightning-output-field  variant="label-hidden" field-name="PROSPE_Carga_Fecha_Nacimiento__c"></lightning-output-field>
+                            </div>
+                            <div class="slds-col slds-size_1-of-2" style="text-align: right;">
+                              <button class="slds-button slds-button_icon" onclick={handleClick_editar} title="Modificar Fecha de Nacimiento">
+                                <svg class="slds-button__icon slds-button__icon_hint" aria-hidden="true">
+                                  <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#edit"></use>
+                                  <!-- <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#edit"></use> -->
+                                </svg>
+                                <span class="slds-assistive-text">Modificar Fecha de Nacimiento</span>
+                              </button>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                    <div class="slds-form__item" role="listitem">
+                      <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                        <span class="slds-form-element__label">Edad</span>
+                        <div class="slds-form-element__control">
+                          <div class="slds-form-element__static">
+                            <div class="slds-grid slds-gutters">
+                              <div class="slds-col slds-size_1-of-2" style="text-align: left;">
+                                <lightning-output-field  variant="label-hidden" field-name="Edad__c"></lightning-output-field>
+                              </div>
+                              <div class="slds-col slds-size_1-of-2" style="text-align: right;">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="slds-form__row">
+                    <div class="slds-form__item" role="listitem">
+                      <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                          <span class="slds-form-element__label">Cargo</span>
+                        <div class="slds-form-element__control">
+                          <div class="slds-grid slds-gutters">
+                            <div class="slds-col slds-size_1-of-2" style="text-align: left;">
+                            <!--  <label>{CARGO}</label>-->
+                               <lightning-output-field  variant="label-hidden" field-name="Title"></lightning-output-field>
+                            </div>
+                            <div class="slds-col slds-size_1-of-2" style="text-align: right;">
+                              <button class="slds-button slds-button_icon" onclick={handleClick_editar} title="Modificar Cargo">
+                                <svg class="slds-button__icon slds-button__icon_hint" aria-hidden="true">
+                                  <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#edit"></use>
+                                  <!-- <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#edit"></use> -->
+                                </svg>
+                                <span class="slds-assistive-text">Modificar Cargo</span>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="slds-form__item" role="listitem">
+                      <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                        <span class="slds-form-element__label">Renta</span>
+                        <div class="slds-form-element__control">
+                          <div class="slds-grid slds-gutters">
+                            <div class="slds-col slds-size_1-of-2" style="text-align: left;">
+                              <lightning-output-field  variant="label-hidden" field-name="Renta__c"></lightning-output-field>
+                            </div>
+                            <div class="slds-col slds-size_1-of-2" style="text-align: right;">
+                              <button class="slds-button slds-button_icon" onclick={handleClick_editar} title="Modificar Renta">
+                                <svg class="slds-button__icon slds-button__icon_hint" aria-hidden="true">
+                                  <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#edit"></use>
+                                  <!-- <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#edit"></use> -->
+                                </svg>
+                                <span class="slds-assistive-text">Modificar Renta</span>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+
+
+
+
+            <div class="slds-form__row">
+
+              <div class="slds-form__item" role="listitem">
+                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                  <span class="slds-form-element__label">Estado del Prospecto</span>
+                  <div class="slds-form-element__control">
+                    <div class="slds-grid slds-gutters">
+                      <div class="slds-col slds-size_1-of-2" style="text-align: left;">
+                        <lightning-output-field  variant="label-hidden" field-name="Status"></lightning-output-field>
+                      </div>
+                      <div class="slds-col slds-size_1-of-2" style="text-align: right;">
+                        <button class="slds-button slds-button_icon" onclick={handleClick_editar} title="Modificar Estado del Prospecto">
+                          <svg class="slds-button__icon slds-button__icon_hint" aria-hidden="true">
+                            <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#edit"></use>
+                            <!-- <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#edit"></use> -->
+                          </svg>
+                          <span class="slds-assistive-text">Modificar Estado del Prospecto</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="slds-form__item" role="listitem">
+                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                  <span class="slds-form-element__label">Sub - Estado del Prospecto</span>
+                  <div class="slds-form-element__control">
+                    <div class="slds-grid slds-gutters">
+                      <div class="slds-col slds-size_1-of-2" style="text-align: left;">
+                        <lightning-output-field  variant="label-hidden" field-name="Sub_Estado__c"></lightning-output-field>
+                      </div>
+                      <div class="slds-col slds-size_1-of-2" style="text-align: right;">
+                        <button class="slds-button slds-button_icon" onclick={handleClick_editar} title="Modificar Sub - Estado del Prospecto">
+                          <svg class="slds-button__icon slds-button__icon_hint" aria-hidden="true">
+                            <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#edit"></use>
+                            <!-- <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#edit"></use> -->
+                          </svg>
+                          <span class="slds-assistive-text">Modificar Sub - Estado del Prospecto</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </slot>
+        </div>
+   </div>
+
+            <div class={sectionClass_ubicacionProspecto}>
+              <h3 class="slds-section__title">
+                  <button class="slds-button slds-section__title-action" onclick={handleClick_ubicacionProspecto}>
+                      <lightning-icon
+                          icon-name="utility:switch"
+                          class="slds-button__icon slds-button__icon_left slds-section__title-action-icon"
+                          size="x-small"
+                      ></lightning-icon>
+                      <span class="slds-truncate" title="Ubicación Prospecto">Ubicación Prospecto</span>
+                  </button>
+              </h3>
+              <div class="slds-section__content">
+                <slot>
+            <div class="slds-form__row">
+              <div class="slds-form__item" role="listitem">
+                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                    <span class="slds-form-element__label">Email</span>
+                  <div class="slds-form-element__control">
+
+                    <div class="slds-grid slds-gutters">
+                      <div class="slds-col slds-size_1-of-2" style="text-align: left;">
+                         <label>{CORREO_ELECTRONICO}</label>
+                        <!-- <lightning-output-field  variant="label-hidden"  field-name="Email"></lightning-output-field> -->
+                      </div>
+
+                      <div class="slds-col slds-size_1-of-2" style="text-align: right;">
+
+                        <button class="slds-button slds-button_icon" if:true={isValue_Email}  title="Enviar Correo Electrónico">
+                          <a href={href_Email}>
+                              <svg class="slds-button__icon slds-button__icon_hint" aria-hidden="true">
+                                <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#email"></use>
+                                <!-- <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#edit"></use> -->
+                              </svg>
+                              <span class="slds-assistive-text">Enviar Correo Electrónico</span>
+                            </a>
+                        </button>
+                        <button class="slds-button slds-button_icon" onclick={handleClick_editar} title="Modificar Correo Electrónico">
+                          <svg class="slds-button__icon slds-button__icon_hint" aria-hidden="true">
+                            <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#edit"></use>
+                            <!-- <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#edit"></use> -->
+                          </svg>
+                          <span class="slds-assistive-text">Modificar Correo Electrónico</span>
+                        </button>
+                      </div>
+                    </div>
+
+
+                  </div>
+                </div>
+              </div>
+              <div class="slds-form__item" role="listitem">
+
+              </div>
+            </div>
+
+            <div class="slds-form__row">
+              <div class="slds-form__item" role="listitem">
+                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                    <span class="slds-form-element__label">Teléfono 1</span>
+                  <div class="slds-form-element__control">
+
+                    <div class="slds-grid slds-gutters">
+                      <div class="slds-col slds-size_1-of-2" style="text-align: left;">
+                        <label>{PHONE_1}</label>
+                        <!-- <lightning-output-field  variant="label-hidden" disabled field-name="Phone"></lightning-output-field> -->
+                      </div>
+
+                      <div class="slds-col slds-size_1-of-2" style="text-align: right;">
+                        <button class="slds-button slds-button_icon" if:true={isValue_Phone_1} onclick={handleClick_call_Telefono_1} title="Llamar Teléfono 1">
+                          <a href={href_Phone_1}>
+                              <svg class="slds-button__icon slds-button__icon_hint" aria-hidden="true">
+                                <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#call"></use>
+                                <!-- <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#edit"></use> -->
+                              </svg>
+                              <span class="slds-assistive-text">Llamar Teléfono 1</span>
+                            </a>
+                        </button>
+
+                        <button class="slds-button slds-button_icon" onclick={handleClick_editar} title="Modificar Teléfono 1">
+                          <svg class="slds-button__icon slds-button__icon_hint" aria-hidden="true">
+                            <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#edit"></use>
+                            <!-- <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#edit"></use> -->
+                          </svg>
+                          <span class="slds-assistive-text">Modificar Teléfono 1</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="slds-form__item" role="listitem">
+                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                    <span class="slds-form-element__label">Teléfono 2</span>
+                  <div class="slds-form-element__control">
+                    <!-- <div class="slds-form-element__static"> -->
+                      <div class="slds-grid slds-gutters">
+                        <div class="slds-col slds-size_1-of-2" style="text-align: left;">
+                          <label>{PHONE_2}</label>
+                              <!-- <lightning-output-field  variant="label-hidden" onclick={handleClick_call_Telefono_2} field-name="PROSP_Carga_Tel_fono_2__c"></lightning-output-field> -->
+                        </div>
+
+                        <div class="slds-col slds-size_1-of-2" style="text-align: right;">
+                          <button class="slds-button slds-button_icon" if:true={isValue_Phone_2} onclick={handleClick_call_Telefono_2} title="Llamar Teléfono 2">
+                            <a href={href_Phone_2}>
+                                <svg class="slds-button__icon slds-button__icon_hint" aria-hidden="true">
+                                  <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#call"></use>
+                                  <!-- <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#edit"></use> -->
+                                </svg>
+                                <span class="slds-assistive-text">Llamar Teléfono 2</span>
+                              </a>
+                          </button>
+
+                          <button class="slds-button slds-button_icon" onclick={handleClick_editar} title="Modificar Teléfono 2">
+                            <svg class="slds-button__icon slds-button__icon_hint" aria-hidden="true">
+                              <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#edit"></use>
+                              <!-- <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#edit"></use> -->
+                            </svg>
+                            <span class="slds-assistive-text">Modificar Teléfono 2</span>
+                          </button>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+            <div class="slds-form__row">
+              <div class="slds-form__item" role="listitem">
+                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                    <span class="slds-form-element__label">Teléfono 3</span>
+                  <div class="slds-form-element__control">
+                    <div class="slds-grid slds-gutters">
+                      <div class="slds-col slds-size_1-of-2" style="text-align: left;">
+                        <label>{PHONE_3}</label>
+                      </div>
+
+                      <div class="slds-col slds-size_1-of-2" style="text-align: right;">
+                        <button class="slds-button slds-button_icon" if:true={isValue_Phone_3} onclick={handleClick_call_Telefono_3} title="Llamar Teléfono 3">
+                          <a href={href_Phone_3}>
+                              <svg class="slds-button__icon slds-button__icon_hint" aria-hidden="true">
+                                <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#call"></use>
+                                <!-- <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#edit"></use> -->
+                              </svg>
+                              <span class="slds-assistive-text">Llamar Teléfono 3</span>
+                            </a>
+                        </button>
+
+                        <button class="slds-button slds-button_icon" onclick={handleClick_editar} title="Modificar Teléfono 3">
+                          <svg class="slds-button__icon slds-button__icon_hint" aria-hidden="true">
+                            <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#edit"></use>
+                            <!-- <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#edit"></use> -->
+                          </svg>
+                          <span class="slds-assistive-text">Modificar Teléfono 3</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="slds-form__item" role="listitem">
+                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                    <span class="slds-form-element__label">Teléfono 4</span>
+                  <div class="slds-form-element__control">
+                    <div class="slds-grid slds-gutters">
+                      <div class="slds-col slds-size_1-of-2" style="text-align: left;">
+                        <label>{PHONE_4}</label>
+                      </div>
+
+                      <div class="slds-col slds-size_1-of-2" style="text-align: right;">
+                        <button class="slds-button slds-button_icon" if:true={isValue_Phone_4}  onclick={handleClick_call_Telefono_4} title="Llamar Teléfono 4">
+                          <a href={href_Phone_4}>
+                              <svg class="slds-button__icon slds-button__icon_hint" aria-hidden="true">
+                                <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#call"></use>
+                                <!-- <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#edit"></use> -->
+                              </svg>
+                              <span class="slds-assistive-text">Llamar Teléfono 4</span>
+                            </a>
+                        </button>
+
+                        <button class="slds-button slds-button_icon" onclick={handleClick_editar} title="Modificar Teléfono 4">
+                          <svg class="slds-button__icon slds-button__icon_hint" aria-hidden="true">
+                            <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#edit"></use>
+                            <!-- <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#edit"></use> -->
+                          </svg>
+                          <span class="slds-assistive-text">Modificar Teléfono 4</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="slds-form__row">
+              <div class="slds-form__item" role="listitem">
+                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                    <span class="slds-form-element__label">Teléfono 5</span>
+                  <div class="slds-form-element__control">
+                    <div class="slds-grid slds-gutters">
+                      <div class="slds-col slds-size_1-of-2" style="text-align: left;">
+                        <label>{PHONE_5}</label>
+                      </div>
+
+                      <div class="slds-col slds-size_1-of-2" style="text-align: right;">
+                        <button class="slds-button slds-button_icon"  if:true={isValue_Phone_5}  onclick={handleClick_call_Telefono_5} title="Llamar Teléfono 5">
+                          <a href={href_Phone_5}>
+                              <svg class="slds-button__icon slds-button__icon_hint" aria-hidden="true">
+                                <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#call"></use>
+                                <!-- <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#edit"></use> -->
+                              </svg>
+                              <span class="slds-assistive-text">Llamar Teléfono 5</span>
+                            </a>
+                        </button>
+
+                        <button class="slds-button slds-button_icon" onclick={handleClick_editar} title="Modificar Teléfono 5">
+                          <svg class="slds-button__icon slds-button__icon_hint" aria-hidden="true">
+                            <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#edit"></use>
+                            <!-- <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#edit"></use> -->
+                          </svg>
+                          <span class="slds-assistive-text">Modificar Teléfono 5</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="slds-form__item" role="listitem">
+                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                    <span class="slds-form-element__label">Teléfono 6</span>
+                  <div class="slds-form-element__control">
+                    <div class="slds-grid slds-gutters">
+                      <div class="slds-col slds-size_1-of-2" style="text-align: left;">
+                        <label>{PHONE_6}</label>
+                      </div>
+
+                      <div class="slds-col slds-size_1-of-2" style="text-align: right;">
+                        <button class="slds-button slds-button_icon" if:true={isValue_Phone_6}  onclick={handleClick_call_Telefono_6} title="Llamar Teléfono 6">
+                          <a href={href_Phone_6}>
+                              <svg class="slds-button__icon slds-button__icon_hint" aria-hidden="true">
+                                <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#call"></use>
+                                <!-- <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#edit"></use> -->
+                              </svg>
+                              <span class="slds-assistive-text">Llamar Teléfono 6</span>
+                            </a>
+                        </button>
+
+                        <button class="slds-button slds-button_icon" onclick={handleClick_editar} title="Modificar Teléfono 6">
+                          <svg class="slds-button__icon slds-button__icon_hint" aria-hidden="true">
+                            <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#edit"></use>
+                            <!-- <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#edit"></use> -->
+                          </svg>
+                          <span class="slds-assistive-text">Modificar Teléfono 6</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="slds-form__row">
+              <div class="slds-form__item" role="listitem">
+                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                    <span class="slds-form-element__label">Teléfono 7</span>
+                  <div class="slds-form-element__control">
+                    <div class="slds-grid slds-gutters">
+                      <div class="slds-col slds-size_1-of-2" style="text-align: left;">
+                        <label>{PHONE_7}</label>
+                      </div>
+
+                      <div class="slds-col slds-size_1-of-2" style="text-align: right;">
+                        <button class="slds-button slds-button_icon" if:true={isValue_Phone_7}  onclick={handleClick_call_Telefono_7} title="Llamar Teléfono 7">
+                          <a href={href_Phone_7}>
+                              <svg class="slds-button__icon slds-button__icon_hint" aria-hidden="true">
+                                <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#call"></use>
+                                <!-- <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#edit"></use> -->
+                              </svg>
+                              <span class="slds-assistive-text">Llamar Teléfono 7</span>
+                            </a>
+                        </button>
+
+                        <button class="slds-button slds-button_icon" onclick={handleClick_editar} title="Modificar Teléfono 7">
+                          <svg class="slds-button__icon slds-button__icon_hint" aria-hidden="true">
+                            <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#edit"></use>
+                            <!-- <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#edit"></use> -->
+                          </svg>
+                          <span class="slds-assistive-text">Modificar Teléfono 7</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="slds-form__item" role="listitem">
+                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                    <span class="slds-form-element__label">Teléfono 8</span>
+                  <div class="slds-form-element__control">
+                    <div class="slds-grid slds-gutters">
+                      <div class="slds-col slds-size_1-of-2" style="text-align: left;">
+                        <label>{PHONE_8}</label>
+                      </div>
+                      <div class="slds-col slds-size_1-of-2" style="text-align: right;">
+                        <button class="slds-button slds-button_icon"  if:true={isValue_Phone_8} onclick={handleClick_call_Telefono_8} title="Llamar Teléfono 8">
+                          <a href={href_Phone_8}>
+                              <svg class="slds-button__icon slds-button__icon_hint" aria-hidden="true">
+                                <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#call"></use>
+                                <!-- <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#edit"></use> -->
+                              </svg>
+                              <span class="slds-assistive-text">Llamar Teléfono 8</span>
+                            </a>
+                        </button>
+                        <button class="slds-button slds-button_icon" onclick={handleClick_editar} title="Modificar Teléfono 8">
+                          <svg class="slds-button__icon slds-button__icon_hint" aria-hidden="true">
+                            <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#edit"></use>
+                            <!-- <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#edit"></use> -->
+                          </svg>
+                          <span class="slds-assistive-text">Modificar Teléfono 8</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="slds-form__row">
+              <div class="slds-form__item" role="listitem">
+                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                    <span class="slds-form-element__label">Dirección</span>
+                  <div class="slds-form-element__control">
+                    <div class="slds-grid slds-gutters">
+                      <div class="slds-col slds-size_1-of-2" style="text-align: left;">
+                         <lightning-output-field  variant="label-hidden" field-name="Direccion__c"></lightning-output-field>
+                         <!-- <label>{DIRECCION}</label> -->
+                      </div>
+                      <div class="slds-col slds-size_1-of-2" style="text-align: right;">
+                        <button class="slds-button slds-button_icon" onclick={handleClick_editar} title="Modificar Dirección">
+                          <svg class="slds-button__icon slds-button__icon_hint" aria-hidden="true">
+                            <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#edit"></use>
+                            <!-- <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#edit"></use> -->
+                          </svg>
+                          <span class="slds-assistive-text">Modificar Dirección</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="slds-form__item" role="listitem">
+                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                    <span class="slds-form-element__label">Comuna</span>
+                  <div class="slds-form-element__control">
+                    <div class="slds-grid slds-gutters">
+                      <div class="slds-col slds-size_1-of-2" style="text-align: left;">
+                         <lightning-output-field  variant="label-hidden" field-name="Comuna__c"></lightning-output-field>
+                         <!-- <label>{COMUNA}</label> -->
+                      </div>
+                      <div class="slds-col slds-size_1-of-2" style="text-align: right;">
+                        <button class="slds-button slds-button_icon" onclick={handleClick_editar} title="Modificar Comuna">
+                          <svg class="slds-button__icon slds-button__icon_hint" aria-hidden="true">
+                            <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#edit"></use>
+                            <!-- <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#edit"></use> -->
+                          </svg>
+                          <span class="slds-assistive-text">Modificar Comuna</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="slds-form__row">
+              <div class="slds-form__item" role="listitem">
+                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                    <span class="slds-form-element__label">Ciudad</span>
+                  <div class="slds-form-element__control">
+                    <div class="slds-grid slds-gutters">
+                      <div class="slds-col slds-size_1-of-2" style="text-align: left;">
+                         <lightning-output-field  variant="label-hidden" field-name="Ciudad__c"></lightning-output-field>
+                         <!-- <label>{CIUDAD}</label> -->
+                      </div>
+                      <div class="slds-col slds-size_1-of-2" style="text-align: right;">
+                        <button class="slds-button slds-button_icon" onclick={handleClick_editar} title="Modificar Ciudad">
+                          <svg class="slds-button__icon slds-button__icon_hint" aria-hidden="true">
+                            <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#edit"></use>
+                            <!-- <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#edit"></use> -->
+                          </svg>
+                          <span class="slds-assistive-text">Modificar Ciudad</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="slds-form__item" role="listitem">
+                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                    <span class="slds-form-element__label">Región</span>
+                  <div class="slds-form-element__control">
+                    <div class="slds-grid slds-gutters">
+                      <div class="slds-col slds-size_1-of-2" style="text-align: left;">
+                         <lightning-output-field  variant="label-hidden" field-name="Region__c"></lightning-output-field>
+                         <!-- <label>{REGION}</label> -->
+                      </div>
+                      <div class="slds-col slds-size_1-of-2" style="text-align: right;">
+                        <button class="slds-button slds-button_icon" onclick={handleClick_editar} title="Modificar Región">
+                          <svg class="slds-button__icon slds-button__icon_hint" aria-hidden="true">
+                            <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#edit"></use>
+                            <!-- <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#edit"></use> -->
+                          </svg>
+                          <span class="slds-assistive-text">Modificar Región</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="slds-form__row">
+              <div class="slds-form__item" role="listitem">
+                <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                    <span class="slds-form-element__label">Teléfono Activo</span>
+                  <div class="slds-form-element__control">
+                    <div class="slds-grid slds-gutters">
+                      <div class="slds-col slds-size_1-of-2" style="text-align: left;">
+                        <label>{TELEFONO_ACTIVO}</label>
+                      </div>
+                      <div class="slds-col slds-size_1-of-2" style="text-align: right;">
+                        <button class="slds-button slds-button_icon" if:true={isValue_Telefono_Activo}  onclick={handleClick_call_Telefono_Activo} title="Llamar Teléfono Activo">
+                          <a href={href_Telefono_Activo}>
+                              <svg class="slds-button__icon slds-button__icon_hint" aria-hidden="true">
+                                <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#call"></use>
+                                <!-- <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#edit"></use> -->
+                              </svg>
+                              <span class="slds-assistive-text">Llamar Teléfono Activo</span>
+                            </a>
+                        </button>
+                        <button class="slds-button slds-button_icon" onclick={handleClick_editar} title="Modificar Teléfono Activo">
+                          <svg class="slds-button__icon slds-button__icon_hint" aria-hidden="true">
+                            <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#edit"></use>
+                            <!-- <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#edit"></use> -->
+                          </svg>
+                          <span class="slds-assistive-text">Modificar Teléfono Activo</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="slds-form__item" role="listitem">
+               &nbsp;
+              </div>
+            </div>
+          </slot>
+        </div>
+   </div>
+            <div class={sectionClass_gestionProspecto}>
+              <h3 class="slds-section__title">
+                  <button class="slds-button slds-section__title-action" onclick={handleClick_gestionProspecto}>
+                      <lightning-icon
+                          icon-name="utility:switch"
+                          class="slds-button__icon slds-button__icon_left slds-section__title-action-icon"
+                          size="x-small"
+                      ></lightning-icon>
+                      <span class="slds-truncate" title="Información gestión Prospecto">Información gestión Prospecto</span>
+                  </button>
+              </h3>
+              <div class="slds-section__content">
+                  <slot>
+
+                    <div class="slds-form__row">
+
+                      <div class="slds-form__item" role="listitem">
+                        <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                            <span class="slds-form-element__label">Reprogramación</span>
+                          <div class="slds-form-element__control">
+                            <div class="slds-grid slds-gutters">
+                              <div class="slds-col slds-size_1-of-2" style="text-align: left;">
+                                <lightning-output-field  variant="label-hidden" field-name="Reprogramacion__c"></lightning-output-field>
+                              </div>
+                              <div class="slds-col slds-size_1-of-2" style="text-align: right;">
+                                <button class="slds-button slds-button_icon" onclick={handleClick_editar} title="Modificar Reprogramación">
+                                  <svg class="slds-button__icon slds-button__icon_hint" aria-hidden="true">
+                                    <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#edit"></use>
+                                    <!-- <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#edit"></use> -->
+                                  </svg>
+                                  <span class="slds-assistive-text">Modificar Reprogramación</span>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+   <div class="slds-form__item" role="listitem">
+                      <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                          <span class="slds-form-element__label">Acepta Contacto Futuro</span>
+                        <div class="slds-form-element__control">
+                          <div class="slds-grid slds-gutters">
+                            <div class="slds-col slds-size_1-of-2" style="text-align: left;">
+                              <lightning-output-field  variant="label-hidden" field-name="Acepta_Contacto_Futuro__c"></lightning-output-field>
+                            </div>
+                            <div class="slds-col slds-size_1-of-2" style="text-align: right;">
+                              <button class="slds-button slds-button_icon" onclick={handleClick_editar} title="Modificar Acepta Contacto Futuro">
+                                <svg class="slds-button__icon slds-button__icon_hint" aria-hidden="true">
+                                  <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#edit"></use>
+                                  <!-- <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#edit"></use> -->
+                                </svg>
+                                <span class="slds-assistive-text">Modificar Acepta Contacto Futuro</span>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    </div>
+                    <div class="slds-form__row">
+                      <div class="slds-form__item" role="listitem">
+                        <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                            <span class="slds-form-element__label">Agente o Supervisor FFVV</span>
+                          <div class="slds-form-element__control">
+                            <div class="slds-grid slds-gutters">
+                              <div class="slds-col slds-size_1-of-2" style="text-align: left;">
+                                <lightning-output-field  variant="label-hidden" field-name="Agente_Venta__c"></lightning-output-field>
+                              </div>
+                              <div class="slds-col slds-size_1-of-2" style="text-align: right;">
+                                <button class="slds-button slds-button_icon" onclick={handleClick_editar} title="Modificar Agente o Supervisor FFVV">
+                                  <svg class="slds-button__icon slds-button__icon_hint" aria-hidden="true">
+                                    <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#edit"></use>
+                                    <!-- <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#edit"></use> -->
+                                  </svg>
+                                  <span class="slds-assistive-text">Modificar Agente o Supervisor FFVV</span>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="slds-form__item" role="listitem">
+                        <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                            <span class="slds-form-element__label">Ejecutivo PostVenta</span>
+                          <div class="slds-form-element__control">
+                            <div class="slds-grid slds-gutters">
+                              <div class="slds-col slds-size_1-of-2" style="text-align: left;">
+                                <lightning-output-field  variant="label-hidden" field-name="Ejecutivo_PostVenta__c"></lightning-output-field>
+                              </div>
+                              <div class="slds-col slds-size_1-of-2" style="text-align: right;">
+                                <button class="slds-button slds-button_icon" onclick={handleClick_editar} title="Modificar Ejecutivo PostVenta">
+                                  <svg class="slds-button__icon slds-button__icon_hint" aria-hidden="true">
+                                    <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#edit"></use>
+                                    <!-- <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#edit"></use> -->
+                                  </svg>
+                                  <span class="slds-assistive-text">Modificar Ejecutivo PostVenta</span>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="slds-form__row" style="margin-bottom: 5px;;">
+                      <div class="slds-form__item" role="listitem">
+                        <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                            <span class="slds-form-element__label">Perfil de asignación</span>
+                          <div class="slds-form-element__control">
+                            <div class="slds-grid slds-gutters">
+                              <div class="slds-col slds-size_1-of-2" style="text-align: left;">
+                                <lightning-output-field  variant="label-hidden" field-name="Perfil_asignacion__c"></lightning-output-field>
+                              </div>
+                              <div class="slds-col slds-size_1-of-2" style="text-align: right;">
+                                <button class="slds-button slds-button_icon" onclick={handleClick_editar} title="Modificar Perfil de asignación">
+                                  <svg class="slds-button__icon slds-button__icon_hint" aria-hidden="true">
+                                    <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#edit"></use>
+                                    <!-- <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#edit"></use> -->
+                                  </svg>
+                                  <span class="slds-assistive-text">Modificar Perfil de asignación</span>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="slds-form__item" role="listitem">
+                        <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                            <span class="slds-form-element__label">Tipo de Cliente</span>
+                          <div class="slds-form-element__control">
+
+                            <div class="slds-grid slds-gutters">
+                              <div class="slds-col slds-size_1-of-2" style="text-align: left;">
+                                <lightning-output-field  variant="label-hidden" field-name="Tipo_Cliente__c"></lightning-output-field>
+                              </div>
+                              <div class="slds-col slds-size_1-of-2" style="text-align: right;">
+                                <button class="slds-button slds-button_icon"  onclick={handleClick_editar} title="Modificar Tipo de Cliente">
+                                  <svg class="slds-button__icon slds-button__icon_hint" aria-hidden="true">
+                                    <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#edit"></use>
+                                    <!-- <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#edit"></use> -->
+                                  </svg>
+                                  <span class="slds-assistive-text">Modificar Tipo de Cliente</span>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </slot>
+              </div>
+          </div>
+          <div class={sectionClass_informacionEntrevista}>
+            <h3 class="slds-section__title">
+                <button class="slds-button slds-section__title-action" onclick={handleClick_informacionEntrevista}>
+                    <lightning-icon
+                        icon-name="utility:switch"
+                        class="slds-button__icon slds-button__icon_left slds-section__title-action-icon"
+                        size="x-small"
+                    ></lightning-icon>
+                    <span class="slds-truncate" title="Información de la Entrevista">Información de Entrevista</span>
+                </button>
+            </h3>
+            <div class="slds-section__content">
+              <slot>
+                  <div class="slds-form__row">
+                    <div class="slds-form__item" role="listitem">
+                      <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                          <span class="slds-form-element__label">Fecha de Entrevista</span>
+                        <div class="slds-form-element__control">
+                          <div class="slds-grid slds-gutters">
+                            <div class="slds-col slds-size_1-of-2" style="text-align: left;">
+                              <lightning-output-field  variant="label-hidden" field-name="Fecha_Entrevista__c"></lightning-output-field>
+                            </div>
+                            <div class="slds-col slds-size_1-of-2" style="text-align: right;">
+                              <button class="slds-button slds-button_icon" onclick={handleClick_editar} title="Modificar Fecha de Entrevista">
+                                <svg class="slds-button__icon slds-button__icon_hint" aria-hidden="true">
+                                  <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#edit"></use>
+                                  <!-- <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#edit"></use> -->
+                                </svg>
+                                <span class="slds-assistive-text">Modificar Fecha de Entrevista</span>
+                              </button>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                    <div class="slds-form__item" role="listitem">
+                      <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                          <span class="slds-form-element__label">Tipo de Link</span>
+                        <div class="slds-form-element__control">
+                          <div class="slds-grid slds-gutters">
+                            <div class="slds-col slds-size_1-of-2" style="text-align: left;">
+                              <lightning-output-field  variant="label-hidden" field-name="Tipo_Link__c"></lightning-output-field>
+                            </div>
+                            <div class="slds-col slds-size_1-of-2" style="text-align: right;">
+                              <button class="slds-button slds-button_icon" if:true={permisoEdicion} onclick={handleClick_editar} title="Modificar Tipo de Link">
+                                <svg class="slds-button__icon slds-button__icon_hint" aria-hidden="true">
+                                  <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#edit"></use>
+                                  <!-- <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#edit"></use> -->
+                                </svg>
+                                <span class="slds-assistive-text">Modificar Tipo de Link</span>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="slds-form__row">
+                    <div class="slds-form__item" role="listitem">
+                      <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                          <span class="slds-form-element__label">Hora de Entrevista</span>
+                        <div class="slds-form-element__control">
+                          <div class="slds-grid slds-gutters">
+                            <div class="slds-col slds-size_1-of-2" style="text-align: left;">
+                              <lightning-output-field  variant="label-hidden" field-name="Hora_Entrevista__c"></lightning-output-field>
+                            </div>
+                            <div class="slds-col slds-size_1-of-2" style="text-align: right;">
+                              <button class="slds-button slds-button_icon" onclick={handleClick_editar} title="Modificar Hora de Entrevista">
+                                <svg class="slds-button__icon slds-button__icon_hint" aria-hidden="true">
+                                  <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#edit"></use>
+                                  <!-- <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#edit"></use> -->
+                                </svg>
+                                <span class="slds-assistive-text">Modificar Hora de Entrevista</span>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="slds-form__item" role="listitem">
+                      <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                          <span class="slds-form-element__label">Tipo de Base</span>
+                        <div class="slds-form-element__control">
+                          <div class="slds-grid slds-gutters">
+                            <div class="slds-col slds-size_1-of-2" style="text-align: left;">
+                              <lightning-output-field  variant="label-hidden" field-name="Tipo_Base__c"></lightning-output-field>
+                            </div>
+                            <div class="slds-col slds-size_1-of-2" style="text-align: right;">
+                              <button class="slds-button slds-button_icon"  if:true={permisoEdicion} onclick={handleClick_editar} title="Modificar Tipo de Base">
+                                <svg class="slds-button__icon slds-button__icon_hint" aria-hidden="true">
+                                  <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#edit"></use>
+                                  <!-- <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#edit"></use> -->
+                                </svg>
+                                <span class="slds-assistive-text">Modificar Tipo de Base</span>
+                              </button>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="slds-form__row">
+                    <div class="slds-form__item" role="listitem">
+                      <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                          <span class="slds-form-element__label">Fecha de Concertación</span>
+                        <div class="slds-form-element__control">
+
+                          <div class="slds-grid slds-gutters">
+                            <div class="slds-col slds-size_1-of-2" style="text-align: left;">
+                              <lightning-output-field  variant="label-hidden" field-name="Fecha_Concertacion__c"></lightning-output-field>
+                            </div>
+                            <div class="slds-col slds-size_1-of-2" style="text-align: right;">
+                              <button class="slds-button slds-button_icon"  onclick={handleClick_editar} title="Modificar Fecha de Concertación">
+                                <svg class="slds-button__icon slds-button__icon_hint" aria-hidden="true">
+                                  <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#edit"></use>
+                                  <!-- <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#edit"></use> -->
+                                </svg>
+                                <span class="slds-assistive-text">Modificar Fecha de Concertación</span>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="slds-form__item" role="listitem">
+                      <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                          <span class="slds-form-element__label">Nombre de Base</span>
+                        <div class="slds-form-element__control">
+                          <div class="slds-grid slds-gutters">
+                            <div class="slds-col slds-size_1-of-2" style="text-align: left;">
+                              <lightning-output-field  variant="label-hidden" field-name="Nombre_Base__c"></lightning-output-field>
+                            </div>
+                            <div class="slds-col slds-size_1-of-2" style="text-align: right;">
+                              <button class="slds-button slds-button_icon" if:true={permisoEdicion} onclick={handleClick_editar} title="Modificar Nombre de Base">
+                                <svg class="slds-button__icon slds-button__icon_hint" aria-hidden="true">
+                                  <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#edit"></use>
+                                  <!-- <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#edit"></use> -->
+                                </svg>
+                                <span class="slds-assistive-text">Modificar Nombre de Base</span>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="slds-form__row">
+
+
+                    <div class="slds-form__item" role="listitem">
+                      <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                          <span class="slds-form-element__label">Fecha de Creación</span>
+                        <div class="slds-form-element__control">
+                          <div class="slds-grid slds-gutters">
+                            <div class="slds-col slds-size_1-of-2" style="text-align: left;">
+                              <lightning-output-field  variant="label-hidden" field-name="Fecha_de_creacion__c"></lightning-output-field>
+                            </div>
+                            <div class="slds-col slds-size_1-of-2" style="text-align: right;">
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="slds-form__item" role="listitem">
+                      <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                        <span class="slds-form-element__label">Asunto</span>
+                      <div class="slds-form-element__control">
+                        <div class="slds-grid slds-gutters">
+                          <div class="slds-col slds-size_1-of-2" style="text-align: left;">
+                            <lightning-output-field  variant="label-hidden" field-name="Subject_Link__c"></lightning-output-field>
+                          </div>
+                          <div class="slds-col slds-size_1-of-2" style="text-align: right;">
+                            <button class="slds-button slds-button_icon"  if:true={permisoEdicion} onclick={handleClick_editar} title="Modificar Asunto">
+                              <svg class="slds-button__icon slds-button__icon_hint" aria-hidden="true">
+                                <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#edit"></use>
+                                <!-- <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#edit"></use> -->
+                              </svg>
+                              <span class="slds-assistive-text">Modificar Asunto</span>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    </div>
+                  </div>
+                </slot>
+            </div>
+          </div>
+          <div class={sectionClass_informacionAdicional}>
+          <h3 class="slds-section__title">
+              <button class="slds-button slds-section__title-action"  onclick={handleClick_informacionAdicional}>
+                  <lightning-icon
+                      icon-name="utility:switch"
+                      class="slds-button__icon slds-button__icon_left slds-section__title-action-icon"
+                      size="x-small"
+                  ></lightning-icon>
+                  <span class="slds-truncate" title="Información de la Entrevista">Información adicional</span>
+              </button>
+          </h3>
+          <div class="slds-section__content">
+              <slot>
+                <div class="slds-form__row">
+                  <div class="slds-form__item" role="listitem">
+                    <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                        <span class="slds-form-element__label">Tipo de Intermediario Final</span>
+                      <div class="slds-form-element__control">
+                        <div class="slds-grid slds-gutters">
+                          <div class="slds-col slds-size_1-of-2" style="text-align: left;">
+                            <lightning-output-field  variant="label-hidden" field-name="Tipo_Intermediario_Final__c"></lightning-output-field>
+                          </div>
+                          <div class="slds-col slds-size_1-of-2" style="text-align: right;">
+                            <button class="slds-button slds-button_icon"  onclick={handleClick_editar} title="Modificar Tipo de Intermediario Final">
+                              <svg class="slds-button__icon slds-button__icon_hint" aria-hidden="true">
+                                <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#edit"></use>
+                                <!-- <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#edit"></use> -->
+                              </svg>
+                              <span class="slds-assistive-text">Modificar Tipo de Intermediario Final</span>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="slds-form__item" role="listitem">
+                    <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                        <span class="slds-form-element__label">Nombre Intermediario Final</span>
+                      <div class="slds-form-element__control">
+
+                        <div class="slds-grid slds-gutters">
+                          <div class="slds-col slds-size_1-of-2" style="text-align: left;">
+                            <lightning-output-field  variant="label-hidden" field-name="Nombre_intermediario_Final__c"></lightning-output-field>
+                          </div>
+                          <div class="slds-col slds-size_1-of-2" style="text-align: right;">
+                            <button class="slds-button slds-button_icon"  onclick={handleClick_editar} title="Modificar Nombre Intermediario Final">
+                              <svg class="slds-button__icon slds-button__icon_hint" aria-hidden="true">
+                                <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#edit"></use>
+                                <!-- <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#edit"></use> -->
+                              </svg>
+                              <span class="slds-assistive-text">Modificar Nombre Intermediario Final</span>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="slds-form__row">
+                   <div class="slds-form__item" role="listitem">
+                    <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                        <span class="slds-form-element__label">Email Intermediario Final</span>
+                      <div class="slds-form-element__control">
+                        <div class="slds-grid slds-gutters">
+                          <div class="slds-col slds-size_1-of-2" style="text-align: left;">
+                            <lightning-output-field  variant="label-hidden" field-name="Email_intermediario_final__c"></lightning-output-field>
+                          </div>
+                          <div class="slds-col slds-size_1-of-2" style="text-align: right;">
+                            <button class="slds-button slds-button_icon"  onclick={handleClick_editar} title="Modificar Email Intermediario Final">
+                              <svg class="slds-button__icon slds-button__icon_hint" aria-hidden="true">
+                                <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#edit"></use>
+                                <!-- <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#edit"></use> -->
+                              </svg>
+                              <span class="slds-assistive-text">Modificar Email Intermediario Final</span>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="slds-form__item" role="listitem">
+                    <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                        <span class="slds-form-element__label">Sucursal</span>
+                      <div class="slds-form-element__control">
+                        <div class="slds-grid slds-gutters">
+                          <div class="slds-col slds-size_1-of-2" style="text-align: left;">
+                            <lightning-output-field  variant="label-hidden" field-name="Sucursal__c"></lightning-output-field>
+                          </div>
+                          <div class="slds-col slds-size_1-of-2" style="text-align: right;">
+                            <button class="slds-button slds-button_icon"  onclick={handleClick_editar} title="Modificar Sucursal">
+                              <svg class="slds-button__icon slds-button__icon_hint" aria-hidden="true">
+                                <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#edit"></use>
+                                <!-- <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#edit"></use> -->
+                              </svg>
+                              <span class="slds-assistive-text">Modificar Sucursal</span>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="slds-form__row">
+                  <div class="slds-form__item" role="listitem">
+                    <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                        <span class="slds-form-element__label">Origen del Prospecto</span>
+                      <div class="slds-form-element__control">
+                        <div class="slds-grid slds-gutters">
+                          <div class="slds-col slds-size_1-of-2" style="text-align: left;">
+                          <lightning-output-field  variant="label-hidden"  field-name="LeadSource"></lightning-output-field>
+                          </div>
+                          <div class="slds-col slds-size_1-of-2" style="text-align: right;">
+                            <button class="slds-button slds-button_icon" onclick={handleClick_editar}  title="Modificar Origen del Prospecto">
+                              <svg class="slds-button__icon slds-button__icon_hint" aria-hidden="true">
+                                <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#edit"></use>
+                                <!-- <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#edit"></use> -->
+                              </svg>
+                              <span class="slds-assistive-text">Modificar Origen del Prospecto</span>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                <!-- </div>
+                <div class="slds-form__row"> -->
+                  <div class="slds-form__item" role="listitem">
+                    <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                        <span class="slds-form-element__label">Observación</span>
+                      <div class="slds-form-element__control">
+                        <div class="slds-grid slds-gutters">
+                          <div class="slds-col slds-size_1-of-2" style="text-align: left;">
+                            <lightning-output-field  variant="label-hidden" field-name="Observacion__c"></lightning-output-field>
+                          </div>
+                          <div class="slds-col slds-size_1-of-2" style="text-align: right;">
+                            <button class="slds-button slds-button_icon" onclick={handleClick_editar}  title="Modificar Observación">
+                              <svg class="slds-button__icon slds-button__icon_hint" aria-hidden="true">
+                                <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#edit"></use>
+                                <!-- <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#edit"></use> -->
+                              </svg>
+                              <span class="slds-assistive-text">Modificar Observación</span>
+                            </button>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </slot>
+          </div>
+          </div>
+          <div class={sectionClass_informacionSistema}>
+          <h3 class="slds-section__title">
+            <button class="slds-button slds-section__title-action" onclick={handleClick_informacionSistema}>
+                <lightning-icon
+                    icon-name="utility:switch"
+                    class="slds-button__icon slds-button__icon_left slds-section__title-action-icon"
+                    size="x-small"
+                ></lightning-icon>
+                <span class="slds-truncate" title="Información de la Entrevista">Información del Sistema</span>
+            </button>
+          </h3>
+          <div class="slds-section__content">
+            <slot>
+              <div class="slds-form__row">
+                <div class="slds-form__item" role="listitem">
+                  <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                      <span class="slds-form-element__label">Creado por</span>
+                    <div class="slds-form-element__control">
+                      <div class="slds-form-element__static">
+                        <lightning-output-field  variant="label-hidden" field-name="CreatedById"></lightning-output-field>
+                        <lightning-output-field  variant="label-hidden" field-name="CreatedDate"></lightning-output-field>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="slds-form__item" role="listitem">
+                  <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                      <span class="slds-form-element__label">Última modificación por</span>
+                    <div class="slds-form-element__control">
+                      <div class="slds-form-element__static">
+                        <lightning-output-field  variant="label-hidden" field-name="LastModifiedById"></lightning-output-field>
+                        <lightning-output-field  variant="label-hidden" field-name="LastModifiedDate"></lightning-output-field>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="slds-form__row">
+                <div class="slds-form__item" role="listitem">
+                  <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                      <span class="slds-form-element__label">Tipo de registro de prospecto</span>
+                    <div class="slds-form-element__control">
+                      <div class="slds-form-element__static">
+                        <lightning-output-field  variant="label-hidden" field-name="RecordTypeId"></lightning-output-field>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="slds-form__item" role="listitem">
+                  <div class="slds-form-element slds-form-element_edit slds-form-element_readonly  slds-form-element_horizontal slds-form-element_stacked slds-hint-parent">
+                      <span class="slds-form-element__label">Divisa del prospecto</span>
+                    <div class="slds-form-element__control">
+                      <div class="slds-form-element__static">
+                        <lightning-output-field  variant="label-hidden" field-name="CurrencyIsoCode"></lightning-output-field>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </slot>
+          </div>
+          </div>
+        </lightning-record-view-form>
+      </div>
+    </template>
+
+ <!-- inicio modal -->
+ <template if:true={openChangeOwner}>
+    <div class="demo-only" style="height: 640px;">
+      <template if:true={showLoading_changeOwner}>
+        <lightning-spinner alternative-text="Loading" size="medium" class="spinnerClass"></lightning-spinner>
+      </template>
+      <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+          <div class="slds-modal__container">
+              <header class="slds-modal__header">
+                  <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal_close}>
+                      <lightning-icon icon-name="utility:close" size="medium">
+                      </lightning-icon>
+                      <span class="slds-assistive-text">Close</span>
+                  </button>
+                  <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Cambiar propietario de Prospecto</h2>
+              </header>
+              <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                <c-change-owner-lead
+                    onlookup={handleLookup}
+                    fields-to-create={fieldsToCreate}
+                    create-record=true
+                    parent-a-p-i-name="OwnerId"
+                    obj-name="User"
+                    display-ields="Name, Email"
+                    fields = {fields}
+                    show-label=true
+                    label-name="Buscar Usuarios"
+                    data-index={index}
+                    index={index}>
+                </c-change-owner-lead>
+              </div>
+              <footer class="slds-modal__footer" >
+                  <lightning-button label="Cancelar" variant="neutral" onclick={handleClick_closeChangeOwner}></lightning-button>&nbsp;&nbsp;&nbsp;&nbsp;
+                  <lightning-button label="Cambiar Propietario" variant="brand" onclick={handleClick_saveChangeOwner}></lightning-button>
+              </footer>
+          </div>
+      </section>
+      <div class="slds-backdrop slds-backdrop_open"></div>
+  </div>
+</template>
+<!-- fin modal -->
+</template>

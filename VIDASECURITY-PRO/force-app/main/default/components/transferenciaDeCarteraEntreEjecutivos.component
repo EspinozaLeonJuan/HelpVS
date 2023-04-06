@@ -1,0 +1,49 @@
+<apex:component controller="TransferirCarteraController" allowDML="true">
+<apex:sectionHeader title="Transferir Cartera" subtitle="Transferencia Masiva de Cartera de Ejecutivos" />
+<apex:form >
+<apex:outputPanel id="inputs" layout="none">
+<apex:pageBlock title="Transferir Cartera" mode="edit" rendered="{! ISNULL(cantidad) && !resultado }">
+<apex:pageBlockButtons location="bottom">
+<apex:commandButton value="Transferir Cartera" action="{!obtenerCantidad}" rerender="inputs,quantity"/>
+</apex:pageBlockButtons>
+<apex:pageBlockSection columns="1">
+<apex:pageMessages />
+<apex:selectList value="{!transferirDe}" multiselect="false" size="1" label="Transferir De" style="width:220px;">
+	<apex:selectOptions value="{!transferirDeOptions}"/>
+</apex:selectList>
+<apex:selectList value="{!transferirA}" multiselect="false" size="1" label="Transferir A" style="width:220px;">
+	<apex:selectOptions value="{!transferirAOptions}"/>
+</apex:selectList>
+</apex:pageBlockSection>
+</apex:pageBlock>
+</apex:outputPanel>
+<apex:outputPanel layout="none" id="quantity">
+<apex:pageBlock title="Advertencia" mode="edit" rendered="{! !ISNULL(cantidad) && !resultado }">
+<apex:pageBlockButtons location="bottom">
+<apex:commandButton value="Sí" action="{!transferir}" rerender="quantity,results" status="status"/>
+<apex:commandButton value="No" action="{! cancelar }" rerender="inputs,quantity"/>
+</apex:pageBlockButtons>
+<apex:pageBlockSection columns="1">
+<apex:pageMessages />
+<apex:outputLabel value="Se transferiran {!cantidad} cuentas del ejecutivo {!ejecutivoDe.Name} al ejecutivo {!ejecutivoA.Name}" />
+<apex:outputLabel value="¿Desea continuar con la operación?" />
+</apex:pageBlockSection>
+</apex:pageBlock>
+<apex:actionStatus id="status" stopText="">
+<apex:facet name="start">
+<blink>Transfiriendo Cartera</blink>
+</apex:facet>
+</apex:actionStatus>
+</apex:outputPanel>
+<apex:outputPanel layout="none" id="results">
+<apex:pageBlock title="Resultados de Transferencia de Cartera" rendered="{! resultado }">
+<apex:pageBlockButtons location="bottom">
+<apex:commandButton value="Aceptar" action="{!volverAForm }" rerender="inputs,results"/>
+</apex:pageBlockButtons>
+<apex:pageBlockSection columns="1">
+<apex:pageMessages />
+</apex:pageBlockSection>
+</apex:pageBlock>
+</apex:outputPanel>
+</apex:form>
+</apex:component>

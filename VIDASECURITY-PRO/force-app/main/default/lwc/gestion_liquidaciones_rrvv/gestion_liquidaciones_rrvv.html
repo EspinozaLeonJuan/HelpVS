@@ -1,0 +1,128 @@
+<!--
+  @description       :
+  @author            : Juan Espinoza León
+  @group             :
+  @last modified on  : 10-13-2022
+  @last modified by  : Juan Espinoza León
+-->
+<template>
+    <template if:false={enviarCorreo}>
+        <div class="slds-card homeAssistant">
+            <template if:true={showLoading}>
+                <lightning-spinner alternative-text="Loading" size="medium" class="spinnerClass"></lightning-spinner>
+            </template>
+            <div class="slds-page-header">
+                <header class="header-title-container slds-has-flexi-truncate" id="modal-principal-id-1">
+                    <div class="slds-text-heading_small" style="font-weight: bold;">Generación Liquidaciones RRVV</div>
+                </header>
+            </div>
+            <div class="slds-card__body slds-card__body_inner" style="height: 100%;"  >
+
+                <div class="slds-grid">
+
+                    <!-- -->
+
+                    <div class="slds-col slds-size_1-of-3" style="text-align: left;">
+                        <div style="width:95%;">
+                            <label style="font-weight:bold;margin-bottom:10px;">
+                                Mes Liquidación
+                            </label>
+                            <lightning-combobox
+                            name="filter_month_liq"
+                            variant="label-hidden"
+                            label="Estado Caso"
+                            value={monthValue}
+                            options={months}
+                            onchange={handlePicklist_Months_Change}
+                            placeholder="Seleccione un Estado">
+                        </lightning-combobox>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3" style="text-align: left;">
+                        <div style="width:95%;">
+                            <label style="font-weight:bold;margin-bottom:10px;">
+                                Año Liquidación
+                            </label>
+                            <lightning-combobox
+                            name="filter_year_liq"
+                            variant="label-hidden"
+                            label="Año Liquidación"
+                            value={yearValue}
+                            options={years}
+                            onchange={handlePicklist_Years_Change}
+                            placeholder="Seleccione un Año">
+                        </lightning-combobox>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_1-of-3" style="text-align: center;">
+                        <br/>
+                        <lightning-button label="Agregar Periodo" variant="brand-outline" onclick={handleClick_add_Period} ></lightning-button>
+
+                    </div>
+                </div>
+                <br/>
+                <div class="slds-grid" >
+                    <div class="slds-col slds-size_1-of-1" >
+
+                        <div  class="slds-align_absolute-center" style="height: 100%;">
+                            <template if:true = {liquidaciones}>
+                                    <lightning-datatable key-field="Id"
+                                    data={liquidaciones}
+                                    columns={columns}
+                                    hide-checkbox-column="true"
+                                    onrowaction={callRowActionDeleteValue} >
+                                    </lightning-datatable>
+                            </template>
+                            <template if:true = {error}>
+                                {error}>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+                <br/>
+                <template if:true={botonVisible}>
+                    <div class="slds-grid">
+                        <div class="slds-col slds-size_1-of-1" style="text-align: right;">
+                            <lightning-button label="Enviar Correo a Cliente" variant="success" onclick={sendEmailLiquidaciones}></lightning-button>
+                        </div>
+                    </div>
+                    <br/>
+                </template>
+            </div>
+        </div>
+    </template>
+
+    <template if:true={enviarCorreo}>
+
+        <div class="slds-card homeAssistant">
+            <div class="slds-page-header">
+                <header class="header-title-container slds-has-flexi-truncate" id="modal-principal-id-2">
+                    <div class="slds-text-heading_small" style="font-weight: bold;">Generación Liquidaciones RRVV</div>
+                </header>
+            </div>
+        <div class="slds-card__body slds-card__body_inner" style="height: 100%;"  >
+            <br/>
+            <div class="slds-grid" >
+                <div class="slds-col slds-size_1-of-1">
+
+                    <div  class="slds-align_absolute-center" style="height: 100%;">
+                        <template if:true = {liquidaciones}>
+                                <lightning-datatable key-field="Id"
+                                data={liquidaciones}
+                                columns={columns_after}
+                                hide-checkbox-column="true"
+                                onrowaction={callRowActionGetValue} >
+                                </lightning-datatable>
+                        </template>
+                        <template if:true = {error}>
+                            {error}>
+                        </template>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br/>
+</div>
+    </template>
+
+</template>

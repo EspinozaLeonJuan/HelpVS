@@ -1,0 +1,58 @@
+<aura:component implements="force:appHostable" controller="BaseConocimientosController">
+   
+    <!-- Registrar Eventos -->
+    <aura:registerEvent name="cerrarModalCategoriaSelect" type="c:BaseConocimientoEvents" />
+    <aura:registerEvent name="seleccionarModalCategoriaSelect" type="c:BaseConocimientoEvents" />
+
+    <!-- Registrar Eventos -->
+    
+    <!-- Manejar Eventos -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <!-- Manejar Eventos -->
+   
+    <!-- Atributos -->
+    <aura:attribute name="item" type="Object" />
+    <aura:attribute name="items" type="Object" />
+    <aura:attribute name="itemSelected" type="Object" />
+    <aura:attribute name="itemId" type="String" />
+    <aura:attribute name="itemParentId" type="String" />
+    <aura:attribute name="recordError" type="String" />
+    <aura:attribute name="recordMode" type="String" default="selectParent" />
+    <aura:attribute name="titleModal" type="String" />
+    <aura:attribute name="mostrarSpinner" type="Boolean" default="false" />
+    <aura:attribute name="countRequest" type="Integer" default="0" />
+     <!-- Atributos -->
+
+    <div role="dialog" tabindex="-1" aria-labelledby="header99" class="slds-modal slds-fade-in-open" id="modal-content">
+        <div class="slds-modal__container">
+            <div class="slds-modal__header">
+                <button class="slds-button slds-modal__close slds-button--icon-inverse" title="Cerrar" onclick="{!c.cerrarModal}">X<span class="slds-assistive-text">Cerrar</span></button>
+                <h2 class="slds-text-heading--medium">Por favor elija una categoría</h2>
+            </div>
+            <div class="slds-modal__content slds-p-around--medium">
+                <aura:if isTrue="{!not(empty(v.recordError))}">
+                    <div aura:id="text" style="{!v.display}">
+                        <ui:message title="Error" severity="error" closable="false"> {!v.recordError} </ui:message>
+                    </div>
+                </aura:if>
+                <p>
+                    <lightning:tree items="{! v.items }" header="Categorías" onselect="{!c.handleSelect}"/>
+                </p>               
+                <div class="slds-modal__footer">
+                    <lightning:button label="Cancelar" onclick="{!c.cerrarModal}" variant="neutral" class="slds-m-top--medium" />
+                    <aura:if isTrue="{! v.recordMode == 'selectParent' }">
+                        <lightning:button label="Seleccionar" onclick="{!c.selectCategory}" variant="brand" class="slds-m-top--medium" disabled="{!or(v.itemSelected.name == undefined, v.itemSelected.name == null)}" />    
+                    </aura:if>
+                    <aura:if isTrue="{! v.recordMode == 'chooseCategory'  }">
+                        <lightning:button label="Seleccionar" onclick="{!c.selectCategory}" variant="brand" class="slds-m-top--medium" disabled="{!or(v.itemSelected.name == undefined, v.itemSelected.name == null)}" />    
+                    </aura:if>
+                    <aura:if isTrue="{! v.recordMode == 'findCategory'  }">
+                        <lightning:button label="Buscar" onclick="{!c.selectCategory}" variant="brand" class="slds-m-top--medium" disabled="{!or(v.itemSelected.name == undefined, v.itemSelected.name == null)}" />    
+                    </aura:if>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="slds-backdrop slds-backdrop--open"></div>
+</aura:component>

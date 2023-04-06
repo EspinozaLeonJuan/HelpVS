@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Poliza de Participante de Campaña</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Polizas de Participantes de Campañas</value>
+    </caseValues>
+    <gender>Feminine</gender>
+</CustomObjectTranslation>

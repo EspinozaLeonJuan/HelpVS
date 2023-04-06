@@ -1,0 +1,22 @@
+<aura:event type="APPLICATION"> 
+	<aura:attribute name="isOpen" type="boolean"/>
+	<aura:attribute name="isOpenCategoria" type="boolean"/>
+	<aura:attribute name="isOpenCategoriaSelect" type="boolean"/>
+	<aura:attribute name="deseaEliminar" type="boolean"/>
+	<aura:attribute name="solucion" type="Solution"/>
+	<aura:attribute name="recordMode" type="String"/>
+    <aura:attribute name="recordModeCategoriaSelect" type="String"/>
+	<aura:attribute name="recordInfo" type="String"/>
+    <aura:attribute name="recordItemCategory" type="Object"/>
+	<aura:attribute name="itemParent" type="Object"/>
+	<aura:attribute name="items" type="Object"/>
+	<aura:attribute name="itemId" type="String"/>
+	<aura:attribute name="itemParentId" type="String"/>
+	<aura:attribute name="categorySolucion" type="String"/>
+	<aura:attribute name="solutionNote" type="String"/>
+	<aura:attribute name="solutionName" type="String"/>
+	<aura:attribute name="isPublished" type="String"/>
+	<aura:attribute name="isPublishedKb" type="String"/>
+	<aura:attribute name="solutionStatus" type="String"/>
+	<aura:attribute name="idSolucion" type="String"/>
+</aura:event>

@@ -1,0 +1,30 @@
+<template>
+    <div class="slds-grid slds-grid_align-center">
+        <lightning-card class="slds-col">
+            <h3 slot="title">
+                <div class="slds-p-top_small">
+                    <lightning-icon class="slds-m-horizontal_small" icon-name="custom:custom13" size="small"></lightning-icon>
+                    Cargar archivos presupuesto:
+                </div>
+            </h3>
+            <div class="slds-grid slds-wrap slds-grid_align-center">
+                <c-comercial-file-upload 
+                    class="slds-col slds-p-horizontal_medium"
+                    title='Propuesta Técnica'
+                    object-id={recordId}
+                    field-id={idTecnica}
+                    field-name={fieldTecnica}
+                    success-message='Propuesta Técnica subida correctamente'>
+                </c-comercial-file-upload>
+                <c-comercial-file-upload
+                    class="slds-col slds-p-horizontal_medium"
+                    title='Propuesta Comercial'
+                    object-id={recordId}
+                    field-id={idComercial}
+                    field-name={fieldComercial}
+                    success-message='Propuesta Comercial subida correctamente'>
+                </c-comercial-file-upload>
+            </div>
+        </lightning-card>
+    </div>
+</template>

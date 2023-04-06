@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Prospecto</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Prospectos</value>
+    </caseValues>
+    <gender>Masculine</gender>
+    <layouts>
+        <layout>Comercial</layout>
+        <sections>
+            <label></label>
+            <section>Información de Contacto</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de la Empresa</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información general</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Prospecto - Salud Protegida</layout>
+        <sections>
+            <label></label>
+            <section>Etapa Salud Protegida</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información Intermediario</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información Tercero</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información del Contratante</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Prospecto - Venta Oncológico Televenta</layout>
+        <sections>
+            <label></label>
+            <section>Datos Prospecto</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Resultados Gestión</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Prospecto - Venta Oncológico Televenta Ligthning</layout>
+        <sections>
+            <label></label>
+            <section>Datos Prospecto</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Resultados Gestión</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Prospecto Links</layout>
+        <sections>
+            <label></label>
+            <section>Información de entrevista</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>No considerar</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Prospecto Links Carga</layout>
+        <sections>
+            <label></label>
+            <section>Información de entrevista</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>No Considerar</section>
+        </sections>
+    </layouts>
+</CustomObjectTranslation>

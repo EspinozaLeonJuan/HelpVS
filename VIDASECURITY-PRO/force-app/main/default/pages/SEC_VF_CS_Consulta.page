@@ -1,0 +1,35 @@
+<!--
+  @description       :
+  @author            : Juan Espinoza León
+  @group             :
+  @last modified on  : 10-29-2022
+  @last modified by  : Juan Espinoza León
+-->
+<apex:page controller="CTR_CS_Consulta" action="{!callToVidaSecurity}"  lightningStylesheets="true" showHeader="true" sidebar="true" tabStyle="Case" >
+
+    <script>
+
+    if ('{!Mensaje}' != 'OK')
+    {
+    	alert('{!Mensaje}');
+        window.close();
+    }
+    else
+    {
+
+        // var popUp = window.open('{!URL}', "_blank", performance);
+
+        // if (popUp == null || typeof(popUp)=='undefined') {
+        //     alert('Por favor deshabilita el bloqueador de ventanas emergentes y vuelve a hacer clic en "Detalle de Solicitud".');
+        // }
+        // else {
+        //     popUp.focus();
+        // }
+
+        document.location = '{!URL}';
+
+    }
+
+    </script>
+
+</apex:page>

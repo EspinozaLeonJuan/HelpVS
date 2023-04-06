@@ -1,0 +1,141 @@
+/**
+* VASS
+* @author           Javier Tibamoza
+* @email: 			javier.cubillos@vasslatam.com
+* Project:          Integraciones con GCP
+* Description:      Clase de prueba para la clase TriggerDispatcherBase
+* Changes (Version)
+* -------------------------------------
+*            No.    Date           Author                           Description      
+*            ----   ----------     ---------------------------     -------------    
+* @version   1.0    12/11/2021     Javier Tibamoza JATC 	       Class Created
+***********************************************************************************************************************/
+@isTest (seealldata=false)
+public with sharing class TriggerDispatcherBaseTest {
+    /** 
+    * @description: This method creates test records for all other test methods in this class
+    */
+    @testSetup private static void testSetup(){
+        if(!TestVerificationService.ShouldExecute('TriggerDispatcherBaseTest.testSetup')){return;}
+        AccountGeneration cuentaCorporativa = (AccountGeneration)Fabricate.cuentaTest().corporativa().set('Omitir_Validaciones_AMAC__c',true).save();
+    }
+    /** 
+	* @description 
+	*/
+	@isTest static void testafterInsert() {
+        if(!TestVerificationService.ShouldExecute('TriggerDispatcherBaseTest.testafterInsert')){ return; }
+        List<SObject> nlist = [
+            SELECT Actividad_desde_Reasignaci_n_Ejecutiva__c,Activo__pc,Agente_vigente__c,Campa_a_Masiva__c,Cantidad_de_Meses_sin_Actividades__c,
+            Cantidad_de_Meses_sin_Llamados__c,Cantidad_Polizas_Activas_Todas__c,Cantidad_Polizas_Activas__c,Cantidad_Polizas_RV_Activas__c,
+            Cant_Meses_sin_Act_desde_Asignacion_Eje__c,Capital_Administrado_UF__c,Categor_a_Cliente_Final__c,Clientes_Contactados__c,
+            Cliente_Asegurado_Empresa__c,Cliente_en_campa_a__c,Cliente_Fidelizado__c,Cliente_Inubicable__c,Cliente_No_Contactar__c,Con_Problema_Economico__c,
+            Con_Siniestro__c,Copia_Correo_electronico_Persona__c,Correo_Pendiente_de_Envio__c,CreatedById,CreatedDate,
+            CUENT_No_quiere_ser_contactado_Televenta__c,CUENT_Participando_en_Campana_Oncologica__c,CurrencyIsoCode,Declarado_Fallecido__c,
+            Dias_Con_Ejecutivo__c,Dias_Sin_Ejecutivo__c,Dicom__c,DV_contacto__pc,DV__c,EAP__c,Edad_cliente__c,Edad__c,Ejecutivo_Asignado__c,
+            Empresa_declinada__c,Enviar_correo__c,Envio_Informacion__c,Envio_Informacion__pc,Excluido_de_Polizas__c,Factor_Ejecutivo__c,
+            Firma_Convenio__c,Firma_pagar__c,FirstName,Holding__c,Id,Incluir_comunicados__pc,Indicador_de_Devolucion_de_Correos__c,
+            Indicador_de_Email_Rebotado_o_Malo__c,Indicador_de_Fonos_Malos__c,IsDeleted,IsPersonAccount,LastModifiedById,LastModifiedDate,LastName,
+            Lista_Negra__c,Meses_sin_Actividades_ni_Asig_Ejec__c,Meses_sin_Actividad_con_la_Ejecutiva__c,Meses_sin_Llamados_ni_Asignaci_n_Ejec__c,
+            Nacionalidad__c,Name,Nombres_Cliente__c,No_cobrar__c,NP_Apellidos__c,NP_Nombres__c,N_de_Hijos_Resumen__c,Omitir_Validaciones_AMAC__c,
+            OwnerId,Participa_Campaign_Amac__c,Pendiente_Envio_Encuesta__c,Pensionado__c,Perfil_Propietario__c,PersonContactId,PersonEmail,
+            Peso_por_Cuenta__c,PhotoUrl,Plantilla_Atento__c,Plantilla_Ejecutivo__c,Plantilla_Estimado__c,Plantilla_Saludarlo__c,
+            Posee_Seguros_con_otras_Cias__c,Postergacion_de_Credito__c,Prima_Mensualizada_Administrada__c,Prima_UFAnualizado__c,Producto_Activo__c,
+            Producto_Ahorro_4__c,Producto_Ahorro_5__c,Producto_Ahorro__c,Producto_con_Ahorro_1__c,Producto_con_Ahorro_2__c,Propietario_Activo__c,
+            Recibe_Correos_Cumpleanos__c,Reclamos_Ultimo_Anio__c,RecordTypeId,Reenviar__c,Resetear_Sistema_de_Correo_de_Cumplea_os__c,
+            rh2__Formula_Test__pc,Rut_contacto__pc,Rut_con_dv__c,Rut__c,Siniestro_Vida__c,Sin_Agente__c,Sin_Trabajo__c,Suma_PrimaUF__c,
+            SystemModstamp,Tarjeta_Club_Viva_Mejor__c,Tiene_57__c,Tiene_APV_1__c,Tiene_APV__c,Tiene_Auto__c,Tiene_ejecutivo_de_Cliente__c,
+            Tiene_Link_Activo__c,Tramo_de_Edad__c,Valor_Poliza_Total__c,Vive_en_el_Extranjero__c 
+            FROM Account ORDER BY CreatedDate DESC NULLS FIRST LIMIT 1];        
+        List<SObject> olist;
+        Map<Id, SObject> omap; 
+        Map<Id, SObject> nmap; 
+        Boolean ib, ia, id, ii, iu, iud, ie, isExtender;
+        ITriggerHandler handlerInstance;
+        ii = true;
+        ib = true;
+        System.TriggerOperation triggerOperation = TriggerOperation.AFTER_INSERT;
+        String dispatcherHandlerName = 'AccountTriggerDispacher';
+        TriggerParameters tp = new TriggerParameters( olist, nlist, omap, nmap, ib, ia, id, ii, iu, iud, ie, isExtender, triggerOperation, dispatcherHandlerName);
+        
+        TestTriggerDispatcherBase cls = new TestTriggerDispatcherBase( tp );
+        
+        cls.bulkBefore();
+        cls.bulkAfter();
+        cls.andFinally();
+
+        cls.beforeInsert(tp);
+        cls.beforeUpdate(tp);
+        cls.beforeDelete(tp);
+        cls.afterInsert(tp);
+        cls.afterUpdate(tp);
+        cls.afterDelete(tp);
+        cls.afterUnDelete(tp);
+        
+        List<SObject> newRecords;
+        Map<Id,SObject> oldMap;
+
+        cls.beforeInsert(newRecords);
+        cls.beforeUpdate(newRecords, oldMap);
+        cls.beforeDelete(newRecords);
+        cls.afterInsert(newRecords);
+        cls.afterUpdate(newRecords, oldMap);
+        cls.afterDelete(newRecords);
+        cls.afterUnDelete(newRecords);
+
+        cls.beforeInsertInProgress(newRecords);
+        cls.beforeUpdateInProgress(newRecords, oldMap);
+        cls.beforeDeleteInProgress(newRecords);
+        cls.afterInsertInProgress(newRecords);
+        cls.afterUpdateInProgress(newRecords,oldMap);
+        cls.afterDeleteInProgress(newRecords);
+        cls.afterUnDeleteInProgress(newRecords);
+        
+        TriggerParameters.TriggerEvent tEvent = TriggerParameters.TriggerEvent.beforeInsert;
+        cls = new TestTriggerDispatcherBase( handlerInstance, tp, tEvent );
+        try{
+            cls = new TestTriggerDispatcherBase( null, tp, tEvent );
+        }catch(Exception ex){ }
+    }
+    /** 
+	* @description 
+	*/
+	@isTest static void testafterInsertNull() {
+        if(!TestVerificationService.ShouldExecute('TriggerDispatcherBaseTest.testafterInsertNull')){ return; }
+        List<SObject> nlist = [
+            SELECT Actividad_desde_Reasignaci_n_Ejecutiva__c,Activo__pc,Agente_vigente__c,Campa_a_Masiva__c,Cantidad_de_Meses_sin_Actividades__c,
+            Cantidad_de_Meses_sin_Llamados__c,Cantidad_Polizas_Activas_Todas__c,Cantidad_Polizas_Activas__c,Cantidad_Polizas_RV_Activas__c,
+            Cant_Meses_sin_Act_desde_Asignacion_Eje__c,Capital_Administrado_UF__c,Categor_a_Cliente_Final__c,Clientes_Contactados__c,
+            Cliente_Asegurado_Empresa__c,Cliente_en_campa_a__c,Cliente_Fidelizado__c,Cliente_Inubicable__c,Cliente_No_Contactar__c,Con_Problema_Economico__c,
+            Con_Siniestro__c,Copia_Correo_electronico_Persona__c,Correo_Pendiente_de_Envio__c,CreatedById,CreatedDate,
+            CUENT_No_quiere_ser_contactado_Televenta__c,CUENT_Participando_en_Campana_Oncologica__c,CurrencyIsoCode,Declarado_Fallecido__c,
+            Dias_Con_Ejecutivo__c,Dias_Sin_Ejecutivo__c,Dicom__c,DV_contacto__pc,DV__c,EAP__c,Edad_cliente__c,Edad__c,Ejecutivo_Asignado__c,
+            Empresa_declinada__c,Enviar_correo__c,Envio_Informacion__c,Envio_Informacion__pc,Excluido_de_Polizas__c,Factor_Ejecutivo__c,
+            Firma_Convenio__c,Firma_pagar__c,FirstName,Holding__c,Id,Incluir_comunicados__pc,Indicador_de_Devolucion_de_Correos__c,
+            Indicador_de_Email_Rebotado_o_Malo__c,Indicador_de_Fonos_Malos__c,IsDeleted,IsPersonAccount,LastModifiedById,LastModifiedDate,LastName,
+            Lista_Negra__c,Meses_sin_Actividades_ni_Asig_Ejec__c,Meses_sin_Actividad_con_la_Ejecutiva__c,Meses_sin_Llamados_ni_Asignaci_n_Ejec__c,
+            Nacionalidad__c,Name,Nombres_Cliente__c,No_cobrar__c,NP_Apellidos__c,NP_Nombres__c,N_de_Hijos_Resumen__c,Omitir_Validaciones_AMAC__c,
+            OwnerId,Participa_Campaign_Amac__c,Pendiente_Envio_Encuesta__c,Pensionado__c,Perfil_Propietario__c,PersonContactId,PersonEmail,
+            Peso_por_Cuenta__c,PhotoUrl,Plantilla_Atento__c,Plantilla_Ejecutivo__c,Plantilla_Estimado__c,Plantilla_Saludarlo__c,
+            Posee_Seguros_con_otras_Cias__c,Postergacion_de_Credito__c,Prima_Mensualizada_Administrada__c,Prima_UFAnualizado__c,Producto_Activo__c,
+            Producto_Ahorro_4__c,Producto_Ahorro_5__c,Producto_Ahorro__c,Producto_con_Ahorro_1__c,Producto_con_Ahorro_2__c,Propietario_Activo__c,
+            Recibe_Correos_Cumpleanos__c,Reclamos_Ultimo_Anio__c,RecordTypeId,Reenviar__c,Resetear_Sistema_de_Correo_de_Cumplea_os__c,
+            rh2__Formula_Test__pc,Rut_contacto__pc,Rut_con_dv__c,Rut__c,Siniestro_Vida__c,Sin_Agente__c,Sin_Trabajo__c,Suma_PrimaUF__c,
+            SystemModstamp,Tarjeta_Club_Viva_Mejor__c,Tiene_57__c,Tiene_APV_1__c,Tiene_APV__c,Tiene_Auto__c,Tiene_ejecutivo_de_Cliente__c,
+            Tiene_Link_Activo__c,Tramo_de_Edad__c,Valor_Poliza_Total__c,Vive_en_el_Extranjero__c 
+            FROM Account ORDER BY CreatedDate DESC NULLS FIRST LIMIT 1];        
+        List<SObject> olist;
+        Map<Id, SObject> omap; 
+        Map<Id, SObject> nmap; 
+        Boolean ib, ia, id, ii, iu, iud, ie, isExtender;
+        ITriggerHandler handlerInstance;
+        ii = true;
+        ib = true;
+        System.TriggerOperation triggerOperation = TriggerOperation.AFTER_INSERT;
+        String dispatcherHandlerName = 'AccountTriggerDispacher';
+        TriggerParameters tp = new TriggerParameters( olist, nlist, omap, nmap, ib, ia, id, ii, iu, iud, ie, isExtender, triggerOperation, dispatcherHandlerName);
+        TriggerParameters.TriggerEvent tEvent = TriggerParameters.TriggerEvent.beforeInsert;
+        try{
+            TestTriggerDispatcherBase cls = new TestTriggerDispatcherBase( null, tp, tEvent );
+        }catch(Exception ex){ }
+    }
+}

@@ -1,0 +1,34 @@
+.slds-modal__container{
+    width: 80% !important;
+    max-width: 80% !important;
+}
+
+
+.label-bold{
+    font-weight: bold;
+}
+
+
+.textarea {
+    resize:none;
+    margin-top: -10px;
+    /* height: 250px;
+    max-height: 250px; */
+    width: 95% !important;
+}
+
+.input-date
+{
+    margin-top: -10px;
+    width: 80% !important;
+}
+
+.combobox
+{
+    margin-top: -10px;
+    width: 80% !important;
+}
+
+ :host {
+    --sds-c-textarea-sizing-min-height: 140px;
+ }

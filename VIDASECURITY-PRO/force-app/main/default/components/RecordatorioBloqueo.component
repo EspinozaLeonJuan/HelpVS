@@ -1,0 +1,11 @@
+<apex:component controller="RecordatorioBloqueoController" access="global">
+<apex:attribute required="true" name="_corredor" description="Corredor a Notificar" type="Corredor__c"  assignTo="{! corredor }" access="global"/>
+<div style="color:#727272; font-size:14px; line-height: 18px; font-weight:normal; font-family: Arial, Helvetica, sans-serif; width:650px; display:block; text-align: justify; margin:0 auto">
+    <apex:dataTable value="{! filiales }" var="filial" border="1px" cellpadding="1px" width="100%">
+                <apex:column value="{!filial.Numero_Poliza__c}" headerValue="Póliza"/>
+                <apex:column value="{!filial.Rut_Filial__c}" headerValue="RUT Filial"/>
+        <apex:column value="{!filial.Razon_Social__c}" headerValue="Razón Social" />
+        <apex:column value="{! filial.Fecha_Bloqueo_de_Beneficios__c }" headerValue="Fecha Bloqueo"/> 
+    </apex:dataTable>
+</div>
+</apex:component>

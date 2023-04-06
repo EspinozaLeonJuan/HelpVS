@@ -1,0 +1,214 @@
+<!--
+  @description       : 
+  @author            : Juan Espinoza León
+  @group             : 
+  @last modified on  : 05-17-2021
+  @last modified by  : Juan Espinoza León
+  Modifications Log 
+  Ver   Date         Author               Modification
+  1.0   12-18-2020   Juan Espinoza León   Initial Version
+-->
+<apex:page extensions="CTR_CS_Repositorio_Documentos"  standardController="Case" lightningStylesheets="true" showHeader="false" sidebar="false"  docType="html-5.0" >
+    
+ <style> 
+    .ct{
+    text-align:center;
+    }
+
+    .btn_doc_anticipo{
+        color:white !important;
+        background:#8D8E95 !important;
+       /*display: inline-flex;*/
+        /*margin-left: -10px;*/
+        margin-right: -8px;
+    }
+
+
+    </style>
+    <apex:includeScript value="{!$Resource.jquery}"/>
+    <!--<br/>-->
+    <script type="text/javascript">
+        function AccederDocumento(urlDoc)
+        {                      
+            var height = 588;
+            var width =1000;
+            var y=parseInt((window.screen.height/2) - height/2);
+            var x=parseInt((window.screen.width/2) - width/2); 
+
+            var performance   = 'height='+height+'px,width='+width+'px, top='+y+',left='+x+',toolbar=no,location=no,status=no,menubar=no,scrollbars=no,directories=no,resizable=no';
+ 
+                var popUp = window.open(urlDoc, "_blank", performance);
+            
+                if (popUp == null || typeof(popUp)=='undefined') {  
+                        alert('Por favor deshabilita el bloqueador de ventanas emergentes y vuelve a hacer clic en "Detalle Tarea UR".');     
+                }
+                else {          
+                        popUp.focus();           
+                }
+        }
+
+       /* function AdjuntarArchivoValuetech(Id)
+        {    
+            var height = 540;
+            var width = 1150;                     
+            var y=parseInt((window.screen.height/2) - height/2);
+            var x=parseInt((window.screen.width/2) - width/2); 
+
+            var performance   = 'height='+height+'px,width='+width+'px,top='+y+',left='+x+',toolbar=no,location=no,status=no,menubar=no,scrollbars=no,directories=no,resizable=no';
+            // var url = "/apex/SEC_VF_CV_CargaAdjunto?Id="+Id+'&procedencia=caso_ur&idResponsable='+ idResponsable+'&procedenciaur='+procedenciaur; 
+            var url = "/apex/SEC_VF_CS_UploadValuetech?Id="+Id+"&From=caso_nativo";
+            var popUp = window.open(url, "_blank", performance);
+        
+            if (popUp == null || typeof(popUp)=='undefined') {  
+                    alert('Por favor deshabilita el bloqueador de ventanas emergentes y vuelve a hacer clic en "Agregar Tarea UR".');     
+            }
+            else {          
+                    popUp.focus();           
+            }   
+        }*/
+
+        function Documentos_Anticipo(NumeroCaso)
+        {                      
+            var height = 880;
+            var width = 1200;                 
+            var y=parseInt((window.screen.height/2) - height/2);
+            var x=parseInt((window.screen.width/2) - width/2); 
+
+            var performance   = 'height='+height+'px,width='+width+'px,top='+y+',left='+x+',toolbar=no,location=no,status=no,menubar=no,scrollbars=no,directories=no,resizable=no';
+            var url = "http://www.valueweb.cl/vwnet_vidasecurity_visorpost/default.aspx?Archivador=3&compaginado=False&CAJA="+NumeroCaso;
+            ///apex/SEC_VF_UR_Caso_CambioEstado?Id="+Id+"&idResponsable="+uback+"&procedencia="+procedencia+"&cambio=Rechazo&envioCorreo="+envioCorreo; 
+           
+            var popUp = window.open(url, "_blank", performance);
+
+            if (popUp == null || typeof(popUp)=='undefined') {  
+                    alert('Por favor deshabilita el bloqueador de ventanas emergentes y vuelve a hacer clic en "Agregar Tarea UR".');     
+            }
+            else {          
+                    popUp.focus();           
+            }
+        }
+    </script>
+    <apex:form id="frm_sup" >    
+      <!--<apex:panelGrid columns="1">
+          <apex:commandButton id="cmd_Add_Atachment" title="Agregar Documento" value="Agregar Adjunto"  onclick="AdjuntarArchivoValuetech('{!Id}');"/>
+      </apex:panelGrid> -->
+    
+      <apex:pageBlock id="idBlock" rendered="{!CaseNumber == ''}"  >
+        <div style="overflow:auto;width:100%;text-align:right;">
+          <apex:commandButton value="Editar" action="{!editarEstadoBloque}" rendered="{!AND(isEditable,isAccess)}" style="margin: auto 4px 4px 4px;"/>
+          <apex:commandButton value="Cancelar" action="{!cancelarEstadoBloque}" rendered="{! AND(!isEditable,isAccess) }" style="margin: auto 4px 4px 4px;"/>
+          <apex:commandButton value="Guardar" action="{!guardarCambios}" rendered="{! AND(!isEditable,isAccess) }" style="margin: auto 4px 4px 4px;"/>
+        </div>
+        
+        <apex:outputPanel layout="block" style="overflow:auto;width:100%;height:200px;text-align:center;">
+          <apex:pageBlockTable id="pbkt_TablaAdjuntosVal" title="Adjuntos Caso" value="{!LST_Adjuntos}" var="adjunto" styleClass="myTable" rowClasses="row" >   
+            <apex:column headerClass="ct" style="text-align:center;">
+              <apex:facet name="header">
+                <p id="idOrder" style="margin:auto;" onclick="javascript:sortTable('{!$Component.pbkt_TablaAdjuntosVal}')"> Archivo </p>
+              </apex:facet>
+              <apex:outputText />
+            </apex:column>
+            <apex:column headerValue="Visualizar" style="text-align:center;" headerClass="ct">
+              <apex:commandLink value="Documento" onclick="AccederDocumento('{!adjunto.UrlDoc__c}');" action="{!guardarEstado}"  >
+                <apex:param value="{!adjunto.Id}" name="idAdjuntos"/>
+                <apex:param value="{!adjunto.Estado__c}" name="estadoAdjuntos"/>
+              </apex:commandLink>
+            </apex:column> 
+            <apex:column headerClass="ct" style="text-align:center;">
+              <apex:facet name="header">Estado
+              </apex:facet>
+              <apex:outputText value="{!adjunto.Estado__c}" rendered="{!isEditable }" />
+              <apex:inputField value="{!adjunto.Estado__c}" rendered="{! AND(!isEditable,isAccess) }" />
+            </apex:column>
+            <!--<apex:column headerValue="Estado" value="{!adjunto.Estado__c}"  headerClass="ct" style="text-align:center;"/>-->
+            <apex:column headerValue="Nombre Adjunto" value="{!adjunto.File_Name__c}"  headerClass="ct" style="text-align:center;" />   
+            <apex:column headerValue="Nombre Documento" value="{!adjunto.Nombre_Documento__c}"  headerClass="ct" style="text-align:center;" /> 
+            <!--<apex:column headerValue="Código Adjunto" value="{!adjunto.Codigo_Adjunto__c}"  headerClass="ct" style="text-align:center;"/>-->
+            <!--<apex:column headerValue="Id Retorno" value="{!adjunto.Id_Retorno__c}"  headerClass="ct" style="text-align:center;"/>-->    
+            <apex:column headerValue="Fecha Creación" value="{!adjunto.CreatedDate}"  headerClass="ct"  style="text-align:center;"/>
+            <apex:column headerValue="Creado por" value="{!adjunto.CreatedById}"  headerClass="ct"  style="text-align:center;"/>
+          </apex:pageBlockTable>
+        </apex:outputPanel>
+    </apex:pageBlock>  
+    <apex:pageBlock rendered="{!CaseNumber != ''}" >
+      <br/><br/><br/>
+      <apex:panelGrid columns="1">
+          <apex:commandButton id="cmd_AccederDocumentos" value="Acceder Documentos Anticipo" styleClass="btn_doc_anticipo"  onclick="Documentos_Anticipo('{!CaseNumber}');"></apex:commandButton>
+      </apex:panelGrid>
+      <br/><br/><br/>
+    </apex:pageBlock>  
+  </apex:form>
+
+  <script type="text/javascript">
+    var order = 'DESC';
+    var elem = document.getElementById("idOrder");
+    var insertOrderTable = true;
+    if (typeof elem.onclick == "function") {
+      elem.onclick.apply(elem);
+    }
+    function sortTable(idTable) {
+      var table, rows, switching, i, x, y, shouldSwitch, tableOld, rowsOld, iOld, xOld;
+
+      if ( insertOrderTable ) {
+        tableOld = document.getElementById(idTable);
+        rowsOld = tableOld.rows;
+        for (iOld = 1; iOld < (rowsOld.length); iOld++) {
+          xOld = rowsOld[iOld].getElementsByTagName("TD")[0];
+          xOld.textContent = iOld;
+        }
+        insertOrderTable = false;
+      }
+      
+      table = document.getElementById(idTable);
+      switching = true;
+      if ( order == 'ASCE' ) {
+        while (switching) {
+          switching = false;
+          rows = table.rows;
+          for (i = 1; i < (rows.length - 1); i++) {
+            shouldSwitch = false;
+            x = rows[i].getElementsByTagName("TD")[0];
+            y = rows[i + 1].getElementsByTagName("TD")[0];
+            if (Number(x.textContent.toLowerCase()) > Number(y.textContent.toLowerCase())) {
+                shouldSwitch = true;
+                break;
+            }
+          }
+          if (shouldSwitch) {
+            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+            switching = true;
+          }
+        }
+        order = 'DESC';
+        elem.textContent = 'Archivo ▼';
+      }
+      else if ( order == 'DESC' ) {
+        while (switching) {
+          switching = false;
+          rows = table.rows;
+          for (i = 1; i < (rows.length - 1); i++) {
+            shouldSwitch = false;
+            x = rows[i].getElementsByTagName("TD")[0];
+            y = rows[i + 1].getElementsByTagName("TD")[0];
+            if (Number(x.textContent.toLowerCase()) < Number(y.textContent.toLowerCase())) {
+                shouldSwitch = true;
+                break;
+            }
+          }
+          if (shouldSwitch) {
+            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+            switching = true;
+          }
+        }
+        order = 'ASCE';
+        elem.textContent = 'Archivo ▲';
+      }
+    }
+
+    function getCookie(name) {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+  </script>
+</apex:page>

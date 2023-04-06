@@ -1,0 +1,70 @@
+<apex:page controller="CTR_AperturaCierreCaso" action="{!CierreAtencion_cargaCaso}"  lightningStylesheets="true" showHeader="true" sidebar="true" tabStyle="Case" >
+    
+    <script>
+    
+    if ('{!CODMENSAJE}' == 'hijos_sin_cerrar')
+    {
+    	alert('No es posible cerrar el Caso de Atención ya que existen casos de requerimientos pendientes por resolver.');
+    	document.location = "/"+'{!IDCASO}';  
+    }
+    else if ('{!CODMENSAJE}' == 'campos_vacios') 
+    {
+        alert('No es posible cerrar el Caso de Atención ya que el campo Tipo de Solicitante y/o Negocio no se encuentran seleccionados.');
+    	document.location = "/"+'{!IDCASO}';  
+    }
+     
+    </script>
+    
+        <apex:form id="frm_VerCaso">
+            <apex:actionFunction action="{!ToCase}" name="ToCase"/>        
+       
+            
+            <apex:pageBlock title="Cerrar Caso Atención" id="dv_header">
+                      
+
+                    <apex:panelGrid columns="5"  >
+                        <apex:outputLabel style="font-weight:bold;" >Número de Caso:</apex:outputLabel>                      
+                        <apex:commandLink action="{!ToCase}"  value="{!Caso.CaseNumber}" />   
+                       &nbsp;      &nbsp; &nbsp;      &nbsp; 
+                        <apex:outputLabel style="font-weight:bold;" >RUT Titular:</apex:outputLabel>  
+                        <apex:outputLabel value="{!Caso.RUT__c}"></apex:outputLabel>                    
+                     
+                        <apex:outputLabel style="font-weight:bold;" >Nombre Titular:</apex:outputLabel>                            
+                        <apex:outputLabel value="{!Caso.Nombre_Completo_Razon_Social__c}"></apex:outputLabel>    
+                        &nbsp;      &nbsp; &nbsp;      &nbsp; 
+                        <apex:outputLabel style="font-weight:bold;" >Poliza Titular:</apex:outputLabel>  
+                        <apex:outputLabel value="{!Poliza}" ></apex:outputLabel>                    
+                    </apex:panelGrid>
+                  
+           <hr/>
+                    <apex:panelGrid columns="2" >                    
+        
+                        <apex:outputLabel style="font-weight:bold;" >Negocio:</apex:outputLabel> 
+                        <apex:outputLabel value="{!Caso.Negocio__c}"></apex:outputLabel>                        
+                       
+    
+                            
+                       
+                                <apex:outputLabel style="font-weight:bold;" >Estado actual:</apex:outputLabel>                          
+                                <apex:outputLabel style="font-weight:bold;font-size:14px;" value="{!Caso.Status}"></apex:outputLabel>     
+                               
+                        </apex:panelGrid>
+                        
+        
+            </apex:pageBlock>
+
+            <apex:pageBlock id="pb_ActionGuardar" >
+            
+                    <apex:commandButton id="cmd_Cancelar" value="Cancelar" action="{!ToCase}" /> 
+                    <apex:commandButton id="cmd_CambiarEstado" value="Cerrar Caso Atención" action="{!CierreAtencion_guardarCaso}" />    
+                </apex:pageBlock>
+        
+
+
+
+
+
+    
+        </apex:form>
+    
+</apex:page>

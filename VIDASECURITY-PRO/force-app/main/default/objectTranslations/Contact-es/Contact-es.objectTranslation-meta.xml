@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <layouts>
+        <layout>Formato de contactos</layout>
+        <sections>
+            <label></label>
+            <section>Otros datos personales</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de contactos - Usuario UR</layout>
+        <sections>
+            <label></label>
+            <section>Otros datos personales</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de contactos Contratante</layout>
+        <sections>
+            <label></label>
+            <section>Información Adicional</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Dirección</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información del sistema</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Otros datos personales</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de contactos Totalpack</layout>
+        <sections>
+            <label></label>
+            <section>Otros datos personales</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de contactos comercial</layout>
+        <sections>
+            <label></label>
+            <section>Otros datos personales</section>
+        </sections>
+    </layouts>
+</CustomObjectTranslation>

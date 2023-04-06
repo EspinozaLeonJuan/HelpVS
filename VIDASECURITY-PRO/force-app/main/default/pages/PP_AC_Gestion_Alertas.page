@@ -1,0 +1,63 @@
+<!--
+  @description       :
+  @author            : Juan Espinoza León
+  @group             :
+  @last modified on  : 05-18-2022
+  @last modified by  : Juan Espinoza León
+  Modifications Log
+  Ver   Date         Author               Modification
+  1.0   07-13-2021   Juan Espinoza León   Initial Version
+-->
+<apex:page standardController="Account" extensions="CTR_AC_Gestion_Alertas">
+
+    <script type="text/javascript">
+        var protocolo_atencion = '{!Protocolo_Atencion}';
+
+        var text = '';
+
+        if (protocolo_atencion == 'true')
+        {
+            text = text + ' *  Aplicar protocolo de atención.\n';
+            //alert("Aplicar protocolo de atención.");
+        }
+
+        var pago_presencial = '{!Pago_Presencial}';
+
+        if (pago_presencial == 'true')
+        {
+          text = text + ' *  Pensionado con Vale Vista/Pago presencial, ofrécele cambiarse de medio de pago, pensando en su comodidad y seguridad  (cuenta vista, rut, corriente, ahorro).\n';
+            //alert("Pago Presencial.");
+        }
+/*
+        var evalua_rentas_vitalicias = '{!Evalua_RRVV}'
+
+        if (evalua_rentas_vitalicias == 'true')
+        {
+            text = text + ' *  Cliente es pensionado, revisar oferta de crédito en \'Crédito Disponible\'\n';
+            //alert("Cliente es pensionado, revisar oferta de crédito en 'Crédito Disponible'.");
+        }
+
+        var postergacion_credito = '{!Postergacion_Credito}'
+
+        if (postergacion_credito == 'true')
+        {
+            text = text + ' *  Cliente con Postergación de crédito\n';
+            //alert("Cliente con Postergación de crédito.");
+        }
+*/
+
+        var tiene_reclamo = '{!Tiene_Reclamo}'
+
+        if (tiene_reclamo == 'true')
+        {
+
+          text = text + ' *  Cliente tiene registrado un reclamo\n';
+            //aalert("Cliente tiene registrado un reclamo.");
+        }
+
+        if (text != '')
+        {
+            alert(text);
+        }
+  </script>
+</apex:page>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Metlife</fullName>
+        <default>false</default>
+        <label>Metlife</label>
+    </customValue>
+    <customValue>
+        <fullName>Consorcio</fullName>
+        <default>false</default>
+        <label>Consorcio</label>
+    </customValue>
+    <customValue>
+        <fullName>Chilena</fullName>
+        <default>false</default>
+        <label>Chilena</label>
+    </customValue>
+    <customValue>
+        <fullName>Vida Camara</fullName>
+        <default>false</default>
+        <label>Vida Camara</label>
+    </customValue>
+    <customValue>
+        <fullName>BICE</fullName>
+        <default>false</default>
+        <label>BICE</label>
+    </customValue>
+    <customValue>
+        <fullName>BCI</fullName>
+        <default>false</default>
+        <label>BCI</label>
+    </customValue>
+    <customValue>
+        <fullName>SURA</fullName>
+        <default>false</default>
+        <label>SURA</label>
+    </customValue>
+    <customValue>
+        <fullName>BUPA</fullName>
+        <default>false</default>
+        <label>BUPA</label>
+    </customValue>
+    <customValue>
+        <fullName>HDI</fullName>
+        <default>false</default>
+        <label>HDI</label>
+    </customValue>
+    <customValue>
+        <fullName>Colmena</fullName>
+        <default>false</default>
+        <label>Colmena</label>
+    </customValue>
+    <customValue>
+        <fullName>Bienestar</fullName>
+        <default>false</default>
+        <label>Bienestar</label>
+    </customValue>
+    <customValue>
+        <fullName>MAPFRE</fullName>
+        <default>false</default>
+        <label>MAPFRE</label>
+    </customValue>
+    <customValue>
+        <fullName>Vida Security</fullName>
+        <default>false</default>
+        <label>Vida Security</label>
+    </customValue>
+    <masterLabel>Aseguradoras</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

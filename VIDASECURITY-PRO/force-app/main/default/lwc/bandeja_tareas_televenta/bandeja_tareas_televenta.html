@@ -1,0 +1,440 @@
+<!--
+  @description       :
+  @author            : Juan Espinoza León
+  @group             :
+  @last modified on  : 04-20-2022
+  @last modified by  : Juan Espinoza León
+-->
+<template>
+    <lightning-card  style="height: 100%;" >
+        <template if:true={showLoading}>
+            <lightning-spinner alternative-text="Loading" size="medium" ></lightning-spinner>
+          </template>
+        <div class = "slds-m-around_medium">
+        <div class="slds-grid">
+            <div class="slds-col slds-size_1-of-5" style="text-align: left;">
+                <div style="width:90%;">
+                    <lightning-radio-group name="radioGroup"
+                    label="Seleccione Tipo de Tarea :"
+                    options={optionsTypeTask}
+                    value={recordType}
+                    variant="label-stacked"
+                    type="radio"
+                    onchange={handle_SelectTypeTask_OnChange}
+                    ></lightning-radio-group>
+
+                </div>
+            </div>
+        </div>
+        <template if:true={Option_VentaOncologico}>
+            <template if:true = {tasks}>
+
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-5" style="text-align: left;">
+                        <div style="width:90%;">
+                            <lightning-combobox
+                            name="filter_campagna"
+                            label="Campaña"
+                            value={campagnaValue}
+                            options={campaigns}
+                            onchange={handlePicklist_Campaign_Change}
+                            placeholder="Seleccione una Campaña">
+                        </lightning-combobox>
+                        </div>
+                    </div>
+
+
+                    <div class="slds-col slds-size_1-of-5" style="text-align: left;">
+                        <div style="width:90%;">
+                            <lightning-combobox
+                            name="filter_estado_pri"
+                            label="Estado Tarea"
+                            value={statusTaskValue}
+                            options={task_status.data.values}
+                            onchange={handlePicklist_statusTask_Change}
+                            placeholder="Seleccione un Estado">
+                        </lightning-combobox>
+                        </div>
+                    </div>
+
+                    <div class="slds-col slds-size_1-of-5" style="text-align: left;">
+                        <div style="width:90%;">
+                            <lightning-combobox
+                            class="validate"
+                             name="filter_sybStatus"
+                             label="Sub-Estado"
+                             value={subStatusTaskValue}
+                             options={taskFilter_subStatus}
+                             onchange={handlePicklist_subStatusTask_Change}
+                             placeholder="Seleccione un Sub-Estado">
+                         </lightning-combobox>
+                        </div>
+                    </div>
+
+                    <div class="slds-col slds-size_1-of-5" style="text-align: left;">
+                        <div style="width:90%;">
+                            <lightning-input type="text" value={nameLeadValue}  name="nameLead"    onchange={handleInput_nameLead_Change} label="Nombre Prospecto" ></lightning-input>
+                        </div>
+                    </div>
+
+                    <div class="slds-col slds-size_1-of-5" style="text-align: left;">
+                        <div style="width:90%;">
+                            <lightning-input type="text" value={nameOwnerValue}  name="nameOwner"   onchange={handleInput_nameOwner_Change} label="Asignado A" ></lightning-input>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-5" style="text-align: left;">
+                        <div style="width:90%;">
+                            <lightning-input type="date" value={createdDate}  name="cdate"    style="width:150px;" onchange={handleInput_createdDate_Change} label="Fecha de Creación" ></lightning-input>
+                        </div>
+                    </div>
+
+                    <div class="slds-col slds-size_1-of-5" style="text-align: left;">
+                        <div style="width:90%;">
+                            <lightning-input type="date" value={lastModifiedDate}  name="ldate"    style="width:150px;" onchange={handleInput_lastModifiedDate_Change} label="Fecha último cambio" ></lightning-input>
+                        </div>
+                    </div>
+
+
+
+                    <div class="slds-col slds-size_1-of-5" style="text-align: left;">
+                        <div style="width:90%;">
+                            <lightning-input type="date" value={reminderDateTime}  name="ldate"  style="width:150px;" onchange={handleInput_reminderDateTime_Change} label="Recordatorio" ></lightning-input>
+                        </div>
+                    </div>
+
+                    <div class="slds-col slds-size_1-of-5" style="text-align: left;">
+                        <div style="width:90%;">
+                            <lightning-input type="text" value={rutLeadValue}  name="rutLead"    style="width:180px;color:red;font-weight: bold;" onchange={handleInput_rutLead_Change} label="RUT" ></lightning-input>
+                        </div>
+                    </div>
+
+                    <div class="slds-col slds-size_1-of-5" style="text-align: left;">
+                        <div style="width:90%;">
+                           &nbsp;
+                        </div>
+                    </div>
+                  </div>
+<br/>
+        <div class="slds-grid">
+            <div class="slds-col slds-size_1-of-2" style="text-align: left;">
+                 <label class="slds-form-element__label" for="form-element-01">Total registros Consulta: </label>
+                 <label class="slds-form-element__label" for="form-element-02" style="font-size:12px;color:blue;font-weight: bold;"  >{totalRegistros_Query}  </label>
+            </div>
+            <div class="slds-col slds-size_1-of-2" style="text-align: right;">
+          <lightning-button label="Limpiar Filtros" variant="neutral" onclick={handleClick_RestartFilter}></lightning-button>&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;
+
+            <lightning-button label="Cambiar Propietario" variant="brand" onclick={handleClick_start_change_multiple_owner} ></lightning-button>
+            &nbsp;
+            <lightning-button label="Cambiar Estado" variant="brand" onclick={handleClick_start_change_multiple_status} ></lightning-button>
+            </div>
+
+        </div>
+        <br/>
+
+            <div style="height: 100%;">
+
+                <lightning-datatable
+                                     key-field="Id"
+                                     data={data}
+                                     columns={columns}
+                                     show-row-number-column
+                                     suppress-bottom-bar
+                                     sorted-by={sortBy}
+                                     sorted-direction={sortDirection}
+                                     onsort={doSorting}
+                                     >
+                </lightning-datatable>
+
+            </div>
+
+            <br/>
+            <lightning-layout horizontal-align="space">
+                <lightning-layout-item flexibility="auto">
+                    <lightning-button label="Previous" icon-name="utility:chevronleft" onclick={previousHandler}>
+                    </lightning-button>
+                </lightning-layout-item>
+                <lightning-layout-item flexibility="auto">
+                    Page {page} of {totalPage}
+                </lightning-layout-item>
+                <lightning-layout-item flexibility="auto">
+                    <lightning-button label="Next" icon-name="utility:chevronright" icon-position="right"
+                        onclick={nextHandler}></lightning-button>
+                </lightning-layout-item>
+            </lightning-layout>
+        </template>
+
+        <template if:true = {error}>
+
+            {error}>
+
+        </template>
+        </template>
+
+        <template if:true={Option_TareaTeleventasLinks}>
+            <template if:true = {tasks}>
+
+                <div class="slds-grid">
+
+                    <div class="slds-col slds-size_1-of-4" style="text-align: left;">
+                        <div style="width:90%;">
+                            <lightning-combobox
+                            name="filter_estado_pri"
+                            label="Estado Tarea"
+                            value={statusTaskValue}
+                            options={task_status.data.values}
+                            onchange={handlePicklist_statusTask_Change}
+                            placeholder="Seleccione un Estado">
+                        </lightning-combobox>
+                        </div>
+                    </div>
+
+                    <div class="slds-col slds-size_1-of-4" style="text-align: left;">
+                        <div style="width:90%;">
+                            <lightning-combobox
+                            class="validate"
+                             name="filter_sybStatus"
+                             label="Sub-Estado"
+                             value={subStatusTaskValue}
+                             options={taskFilter_subStatus}
+                             onchange={handlePicklist_subStatusTask_Change}
+                             placeholder="Seleccione un Sub-Estado">
+                         </lightning-combobox>
+                        </div>
+                    </div>
+
+                    <div class="slds-col slds-size_1-of-4" style="text-align: left;">
+                        <div style="width:90%;">
+                            <lightning-input type="text" value={nameLeadValue}  name="nameLead"    onchange={handleInput_nameLead_Change} label="Nombre Prospecto" ></lightning-input>
+                        </div>
+                    </div>
+
+                    <div class="slds-col slds-size_1-of-4" style="text-align: left;">
+                        <div style="width:90%;">
+                            <lightning-input type="text" value={nameOwnerValue}  name="nameOwner"   onchange={handleInput_nameOwner_Change} label="Asignado A" ></lightning-input>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-col slds-size_1-of-4" style="text-align: left;">
+                        <div style="width:90%;">
+                            <lightning-input type="date" value={createdDate}  name="cdate"    style="width:150px;" onchange={handleInput_createdDate_Change} label="Fecha de Creación" ></lightning-input>
+                        </div>
+                    </div>
+
+                    <div class="slds-col slds-size_1-of-4" style="text-align: left;">
+                        <div style="width:90%;">
+                            <lightning-input type="date" value={lastModifiedDate}  name="ldate"    style="width:150px;" onchange={handleInput_lastModifiedDate_Change} label="Fecha último cambio" ></lightning-input>
+                        </div>
+                    </div>
+
+
+
+                    <div class="slds-col slds-size_1-of-4" style="text-align: left;">
+                        <div style="width:90%;">
+                            <lightning-input type="date" value={reminderDateTime}  name="ldate"  style="width:150px;" onchange={handleInput_reminderDateTime_Change} label="Recordatorio" ></lightning-input>
+                        </div>
+                    </div>
+
+                    <div class="slds-col slds-size_1-of-4" style="text-align: left;">
+                        <div style="width:90%;">
+                            <lightning-input type="text" value={rutLeadValue}  name="rutLead"    style="width:180px;color:red;font-weight: bold;" onchange={handleInput_rutLead_Change} label="RUT" ></lightning-input>
+                        </div>
+                    </div>
+
+
+                  </div>
+<br/>
+        <div class="slds-grid">
+            <div class="slds-col slds-size_1-of-2" style="text-align: left;">
+                 <label class="slds-form-element__label" for="form-element-01">Total registros Consulta: </label>
+                 <label class="slds-form-element__label" for="form-element-02" style="font-size:12px;color:blue;font-weight: bold;"  >{totalRegistros_Query}  </label>
+            </div>
+            <div class="slds-col slds-size_1-of-2" style="text-align: right;">
+          <lightning-button label="Limpiar Filtros" variant="neutral" onclick={handleClick_RestartFilter}></lightning-button>&nbsp;&nbsp;&nbsp;&nbsp;
+          <!-- &nbsp;
+
+            <lightning-button label="Cambiar Propietario" variant="brand" onclick={handleClick_start_change_multiple_owner} ></lightning-button>
+            &nbsp;
+            <lightning-button label="Cambiar Estado" variant="brand" onclick={handleClick_start_change_multiple_status} ></lightning-button> -->
+            </div>
+
+        </div>
+        <br/>
+
+            <div style="height: 100%;">
+
+                <lightning-datatable
+                                     key-field="Id"
+                                     data={data}
+                                     columns={columns_tlinks}
+                                     show-row-number-column
+                                     suppress-bottom-bar
+                                     sorted-by={sortBy}
+                                     sorted-direction={sortDirection}
+                                     onsort={doSorting}
+                                     >
+                </lightning-datatable>
+
+            </div>
+
+            <br/>
+            <lightning-layout horizontal-align="space">
+                <lightning-layout-item flexibility="auto">
+                    <lightning-button label="Previous" icon-name="utility:chevronleft" onclick={previousHandler}>
+                    </lightning-button>
+                </lightning-layout-item>
+                <lightning-layout-item flexibility="auto">
+                    Page {page} of {totalPage}
+                </lightning-layout-item>
+                <lightning-layout-item flexibility="auto">
+                    <lightning-button label="Next" icon-name="utility:chevronright" icon-position="right"
+                        onclick={nextHandler}></lightning-button>
+                </lightning-layout-item>
+            </lightning-layout>
+        </template>
+
+        <template if:true = {error}>
+
+            {error}>
+
+        </template>
+        </template>
+
+    </div>
+    </lightning-card>
+
+     <!-- inicio modal changeowner-->
+ <template if:true={openChangeOwner}>
+    <div class="demo-only" style="height: 640px;">
+      <template if:true={showLoading_changeOwner}>
+        <lightning-spinner alternative-text="Loading" size="medium" class="spinnerClass"></lightning-spinner>
+      </template>
+      <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+          <div class="slds-modal__container">
+              <header class="slds-modal__header">
+                  <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={handleClick_closeChangeOwner}>
+                      <lightning-icon icon-name="utility:close" size="medium">
+                      </lightning-icon>
+                      <span class="slds-assistive-text">Close</span>
+                  </button>
+                  <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Cambiar propietario de Tarea(s)</h2>
+              </header>
+              <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                <c-change-owner-object
+                    onlookup={handleLookup_User}
+                    fields-to-create={fieldsToCreate}
+                    create-record=true
+                    parent-a-p-i-name="OwnerId"
+                    obj-name="User"
+                    display-ields="Name, Email"
+                    fields = {fields}
+                    show-label=true
+                    label-name="Buscar Usuarios"
+                    data-index={index}
+                    index={index}>
+                </c-change-owner-object>
+
+                <br/>
+
+                <br/>
+
+                <br/>
+
+                <lightning-datatable key-field="Id"
+                data={tasksListChanged}
+                columns={columns_grid_popup}
+                hide-checkbox-column="true"
+                show-row-number-column>
+</lightning-datatable>
+              </div>
+              <footer class="slds-modal__footer" >
+                  <lightning-button label="Cancelar" variant="neutral" onclick={handleClick_closeChangeOwner}></lightning-button>&nbsp;&nbsp;&nbsp;&nbsp;
+                  <lightning-button label="Cambiar Propietario" variant="brand" onclick={handleClick_saveChangeOwner}></lightning-button>
+              </footer>
+          </div>
+      </section>
+      <div class="slds-backdrop slds-backdrop_open"></div>
+  </div>
+</template>
+<!-- fin modal changeowner-->
+
+<!--inicio modal changestatus -->
+<template if:true={openChangeStatus}>
+    <div class="demo-only" style="height: 100%;">
+        <template if:true={showLoading_changeStatus}>
+            <lightning-spinner alternative-text="Loading" size="medium" class="spinnerClass"></lightning-spinner>
+          </template>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-02" aria-modal="true" aria-describedby="modal-content-id-2" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={handleClick_closeChangeStatus}>
+                        <lightning-icon icon-name="utility:close" size="medium">
+                        </lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-02" class="slds-text-heading_medium slds-hyphenate">Cambiar Estado Tarea(s)</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium modalBody" id="modal-content-id-2">
+                    <lightning-record-view-form record-id={recordId} object-api-name="Task">
+                        <template if:true={task_status.data}>
+                            <div style="width:400px; padding:0.5rem;">
+                                <lightning-combobox
+                                    name="filter_estado"
+                                    label="Estado"
+                                    value={statusValue}
+                                    options={task_status.data.values}
+                                    onchange={handlePicklist_Status_Change}
+                                    placeholder="Seleccione un Estado">
+                                </lightning-combobox>
+                            </div>
+                            <div style="width:400px; padding:0.5rem;">
+                                <lightning-combobox
+                                   class="validate"
+                                    name="filter_sybStatus"
+                                    label="Sub-Estado"
+                                    value={subStatusValue}
+                                    options={task_subStatus}
+                                    onchange={handlePicklist_SubStatus_Change}
+                                    placeholder="Seleccione un Sub-Estado">
+                                </lightning-combobox>
+                            </div>
+                        </template>
+
+                        <br/>
+
+                        <br/>
+
+                        <br/>
+
+                        <lightning-datatable key-field="Id"
+                        data={tasksListChanged}
+                        columns={columns_grid_popup}
+                        hide-checkbox-column="true"
+                        show-row-number-column>
+        </lightning-datatable>
+
+
+
+                </lightning-record-view-form>
+                    <br/>
+
+
+
+                </div>
+                <footer class="slds-modal__footer" >
+                    <lightning-button label="Cancelar" variant="neutral" onclick={handleClick_closeChangeStatus}></lightning-button>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <lightning-button label="Cambiar Estado" variant="brand" onclick={handleClick_saveChangeStatus}></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </div>
+</template>
+<!--fin modal changestatus -->
+
+</template>

@@ -1,0 +1,880 @@
+<!--
+  @description       :
+  @author            : Juan Espinoza León
+  @group             :
+  @last modified on  : 05-04-2022
+  @last modified by  : Juan Espinoza León
+-->
+<template>
+    <div class="slds-card homeAssistant">
+        <div class="slds-page-header">
+            <header class="header-title-container slds-has-flexi-truncate" id="modal-principal-id-1">
+                <!-- <div class="slds-text-heading_small" style="font-weight: bold;">Campos personalizados</div> -->
+                <h3 class="slds-text-heading_small">
+                    <lightning-icon icon-name="custom:custom111" size="small"></lightning-icon> <strong> Campos personalizados Prospecto</strong>
+                    </h3>
+            </header>
+        </div>
+        <div class="slds-card__body slds-card__body_inner"  >
+
+            <div class="slds-grid" if:true={modo_view}>
+
+                <div class="slds-col slds-size_1-of-1" style="text-align: right;">
+                    <lightning-button if:true={permisoEdicion}
+                    name="fields_edit"
+                    label="Editar Campos personalizados"
+                    onclick={to_modo_edit}
+                >
+                </lightning-button>
+                </div>
+            </div>
+
+            <div class="slds-grid" if:true={modo_edit}>
+                <div class="slds-col slds-size_1-of-1" style="text-align: right;">
+                    <lightning-button label="Cancelar" variant="neutral" onclick={to_modo_view}></lightning-button>&nbsp;&nbsp;&nbsp;
+                <lightning-button label="Guardar" variant="brand" onclick={save_changes}></lightning-button>
+                </div>
+
+            </div>
+
+            <br/>
+            <template if:true={modo_view}>
+                <lightning-record-view-form record-id={recordId} object-api-name="Lead">
+                    <div if:true={isNotNull_Tipo_Mailing} class="slds-grid">
+                        <div class="slds-col slds-size_1-of-2">
+                            <label class="slds-form-element__label" >Tipo Mailing</label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-output-field  variant="label-hidden" field-name="Tipo_Mailing__c"></lightning-output-field>
+                        </div>
+                    </div>
+                    <div if:true={isNotNull_Nombre_producto_en_campa_a} class="slds-grid">
+                        <div class="slds-col slds-size_1-of-2">
+                            <label class="slds-form-element__label" >Nombre producto en Campaña</label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-output-field variant="label-hidden" field-name="Nombre_producto_en_campa_a__c"></lightning-output-field>
+                        </div>
+                    </div>
+                    <div  if:true={isNotNull_Numero_Poliza_Campagna} class="slds-grid">
+                        <div class="slds-col slds-size_1-of-2">
+                            <label class="slds-form-element__label" >Número Póliza en Campaña</label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-output-field variant="label-hidden" field-name="Numero_Poliza_Campagna__c"></lightning-output-field>
+                        </div>
+                    </div>
+                    <div  if:true={isNotNull_Fecha_inicio_vigencia_Poliza_Campagna} class="slds-grid">
+                        <div class="slds-col slds-size_1-of-2">
+                            <label class="slds-form-element__label" >Fecha inicio vigencia Póliza en Campaña</label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-output-field variant="label-hidden" field-name="Fecha_inicio_vigencia_Poliza_Campagna__c"></lightning-output-field>
+                        </div>
+                    </div>
+                    <div if:true={isNotNull_Periodicidad_pago_Poliza_Campagna} class="slds-grid">
+                        <div class="slds-col slds-size_1-of-2">
+                            <label class="slds-form-element__label" >Periodicidad de pago Póliza en Campaña</label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-output-field variant="label-hidden" field-name="Periodicidad_pago_Poliza_Campagna__c"></lightning-output-field>
+                        </div>
+                    </div>
+                    <div if:true={isNotNull_Medio_Pago_Poliza_Campagna} class="slds-grid">
+                        <div class="slds-col slds-size_1-of-2">
+                            <label class="slds-form-element__label" >Medio de Pago Póliza en Campaña</label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-output-field variant="label-hidden" field-name="Medio_Pago_Poliza_Campagna__c"></lightning-output-field>
+                        </div>
+                    </div>
+                    <div if:true={isNotNull_Capital_Fallecimiento_Poliza_Campagna} class="slds-grid">
+                        <div class="slds-col slds-size_1-of-2">
+                            <label class="slds-form-element__label" >Capital fallecimiento Póliza en Campaña </label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-output-field variant="label-hidden"  field-name="Capital_Fallecimiento_Poliza_Campagna__c"></lightning-output-field>
+                        </div>
+                    </div>
+                    <div if:true={isNotNull_Prima_Poliza_Campagna} class="slds-grid">
+                        <div class="slds-col slds-size_1-of-2">
+                            <label class="slds-form-element__label" >Prima Póliza en Campaña</label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-output-field variant="label-hidden" field-name="Prima_Poliza_Campagna__c"></lightning-output-field>
+                        </div>
+                    </div>
+                    <div if:true={isNotNull_Simulacion_1} class="slds-grid">
+                        <div class="slds-col slds-size_1-of-2">
+                            <label class="slds-form-element__label" >Simulación 1</label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-output-field variant="label-hidden" field-name="Simulacion_1__c"></lightning-output-field>
+                        </div>
+                    </div>
+
+                    <div if:true={isNotNull_Simulacion_2} class="slds-grid">
+                        <div class="slds-col slds-size_1-of-2">
+                            <label class="slds-form-element__label" >Simulación 2</label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-output-field variant="label-hidden" field-name="Simulacion_2__c"></lightning-output-field>
+                        </div>
+                    </div>
+                    <div if:true={isNotNull_Simulacion_3}  class="slds-grid">
+                        <div class="slds-col slds-size_1-of-2">
+                            <label class="slds-form-element__label" >Simulación 3</label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-output-field  variant="label-hidden" field-name="Simulacion_3__c"></lightning-output-field>
+                        </div>
+                    </div>
+                    <div if:true={isNotNull_Simulacion_4} class="slds-grid">
+                        <div class="slds-col slds-size_1-of-2">
+                            <label class="slds-form-element__label" >Simulación 4</label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-output-field  variant="label-hidden" field-name="Simulacion_4__c"></lightning-output-field>
+                        </div>
+                    </div>
+                    <div  if:true={isNotNull_Simulacion_5} class="slds-grid">
+                        <div class="slds-col slds-size_1-of-2">
+                            <label class="slds-form-element__label" >Simulación 5</label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-output-field variant="label-hidden"  field-name="Simulacion_5__c"></lightning-output-field>
+                        </div>
+                    </div>
+                    <div if:true={isNotNull_Simulacion_6} class="slds-grid">
+                        <div class="slds-col slds-size_1-of-2">
+                            <label class="slds-form-element__label" >Simulación 6</label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-output-field  variant="label-hidden" field-name="Simulacion_6__c"></lightning-output-field>
+                        </div>
+                    </div>
+                    <div if:true={isNotNull_Supuesto_simulacion_1} class="slds-grid">
+                        <div class="slds-col slds-size_1-of-2">
+                            <label class="slds-form-element__label" >Supuesto Simulación 1</label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-output-field variant="label-hidden" field-name="Supuesto_simulacion_1__c"></lightning-output-field>
+                        </div>
+                    </div>
+                    <div if:true={isNotNull_Supuesto_simulacion_2} class="slds-grid">
+                        <div class="slds-col slds-size_1-of-2">
+                            <label class="slds-form-element__label" >Supuesto Simulación 2</label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-output-field variant="label-hidden"  field-name="Supuesto_simulacion_2__c"></lightning-output-field>
+                        </div>
+                    </div>
+                    <div if:true={isNotNull_Supuesto_simulacion_3} class="slds-grid">
+                        <div class="slds-col slds-size_1-of-2">
+                            <label class="slds-form-element__label" >Supuesto Simulación 3</label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-output-field  variant="label-hidden" field-name="Supuesto_simulacion_3__c"></lightning-output-field>
+                        </div>
+                    </div>
+                    <div if:true={isNotNull_Ultimo_producto_contratado} class="slds-grid">
+                        <div class="slds-col slds-size_1-of-2">
+                            <label class="slds-form-element__label" >Último Producto contratado</label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-output-field  variant="label-hidden" field-name="Ultimo_producto_contratado__c"></lightning-output-field>
+                        </div>
+                    </div>
+                    <div if:true={isNotNull_Numero_ultima_Poliza_contratada} class="slds-grid">
+                        <div class="slds-col slds-size_1-of-2">
+                            <label class="slds-form-element__label" >Número última Póliza contratada</label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-output-field variant="label-hidden"  field-name="Numero_ultima_Poliza_contratada__c"></lightning-output-field>
+                        </div>
+                    </div>
+                    <div if:true={isNotNull_Fecha_inicio_vigencia_ultima_Poliza_cont} class="slds-grid">
+                        <div class="slds-col slds-size_1-of-2">
+                            <label class="slds-form-element__label" >Fecha inicio vigencia última Póliza contratada</label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-output-field variant="label-hidden"  field-name="Fecha_inicio_vigencia_ultima_Poliza_cont__c"></lightning-output-field>
+                        </div>
+                    </div>
+                    <div if:true={isNotNull_Periodicidad_pago_ultima_Poliza_contr} class="slds-grid">
+                        <div class="slds-col slds-size_1-of-2">
+                            <label class="slds-form-element__label" >Periodicidad de pago última Póliza contratada</label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-output-field variant="label-hidden"  field-name="Periodicidad_pago_ultima_Poliza_contr__c"></lightning-output-field>
+                        </div>
+                    </div>
+                    <div if:true={isNotNull_Medio_Pago_ultima_Poliza_contr} class="slds-grid">
+                        <div class="slds-col slds-size_1-of-2">
+                            <label class="slds-form-element__label" >Medio de Pago última Póliza contratada</label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-output-field  variant="label-hidden" field-name="Medio_Pago_ultima_Poliza_contr__c"></lightning-output-field>
+                        </div>
+                    </div>
+
+                    <div if:true={isNotNull_Capital_fallecimiento_ultima_Poliza_cont} class="slds-grid">
+                        <div class="slds-col slds-size_1-of-2">
+                            <label class="slds-form-element__label" >Capital fallecimiento última Póliza contratada</label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-output-field  variant="label-hidden" field-name="Capital_fallecimiento_ultima_Poliza_cont__c"></lightning-output-field>
+                        </div>
+                    </div>
+                    <div  if:true={isNotNull_Prima_ultima_Poliza_contratada} class="slds-grid">
+                        <div class="slds-col slds-size_1-of-2">
+                            <label class="slds-form-element__label" >Prima última Póliza contratada</label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-output-field  variant="label-hidden" field-name="Prima_ultima_Poliza_contratada__c"></lightning-output-field>
+                        </div>
+                    </div>
+
+                    <div if:true={isNotNull_Aumento_potencial_de_prima} class="slds-grid">
+                        <div class="slds-col slds-size_1-of-2">
+                            <label class="slds-form-element__label" >Aumento potencial de prima</label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-output-field variant="label-hidden"  field-name="Aumento_potencial_de_prima__c"></lightning-output-field>
+                        </div>
+                    </div>
+                    <div if:true={isNotNull_Producto_recomendado} class="slds-grid">
+                        <div class="slds-col slds-size_1-of-2">
+                            <label class="slds-form-element__label" >Producto recomendado</label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-output-field variant="label-hidden"  field-name="Producto_recomendado__c"></lightning-output-field>
+                        </div>
+                    </div>
+
+                    <div if:true={isNotNull_Capital_recomendado} class="slds-grid">
+                        <div class="slds-col slds-size_1-of-2">
+                            <label class="slds-form-element__label" >Capital recomendado</label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-output-field variant="label-hidden"  field-name="Capital_recomendado__c"></lightning-output-field>
+                        </div>
+                    </div>
+                    <div  if:true={isNotNull_Cobertura_recomendada} class="slds-grid">
+                        <div class="slds-col slds-size_1-of-2">
+                            <label class="slds-form-element__label" >Cobertura recomendada</label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-output-field variant="label-hidden" field-name="Cobertura_recomendada__c"></lightning-output-field>
+                        </div>
+                    </div>
+
+                    <div if:true={isNotNull_Prima_producto_cobertura_recomendada}  class="slds-grid">
+                        <div class="slds-col slds-size_1-of-2">
+                            <label class="slds-form-element__label" >Prima producto/cobertura recomendada</label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-output-field variant="label-hidden" field-name="Prima_producto_cobertura_recomendada__c"></lightning-output-field>
+                        </div>
+                    </div>
+                    <div if:true={isNotNull_Supuestos_1}  class="slds-grid">
+                        <div class="slds-col slds-size_1-of-2">
+                            <label class="slds-form-element__label" >Supuestos 1</label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-output-field  variant="label-hidden" field-name="Supuestos_1__c"></lightning-output-field>
+                        </div>
+                    </div>
+                    <div if:true={isNotNull_Supuestos_2} class="slds-grid">
+                        <div class="slds-col slds-size_1-of-2">
+                            <label class="slds-form-element__label" >Supuestos 2</label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-output-field variant="label-hidden" field-name="Supuestos_2__c"></lightning-output-field>
+                        </div>
+                    </div>
+                    <div if:true={isNotNull_Supuestos_3} class="slds-grid">
+                        <div class="slds-col slds-size_1-of-2">
+                            <label class="slds-form-element__label" >Supuestos 3</label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-output-field variant="label-hidden"  field-name="Supuestos_3__c"></lightning-output-field>
+                        </div>
+                    </div>
+                    <div  if:true={isNotNull_Deposito_esporadico_o_convenido_ultimos} class="slds-grid">
+                        <div class="slds-col slds-size_1-of-2">
+                            <label class="slds-form-element__label" >Ha realizado depósito esporádico o convenido últimos 3 años en este mismo período?</label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-output-field variant="label-hidden"  field-name="Deposito_esporadico_o_convenido_ultimos__c"></lightning-output-field>
+                        </div>
+                    </div>
+                    <div if:true={isNotNull_Periodo_1} class="slds-grid">
+                        <div class="slds-col slds-size_1-of-2">
+                            <label class="slds-form-element__label" >Período 1</label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-output-field variant="label-hidden" field-name="Periodo_1__c"></lightning-output-field>
+                        </div>
+                    </div>
+                    <div  if:true={isNotNull_Monto_total_deposito_esporadico_1} class="slds-grid">
+                        <div class="slds-col slds-size_1-of-2">
+                            <label class="slds-form-element__label" >Monto Total depósito esporádico o convenido 1</label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-output-field variant="label-hidden" field-name="Monto_total_deposito_esporadico_1__c"></lightning-output-field>
+                        </div>
+                    </div>
+                    <div if:true={isNotNull_Monto_promedio_deposito_esporadico_1} class="slds-grid">
+                        <div class="slds-col slds-size_1-of-2">
+                            <label class="slds-form-element__label" >Monto Promedio depósito esporádico o convenido 1</label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-output-field variant="label-hidden" field-name="Monto_promedio_deposito_esporadico_1__c"></lightning-output-field>
+                        </div>
+                    </div>
+                    <div if:true={isNotNull_Periodo_2} class="slds-grid">
+                        <div class="slds-col slds-size_1-of-2">
+                            <label class="slds-form-element__label" >Período 2</label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-output-field variant="label-hidden" field-name="Periodo_2__c"></lightning-output-field>
+                        </div>
+                    </div>
+                    <div if:true={isNotNull_Monto_total_deposito_esporadico_2} class="slds-grid">
+                        <div class="slds-col slds-size_1-of-2">
+                            <label class="slds-form-element__label" >Monto Total depósito esporádico o convenido 2</label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-output-field  variant="label-hidden" field-name="Monto_total_deposito_esporadico_2__c"></lightning-output-field>
+                        </div>
+                    </div>
+                    <div if:true={isNotNull_Monto_promedio_deposito_esporadico_2} class="slds-grid">
+                        <div class="slds-col slds-size_1-of-2">
+                            <label class="slds-form-element__label" >Monto Promedio depósito esporádico o convenido 2</label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-output-field  variant="label-hidden" field-name="Monto_promedio_deposito_esporadico_2__c"></lightning-output-field>
+                        </div>
+                    </div>
+                    <div if:true={isNotNull_Periodo_3} class="slds-grid">
+                        <div class="slds-col slds-size_1-of-2">
+                            <label class="slds-form-element__label" >Período 3</label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-output-field  variant="label-hidden" field-name="Periodo_3__c"></lightning-output-field>
+                        </div>
+                    </div>
+                    <div if:true={isNotNull_Monto_total_deposito_esporadico_3} class="slds-grid">
+                        <div class="slds-col slds-size_1-of-2">
+                            <label class="slds-form-element__label" >Monto Total depósito esporádico o convenido 3</label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-output-field  variant="label-hidden" field-name="Monto_total_deposito_esporadico_3__c"></lightning-output-field>
+                        </div>
+                    </div>
+                    <div if:true={isNotNull_Monto_promedio_deposito_esporadico_3} class="slds-grid">
+                        <div class="slds-col slds-size_1-of-2">
+                            <label class="slds-form-element__label" >Monto Promedio depósito esporádico o convenido 3</label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-output-field  variant="label-hidden" field-name="Monto_promedio_deposito_esporadico_3__c"></lightning-output-field>
+                        </div>
+                    </div>
+                    <div if:true={isNotNull_Informacion_Adicional_1} class="slds-grid">
+                        <div class="slds-col slds-size_1-of-2">
+                            <label class="slds-form-element__label" >Información Adicional 1</label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-output-field  variant="label-hidden" field-name="Informacion_Adicional_1__c"></lightning-output-field>
+                        </div>
+                    </div>
+                    <div if:true={isNotNull_Informacion_Adicional_2} class="slds-grid">
+                        <div class="slds-col slds-size_1-of-2">
+                            <label class="slds-form-element__label" >Información Adicional 2</label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-output-field variant="label-hidden"  field-name="Informacion_Adicional_2__c"></lightning-output-field>
+                        </div>
+                    </div>
+                    <div if:true={isNotNull_Informacion_Adicional_3} class="slds-grid">
+                        <div class="slds-col slds-size_1-of-2">
+                            <label class="slds-form-element__label" >Información Adicional 3</label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-output-field variant="label-hidden" field-name="Informacion_Adicional_3__c"></lightning-output-field>
+                        </div>
+                    </div>
+                    <div if:true={isNotNull_Informacion_Adicional_4} class="slds-grid">
+                        <div class="slds-col slds-size_1-of-2">
+                            <label class="slds-form-element__label" >Información Adicional 4</label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-output-field variant="label-hidden"  field-name="Informacion_Adicional_4__c"></lightning-output-field>
+                        </div>
+                    </div>
+                    <div if:true={isNotNull_Informacion_Adicional_5} class="slds-grid">
+                        <div class="slds-col slds-size_1-of-2">
+                            <label class="slds-form-element__label" >Información Adicional 5</label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-output-field variant="label-hidden" field-name="Informacion_Adicional_5__c"></lightning-output-field>
+                        </div>
+                    </div>
+                    <div  if:true={isNotNull_Informacion_Adicional_6} class="slds-grid">
+                        <div class="slds-col slds-size_1-of-2">
+                            <label class="slds-form-element__label" >Información Adicional 6</label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-output-field variant="label-hidden"  field-name="Informacion_Adicional_6__c"></lightning-output-field>
+                        </div>
+                    </div>
+                    <div  if:true={isNotNull_Informacion_Adicional_7} class="slds-grid">
+                        <div class="slds-col slds-size_1-of-2">
+                            <label class="slds-form-element__label" >Información Adicional 7</label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-output-field variant="label-hidden" field-name="Informacion_Adicional_7__c"></lightning-output-field>
+                        </div>
+                    </div>
+                    <div if:true={isNotNull_Informacion_Adicional_8} class="slds-grid">
+                        <div class="slds-col slds-size_1-of-2">
+                            <label class="slds-form-element__label" >Información Adicional 8</label>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-output-field variant="label-hidden" field-name="Informacion_Adicional_8__c"></lightning-output-field>
+                        </div>
+                    </div>
+                </lightning-record-view-form>
+            </template>
+
+            <template if:true={modo_edit}>
+                <template if:true={showLoading}>
+                    <lightning-spinner alternative-text="Loading" size="medium" class="spinnerClass"></lightning-spinner>
+                </template>
+                <lightning-record-edit-form  object-api-name="Lead">
+                    <lightning-messages></lightning-messages>
+                                 <div class="slds-grid slds-m-bottom_xxx-small">
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <label class="slds-form-element__label" >Tipo Mailing</label>
+                                     </div>
+                                     <div class="slds-col slds-size_1-of-2">
+                                        <lightning-input-field  variant="label-hidden" onchange={event_tipo_mailing} field-name="Tipo_Mailing__c" value={tipo_mailing}></lightning-input-field>
+                                     </div>
+                                 </div>
+                                 <div class="slds-grid slds-m-bottom_xxx-small">
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <label class="slds-form-element__label" >Nombre producto en Campaña</label>
+                                     </div>
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <lightning-input-field variant="label-hidden"  onchange={event_nombre_producto_campagna} field-name="Nombre_producto_en_campa_a__c"  value={nombre_producto_campagna}></lightning-input-field>
+                                     </div>
+                                 </div>
+                                 <div class="slds-grid slds-m-bottom_xxx-small">
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <label class="slds-form-element__label" >Número Póliza en Campaña</label>
+                                     </div>
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <lightning-input-field variant="label-hidden" onchange={event_numero_poliza_campagna} value={numero_poliza_campagna}  field-name="Numero_Poliza_Campagna__c" ></lightning-input-field>
+                                     </div>
+                                 </div>
+                                 <div class="slds-grid slds-m-bottom_xxx-small">
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <label class="slds-form-element__label" >Fecha inicio vigencia Póliza en Campaña</label>
+                                     </div>
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <lightning-input-field  variant="label-hidden" onchange={event_fecha_inicio_vigencia_poliza_campagna} value={fecha_inicio_vigencia_poliza_campagna}  field-name="Fecha_inicio_vigencia_Poliza_Campagna__c"></lightning-input-field>
+                                     </div>
+                                 </div>
+                                 <div class="slds-grid slds-m-bottom_xxx-small">
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <label class="slds-form-element__label" >Periodicidad de pago Póliza en Campaña</label>
+                                     </div>
+                                     <div class="slds-col slds-size_1-of-2">
+                                          <lightning-input-field variant="label-hidden" onchange={event_periodicidad_pago_poliza_campagna} value={periodicidad_pago_poliza_campagna}  field-name="Periodicidad_pago_Poliza_Campagna__c"></lightning-input-field>
+                                     </div>
+                                 </div>
+                                  <div class="slds-grid slds-m-bottom_xxx-small">
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <label class="slds-form-element__label" >Medio de Pago Póliza en Campaña</label>
+                                     </div>
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <lightning-input-field  variant="label-hidden" onchange={event_medio_pago_poliza_campagna} value={medio_pago_poliza_campagna}  field-name="Medio_Pago_Poliza_Campagna__c"></lightning-input-field>
+                                     </div>
+                                 </div>
+                                  <div class="slds-grid slds-m-bottom_xxx-small">
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <label class="slds-form-element__label" >Capital fallecimiento Póliza en Campaña </label>
+                                     </div>
+                                     <div class="slds-col slds-size_1-of-2">
+                                          <lightning-input-field variant="label-hidden" onchange={event_capital_fallecimiento_poliza_campagna} value={capital_fallecimiento_poliza_campagna}  field-name="Capital_Fallecimiento_Poliza_Campagna__c"></lightning-input-field>
+                                     </div>
+                                 </div>
+                                  <div class="slds-grid slds-m-bottom_xxx-small">
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <label class="slds-form-element__label" >Prima Póliza en Campaña</label>
+                                     </div>
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <lightning-input-field variant="label-hidden" onchange={event_prima_poliza_campagna} value={prima_poliza_campagna}  field-name="Prima_Poliza_Campagna__c"></lightning-input-field>
+                                     </div>
+                                 </div>
+                                  <div class="slds-grid slds-m-bottom_xxx-small">
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <label class="slds-form-element__label" >Simulación 1</label>
+                                     </div>
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <lightning-input-field  variant="label-hidden" onchange={event_simulacion_1} value={simulacion_1}  field-name="Simulacion_1__c"></lightning-input-field>
+                                     </div>
+                                 </div>
+
+                                  <div class="slds-grid slds-m-bottom_xxx-small">
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <label class="slds-form-element__label" >Simulación 2</label>
+                                     </div>
+                                     <div class="slds-col slds-size_1-of-2">
+                                          <lightning-input-field variant="label-hidden" onchange={event_simulacion_2} value={simulacion_2}   field-name="Simulacion_2__c"></lightning-input-field>
+                                     </div>
+                                 </div>
+                                  <div class="slds-grid slds-m-bottom_xxx-small">
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <label class="slds-form-element__label" >Simulación 3</label>
+                                     </div>
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <lightning-input-field variant="label-hidden" onchange={event_simulacion_3} value={simulacion_3}  field-name="Simulacion_3__c"></lightning-input-field>
+                                     </div>
+                                 </div>
+                                  <div class="slds-grid slds-m-bottom_xxx-small">
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <label class="slds-form-element__label" >Simulación 4</label>
+                                     </div>
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <lightning-input-field  variant="label-hidden" onchange={event_simulacion_4} value={simulacion_4}  field-name="Simulacion_4__c"></lightning-input-field>
+                                     </div>
+                                 </div>
+                                  <div class="slds-grid slds-m-bottom_xxx-small">
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <label class="slds-form-element__label" >Simulación 5</label>
+                                     </div>
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <lightning-input-field variant="label-hidden" onchange={event_simulacion_5} value={simulacion_5}  field-name="Simulacion_5__c"></lightning-input-field>
+                                     </div>
+                                 </div>
+                                  <div class="slds-grid slds-m-bottom_xxx-small">
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <label class="slds-form-element__label" >Simulación 6</label>
+                                     </div>
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <lightning-input-field variant="label-hidden" onchange={event_simulacion_6} value={simulacion_6}  field-name="Simulacion_6__c"></lightning-input-field>
+                                     </div>
+                                 </div>
+                                  <div class="slds-grid slds-m-bottom_xxx-small">
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <label class="slds-form-element__label" >Supuesto Simulación 1</label>
+                                     </div>
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <lightning-input-field variant="label-hidden" onchange={event_supuesto_simulacion_1} value={supuesto_simulacion_1}  field-name="Supuesto_simulacion_1__c"></lightning-input-field>
+                                     </div>
+                                 </div>
+                                  <div class="slds-grid slds-m-bottom_xxx-small">
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <label class="slds-form-element__label" >Supuesto Simulación 2</label>
+                                     </div>
+                                     <div class="slds-col slds-size_1-of-2">
+                                          <lightning-input-field variant="label-hidden" onchange={event_supuesto_simulacion_2} value={supuesto_simulacion_2} field-name="Supuesto_simulacion_2__c"></lightning-input-field>
+                                     </div>
+                                 </div>
+                                  <div class="slds-grid slds-m-bottom_xxx-small">
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <label class="slds-form-element__label" >Supuesto Simulación 3</label>
+                                     </div>
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <lightning-input-field variant="label-hidden" onchange={event_supuesto_simulacion_3} value={supuesto_simulacion_3} field-name="Supuesto_simulacion_3__c"></lightning-input-field>
+                                     </div>
+                                 </div>
+                                  <div class="slds-grid slds-m-bottom_xxx-small">
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <label class="slds-form-element__label" >Último Producto contratado</label>
+                                     </div>
+                                     <div class="slds-col slds-size_1-of-2">
+                                        <lightning-input-field variant="label-hidden" onchange={event_ultimo_producto_contratado} value={ultimo_producto_contratado}  field-name="Ultimo_producto_contratado__c"></lightning-input-field>
+                                     </div>
+                                 </div>
+                                  <div class="slds-grid slds-m-bottom_xxx-small">
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <label class="slds-form-element__label" >Número última Póliza contratada</label>
+                                     </div>
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <lightning-input-field variant="label-hidden" onchange={event_numero_ultima_poliza_contratada} value={numero_ultima_poliza_contratada} field-name="Numero_ultima_Poliza_contratada__c"></lightning-input-field>
+                                     </div>
+                                 </div>
+                                  <div class="slds-grid slds-m-bottom_xxx-small">
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <label class="slds-form-element__label" >Fecha inicio vigencia última Póliza contratada</label>
+                                     </div>
+                                     <div class="slds-col slds-size_1-of-2">
+                                        <lightning-input-field variant="label-hidden" onchange={event_fecha_inicio_vigencia_ultima_poliza_cont} value={fecha_inicio_vigencia_ultima_poliza_cont} field-name="Fecha_inicio_vigencia_ultima_Poliza_cont__c"></lightning-input-field>
+                                     </div>
+                                 </div>
+                                  <div class="slds-grid slds-m-bottom_xxx-small">
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <label class="slds-form-element__label" >Periodicidad de pago última Póliza contratada</label>
+                                     </div>
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <lightning-input-field variant="label-hidden" onchange={event_periodicidad_pago_ultima_poliza_contr} value={periodicidad_pago_ultima_poliza_contr}  field-name="Periodicidad_pago_ultima_Poliza_contr__c"></lightning-input-field>
+                                     </div>
+                                 </div>
+                                  <div class="slds-grid slds-m-bottom_xxx-small">
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <label class="slds-form-element__label" >Medio de Pago última Póliza contratada</label>
+                                     </div>
+                                     <div class="slds-col slds-size_1-of-2">
+                                          <lightning-input-field variant="label-hidden" onchange={event_medio_pago_ultima_poliza_contr} value={medio_pago_ultima_poliza_contr}  field-name="Medio_Pago_ultima_Poliza_contr__c"></lightning-input-field>
+                                     </div>
+                                 </div>
+
+                                  <div class="slds-grid slds-m-bottom_xxx-small">
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <label class="slds-form-element__label" >Capital fallecimiento última Póliza contratada</label>
+                                     </div>
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <lightning-input-field variant="label-hidden" onchange={event_capital_fallecimiento_ultima_poliza_cont} value={capital_fallecimiento_ultima_poliza_cont}  field-name="Capital_fallecimiento_ultima_Poliza_cont__c"></lightning-input-field>
+                                     </div>
+                                 </div>
+                                  <div class="slds-grid slds-m-bottom_xxx-small">
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <label class="slds-form-element__label" >Prima última Póliza contratada</label>
+                                     </div>
+                                     <div class="slds-col slds-size_1-of-2">
+                                          <lightning-input-field variant="label-hidden" onchange={event_prima_ultima_poliza_contratada} value={prima_ultima_poliza_contratada}  field-name="Prima_ultima_Poliza_contratada__c"></lightning-input-field>
+                                     </div>
+                                 </div>
+
+                                  <div class="slds-grid slds-m-bottom_xxx-small">
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <label class="slds-form-element__label" >Aumento potencial de prima</label>
+                                     </div>
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <lightning-input-field variant="label-hidden" onchange={event_aumento_potencial_de_prima} value={aumento_potencial_de_prima} field-name="Aumento_potencial_de_prima__c"></lightning-input-field>
+                                     </div>
+                                 </div>
+                                  <div class="slds-grid slds-m-bottom_xxx-small">
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <label class="slds-form-element__label" >Producto recomendado</label>
+                                     </div>
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <lightning-input-field variant="label-hidden" onchange={event_producto_recomendado} value={producto_recomendado}  field-name="Producto_recomendado__c"></lightning-input-field>
+                                     </div>
+                                 </div>
+
+                                  <div class="slds-grid slds-m-bottom_xxx-small">
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <label class="slds-form-element__label" >Capital recomendado</label>
+                                     </div>
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <lightning-input-field variant="label-hidden" onchange={event_capital_recomendado} value={capital_recomendado}  field-name="Capital_recomendado__c"></lightning-input-field>
+                                     </div>
+                                 </div>
+                                 <div class="slds-grid slds-m-bottom_xxx-small">
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <label class="slds-form-element__label" >Cobertura recomendada</label>
+                                     </div>
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <lightning-input-field variant="label-hidden" onchange={event_cobertura_recomendada} value={cobertura_recomendada} field-name="Cobertura_recomendada__c"></lightning-input-field>
+                                     </div>
+                                 </div>
+
+                                  <div class="slds-grid slds-m-bottom_xxx-small">
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <label class="slds-form-element__label" >Prima producto/cobertura recomendada</label>
+                                     </div>
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <lightning-input-field variant="label-hidden" onchange={event_prima_producto_cobertura_recomendada} value={prima_producto_cobertura_recomendada}  field-name="Prima_producto_cobertura_recomendada__c"></lightning-input-field>
+                                     </div>
+                                 </div>
+                                  <div class="slds-grid slds-m-bottom_xxx-small">
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <label class="slds-form-element__label" >Supuestos 1</label>
+                                     </div>
+                                     <div class="slds-col slds-size_1-of-2">
+                                          <lightning-input-field variant="label-hidden" onchange={event_supuestos_1} value={supuestos_1}  field-name="Supuestos_1__c"></lightning-input-field>
+                                     </div>
+                                 </div>
+                                  <div class="slds-grid slds-m-bottom_xxx-small">
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <label class="slds-form-element__label" >Supuestos 2</label>
+                                     </div>
+                                     <div class="slds-col slds-size_1-of-2">
+                                        <lightning-input-field variant="label-hidden" onchange={event_supuestos_2} value={supuestos_2} field-name="Supuestos_2__c"></lightning-input-field>
+                                     </div>
+                                 </div>
+                                  <div class="slds-grid slds-m-bottom_xxx-small">
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <label class="slds-form-element__label" >Supuestos 3</label>
+                                     </div>
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <lightning-input-field  variant="label-hidden" onchange={event_supuestos_3} value={supuestos_3} field-name="Supuestos_3__c"></lightning-input-field>
+                                     </div>
+                                 </div>
+                                 <div class="slds-grid slds-m-bottom_xxx-small">
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <label class="slds-form-element__label" >Ha realizado depósito esporádico o convenido últimos 3 años en este mismo período?</label>
+                                     </div>
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <lightning-input-field variant="label-hidden" onchange={event_deposito_esporadico_o_convenido_ultimos} value={deposito_esporadico_o_convenido_ultimos}  field-name="Deposito_esporadico_o_convenido_ultimos__c"></lightning-input-field>
+<!--
+                                         <lightning-input type="checkbox" value={deposito_esporadico_o_convenido_ultimos}  name="Deposito_esporadico_o_convenido_ultimos__c"   onchange={event_deposito_esporadico_o_convenido_ultimos}   ></lightning-input> -->
+                                     </div>
+                                 </div>
+                                  <div class="slds-grid slds-m-bottom_xxx-small">
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <label class="slds-form-element__label" >Período 1</label>
+                                     </div>
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <lightning-input-field variant="label-hidden" onchange={event_periodo_1} value={periodo_1}  field-name="Periodo_1__c"></lightning-input-field>
+                                     </div>
+                                 </div>
+                                  <div class="slds-grid slds-m-bottom_xxx-small">
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <label class="slds-form-element__label" >Monto Total depósito esporádico o convenido 1</label>
+                                     </div>
+                                     <div class="slds-col slds-size_1-of-2">
+                                        <lightning-input-field variant="label-hidden" onchange={event_monto_total_deposito_esporadico_1} value={monto_total_deposito_esporadico_1}  field-name="Monto_total_deposito_esporadico_1__c"></lightning-input-field>
+                                     </div>
+                                 </div>
+                                  <div class="slds-grid slds-m-bottom_xxx-small">
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <label class="slds-form-element__label" >Monto Promedio depósito esporádico o convenido 1</label>
+                                     </div>
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <lightning-input-field  variant="label-hidden" onchange={event_monto_promedio_deposito_esporadico_1} value={monto_promedio_deposito_esporadico_1} field-name="Monto_promedio_deposito_esporadico_1__c"></lightning-input-field>
+                                     </div>
+                                 </div>
+                                  <div class="slds-grid slds-m-bottom_xxx-small">
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <label class="slds-form-element__label" >Período 2</label>
+                                     </div>
+                                     <div class="slds-col slds-size_1-of-2">
+                                           <lightning-input-field  variant="label-hidden" onchange={event_periodo_2} value={periodo_2}  field-name="Periodo_2__c"></lightning-input-field>
+                                     </div>
+                                 </div>
+                                  <div class="slds-grid slds-m-bottom_xxx-small">
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <label class="slds-form-element__label" >Monto Total depósito esporádico o convenido 2</label>
+                                     </div>
+                                     <div class="slds-col slds-size_1-of-2">
+                                        <lightning-input-field  variant="label-hidden" onchange={event_monto_total_deposito_esporadico_2} value={monto_total_deposito_esporadico_2}  field-name="Monto_total_deposito_esporadico_2__c"></lightning-input-field>
+                                     </div>
+                                 </div>
+                                  <div class="slds-grid slds-m-bottom_xxx-small">
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <label class="slds-form-element__label" >Monto Promedio depósito esporádico o convenido 2</label>
+                                     </div>
+                                     <div class="slds-col slds-size_1-of-2">
+                                        <lightning-input-field variant="label-hidden"  onchange={event_monto_promedio_deposito_esporadico_2} value={monto_promedio_deposito_esporadico_2} field-name="Monto_promedio_deposito_esporadico_2__c"></lightning-input-field>
+                                     </div>
+                                 </div>
+                                  <div class="slds-grid slds-m-bottom_xxx-small">
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <label class="slds-form-element__label" >Período 3</label>
+                                     </div>
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <lightning-input-field  variant="label-hidden" onchange={event_periodo_3} value={periodo_3} field-name="Periodo_3__c"></lightning-input-field>
+                                     </div>
+                                 </div>
+                                  <div class="slds-grid slds-m-bottom_xxx-small">
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <label class="slds-form-element__label" >Monto Total depósito esporádico o convenido 3</label>
+                                     </div>
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <lightning-input-field  variant="label-hidden" onchange={event_monto_total_deposito_esporadico_3} value={monto_total_deposito_esporadico_3} field-name="Monto_total_deposito_esporadico_3__c"></lightning-input-field>
+                                     </div>
+                                 </div>
+                                  <div class="slds-grid slds-m-bottom_xxx-small">
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <label class="slds-form-element__label" >Monto Promedio depósito esporádico o convenido 3</label>
+                                     </div>
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <lightning-input-field variant="label-hidden"  onchange={event_monto_promedio_deposito_esporadico_3} value={monto_promedio_deposito_esporadico_3} field-name="Monto_promedio_deposito_esporadico_3__c"></lightning-input-field>
+                                     </div>
+                                 </div>
+                                  <div class="slds-grid slds-m-bottom_xxx-small">
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <label class="slds-form-element__label" >Información Adicional 1</label>
+                                     </div>
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <lightning-input-field variant="label-hidden"  onchange={event_informacion_adicional_1} value={informacion_adicional_1}  field-name="Informacion_Adicional_1__c"></lightning-input-field>
+                                     </div>
+                                 </div>
+                                  <div class="slds-grid slds-m-bottom_xxx-small">
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <label class="slds-form-element__label" >Información Adicional 2</label>
+                                     </div>
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <lightning-input-field variant="label-hidden" onchange={event_informacion_adicional_2} value={informacion_adicional_2}   field-name="Informacion_Adicional_2__c"></lightning-input-field>
+                                     </div>
+                                 </div>
+                                  <div class="slds-grid slds-m-bottom_xxx-small">
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <label class="slds-form-element__label" >Información Adicional 3</label>
+                                     </div>
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <lightning-input-field variant="label-hidden" onchange={event_informacion_adicional_3} value={informacion_adicional_3}  field-name="Informacion_Adicional_3__c"></lightning-input-field>
+                                     </div>
+                                 </div>
+                                  <div class="slds-grid slds-m-bottom_xxx-small">
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <label class="slds-form-element__label" >Información Adicional 4</label>
+                                     </div>
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <lightning-input-field variant="label-hidden"  field-name="Informacion_Adicional_4__c"></lightning-input-field>
+                                     </div>
+                                 </div>
+                                  <div class="slds-grid slds-m-bottom_xxx-small">
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <label class="slds-form-element__label" >Información Adicional 5</label>
+                                     </div>
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <lightning-input-field variant="label-hidden" onchange={event_informacion_adicional_4} value={informacion_adicional_4}  field-name="Informacion_Adicional_5__c"></lightning-input-field>
+                                     </div>
+                                 </div>
+                                  <div class="slds-grid slds-m-bottom_xxx-small">
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <label class="slds-form-element__label" >Información Adicional 5</label>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <lightning-input-field variant="label-hidden" onchange={event_informacion_adicional_5} value={informacion_adicional_5}  field-name="Informacion_Adicional_5__c"></lightning-input-field>
+                                    </div>
+                                </div>
+                                 <div class="slds-grid slds-m-bottom_xxx-small">
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <label class="slds-form-element__label" >Información Adicional 6</label>
+                                     </div>
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <lightning-input-field variant="label-hidden" onchange={event_informacion_adicional_6} value={informacion_adicional_6}  field-name="Informacion_Adicional_6__c"></lightning-input-field>
+                                     </div>
+                                 </div>
+                                  <div class="slds-grid slds-m-bottom_xxx-small">
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <label class="slds-form-element__label" >Información Adicional 7</label>
+                                     </div>
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <lightning-input-field variant="label-hidden" onchange={event_informacion_adicional_7} value={informacion_adicional_7}  field-name="Informacion_Adicional_7__c"></lightning-input-field>
+                                     </div>
+                                 </div>
+                                  <div class="slds-grid slds-m-bottom_xxx-small">
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <label class="slds-form-element__label" >Información Adicional 8</label>
+                                     </div>
+                                     <div class="slds-col slds-size_1-of-2">
+                                         <lightning-input-field variant="label-hidden" onchange={event_informacion_adicional_8} value={informacion_adicional_8}  field-name="Informacion_Adicional_8__c"></lightning-input-field>
+                                     </div>
+                                 </div>
+                </lightning-record-edit-form>
+
+
+            </template>
+
+        </div>
+      </div>
+
+</template>

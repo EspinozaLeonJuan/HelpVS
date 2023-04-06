@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Con experiencia</fullName>
+        <default>false</default>
+        <label>Con experiencia</label>
+    </customValue>
+    <customValue>
+        <fullName>Sin experiencia</fullName>
+        <default>false</default>
+        <label>Sin experiencia</label>
+    </customValue>
+    <masterLabel>Tipos de Cuenta</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

@@ -1,0 +1,1147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Póliza</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Pólizas</value>
+    </caseValues>
+    <gender>Masculine</gender>
+    <layouts>
+        <layout>Formato Cobranza Colectivos</layout>
+        <sections>
+            <label></label>
+            <section>Corredor</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Fecha</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Colectivo</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información del sistema</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Más Información</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato Comercial Colectivos</layout>
+        <sections>
+            <label></label>
+            <section>Corredor</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Fecha</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Colectivo</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información del sistema</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Colectivos</layout>
+        <sections>
+            <label></label>
+            <section>Corredor</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Fecha</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Colectivo</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información del sistema</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Colectivos (calidad)</layout>
+        <sections>
+            <label></label>
+            <section>Corredor</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Fecha</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Colectivo</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información del sistema</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Colectivos (gerencia)</layout>
+        <sections>
+            <label></label>
+            <section>Corredor</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Fecha</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Colectivo</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información del sistema</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Colectivos - Atención al cliente</layout>
+        <sections>
+            <label></label>
+            <section>Corredor</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Fecha</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Colectivo</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información del sistema</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Colectivos Cumplimiento</layout>
+        <sections>
+            <label></label>
+            <section>Corredor</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Fecha</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Colectivo</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información del sistema</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Colectivos PV</layout>
+        <sections>
+            <label></label>
+            <section>Corredor</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Fecha</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Colectivo</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información del sistema</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Colectivos Segmento</layout>
+        <sections>
+            <label></label>
+            <section>Corredor</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Fecha</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Colectivo</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información del sistema</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Individuales</layout>
+        <sections>
+            <label></label>
+            <section>Agente/Ejecutivo</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Fecha</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Individual</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información del sistema</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Motivo anulación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Pago</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Valor</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Último Rescate</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Individuales -  Usuario UR</layout>
+        <sections>
+            <label></label>
+            <section>Agente/Ejecutivo</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Fecha</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Individual</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información del sistema</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Pago</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Valor</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Individuales - Atención al cliente</layout>
+        <sections>
+            <label></label>
+            <section>Agente/Ejecutivo</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Fecha</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Individual</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información del sistema</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Motivo anulación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Pago</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Valor</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Último Rescate</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Individuales - Call center</layout>
+        <sections>
+            <label></label>
+            <section>Agente/Ejecutivo</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Fecha</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Individual</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información del sistema</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Motivo anulación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Pago</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Valor</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Último Rescate</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Individuales Colectivo</layout>
+        <sections>
+            <label></label>
+            <section>Agente/Ejecutivo</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Fecha</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Individual</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información del sistema</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Motivo anulación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Pago</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Valor</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Individuales Cumplimiento</layout>
+        <sections>
+            <label></label>
+            <section>Agente/Ejecutivo</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Fecha</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Individual</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información del sistema</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Motivo anulación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Pago</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Valor</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Último Rescate</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Individuales GJSAC</layout>
+        <sections>
+            <label></label>
+            <section>Agente/Ejecutivo</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Fecha</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Individual</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información del sistema</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Motivo anulación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Pago</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Valor</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Último Rescate</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Individuales Lightning</layout>
+        <sections>
+            <label></label>
+            <section>Agente/Ejecutivo</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Fecha</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Individual</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información del sistema</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Pago</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Valor</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Último Rescate</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Individuales PV</layout>
+        <sections>
+            <label></label>
+            <section>Agente/Ejecutivo</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Fecha</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Individual</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información del sistema</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Motivo anulación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Pago</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Valor</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Último Rescate</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Individuales Segmento</layout>
+        <sections>
+            <label></label>
+            <section>Agente/Ejecutivo</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Fecha</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Individual</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información del sistema</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Motivo anulación</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Pago</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Valor</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Último Rescate</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Masivos</layout>
+        <sections>
+            <label></label>
+            <section>Agente/Ejecutivo</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Fecha</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Masivo</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información del sistema</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Pago</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Valor</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Último Rescate</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Masivos - Usuario UR</layout>
+        <sections>
+            <label></label>
+            <section>Agente/Ejecutivo</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Fecha</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Masivo</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información del sistema</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Pago</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Valor</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Último Rescate</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Masivos Cumplimiento</layout>
+        <sections>
+            <label></label>
+            <section>Agente/Ejecutivo</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Fecha</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Masivo</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información del sistema</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Pago</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Valor</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Último Rescate</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Masivos Lightning</layout>
+        <sections>
+            <label></label>
+            <section>Agente/Ejecutivo</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Fecha</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Masivo</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información del sistema</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Pago</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Valor</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Último Rescate</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Masivos PV</layout>
+        <sections>
+            <label></label>
+            <section>Agente/Ejecutivo</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Fecha</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Masivo</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información del sistema</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Pago</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Valor</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Último Rescate</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de PF</layout>
+        <sections>
+            <label></label>
+            <section>Agente/Ejecutivo</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Fecha</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Individual</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información del sistema</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Pago</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Productos</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Valor</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de PF - Usuario UR</layout>
+        <sections>
+            <label></label>
+            <section>Agente/Ejecutivo</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Fecha</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Individual</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información del sistema</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Pago</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Productos</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Valor</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de PF Cumplimiento</layout>
+        <sections>
+            <label></label>
+            <section>Agente/Ejecutivo</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Fecha</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Individual</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información del sistema</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Pago</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Productos</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Valor</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de PF Lightning</layout>
+        <sections>
+            <label></label>
+            <section>Agente/Ejecutivo</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Fecha</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Individual</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información del sistema</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Pago</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Productos</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Valor</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de PF PV</layout>
+        <sections>
+            <label></label>
+            <section>Agente/Ejecutivo</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Fecha</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información de Individual</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información del sistema</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Pago</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Productos</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Valor</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Renta Vitalicia</layout>
+        <sections>
+            <label></label>
+            <section>Agente/Ejecutivo</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Detalle de Crédito</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Fecha</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información Renta Vitalicia</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Pago</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Producto</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Valor</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Renta Vitalicia - Usuario UR</layout>
+        <sections>
+            <label></label>
+            <section>Agente/Ejecutivo</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Detalle de Crédito</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Fecha</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información Renta Vitalicia</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Pago</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Producto</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Valor</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Renta Vitalicia Cumplimiento</layout>
+        <sections>
+            <label></label>
+            <section>Agente/Ejecutivo</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Detalle de Crédito</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Fecha</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información Renta Vitalicia</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Pago</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Producto</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Valor</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Renta Vitalicia Lightning</layout>
+        <sections>
+            <label></label>
+            <section>Agente/Ejecutivo</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Detalle de Crédito</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Fecha</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información Renta Vitalicia</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Pago</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Producto</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Valor</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato de Renta Vitalicia PV</layout>
+        <sections>
+            <label></label>
+            <section>Agente/Ejecutivo</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Detalle de Crédito</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Fecha</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Información Renta Vitalicia</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Pago</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Producto</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Valor</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <workflowTasks>
+        <description></description>
+        <name>Informe_Siniestralidad_P_liza_Segmento_Mediano</name>
+        <subject></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <description></description>
+        <name>Informe_Siniestralidad_segmento_grande</name>
+        <subject></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <description></description>
+        <name>Planificaci_n_de_Renovaci_n_segmento_grande</name>
+        <subject></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <description></description>
+        <name>Planificaci_n_de_Renovaci_n_segmento_mediano</name>
+        <subject></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <description></description>
+        <name>informe_siniestralidad_2</name>
+        <subject></subject>
+    </workflowTasks>
+</CustomObjectTranslation>

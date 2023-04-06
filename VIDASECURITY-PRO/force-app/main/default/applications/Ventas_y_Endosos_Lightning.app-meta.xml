@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <brand>
+        <headerColor>#EABE2C</headerColor>
+        <logo>codey_businessr</logo>
+        <logoVersion>1</logoVersion>
+        <shouldOverrideOrgTheme>false</shouldOverrideOrgTheme>
+    </brand>
+    <description>Ventas y Endosos Lightning TI Vida 2020</description>
+    <formFactors>Small</formFactors>
+    <formFactors>Large</formFactors>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
+    <label>Ventas y Endosos</label>
+    <navType>Standard</navType>
+    <tabs>Casos</tabs>
+    <tabs>standard-Account</tabs>
+    <tabs>Poliza__c</tabs>
+    <tabs>standard-Contact</tabs>
+    <tabs>Participantes_de_Campa_a__c</tabs>
+    <uiType>Lightning</uiType>
+    <utilityBar>Ventas_y_Endosos_UtilityBar</utilityBar>
+</CustomApplication>

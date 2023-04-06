@@ -1,0 +1,12 @@
+.THIS {
+}
+
+.THIS .slds-modal{
+	height: 200px;
+	max-height: 400px;
+}
+
+.THIS .slds-modal__footer{
+	padding-top: 0px !important;
+		margin-top: 10px !important;
+}

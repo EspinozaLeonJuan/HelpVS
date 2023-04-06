@@ -1,0 +1,105 @@
+<!--
+  @description       : 
+  @author            : Juan Espinoza Leon
+  @group             : 
+  @last modified on  : 05-28-2021
+  @last modified by  : Juan Espinoza León
+  Modifications Log 
+  Ver   Date         Author               Modification
+  1.0   09-13-2020   Juan Espinoza Leon   Initial Version
+-->
+<apex:page id="pgPolizasVigentes" controller="CTR_CM_PolizasVigentes" action="{!PolizasVigentes}"  lightningStylesheets="true" sidebar="false" showHeader="true"  docType="HTML-5.0">
+    <style>
+        .ct{
+            text-align:center;
+         }
+    </style>
+
+<apex:includeScript value="{!$Resource.jquery}"/>
+<script type="text/javascript">    
+    //var rutaRecursosEstaticos = '{!URLFOR($Resource.CotizadorExpress)}';   
+
+    function colorPageBlock(pageblock, bkcolor, color) {
+        if (pageblock != null) 
+        {
+            pageblock.firstChild.style.cssText = "background-color: " + bkcolor + ";color:"+color+";";
+        }
+    }
+
+    function cerrarVentana()
+    {
+        window.close();
+    
+    }
+</script>
+
+<br/>
+    
+    <div id="dv_CuerpoPrincipal" style="width: 100%; margin-left: auto; margin-right: auto; height: 90%;">
+            <input type="hidden" id="AseguradoId" name="AseguradoId" />            
+            <input type="hidden" id="idaborrar" value="0" />      
+            <input type="hidden" id="cont" value="0" />
+            
+            <apex:actionStatus id="Status"  >
+                <apex:facet name="start">
+                    <apex:outputPanel >
+                        <div class="popupBackground" />
+                        <div class="popupPanel">
+                            &nbsp; Espere...<img src="/apexpages/devmode/img/saveStatus.gif" />
+                        </div>
+                    </apex:outputPanel> 
+                </apex:facet>
+            </apex:actionStatus>
+            <br/>
+
+        <apex:form id="frm_DatosContratante">
+
+            <apex:pageBlock id="pB_CotizadorContratante">                    
+                    <!-- INFO CONTRATANTE -->                    
+                    <apex:pageBlockSection title="Pólizas Vigentes Contratante" columns="1" id="pBs_DatosContratante" collapsible="false" >     
+                        <apex:pageBlockTable id="pbt_Productos" value="{!LST_POLIZAS_CTE}" var="po" style="font: 12px arial, sans-serif;">
+                            <apex:column headerValue="Mandatoria"  headerClass="ct"  style="width: auto;font: bold; backgroung-color: dark-orange;text-align: center;">
+                                <apex:inputCheckbox value="{!pmanEncontrada}" disabled="true" rendered="{!IF(po.Name==polMandatoria,true,false)}" />
+                            </apex:column>
+                            <apex:column headerValue="N° Póliza" headerClass="ct"  style="width: auto;font: bold;text-align: center;" >{!po.Name}</apex:column> <!-- Número Póliza.... -->
+                            <!--<apex:column headerValue="Tipo" style="width: auto;" >{!po.RecordType.Name}</apex:column>-->
+                            <!--<apex:column headerValue="Categoría" headerClass="ct" style="width: auto;" >{!po.Categoria_Poliza__c}</apex:column>-->
+                            <apex:column headerValue="RUT" headerClass="ct" style="width: auto;text-align: center;" >{!po.Rut_Contratante__c}</apex:column>
+                            <apex:column headerValue="Estado" headerClass="ct" style="width: auto;text-align: center;" >{!po.Estatus__c}</apex:column>
+                            <apex:column headerValue="Producto" headerClass="ct" style="width: auto;" >{!po.Nombre_de_Producto__c}</apex:column>
+                            <apex:column headerValue="Forma de Pago" headerClass="ct" style="width: auto;text-align: center;" >{!po.Forma_de_Pago__c}</apex:column>                
+                            <!--<apex:column headerValue="Prima Actual" style="width: auto;" >{!po.Prima_Actual__c}</apex:column>-->
+                            <apex:column headerValue="Prima Total" headerClass="ct" style="width: auto;text-align: center;" >{!po.Prima_Total__c}</apex:column>
+                            <apex:column headerValue="Moneda Poliza" headerClass="ct" style="width: auto;text-align: center;" >{!po.Moneda_Poliza__c}</apex:column>
+                            <apex:column headerValue="Frecuencia Pago" headerClass="ct" style="width: auto;text-align: center;" >{!po.Frecuencia_de_Pago__c}</apex:column>
+                            <!--<apex:column headerValue="Institución de Pago" style="width: auto;" >{!po.Institucion_de_Pago__c}</apex:column>-->
+                            <!--<apex:column headerValue="Ejecutivo de Clientes" style="width: auto;" >{!po.Ejecutivo_de_Clientes__c}</apex:column>-->
+                        </apex:pageBlockTable>
+        
+                        <script>
+                            colorPageBlock(document.getElementById("{!$Component.pBs_DatosContratante}"), "#EF861C", "white");
+                        </script>
+                    </apex:pageBlockSection>
+                    <div id="dv_Botones" style="width: 97%; margin-left: auto; margin-right: auto;">
+                        <center>
+                            <script>
+                            function cerrarVentana(){
+                                window.close();
+                            }
+                            </script>
+                            <apex:commandButton value="Cerrar" onclick="cerrarVentana();" /> 
+                        </center>                
+                    </div>   
+
+            </apex:pageBlock>
+
+
+
+
+            
+        </apex:form>
+
+    </div>
+
+
+</apex:page>

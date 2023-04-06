@@ -1,0 +1,28 @@
+<!--
+  @description       :
+  @author            : Juan Espinoza León
+  @group             :
+  @last modified on  : 06-06-2022
+  @last modified by  : Juan Espinoza León
+-->
+<template>
+    <div class="slds-card homeAssistant">
+        <template if:true={showLoading}>
+            <lightning-spinner alternative-text="Loading" size="medium" class="spinnerClass"></lightning-spinner>
+        </template>
+        <div class="slds-page-header">
+            <header class="header-title-container slds-has-flexi-truncate" id="modal-principal-id-1">
+
+                <h3 class="slds-text-heading_small">
+                    <lightning-icon icon-name="custom:custom105" size="small"></lightning-icon> <strong>   Notificación Manual Entrevista Link</strong>
+                    </h3>
+            </header>
+        </div>
+        <div class="slds-card__body slds-card__body_inner"  >
+            <center>
+                <lightning-button label="Notificación Agente" variant="brand-outline" onclick={send_notification_agente} ></lightning-button>&nbsp;
+                <lightning-button label="Notificación Cliente" variant="brand-outline" onclick={send_notification_cliente}  ></lightning-button>
+            </center>
+        </div>
+    </div>
+</template>

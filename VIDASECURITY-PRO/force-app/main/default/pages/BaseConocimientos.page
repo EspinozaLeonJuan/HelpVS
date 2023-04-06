@@ -1,0 +1,14 @@
+<apex:page standardController="Solution" sidebar="true" showHeader="true" recordSetVar="solutions">
+		<apex:includeLightning />
+		<div id="lightning" class="bs"/>
+		<script type="text/javascript">
+			$Lightning.use("c:BaseConocimientos", function() {
+				$Lightning.createComponent("c:BaseConocimientosList",
+				{ },
+				"lightning",
+				function(cmp) {
+					console.log("creando componentes");
+				});
+			});
+		</script>
+</apex:page>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AnimationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <animationFrequency>often</animationFrequency>
+    <developerName>Ventas_Fuerza_de_Venta</developerName>
+    <isActive>true</isActive>
+    <masterLabel>Ventas Fuerza de Venta Dummy</masterLabel>
+    <recordTypeContext>Custom</recordTypeContext>
+    <recordTypeName>Prospecto_FFVV</recordTypeName>
+    <sobjectType>Lead</sobjectType>
+    <targetField>Status</targetField>
+    <targetFieldChangeToValues>Interesado</targetFieldChangeToValues>
+</AnimationRule>

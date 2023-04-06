@@ -1,0 +1,57 @@
+<!--
+  @File Name          : SEC_VF_CS_LightningEvents.page
+  @Description        : 
+  @Author             : ChangeMeIn@UserSettingsUnder.SFDoc
+  @Group              : 
+  @Last Modified By   : ChangeMeIn@UserSettingsUnder.SFDoc
+  @Last Modified On   : 4/23/2020, 12:32:51 AM
+  @Modification Log   : 
+  Ver       Date            Author                  Modification
+  1.0    4/22/2020   ChangeMeIn@UserSettingsUnder.SFDoc     Initial Version
+-->
+<apex:page controller="CTR_CS_LightningEvents" action="{!LoadEvent}" lightningStylesheets="true" showHeader="false" sidebar="false" docType="html-5.0" >
+    <apex:includeScript value="{!$Resource.jquery}"/>
+     
+   <script type="text/javascript">
+        
+        $(document).ready(function() {
+
+            if ('{!Mensaje}' != '')
+            {
+                alert('{!Mensaje}');
+            }
+            else
+            {
+                 /* var url = '{!URL}';
+           
+                var win = window.open(url, '_blank');
+                
+                win.focus();
+                */
+                
+                var url = '{!URL}';
+                
+                 var height = 700;
+                var width = 1100;
+                var y=parseInt((window.screen.height/2) - height/2);
+                var x=parseInt((window.screen.width/2) - width/2); 
+
+                var performance   = 'height='+height+'px,width='+width+'px, top='+y+',left='+x+',toolbar=no,location=no,status=no,menubar=no,scrollbars=no,directories=no,resizable=no';
+                
+           
+                var win = window.open(url,'', performance);
+              
+               
+                
+                win.focus(); 
+            }
+            
+            document.location.href ='/{!Id}';
+        });
+
+    </script>
+<!-- Begin Default Content REMOVE THIS -->
+<!--<h1>Caso</h1> 
+Gestion de Eventos -->
+<!-- End Default Content REMOVE THIS -->
+</apex:page>

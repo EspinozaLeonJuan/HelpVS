@@ -1,0 +1,15 @@
+<apex:page controller="EnviaCorreosPendientesController">
+<apex:sectionHeader title="Enviar Correos Pendientes" subtitle="{! $User.FirstName } {! $User.LastName}" />
+<apex:form >
+<apex:pageBlock title="Enviar Correos Pendientes">
+<apex:pageBlockButtons location="bottom">
+<apex:commandButton value="Enviar" action="{!enviar}" />
+</apex:pageBlockButtons>
+<apex:pageBlockSection columns="1">
+<apex:pageMessages />
+<apex:outputLabel value="Se enviarán {! correosPendientes } correos." rendered="{! correosPendientes > 0 }"/>
+<apex:outputLabel value="No quedan correos por enviar" rendered="{!correosPendientes = 0}" />
+</apex:pageBlockSection>
+</apex:pageBlock>
+</apex:form>
+</apex:page>

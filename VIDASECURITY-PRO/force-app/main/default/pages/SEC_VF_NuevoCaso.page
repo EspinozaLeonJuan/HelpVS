@@ -1,0 +1,238 @@
+<!--
+  @description       :
+  @author            : Juan Espinoza León
+  @group             :
+  @last modified on  : 09-06-2021
+  @last modified by  : Juan Espinoza León
+  Modifications Log
+  Ver   Date         Author               Modification
+  1.0   07-15-2021   Juan Espinoza León   Initial Version
+-->
+<apex:page controller="CLS_CasoHijoControlador" action="{!CargaCaso}" lightningStylesheets="true" showHeader="false" sidebar="false" tabStyle="Case" >
+<style>
+.popupBackground {
+        /* Background color */
+        background-color:black;
+        opacity: 0.5;
+        filter: alpha(opacity = 50);
+
+        /* Dimensions */
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 00;
+        z-index: 998;
+        position: absolute;
+        /* Mouse */
+        cursor:wait;
+    }
+
+    .popupPanel {
+       /* Background color */
+        border: solid 2px orange;
+        background-color: white;
+        /* Dimensions */
+        display: inline-block;
+        left: 50%;
+        width: 100px;
+        margin-left: 0px;
+        top: 100px;
+        height: 25px;
+        margin-top: -25px;
+        position: absolute;
+        z-index: 999;
+        /* Mouse */
+        cursor:pointer;;
+    }
+
+    </style>
+    <br/>
+      <apex:actionStatus id="Status">
+        <apex:facet name="start">
+            <apex:outputPanel >
+                <div class="popupBackground" />
+                <div class="popupPanel">
+                    &nbsp; Espere...<img src="/apexpages/devmode/img/saveStatus.gif" />
+                </div>
+            </apex:outputPanel>
+        </apex:facet>
+    </apex:actionStatus>
+    <br/>
+    <div id="dv_RequerimientosHijos" style="width: 97%; margin-left: auto; margin-right: auto;">
+        <apex:form >
+            <apex:actionFunction action="{!VerificaProtocolo_Concepto}" name="VerificaProtocolo_Concepto" >
+            </apex:actionFunction>
+            <apex:actionFunction action="{!Protocolo_Ckeck}" name="Protocolo_Ckeck" >
+            </apex:actionFunction>
+            
+            <apex:pageBlock title="{!Titulo}" id="dv_header">
+				<apex:panelGrid columns="5" style="width:80%;">
+                	<apex:outputLabel style="font-weight:bold;" >Caso Principal</apex:outputLabel>
+					<apex:commandLink onclick="cerrarVentana();"  value="{!NumeroCaso}" />
+					<apex:outputText value="    " id="empty01"/>
+                    <apex:outputLabel style="font-weight:bold;" >Negocio</apex:outputLabel>
+                    <apex:outputText value="{!NomNegocio}" id="Id_Negocio" style="font-size:14px"/>
+
+                    <apex:outputLabel style="font-weight:bold;" >RUT Titular</apex:outputLabel>
+                    <label id="" style="font-size:14px">{!RUTTitular}</label>
+                    <apex:outputText value="    " id="empty02"/>
+                    <apex:outputLabel style="font-weight:bold;" >Nombre Titular</apex:outputLabel>
+                    <label id="Nombre_Titular" >{!NombreTitular}</label>
+
+                    <apex:outputLabel style="font-weight:bold;"  >Nº de Poliza</apex:outputLabel>
+                    <apex:selectList id="cmd_Poliza" value="{!Poliza}" size="1"  required="false" style="font-weight:bold;" >
+                    	<apex:selectOptions value="{!ListaPolizas}" />
+                    </apex:selectList>
+				</apex:panelGrid>
+
+			</apex:pageBlock>
+
+             <apex:pageblock id="dv_Tipificacion" title="Tipificación">
+				
+                 <apex:pageBlockSection id="pbks_CampoSolicitudes" columns="2"  showHeader="false" rendered="{!Panel == 'SOLICITUD'}">
+                     
+					<apex:inputField value="{!CASO_Hijo.CASO_Categoria__c}" />
+                    <apex:inputField value="{!CASO_Hijo.Negocio__c}" label="" style="display:none;" />
+					
+                    <apex:inputField value="{!CASO_Hijo.Detalle_Solicitud__c}" onchange="javascript:DSChange('{!$Component.DSId}','{!$Component.CMSId}','{!$Component.FISId}','{!$Component.idErrorSolicitud}')" id="DSId"/>
+                    <apex:inputField value="{!CASO_Hijo.Detalle_Error_de_liquidaci_n__c}" html-disabled="true" id="idErrorSolicitud"/>
+                    <!-- <apex:pageBlockSectionItem ></apex:pageBlockSectionItem> -->                   
+                    <apex:inputField value="{!CASO_Hijo.Detalle_de_Rescate__c}"/>
+                    <apex:pageBlockSectionItem ></apex:pageBlockSectionItem>
+                     <apex:inputField value="{!CASO_Hijo.Detalle_Configuracion__c}"/>
+                     
+                    <apex:inputField value="{!CASO_Hijo.Problema__c}" required="false" />
+					<apex:inputField value="{!CASO_Hijo.Cantidad_de_meses_suspendido__c}" Id="CMSId" html-disabled="true"/>
+                     <apex:inputField value="{!CASO_Hijo.Entrega_Respuesta__c}" required="false" label="Cerrar Caso"/>
+                     <apex:inputField value="{!CASO_Hijo.Fecha_de_inicio_de_suspensi_n__c}" Id="FISId" html-disabled="true"/> 
+                    <apex:inputTextarea id="Description" value="{!CASO_Hijo.Description}" style="resize: none;width:350px;height:150px;"/>
+                     
+                    
+                     
+                     
+				</apex:pageBlockSection>
+
+				<apex:pageBlockSection id="pbks_CampoReclamos" columns="2" collapsible="false" rendered="{!Panel == 'RECLAMO'}">
+                	<apex:inputField value="{!CASO_Hijo.Producto__c}" />
+                    <!--<apex:inputField value="{!CASO_Hijo.Entrega_Respuesta__c}" required="false"  label="Cerrar Caso"/>-->
+                    <apex:outputText value="    " id="empty02"/>
+                    <apex:inputField value="{!CASO_Hijo.Tipo_Operacion__c}"   />
+                    <apex:outputText value="    " id="empty03"/>
+                    <apex:inputField value="{!CASO_Hijo.Detalle_Operacion__c}" onchange="javascript:DetalleChange('{!$Component.idOperacion}','{!$Component.idError}' )" id="idOperacion" />
+                    <apex:inputField value="{!CASO_Hijo.Problema__c}" required="false" />
+                    <apex:inputField value="{!CASO_Hijo.Detalle_Error_de_liquidaci_n__c}" html-disabled="true" id="idError"/>
+					<apex:inputTextarea id="Description" value="{!CASO_Hijo.Description}" style="resize: none;width:300px;height:150px;"/>
+					<apex:inputField value="{!CASO_Hijo.Respuesta_por_Carta__c}" rendered="{!ReclamoOpcion == true}"/>
+                    <apex:inputField value="{!CASO_Hijo.Negocio__c}" label="" style="display:none;" />
+                    <apex:inputField value="{!CASO_Hijo.Respuesta_por_Email__c}" rendered="{!ReclamoOpcion == true}"/>                 
+                 </apex:pageBlockSection>
+				
+                <apex:pageBlockSection id="pbks_CampoConsultas" columns="2" collapsible="false" rendered="{!Panel == 'CONSULTA'}">
+                	<apex:inputField value="{!CASO_Hijo.Concepto__c}" onchange="VerificaProtocolo_Concepto();" />
+                    <apex:inputField value="{!CASO_Hijo.Entrega_Respuesta__c}"  required="false" label="Cerrar Caso"/>
+
+                    <apex:outputLabel value="" rendered="{!Es_Protocolo == false}"></apex:outputLabel>
+                    <apex:inputField value="{!CASO_Hijo.Es_Protocolo__c}" rendered="{!Es_Protocolo == true}" onchange="Protocolo_Ckeck();"/>
+
+                    <apex:inputField value="{!CASO_Hijo.Problema__c}" required="false" />
+                    <apex:outputLabel value="" rendered="{!Ckeck_Protocolo == false}"></apex:outputLabel>
+                    <apex:inputField value="{!CASO_Hijo.Protocolo_Envio_Informacion__c}" rendered="{!Ckeck_Protocolo == true}" />
+					<apex:inputTextarea id="Description" value="{!CASO_Hijo.Description}" style="resize: none;width:350px;height:150px;"/>
+					<!--<apex:inputField value="{!CASO_Hijo.Problema__c}" required="false" />  &nbsp;  -->
+					<apex:inputField value="{!CASO_Hijo.Negocio__c}" label="" style="display:none;" />
+				</apex:pageBlockSection>
+                 
+            </apex:pageblock>
+
+            <apex:pageBlock >
+                    <div id="dv_Botones" style="width: 97%; margin-left: auto; margin-right: auto;">
+                        <apex:commandButton id="cmd_Cancelar" value="Cancelar" action="{!cancelarRequerimiento}" />
+                        <apex:commandButton id="cmd_GuardarRequerimientos" value="Guardar" action="{!guardarCasos}" oncomplete="cerrarVentana('{!ErrorValidacion}','{!ID_CASO}');" status="Status"/>
+                    </div>
+            </apex:pageBlock>
+
+             <!-- <apex:pageMessages id="showmsg" escape="true"></apex:pageMessages>-->
+
+            <script type="text/javascript">
+                //Función cerrar ventana...
+                function cerrarVentana(error, Id){
+    
+                    if (error == "CON_NOT_CON")
+                    {
+                        alert('Debe seleccionar el Concepto asociado al Requerimiento.')
+                    }
+                    else if (error == "CON_NOT_ENV_INF_PRO")//protocolo atencion
+                    {
+                        alert('Debe indicar si se ha enviado Información al Cliente. Opción ["Protocolo - Envio Informacion"].');
+                    }
+                    else if (error == "REC_NOT_DETOP")
+                    {
+                        alert('Debe seleccionar el Detalle de Operación asociado al Requerimiento.')
+                    }
+                    else if (error == "SOL_NOT_DETSOL")
+                    {
+                        alert('Debe seleccionar el Detalle de Solicitud asociado al Requerimiento.')
+                    }
+                    else if (error == "SOL_NOT_RESSOL")
+                    {
+                        alert('Debe seleccionar el Detalle de Rescate asociado al Requerimiento.')
+                    }
+                    else if (error == "REC_NOT_RESPONSE")
+                    {
+                        alert('Debe seleccionar una Opción de Respuesta asociada al Caso.');
+                    }
+                    else if(error == "SOL_NOT_MESFCH")
+                    {
+                    	alert('Debe seleccionar Fecha de inicio de suspension y Cantidad de meses suspendido.');
+                    }
+                    else
+                    {
+                        alert('Caso Requerimiento creado satisfactoriamente.')
+                        // alert(Id);
+                          //window.opener.location.href="/{!ID_CasoPrincipal}";
+                        window.opener.location.href="/"+Id;
+                        window.top.close();
+                    }
+                    /* alert('Caso Requerimiento creado satisfactoriamente.')
+                        window.opener.location.href="/{!ID_CasoPrincipal}";
+                        window.top.close();*/
+                }
+            	function DSChange(ds,ms,fs,idErrorSolicitud){
+                    let detalleSolicitud = document.getElementById(ds).value;
+                    let mesesSuspendidos = document.getElementById(ms);
+                    let fechaSuspension = document.getElementById(fs);
+                    let detalleErrorSolicitud = document.getElementById(idErrorSolicitud);
+                    
+                    if(detalleSolicitud == 'Solicitud de suspensión de primas'){
+                        console.log(detalleSolicitud);
+                        console.log('antes',mesesSuspendidos);
+                    	mesesSuspendidos.removeAttribute("disabled");
+                        fechaSuspension.removeAttribute("disabled");
+                    }
+                    else{
+                        mesesSuspendidos.value = '';
+                        fechaSuspension.value = '';
+                    	mesesSuspendidos.setAttribute("disabled",true);
+                        fechaSuspension.setAttribute("disabled",true);
+                    }
+                    if ( detalleSolicitud == 'Error de liquidación' ) {
+                      detalleErrorSolicitud.removeAttribute("disabled");
+                    } else {
+                      detalleErrorSolicitud.value = '';
+                      detalleErrorSolicitud.setAttribute("disabled",true);
+                    }
+                }
+                function DetalleChange(idOperacion,idError) {
+                  var Detalle_Operacion = document.getElementById(idOperacion).value;
+                  var Detalle_Error_de_liquidaci_n = document.getElementById(idError);
+                  if ( Detalle_Operacion == 'Error de liquidación') {
+                    Detalle_Error_de_liquidaci_n.removeAttribute("disabled");
+                  } else {
+                    Detalle_Error_de_liquidaci_n.value = '';
+                    Detalle_Error_de_liquidaci_n.setAttribute("disabled",true);
+                  }
+                }
+            </script>
+        </apex:form>
+    </div>
+</apex:page>

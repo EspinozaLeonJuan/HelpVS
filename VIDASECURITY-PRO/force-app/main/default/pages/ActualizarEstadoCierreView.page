@@ -1,0 +1,29 @@
+<apex:page standardController="Participantes_de_Campa_a__c" extensions="ParticipantesCampanaUtils">
+    <script type="text/javascript">
+    function back(){
+        
+        const queryString = window.location.search;
+		const urlParams = new URLSearchParams(queryString);
+        const listViewId = urlParams.get('lv')
+        window.location.href = '/'+'a03?fcf'+listViewId;
+    }
+    </script>
+    
+    <apex:form >
+    <apex:pageBlock title="Actualizar estado cierre">
+        <apex:pageBlockSection >
+         
+            <apex:inputField required="true" id="estadoCierre" value="{!participante.Estado_Cierre__c }">
+                <apex:actionSupport event="onchange" action="{!passValueToController}" reRender=""></apex:actionSupport>
+            </apex:inputField>
+          
+        </apex:pageBlockSection>
+        <apex:pageBlockButtons >
+            
+            <apex:commandButton action="{! ActualizarEstadoCierre }" value="Actualizar"/>
+            <apex:commandButton value="Cancelar" oncomplete="back()"/>  
+            
+        </apex:pageBlockButtons>
+    </apex:pageBlock>
+    </apex:form>
+ </apex:page>

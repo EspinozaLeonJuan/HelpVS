@@ -1,0 +1,27 @@
+.THIS {}
+
+.THIS article,
+.THIS .container-body>div {
+    width: 100% !important;
+}
+
+.THIS span.paginacion {
+    width: 150px;
+    float: right;
+    margin-top: -30px;
+}
+
+.THIS div.slds-form-element.lightningInput {
+    margin-bottom: 20px;
+}
+
+.THIS span.paginacion > .slds-form-element {
+  	display: inline-flex;
+    float: right;
+}
+
+.THIS .iconsParentCategory{
+	display: inline;
+	cursor: pointer;
+	margin-left: 10px;
+}

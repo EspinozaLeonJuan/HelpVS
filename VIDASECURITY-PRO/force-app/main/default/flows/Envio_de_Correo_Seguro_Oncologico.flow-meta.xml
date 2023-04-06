@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <description>Alerta de correo electrónico para seguro ongológico.</description>
+        <name>Correo_Seguro_Oncologico</name>
+        <label>Correo Seguro Oncológico</label>
+        <locationX>465</locationX>
+        <locationY>117</locationY>
+        <actionName>CampaignMember.SEC_Enviar_Email_Producto_Oncologico_Televenta</actionName>
+        <actionType>emailAlert</actionType>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>Id_Miembro</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <apiVersion>49.0</apiVersion>
+    <description>Flujo para enviar correo electrónico de Seguro Oncológico.</description>
+    <interviewLabel>Envío de Correo Seguro Oncológico {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Envío de Correo Seguro Oncológico</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <description>Proceso que obtiene datos de la tarea actual.</description>
+        <name>Obtener_Tarea_Oncologico_Actual</name>
+        <label>Obtener Tarea Oncológico Actual</label>
+        <locationX>271</locationX>
+        <locationY>117</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Correo_Seguro_Oncologico</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Id_Tarea</elementReference>
+            </value>
+        </filters>
+        <object>Task</object>
+        <outputAssignments>
+            <assignToReference>Id_Miembro</assignToReference>
+            <field>TASK_ID_Miembro_Campana__c</field>
+        </outputAssignments>
+    </recordLookups>
+    <startElementReference>Obtener_Tarea_Oncologico_Actual</startElementReference>
+    <status>Active</status>
+    <variables>
+        <description>Variable en la cual se almacena el miembro de campaña.</description>
+        <name>Id_Miembro</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+    <variables>
+        <description>Id de la tarea actual.</description>
+        <name>Id_Tarea</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+</Flow>

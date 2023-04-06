@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <defaultLandingTab>Asignacion_de_Cartera</defaultLandingTab>
+    <description>Aplicación para proyecto AMAC de asignaciones de cartera de clientes.</description>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
+    <label>AMAC</label>
+    <logo>SEC_Imagenes_Notificaciones_UR/logo_JPG.jpg</logo>
+    <tabs>standard-Contact</tabs>
+    <tabs>standard-Account</tabs>
+    <tabs>Asignacion_de_Cartera</tabs>
+    <tabs>Cartera_Asignada</tabs>
+    <tabs>Cartera_Fidelizada</tabs>
+    <tabs>Estado_de_Poliza</tabs>
+    <tabs>Categoria_de_Cliente__c</tabs>
+    <tabs>Categoria_de_Poliza__c</tabs>
+    <tabs>Relacion_de_Categoria__c</tabs>
+    <tabs>standard-Dashboard</tabs>
+    <tabs>standard-report</tabs>
+    <tabs>Ejecutivo_de_Cliente__c</tabs>
+    <tabs>Ciudad_de_Sucursal__c</tabs>
+    <tabs>Lista_de_Distribucion__c</tabs>
+</CustomApplication>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Anual</fullName>
+        <default>true</default>
+        <label>Anual</label>
+    </customValue>
+    <customValue>
+        <fullName>Bianual, con Cláusula de Revisión</fullName>
+        <default>false</default>
+        <label>Bianual, con Cláusula de Revisión</label>
+    </customValue>
+    <customValue>
+        <fullName>Bianual con Tarifa Plana</fullName>
+        <default>false</default>
+        <label>Bianual con Tarifa Plana</label>
+    </customValue>
+    <masterLabel>Tipo de Contrato</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

@@ -1,0 +1,97 @@
+<aura:component controller="BaseConocimientosController">
+    <!-- Registrar Eventos -->
+    <aura:registerEvent name="cerrarModal" type="c:BaseConocimientoEvents" />
+    <aura:registerEvent name="actualizarListado" type="c:BaseConocimientoEvents" />
+    <!-- Registrar Eventos -->
+    <aura:handler name="init" value="{!this}" action="{!c.openModelConSolucion}" />
+    <aura:handler name="parametroSolucionModal" event="c:BaseConocimientoEvents" action="{!c.openModelConSolucion}" />
+    <!-- spinner -->
+    <aura:handler event="aura:waiting" action="{!c.showSpinner}" type="APPLICATION" />
+    <aura:handler event="aura:doneWaiting" action="{!c.hideSpinner}" type="APPLICATION" />
+    <aura:attribute name="mostrarSpinner" type="Boolean" default="false" />
+    <aura:attribute name="countRequest" type="Integer" default="0" />
+    <aura:attribute name="estados" type="String[]" />
+    <aura:attribute name="solucion" type="Solution" />
+    <aura:attribute name="recordMode" type="String" />
+    <aura:attribute name="categorySolucion" type="String" />
+    <aura:attribute name="recordError" type="String" />
+    <aura:attribute name="etiquetas" type="String[]" />
+    <aura:attribute name="items" type="Object" />
+    <aura:attribute name="mapFieldsAccesibility" type="Map" />
+    <aura:attribute name="mapFieldsUpdateable" type="Map" />
+
+    <aura:attribute name="display" type="String" default="display:none" />
+    <ltng:require scripts="{!join(',',
+        $Resource.jQuery2,
+        $Resource.LinkifyJS + '/linkify.min.js',
+        $Resource.LinkifyJS + '/linkify-jquery.min.js') }" afterScriptsLoaded="{!c.scriptsLoaded}" />
+    <!--###### MODAL BOX Start From Here ######-->
+    <div role="dialog" tabindex="-1" aria-labelledby="header99" class="slds-modal slds-fade-in-open" id="modal-content">
+        <div class="slds-modal__container">
+            <!-- ###### MODAL BOX HEADER Part Start From Here ######-->
+            <div class="slds-modal__header">
+                <button class="slds-button slds-modal__close slds-button--icon-inverse" title="Cerrar" onclick="{!c.cerrarModal}">X<span class="slds-assistive-text">Cerrar</span></button>
+                <aura:if isTrue="{! v.recordMode!='new'}">
+                    <h2 class="slds-text-heading--medium"> {!v.solucion.SolutionNumber} - {!v.solucion.SolutionName}</h2>
+                    <aura:set attribute="else">
+                        <h2 class="slds-text-heading--medium">Nueva Solución</h2>
+                    </aura:set>
+                </aura:if>
+            </div>
+            <!--###### MODAL BOX BODY Part Start From Here ######-->
+            <div class="slds-modal__content slds-p-around--medium">
+                <aura:if isTrue="{!not(empty(v.recordError))}">
+                    <div aura:id="text" style="{!v.display}">
+                        <ui:message title="Error" severity="error" closable="false"> {!v.recordError} </ui:message>
+                    </div>
+                </aura:if>
+                <span style="{! if( v.mapFieldsAccesibility.SolutionName, '' , 'display : none')}"> 
+                <lightning:input aura:id="SolutionName" name="SolutionName" label="Título de la solución" value="{!v.solucion.SolutionName}" disabled="{!or(v.recordMode =='view',v.recordMode =='external')}" />
+                </span>
+                <!--{! v.mapFieldsUpdateable.SolutionNote}-->
+                <span style="{! if( v.mapFieldsAccesibility.SolutionNote, '' , 'display : none')}" id="{! v.mapFieldsUpdateable.SolutionNote == true ? 'YSN' : 'NSN' }"> 
+                <label for="SolutionNote" class="slds-form-element__label"><span>Detalles de la solución</span></label> <br />
+                <lightning:inputRichText aura:id="SolutionNote" value="{!v.solucion.SolutionNote}" disabled="{!or(v.recordMode =='view',v.recordMode =='external')}" />
+                </span>
+                <span style="{! if( v.mapFieldsAccesibility.Status, '' , 'display : none')}"> 
+                <lightning:select name="Estado" label="Estado" aura:id="estados" value="{!v.solucion.Status}" disabled="{!or(v.recordMode =='view',v.recordMode =='external')}">
+                    <option text="---Sin Seleccionar---" value="Ninguno" />
+                    <aura:iteration items="{!v.estados}" var="item">
+                        <option text="{!item}" value="{!item}" />
+                    </aura:iteration>
+                </lightning:select>
+                </span>
+                <span style="{! if( v.mapFieldsAccesibility.Categoria_Solucion__c, '' , 'display : none')}"> 
+                <aura:if isTrue="{!not(empty(v.categorySolucion))}">
+                    <lightning:input aura:id="CategoryName" name="CategoryName" label="Categoría" value="{!v.categorySolucion}" disabled="true" style="display : inline-block; width: 86%" />
+                    <aura:set attribute="else">
+                        <lightning:input aura:id="CategoryName" name="CategoryName" label="Categoría" value="{!v.solucion.Categoria_Solucion__r.Name}" disabled="true" style="display : inline-block; width: 86%" />
+                    </aura:set>
+                </aura:if>
+                <div onclick="{!c.selectCategory}" class="iconsParentCategory" style="display: inline">
+                    <lightning:icon iconName="action:edit" title="Elegir Categoría" size="xx-small" />
+                </div>
+                <div onclick="{!c.deleteCategory}" class="iconsParentCategory" style="display: inline">
+                    <lightning:icon iconName="action:delete" title="Eliminar Categoría" size="xx-small" />
+                </div>
+                </span>
+                <span style="{! if( v.mapFieldsAccesibility.IsPublished, '' , 'display : none')}"> 
+                <lightning:input aura:id="SolutionPublished" type="checkbox" label="Pública" name="Publica" checked="{!v.solucion.IsPublished}" disabled="{!or(v.recordMode =='view',v.recordMode =='new')}" />
+                </span>
+                <span style="{! if( v.mapFieldsAccesibility.IsPublishedInPublicKb, '' , 'display : none')}"> 
+                <lightning:input aura:id="SolutionPublishedInPublicKb" type="checkbox" label="Visible en la base de datos de conocimientos pública" name="IsPublishedInPublicKb" checked="{!v.solucion.IsPublishedInPublicKb}" disabled="{!or(v.recordMode =='view',v.recordMode =='external')}" />
+                </span>
+                <div class="slds-modal__footer">
+                    <lightning:button label="Cancelar" onclick="{!c.cerrarModal}" variant="neutral" class="slds-m-top--medium" />
+                    <aura:if isTrue="{!or(v.recordMode =='edit',v.recordMode =='new') }">
+                        <lightning:button label="Guardar" onclick="{!c.handleSaveRecord}" variant="brand" class="slds-m-top--medium" />
+                    </aura:if>
+                    <aura:if isTrue="{!v.recordMode =='external'}">
+                        <lightning:button label="Editar" onclick="{!c.habilitarContenido}" variant="brand" class="slds-m-top--medium" />
+                    </aura:if>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="slds-backdrop slds-backdrop--open"></div>
+</aura:component>

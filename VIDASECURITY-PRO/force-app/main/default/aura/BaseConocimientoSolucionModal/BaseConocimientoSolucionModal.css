@@ -1,0 +1,41 @@
+.THIS {}
+.THIS .slds-modal__content.slds-p-around--medium div.slds-select_container,
+.THIS .slds-modal__content.slds-p-around--medium span.select2,
+.THIS .slds-modal__content.slds-p-around--medium div.lightningInputRichText,
+.THIS .slds-modal__content.slds-p-around--medium input {
+    margin-bottom: 12px;
+}
+
+.THIS .slds-modal__container {
+    justify-content: initial;
+    width: 100%;
+    max-width: 100%;
+
+}
+
+.THIS .slds-modal__footer {
+    padding-top: 0px !important;
+    margin-top: 10px !important;
+}
+
+.THIS .ql-editor>p {
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    font-size: 12px;
+}
+
+.THIS .iconsParentCategory{
+	display: inline;
+	cursor: pointer;
+	margin-left: 5px;
+}
+
+
+.THIS .slds-rich-text-area__content {
+    max-height: 20rem;
+    min-height: 17rem !important;
+}
+
+
+.THIS #NSN .slds-rich-text-editor__toolbar{
+    display: none;
+}

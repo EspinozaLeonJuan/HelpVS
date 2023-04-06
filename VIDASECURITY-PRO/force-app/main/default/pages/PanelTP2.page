@@ -1,0 +1,225 @@
+<apex:page sidebar="false" showHeader="false" controller="SalesforceTP2" cache="false" action="{!InicializaActualiza}" standardStylesheets="false" > 
+    <apex:includeScript value="{!URLFOR($Resource.Totalpack, 'js/jquery.min.js')}" />
+    <apex:includeScript value="{!URLFOR($Resource.Totalpack, 'js/panel.js')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.Totalpack, 'css/panel.css')}" />
+    
+    <script> 
+    //esto es para uso en panel.js (notificaciones)
+    var rutaRecursosEstaticos = '{!URLFOR($Resource.Totalpack)}';
+    </script>
+    
+    <apex:form id="pagina">
+        
+        <!-- Overlay bloquea UI -->
+        <apex:actionStatus id="Status">
+            <apex:facet name="start">
+                <apex:outputPanel >
+                    <div class="popupBackground" />
+                    <div class="popupPanel">
+                        Espere un momento... <img src="/apexpages/devmode/img/saveStatus.gif" />
+                    </div>
+                </apex:outputPanel> 
+            </apex:facet>
+        </apex:actionStatus>
+        
+        <!--Timers y hiddens -->
+        <apex:actionFunction action="{!getRegresoPopup}" name="fRegresoPopup" oncomplete="window.location.reload(false);windowResize();alertas();"/>
+        <apex:inputHidden id="hTimerRecordatorio" value="{!RecordatorioCierreAtencionMsecs}"/>
+        <apex:actionPoller action="{!InicializaActualiza}" enabled="{!OR(Estado='ESPERANDO', Estado='PAUSA')}" oncomplete="windowResize();alertas();" interval="15" status="Status" reRender="pagina"  />
+        <apex:actionPoller action="{!InicializaActualiza}" enabled="{!IF(Estado='REINTENTANDO LOGIN', true, false)}" oncomplete="windowResize();alertas();" interval="10" status="Status" reRender="pagina" />
+        <apex:actionPoller action="{!InicializaActualiza}" enabled="{!IF(Estado='ATENDIENDO', true, false)}" oncomplete="windowResize();alertas();" interval="60" status="Status" reRender="pagina" />
+        
+        <!--Panel Principal-->
+        <table id="panelPrincipal" class="base">
+            <tr>
+                <td rowspan="2">
+                    <apex:outputPanel id="Panel" styleClass="panel">
+                        <table class="tabla">
+                            <tbody>
+                                <tr>
+                                    <td class="cellHeader">
+                                        <b><span class="tituloSucursal">{!Sucursal}</span></b><br />
+                                        <span class="tituloSAC">SERVICIO AL CLIENTE</span><br />
+                                        <span class="tituloModulo">Módulo: {!IdEscritorio}&nbsp;</span><apex:commandButton action="{!MostrarPopup}" oncomplete="OpenVfpage('CAMBIOESC');" value="Cambiar" status="Status" reRender="Panel" rendered="{!IF(Estado='LOGOFF', true, false)}"/><br/>                   
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <apex:pageMessages />
+                                </tr>
+                                <tr>
+                                    <td class="cellMid"></td>
+                                </tr>
+                                <tr>
+                                    <td class="cellBtns">
+                                        <apex:commandButton value="Ingresar" action="{!LoginPausa}" status="Status" reRender="pagina" rendered="{!DisplayBotonLogin}" oncomplete="windowResize();"/> 
+                                        <apex:commandButton value="Inicia Atención" action="{!PidoTurno}" status="Status" reRender="pagina" rendered="{!DisplayBotonIniciaAtencion}" oncomplete="windowResize();"/> 
+                                        <apex:commandButton value="Cierra Atención" action="{!FinTurno}" status="Status" reRender="pagina" rendered="{!DisplayBotonCierraAtencion}" oncomplete="windowResize();"/>
+                                        <apex:commandButton value="Pausa" action="{!MostrarPopup}" status="Status" reRender="pagina" oncomplete="OpenVfpage('PAUSA');" rendered="{!DisplayBotonPausa}"/>
+                                        <apex:commandButton value="Cliente Llegó" action="{!ProcesoTurno}" status="Status" reRender="pagina" rendered="{!DisplayBotonClienteLlego}" oncomplete="windowResize();alertas();" />
+                                        <apex:commandButton value="Rellamada" action="{!Rellamo}" rendered="{!DisplayBotonRellamada}" status="Status" reRender="pagina"/>
+                                        <apex:commandButton value="Anular" action="{!Anulo}" status="Status" reRender="pagina" rendered="{!DisplayBotonAnular}" oncomplete="windowResize();"/>
+                                        <apex:commandButton value="Urgencia" action="{!MostrarPopup}" status="Status" oncomplete="OpenVfpage('URGENCIA');" rendered="{!DisplayBotonUrgencia}"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="cellMid"></td>
+                                </tr>
+                                <tr>
+                                    <td class="cellEstado">
+                                        <apex:outputText value="{!Estado}" id="lblEstado" styleClass="labelEstado"/><br/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <apex:panelGroup rendered="{!DisplayCuadroDetallesSucursal}">
+                            <table class="tablaDetallesSucursal">
+                                <tbody>
+                                    <tr>
+                                        <td class="tdTitulo"><apex:outputLabel value="Estado Sucursal"/></td>
+                                        <td class="tdValor"><apex:outputLabel value="Sucursal"/></td>
+                                        <td class="tdValor"><apex:outputLabel value="Módulo"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tdTitulo"><apex:outputLabel value="En espera"  /></td>
+                                        <td class="tdValor"><apex:outputLabel value="{!OficinaEspera}"/></td>
+                                        <td class="tdValor"><apex:outputLabel value="{!EscritorioEspera}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tdTitulo"><apex:outputLabel value="Tiempo Espera"/></td>
+                                        <td class="tdValor"><apex:outputLabel value="{!OficinaTiempoEspera}"/></td>
+                                        <td class="tdValor"><apex:outputLabel value="{!EscritorioTiempoEspera}"/></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </apex:panelGroup>
+                        <apex:panelGroup rendered="{!DisplayBotonSalir}">
+                            <br/>
+                            <div align="center" draggable="false" >
+                                <apex:CommandButton value="Salir" action="{!Logoff}" status="Status" reRender="Panel" />
+                            </div>
+                            <br/>
+                        </apex:panelGroup>
+                    </apex:outputPanel>
+                </td>
+                <apex:panelGroup rendered="{!IF(Estado='ATENDIENDO', true, false)}">
+                    <td class="cellPanelTop">
+                        <table class="tabla">
+                            <tr>
+                                <td>
+                                    <apex:outputLabel value="{!ClienteNombre}" style="font-size: large; font-weight: bold;"/><br/><br/>
+                                    <apex:commandButton action="{!MostrarPopup}" oncomplete="OpenVfpage('CAMBIORUT');" value="Cambiar RUT Cliente" status="Status" reRender="Panel" rendered="{!DisplayBotonCambiaRut}"/><br />
+                                    
+                                    <apex:outputPanel layout="none" rendered="{!ClienteNombre!='CLIENTE NO ENCONTRADO'}">
+                                        
+                                        <table class="tablaDetallesSucursal">
+                                            <tr>
+                                                <td class="tdTitulo"><apex:outputLabel value="Cliente desde"/></td>
+                                                <td class="tdValor"><apex:outputLabel value="{!ClienteFechaInicioRelacion}"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tdTitulo"><apex:outputLabel value="Última visita a sucursal"/></td>
+                                                <td class="tdValor"><apex:outputLabel value="{!ClienteUltimaVisitaSucursal}"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tdTitulo"><apex:outputLabel value="Pólizas activas"/></td>
+                                                <td class="tdValor"><apex:outputLabel value="{!ClienteCantidadPolizasActivas}"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tdTitulo"><apex:outputLabel value="Último caso"/></td>
+                                                <td class="tdValor"><apex:commandButton onclick="OpenParent('{!ClienteUrlUltimoCaso}');return false;" value="Ver último caso"></apex:commandButton></td>
+                                            </tr>
+                                        </table>
+                                        <br/>
+                                        
+                                        <table class="tablaDetallesSucursal">
+                                            <tr>
+                                                <td class="tdTitulo"><apex:outputLabel value=""/></td>
+                                                <td class="tdValor"><apex:outputLabel value="Este Año"/></td>
+                                                <td class="tdValor"><apex:outputLabel value="Anteriores"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tdTitulo"><apex:outputLabel value="Reclamos"/></td>
+                                                <td class="tdValor"><apex:outputLabel value="{!ClienteReclamosAno}"/></td>
+                                                <td class="tdValor"><apex:outputLabel value="{!ClienteReclamosAnteriores}"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tdTitulo"><apex:outputLabel value="Consultas"/></td>
+                                                <td class="tdValor"><apex:outputLabel value="{!ClienteConsultasAno}"/></td>
+                                                <td class="tdValor"><apex:outputLabel value="{!ClienteConsultasAnteriores}"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tdTitulo"><apex:outputLabel value="Solicitudes"/></td>
+                                                <td class="tdValor"><apex:outputLabel value="{!ClienteSolicitudesAno}"/></td>
+                                                <td class="tdValor"><apex:outputLabel value="{!ClienteSolicitudesAnteriores}"/></td>
+                                            </tr>
+                                        </table>
+                                    </apex:outputPanel>
+                                    <apex:outputPanel layout="none" rendered="{!ClienteNombre='CLIENTE NO ENCONTRADO'}" styleClass="tablaDetallesSucursal">
+                                        <apex:commandButton value="Crear cuenta en Salesforce" onclick="OpenParent('/setup/ui/recordtypeselect.jsp?ent=Account'); return false;" /><br/>
+                                    </apex:outputPanel>
+                                    
+                                    <apex:panelGroup rendered="{!DisplayCuadroDetallesTurno}">
+                                        <br />
+                                        <table class="tablaDetallesCliente">
+                                            <tr>
+                                                <td class="tdTitulo"><apex:outputLabel value="Turno"/></td>
+                                                <td class="tdValor"><apex:outputLabel value="{!Turno}"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tdTitulo"><apex:outputLabel value="Tiempo de espera"/></td>
+                                                <td class="tdValor"><apex:outputLabel value="{!Espera}"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="tdTitulo"><apex:outputLabel value="RUT Cliente"/></td>
+                                                <td class="tdValor">
+                                                    <apex:outputLabel value="{!ClienteRut}" rendered="{!IF(DisplayLinkCaso, false, true)}"/>
+                                                    <apex:commandButton rendered="{!DisplayLinkCaso}" value="Ir al caso" onclick="OpenParent('{!UrlCaso}'); return false;" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </apex:panelGroup>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </apex:panelGroup>
+                <apex:panelGroup rendered="{!IF(Estado<>'ATENDIENDO', true, false)}">
+                    <td class="atAnteriores">
+                        
+                        <apex:outputLabel value="Atenciones del día" styleClass="tituloSAC"/><br/>
+                        
+                        <table class="tablaAtAnteriores">
+                            <tr>
+                                <td class="tdTitulo">Rut Cliente</td>
+                                <td class="tdTitulo">Caso</td>
+                                <td class="tdTitulo">Hora fin de atención</td>
+                            </tr>
+                            <apex:repeat value="{!InfoAtenciones}" var="atencion" id="rpt">
+                                <tr>
+                                    <td><apex:outputText value="{!atencion.Rut__c}"/><apex:outputText value="{!atencion.DV__c}"/></td>
+                                    <td><apex:outputText value="{!atencion.Caso__c}"/></td>
+                                    <td><apex:outputText value="{!atencion.Fecha_Hora_de_Termino__c}"/></td>
+                                </tr>
+                            </apex:repeat>
+                        </table>
+                    </td>
+                </apex:panelGroup>
+            </tr>
+            <apex:panelGroup rendered="{!IF(Estado='ATENDIENDO', true, false)}">
+                <tr>
+                    <td class="cellPanelBottom">
+                        <table class="tabla">
+                            <tr>
+                                <td>
+                                    Tiempo de atención: <label id="tiempoAtencion">{!TiempoAtencion}</label><br/>
+                                    Recordatorio de cierre: <label id="recordatorio">{!RecordatorioCierreAtencionMsecs}</label><apex:commandButton onclick="OpenRecordatorioCierre(); return false;" value="Establecer recordatorio" />
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </apex:panelGroup>
+        </table>
+    </apex:form>
+</apex:page>

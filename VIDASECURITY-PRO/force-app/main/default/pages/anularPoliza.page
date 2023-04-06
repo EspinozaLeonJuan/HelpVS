@@ -1,0 +1,29 @@
+<apex:page standardController="Poliza__c" extensions="AnulacionController" action="{!init}">
+    <apex:sectionHeader title="Anulación de Póliza" subtitle="Póliza" />
+    <apex:form >
+        <apex:pageBlock id="block" title="Confirmación de Anulación">
+            <apex:pageBlockButtons location="bottom">
+                <apex:commandButton value="Volver" action="{! cancel}" />
+                <apex:commandButton value="Anular Póliza" action="{!anularPoliza}" reRender="block" rendered="{! showSections }" status="status" />
+            </apex:pageBlockButtons>
+            <apex:pageMessages />
+            <apex:pageBlockSection columns="1" rendered="{! showSections }" >
+                <apex:outputField value="{!poliza.Name}" />
+                <apex:outputField value="{!poliza.Estatus__c}" />
+                <apex:pageMessage id="WarningMsg" escape="0" summary="Está a punto de anular esta póliza, ¿Está seguro?" severity="warning" strength="3"/>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+
+        <apex:actionStatus id="status">
+            <apex:facet name="start">
+                <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.75; z-index: 1000; background-color: black;">
+                    &nbsp;
+                </div>
+                <div style="position: fixed; left: 0; top: 0; bottom: 0; right: 0; z-index: 1001; width: 100%; heigth: 100%;">
+                    <img src="{!URLFOR($Resource.ajax_loading_icon)}" style="position: relative; top: calc(50% - 100px); left: calc(50% - 100px); width: 200px !important; height: 200px !important;"
+                    />
+                </div>
+            </apex:facet>
+        </apex:actionStatus>
+    </apex:form>
+</apex:page>

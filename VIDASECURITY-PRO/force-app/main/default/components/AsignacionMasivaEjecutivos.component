@@ -1,0 +1,101 @@
+<apex:component controller="AsignacionMasivaEjecutivosControlador"  allowDML="true">
+	
+	<style type="text/css">
+        [id*=pbAcciones] { float: right; padding-bottom: 25px;}
+        [id*=botonera] { float: right; }
+        .paginaSeleccionada {
+        	font-weight: bold;
+        	font-size: 14px;
+        }
+
+        .paginaNoSeleccionada {
+        	font-weight: normal;
+        	font-size: 12px;
+        }
+	</style>
+	
+	<apex:form >
+<apex:actionFunction name="establecerSucursal" action="{!establecerSucursal}" reRender="sucursal,mensajes" status="estadoCarga">
+		<apex:param name="ownerId" value="" />
+		<apex:param name="accountId" value="" />
+	</apex:actionFunction> 
+	<apex:pageBlock id="pageBlockGeneral" > 
+		<apex:pageMessages id="mensajes" />
+		<apex:outputPanel id="panelFiltros">
+			<apex:selectList value="{!filtro}" size="1">
+				<apex:actionSupport event="onchange" action="{!cambioFiltro}" reRender="pageBlockGeneral" status="estadoCarga"/>
+	            <apex:selectOptions value="{!items}"/>
+	        </apex:selectList>
+	       <apex:outputPanel id="pbAcciones">
+                <apex:commandButton action="{!proponerAsignacion}" value="Proponer Asignacion" disabled="{!OR(filtro=='Cuenta_Vinculada',cuentas.size == 0)}"/>
+                <apex:commandButton action="{!asignar}" value="Asignar" disabled="{!OR(filtro=='Cuenta_Vinculada',cuentas.size == 0)}"/>
+                <apex:commandButton action="{!asignarMasivamente}" value="Asignar Masivamente CSV" disabled="{!IF(filtro=='Cuenta_Vinculada', true, false)}"/>
+                <apex:commandButton action="{!exportar}" value="Exportar a Excel" disabled="{! IF(cuentas.size == 0, true, false)}"/>
+            </apex:outputPanel>
+		</apex:outputPanel>
+		<apex:outputPanel >                      
+                <apex:actionStatus id="estadoCarga" >
+                    <apex:facet name="start" >
+                        <img src="/img/loading.gif" />                    
+                </apex:facet>
+            </apex:actionStatus>
+        </apex:outputPanel> 
+ 		<apex:outputPanel id="panelCuentas" rendered="{! cuentas.size > 0 }">
+			<apex:pageBlockTable value="{!cuentas}" var="c" align="center" >
+				<apex:column >
+			    	<apex:facet name="header">Cliente Asegurado / Empresa</apex:facet>
+					<apex:outputlink target="_blank" value="/{!c.Id}"> {! mapUsuariosPorCuenta[c.Id].cuenta.Name } </apex:outputlink>
+			    </apex:column>
+			    <apex:column value="{!c.Rut_con_dv__c}" />
+			    <apex:column headerValue="Agente Actual">
+			    <apex:outputLink target="_blank" value="/{!c.Agente_Actual__c}">{!c.Agente_Actual__r.Name}</apex:outputLink> 
+			    </apex:column>
+			    <apex:column headerValue="Categoría del Cliente">
+			    	<apex:outputLink target="_blank" value="/{!c.Categoria_del_Cliente__c}">{!c.Categoria_del_Cliente__r.Name}</apex:outputLink>
+			    </apex:column>
+			    <apex:column headerValue="Ciudad Particular">
+			    <apex:outputLink target="_blank" value="/{!c.Ciudad_Particular_B__c}">{!c.Ciudad_Particular_B__r.Name}</apex:outputLink>
+			    </apex:column>
+			    <apex:column value="{!c.Categoria_Ejecutivo__c}" rendered="{! filtro=='Cuenta_Vinculada'}"/>
+			    <apex:column id="sucursal" value="{! mapUsuariosPorCuenta[c.Id].sucursalAsignada.Name }" />
+			    <apex:column value="{!c.Prima_Mensualizada_Administrada__c}" rendered="{! filtro=='Cuenta_Vinculada'}"/>
+			    <apex:column rendered="{! filtro=='Cuenta_Vinculada'}">
+			    	<apex:facet name="header">Valor poliza Administrada UF</apex:facet>
+			    	   {!c.Valor_Poliza_Total__c}
+			    </apex:column>
+			    <apex:column value="{!c.Capital_Administrado_UF__c}" rendered="{! filtro=='Cuenta_Vinculada'}"/>
+			    <apex:column value="{!c.Dias_Sin_Ejecutivo__c}" rendered="{! filtro=='Cuenta_Desvinculada'}"/>
+			    <apex:column value="{!c.Dias_Con_Ejecutivo__c}" rendered="{! filtro=='Cuenta_Vinculada'}"/>
+			    <apex:column >
+			    	<apex:facet name="header">Ejecutivo Asignado</apex:facet>
+			    	   <apex:selectList size="1" value="{!c.OwnerId}" rendered="{! IF(filtro!='Cuenta_Vinculada', true, false)}" onchange="javascript:establecerSucursal(this.value, '{!c.Id}');" style="width:200px;">
+			    	   		<apex:selectOptions value="{!  mapCuentasUsuarios[c.Id] }"/>
+				    	</apex:selectList>
+				    	<apex:outputText rendered="{!IF(filtro=='Cuenta_Vinculada', true, false)}" value="{! c.Owner.Name}"/>
+			    </apex:column>
+			</apex:pageBlockTable>
+		</apex:outputPanel>
+		<apex:pageBlockButtons location="bottom" >
+		   	<apex:outputPanel id="botonera">
+		        <apex:commandButton status="estadoCarga" reRender="pageBlockGeneral" value="Primero" action="{!first}" disabled="{!!hasPrevious}" title="Primero"/> 
+                <apex:commandButton status="estadoCarga" reRender="pageBlockGeneral" value="Previo" action="{!previous}" disabled="{!!hasPrevious}" title="Previo"/> 
+                <apex:repeat value="{!paginas}" var="pagina">
+		            <apex:outputText >
+							<apex:commandLink action="{!irAPagina}" rerender="pageBlockGeneral" styleClass="{!IF(pageNumber == pagina, 'paginaSeleccionada', 'paginaNoSeleccionada')}">
+								<apex:param name="paginaActual"  value="{!pagina}" assignTo="{!paginaActual}"/>{!pagina}&nbsp;
+							</apex:commandLink>                               
+		        	</apex:outputText> 
+		        </apex:repeat>
+
+                <apex:commandButton status="estadoCarga" reRender="pageBlockGeneral" value="Siguiente" action="{!next}" disabled="{!!hasNext}" title="Siguiente"/> 
+                <apex:commandButton status="estadoCarga" reRender="pageBlockGeneral" value="Ultimo" action="{!last}" disabled="{!!hasNext}" title="Ultimo"/> 
+                <apex:outputText >{!(pageNumber * tamanoLista)+1-tamanoLista}-{!IF((pageNumber * tamanoLista)>tamanoTotal, tamanoTotal,
+                     (pageNumber * tamanoLista))} de {!tamanoTotal}
+                </apex:outputText> 
+		   </apex:outputPanel>
+		   		
+		</apex:pageBlockButtons>
+
+</apex:pageBlock>
+</apex:form>
+</apex:component>

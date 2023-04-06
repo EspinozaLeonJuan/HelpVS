@@ -1,0 +1,53 @@
+<apex:page standardController="Respuesta__c"  showHeader="true"  tabStyle="Respuesta__c" >
+<apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" />
+<apex:sectionHeader title="Respuesta" subtitle="{! Respuesta__c.Name}" />
+<apex:form >
+<apex:pageMessages />
+<!-- <apex:detail relatedList="true" title="false" showChatter="false"></apex:detail> -->
+    <br/>
+    <!-- <apex:outputLink value="https://cs8.salesforce.com/a0G/o" id="theLink">« Volver a la lista: Definiciones de objetos personalizados</apex:outputLink> -->
+    <apex:pageBlock mode="mainDetail" >         
+            <apex:pageBlockSection title="Detalle de Respuesta" columns="1">
+                <apex:outputField value="{!Respuesta__c.Name}" />
+                <apex:outputField value="{!Respuesta__c.Id_respuesta_cat__c}" />  
+                <apex:outputField value="{!Respuesta__c.Caso_Cat__c}" />
+                <apex:outputText escape="false" id="comentarioRespuesta" value="{!Respuesta__c.Comentario_Respuesta__c}"/>
+                <apex:outputField value="{!Respuesta__c.E_mail_Creador__c}" />
+                <!-- <apex:outputField value="{!Respuesta__c.Caso_Vida_Security__c}" /> -->
+                <apex:outputField value="{!Respuesta__c.Fecha_Creacion__c}" />
+                <apex:outputField value="{!Respuesta__c.Nombre_usuario_creador__c}" />
+                <!-- <apex:outputField value="{!Respuesta__c.Tiene_attachement__c}" />  -->
+                <apex:outputField value="{!Respuesta__c.Tiene_attachement__c}" />  
+                <!-- <apex:inlineEditSupport event="ondblClick"  showOnEdit="saveButton,cancelButton" hideOnEdit="editButton" />     -->         
+            </apex:pageBlockSection> 
+            <!-- <apex:pageBlockButtons > 
+                <apex:commandButton value="Modificar" action="{!edit}" id="editButton" />
+                <apex:commandButton value="Eliminar"  action="{!delete}" id="saveButton" />
+                <apex:commandButton value="Duplicar"  action="{!edit}" id="doubleButton" />
+            </apex:pageBlockButtons> -->
+    </apex:pageBlock>
+    
+    
+</apex:form>
+
+<!--<apex:relatedList list="OpenActivities"/>
+<apex:relatedList list="ActivityHistories"/>
+ <apex:relatedList   list="NotesAndAttachments"/> --> 
+ 
+<apex:relatedList subject="{!Respuesta__c}" list="CombinedAttachments" >
+</apex:relatedList>
+
+<script>
+j$ = jQuery.noConflict();
+
+var texto = j$("[id$='comentarioRespuesta']");
+
+j$(document).ready(function() {
+    j$(texto.children("a").each( function() {
+        //alert(this.innerHTML);
+       j$(this).replaceWith(j$('<a href="' + this.innerHTML + '">' + this.innerHTML + '</a>'));
+    }));
+});
+</script>
+
+</apex:page>

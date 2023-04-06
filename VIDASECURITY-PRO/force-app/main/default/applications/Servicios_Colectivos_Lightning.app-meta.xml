@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Participante_de_Campa_a_P_gina_de_registro2</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+        <pageOrSobjectType>Participantes_de_Campa_a__c</pageOrSobjectType>
+    </actionOverrides>
+    <brand>
+        <headerColor>#0070D2</headerColor>
+        <shouldOverrideOrgTheme>false</shouldOverrideOrgTheme>
+    </brand>
+    <description>App para controlar todo lo relacionado a Servicios colectivos</description>
+    <formFactors>Large</formFactors>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
+    <label>Servicios Colectivos Lightning</label>
+    <navType>Standard</navType>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Caso_P_gina_de_registro2211</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Case</pageOrSobjectType>
+        <recordType>Case.Atencion</recordType>
+        <type>Flexipage</type>
+        <profile>Ejecutiva Colectivo - UR LGN</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Caso_P_gina_de_registro2211</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Case</pageOrSobjectType>
+        <recordType>Case.Atencion</recordType>
+        <type>Flexipage</type>
+        <profile>Ejecutiva Colectivo - UR</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>P_liza_P_gina_de_registro667813</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Poliza__c</pageOrSobjectType>
+        <recordType>Poliza__c.Masivos</recordType>
+        <type>Flexipage</type>
+        <profile>Ejecutiva Colectivo - UR LGN</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>P_liza_P_gina_de_registro667813</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Poliza__c</pageOrSobjectType>
+        <recordType>Poliza__c.PF</recordType>
+        <type>Flexipage</type>
+        <profile>Ejecutiva Colectivo - UR LGN</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>P_liza_P_gina_de_registro667813</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Poliza__c</pageOrSobjectType>
+        <recordType>Poliza__c.Rentas_Vitalicias</recordType>
+        <type>Flexipage</type>
+        <profile>Ejecutiva Colectivo - UR LGN</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Caso_P_gina_de_registro2327</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Case</pageOrSobjectType>
+        <recordType>Case.Solicitudes</recordType>
+        <type>Flexipage</type>
+        <profile>Ejecutiva Colectivo - UR LGN</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>Tab</actionName>
+        <content>P_gina_de_inicio_predeterminada511</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>standard-home</pageOrSobjectType>
+        <type>Flexipage</type>
+        <profile>Ejecutiva Colectivo - UR LGN</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Contacto_P_gina_de_registro51121</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Contact</pageOrSobjectType>
+        <recordType>Contact.Agente</recordType>
+        <type>Flexipage</type>
+        <profile>Ejecutiva Colectivo - UR</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Contacto_P_gina_de_registro51121</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Contact</pageOrSobjectType>
+        <recordType>Contact.Agente</recordType>
+        <type>Flexipage</type>
+        <profile>Ejecutiva Colectivo - UR LGN</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Contacto_P_gina_de_registro51121</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Contact</pageOrSobjectType>
+        <recordType>Contact.Contactos_Comercial</recordType>
+        <type>Flexipage</type>
+        <profile>Ejecutiva Colectivo - UR</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Contacto_P_gina_de_registro51121</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Contact</pageOrSobjectType>
+        <recordType>Contact.Contactos_Comercial</recordType>
+        <type>Flexipage</type>
+        <profile>Ejecutiva Colectivo - UR LGN</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Contacto_P_gina_de_registro51121</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Contact</pageOrSobjectType>
+        <recordType>Contact.Contratante</recordType>
+        <type>Flexipage</type>
+        <profile>Ejecutiva Colectivo - UR</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Contacto_P_gina_de_registro51121</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Contact</pageOrSobjectType>
+        <recordType>Contact.Contratante</recordType>
+        <type>Flexipage</type>
+        <profile>Ejecutiva Colectivo - UR LGN</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Contacto_P_gina_de_registro51121</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Contact</pageOrSobjectType>
+        <recordType>Contact.Corredor</recordType>
+        <type>Flexipage</type>
+        <profile>Ejecutiva Colectivo - UR</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Contacto_P_gina_de_registro51121</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Contact</pageOrSobjectType>
+        <recordType>Contact.Corredor</recordType>
+        <type>Flexipage</type>
+        <profile>Ejecutiva Colectivo - UR LGN</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Caso_Reclamo_JefaturaCalidad</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Case</pageOrSobjectType>
+        <recordType>Case.Reclamos</recordType>
+        <type>Flexipage</type>
+        <profile>Ejecutiva Post Venta (R)</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>P_liza_P_gina_de_registro667813</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Poliza__c</pageOrSobjectType>
+        <recordType>Poliza__c.Individuales1</recordType>
+        <type>Flexipage</type>
+        <profile>Ejecutiva Colectivo - UR</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>P_liza_P_gina_de_registro6677</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Poliza__c</pageOrSobjectType>
+        <recordType>Poliza__c.Colectivos</recordType>
+        <type>Flexipage</type>
+        <profile>Ejecutiva Colectivo - UR</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>P_liza_P_gina_de_registro667813</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Poliza__c</pageOrSobjectType>
+        <recordType>Poliza__c.Masivos</recordType>
+        <type>Flexipage</type>
+        <profile>Ejecutiva Colectivo - UR</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>P_liza_P_gina_de_registro667813</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Poliza__c</pageOrSobjectType>
+        <recordType>Poliza__c.PF</recordType>
+        <type>Flexipage</type>
+        <profile>Ejecutiva Colectivo - UR</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>P_liza_P_gina_de_registro667813</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Poliza__c</pageOrSobjectType>
+        <recordType>Poliza__c.Rentas_Vitalicias</recordType>
+        <type>Flexipage</type>
+        <profile>Ejecutiva Colectivo - UR</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Caso_Reclamo_JefaturaCalidad</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Case</pageOrSobjectType>
+        <recordType>Case.Reclamos</recordType>
+        <type>Flexipage</type>
+        <profile>Ejecutiva Post Venta Plus</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Caso_P_gina_de_registro24147</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Case</pageOrSobjectType>
+        <recordType>Case.Consultas</recordType>
+        <type>Flexipage</type>
+        <profile>Ejecutiva Colectivo - UR LGN</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Caso_P_gina_de_registro2327</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Case</pageOrSobjectType>
+        <recordType>Case.Solicitudes</recordType>
+        <type>Flexipage</type>
+        <profile>Ejecutiva Colectivo - UR</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Caso_P_gina_de_registro24147</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Case</pageOrSobjectType>
+        <recordType>Case.Consultas</recordType>
+        <type>Flexipage</type>
+        <profile>Ejecutiva Colectivo - UR</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Caso_Reclamo_JefaturaCalidad</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Case</pageOrSobjectType>
+        <recordType>Case.Reclamos</recordType>
+        <type>Flexipage</type>
+        <profile>Jefe de calidad</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Caso_Reclamo_JefaturaCalidad</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Case</pageOrSobjectType>
+        <recordType>Case.Atencion_de_Reclamos_y_Solicitudes</recordType>
+        <type>Flexipage</type>
+        <profile>Jefe de calidad</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>Tab</actionName>
+        <content>Ejecutivos_Post_Venta</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>standard-home</pageOrSobjectType>
+        <type>Flexipage</type>
+        <profile>Ejecutiva Post Venta</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>Tab</actionName>
+        <content>Ejecutivos_Post_Venta</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>standard-home</pageOrSobjectType>
+        <type>Flexipage</type>
+        <profile>Ejecutiva Post Venta Plus</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>Tab</actionName>
+        <content>Ejecutivos_Post_Venta</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>standard-home</pageOrSobjectType>
+        <type>Flexipage</type>
+        <profile>Ejecutiva Post Venta (R)</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>Tab</actionName>
+        <content>Ejecutivos_Post_Venta</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>standard-home</pageOrSobjectType>
+        <type>Flexipage</type>
+        <profile>Jefatura PostVenta</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>Tab</actionName>
+        <content>Ejecutivos_Post_Venta</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>standard-home</pageOrSobjectType>
+        <type>Flexipage</type>
+        <profile>Ejecutiva  Post Venta cobranza</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Caso_Atencion_JefaturaCalidad</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Case</pageOrSobjectType>
+        <recordType>Case.Atencion</recordType>
+        <type>Flexipage</type>
+        <profile>Jefe de calidad</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Caso_Reclamo_JefaturaCalidad</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Case</pageOrSobjectType>
+        <recordType>Case.Reclamos</recordType>
+        <type>Flexipage</type>
+        <profile>Analísta PostVenta</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Caso_Reclamo_JefaturaCalidad</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Case</pageOrSobjectType>
+        <recordType>Case.Reclamos</recordType>
+        <type>Flexipage</type>
+        <profile>Ejecutiva Post Venta</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Cuenta_P_gina_de_registro16</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Account</pageOrSobjectType>
+        <recordType>Account.Cuenta_Corporativa</recordType>
+        <type>Flexipage</type>
+        <profile>Ejecutiva Colectivo - UR</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Cuenta_P_gina_de_registro16</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Account</pageOrSobjectType>
+        <recordType>Account.Cuenta_Corporativa</recordType>
+        <type>Flexipage</type>
+        <profile>Ejecutiva Colectivo - UR LGN</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Cuenta_P_gina_de_registro16</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Account</pageOrSobjectType>
+        <recordType>PersonAccount.PersonAccount</recordType>
+        <type>Flexipage</type>
+        <profile>Ejecutiva Colectivo - UR</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Cuenta_P_gina_de_registro16</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Account</pageOrSobjectType>
+        <recordType>PersonAccount.PersonAccount</recordType>
+        <type>Flexipage</type>
+        <profile>Ejecutiva Colectivo - UR LGN</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>Tab</actionName>
+        <content>P_gina_de_inicio_predeterminada511</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>standard-home</pageOrSobjectType>
+        <type>Flexipage</type>
+        <profile>Ejecutiva Colectivo - UR</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Caso_P_gina_de_registro2413</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Case</pageOrSobjectType>
+        <recordType>Case.Consultas</recordType>
+        <type>Flexipage</type>
+        <profile>Gerencia y Jefatura SAC LGN</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Caso_P_gina_de_registro24126</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Case</pageOrSobjectType>
+        <recordType>Case.Reclamos</recordType>
+        <type>Flexipage</type>
+        <profile>Ejecutiva Colectivo - UR LGN</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>Caso_P_gina_de_registro24126</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Case</pageOrSobjectType>
+        <recordType>Case.Reclamos</recordType>
+        <type>Flexipage</type>
+        <profile>Ejecutiva Colectivo - UR</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>P_liza_P_gina_de_registro667813</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Poliza__c</pageOrSobjectType>
+        <recordType>Poliza__c.Individuales1</recordType>
+        <type>Flexipage</type>
+        <profile>Ejecutiva Colectivo - UR LGN</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>P_liza_P_gina_de_registro6677</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Poliza__c</pageOrSobjectType>
+        <recordType>Poliza__c.Colectivos</recordType>
+        <type>Flexipage</type>
+        <profile>Ejecutiva Colectivo - UR LGN</profile>
+    </profileActionOverrides>
+    <tabs>standard-home</tabs>
+    <tabs>standard-Account</tabs>
+    <tabs>standard-Contact</tabs>
+    <tabs>Corredor__c</tabs>
+    <tabs>standard-Case</tabs>
+    <tabs>Poliza__c</tabs>
+    <tabs>standard-Dashboard</tabs>
+    <tabs>Base_de_Conocimientos</tabs>
+    <uiType>Lightning</uiType>
+</CustomApplication>

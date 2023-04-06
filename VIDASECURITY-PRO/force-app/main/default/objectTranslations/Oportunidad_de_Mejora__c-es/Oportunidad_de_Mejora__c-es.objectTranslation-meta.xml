@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Oportunidad de Mejora</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Oportunidades de Mejora</value>
+    </caseValues>
+    <gender>Feminine</gender>
+    <layouts>
+        <layout>Formato Oportunidad de Mejora</layout>
+        <sections>
+            <label></label>
+            <section>Gestión de la Oportunidad de mejora</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Formato Oportunidad de Mejora (Gestión)</layout>
+        <sections>
+            <label></label>
+            <section>Gestión Oportunidad de Mejora</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Oportunidad de Mejora</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+</CustomObjectTranslation>

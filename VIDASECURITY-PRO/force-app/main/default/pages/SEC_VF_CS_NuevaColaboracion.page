@@ -1,0 +1,224 @@
+<apex:page controller="CTR_ColaboracionReclamo" action="{!cargaCaso}" lightningStylesheets="true" showHeader="true" sidebar="true" tabStyle="Case" >
+   
+<style>
+    
+    .popupBackground {
+        /* Background color */
+        background-color:black;
+        opacity: 0.5;
+        filter: alpha(opacity = 50);
+        
+        /* Dimensions */
+        width: 90%;
+        height: 100%;       
+        top: 0;
+        left: 50;
+        z-index: 998;
+        position: absolute;        
+        /* Mouse */
+        cursor:wait;
+    }
+            
+    .popupPanel {
+        /* Background color */
+        border: solid 2px orange;
+        background-color: white;        
+        /* Dimensions */
+        display: inline-block;
+        left: 50%;
+        width: 100px;
+        margin-left: 0px;
+        top: 100px;
+        height: 25px;
+        margin-top: -25px;
+        position: absolute;   
+        z-index: 999;        
+        /* Mouse */
+        cursor:pointer;;
+    }
+    .DivColumn_A {
+        width:40%;
+        float:left;
+    }
+
+    .DivColumn_B {
+        width:10%;
+        float:left;
+    }
+
+    .DivColumn_C {
+        width:50%;
+        float:left;
+    }
+</style>
+ <script>
+    function alerta(mensaje) {
+        if (mensaje != '')
+        {
+            alert(mensaje);
+        }         
+    }
+
+    function finalizar(exito)
+    {
+        if (exito == 'S')
+        {
+            alert('La Colaboración de Reclamo ingresada ha sido generada exitosamente.');
+            ToList();
+        }
+        else  if (exito == 'N1')
+        {
+            alert('Debe seleccionar al menos una UR a la cual solicitar Colaboración del Reclamo.');
+        }
+        else  if (exito == 'N2')
+        {
+            alert('La Fecha de Vencimiento no puede ser anterior a la Fecha de Hoy.');
+        }
+        else
+        {
+            alert('Ha ocurrido un error la Colaboración de Reclamo ingresada no ha sido generada.');
+        }
+    }
+</script>
+
+<apex:actionStatus id="Status">
+        <apex:facet name="start">
+            <apex:outputPanel >
+                <div class="popupBackground" />
+                <div class="popupPanel">
+                    &nbsp; Espere...<img src="/apexpages/devmode/img/saveStatus.gif" />
+                </div>
+            </apex:outputPanel> 
+        </apex:facet>
+    </apex:actionStatus>
+    <br/>
+    <apex:form id="frm_VerCaso">            
+            <apex:actionFunction action="{!ToCase}" name="ToCase"/>   
+            <apex:actionFunction action="{!ToList}" name="ToList"/>   
+             
+          <apex:commandButton id="cmd_ListadoColaboraciones" value="Colaboraciones" action="{!ToList}" immediate="true" />
+            <apex:commandButton id="cmd_nuevaColaboracion" value="Nueva Colaboración" disabled="true" />
+       
+            
+            <apex:pageBlock id="pbk_EncabezadoCaso" title="Nueva Colaboración de Caso Reclamo" >
+                 <apex:panelGrid columns="8" style="width:80%;">
+                      <apex:outputLabel style="font-weight:bold;" >Nº Caso</apex:outputLabel> 
+                      <apex:commandLink value="{!Caso.CaseNumber}"  action="{!ToCase}"   />
+                     <!--<apex:outputLabel style="font-weight:bold;" value="{!Caso.CaseNumber}" />                               -->
+                     <apex:outputText value="    " id="empty01"/>
+                     <apex:outputLabel style="font-weight:bold;"  >Nº de Poliza</apex:outputLabel>
+                     <apex:outputField value="{!Caso.CASO_N_Poliza__c}" rendered="true" />  
+                     <apex:outputText value="    " id="empty02"/>
+                     <apex:outputLabel style="font-weight:bold;"  >Estado</apex:outputLabel>
+                     <apex:outputField value="{!Caso.Status}" rendered="true" />
+                   
+                     <apex:outputLabel style="font-weight:bold;" >RUT Cliente</apex:outputLabel>     
+                     <apex:outputField label="RUT Cliente" value="{!Caso.RUT__c}"/>       
+                     <!-- <label id="" style="font-size:14px">{!Caso.RUT__c}</label>                   -->               
+                     <apex:outputText value="    " id="empty03"/>
+                     <apex:outputLabel style="font-weight:bold;" >Cliente</apex:outputLabel>      
+                     <!-- <label id="Nombre_Titular" >{!Caso.Nombre_Completo_Razon_Social__c}</label>   -->
+                     <apex:outputField value="{!Caso.AccountId}" rendered="true" /> 
+                     <apex:outputText value="    " id="empty04"/>
+                     <apex:outputLabel style="font-weight:bold;" >Contacto</apex:outputLabel>    
+                     <apex:outputField value="{!Caso.ContactId}" rendered="true" />
+                 
+                     <apex:outputLabel style="font-weight:bold;" >Negocio</apex:outputLabel>  
+                     <apex:outputLabel style="font-weight:bold;color:blue;" value="{!Caso.Negocio__c}" rendered="true" />                   
+                  
+                     <apex:outputText value="    " id="empty05"/>                     
+                     <apex:outputLabel style="font-weight:bold;"  >Canal</apex:outputLabel>
+                     <apex:outputField value="{!Caso.Canal__c}" rendered="true" />
+                     <apex:outputText value="    " id="empty06"/>
+                      <apex:outputLabel style="font-weight:bold;" >Asunto</apex:outputLabel>  
+                     <apex:outputField value="{!Caso.Subject}" rendered="true" />
+                
+                     <apex:outputLabel style="font-weight:bold;"  >Producto</apex:outputLabel>  
+                     <apex:outputLabel style="font-weight:bold;color:blue;" value="{!Caso.Producto__c}" rendered="true" />
+                     <apex:outputText value="    " id="empty07"/>
+                     <apex:outputLabel style="font-weight:bold;"  >Tipo de Operación</apex:outputLabel>  
+                     <apex:outputLabel style="font-weight:bold;color:blue;" value="{!Caso.Tipo_Operacion__c}" rendered="true" />
+                     <apex:outputText value="    " id="empty08"/>
+                     <apex:outputLabel style="font-weight:bold;" >Detalle Operación</apex:outputLabel>    
+                     <apex:outputLabel style="font-weight:bold;color:blue;" value="{!Caso.Detalle_Operacion__c}" rendered="true" />                   
+                      
+                    
+                     <apex:outputLabel style="font-weight:bold;" >Fecha/Hora de Creación</apex:outputLabel>  
+                     <apex:outputField value="{!Caso.CreatedDate}" rendered="true" /> 
+                     <apex:outputText value="    " id="empty09"/>
+                     <apex:outputText value="    " id="empty10"/>
+                     <apex:outputText value="    " id="empty11"/>
+                     <apex:outputText value="    " id="empty12"/>
+                     <apex:outputLabel style="font-weight:bold;" >Fecha cierre Tope</apex:outputLabel> 
+                     <apex:outputField value="{!Caso.Fecha_Cierre_Tope__c}" rendered="true" /> 
+                 </apex:panelGrid>   
+                 <!-- Reclamos -->           
+                <hr/>
+                <br/>
+
+                <div id="dv_URPanel" style="width: 100%;height:220px; margin-left: auto; margin-right: auto;">
+                        <div class="DivColumn_A" >
+                            <apex:panelGrid columns="3" style="width:80%;">
+                
+                                    <apex:outputLabel style="font-weight:bold;" >UR por Seleccionar</apex:outputLabel> 
+                                    &nbsp;
+                                    <apex:outputLabel style="font-weight:bold;" >UR Seleccionadas</apex:outputLabel> 
+                
+                                        <apex:selectList value="{!UR_Select}" size="12" style="width:180px;" multiselect="true" >
+                                                <apex:selectOptions value="{!UnidadesSelect}"  />                           
+                                        </apex:selectList>
+                                        <apex:panelGrid columns="1" >
+                
+                <apex:commandButton id="cmd_Add" value="Agregar UR"   action="{!AddUR}"  />
+                                            <br/>
+                                            <apex:commandButton id="cmd_Delete" value="Quitar UR"  action="{!RemoveUR}" />
+                            
+                                        </apex:panelGrid>
+                                        <apex:selectList value="{!UR_Unselect}"  size="12" style="width:180px;" multiselect="true" >
+                
+                                                <apex:selectOptions value="{!UnidadesUnselect}" />
+                                           
+                                           </apex:selectList>    
+                                        
+                                </apex:panelGrid>
+                    </div>
+                    <div class="DivColumn_B" >
+                        &nbsp;
+                        </div>
+                    <div class="DivColumn_C" >
+
+
+
+
+                            <apex:pageBlockSection id="pbs_DatoCaso" collapsible="false" columns="1" >
+                                
+                                    <apex:inputField label="Prioridad:" value="{!NewTask.Priority}" tabOrderHint="1" />  
+
+           
+                                    <apex:inputField label="Fecha de Vencimiento" value="{!NewTask.ActivityDate}" tabOrderHint="1" />
+
+                        
+                                    <apex:inputTextarea id="txt_ComentarioNotificacion"  label="Descripción"
+                                     value="{!NewTask.Description}" style="resize: none;width:100%;height:80px;" />
+
+                                    </apex:pageBlockSection> 
+                    </div>
+                </div>
+
+                
+            </apex:pageBlock>
+       
+            <apex:pageBlock id="pb_ActionCaso">
+            <apex:commandButton id="cmd_Guardar" title="Guardar" value="Crear Colaboración"   status="Status" 
+            action="{!SaveTask}"  oncomplete="finalizar('{!Exito}');"
+            />
+          
+             
+            <apex:commandButton id="cmd_Cancelar" title="Cancelar" value="Cancelar" immediate="true" action="{!ToCase}"  />
+          
+        </apex:pageBlock>    
+             
+        </apex:form>
+
+
+</apex:page>

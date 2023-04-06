@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <defaultLandingTab>standard-home</defaultLandingTab>
+    <description>App para controlar todo lo relacionado a Servicios colectivos</description>
+    <formFactors>Large</formFactors>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
+    <label>Servicios Colectivos</label>
+    <tabs>standard-Account</tabs>
+    <tabs>standard-Contact</tabs>
+    <tabs>standard-Case</tabs>
+    <tabs>Corredor__c</tabs>
+    <tabs>Poliza__c</tabs>
+    <tabs>Vales_de_Vista_por_Cobrar</tabs>
+    <tabs>Base_de_Conocimientos</tabs>
+    <tabs>Categoria_Solucion__c</tabs>
+    <tabs>Lista_de_Distribucion__c</tabs>
+</CustomApplication>

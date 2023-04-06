@@ -1,0 +1,28 @@
+<!--
+  @File Name          : panelBotonCloneQuote.html
+  @Description        : 
+  @Author             : ChangeMeIn@UserSettingsUnder.SFDoc
+  @Group              : 
+  @Last Modified By   : ChangeMeIn@UserSettingsUnder.SFDoc
+  @Last Modified On   : 25-06-2020 17:13:32
+  @Modification Log   : 
+  Ver       Date            Author      		    Modification
+  1.0    24-06-2020   ChangeMeIn@UserSettingsUnder.SFDoc     Initial Version
+-->
+<template>
+    <div class="slds-grid slds-grid_align-left">
+        <lightning-card class="slds-col">
+            <h3 slot="title">
+                <div class="slds-p-top_small">
+                    <lightning-icon class="slds-m-right_small" icon-name="custom:custom13" size="small"></lightning-icon>
+                    Generar Nuevas Versiones de la Cotización
+                </div>
+            </h3>
+            <div class="slds-grid slds-wrap slds-grid_align-center">
+                <c-boton-comercial-Clone-Quote 
+                    object-id={recordId}>
+                </c-boton-comercial-Clone-Quote >
+            </div>
+        </lightning-card>
+    </div>
+</template>

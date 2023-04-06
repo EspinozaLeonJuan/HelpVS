@@ -1,0 +1,37 @@
+<apex:page standardController="Poliza__c" extensions="CoberturasController">
+<apex:form >
+	<apex:pageMessages />
+	<apex:pageBlock title="Detalle de Poliza">
+		<apex:pageBlockButtons >
+			<input type="button" value="Volver" onclick="javascript:history.back();" />
+		</apex:pageBlockButtons>
+	
+		<apex:outputText value="Revise las coberturas de la póliza"/>
+		<apex:pageBlockSection title="CoberturaPolizaIndividual">
+	    <apex:pageBlockTable value="{!ListaCoberturas}" var="item"> 
+	       	<apex:column value="{!item.Name}"/>
+					<apex:column headerValue="{! $ObjectType.Cobertura__c.Fields.Capital_Asegurado__c.Label }">
+						<apex:outputText value="{0,number,###############0.00}">
+							<apex:param value="{!item.Capital_Asegurado__c}" />
+						</apex:outputText>
+					</apex:column>
+					<apex:column headerValue="{! $ObjectType.Cobertura__c.Fields.Prima_Neta__c.Label }">
+						<apex:outputText value="{0,number,###############0.00}">
+							<apex:param value="{!item.Prima_Neta__c}" />
+						</apex:outputText>
+					</apex:column> 
+					<apex:column headerValue="{! $ObjectType.Cobertura__c.Fields.IVA__c.Label }">
+						<apex:outputText value="{0,number,###############0.00}">
+							<apex:param value="{!item.IVA__c}" />
+						</apex:outputText>
+					</apex:column> 
+					<apex:column headerValue="{! $ObjectType.Cobertura__c.Fields.Prima_Minima__c.Label }">
+						<apex:outputText value="{0,number,###############0.00}">
+							<apex:param value="{!item.Prima_Minima__c}" />
+						</apex:outputText>
+					</apex:column> 
+	     </apex:pageBlockTable> 
+     </apex:pageBlockSection>
+	</apex:pageBlock>
+</apex:form>
+</apex:page>

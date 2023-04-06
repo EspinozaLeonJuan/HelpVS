@@ -1,0 +1,310 @@
+<apex:page renderAs="pdf" standardController="Quote" showHeader="false" standardStylesheets="true" sidebar="false" applyHtmlTag="false" applyBodyTag="false" docType="html-5.0" extensions="SEC_CTRL_COVID_PDF" title="Propuesta_Seguro_Covid.pdf">
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="es">
+    <head>
+		<title>PROPUESTA SEGURO COVID</title>
+        <style type="text/css" media="print">
+
+            body {
+            	font-family: sans-serif;
+            }
+            table{
+                width: 100%;
+	            border-collapse: collapse;
+            }
+            table, th, td {
+              border: 1px solid #EF6F00;
+            }   
+            
+			td {
+            	padding-left:8px;
+            	padding-right:8px;            
+            }            
+            .background-orange {
+	            background:#DC5A00;
+            }
+
+            .td-center {
+            	text-align: center;
+            }            
+            
+            .label-white-title {
+            	color: #ffffff;
+            	font-size: 18px;
+            	font-weight: bold;
+            }
+            
+            .label-white-subtitle {
+            	color: #ffffff;
+            	font-size: 12px;
+            	font-weight: bold;            
+            }            
+
+            .label-white {
+            	text-align: center;
+            	color: #ffffff;
+            }            
+            
+            .text-important {
+            	color: #424893;
+            	font-size: 10px;
+            	margin: 5px;
+            }
+            .concept-title {
+            	font-weight: bold;
+            	color:#232272;
+            	font-size: 10px;
+            }
+            .concepts {
+            	color:#424893;
+            	font-size: 10px;
+            }
+
+            .label-white-concept {
+            	color: #ffffff;
+            	font-size: 10px;
+            	font-weight: bold;            
+            }             
+            .just {
+            	text-align: left;
+            }
+            .bold {
+            	font-weight: bold;            
+            }
+        </style>
+    </head>
+    <body>
+    <div id="content">
+        <apex:image value="{!URLFOR($Resource.SEC_Logo_v01)}" height="50"/>
+        <table>
+            <tr class="background-orange">
+                <td colspan="12" class="td-center">
+                    <label class="label-white-title">PROPUESTA SEGURO COVID</label>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3"><label class="concepts">Contratante</label></td>
+                <td colspan="3" class="td-center"><label class="concepts bold">{!cuenta.Name}</label></td>
+                <td colspan="3"><label class="concepts">% Adhesión Mínima</label></td>
+                <td colspan="3" class="td-center"><label class="concepts bold">90% del grupo cotizado </label></td> 
+            </tr>
+            
+            <tr>
+                <td colspan="3"><label class="concepts">Rut empresa</label></td>
+                <td colspan="3" class="td-center"><label class="concepts bold">{!cuenta.Rut__c}-{!cuenta.DV__c}</label></td>
+                <td colspan="3"><label class="concepts">Periodicidad tasas y primas</label></td>
+                <td colspan="3" class="td-center"><label class="concepts bold">ANUAL</label></td> 
+            </tr>
+
+            <tr>
+                <td colspan="3"><label class="concepts">Rubro empresa</label></td>
+                <td colspan="3" class="td-center"><label class="concepts bold">{!cuenta.Rubro__c}</label></td>
+                <td colspan="3"><label class="concepts">Moneda capitales y primas</label></td>
+                <td colspan="3" class="td-center"><label class="concepts bold">UF</label></td> 
+            </tr>
+            
+            <tr>
+                <td colspan="3"><label class="concepts">Corredor</label></td>
+                <td colspan="3" class="td-center"><label class="concepts bold">{!corredor.Name}</label></td>
+                <td colspan="3"><label class="concepts">Fecha Cotización</label></td>
+                <td colspan="3" class="td-center"><label class="concepts">{!dateFormat}</label></td> 
+            </tr>
+            
+            <tr>
+                <td colspan="3"><label class="concepts">% Comisión neta</label></td>
+                <td colspan="3" class="td-center"><label class="concepts bold">{!presupuesto.Comision__c}%</label></td>
+                <td colspan="3"><label class="concepts">Validez cotización</label></td>
+                <td colspan="3" class="td-center"><label class="concepts">30 días</label></td> 
+            </tr>
+
+            <tr>
+                <td colspan="3"><label class="concepts">Financiamiento Prima</label></td>
+                <td colspan="3" class="td-center"><label class="concepts bold">{!oportunidad.QuienFinanciaPrima__c }</label></td>
+                <td colspan="3"><label class="concepts">Vigencia Póliza (meses)</label></td>
+                <td colspan="3" class="td-center"><label class="concepts">12 meses</label></td> 
+            </tr>
+            
+            <tr class="background-orange">
+                <td colspan="12" class="td-center">
+                    <label class="label-white-subtitle">COBERTURA</label>
+                </td>
+            </tr>
+            
+            <tr>
+                <td class="td-center" colspan="3">
+                    <label class="concept-title">ASEGURADO</label>
+                </td>
+                <td class="td-center" colspan="3">
+                    <label class="concept-title">RAMO</label>
+                </td>
+                <td class="td-center" colspan="3">
+                    <label class="concept-title">COBERTURA</label>
+                </td>
+                <td class="td-center" colspan="3">
+                    <label class="concept-title">MONTO ASEGURADO</label>
+                </td> 
+            </tr>
+            
+            <tr>
+                <td colspan="3" rowspan="2" class="td-center"><label class="concepts">Titular</label></td>
+                <td colspan="3" class="td-center"><label class="concepts">VIDA</label></td>
+                <td colspan="3" class="td-center"><label class="concepts">Fallecimiento por COVID</label></td>
+                <td colspan="3" class="td-center"><label class="concepts">UF 180.-</label></td> 
+            </tr>
+
+            <tr>
+                <td colspan="3" class="td-center"><label class="concepts">SALUD</label></td>
+                <td colspan="3" class="td-center"><label class="concepts">Hospitalización y Rehabilitación<br/>por COVID</label></td>
+                <td colspan="3">
+                    <label class="concepts">
+                        a) Afiliado FONASA: 100% copago, gastos<br/>realizados en la Red Asistencial Institucional (sin tope). <br/>
+                        b) Afiliado ISAPRE: deducible CAEC hasta<br/>tope UF 126 (tiene que atenderse con<br/>Prestadores CAEC).
+                    </label>
+                </td> 
+            </tr>            
+            
+            <tr>
+                <td colspan="12">
+                    <label class="text-important">1.- Riesgos de Salud<br/>
+                        a) Tratándose de los trabajadores referidos en la letra A en el articulo 11 de la ley 21.342, el seguro indemnizará un monto equivalente al 100% del copago por los gastos de hospitalización realizados en la Red Asistencial a que se refiere el artículo 17 del decreto con fuerza de ley Nº 1, promulgado el año 2005 y publicado el 24 de abril de 2006, del Ministerio de Salud, de acuerdo a la Modalidad de Atención Institucional.<br/>
+                        b) Tratándose de los trabajadores señalados en la letra B del articulo 11 de la ley 21.342 , el seguro indemnizará el deducible de cargo de ellos, que corresponda a la aplicación de la CAEC respecto de las atenciones hospitalarias realizadas en la red de prestadores de salud que cada Institución de Salud Previsional pone a disposición de sus afiliados, con el propósito de otorgarles dicha cobertura adicional o en un prestador distinto en aquellos casos en que la derivación se efectuó a través de la correspondiente unidad del Ministerio de Salud. Para estos efectos, cumplidos los requisitos aquí establecidos, la CAEC se activará en forma automática.<br/>
+                        En ambos casos, la cobertura asegurada se aplicará respecto de los gastos relacionados con las prestaciones de salud recibidas durante la hospitalización y rehabilitación derivada de un diagnóstico confirmado de COVID-19, siempre y cuando éste se haya producido dentro del período de vigencia de la póliza.<br/>
+                        2.- Riesgo de muerte:<br/>
+                        En caso de fallecimiento de los trabajadores referidos en las letras A y B del artículo 11 de la Ley 21.342, de cualquiera edad, cuya causa básica de defunción sea COVID-19, según la codificación oficial establecida por el Ministerio de Salud, se pagará un monto equivalente a 180 unidades de fomento. Esta cobertura no podrá estar condicionada a la edad del asegurado.                    
+                    </label>
+                </td>
+            </tr>
+            <tr class="background-orange">
+                <td colspan="12" class="td-center">
+                    <label class="label-white-subtitle">EXCLUSIONES</label>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="12">
+                    <label class="text-important">1. Gastos de hospitalización, rehabilitación o el fallecimiento asociados a enfermedades distintas al Covid-19.</label><br/>
+                    <label class="text-important">2. Gastos de hospitalización, rehabilitación o el fallecimiento asociado o derivados de lesiones sufridas en un accidente, de cualquier naturaleza o tipo, incluso si la víctima tiene Covid-19. Se entenderá por accidente todo suceso imprevisto, involuntario, repentino y fortuito, causado por medios externos y de un modo violento, que afecte el organismo del asegurado ocasionándole una o más lesiones, que se manifiesten por heridas visibles o contusiones internas, incluyéndose asimismo el ahogamiento y la asfixia, torcedura y desgarramientos producidos por esfuerzos repentinos, como también estados septicémicos e infecciones que sean la consecuencia de heridas externas e involuntarias y hayan penetrado por ellas en el organismo o bien se hayan desarrollado por efecto de contusiones, revelados por los exámenes correspondientes</label>.<br/>
+                    <label class="text-important">3. En el caso de personas aseguradas afiliadas al Fondo Nacional de Salud, los gastos de hospitalización y rehabilitación incurridos en prestadores que no pertenezcan a la Red Asistencial o bien fuera de la Modalidad de Atención Institucional.</label><br/>
+                    <label class="text-important">4. En el caso de personas aseguradas afiliadas a una Institución de Salud Previsional, los gastos de hospitalización y rehabilitación incurridos en prestadores que no pertenezcan a la red de prestadores de salud individuales e institucionales que cada Institución pone a disposición de sus afiliados, con el propósito de otorgarles la CAEC.</label><br/>
+                    <label class="text-important">Sin perjuicio de lo anterior, el seguro deberá financiar una suma equivalente al monto del deducible que le hubiere correspondido pagar si el asegurado se hubiese atendido en la red de prestadores respectiva para gozar de la CAEC, el cual en ningún caso será superior al equivalente a 126 unidades de fomento. En este caso, el monto de dinero se imputará al copago que, de acuerdo al plan de salud, sea de cargo del afiliado; si el copago fuere inferior al monto equivalente al deducible, el asegurador solo estará obligado a enterar el monto del copago efectivo.</label>
+                    
+                </td>
+            </tr>
+            <tr>
+                <td colspan="12"><label class="concepts bold">Condiciones Generales en uso por la Compañía:</label></td>
+            </tr>
+            <tr>
+                <td colspan="6"><label class="concepts">Vida y Salud</label></td>
+                <td colspan="6"><label class="concepts">{!pol}</label></td>                
+            </tr>
+            
+            
+            <tr class="background-orange">
+                <td class="td-center" colspan="4">
+                    <label class="label-white-concept">Asegurado</label>
+                </td>
+                <td class="td-center" colspan="4">
+                    <label class="label-white-concept">Edad Límite de Ingreso</label>
+                </td>
+                <td class="td-center" colspan="4">
+                    <label class="label-white-concept">Edad Límite de Término</label>
+                </td>
+            </tr>
+            <tr>
+                <td class="td-center" colspan="4"><label class="concepts">Titular</label></td>
+                <td class="td-center" colspan="4"><label class="concepts">Sin límite de edad</label></td>
+                <td class="td-center" colspan="4"><label class="concepts">Sin límite de edad</label></td>
+            </tr>
+            <tr>
+                <td colspan="12">
+                    <label class="concepts">Podrán ingresar al seguro, todos los trabajadores con contratos sujetos al código del trabajo  y que estén desarrollando sus labores de manera presencial, total o parcial.</label></td>
+            </tr>
+            
+            <tr class="background-orange">
+                <td colspan="12" class="td-center">
+                    <label class="label-white-subtitle">IMPORTANTE</label>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="12">
+                    <label class="text-important">1. Este seguro , no sustituye la cobertura que otorga la Isapre o Fonasa y no necesariamente cubre las mismas prestaciones.<br/>
+                        &nbsp;&nbsp;2. Antes de contratar el seguro, es importante que se informe y tenga claridad sobre los siguientes aspectos:<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;Duración del seguro<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;Cómo y bajo qué condiciones se renueva el seguro<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;De qué manera se va a reajustar el costo del seguro en caso de renovación<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;En qué casos NO SE PAGARÁ EL SEGURO<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;Los requisitos para cobrar el seguro<br/> 
+                        &nbsp;&nbsp;3. Algunos antecedentes importantes que debe considerar, al momento de contratar el seguro:<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; NO contempla renovación garantizada<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SI podrá aumentar la prima (precio) en caso de renovación de la póliza<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; NO considera la siniestralidad individual para el aumento de la prima<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; NO cubre preexistencias.<br/>
+                        &nbsp;&nbsp;Notas:<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; La facturación será en base a información que está en poder de la Cía, si es distinto favor indicar.<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Inicio de vigencia a contar del día que se firma la propuesta.<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; El pago de la prima se deberá efecturar dentro de 10 días hábiles una vez firmada la propuesta.<br/>
+                    </label>                   
+                </td>
+            </tr> 
+            
+            <tr class="background-orange">
+                <td colspan="12" class="td-center">
+                    <label class="label-white-subtitle">&nbsp;</label>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="12">
+                    <label class="concepts">“Esta compañía de seguros está adherida al Código de Autorregulación de las Cías. de Seguros y ha aceptado la intervención del Defensor del Asegurado cuando los clientes le presenten reclamos. Más información en web www.autorregulacion.cl y www.ddachile.cl”</label>
+                </td>
+            </tr>            
+
+            <tr class="background-orange">
+                <td colspan="2" class="td-center">
+                    <label class="label-white-concept">Cobertura</label>
+                </td>
+                <td colspan="2" class="td-center">
+                    <label class="label-white-concept">N° Asegurados</label>
+                </td>
+                <td colspan="2" class="td-center">
+                    <label class="label-white-concept">Prima neta por trabajador</label>
+                </td>
+                <td colspan="2" class="td-center">
+                    <label class="label-white-concept">Prima Neta<br/>UF</label>
+                </td>
+                <td colspan="2" class="td-center">
+                    <label class="label-white-concept">Impuesto IVA</label>
+                </td>
+                <td colspan="2" class="td-center">
+                    <label class="label-white-concept">Prima Bruta<br/>UF</label>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2" class="td-center"><label class="concepts">VIDA</label></td>
+                <td colspan="2" class="td-center" rowspan="2"><label class="concepts">{!presupuesto.Total_N_titulares__c}</label></td>
+                <td colspan="2" class="td-center"><label class="concepts">UF {!presupuesto.Prima_neta_por_trabajador_Vida__c}</label></td>
+                <td colspan="2" class="td-center"><label class="concepts">UF {!presupuesto.Prima_neta_por_trabajador_Vida__c * presupuesto.Total_N_titulares__c}</label></td>
+                <td colspan="2" class="td-center"><label class="concepts">UF 0.0000</label></td>
+                <td colspan="2" class="td-center"><label class="concepts">UF {!presupuesto.Prima_bruta_Vida__c}</label></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="td-center"><label class="concepts">SALUD (Catastrófico)</label></td>                
+                <td colspan="2" class="td-center"><label class="concepts">UF {!presupuesto.Prima_neta_por_trabajador_Salud__c}</label></td>
+                <td colspan="2" class="td-center"><label class="concepts">UF {!presupuesto.Prima_neta_por_trabajador_Salud__c * presupuesto.Total_N_titulares__c}</label></td>
+                <td colspan="2" class="td-center"><label class="concepts">UF {!impuestos}</label></td>
+                <td colspan="2" class="td-center"><label class="concepts">UF {!presupuesto.Prima_bruta_Salud__c}</label></td>
+            </tr>             
+
+            <tr class="background-orange">
+                <td colspan="4" class="td-center"><label class="label-white-concept">Prima  total UF</label></td>
+                <td colspan="2" class="td-center"><label class="label-white-concept">UF {!presupuesto.Prima_neta_por_trabajador_Vida__c + presupuesto.Prima_neta_por_trabajador_Salud__c}</label></td>
+                <td colspan="2" class="td-center"><label class="label-white-concept">UF {!(presupuesto.Prima_neta_por_trabajador_Vida__c * presupuesto.Total_N_titulares__c) + (presupuesto.Prima_neta_por_trabajador_Salud__c * presupuesto.Total_N_titulares__c)}</label></td>
+                <td colspan="2" class="td-center"><label class="label-white-concept">UF {!impuestos}</label></td>
+                <td colspan="2" class="td-center"><label class="label-white-concept">UF {!presupuesto.Prima_Total_Bruta__c}</label></td>
+            </tr>
+           
+        </table>
+    </div>
+
+    </body>
+    </html>
+</apex:page>

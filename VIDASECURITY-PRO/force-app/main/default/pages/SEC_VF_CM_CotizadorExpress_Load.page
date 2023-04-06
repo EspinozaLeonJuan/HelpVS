@@ -1,0 +1,58 @@
+<!--
+  @description       : 
+  @author            : Juan Espinoza León
+  @group             : 
+  @last modified on  : 05-19-2021
+  @last modified by  : Juan Espinoza León
+  Modifications Log 
+  Ver   Date         Author               Modification
+  1.0   03-02-2021   Juan Espinoza León   Initial Version
+-->
+<apex:page controller="CTR_CM_CotizadorExpress" action="{!loadInicio}" lightningStylesheets="true" showHeader="true" sidebar="true"  docType="html-5.0">
+  
+    <apex:includeScript value="{!$Resource.jquery}"/>
+    <!--<br/>-->
+    <script type="text/javascript">
+
+    if ('{!Call}' == "LEAD")
+    {
+        window.open( "/apex/SEC_VF_CM_CotizadorExpress?LeadId={!Id}", "_blank");           
+        window.location.href = '/'+'{!Id}';      
+    }
+    /*else if ('{!Call}' == "TASK")
+    {
+        var popUp = window.open( "/apex/SEC_VF_CM_CotizadorExpress?TaskId={!Id}", "_blank");
+            
+        if (popUp == null || typeof(popUp)=='undefined') {  
+                alert('Por favor deshabilita el bloqueador de ventanas emergentes y vuelve a hacer clic en "Cotizador Express".');     
+        }
+        else {          
+                popUp.focus();           
+        }
+    }*/
+    else if ('{!Call}' == "TASK")
+    {
+        var popUp = window.open( "/apex/SEC_VF_CM_CotizadorExpress?TaskId={!Id}", "_blank");
+        window.location.href = '/'+'{!Id}';            
+    }
+    else if ('{!Call}' == "CONTRATANTE_NO_SELECCIONADO")
+    {
+        alert("Debe ser seleccionado el valor 'Contratante Salud Protegida' para poder acceder a Cotizador Express");
+        window.location.href = '/'+'{!Id}'; 
+    }
+    else if ('{!Call}' == "CIERRE_ADMINISTRATIVO")
+    {
+        alert("No se puede acceder a Cotizador Express, ya que el prospecto se encuentra Cerrado.");
+        window.location.href = '/'+'{!Id}'; 
+    }
+    else if ('{!Call}' == "ESTADO_TERMINAL")
+    {
+        alert("No se puede acceder a Cotizador Express, ya que el prospecto se encuentra un Estado Terminal.");
+        window.location.href = '/'+'{!Id}'; 
+    }
+    //window.location.href = '/'+'{!Id}'; 
+    window.close();
+    </script>
+<!-- Begin Default Content REMOVE THIS -->
+
+</apex:page>

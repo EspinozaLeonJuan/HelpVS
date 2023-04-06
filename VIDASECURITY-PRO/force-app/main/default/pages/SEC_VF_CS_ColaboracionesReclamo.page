@@ -1,0 +1,162 @@
+<apex:page controller="CTR_ColaboracionReclamo" action="{!ListadoTareas}" lightningStylesheets="true" showHeader="true" sidebar="true" tabStyle="Case" >
+    
+    <style>
+    
+        .popupBackground {
+            /* Background color */
+            background-color:black;
+            opacity: 0.5;
+            filter: alpha(opacity = 50);
+            
+            /* Dimensions */
+            width: 90%;
+            height: 100%;       
+            top: 0;
+            left: 50;
+            z-index: 998;
+            position: absolute;        
+            /* Mouse */
+            cursor:wait;
+        }
+                
+        .popupPanel {
+            /* Background color */
+            border: solid 2px orange;
+            background-color: white;        
+            /* Dimensions */
+            display: inline-block;
+            left: 50%;
+            width: 100px;
+            margin-left: 0px;
+            top: 100px;
+            height: 25px;
+            margin-top: -25px;
+            position: absolute;   
+            z-index: 999;        
+            /* Mouse */
+            cursor:pointer;;
+        }
+        .DivColumn_A {
+            width:40%;
+            float:left;
+        }
+    
+        .DivColumn_B {
+            width:12%;
+            float:left;
+        }
+    
+        .DivColumn_C {
+            width:48%;
+            float:left;
+        }
+
+        .ct{
+        text-align:center;
+        }
+    </style>
+
+    <apex:actionStatus id="Status">
+        <apex:facet name="start">
+            <apex:outputPanel >
+                <div class="popupBackground" />
+                <div class="popupPanel">
+                    &nbsp; Espere...<img src="/apexpages/devmode/img/saveStatus.gif" />
+                </div>
+            </apex:outputPanel> 
+        </apex:facet>
+    </apex:actionStatus>
+    <br/>
+    <apex:form id="frm_ListadoColaboraciones">
+        <apex:commandButton id="cmd_ListadoColaboraciones" value="Colaboraciones" disabled="true" />
+        <apex:commandButton id="cmd_nuevaColaboracion" value="Nueva Colaboración" action="{!ToNew}" immediate="true" />
+   
+        
+        <apex:pageBlock id="pbk_EncabezadoCaso" title="Colaboraciones de Caso Reclamo" >
+             <apex:panelGrid columns="8" style="width:80%;">
+                  <apex:outputLabel style="font-weight:bold;" >Nº Caso</apex:outputLabel> 
+                  <apex:commandLink value="{!Caso.CaseNumber}"  action="{!ToCase}"   />
+                 <!--<apex:outputLabel style="font-weight:bold;" value="{!Caso.CaseNumber}" />                               -->
+                 <apex:outputText value="    " id="empty01"/>
+                 <apex:outputLabel style="font-weight:bold;"  >Nº de Poliza</apex:outputLabel>
+                 <apex:outputField value="{!Caso.CASO_N_Poliza__c}" rendered="true" />  
+                 <apex:outputText value="    " id="empty02"/>
+                 <apex:outputLabel style="font-weight:bold;"  >Estado</apex:outputLabel>
+                 <apex:outputField value="{!Caso.Status}" rendered="true" />
+               
+                 <apex:outputLabel style="font-weight:bold;" >RUT Cliente</apex:outputLabel>     
+                 <apex:outputField label="RUT Cliente" value="{!Caso.RUT__c}"/>       
+                 <!-- <label id="" style="font-size:14px">{!Caso.RUT__c}</label>                   -->               
+                 <apex:outputText value="    " id="empty03"/>
+                 <apex:outputLabel style="font-weight:bold;" >Cliente</apex:outputLabel>      
+                 <!-- <label id="Nombre_Titular" >{!Caso.Nombre_Completo_Razon_Social__c}</label>   -->
+                 <apex:outputField value="{!Caso.AccountId}" rendered="true" /> 
+                 <apex:outputText value="    " id="empty04"/>
+                 <apex:outputLabel style="font-weight:bold;" >Contacto</apex:outputLabel>    
+                 <apex:outputField value="{!Caso.ContactId}" rendered="true" />
+             
+                 <apex:outputLabel style="font-weight:bold;" >Negocio</apex:outputLabel>  
+                 <apex:outputLabel style="font-weight:bold;color:blue;" value="{!Caso.Negocio__c}" rendered="true" />                   
+              
+                 <apex:outputText value="    " id="empty05"/>                     
+                 <apex:outputLabel style="font-weight:bold;"  >Canal</apex:outputLabel>
+                 <apex:outputField value="{!Caso.Canal__c}" rendered="true" />
+                 <apex:outputText value="    " id="empty06"/>
+                  <apex:outputLabel style="font-weight:bold;" >Asunto</apex:outputLabel>  
+                 <apex:outputField value="{!Caso.Subject}" rendered="true" />
+            
+                 <apex:outputLabel style="font-weight:bold;"  >Producto</apex:outputLabel>  
+                 <apex:outputLabel style="font-weight:bold;color:blue;" value="{!Caso.Producto__c}" rendered="true" />
+                 <apex:outputText value="    " id="empty07"/>
+                 <apex:outputLabel style="font-weight:bold;"  >Tipo de Operación</apex:outputLabel>  
+                 <apex:outputLabel style="font-weight:bold;color:blue;" value="{!Caso.Tipo_Operacion__c}" rendered="true" />
+                 <apex:outputText value="    " id="empty08"/>
+                 <apex:outputLabel style="font-weight:bold;" >Detalle Operación</apex:outputLabel>    
+                 <apex:outputLabel style="font-weight:bold;color:blue;" value="{!Caso.Detalle_Operacion__c}" rendered="true" />                   
+                  
+                
+                 <apex:outputLabel style="font-weight:bold;" >Fecha/Hora de Creación</apex:outputLabel>  
+                 <apex:outputField value="{!Caso.CreatedDate}" rendered="true" /> 
+                 <apex:outputText value="    " id="empty09"/>
+                 <apex:outputText value="    " id="empty10"/>
+                 <apex:outputText value="    " id="empty11"/>
+                 <apex:outputText value="    " id="empty12"/>
+                 <apex:outputLabel style="font-weight:bold;" >Fecha cierre Tope</apex:outputLabel> 
+                 <apex:outputField value="{!Caso.Fecha_Cierre_Tope__c}" rendered="true" /> 
+             </apex:panelGrid>   
+             <!-- Reclamos -->           
+            <hr/>
+            <br/>
+            <apex:messages rendered="true" />
+            
+            <apex:pageBlockTable id="pbkt_TablaCasos" value="{!LST_Tareas}" var="tarea"  >
+                <apex:column style="font-weight:bold;text-align:center;" headerValue="Estado" value="{!tarea.Status}" headerClass="ct" />          
+                <apex:column headerValue="Acciones" style="text-align:center;" headerClass="ct">
+                    <apex:commandLink action="{!verColaboracionSeleccionada}" value="Detalle Colaboración">
+                        <apex:param name="idTarea" value="{!tarea.Id}" />
+                    </apex:commandLink>
+                </apex:column>                    
+                <apex:column headerValue="Asunto" value="{!tarea.Detalle_Operacion__c}" rendered="true" headerClass="ct" />
+                <apex:column headerValue="Descripción" value="{!tarea.Description}" rendered="true" headerClass="ct" />                                  
+                <apex:column headerValue="Fecha Creación" value="{!tarea.CreatedDate}" headerClass="ct" style="text-align:right;"/>
+                <apex:column headerValue="Fecha de Vencimiento"  value="{!tarea.ActivityDate}" headerClass="ct" style="text-align:right;"/>
+                <apex:column headerValue="Unidad Resolutora" value="{!tarea.Owner.Name}" headerClass="ct" style="text-align:center;"/>
+                <apex:column headerValue="Responsable" value="{!tarea.Responsable_Backup__c}" rendered="true" headerClass="ct" style="text-align:center;"/>
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+        
+         
+     </apex:form>
+     
+
+
+
+
+
+ 
+
+
+
+
+
+</apex:page>

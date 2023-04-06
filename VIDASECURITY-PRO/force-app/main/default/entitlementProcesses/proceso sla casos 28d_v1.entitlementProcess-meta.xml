@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EntitlementProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <SObjectType>Case</SObjectType>
+    <active>true</active>
+    <businessHours>Predeterminado</businessHours>
+    <description>Proceso SLA Casos asociado a 28 dias</description>
+    <entryStartDateField>Case.CreatedDate</entryStartDateField>
+    <exitCriteriaFilterItems>
+        <field>Case.IsClosed</field>
+        <operation>equals</operation>
+        <value>true</value>
+    </exitCriteriaFilterItems>
+    <isVersionDefault>false</isVersionDefault>
+    <milestones>
+        <businessHours>Predeterminado</businessHours>
+        <milestoneCriteriaFilterItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Cerrado</value>
+        </milestoneCriteriaFilterItems>
+        <milestoneName>Evento Clave 28 D</milestoneName>
+        <minutesToComplete>40320</minutesToComplete>
+        <successActions>
+            <name>Case.En_plazo</name>
+            <type>FieldUpdate</type>
+        </successActions>
+        <timeTriggers>
+            <actions>
+                <name>Case.Vencido</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <timeLength>1</timeLength>
+            <workflowTimeTriggerUnit>Minutes</workflowTimeTriggerUnit>
+        </timeTriggers>
+        <timeTriggers>
+            <actions>
+                <name>Case.Por_vencer</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <timeLength>-9</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </timeTriggers>
+        <useCriteriaStartTime>true</useCriteriaStartTime>
+    </milestones>
+    <milestones>
+        <businessHours>Predeterminado</businessHours>
+        <milestoneName>Evento Clave 28D</milestoneName>
+        <minutesToComplete>40320</minutesToComplete>
+        <timeTriggers>
+            <actions>
+                <name>Case.Por_vencer</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <timeLength>-9</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </timeTriggers>
+        <timeTriggers>
+            <timeLength>-1</timeLength>
+            <workflowTimeTriggerUnit>Minutes</workflowTimeTriggerUnit>
+        </timeTriggers>
+        <timeTriggers>
+            <actions>
+                <name>Case.Vencido</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <timeLength>1</timeLength>
+            <workflowTimeTriggerUnit>Minutes</workflowTimeTriggerUnit>
+        </timeTriggers>
+        <useCriteriaStartTime>false</useCriteriaStartTime>
+    </milestones>
+    <name>Proceso SLA Casos 28D</name>
+    <versionMaster>552f00000008Q13</versionMaster>
+    <versionNumber>1</versionNumber>
+</EntitlementProcess>

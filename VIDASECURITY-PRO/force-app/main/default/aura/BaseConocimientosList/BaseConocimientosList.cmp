@@ -1,0 +1,137 @@
+<aura:component implements="force:appHostable" controller="BaseConocimientosController">
+    <!-- Manejadores -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:handler name="change" value="{!v.textoBusqueda}" action="{!c.busqueda}" />
+    <aura:handler name="cerrarModal" event="c:BaseConocimientoEvents" action="{!c.closeModel}" />
+    <aura:handler name="cerrarModalCategoria" event="c:BaseConocimientoEvents" action="{!c.closeModelCategoria}" />
+    <aura:handler name="parametroSolucionModal" event="c:BaseConocimientoEvents" action="{!c.openModelConSolucion}" />
+    <aura:handler name="actualizarListado" event="c:BaseConocimientoEvents" action="{!c.actualizarListado}" />
+    <aura:handler name="eliminarSolucion" event="c:BaseConocimientoEvents" action="{!c.eliminarSolucion}" />
+    <aura:handler name="eliminarCategoria" event="c:BaseConocimientoEvents" action="{!c.eliminarCategoria}" />
+    <aura:handler name="cerrarModalEliminarSolucion" event="c:BaseConocimientoEvents" action="{!c.cerrarModalEliminarSolucion}" />
+    <aura:handler name="cerrarModalEliminarCategoria" event="c:BaseConocimientoEvents" action="{!c.cerrarModalEliminarCategoria}" />
+    <aura:handler name="cerrarModalCategoriaSelect" event="c:BaseConocimientoEvents" action="{!c.cerrarModalCategoriaSelect}" />
+    <aura:handler event="aura:waiting" action="{!c.showSpinner}" type="APPLICATION" />
+    <aura:handler event="aura:doneWaiting" action="{!c.hideSpinner}" type="APPLICATION" />
+    <!-- Manejadores -->
+    <!-- Atributos -->
+    <aura:attribute name="isSolutionEditable" type="boolean" default="false" />
+    <aura:attribute name="isSolutionCreatable" type="boolean" default="false" />
+    <aura:attribute name="isSolutionAccesible" type="boolean" default="false" />
+    <aura:attribute name="isSolutionDeleteable" type="boolean" default="false" />
+    <aura:attribute name="isCategoryEditable" type="boolean" default="false" />
+    <aura:attribute name="isCategoryCreatable" type="boolean" default="false" />
+    <aura:attribute name="isCategoryAccesible" type="boolean" default="false" />
+    <aura:attribute name="isCategoryDeleteable" type="boolean" default="false" />
+    <aura:attribute name="mapFieldsAccesibility" type="Map" />
+    <aura:attribute name="mapFieldsUpdateable" type="Map" />
+
+    <aura:attribute name="isOpen" type="boolean" default="false" />
+    <aura:attribute name="isOpenCategoria" type="boolean" default="false" />
+    <aura:attribute name="isOpenCategoriaSelect" type="boolean" default="false" />
+    <aura:attribute name="deseaEliminar" type="boolean" default="false" />
+    <aura:attribute name="deseaEliminarCategoria" type="boolean" default="false" />
+    <aura:attribute name="recordMode" type="String" default="new" />
+    <aura:attribute name="recordModeCategoria" type="String" default="manage" />
+    <aura:attribute name="soluciones" type="Solution[]" />
+    <aura:attribute name="listadoSoluciones" type="Solution[]" />
+    <aura:attribute name="item" type="Object" />
+    <aura:attribute name="itemId" type="String" />
+    <aura:attribute name="itemParent" type="Object" />
+    <aura:attribute name="itemParentId" type="String" />
+    <aura:attribute name="items" type="Object" />
+    <aura:attribute name="categorySolucion" type="String" />
+    <aura:attribute name="recordModeCategoriaSelect" type="String" default="selectParent" />
+    <aura:attribute name="solucion" type="Solution" />
+    <aura:attribute name="totalSoluciones" type="Integer" />
+    <aura:attribute name="textoBusqueda" type="String" />
+    <aura:attribute name="offset" type="integer" />
+    <aura:attribute name="next" type="boolean" />
+    <aura:attribute name="prev" type="boolean" />
+    <aura:attribute name="error" type="String" />
+    <aura:attribute name="estados" type="String[]" />
+    <aura:attribute name="etiquetas" type="String[]" />
+    <aura:attribute name="recordInfo" type="String" />
+    <aura:attribute name="Id" type="String" />
+    <aura:attribute name="paginacion" type="String" default="5" />
+    <aura:attribute name="mostrarSpinner" type="Boolean" default="false" />
+    <aura:attribute name="countRequest" type="Integer" default="0" />
+    <!-- Atributos -->
+    <div class="slds-page-header slds-page-header--object-home">
+        <lightning:layout>
+            <lightning:layoutItem>
+                <lightning:icon iconName="standard:solution" />
+            </lightning:layoutItem>
+            <lightning:layoutItem class="slds-m-left--small">
+                <p class="slds-text-title--caps slds-line-height--reset">Base de Conocimientos</p>
+                <h1 class="slds-page-header__title slds-p-right--x-small">{!v.totalSoluciones} Soluciones</h1>
+                <aura:if isTrue="{!v.isSolutionCreatable}">
+                    <lightning:buttonIcon iconName="utility:add" variant="circle" onclick="{! c.openModel }" alternativeText="Agregar Solución" />
+                </aura:if>
+            </lightning:layoutItem>
+        </lightning:layout>
+        <span class="paginacion">
+            <aura:if isTrue="{!v.isCategoryAccesible}">
+                 <lightning:buttonIcon iconName="utility:settings"  variant="border-filled" alternativeText="Administración de categorías" onclick="{! c.openModelCategoria}" />
+            </aura:if>           
+            <lightning:select name="paginacion" label="Mostrar" aura:id="paginacion" value="{!v.paginacion}" onchange="{!c.cambioPaginacion}">
+                <option text="5" value="5"/>
+                <option text="10" value="10"/>
+                <option text="15" value="15"/>
+                <option text="20" value="20"/>
+            </lightning:select>
+        </span>
+    </div>
+    <div class="c-container">
+        <aura:if isTrue="{!v.mostrarSpinner}">
+            <div aura:id="spinnerId" class="slds-spinner_container">
+                <div class="slds-spinner--brand  slds-spinner slds-spinner--large slds-is-relative" role="alert">
+                    <span class="slds-assistive-text">Cargando</span>
+                    <div class="slds-spinner__dot-a"></div>
+                    <div class="slds-spinner__dot-b"></div>
+                </div>
+            </div>
+        </aura:if>
+        <aura:if isTrue="{!not(empty(v.error))}">
+            <div class="recordError">
+                <ui:message title="Error" severity="error" closable="true"> {!v.error} </ui:message>
+            </div>
+        </aura:if>
+        <aura:if isTrue="{!not(empty(v.recordInfo))}">
+            <div aura:id="text" style="{!v.display}">
+                <ui:message title="Información" severity="info" closable="false">{!v.recordInfo} </ui:message>
+            </div>
+        </aura:if>
+        <lightning:layout class="container-body">
+            <aura:if isTrue="{!v.isSolutionAccesible}">
+                <lightning:layoutItem>
+                    <lightning:input aura:id="buscador" type="search" label="Buscar" name="search" placeholder="Escriba aqui" value="{!v.textoBusqueda}" style="display : inline-block; width: 80%;  margin-bottom:10px" />
+                    <aura:if isTrue="{!v.isCategoryAccesible}">
+                        <a href="javascript:void(0)" onclick="{!c.openModalCategoriaSelect}" class="iconsParentCategory">Búsqueda por Categoría</a>
+                    </aura:if>
+                    <a href="javascript:void(0)" onclick="{!c.cleanSearch}" class="iconsParentCategory">Limpiar Búsqueda</a>
+                    <aura:iteration var="solucion" items="{!v.soluciones}">
+                        <c:BaseConocimientoSolucion solucion="{!solucion}" isSolutionEditable="{!v.isSolutionEditable}" isSolutionDeleteable="{!v.isSolutionDeleteable}" />
+                    </aura:iteration>
+                </lightning:layoutItem>
+            </aura:if>
+        </lightning:layout>
+        <lightning:button label="Atras" onclick="{!c.previous}" variant="brand" class="slds-m-top--medium" disabled="{!v.prev}" />
+        <lightning:button label="Siguiente" onclick="{!c.next}" variant="brand" class="slds-m-top--medium" disabled="{!v.next}" />
+    </div>
+    <aura:if isTrue="{!v.isOpen}">
+        <c:BaseConocimientoSolucionModal categorySolucion="{!v.categorySolucion}" solucion="{!v.solucion}" recordMode="{!v.recordMode}" estados="{!v.estados}" etiquetas="{!v.etiquetas}" mapFieldsAccesibility="{!v.mapFieldsAccesibility}" mapFieldsUpdateable="{!v.mapFieldsUpdateable}"/>
+    </aura:if>
+    <aura:if isTrue="{!v.deseaEliminar}">
+        <c:BaseConocimientoSolucionModalEliminacion solucion="{!v.solucion}" />
+    </aura:if>
+    <aura:if isTrue="{!v.isOpenCategoria}">
+        <c:BaseConocimientosCategoriaModal isCategoryEditable="{!v.isCategoryEditable}" isCategoryCreatable="{!v.isCategoryCreatable}" isCategoryAccesible="{!v.isCategoryAccesible}" isCategoryDeleteable="{!v.isCategoryDeleteable}" recordMode="{!v.recordModeCategoria}" items="{!v.items}" itemId="{!v.itemId}" itemParentId="{!v.itemParentId}" />
+    </aura:if>
+    <aura:if isTrue="{!v.isOpenCategoriaSelect}">
+        <c:BaseConocimientosCategoriaModalSelect itemId="{!v.itemId}" items="{!v.items}" recordMode="{!v.recordModeCategoriaSelect}" />
+    </aura:if>
+    <aura:if isTrue="{!v.deseaEliminarCategoria}">
+        <c:BaseConocimientosCategoriaModalEliminacion itemId="{!v.itemId}" items="{!v.items}" itemParentId="{!v.itemParentId}" />
+    </aura:if>
+</aura:component>

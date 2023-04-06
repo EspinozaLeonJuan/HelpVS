@@ -1,0 +1,61 @@
+<apex:page standardController="Solicitud__c"  extensions="EditarSolicitudEDController" sidebar="true" >
+ 
+    <apex:stylesheet value="{!URLFOR($Resource.EscritorioDigital, 'css/EscritorioDigital.css')}" />        
+    <apex:includeScript value="{!URLFOR($Resource.EscritorioDigital, 'js/EscritorioDigital.js')}"/>    
+    <script>    
+    	var rutaRecursosEstaticos = '{!URLFOR($Resource.EscritorioDigital)}';   
+    </script>
+   
+    <apex:actionStatus id="Status">
+        <apex:facet name="start">
+            <apex:outputPanel >
+                <div class="popupBackground" />
+                <div class="popupPanel">
+                    &nbsp; Espere...<img src="/apexpages/devmode/img/saveStatus.gif" />
+                </div>
+            </apex:outputPanel> 
+        </apex:facet>
+    </apex:actionStatus>
+
+
+    <apex:form id="SolicitudForm">
+     
+        <apex:outputPanel > 
+         
+            <apex:sectionHeader title="Actualizar Solicitud Escritorio Digital"/>  
+            <apex:pageblock id="Panel" rendered="true"> 	
+                 
+                <apex:panelGrid columns="3">
+                    &nbsp;
+                    <apex:outputLabel >RUT Titular:</apex:outputLabel>      
+                    <apex:outputLabel value="{!Solicitud__c.RUT_Titular__c}"></apex:outputLabel>
+                    
+                    &nbsp;
+                    <apex:outputLabel >Nombre Titular:</apex:outputLabel>      
+                    <apex:outputLabel value="{!Solicitud__c.Nombre_Titular__c}"></apex:outputLabel>
+                    
+                    &nbsp;
+                    <apex:outputLabel >Detalle Solicitud:</apex:outputLabel>      
+                     <apex:selectList value="{!CodigoSolicitud}" size="1" id="solicitudes_values"  >                  
+                       <apex:actionsupport event="onchange" rerender="solicitantes_values"/>
+                        <apex:selectOptions value="{!ListaSolicitudes}"/>
+                    </apex:selectList>
+                    
+                     &nbsp;
+                    <apex:outputLabel >Solicitante:</apex:outputLabel>      
+                     <apex:selectList value="{!TipoRequerimiento}" size="1" id="solicitantes_values">
+                        <apex:actionSupport event="onchange" reRender="newvalue" />
+                        <apex:selectOptions value="{!ListaSolicitantes}"/>
+                    </apex:selectList>  
+                    
+                </apex:panelGrid>
+                <apex:panelGrid columns="2">
+                     <apex:commandButton action="{!actualizarSolicitud}" status="Status" value="Guardar" oncomplete="actualizarSolicitud('{!Persistencia}');"/>    
+                     <apex:commandButton action="{!cancelarSolicitud}" value="Cancelar"/>                       
+                </apex:panelGrid>
+     	   </apex:pageblock>
+          
+        </apex:outputPanel>
+	</apex:form>
+    
+</apex:page>

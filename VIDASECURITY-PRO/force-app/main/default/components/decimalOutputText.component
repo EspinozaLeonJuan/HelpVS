@@ -1,0 +1,7 @@
+<apex:component controller="DecimalOutputTextController">
+  <apex:attribute name="value" type="Decimal" description="Value to format" assignTo="{! valueNotFormatted }"/>
+  <apex:attribute name="numberDecimal" type="Integer" description="Numero de decimales" assignTo="{! numberDecimalValue }" />
+  <apex:attribute name="trailingZeros" type="Boolean" description="Borra los ceros innecesarios luego de los decimales" assignTo="{! isTrailingZeros }" />
+  
+  <apex:outputText value="{! valueFormatted }"/>
+</apex:component>

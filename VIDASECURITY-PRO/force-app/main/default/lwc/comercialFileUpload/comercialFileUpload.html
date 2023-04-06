@@ -1,0 +1,24 @@
+<template>
+    <div class="slds-grid slds-grid_vertical-align-center slds-p-vertical_medium">
+        <lightning-file-upload
+            label={title}
+            name="fileUploader"
+            record-id={objectId}
+            onuploadfinished={handleUploadFinished}>
+        </lightning-file-upload>
+        <lightning-icon
+            class="slds-m-left_small ready"
+            icon-name={iconStatus}
+            size="small">
+        </lightning-icon>
+        <template if:true={fileLoaded}>
+            <lightning-button
+                class="slds-m-left_small"
+                label="Ver"
+                title="Ver archivo cargado."
+                onclick={handleClick}
+                >
+            </lightning-button>
+        </template>
+    </div>
+</template>

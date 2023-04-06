@@ -1,0 +1,143 @@
+<!--
+  @description       : 
+  @author            : Juan Espinoza Leon
+  @group             : 
+  @last modified on  : 06-16-2021
+  @last modified by  : Juan Espinoza León
+  Modifications Log 
+  Ver   Date         Author               Modification
+  1.0   09-14-2020   Juan Espinoza Leon   Initial Version
+-->
+<apex:page id="pgDigitador" controller="CTR_CM_Predigitador" action="{!cargaDatosPreDigitador}"
+            lightningStylesheets="true" sidebar="false" showHeader="false" standardStylesheets="true"
+             docType="HTML-5.0">
+
+    
+     <html>     
+        <head>             
+        </head>
+        <body onload="" >
+             <script type="text/javascript">            
+                    function cargaInicial()  
+                        { 
+                            if('{!ExisteError}' == 'true')
+                            {
+                                alert('{!Errores}');
+                                window.top.close();
+                            }
+                            else
+                            {
+                                document.getElementById("idCanal").value = document.getElementById('pgDigitador:formDigitadorApex:txt_idCanal').value;                            
+                                document.getElementById("rutUsuario").value = document.getElementById('pgDigitador:formDigitadorApex:txt_rutUsuario').value;                            
+                                document.getElementById("dvUsuario").value = document.getElementById('pgDigitador:formDigitadorApex:txt_dvUsuario').value;                            
+                                document.getElementById("rutCliente").value = document.getElementById('pgDigitador:formDigitadorApex:txt_rutContratante').value;                            
+                                document.getElementById("idCampana").value = document.getElementById('pgDigitador:formDigitadorApex:txt_idCampana').value;                            
+                                document.getElementById("tipoFolio").value = document.getElementById('pgDigitador:formDigitadorApex:txt_tipoFolio').value;                            
+                                document.getElementById("poliza").value = document.getElementById('pgDigitador:formDigitadorApex:txt_poliza').value;                       
+                                document.getElementById("idExterno").value = document.getElementById('pgDigitador:formDigitadorApex:txt_idExterno').value;
+                                document.getElementById("totalInic").value = document.getElementById('pgDigitador:formDigitadorApex:txt_totalInic').value;                            
+                                document.getElementById("preimpreso").value = document.getElementById('pgDigitador:formDigitadorApex:txt_preimpreso').value;                             
+                                document.getElementById("direccion").value = document.getElementById('pgDigitador:formDigitadorApex:txt_direccion').value;                             
+                                document.getElementById("mail").value = document.getElementById('pgDigitador:formDigitadorApex:txt_mail').value;                             
+                                document.getElementById("fono").value = document.getElementById('pgDigitador:formDigitadorApex:txt_fono').value;                           
+                                document.getElementById("celular").value = document.getElementById('pgDigitador:formDigitadorApex:txt_celular').value;                             
+                                document.getElementById("codComuna").value = document.getElementById('pgDigitador:formDigitadorApex:txt_codComuna').value;                             
+                                document.getElementById("codRegion").value = document.getElementById('pgDigitador:formDigitadorApex:txt_codRegion').value;                          
+                                document.getElementById("codCiudad").value = document.getElementById('pgDigitador:formDigitadorApex:txt_codCiudad').value;                            
+                                document.getElementById("tipoCliente").value = document.getElementById('pgDigitador:formDigitadorApex:txt_tipoCliente').value;                             
+                                document.getElementById("persistencia").value = document.getElementById('pgDigitador:formDigitadorApex:txt_persistencia').value;     
+
+                                document.getElementById("rutAsegT").value = document.getElementById('pgDigitador:formDigitadorApex:txt_rutAseguradoTitular').value;      
+                                document.getElementById("Plan").value = document.getElementById('pgDigitador:formDigitadorApex:txt_plan').value;      
+                                document.getElementById("DireccionAsegT").value = document.getElementById('pgDigitador:formDigitadorApex:txt_direccionAsegT').value;      
+                                document.getElementById("MailAsegT").value = document.getElementById('pgDigitador:formDigitadorApex:txt_mailAsegT').value;      
+                                document.getElementById("fonoAsegT").value = document.getElementById('pgDigitador:formDigitadorApex:txt_fonoAsegT').value;      
+                                document.getElementById("celAsegT").value = document.getElementById('pgDigitador:formDigitadorApex:txt_celularAsegT').value;      
+                                document.getElementById("codComunaAsegT").value = document.getElementById('pgDigitador:formDigitadorApex:txt_codComunaAsegT').value;      
+                                document.getElementById("codRegionAsegT").value = document.getElementById('pgDigitador:formDigitadorApex:txt_codRegionAsegT').value;      
+                                document.getElementById("codCiudadAsegT").value = document.getElementById('pgDigitador:formDigitadorApex:txt_codCiudadAsegT').value;      
+                                formDigitador.submit();  
+                            }
+                        }
+             </script>
+            
+             <apex:messages rendered="true" />
+                
+             <div style="display:none;">
+ 
+             <apex:form id="formDigitadorApex" rendered="true"  >
+                         <apex:input id="txt_idCanal" value="{!PD_Digitador.idCanal}" />
+                         <apex:input id="txt_rutUsuario" value="{!PD_Digitador.rutUsuario}"/>
+                         <apex:input id="txt_dvUsuario" value="{!PD_Digitador.dvUsuario}"/>
+                         <apex:input id="txt_rutContratante" value="{!PD_Digitador.rutContratante}"/>
+                         <apex:input id="txt_idCampana" value="{!PD_Digitador.idCampana}"/>
+                         <apex:input id="txt_tipoFolio" value="{!PD_Digitador.tipoFolio}"/>
+                         <apex:input id="txt_poliza" value="{!PD_Digitador.poliza}"/>
+                         <apex:input id="txt_idExterno" value="{!PD_Digitador.idExterno}"/>
+                         <apex:input id="txt_totalInic" value="{!PD_Digitador.totalInic}"/>
+                         <apex:input id="txt_preimpreso" value="{!PD_Digitador.preimpreso}"/>
+                         <apex:input id="txt_direccion" value="{!PD_Digitador.direccion}"/>
+                         <apex:input id="txt_mail" value="{!PD_Digitador.mail}"/>
+                         <apex:input id="txt_fono" value="{!PD_Digitador.fono}"/>
+                         <apex:input id="txt_celular" value="{!PD_Digitador.celular}"/>
+                         <apex:input id="txt_codComuna" value="{!PD_Digitador.codComuna}"/>
+                         <apex:input id="txt_codRegion" value="{!PD_Digitador.codRegion}"/>
+                         <apex:input id="txt_codCiudad" value="{!PD_Digitador.codCiudad}"/>
+                         <apex:input id="txt_tipoCliente" value="{!PD_Digitador.tipoCliente}"/>
+                         <apex:input id="txt_persistencia" value="{!PD_Digitador.persistencia}"/>
+                         <apex:input id="txt_url" value="{!PD_Digitador.url}" />
+                         <apex:input id="txt_rutAseguradoTitular" value="{!PD_Digitador.rutAseguradoTitular}" />
+                         <apex:input id="txt_plan" value="{!PD_Digitador.plan}" />
+                         <apex:input id="txt_direccionAsegT" value="{!PD_Digitador.direccionAsegT}" />
+                         <apex:input id="txt_mailAsegT" value="{!PD_Digitador.mailAsegT}" />
+                         <apex:input id="txt_fonoAsegT" value="{!PD_Digitador.fonoAsegT}" />
+                         <apex:input id="txt_celularAsegT" value="{!PD_Digitador.celularAsegT}" />
+                         <apex:input id="txt_codComunaAsegT" value="{!PD_Digitador.codComunaAsegT}" />
+                         <apex:input id="txt_codRegionAsegT" value="{!PD_Digitador.codRegionAsegT}" />
+                         <apex:input id="txt_codCiudadAsegT" value="{!PD_Digitador.codCiudadAsegT}" />
+            </apex:form>
+            </div>
+            <div >
+            <center>
+        <form id="formDigitador" action="http://clientes.vidasecurity.cl/CMSVidaSecurity/paginas/nuevoproducto/PopUp.aspx" method="post" charset="UTF-8" enctype="application/x-www-form-urlencoded" >
+                idCanal:<input type="text" id="idCanal" name="idCanal" value="" /><br/>
+                rutUsuario:<input type='text' id="rutUsuario" name="rutUsuario" value="" />
+                dvUsuario:<input type='text' id="dvUsuario" name="dvUsuario" value="" />
+                rutCliente:<input type="text" id="rutCliente" name="rutCliente" value="" /><br/>
+                idCampana:<input type="text" id="idCampana" name="idCampana" value="" /><br/>
+                tipoFolio:<input type="text" id="tipoFolio" name="tipoFolio" value="" /><br/>
+                poliza:<input type="text" id="poliza" name="poliza" value="" /><br/>
+                idExterno:<input type="text" id="idExterno" name="idExterno" value="" /><br/>
+                 totalInic:<input type="text" id="totalInic" name="totalInic" value="" /><br/>
+                preimpreso:<input type="text" id="preimpreso" name="preimpreso" value="" /><br/>
+                direccion:<input type="text" id="direccion" name="direccion" value="" /><br/>
+                 mail:<input type="text" id="mail" name="mail" value="" /><br/>
+                 fono:<input type="text" id="fono" name="fono" value="" /><br/>
+                 celular:<input type="text" id="celular" name="celular" value="" /><br/>
+                 codComuna:<input type="text" id="codComuna" name="codComuna" value="" /><br/>
+                 codRegion:<input type="text" id="codRegion" name="codRegion" value="" /><br/>
+                 codCiudad:<input type="text" id="codCiudad" name="codCiudad" value="" /><br/>
+                 tipoCliente:<input type="text" id="tipoCliente" name="tipoCliente" value="" /><br/>
+                 persistencia:<input type="text" id="persistencia" name="persistencia" value="" /><br/>
+
+                 rutAsegT:<input type="text" id="rutAsegT" name="rutAsegT" value="" /><br/>
+                 plan:<input type="text" id="Plan" name="Plan" value="" /> <br/> 
+                 DireccionAsegT:<input type="text" id="DireccionAsegT" name="DireccionAsegT" value="" /><br/>
+                 MailAsegT:<input type="text" id="MailAsegT" name="MailAsegT" value="" /><br/>
+                 fonoAsegT:<input type="text" id="fonoAsegT" name="fonoAsegT" value="" /><br/>
+                 celAsegT:<input type="text" id="celAsegT" name="celAsegT" value="" /><br/>
+                 codComunaAsegT:<input type="text" id="codComunaAsegT" name="codComunaAsegT" value="" /><br/>
+                 codRegionAsegT:<input type="text" id="codRegionAsegT" name="codRegionAsegT" value="" /><br/>
+                 codCiudadAsegT:<input type="text" id="codCiudadAsegT" name="codCiudadAsegT" value="" /><br/>
+                                  
+                <input type="submit" value="Ir a PreDigitacion" />
+            </form>
+                </center>
+           </div>
+            
+            </body>
+           <script>
+                cargaInicial();                
+           </script>
+    </html>
+</apex:page>

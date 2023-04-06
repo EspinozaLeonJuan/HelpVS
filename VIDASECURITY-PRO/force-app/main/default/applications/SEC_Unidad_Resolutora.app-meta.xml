@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <defaultLandingTab>Bandeja_UR</defaultLandingTab>
+    <description>Aplicación personalizada para Unidades Resolutoras.
+Proyecto CRM - ADvigital 2018</description>
+    <formFactors>Large</formFactors>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
+    <label>Unidad Resolutora</label>
+    <tabs>Bandeja_UR</tabs>
+    <tabs>Escritorio__c</tabs>
+    <tabs>Historial_UR</tabs>
+    <tabs>Bandeja_Unidad_Resolutora</tabs>
+</CustomApplication>

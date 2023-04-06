@@ -1,0 +1,4689 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AssignmentRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <assignmentRule>
+        <fullName>Casos Sitio</fullName>
+        <active>true</active>
+        <ruleEntry>
+            <assignedTo>segmento@security.cl</assignedTo>
+            <assignedToType>User</assignedToType>
+            <criteriaItems>
+                <field>Case.Subject</field>
+                <operation>contains</operation>
+                <value>Oncologico,Oncológico,APV Cliente con APV,APV Cliente sin APV</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>Contacto_Vida</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.Canal__c</field>
+                <operation>equals</operation>
+                <value>WEB</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Subject</field>
+                <operation>equals</operation>
+                <value>Formulario cliente web</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>Televenta</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <booleanFilter>1 AND 2 AND (3 OR 4)</booleanFilter>
+            <criteriaItems>
+                <field>Case.Canal__c</field>
+                <operation>equals</operation>
+                <value>WEB</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Subject</field>
+                <operation>contains</operation>
+                <value>Contacto VS,proyexxion,Proyexxion</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Account.Cliente_Asegurado_Empresa__c</field>
+                <operation>equals</operation>
+                <value>Anónimo VS Anónimo</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Account.Cliente_Asegurado_Empresa__c</field>
+                <operation>equals</operation>
+                <value>Prospecto</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>Contacto_Vida</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <booleanFilter>1 AND 2 AND (3 OR 4)</booleanFilter>
+            <criteriaItems>
+                <field>Case.Canal__c</field>
+                <operation>equals</operation>
+                <value>WEB</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Subject</field>
+                <operation>contains</operation>
+                <value>Contacto VS</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Account.Cliente_Asegurado_Empresa__c</field>
+                <operation>notEqual</operation>
+                <value>Anónimo VS Anónimo</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Account.Cliente_Asegurado_Empresa__c</field>
+                <operation>notEqual</operation>
+                <value>Prospecto</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>Televenta</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <booleanFilter>2 AND (3 OR 4 OR 6 OR 7 OR 8) AND 5 AND (1 OR 9)</booleanFilter>
+            <criteriaItems>
+                <field>Case.Tipo_de_Solicitante__c</field>
+                <operation>equals</operation>
+                <value>Prospecto</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Canal__c</field>
+                <operation>equals</operation>
+                <value>Redes Sociales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Subject</field>
+                <operation>contains</operation>
+                <value>Facebook</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Subject</field>
+                <operation>contains</operation>
+                <value>Youtube</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.OwnerId</field>
+                <operation>notContain</operation>
+                <value>Asistencia Agente</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Subject</field>
+                <operation>contains</operation>
+                <value>Linkedin</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Subject</field>
+                <operation>contains</operation>
+                <value>Discovery</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Subject</field>
+                <operation>contains</operation>
+                <value>Google_Ads_extensión</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Account.Cliente_Asegurado_Empresa__c</field>
+                <operation>equals</operation>
+                <value>Prospecto</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>Portabilidad_Financiera</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>UR - Solicitud Certificado de Portabilidad</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Tipo_de_Solicitante__c</field>
+                <operation>equals</operation>
+                <value>Institución Financiera</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_RRVV</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>UR - Confirmación de Portabilidad</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Tipo_de_Solicitante__c</field>
+                <operation>equals</operation>
+                <value>Institución Financiera</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>Portabilidad_Financiera</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>UR - Solicitud de Portabilidad Financiera</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Tipo_de_Solicitante__c</field>
+                <operation>equals</operation>
+                <value>Contratante</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>Contacto_Vida</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <booleanFilter>1 AND 2 AND 3</booleanFilter>
+            <criteriaItems>
+                <field>Case.Canal__c</field>
+                <operation>equals</operation>
+                <value>WEB</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>ED - Endoso Aumento de Prima en Exceso,ED - Modificación de Tipo de Pago,ED - Modificación tipo de pago a Empleador,ED - Designación y Actualización de Beneficiarios,Siniestro Individuales</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>Contacto_Vida</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.Canal__c</field>
+                <operation>equals</operation>
+                <value>WEB</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>ED - Solicitud de Rescate Total,ED - Solicitud de Rescate Parcial</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <criteriaItems>
+                <field>Case.Canal__c</field>
+                <operation>equals</operation>
+                <value>Chat Público</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <criteriaItems>
+                <field>Case.Canal__c</field>
+                <operation>equals</operation>
+                <value>Call Center</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.IdLlamada__c</field>
+                <operation>notEqual</operation>
+            </criteriaItems>
+        </ruleEntry>
+    </assignmentRule>
+    <assignmentRule>
+        <fullName>Correo de asignación de casos</fullName>
+        <active>false</active>
+    </assignmentRule>
+    <assignmentRule>
+        <fullName>Servicios BHP</fullName>
+        <active>false</active>
+    </assignmentRule>
+    <assignmentRule>
+        <fullName>Traspaso de casos</fullName>
+        <active>false</active>
+    </assignmentRule>
+    <assignmentRule>
+        <fullName>UR -  Caso hijo</fullName>
+        <active>false</active>
+    </assignmentRule>
+    <assignmentRule>
+        <fullName>UR - Consultas</fullName>
+        <active>false</active>
+    </assignmentRule>
+    <assignmentRule>
+        <fullName>UR - Reclamos</fullName>
+        <active>false</active>
+    </assignmentRule>
+    <assignmentRule>
+        <fullName>UR - Solicitudes</fullName>
+        <active>false</active>
+        <ruleEntry>
+            <assignedTo>UR_Siniestros_Tradicionales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <booleanFilter>1 AND 2 AND 5 AND (3 OR 4)</booleanFilter>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Colectivos</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Siniestros</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Rescate</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Siniestro Tradicional Vida COL</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Siniestros_Tradicionales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Colectivos</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Pago comercial</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Pago Comerciales Tradicional Vida</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_RRVV</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>RRVV</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Endoso RRVV</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Solicitud cambio CCAF</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <booleanFilter>1 AND 2 AND 3 AND 4</booleanFilter>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Documentos IND</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Solicitud de Certificados de cobertura</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Cobranza</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Solicitud de copia formulario notificación Ley APV</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <booleanFilter>1 AND 2 AND 3 AND  4</booleanFilter>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Problemas/Solicitud Aporta</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Solicitud de problema con Traspaso In</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Endoso IND</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>On Time - Solicitud Renuncia</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Colectivos</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Colectivos</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Asegurado No Vigente o Inexistente</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Problemas de asegurado</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>1</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Siniestros_Tradicionales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <booleanFilter>1 AND 2 AND 4 AND ( 3 OR 5 OR 6) and 7</booleanFilter>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Masivos</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Siniestros</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Denuncio de siniestro</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Rescate</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Siniestros/ Rescates M</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>1</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Cobranza</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales,Seguros Colectivos,Seguros Familiares</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Devolución por Excepción Comercial</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Cobranza,Cobranza C,Cobranza F</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>1</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_RRVV</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <booleanFilter>1 AND 2 AND 4 AND (3 or 5 or 6)</booleanFilter>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>RRVV</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Declaración Ingresos Actualización</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Beneficio Estatal</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Renuncia Garantía Estatal</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Solicitud de incorporación/ Renovación asignación familiar</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Siniestros_Tradicionales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <booleanFilter>1 AND 2 AND 3 AND (4 or 5) and 6</booleanFilter>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Siniestros/Rescates</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Siniestro Catastrófico</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Siniestro Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>1</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Siniestros_Tradicionales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <booleanFilter>1 AND 2 AND 3 and 4</booleanFilter>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Familiares</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Siniestros/ Rescates F</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>1</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_RRVV</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <booleanFilter>1 AND 2 AND 3 and ( 4 or 5 or 6 or 7)</booleanFilter>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>RRVV</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Beneficio Estatal</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Solicitud cuota mortuoria</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Declaración Ingresos Actualización</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Solicitud de Extinción</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Solicitud garantía estatal</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_RRVV</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <booleanFilter>1 AND 2 AND 3 AND (4 or 5 or 6)</booleanFilter>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>RRVV</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Endoso RRVV</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Solicitud pensión sobrevivencia</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Solicitud periodo garantizado</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Solicitud cambio pago pensión</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <booleanFilter>1 AND 2 AND 3 AND (4 or 5 or 6 or 7 or 8 or 9 or 10)</booleanFilter>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Endoso IND</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>ED - Cambio de Plan APV Max 3.0 y Dominium Max 3.0</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>ED - Cambio de Plan Mi Proyecto Seguro y Mi APV Seguro</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>ED - Designación y Actualización de Beneficiarios</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>ED - Endoso Aumento de Prima en Exceso</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>ED - Endoso Cambio Periodicidad de Pago</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>ED - Endoso Capital Asegurado</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>ED - Modificación de Tipo de Pago</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Siniestros_Tradicionales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <booleanFilter>1 AND 2 AND 3 AND (4 or 5) and 6</booleanFilter>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Familiares</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Siniestros PF</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Siniestros</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Rescate</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>1</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Colectivos</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <booleanFilter>1 AND 2 AND 3  and ( 4 or 5 or 6) and 7</booleanFilter>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Colectivos</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Problemas de asegurado</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Farmacia Cruz Verde</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Farmacia Fasa</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Farmacia Salco</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>1</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Cobranza_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Familiares</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Solicitud de suspensión de primas</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Cobranza F</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>1</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Colectivos</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Colectivos</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Solicitud actualización de datos</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Problemas de asegurado</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>1</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Colectivos</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Colectivos</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Documentos C</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Solicitud copia de póliza</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>1</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Familiares</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Documentos PF</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Solicitud copia de póliza</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>1</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <booleanFilter>1 AND 2 AND 3 AND (4 OR 5)</booleanFilter>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Documentos IND</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Solicitud copia de póliza</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Solicitud de Certificados Tributarios</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Colectivos</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Masivos</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Documentos M</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Solicitud copia de póliza</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>1</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Colectivos</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Colectivos</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Problemas de asegurado</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Solicitud Cotización de Conversión Colectivos</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>1</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Endoso IND</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Familiares</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Documentos PF</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Solicitud de certificados</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>1</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_RRVV</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>RRVV</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Endoso RRVV</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Solicitud de Endoso</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Familiares</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Endoso F</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Solicitud de Endosos</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>1</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Siniestros_Tradicionales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <booleanFilter>1 AND 2 AND 3 AND 4 and 5</booleanFilter>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Siniestros/Rescates</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>ED - Solicitud de Rescate Patrimonial</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>1</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Cobranza</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Solicitud de devolución de prima</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Familiares</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Cobranza</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Solicitud devolución de prima</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>1</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Colectivos</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <booleanFilter>1 AND 2 AND 4 AND (3 or 5 or 6) and 7</booleanFilter>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Otros</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Solicitud por disconformidad certificado declaración renta</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Masivos</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Colectivos</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>1</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Familiares</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Cobranza,Cobranza F</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Solicitud eliminar empleados de planilla (PF-APV)</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>1</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Configuracion_Colectivos</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Colectivos</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Endoso C</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Solicitud Endosos Póliza</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>1</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Cobranza_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <booleanFilter>1 AND 4 AND 3 AND (2 or 5) and 6</booleanFilter>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Cobranza</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Solicitud imputación de pagos</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Familiares</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>1</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Colectivos</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <booleanFilter>1 AND 2 AND 3 AND (4 or 5) and 6</booleanFilter>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Masivos</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Cobranza M</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Solicitud imputación de pagos</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Solicitud de devolución de prima</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>1</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_RRVV</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>RRVV</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Endoso RRVV</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Solicitud nuevo FUN</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Endoso IND</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Endosos</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <booleanFilter>1 AND 2 AND 3  AND (4 OR 5)</booleanFilter>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Problemas/Solicitud Aporta</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Solicitud por disconformidad certificado declaración renta</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Solicitud póliza no aperturada</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_RRVV</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>RRVV</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Problemas de asegurado</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Solicitud por disconformidad certificado declaración renta</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Siniestros_Tradicionales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <booleanFilter>1 AND 2 AND 3 AND 4 AND 5</booleanFilter>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Siniestros/Rescates</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Solicitud préstamo</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>1</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <booleanFilter>1 AND 2 AND 3 AND 4</booleanFilter>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Endoso IND</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Solicitud refechaje</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <booleanFilter>1 AND 2 AND 3 AND 4</booleanFilter>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Endoso IND</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Solicitud rehabilitación póliza</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_RRVV</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>RRVV</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Problemas de asegurado</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Solicitud reintegro pensión</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_RRVV</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <booleanFilter>1 AND 2 AND 4 AND 3</booleanFilter>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>RRVV</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Web/Marketing RRVV</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Solicitud Tarjeta Club Viva Mejor</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Siniestros_Tradicionales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <booleanFilter>1 AND (2 OR 5) AND 3 AND 4 AND 6</booleanFilter>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Siniestros/Rescates</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Solicitud valores garantizados</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Familiares</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>1</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Web/Marketing IND</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Solicitud Tarjeta Club Viva Mejor</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Cobranza_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <booleanFilter>1 AND 2 AND 3 AND 4 AND 5</booleanFilter>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Cobranza</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Solicitud de suspensión de primas</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>1</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Siniestros_Tradicionales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Familiares</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Siniestros/ Rescates F</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Siniestro IQ</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>1</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Siniestros_Tradicionales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Familiares</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Siniestros/ Rescates F</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Siniestros PF</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>1</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Siniestros_Tradicionales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Colectivos</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Siniestros/Rescates C</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>ED - Siniestro Tradicional Vida</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>1</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Siniestros_Tradicionales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Colectivos</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Pago comercial</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Pago Comerciales Tradicional Vida</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>1</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Familiares</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Documentos PF</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Solicitud copia de póliza</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>1</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Familiares</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Cobranza F</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Solicitud de devolución de prima</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>1</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Cobranza_Colectivos</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Colectivos</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Cobranza C</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Solicitud de devolución de prima</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>1</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Siniestros_Tradicionales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Familiares</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Siniestros/ Rescates F</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Solicitud préstamo</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>1</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Familiares</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Endoso F</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Solicitud refechaje</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>1</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Familiares</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Endoso F</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Solicitud rehabilitación póliza</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>1</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_RRVV</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>RRVV</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Credito</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Endoso IND</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>ED - Endoso Aumento de Prima en Exceso</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Deriva_a_UR__c</field>
+                <operation>equals</operation>
+                <value>Verdadero</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_RRVV</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <booleanFilter>1 AND 2 AND 3 AND 4</booleanFilter>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>RRVV</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Documentos RRVV</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Solicitud copia de póliza</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_RRVV</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <booleanFilter>1 AND 2 AND 3 AND 4</booleanFilter>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>RRVV</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Documentos RRVV</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Solicitud de certificados</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_RRVV</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <booleanFilter>1 AND 2 AND 3 AND 4</booleanFilter>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>RRVV</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Endoso RRVV</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>On Time - Solicitud FONASA</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_RRVV</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <booleanFilter>1 AND 2 AND 3 AND 4</booleanFilter>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>RRVV</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Beneficio Estatal</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>On Time - Solicitud APS (Aporte Previsional Solidario)</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Cobranza</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Colectivos</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Cobranza C</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Cobranza Pólizas Colectivo</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Cobranza</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Cobranza</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Devolución de Prima IND-APV</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Cobranza</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Familiares</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Cobranza F</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Devolución de Prima PF</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Cobranza</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Familiares,Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Cobranza,Cobranza F</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Generación Avisos Cobranza</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Cobranza</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Familiares,Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Cobranza,Cobranza F</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Generar Facturar Electrónica</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Cobranza</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Cobranza</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Imputación Empleador APV,UR - Liberar cobranza APV empleador a directo</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Cobranza</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Familiares</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Cobranza F</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Imputación Empleador PF</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Cobranza</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Cobranza</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Imputación Póliza APV</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Cobranza</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Familiares</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Cobranza F</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Imputación Póliza PF</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Cobranza</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Cobranza</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Ingresar Pago Empleador APV</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Cobranza</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Familiares</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Cobranza F</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Ingresar Pago Empleador PF</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Cobranza</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Colectivos</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Cobranza C</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Ingresar Pago Póliza Colectivo</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Cobranza</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Cobranza</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Ingresar Pago Póliza IND-APV</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Cobranza</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Familiares</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Cobranza F</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Ingresar Pago Póliza PF</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Cobranza</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Familiares,Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Cobranza,Cobranza F</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Recaudación PAC o PAT</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Cobranza</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Colectivos,Seguros Familiares,Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Cobranza,Cobranza C,Cobranza F</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Reclamo de Cliente</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Cobranza</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Familiares,Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Cobranza,Cobranza F</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Renovar Póliza</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Cobranza</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Familiares,Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Cobranza,Cobranza F</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Revisión Pago Presencial</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Cobranza</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Cobranza</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Traspasos APV IN</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Cobranza</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Masivos</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Cobranza M</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Solicitud de devolución de prima,Revisión e imputación de pagos</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Negocio General</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>General</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Producción Individuales</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Documentos IND</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>UR - Solicitud Activación Mandatos,UR - Consulta Requerimientos Médicos,UR - Consulta Requerimientos Producción - Recepción SAAP,UR - Consulta Requerimientos Producción - Recepción Mandato Bancario</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Cobranza</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Negocio General</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Cobranza</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Cobranza General</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Cobranza</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Familiares</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Cobranza F</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>UR-Consulta estado solicitud por suspensión de prima PF</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Cobranza</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Familiares</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Cobranza F</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>UR-Consulta estado de devolución por excepción comercial</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Cobranza</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Familiares</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Cobranza F</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>UR-Revisión pago oficina servipag y bancos en convenios</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Cobranza</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Cobranza</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>UR-Consulta estado de devolución por excepción comercial</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Cobranza</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Cobranza</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>UR-Consulta estado solicitud por suspensión de prima IND</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Cobranza</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Cobranza</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>UR-Consulta estado solicitud devolución de prima IND-APV</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Cobranza</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Colectivos</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Cobranza C</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>UR-Consulta estado solicitud devolución de prima Colectivo</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Cobranza</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Masivos</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Cobranza M</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>UR-Consulta estado solicitud devolución de prima Masivos</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Cobranza</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Masivos</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Cobranza M</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>UR-Devolución por excepción comercial</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Cobranza</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Familiares</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Cobranza F</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>UR-Consulta estado solicitud devolución de prima PF</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Familiares</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Endoso F</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>ED - Solicitud Otros Endosos PF</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Familiares</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Endoso F</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>ED - Endoso Agregar Coberturas PF</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Familiares</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Endoso F</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>ED - Agregar asegurados PF</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Familiares</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Endoso F</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>ED - Designación y Actualización de Beneficiarios PF</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Familiares</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Endoso F</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>ED - Eliminar asegurados PF</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Familiares</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Endoso F</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>ED - Endoso Cambio Periodicidad de Pago PF</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Familiares</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Endoso F</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>ED - Endoso Eliminar Coberturas PF</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Familiares</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Endoso F</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>ED - Endoso Capital Asegurado PF</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Familiares</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Endoso F</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>ED - Modificación de Tipo de Pago PF a PAC - PAT</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Familiares</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Endoso F</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>UR- Activación póliza ingreso Siniestros/Primas</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Familiares</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Endoso F</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>UR - Exoneración pago de prima PF</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Familiares</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Endoso F</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>UR - Consulta estado solicitud de endoso PF</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Familiares</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Documentos PF</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>UR - Solicitud activación Mandatos PF</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Familiares</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Documentos PF</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>UR - Solicitud copia de póliza PF</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Familiares</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Endoso F</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>UR - Solicitud rehabilitación póliza PF</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Endoso IND</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>ED - Solicitud traspaso de ingreso</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Endoso IND</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>ED - Agregar asegurados adicionales</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Endoso IND</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>ED - Excluir asegurados adicionales</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Endoso IND</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>ED - Modificación tipo de pago a Empleador</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Endoso IND</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>ED - Modificación tipo de pago a Directo</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Endoso IND</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>ED - Cambio régimen tributario APV</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Familiares</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Endoso F</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>ED - Modificación de Tipo de Pago PF a directo</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Requerimientos IND</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>ED - Requerimiento enmienda venta</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Requerimientos IND</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>ED - Requerimiento SAAP contratación venta</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Requerimientos IND</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>ED - Requerimiento SAAP traspaso venta</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Requerimientos IND</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>ED - Requerimiento Mandato PAC venta</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Requerimientos IND</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>ED - Requerimiento Mandato PAT venta</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Requerimientos IND</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>ED - Requerimiento Otros venta</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Requerimientos Riesgo</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>ED - Requerimiento IMT</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Requerimientos Riesgo</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>ED - Requerimiento exámenes cliente</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Requerimientos Riesgo</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>ED - Requerimiento exámenes tabla requisitos</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Requerimientos Riesgo</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>ED - Requerimiento Enmienda</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Requerimientos Riesgo</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>ED - Requerimiento Cartas de Riesgo</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Requerimientos Riesgo</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>ED - Cuestionarios de Riesgo</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Requerimientos Riesgo</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>ED - Requerimiento F. Beneficiario Final</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Requerimientos Riesgo</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>ED - Requerimiento DPS nueva</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Requerimientos Riesgo</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>ED - Requerimiento Otros Riesgo</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Venta Individual</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>UR - Venta Fisica</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Familiares</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Venta PF</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>UR - Venta Fisica</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Familiares</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Cobranza F</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Solicitud eliminar empleados de planilla (PF-APV)</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Cobranza</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Cobranza</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>UR - Desmarcar pago de póliza</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Cobranza</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Cobranza</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>UR - Reactivar cobros PAC o PAT</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Cobranza</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Familiares</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Cobranza F</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>UR - Desmarcar pago de póliza</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Cobranza</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Familiares</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Cobranza F</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>UR - Reactivar cobros PAC o PAT</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Cobranza</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Cobranza</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>UR - Suspensión cobro PAC (1 póliza mantiene cobro)</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Beneficios</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Siniestros/Rescates</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>ED - Solicitud de Rescate Total</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Beneficios</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Siniestros/Rescates</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>ED - Solicitud de Rescate Parcial</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Beneficios</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Siniestros/Rescates</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>ED - Solicitud de Rescate Patrimonial Parcial</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Beneficios</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Siniestros/Rescates</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>ED - Solicitud de Rescate Patrimonial Total</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_RRVV</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>RRVV</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Credito</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>UR - Solicitud Certificado de Portabilidad</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_RRVV</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>RRVV</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Credito</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>UR - Solicitud de Portabilidad Financiera</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Endoso IND</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>ED - Modificación de Tipo de Pago a Tarjeta de Crédito</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Endoso IND</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>ED - Modificación de Tipo de Pago a Empleador</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Endoso IND</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>ED - Endoso disminución de Prima en Exceso</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Endoso IND</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>ED - Modificación de Tipo de Pago a Cuenta Corriente</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_RRVV</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>RRVV</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Endoso RRVV</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>UR - Endoso Anticipo</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Familiares</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Endoso F</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>UR - Exoneración de pago pre y post natal</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_Individuales</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Familiares</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Endoso F</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>UR - Beneficio de suspensión de pago por Cesantía</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Beneficios</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Siniestros/Rescates</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Siniestro Catastrófico</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Beneficios</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Siniestros/Rescates</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Siniestro Individuales</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Beneficios</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Siniestros/Rescates</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Solicitud préstamo</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Beneficios</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Siniestros/Rescates</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Solicitud rescate valores garantizados</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Beneficios</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Siniestros/Rescates</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Desistimiento de traspaso</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Beneficios</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Colectivos</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Siniestros/Rescates C</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Siniestro Tradicional Vida COL</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Beneficios</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Masivos</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Siniestros/ Rescates M</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Denuncio de siniestro</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Beneficios</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Familiares</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Siniestros/ Rescates F</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Siniestro IQ</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Beneficios</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Familiares</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Siniestros/ Rescates F</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Siniestros PF</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Beneficios</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Familiares</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Siniestros/ Rescates F</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Solicitud préstamo</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Beneficios</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Familiares</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Siniestros/ Rescates F</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Solicitud rescate valores garantizados</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Beneficios</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Familiares</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Siniestros/ Rescates F</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Vencimientos y Saldamientos</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_RRVV</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>RRVV</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Problemas de asegurado</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>UR - Solicitud Retención Judicial</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Produccion_RRVV</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>RRVV</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Beneficio Estatal</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>UR - PGU</value>
+            </criteriaItems>
+        </ruleEntry>
+        <ruleEntry>
+            <assignedTo>UR_Beneficios</assignedTo>
+            <assignedToType>Queue</assignedToType>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Solicitudes</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Negocio__c</field>
+                <operation>equals</operation>
+                <value>Seguros Individuales</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.CASO_Categoria__c</field>
+                <operation>equals</operation>
+                <value>Siniestros/Rescates</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Case.Detalle_Solicitud__c</field>
+                <operation>equals</operation>
+                <value>Vencimientos y Saldamientos</value>
+            </criteriaItems>
+        </ruleEntry>
+    </assignmentRule>
+</AssignmentRules>

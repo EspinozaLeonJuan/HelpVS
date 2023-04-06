@@ -1,0 +1,1 @@
+<apex:page standardController="Categoria_de_Poliza__c" extensions="ActualizarCategoriaDePolizaController" recordSetVar="categorias" action="{!actualizar}"/>

@@ -1,0 +1,105 @@
+<apex:page standardController="Case" extensions="RequerimientoController" showHeader="false" sidebar="false"  >
+ 
+   
+    <apex:stylesheet value="{!URLFOR($Resource.EscritorioDigital, 'css/EscritorioDigital.css')}" />    
+    <apex:includeScript value="{!URLFOR($Resource.EscritorioDigital, 'js/EscritorioDigital.js')}"/>
+    <script>
+    //  esto es para uso en EscritorioDigital.js es asi
+    var rutaRecursosEstaticos = '{!URLFOR($Resource.EscritorioDigital)}';
+   
+    </script>
+   
+     <apex:actionStatus id="Status">
+        <apex:facet name="start">
+            <apex:outputPanel >
+                <div class="popupBackground" />
+                <div class="popupPanel">
+                    &nbsp; Espere...<img src="/apexpages/devmode/img/saveStatus.gif" />
+                </div>
+            </apex:outputPanel> 
+        </apex:facet>
+    </apex:actionStatus>
+
+     <apex:form id="RequerimientoForm" styleClass="customPopup" >
+        <apex:outputPanel > 
+            <apex:sectionHeader title="Formulario Digital"/>  
+            <apex:pageblock id="NuevoRequerimiento" rendered="{!Panel == 'CRE_REQ' }"> 	    
+            <apex:panelGrid columns="3">
+                &nbsp;
+                <apex:outputLabel >RUT Titular:</apex:outputLabel>      
+                <apex:outputLabel value="{!Caso.RUT__c}"></apex:outputLabel>
+                &nbsp;
+                <apex:outputLabel >Formulario:</apex:outputLabel>
+                <apex:outputLabel value="{!NombreFormulario}"></apex:outputLabel>    
+                &nbsp;
+                <apex:outputLabel >Solicitante:</apex:outputLabel>
+                <apex:selectList value="{!TipoRequerimientoED}" size="1" id="values">
+                    <apex:actionSupport event="onchange" reRender="newvalue" />
+                    <apex:selectOptions value="{!TiposSolicitante}"/>
+                </apex:selectList>
+                &nbsp;
+                <apex:commandButton action="{!crearRequerimiento}" value="Generar Formulario Digital" status="Status"
+                       oncomplete="crearRequerimiento('{!IdRequerimientoED}','{!IdPersistenciaED}');"/>                
+            </apex:panelGrid>
+        </apex:pageblock>
+            <apex:pageblock id="RetomarRequerimiento" rendered="{!Panel == 'VER_REQ'}"> 
+                <apex:panelGrid columns="3">
+                    &nbsp;
+                    <apex:outputLabel >RUT Titular:</apex:outputLabel>
+                    <apex:outputLabel value="{!Caso.RUT__c}"></apex:outputLabel>
+                    &nbsp;
+                    <apex:outputLabel >Formulario:</apex:outputLabel>
+                    <apex:outputLabel value="{!Requerimiento}"></apex:outputLabel>
+                     &nbsp;
+                    <apex:outputLabel >Solicitante:</apex:outputLabel>
+                    <apex:outputLabel value="{!Solicitante}"></apex:outputLabel>
+                    &nbsp;
+                    &nbsp;
+                    <apex:commandButton action="{!eliminarRequerimiento}" value="Eliminar Formulario Digital" 
+                              status="Status" onclick="if(!confirm('Desea eliminar el Formulario Digital asociado a la Solicitud?')){return false};"                                                       
+                                        oncomplete="eliminarRequerimiento('{!IdPersistenciaED}','{!ElimResult}', '{!ElimAlert}');"/>     
+                    <apex:commandButton action="{!verRequerimiento}" value="Ver Formulario Digital" status="Status"
+                               oncomplete="verRequerimiento('{!IdRequerimientoED}','{!IdPersistenciaED}','{!RutUsuario}');"/>
+                </apex:panelGrid>
+        
+    </apex:pageblock>
+            <apex:pageblock id="VerRequerimiento" rendered="{!Panel == 'FIN_REQ'}"> 
+                 <apex:panelGrid columns="3">
+                      &nbsp;
+                      <apex:outputLabel >RUT Titular:</apex:outputLabel>
+                      <apex:outputLabel value="{!Caso.RUT__c}"></apex:outputLabel>
+                      &nbsp;
+                      <apex:outputLabel >Formulario:</apex:outputLabel>
+                      <apex:outputLabel value="{!Requerimiento}"></apex:outputLabel>    
+                      &nbsp;
+                      <apex:outputLabel >Solicitante:</apex:outputLabel>
+                      <apex:outputLabel value="{!Solicitante}"></apex:outputLabel>
+                      &nbsp;
+                      &nbsp;    
+                      <apex:commandButton action="{!verRequerimiento}" value="Ver Formulario Digital" status="Status"
+                       oncomplete="verRequerimiento('{!IdRequerimientoED}','{!IdPersistenciaED}','{!RutTitular}');"/>
+                  </apex:panelGrid>    
+            </apex:pageblock>
+            <apex:pageblock id="SinRequerimiento" rendered="{!Panel == 'NUL_REQ' }"> 
+                 <apex:panelGrid columns="1">
+                     &nbsp;     
+                     <apex:outputLabel >Esta solicitud no posee una versión digital del Formulario</apex:outputLabel>
+                     &nbsp;
+                     &nbsp;
+                     &nbsp;
+                     &nbsp;
+                 </apex:panelGrid>    
+            </apex:pageblock>   
+            <apex:pageblock id="SinRutUsuario" rendered="{!Panel == 'NUL_USER' }"> 	
+                 <apex:panelGrid columns="1">
+                     &nbsp;
+                     <apex:outputLabel >El Usuario actual no posee RUT de Usuario asociado, imposible acceder a Escritorio Digital.</apex:outputLabel>
+                     &nbsp;
+                     &nbsp;
+                     &nbsp;
+                     &nbsp;
+                 </apex:panelGrid>    
+            </apex:pageblock> 
+        </apex:outputPanel>
+	</apex:form>
+</apex:page>

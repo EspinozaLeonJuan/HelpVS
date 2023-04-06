@@ -1,0 +1,112 @@
+<apex:page standardController="Poliza__c" extensions="CargosAbonosController">
+  <apex:sectionHeader title="Contratos" subtitle="Datos Generales"/>
+  <apex:pageBlock title="">
+		<apex:pageBlockButtons >
+			<input type="button" value="Volver" onclick="javascript:history.back();" />
+		</apex:pageBlockButtons>
+	  <apex:form >
+	    <apex:pageBlock title="Seguro: Detalle del Contrato">
+	      <apex:pageBlockSection title="" columns="1">
+	        <apex:pageBlockSectionItem >
+        		<apex:outputLabel value="{!$ObjectType.Poliza__c.Fields.N_Poliza__c.Label}" />
+        		<apex:outputLink value="/{!Poliza__c.Id}">{!Poliza__c.N_Poliza__c}</apex:outputLink>
+        	</apex:pageBlockSectionItem>
+	        <apex:outputField value="{!Poliza__c.RecordType.Name}" label="Tipo"/>
+	        <apex:outputField value="{!Poliza__c.Nombre_de_Producto__c}" label="Plan"/>
+	      </apex:pageBlockSection>
+	    </apex:pageBlock>
+	    <apex:pageBlock title="Cargos y Abonos">
+	      <apex:outputlabel value="Consulta Por: " for="values" style="float: left;" />
+	      <apex:actionRegion >
+	        <apex:selectRadio value="{!consulta}" style="float:left;">
+	          <apex:actionSupport event="onclick" rerender="Panelperiodo,Panelmeses" status="changePeriodStatus" />
+	          <apex:selectOptions value="{!TipoConsulta}"/> 
+	        </apex:selectRadio>&nbsp; &nbsp; &nbsp;
+	      </apex:actionRegion>
+				<apex:actionStatus id="changePeriodStatus" style="float: left; margin: 10px 0px 0px 10px;">
+					<apex:facet name="start" >
+						<img src="/img/loading.gif" />                    
+					</apex:facet>
+				</apex:actionStatus>
+				<div style="clear: both;"></div>
+	    </apex:pageBlock>
+	    <apex:outputPanel id="Panelperiodo" >
+	      <apex:outputPanel rendered="{!consulta=='periodo'}">
+	        <apex:outputlabel value="Periodo" for="years" />
+	        <apex:selectList value="{!anios}" size="1" id="years" multiselect="false">
+	          <apex:selectOptions value="{!Years}"/>
+	        </apex:selectList>
+	        <apex:outputlabel value="Mes" for="months" />
+	        <apex:selectList value="{!meses}" size="1" id="months" multiselect="false">
+	          <apex:selectOptions value="{!Months}"/>
+	        </apex:selectList>
+	        &nbsp; &nbsp; &nbsp;
+	        <apex:commandButton value="Buscar" action="{!mostrarResPeriodo}" rerender="resPeriodo,resMeses" status="searchStatus"/>
+	      </apex:outputPanel>
+	    </apex:outputPanel>
+	    <apex:outputPanel id="Panelmeses" >
+	      <apex:outputPanel rendered="{!consulta=='mes'}">
+	        <apex:outputlabel value="Desde Año" for="ymeses" />
+	        <apex:selectList value="{!anios}" size="1" id="ymeses" multiselect="false">
+	          <apex:selectOptions value="{!Years}"/>
+	        </apex:selectList>
+	        <apex:outputlabel value="Mes" for="mmeses" />
+	        <apex:selectList value="{!meses}" size="1" id="mmeses" multiselect="false">
+	          <apex:selectOptions value="{!Months}"/>
+	        </apex:selectList>
+	        <br /><br />
+	        <apex:outputlabel value="Hasta Año" for="ymesess" />
+	        <apex:selectList value="{!aniosH}" size="1" id="ymesess" multiselect="false">
+	          <apex:selectOptions value="{!Years}"/>
+	        </apex:selectList>
+	        <apex:outputlabel value="Mes" for="mmesess" />
+	        <apex:selectList value="{!mesesH}" size="1" id="mmesess" multiselect="false">
+	          <apex:selectOptions value="{!Months}"/>
+	        </apex:selectList>
+	        &nbsp; &nbsp; &nbsp;
+	        <apex:commandButton value="Buscar" action="{!mostrarResMeses}" rerender="resMeses,resPeriodo" status="searchStatus"/>
+	      </apex:outputPanel>
+	    </apex:outputPanel>
+			<apex:actionStatus id="searchStatus">
+				<apex:facet name="start" >
+					<img src="/img/loading.gif" />                    
+				</apex:facet>
+			</apex:actionStatus>
+	  </apex:form>
+	  <br></br>
+	  <br></br>
+	  <br></br>
+	  <br></br>
+	  <apex:form >
+	   <apex:pageBlock title="TODOS LOS DATOS"> 
+	    <apex:outputPanel id="resPeriodo" >
+	      <apex:outputPanel rendered="{!panelResultado=='panelPeriodo'}">
+	        <apex:pageMessages id="periodoMsg" />
+	        <apex:pageBlockSection title="CargoAbonoPoliza" rendered="{! CargoAbonoPeriodo.size > 0 }">
+	          <apex:pageBlockTable value="{!CargoAbonoPeriodo}" var="item">
+	            <apex:column value="{!item.Tipo__c}"/>      
+	            <apex:column value="{!item.Fecha_Movimiento__c}"/>
+	            <apex:column value="{!item.Exceso__c}"/>
+	          </apex:pageBlockTable>
+	        </apex:pageBlockSection>
+	      </apex:outputPanel>
+	    </apex:outputPanel>
+	    <apex:outputPanel id="resMeses" >
+	      <apex:outputPanel rendered="{!panelResultado=='panelMeses'}">
+	        <apex:pageMessages id="mesesMsg" />
+	        <apex:pageBlockSection title="CargoAbonoMensuales" columns="1" rendered="{! CargoAbonoMensuales.size > 0 }">          
+	          <apex:pageBlockTable width="70%" value="{!CargoAbonoMensuales}" var="item" columns="6">
+							<apex:column value="{!item.Poliza__c}"/>  
+							<apex:column value="{!item.Ramo__c}"/> 
+							<apex:column value="{!item.Plan__c}"/> 
+							<apex:column value="{!item.Fecha__c}"/>  
+							<apex:column value="{!item.Glosa__c}"/> 
+							<apex:column value="{!item.Rm_Tomo__c}"/> 
+	         </apex:pageBlockTable>
+	       </apex:pageBlockSection>
+	     </apex:outputPanel>
+	   </apex:outputPanel>
+	 </apex:pageBlock>  
+	</apex:form>
+	</apex:pageBlock>
+</apex:page>

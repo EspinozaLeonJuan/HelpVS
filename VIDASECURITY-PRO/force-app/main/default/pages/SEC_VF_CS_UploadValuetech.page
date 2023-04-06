@@ -1,0 +1,357 @@
+<!--
+@File Name : SEC_VF_CS_UploadValuetech.page
+@Description : 
+@Author : ChangeMeIn@UserSettingsUnder.SFDoc
+@Group : 
+@Last Modified By : Juan Espinoza León
+@Last Modified On : 03-23-2021
+@Modification Log : 
+Ver Date Author Modification
+1.0 4/14/2020 ChangeMeIn@UserSettingsUnder.SFDoc Initial Version
+--> 
+<apex:page controller="CTR_CS_UploadValuetech" action="{!IniciaCargaAdjunto}" lightningStylesheets="true" showHeader="false" sidebar="false" docType="html-5.0" >
+    <body onload = "resizeTo (750,830);">
+        <style>
+            .popupBackground {
+                /* Background color */
+                background-color:black;
+                opacity: 0.5;
+                filter: alpha(opacity = 50);
+                /* Dimensions */
+                width: 100%;
+                height: 1000%; 
+                top: 0;
+                left: 0;
+                z-index: 998;
+                position: absolute; 
+                /* Mouse */
+                cursor:wait;
+            }
+            .popupPanel {
+                /* Background color */
+                border: solid 2px orange;
+                background-color: white; 
+                /* Dimensions */
+                display: inline-block;
+                left: 50%;
+                width: 100px;
+                margin-left: 0px;
+                top: 100px;
+                height: 25px;
+                margin-top: -25px;
+                position: absolute; 
+                z-index: 999; 
+                /* Mouse */
+                cursor:pointer;
+            }
+            .ct
+            {
+                text-align:center;
+            }
+            .header_inline_left
+            {
+                width:49.5%;
+                display:inline-block;
+                /* position: absolute;*/
+                /*float: left;*/
+                /*text-align:center;*/
+                padding: 3px;
+                /* margin-top: -30px;*/
+                margin-bottom: 4px;
+            }
+            .header_inline_right
+            {
+                width:49.5%;
+                display:inline-block;
+                /* position: absolute;*/
+                /*float: left;*/
+                text-align:right;
+                padding: 3px;
+                /* margin-top: -30px;*/
+                margin-bottom: 4px; 
+            }
+            .checkTable 
+            {
+                /*width: 100%;
+                text-align: center;*/
+            }
+            .btnDefault{
+                color:white !important;
+                background:#A2A4A5 !important;
+                margin-right: -8px;
+            }
+            .btnSuccess{
+                color:white !important;
+                background:#11862D !important;
+                margin-right: -8px;
+            }
+            .btnDanger{
+                color:white !important;
+                background:#E30C0C !important;
+                margin-right: -8px;
+            }
+            .btnReturn{
+                color:white !important;
+                background:rgb(105, 97, 214) !important;
+                margin-right: -8px;
+            }
+            .btnMenuCurrent{
+                color:white !important;
+                background:#8D8E95 !important;
+                /*display: inline-flex;*/
+                /*margin-left: -10px;*/
+                margin-right: -8px;
+            }
+            .btnMenu{
+                color:white !important;
+                background:#5260E3 !important;
+                /*display: inline-flex;*/
+                /*margin-left: -10px;*/
+                margin-right: -8px;
+            }
+            .btnPopUp{
+                color:black !important;
+                background:#E7D33B !important;
+                /*display: inline-flex;*/
+                /*margin-left: -10px;*/
+                margin-right: -8px;
+                /*margin-top: 5px;*/
+            }
+        </style>
+        
+        <apex:includeScript value="{!$Resource.jquery}"/>
+        
+        <script type="text/javascript">
+            function colorPageBlock(pageblock, bkcolor, color) {
+                if (pageblock != null) 
+                {
+                pageblock.firstChild.style.cssText = "background-color: " + bkcolor + ";font-weight:bold;color:"+color+";";
+                }
+            }
+            function Cancelar()
+            { 
+                window.top.close();
+            }
+            
+            $(document).ready(function() {
+
+                if ('{!Mensaje}' != '')
+                {
+                    alert('{!Mensaje}');                    
+                }
+
+                if ('{!Error}' == 'true')
+                {
+                    //location.reload();
+                    window.top.close();
+                }
+
+                if ('{!ErrorCargaInicial}' != '')
+                {
+                    alert('{!ErrorCargaInicial}');
+                }
+
+                if ('{!ResultadoCarga}' == 'true')
+                {
+                    if('{!Procedencia}' == 'caso_nativo')
+                    {       
+                        window.opener.location.href='/{!Caso.Id}';
+                        window.top.close();
+                    }
+                    if('{!Procedencia}' == 'caso_nativo_lig')
+                    {       
+                        window.top.close();
+                        //alert('{!Caso.Id}');
+                        //document.location.href ='/{!Caso.Id}';             
+                       window.opener.location.href='/{!Caso.Id}';
+                    //   alert('dddd');
+                        
+                    }
+                    else if ('{!Procedencia}' == 'caso_ventas')
+                    {
+                        window.opener.location.href='/apex/SEC_VF_CV_Caso?Id={!Caso.Id}';
+                        window.top.close();
+                    } 
+                    else if ('{!Procedencia}' == 'tarea_ur')
+                    {
+                        window.opener.location.href='/apex/SEC_VF_UR_Tarea?Id={!IdTarea}&idResponsable={!UBackUp}&procedencia={!ProcedenciaUR}';
+                        window.top.close();
+                    }   
+                    else if ('{!Procedencia}' == 'caso_ur')
+                    {
+                        window.opener.location.href='/apex/SEC_VF_UR_Caso?Id={!Caso.Id}&idResponsable={!UBackUp}&procedencia={!ProcedenciaUR}';
+                        window.top.close();
+                    }
+                }
+                else
+                {
+                   
+                }
+            });
+
+            function cargaArchivoOK()
+            {
+                alert('Iniciando carga de Archivo...');
+                var x = document.getElementById('btnDiv');
+                x.style.display = 'none';
+                /*if (x.style.display === 'none') {
+                    x.style.display = 'block';
+                } else {
+                    x.style.display = 'none';
+                }*/
+            }
+
+            
+        </script>
+            
+        <div id="dv_CuerpoPrincipal" style="width: 90%; margin-left: auto; margin-right: auto; height: 100%; border: none;">
+            <apex:actionStatus id="Status">
+                <apex:facet name="start">
+                    <apex:outputPanel >
+                        <div class="popupBackground" />
+                        <div class="popupPanel">
+                            &nbsp; Espere...<img src="/apexpages/devmode/img/saveStatus.gif" />
+                        </div>
+                    </apex:outputPanel> 
+                </apex:facet>
+            </apex:actionStatus>
+
+            <apex:pageBlock id="pbk_PanelCaso">
+            <!--<br/>-->
+                <apex:form id="frm_sup"> 
+        
+                    <apex:actionFunction name="update" action="{!changeObligatorio}" reRender="obligatorio,causante" >
+                        <apex:param name="idAdjunto" value="" />
+                    </apex:actionFunction> 
+                    <apex:actionFunction name="upload" action="{!Upload}" reRender="obligatorio" />
+                    <apex:actionFunction name="cambio" action="{!cambio}" status="Status"  />
+        
+                    <apex:pageBlockSection title="{!Titulo}" collapsible="false" columns="1" id="pbs_CasoHeader" >
+                        <apex:panelGrid columns="4" style="width:100%;">
+                            <apex:outputLabel style="font-weight:bold;" >Nº Caso</apex:outputLabel> 
+                            <apex:outputLabel style="font-weight:bold;font-size:14px;color:darkblue" value="{!Caso.CaseNumber}" /> 
+                            <apex:outputLabel style="font-weight:bold;" >Negocio</apex:outputLabel> 
+                            <apex:outputField value="{!Caso.Negocio__c}" rendered="true" />
+                            <!--2-->
+                            <apex:outputLabel style="font-weight:bold;" >RUT</apex:outputLabel> 
+                            <apex:outputField label="RUT Cliente" value="{!Caso.RUT__c}" rendered="{!Caso.EsNoCliente__c == false}"/> 
+                            <apex:outputLabel value="{!Caso.RUT_no_Cliente__c}" rendered="{!Caso.EsNoCliente__c == true}" /> 
+                            <apex:outputLabel style="font-weight:bold;" >Categoría</apex:outputLabel> 
+                            <apex:outputLabel value="{!Caso.CASO_Categoria__c}" /> 
+                            <!--3-->
+                            <apex:outputLabel style="font-weight:bold;" >Nombre</apex:outputLabel> 
+                            <apex:outputField value="{!Caso.AccountId}" rendered="{!Caso.EsNoCliente__c == false}" style="width:180px;font-size:11px;" /> 
+                            <apex:outputLabel value="{!Caso.Nombre_no_Cliente__c}" rendered="{!Caso.EsNoCliente__c == true}" style="width:180px;font-size:11px;" /> 
+                            <apex:outputLabel style="font-weight:bold;" >Detalle Solicitud</apex:outputLabel> 
+                            <apex:outputField style="width:180px;" value="{!Caso.Detalle_Solicitud__c}" /> 
+
+                            <apex:outputLabel style="font-weight:bold;" rendered="{!Procedencia == 'caso_ur'}" value="Poliza"/>
+                            <apex:input value="{!Poliza}" type="text" style="width:100px;" rendered="{!Procedencia == 'caso_ur'}" />
+
+                         <!--   <apex:outputLabel style="font-weight:bold;" value="Poliza"  />
+                            <apex:input value="{!Poliza}" type="text" style="width:100px;"  onchange="cambio();"  />-->
+                        </apex:panelGrid>
+
+
+
+                        <hr/>
+
+                        <apex:panelGrid rendered="{!OR(Es_Individuales == true,Es_Colectivo == true)}" >
+                            <apex:outputLabel style="font-weight:bold;display:block;width:150px;" value="Tipo Documento" ></apex:outputLabel>
+                            <apex:selectList id="cmd_TiposDocumento" value="{!TipoDocumentoInd}" size="1" required="false" style="width:400px;" >
+                                <apex:actionSupport event="onchange"  />
+                                <apex:selectOptions value="{!TiposDocumento_IND}" />
+                            </apex:selectList>
+
+                        </apex:panelGrid>
+                        <apex:panelGrid rendered="{!OR(Es_RentasVitalicias == true, Es_Credito == true)}" >
+                            <apex:outputLabel style="font-weight:bold;display:block;width:150px;" value="Familia Documento" ></apex:outputLabel>
+                            <!--<apex:outputLabel  id="family" value="{!Familia}"  ></apex:outputLabel>-->
+                            <apex:selectList id="cmd_Familia" value="{!Familia}" size="1" required="false" style="width:400px;" >
+                                <apex:actionSupport event="onchange"  />
+                                <apex:selectOptions value="{!Familia_RRVV}" />
+                            </apex:selectList>
+                        </apex:panelGrid>
+
+                        <hr/>
+
+                        <apex:panelGrid rendered="{!EscritorioDigital == true}" >
+                            <apex:outputLabel style="font-weight:bold;display:block;width:150px;" value="Tipo Solicitante" ></apex:outputLabel> 
+                            <apex:selectList value="{!Codigo_Requerimiento}" size="1" id="solicitantes_values" style="width:400px;" >
+                                <apex:actionSupport event="onchange" reRender="ladjunto,causante,obligatorio" />
+                                <apex:selectOptions value="{!ListaSolicitantes}"/>
+                            </apex:selectList> 
+                        </apex:panelGrid>
+                        <apex:panelGrid rendered="{!EscritorioDigital == true}"  id="ladjunto" > 
+                            <apex:outputLabel style="font-weight:bold;display:block;width:150px;" value="Seleccione Adjunto" ></apex:outputLabel>
+                            <apex:panelGroup style="width:450px;">
+                               
+                                    <apex:selectList id="cmd_Adjunto" value="{!IdRelacionAdjunto}" size="1" required="false" style="width:400px;" onchange="update(this.value);"  >
+                                        <apex:actionSupport event="onchange" reRender="causante,obligatorio,cmd_Familia" />
+                                        <apex:selectOptions value="{!Adjuntos}" />
+                                    </apex:selectList> 
+                                    <apex:inputCheckbox id="obligatorio" disabled="true" value="{!Obligatorio}" style="font-weight:bold;font-size:16px;color:red;background-color: red" />
+
+                            </apex:panelGroup>
+
+                            
+                         
+                        </apex:panelGrid>
+                        <apex:panelGrid rendered="{!EscritorioDigital == false}">
+                            <apex:outputLabel style="font-weight:bold;display:block;width:150px;" value="Seleccione Adjunto"></apex:outputLabel>
+                            <apex:selectList id="cmd_Adjunto1" value="{!IdAdjunto}" size="1" required="false" style="width:400px;" >
+                                <apex:actionSupport event="onchange" reRender="causante" />
+                                <apex:selectOptions value="{!AdjuntosAll}" />
+                            </apex:selectList> 
+                        </apex:panelGrid>
+                    
+                <!--  <apex:panelGrid id="causante" rendered="{!EscritorioDigital == true}" >
+                            <apex:outputLabel style="font-weight:bold;display:block;width:150px;" rendered="{!Requiere_RutCausante == true}" value="Rut Causante" ></apex:outputLabel>
+                            <apex:input value="{!RutCausante}" type="text" style="width:400px;text-align:left;display:block;"  rendered="{!Requiere_RutCausante == true}"/> 
+                        </apex:panelGrid>
+                    -->
+                        <hr/>
+
+                        <apex:panelGrid >
+                            <apex:outputLabel style="font-weight:bold;display:block;width:150px;" value="Nombre Adjunto"/>
+                            <apex:input value="{!OtroDocumento}" type="text" style="width:400px;" onchange="cambio();"  /> 
+                            <apex:outputLabel style="font-weigth:bold;color:red;width:350px;font-size:9px;" value="Nota: Si ingresa un valor en este campo, este será considerado como el nombre del adjunto ingresado."/>
+                        </apex:panelGrid>
+                      
+
+                        <script>colorPageBlock(document.getElementById("{!$Component.pbs_CasoHeader}"), "#EF861C", "white");</script> 
+                        <!--<script>colorPageBlock(document.getElementById("{!$Component.pbs_CasoHeader}"), "gray", "white");</script>-->
+                    </apex:pageBlockSection>
+
+                </apex:form>
+                <apex:form >
+                  
+                    <div id="btnDiv" >
+                      
+                        <apex:pageBlockSection collapsible="false" columns="1" >
+                            <apex:panelGrid style="width:100%;text-align:left;" id="causante" rendered="{!EscritorioDigital == true}" >
+                                <apex:outputLabel style="font-weight:bold;display:block;width:150px;" rendered="{!Requiere_RutCausante == true}" value="Rut Causante" ></apex:outputLabel>
+                                <apex:input value="{!RutCausante}" type="text" style="width:400px;text-align:left;display:block;"  rendered="{!Requiere_RutCausante == true}"/> 
+                            </apex:panelGrid>
+                           
+                            <apex:panelGrid columns="2" style="width:100%;text-align:right;" >
+                                <apex:panelGrid columns="1" style="width:100%;text-align:center;border-style: solid;color:#5260E3;" >
+                           
+                            <apex:inputFile id="fileBody" value="{!fileBody}" filename="{!fileName}" styleClass="input-file" size="45" /> 
+                           
+                        </apex:panelGrid>
+                                <apex:panelGroup >
+                                    <apex:commandbutton value="Adjuntar archivo" styleClass="btnSuccess" action="{!Upload}" onclick="cargaArchivoOK();" status="Status" />
+                                        &nbsp;
+                                    <apex:commandbutton value="Cancelar" styleClass="btnDefault" onclick="Cancelar();" />
+
+                                 <!--   <apex:commandbutton value="Cancelar" styleClass="btnDefault" onclick="alert('{!Familia}');" />-->
+                                </apex:panelGroup>
+                            </apex:panelGrid>
+                        </apex:pageBlockSection>
+                   </div>
+                </apex:form>
+            </apex:pageBlock>
+        </div>
+    </body>
+</apex:page>

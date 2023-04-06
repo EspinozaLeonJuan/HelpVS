@@ -1,0 +1,37 @@
+<!--
+  @description       : 
+  @author            : Juan Espinoza León
+  @group             : 
+  @last modified on  : 02-10-2021
+  @last modified by  : Juan Espinoza León
+  Modifications Log 
+  Ver   Date         Author               Modification
+  1.0   02-09-2021   Juan Espinoza León   Initial Version
+-->
+
+    <apex:page standardController="Opportunity"
+    lightningStylesheets="true" 
+    sidebar="false" 
+    showHeader="false" 
+    standardStylesheets="false"
+    action="{!SendEmail}" extensions="CTR_LINK_NotificacionManual" >  
+
+<apex:includeScript value="{!$Resource.jquery}"/>
+     
+   <script type="text/javascript">
+        
+
+        $(document).ready(function() {
+
+            alert('{!Mensaje}');
+            document.location.href ='/{!Id}';
+        });
+
+        
+
+    </script>
+<!-- Begin Default Content REMOVE THIS -->
+<!--<h1>Caso</h1> 
+Gestion de Eventos -->
+<!-- End Default Content REMOVE THIS -->
+</apex:page>

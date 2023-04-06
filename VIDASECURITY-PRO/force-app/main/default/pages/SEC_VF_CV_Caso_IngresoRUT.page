@@ -1,0 +1,206 @@
+<!--
+ ************************************************************************************************************
+ |  NOMBRE                 : SEC_VF_CV_Caso_IngresoRUT											            |
+ |  TIPO                   : VISUALFORCE PAGE																|
+ |  REQUERIMIENTO          : MEJORAS UR                                                                  	|
+ |  DESCRIPCION            : Permite realizar el ingreso de un RUT para la creación de un nuevo caso, basado| 
+ |                           en si es Cliente o no CLiente varia la interfaz de creación del Caso y el      |
+ |                           comportamiento en la obtencion de datos                                        | 
+ |  																										|
+ ************************************************************************************************************
+ |  VERSIÓN    *    FECHA C/M    *    RESPONSABLE    *    OBSERVACIONES										|
+ |    1.0      *    2019/08/01   *    JUAN ESPINOZA  *    Creación Página									|
+ |     																										|
+ ************************************************************************************************************
+-->
+
+<apex:page controller="CTR_CV_Caso" action="{!IngresoRUT}" lightningStylesheets="true" showHeader="true" sidebar="false"  docType="html-5.0" >
+    <style>
+              
+.popupBackground {
+        /* Background color */
+        background-color:black;
+        opacity: 0.5;
+        filter: alpha(opacity = 50);
+        
+        /* Dimensions */
+        width: 100%;
+        height: 1000%;       
+        top: 0;
+        left: 0;
+        z-index: 998;
+        position: absolute;        
+        /* Mouse */
+        cursor:wait;
+    }
+
+    .header_inline_right
+    {
+        width :99%;
+        display:inline-block;
+        /* position: absolute;*/
+        /*float: left;*/
+        text-align:right;
+        padding: 3px;
+      /*  margin-top: -30px;*/
+        margin-bottom: 4px;      
+    }
+
+            
+    .popupPanel {
+       /* Background color */
+        border: solid 2px orange;
+        background-color: white;        
+        /* Dimensions */
+        display: inline-block;
+        left: 50%;
+        width: 100px;
+        margin-left: 0px;
+        top: 100px;
+        height: 25px;
+        margin-top: -25px;
+        position: absolute;   
+        z-index: 999;        
+        /* Mouse */
+        cursor:pointer;
+    }
+    
+    .ct{
+    text-align:center;
+    }
+
+
+    .checkTable 
+    {
+        /*width: 100%;
+        text-align: center;*/
+    }
+    
+    .btnMenuCurrent{
+        color:white !important;
+        background:#8D8E95 !important;
+       /*display: inline-flex;*/
+        /*margin-left: -10px;*/
+        margin-right: -8px;
+    }
+
+    .btnMenu{
+        color:white !important;
+        background:#5260E3 !important;
+        /*display: inline-flex;*/
+        /*margin-left: -10px;*/
+        margin-right: -8px;
+    }
+
+    .btnProcess{
+        color:white !important;
+        background:#11862D !important;
+        margin-right: -6px;
+        }
+
+     .btnCancel{
+        color:white !important;
+        background:#F0A769 !important;
+       margin-right: -6px;
+    }
+
+    .btnClean{
+        color: black !important;
+        background: #DAE3E7 !important;
+        margin-right: -5px;
+    }
+
+    
+/*
+    body .bPageBlock .pbHeader {
+    background-color: #EF861C; 
+    size: 45px;
+    color: white;
+    padding-left: 15px;
+    
+}*/
+
+    </style>
+    <apex:includeScript value="{!$Resource.jquery}"/>
+    <!--<br/>-->
+    <script type="text/javascript">
+        function colorPageBlock(pageblock, bkcolor, color) {
+            if (pageblock != null) 
+            {
+                pageblock.firstChild.style.cssText = "background-color: " + bkcolor + ";font-weight:bold;color:"+color+";";
+                //pageblock.firstChild.style.
+            }
+        }
+
+        function validaRespuesta(respuesta, id, rut, dv, leadId, leadName, leadLastName, negocio)
+        {
+           
+            if (respuesta == 1)
+            {  
+                var url = "/apex/SEC_VF_CV_Caso_Crea_Cliente?Id="+id+"&Negocio="+negocio; 
+                window.location.href = url;  
+            }
+            else if (respuesta == 2)
+            {
+                var url = "/apex/SEC_VF_CV_Caso_Crea_NoCliente?Rut="+rut+"&dv="+dv+"&LeadId="+leadId+"&LeadName="+leadName+"&LeadLastName="+leadLastName+"&Negocio="+negocio;
+                window.location.href = url; 
+            }
+            else if (respuesta == 3)
+            {
+                alert("Ha ocurrido un error validando el ingreso del RUT ingresado, favor verificar formato (XXXXXXXX-X).");
+            }
+            else
+            {
+                
+               // window.top.close();
+            }
+        }
+      
+        </script>
+    <div id="dv_CuerpoPrincipal" style="width: 100%; margin-left: auto; margin-right: auto; height: 100%;">
+  
+ 
+    <!--<br/>-->
+    <apex:form id="frm_sup">            
+            <div class="header_inline_right">
+                    <apex:panelGroup style="text-align:right;">
+                        <apex:commandButton id="cmd_ListadoCasos" value="Listado de Casos"  action="{!ListadoCasos}" styleClass="btnMenu" />
+                        <apex:commandButton id="cmd_NuevoCaso" value="Nuevo Caso"  disabled="true" styleClass="btnMenuCurrent" />
+                    </apex:panelGroup>
+            </div> 
+            <apex:pageBlock id="pbk_PanelCaso">
+                <apex:pageBlockSection title="Ingreso nuevo Caso" collapsible="false" columns="1" id="pbs_CasoHeader" >
+                    <apex:panelGrid columns="4"  >
+                        
+                        	<apex:outputLabel value="Ingrese RUT: " style="font-weight:bold;"></apex:outputLabel>
+                        	<apex:input value="{!RUT}"  type="text" id="RutCliente" style="width:200px;"   />  
+                        
+                            <apex:outputLabel style="font-weight:bold;" value="Seleccione Negocio: ">:</apex:outputLabel>  
+                            <apex:inputField value="{!CasoPopup.Negocio__c}"  style="width:200px;" />
+                        
+                    </apex:panelGrid>
+                    <hr/>
+                    <apex:panelGrid columns="1">    
+                            <apex:panelGroup style="text-align:left;" >
+                                    <apex:commandButton value="Procesar RUT" rerender="details"  action="{!validaRut}" oncomplete="validaRespuesta('{!Salida}','{!IdCuenta}','{!RUTC}','{!DVC}','{!LeadId}','{!LeadName}','{!LeadLastName}', '{!CasoPopup.Negocio__c}');" status="Status" styleClass="btnProcess"/>
+                                    <apex:commandButton value="Limpiar"  rerender="details"   status="Status" immediate="true" styleClass="btnClean" action="{!NuevoCaso}"/>                           
+                            </apex:panelGroup> 
+                    </apex:panelGrid>
+                <!--<script>colorPageBlock(document.getElementById("{!$Component.pbs_CasoHeader}"), "gray", "white");</script>-->
+                <script>colorPageBlock(document.getElementById("{!$Component.pbs_CasoHeader}"), "#EF861C", "white");</script>
+                </apex:pageBlockSection>
+                
+            </apex:pageBlock>
+    </apex:form>
+    <apex:actionStatus id="Status">
+            <apex:facet name="start">
+                <apex:outputPanel >
+                    <div class="popupBackground" />
+                    <div class="popupPanel">
+                        &nbsp; Espere...<img src="/apexpages/devmode/img/saveStatus.gif" />
+                    </div>
+                </apex:outputPanel> 
+            </apex:facet>
+        </apex:actionStatus>
+    </div>
+    </apex:page>

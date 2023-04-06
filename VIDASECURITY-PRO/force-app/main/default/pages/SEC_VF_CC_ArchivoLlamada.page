@@ -1,0 +1,13 @@
+<!--
+  @description       : 
+  @author            : Juan Espinoza Leon
+  @group             : 
+  @last modified on  : 10-04-2020
+  @last modified by  : Juan Espinoza Leon
+  Modifications Log 
+  Ver   Date         Author               Modification
+  1.0   10-04-2020   Juan Espinoza Leon   Initial Version
+-->
+<apex:page controller="CTR_CC_ArchivoLlamada" action="{!Redirect}" lightningStylesheets="true"
+ showHeader="false" sidebar="false"  docType="html-5.0"  >
+</apex:page>

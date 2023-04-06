@@ -1,0 +1,59 @@
+<apex:page controller="CTR_DerivarCasosEscritorio"  action="{!CargaCasoPendiente}" lightningStylesheets="true" showHeader="true" sidebar="true" tabStyle="Case"   >
+  
+    <apex:form id="EscritorioDigital_Form">           
+    
+        <apex:actionFunction action="{!ToCase}" name="ToCase"/>        
+        <apex:pageBlock title="Requerimiento Escritorio Digital" id="dv_header">
+                      
+
+            <apex:panelGrid columns="5" >
+                <apex:outputLabel style="font-weight:bold;" >Número de Caso:</apex:outputLabel>                      
+                <apex:commandLink action="{!ToCase}"  value="{!Caso.CaseNumber}" />   
+                &nbsp;      &nbsp; &nbsp;      &nbsp; 
+                <apex:outputLabel style="font-weight:bold;" >Negocio:</apex:outputLabel> 
+                <apex:outputLabel value="{!Caso.Negocio__c}"></apex:outputLabel>                        
+                                         
+
+                <apex:outputLabel style="font-weight:bold;" >RUT Titular:</apex:outputLabel>  
+                <apex:outputLabel value="{!Caso.RUT__c}"></apex:outputLabel>                    
+               &nbsp;      &nbsp; &nbsp;      &nbsp; 
+                <apex:outputLabel style="font-weight:bold;" >Nombre Titular:</apex:outputLabel>                            
+                <apex:outputLabel value="{!Caso.Nombre_Completo_Razon_Social__c}"></apex:outputLabel>
+
+                <apex:outputLabel style="font-weight:bold;" >Poliza Titular:</apex:outputLabel>  
+                <apex:outputLabel value="{!Poliza}" ></apex:outputLabel>                    
+                
+            </apex:panelGrid>
+          
+   <hr/>
+            
+
+
+                <apex:panelGrid columns="2"  >                    
+
+                        <apex:outputLabel style="font-weight:bold;" >Categoría:</apex:outputLabel>  
+                        <apex:outputLabel value="{!Caso.CASO_Categoria__c}"></apex:outputLabel>                        
+                         
+
+                        <apex:outputLabel style="font-weight:bold;" >Detalle Solicitud:</apex:outputLabel>  
+                        <apex:outputLabel value="{!EtiquetaSolicitud}"></apex:outputLabel>     
+                        
+                       
+                       
+                    </apex:panelGrid>
+                    <br/>
+                    <apex:pageMessages id="showmsg" escape="true"></apex:pageMessages>
+    
+    </apex:pageBlock>
+    <apex:pageBlock id="pb_Actionsr" >
+        <apex:commandButton action="{!ToEscritorioDigital}" value="Crear Requerimiento" />    
+                    
+        <apex:commandButton action="{!ToDerivar}"  value="Continuar Proceso Derivación" />
+            <apex:commandButton id="cmd_Cancelar" title="Cancelar" value="Volver a Caso" action="{!ToCase}"  />
+           
+        </apex:pageBlock>
+
+       </apex:form>
+       
+     
+</apex:page>

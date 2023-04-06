@@ -1,0 +1,167 @@
+<apex:page controller="SalesforceTP" showHeader="false" sidebar="false" action="{!CargaPopup}">
+    <script>
+    function OpenDetalleCliente(){
+        window.open("/apex/DetalleClienteTP", "DetalleCliente","Width=400px, Height=500px, center=yes, scrollbars=yes");
+    }
+    
+    // previo al unload, prompt al usuario de ventana cerrada
+    var message = "Debe cerrar la ventana desde la botonera o las opciones ingresadas no serán guardadas.";
+    window.onbeforeunload = function(event) {
+        var e = e || window.event;
+        if (e) {
+            e.returnValue = message; 
+        }
+        
+        return message;
+    };
+	
+    // unload, desbloquea panel totalpack al cerrar ventana
+    window.onunload = cerrarVentana; 
+    function cerrarVentana() { window.opener.fRegresoPopup(); }
+    </script>
+    
+        <style type="text/css"> <!--Popup-->
+    .popupBackground {
+        /* Background color */
+        background-color:black;
+        opacity: 0.5;
+        filter: alpha(opacity = 50);
+    
+        /* Dimensions */
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 998;
+        position: absolute;
+        
+        /* Mouse */
+        cursor:wait;
+    }
+        
+    .popupPanel {
+        /* Background color */
+        border: solid 2px orange;
+        background-color: white;
+        
+        /* Dimensions */
+        display: inline-block;
+        left: 20%;
+        width: 100px;
+        margin-left: 0px;
+        top: 50%;
+        height: 25px;
+        margin-top: -25px;
+        position: absolute;
+        z-index: 999;
+        
+        /* Mouse */
+        cursor:pointer;
+    }
+    </style>
+    
+    <apex:actionStatus id="Status">
+        <apex:facet name="start">
+            <apex:outputPanel >
+                <div class="popupBackground" />
+                <div class="popupPanel">
+                    &nbsp; Espere...<img src="/apexpages/devmode/img/saveStatus.gif" />
+                </div>
+            </apex:outputPanel> 
+        </apex:facet>
+    </apex:actionStatus>
+
+    <apex:form >
+        <apex:pageBlock id="pagina">
+            
+            <apex:pageBlockSection id="resultado">
+                <apex:actionFunction name="cerrarVentana" /> 
+                <apex:pageMessages />
+                <apex:inputHidden value="{!CierraPopup}" id="cPopup"/>
+                
+                <!-- estas funciones van dentro del PageBlock solo para poder capturar los valores ingresados por usuario -->
+                <script> 
+                function ValidaCerrar() {
+                    
+                    var accion = '{!$CurrentPage.parameters.accion}';
+                                       
+                    if (accion == 'CAMBIORUT') {
+                        
+                        var rut = document.getElementById("{!$Component.pagina.cRut}").value;
+
+                        if (!validaDV(rut)){ 
+                            return false;
+                    	}
+                        
+                        OpenDetalleCliente();
+                    }
+                    else {
+                        var cierra = document.getElementById("{!$Component.pagina.resultado.cPopup}").value;
+                        
+                        var cierraPopup = (cierra === 'true');
+
+                        if (!cierraPopup){ 
+                        	return false;
+                    	}
+                    }
+
+                    window.onbeforeunload = null; 
+                    window.close();
+                }
+                
+                 //entrega DV valido
+                function validaDV(T) {
+                    T = T.replace(/[^\dKk\/ ]+/g, '').toUpperCase();
+                    var dv = T.substr(T.length - 1)
+                    T = T.substr(0, T.length - 1);
+                    var M = 0,
+                        S = 1;
+                    for (; T; T = Math.floor(T / 10))
+                    S = (S + T % 10 * (9 - M++ % 6)) % 11;
+                    
+                    if ((S ? S - 1 : 'K') == dv) {
+                        return true;
+                    } else {
+                        alert('RUT incorrecto');
+                        return false;
+                    }
+                }
+                </script>
+            </apex:pageBlockSection>
+            
+            <!-- Pausa -->
+            <apex:selectRadio value="{!PausaItem}" rendered="{!IF($CurrentPage.parameters.accion='PAUSA', true, false)}" layout="pageDirection" >
+                <apex:selectOptions value="{!Pausas}" />
+            </apex:selectRadio><p/>
+            
+            <!-- Urgencia -->
+            <apex:outputText value="N° Turno: " rendered="{!IF($CurrentPage.parameters.accion='URGENCIA', true, false)}" />
+            <apex:inputText value="{!uTurno}" html-placeholder="Sin número" maxlength="2" rendered="{!IF($CurrentPage.parameters.accion='URGENCIA', true, false)}" />
+            <apex:selectRadio value="{!SerieItem}" rendered="{!IF($CurrentPage.parameters.accion='URGENCIA', true, false)}" layout="pageDirection">
+                <apex:selectOptions value="{!Series}" />
+            </apex:selectRadio><p/>
+            
+            <!-- CambioRut -->
+            <apex:outputText value="RUT: " rendered="{!IF($CurrentPage.parameters.accion='CAMBIORUT', true, false)}" />
+            <apex:inputText value="{!ClienteRut}" maxlength="12" id="cRut" rendered="{!IF($CurrentPage.parameters.accion='CAMBIORUT', true, false)}"/>  
+            
+            <!-- CambioEscritorio -->
+            <apex:outputText value="Módulo: " rendered="{!IF($CurrentPage.parameters.accion='CAMBIOESC', true, false)}" />
+            <apex:inputText value="{!IdEscritorio}" maxlength="2" id="cEsc" rendered="{!IF($CurrentPage.parameters.accion='CAMBIOESC', true, false)}"/>  
+            
+            <!-- RecordatorioCierreAtenciónEnCurso -->
+            <apex:outputText value="Recuerde terminar la atención en curso" style="font-size: large; font-weight: bold;" rendered="{!IF($CurrentPage.parameters.accion='RECORDATORIOCIERREATENCION', true, false)}" /><br/>
+            <apex:outputlabel value="Avisar nuevamente en " for="comboMinutos" rendered="{!IF($CurrentPage.parameters.accion='RECORDATORIOCIERREATENCION', true, false)}"/>
+            <apex:selectList value="{!RecordatorioCierreAtencionMsecs}" size="1" id="comboMinutos" rendered="{!IF($CurrentPage.parameters.accion='RECORDATORIOCIERREATENCION', true, false)}">
+                <apex:selectOptions value="{!ListaMinutos}" rendered="{!IF($CurrentPage.parameters.accion='RECORDATORIOCIERREATENCION', true, false)}"/>
+            </apex:selectList>
+            
+            <apex:commandButton action="{!GuardarPopup}" value="Guardar" style="float:center" reRender="resultado" status="Status" oncomplete="ValidaCerrar();" />
+        </apex:pageBlock>
+        
+        <!--opacidad panel-->
+        <apex:outputPanel id="tstpopup">
+            <apex:outputPanel styleClass="popupBackground" layout="block" rendered="{!DisplayWaitEnPopup}"/>
+        </apex:outputPanel>
+    </apex:form>
+</apex:page>

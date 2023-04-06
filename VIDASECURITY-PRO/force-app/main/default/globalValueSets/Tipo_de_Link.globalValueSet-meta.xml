@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Bases Propias</fullName>
+        <default>false</default>
+        <label>Bases Propias</label>
+    </customValue>
+    <customValue>
+        <fullName>Bases Normales</fullName>
+        <default>false</default>
+        <label>Bases Normales</label>
+    </customValue>
+    <customValue>
+        <fullName>Bases Especiales</fullName>
+        <default>false</default>
+        <label>Bases Especiales</label>
+    </customValue>
+    <masterLabel>Tipo de Link</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

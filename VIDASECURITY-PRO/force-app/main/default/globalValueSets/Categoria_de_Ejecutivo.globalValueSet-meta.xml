@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Prime</fullName>
+        <default>false</default>
+        <label>Prime</label>
+    </customValue>
+    <customValue>
+        <fullName>Preferente</fullName>
+        <default>false</default>
+        <label>Preferente</label>
+    </customValue>
+    <customValue>
+        <fullName>Clientes</fullName>
+        <default>false</default>
+        <label>Clientes</label>
+    </customValue>
+    <customValue>
+        <fullName>Todas</fullName>
+        <default>false</default>
+        <label>Todas</label>
+    </customValue>
+    <customValue>
+        <fullName>EJ SS CLIENTE / SE</fullName>
+        <default>false</default>
+        <label>EJ SS CLIENTE / SE</label>
+    </customValue>
+    <masterLabel>Categoría de Ejecutivo</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

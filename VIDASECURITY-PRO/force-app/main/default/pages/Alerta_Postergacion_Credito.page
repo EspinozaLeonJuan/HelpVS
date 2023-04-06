@@ -1,0 +1,12 @@
+<apex:page standardController="Account">
+
+  <script type="text/javascript">   
+   
+    var a = "{!Account.Postergacion_de_Credito__c}";
+       if (a == 'true')
+    { 
+      window.alert("Cliente con Postergación de crédito");
+    } 
+
+  </script> 
+</apex:page>

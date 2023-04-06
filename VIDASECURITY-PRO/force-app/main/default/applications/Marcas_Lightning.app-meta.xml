@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <brand>
+        <headerColor>#0070D2</headerColor>
+        <shouldOverrideOrgTheme>false</shouldOverrideOrgTheme>
+    </brand>
+    <formFactors>Large</formFactors>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
+    <label>Marcas</label>
+    <navType>Standard</navType>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>P_liza_P_gina_de_registro668</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Poliza__c</pageOrSobjectType>
+        <type>Flexipage</type>
+        <profile>Area Cumplimiento LGN</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>P_liza_P_gina_de_registro668</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Poliza__c</pageOrSobjectType>
+        <recordType>Poliza__c.Colectivos</recordType>
+        <type>Flexipage</type>
+        <profile>Area Cumplimiento LGN</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>P_liza_P_gina_de_registro668</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Poliza__c</pageOrSobjectType>
+        <recordType>Poliza__c.Individuales1</recordType>
+        <type>Flexipage</type>
+        <profile>Area Cumplimiento LGN</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>P_liza_P_gina_de_registro668</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Poliza__c</pageOrSobjectType>
+        <recordType>Poliza__c.Masivos</recordType>
+        <type>Flexipage</type>
+        <profile>Area Cumplimiento LGN</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>P_liza_P_gina_de_registro668</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Poliza__c</pageOrSobjectType>
+        <recordType>Poliza__c.PF</recordType>
+        <type>Flexipage</type>
+        <profile>Area Cumplimiento LGN</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>P_liza_P_gina_de_registro668</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Poliza__c</pageOrSobjectType>
+        <recordType>Poliza__c.Rentas_Vitalicias</recordType>
+        <type>Flexipage</type>
+        <profile>Area Cumplimiento LGN</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>CSV_P_gina_de_registro2</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>GCCSV__CSV__c</pageOrSobjectType>
+        <type>Flexipage</type>
+        <profile>Area Cumplimiento LGN</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>P_liza_P_gina_de_registro668</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Poliza__c</pageOrSobjectType>
+        <recordType>Poliza__c.Colectivos</recordType>
+        <type>Flexipage</type>
+        <profile>Area Cumplimiento</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>P_liza_P_gina_de_registro668</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Poliza__c</pageOrSobjectType>
+        <recordType>Poliza__c.Individuales1</recordType>
+        <type>Flexipage</type>
+        <profile>Area Cumplimiento</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>P_liza_P_gina_de_registro668</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Poliza__c</pageOrSobjectType>
+        <recordType>Poliza__c.Masivos</recordType>
+        <type>Flexipage</type>
+        <profile>Area Cumplimiento</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>P_liza_P_gina_de_registro668</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Poliza__c</pageOrSobjectType>
+        <recordType>Poliza__c.PF</recordType>
+        <type>Flexipage</type>
+        <profile>Area Cumplimiento</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>P_liza_P_gina_de_registro668</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>Poliza__c</pageOrSobjectType>
+        <recordType>Poliza__c.Rentas_Vitalicias</recordType>
+        <type>Flexipage</type>
+        <profile>Area Cumplimiento</profile>
+    </profileActionOverrides>
+    <profileActionOverrides>
+        <actionName>View</actionName>
+        <content>CSV_P_gina_de_registro2</content>
+        <formFactor>Large</formFactor>
+        <pageOrSobjectType>GCCSV__CSV__c</pageOrSobjectType>
+        <type>Flexipage</type>
+        <profile>Area Cumplimiento</profile>
+    </profileActionOverrides>
+    <tabs>standard-home</tabs>
+    <tabs>standard-Account</tabs>
+    <tabs>standard-Contact</tabs>
+    <tabs>Poliza__c</tabs>
+    <tabs>standard-report</tabs>
+    <tabs>standard-Dashboard</tabs>
+    <tabs>Marcas__Marca__c</tabs>
+    <tabs>Base_de_Conocimientos</tabs>
+    <tabs>GCCSV__CSV__c</tabs>
+    <uiType>Lightning</uiType>
+    <utilityBar>Marcas_UtilityBar</utilityBar>
+</CustomApplication>

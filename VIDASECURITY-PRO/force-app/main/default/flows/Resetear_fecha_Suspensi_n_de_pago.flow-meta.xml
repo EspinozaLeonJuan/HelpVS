@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>53.0</apiVersion>
+    <description>Dejar en blanco campos &apos;Fecha de inicio de suspensión&apos; y &apos;Cantidad de meses suspendido&apos;. UH asociada 30532</description>
+    <formulas>
+        <name>FechaNull</name>
+        <dataType>Date</dataType>
+        <expression>NULL</expression>
+    </formulas>
+    <interviewLabel>Resetear fecha Suspensión de pago {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Resetear fecha Suspensión de pago</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <description>Una vez alcanzada la fecha de fin de suspensión de pagos se deben dejar los campos respectivos en blanco</description>
+        <name>Actualizar_campos_suspensi_n_de_pagos</name>
+        <label>Actualizar campos suspensión de pagos</label>
+        <locationX>308</locationX>
+        <locationY>288</locationY>
+        <inputAssignments>
+            <field>Cantidad_de_meses_suspendido__c</field>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Fecha_de_inicio_de_suspensi_n__c</field>
+            <value>
+                <elementReference>FechaNull</elementReference>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <doesRequireRecordChangedToMeetCriteria>true</doesRequireRecordChangedToMeetCriteria>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Fecha_de_inicio_de_suspensi_n__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Cantidad_de_meses_suspendido__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>Fecha_fin_de_suspensi_n__c</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <object>Poliza__c</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <scheduledPaths>
+            <name>Campos_de_suspension_de_pago_a_nulo</name>
+            <connector>
+                <targetReference>Actualizar_campos_suspensi_n_de_pagos</targetReference>
+            </connector>
+            <label>Campos de suspension de pago a nulo</label>
+            <offsetNumber>1</offsetNumber>
+            <offsetUnit>Minutes</offsetUnit>
+            <recordField>Fecha_fin_de_suspensi_n__c</recordField>
+            <timeSource>RecordField</timeSource>
+        </scheduledPaths>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Obsolete</status>
+</Flow>

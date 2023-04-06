@@ -1,0 +1,9 @@
+<apex:page standardController="EmailMessage" extensions="HtmlWrapperController" renderAs="pdf">
+
+    <!--IMAGE PDF HEADER-->
+    <apex:image url="{!URLFOR($Resource.VidaSecurityLogo)}" width="135px" />
+    <!-- END IMAGE PDF HEADER -->  
+
+    <apex:outputText value="{!htmlText}" escape="false"/>
+
+</apex:page>

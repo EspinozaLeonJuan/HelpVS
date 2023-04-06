@@ -1,0 +1,14 @@
+<apex:page cache="true" sideBar="false">
+
+    <apex:tabPanel switchType="server" selectedTab="asignacionMasiva" id="asignacion">
+        <apex:tab label="Asignación Masiva de Ejecutivos" name="asignacionMasiva" id="asignacionMasiva">
+        <c:AsignacionMasivaEjecutivos />
+        </apex:tab>
+        <apex:tab label="Transferencia Masiva Entre Ejecutivos" name="transferenciaMasiva" id="transferenciaMasiva">
+        <c:transferenciaDeCarteraEntreEjecutivos />
+        </apex:tab>
+        <apex:tab label="Asignación Individual por Cuenta" name="asignacionIndividual" id="asignacionIndividual">
+        <c:transferirCuentaIndividual />
+        </apex:tab>
+    </apex:tabPanel>
+</apex:page>

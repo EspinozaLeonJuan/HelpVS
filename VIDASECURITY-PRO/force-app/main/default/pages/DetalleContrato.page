@@ -1,0 +1,42 @@
+<apex:page standardController="Poliza__c" extensions="DetalleContratoController">
+  <apex:sectionHeader title="Contratos" subtitle="Datos Generales"/>
+  <apex:form >
+    <apex:pageMessages />
+    <br/>
+    <apex:pageBlock title="Revise personas asociadas al contrato">
+        <apex:pageBlockButtons >
+                <input type="button" value="Volver" onclick="javascript:history.back();" />
+            </apex:pageBlockButtons>
+      <apex:pageBlockSection title="Seguro: Detalle del Contrato" columns="1">
+        <apex:pageBlockSectionItem >
+            <apex:outputLabel value="{!$ObjectType.Poliza__c.Fields.N_Poliza__c.Label}" />
+            <apex:outputLink value="/{!Poliza__c.Id}">{!Poliza__c.N_Poliza__c}</apex:outputLink>
+        </apex:pageBlockSectionItem>
+        <apex:outputField value="{!Poliza__c.RecordType.Name}" label="Tipo"/>
+        <apex:outputField value="{!Poliza__c.Nombre_de_Producto__c}"/>
+      </apex:pageBlockSection>
+      <apex:pageBlockSection title="Personas asociadas al contrato">
+        <apex:pageBlockTable value="{!Contacto}" var="item">
+         <apex:column value="{!item.Rol__c}"/> 
+         <apex:column value="{!item.Name}"/> 
+         <apex:column value="{!item.Rut_contacto__c}"/> 
+       </apex:pageBlockTable>
+     </apex:pageBlockSection>
+     <apex:pageBlockSection title="Beneficiarios">
+      <apex:pageBlockTable value="{!ListaBenef}" var="item">
+       <apex:column value="{!item.Name}"/> 
+       <apex:column value="{!item.Rut__c}"/> 
+       <apex:column value="{!item.Tipo__c}"/> 
+       <apex:column value="{!item.Porcentaje__c}"/> 
+     </apex:pageBlockTable>
+   </apex:pageBlockSection>
+   <apex:pageBlockSection title="Dependientes">
+    <apex:pageBlockTable value="{!ListaDepend}" var="item">
+     <apex:column value="{!item.Name}"/> 
+     <apex:column value="{!item.Rut__c}"/> 
+     <apex:column value="{!item.Parentesco__c}"/> 
+   </apex:pageBlockTable>
+ </apex:pageBlockSection>
+</apex:pageBlock>
+</apex:form>
+</apex:page>

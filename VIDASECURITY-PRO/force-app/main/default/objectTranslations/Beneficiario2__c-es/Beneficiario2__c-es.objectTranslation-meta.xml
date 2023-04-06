@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Beneficiario</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Beneficiarios</value>
+    </caseValues>
+    <gender>Masculine</gender>
+    <layouts>
+        <layout>Formato Beneficiario</layout>
+        <sections>
+            <label></label>
+            <section>Datos Dirección</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Datos de Contacto</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+</CustomObjectTranslation>

@@ -1,0 +1,87 @@
+<apex:page renderAs="pdf" standardController="Case" extensions="LinksController" showHeader="false">
+    
+    <apex:stylesheet value="{!URLFOR($Resource.EstilosSalesforce, 'salesforce-common.css')}" />
+    <apex:stylesheet value="{!URLFOR($Resource.EstilosSalesforce, 'salesforce-extended.css')}" />
+    <apex:stylesheet value="{!URLFOR($Resource.CertificadoReclamoCasos, 'style.css')}" />
+    
+    <div class="header" align="center">
+        <apex:image value="{! URLFOR($Resource.CertificadoReclamoCasos, 'header.jpg') }" />
+    </div>
+    
+    <div class="body">
+        <h1>Comprobante de Solicitud</h1>
+        
+        <apex:pageBlock >
+            <apex:pageBlockSection columns="1">
+                <apex:outputField value="{!Case.CaseNumber}"/>
+                <apex:outputField value="{!Case.CreatedDate}"/>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    
+        <h2>Información del Solicitud</h2>
+        <apex:pageBlock title="Solicitante" rendered="{!Case.RUT_Solicitante__c != Case.RUT1__c }">
+            <apex:pageBlockSection columns="2">
+                <apex:outputField value="{!Case.Nombre_Solicitante__c}"/>
+              <apex:outputField value="{!Case.Region_Solicitante__c}"/>
+              <apex:outputField value="{!Case.RUT_Solicitante__c}"/>
+              <apex:outputField value="{!Case.Ciudad_Solicitante__c}"/>
+              <apex:outputField value="{!Case.Telefono_Solicitante__c}"/>
+              <apex:outputField value="{!Case.Comuna_Solicitante__c}"/>
+              <apex:outputField value="{!Case.Correo_electronico_Solicitante__c}"/>
+              <apex:outputField value="{!Case.Direccion_Solicitante__c}"/>          
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    
+    
+        <apex:pageBlock title="Contratante">
+            <apex:pageBlockSection columns="2">
+              <apex:outputField value="{!Case.Nombre_Completo_Razon_Social__c}"/>
+              <apex:outputField value="{!Case.RUT__c}"/>
+              <apex:outputField value="{!Case.Contact.Name}"/>       
+              <apex:outputField value="{!Case.Correo_Electronico__c}"/>                
+              <apex:outputField value="{!Case.Telefono_Particular__c}"/>
+              <apex:outputField value="{!Case.Domicilio_Particular_Completo__c}"/>              
+              <apex:outputField value="{!Case.Telefono_Comercial__c}"/>         
+              <apex:outputField value="{!Case.Domicilio_Comercial_Completo__c}"/>              
+              <apex:outputField value="{!Case.Celular__c}"/>              
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        
+        <apex:pageBlock title="Detalles de Solicitud">
+            <apex:pageBlockSection columns="1">
+                <apex:outputField value="{!Case.Canal__c}" />
+                <apex:outputField value="{!Case.Motivo_de_la_Solicitud__c}" />
+                <apex:outputField value="{!Case.Negocio__c}" />
+                <apex:outputField value="{!Case.Detalle_Solicitud__c}" />
+                <apex:outputField value="{!Case.Detalle_de_Rescate__c}" />                
+                <apex:outputField value="{!Case.Tipo_de_Cliente__c}" />            
+                <apex:outputText value="{!Case.Description}" />
+                <apex:outputField value="{!Case.Fecha_Hora_de_Cierre__c}" />   
+            </apex:pageBlockSection>            
+        </apex:pageBlock> 
+        
+        <apex:pageBlock title="Envio de Respuesta">
+            <apex:pageBlockSection columns="2">
+                <apex:outputField value="{!Case.Direccion_envio_respuesta__c }" />
+                <apex:outputField value="{!Case.Solicita_envio_a_otra_direccion__c }" />
+                <apex:outputField value="{!Case.Descripcion_de_Respuesta__c }" />
+                <apex:outputText value="{!Case.Direccion_Postal_Alternativa__c }" />
+                <apex:outputText value="{!Case.Correo_electronico_alternativo__c }" />
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        
+        <div class="extra_info">
+            <p class="telefono">800 222 100</p>
+            Atención Clientes<br /> 
+            Lunes a Jueves:<br />
+            Mañana de 9:00 a 14:00 hrs.<br />
+            Tarde desde 15:00 hrs a 18:00 hrs.<br />
+            Viernes<br />
+            Desde 9:00 a 15:00 hrs.(Continuado)<br />
+        </div>      
+    </div>
+    
+    <div class="footer" align="center">
+        <apex:image styleClass="footer" value="{! URLFOR($Resource.CertificadoReclamoCasos, 'footer.jpg') }" />
+    </div>
+</apex:page>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Empresa</fullName>
+        <default>false</default>
+        <label>Empresa</label>
+    </customValue>
+    <customValue>
+        <fullName>Corredor Actual</fullName>
+        <default>false</default>
+        <label>Corredor Actual</label>
+    </customValue>
+    <customValue>
+        <fullName>Corredor Nuev</fullName>
+        <default>false</default>
+        <label>Corredor Nuev</label>
+    </customValue>
+    <customValue>
+        <fullName>Otro</fullName>
+        <default>false</default>
+        <label>Otro</label>
+    </customValue>
+    <masterLabel>Tipos de contacto</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

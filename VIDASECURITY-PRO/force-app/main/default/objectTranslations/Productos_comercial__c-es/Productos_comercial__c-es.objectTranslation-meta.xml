@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Productos comercial</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Productos comerciales</value>
+    </caseValues>
+    <gender>Feminine</gender>
+    <layouts>
+        <layout>Formato Productos comercial</layout>
+        <sections>
+            <label></label>
+            <section>Información Inicial - Completar solo para Renovaciones</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+</CustomObjectTranslation>

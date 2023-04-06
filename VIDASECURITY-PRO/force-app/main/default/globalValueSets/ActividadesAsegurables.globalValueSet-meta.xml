@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Personal administrativos de empresas financieras, inmobiliarias, o cualquiera otro servicios sin riesgo adverso</fullName>
+        <default>false</default>
+        <label>Personal administrativos de empresas financieras, inmobiliarias, o cualquiera otro servicios sin riesgo adverso</label>
+    </customValue>
+    <customValue>
+        <fullName>Bomberos</fullName>
+        <default>false</default>
+        <label>Bomberos</label>
+    </customValue>
+    <customValue>
+        <fullName>Bufet de abogados</fullName>
+        <default>false</default>
+        <label>Bufet de abogados</label>
+    </customValue>
+    <customValue>
+        <fullName>Estudiantes</fullName>
+        <default>false</default>
+        <label>Estudiantes</label>
+    </customValue>
+    <customValue>
+        <fullName>Iglesias, religiosos, misioneros o asociaciones afines</fullName>
+        <default>false</default>
+        <label>Iglesias, religiosos, misioneros o asociaciones afines</label>
+    </customValue>
+    <customValue>
+        <fullName>Militares o Civiles de Fuerzas Armadas,  Carabineros y o Gendarmería</fullName>
+        <default>false</default>
+        <label>Militares o Civiles de Fuerzas Armadas,  Carabineros y o Gendarmería</label>
+    </customValue>
+    <customValue>
+        <fullName>Obreros de la Construcción</fullName>
+        <default>false</default>
+        <label>Obreros de la Construcción</label>
+    </customValue>
+    <customValue>
+        <fullName>Operarios empresas de servicio o fabricación con  riesgo adverso</fullName>
+        <default>false</default>
+        <label>Operarios empresas de servicio o fabricación con  riesgo adverso</label>
+    </customValue>
+    <customValue>
+        <fullName>Operarios empresas de servicio o fabricación sin riesgo adverso</fullName>
+        <default>false</default>
+        <label>Operarios empresas de servicio o fabricación sin riesgo adverso</label>
+    </customValue>
+    <customValue>
+        <fullName>Pasajeros naves aéreas o marítimas</fullName>
+        <default>false</default>
+        <label>Pasajeros naves aéreas o marítimas</label>
+    </customValue>
+    <customValue>
+        <fullName>Periodistas, televisión y medios de comunicación</fullName>
+        <default>false</default>
+        <label>Periodistas, televisión y medios de comunicación</label>
+    </customValue>
+    <customValue>
+        <fullName>Personal que manipula o fabrica Explosivos o materiales peligrosos</fullName>
+        <default>false</default>
+        <label>Personal que manipula o fabrica Explosivos o materiales peligrosos</label>
+    </customValue>
+    <customValue>
+        <fullName>Profesionales  de deportes o clubes o asociaciones deportivas</fullName>
+        <default>false</default>
+        <label>Profesionales  de deportes o clubes o asociaciones deportivas</label>
+    </customValue>
+    <customValue>
+        <fullName>Profesores</fullName>
+        <default>false</default>
+        <label>Profesores</label>
+    </customValue>
+    <customValue>
+        <fullName>Trabajadores agrícolas o forestales con riesgo adverso (aserraderos o fumigado)</fullName>
+        <default>false</default>
+        <label>Trabajadores agrícolas o forestales con riesgo adverso (aserraderos o fumigado)</label>
+    </customValue>
+    <customValue>
+        <fullName>Trabajadores agrícolas o forestales sin riesgo adverso</fullName>
+        <default>false</default>
+        <label>Trabajadores agrícolas o forestales sin riesgo adverso</label>
+    </customValue>
+    <customValue>
+        <fullName>Trabajadores de empresas publicas o gubernamentales</fullName>
+        <default>false</default>
+        <label>Trabajadores de empresas publicas o gubernamentales</label>
+    </customValue>
+    <customValue>
+        <fullName>Trabajadores de servicio de entretención, clubes, restaurantes, hoteles, zoológicos</fullName>
+        <default>false</default>
+        <label>Trabajadores de servicio de entretención, clubes, restaurantes, hoteles, zoológicos</label>
+    </customValue>
+    <customValue>
+        <fullName>Trabajadores de  Servicios de la Salud</fullName>
+        <default>false</default>
+        <label>Trabajadores de  Servicios de la Salud</label>
+    </customValue>
+    <customValue>
+        <fullName>Trabajadores en Altura y o alta tensión</fullName>
+        <default>false</default>
+        <label>Trabajadores en Altura y o alta tensión</label>
+    </customValue>
+    <customValue>
+        <fullName>Trabajadores minas rajo abierto</fullName>
+        <default>false</default>
+        <label>Trabajadores minas rajo abierto</label>
+    </customValue>
+    <customValue>
+        <fullName>Trabajadores minas subterránea</fullName>
+        <default>false</default>
+        <label>Trabajadores minas subterránea</label>
+    </customValue>
+    <customValue>
+        <fullName>Trabajadores portuarios o servicios marítimos no en altamar</fullName>
+        <default>false</default>
+        <label>Trabajadores portuarios o servicios marítimos no en altamar</label>
+    </customValue>
+    <customValue>
+        <fullName>Transportistas materiales no peligrosos</fullName>
+        <default>false</default>
+        <label>Transportistas materiales no peligrosos</label>
+    </customValue>
+    <customValue>
+        <fullName>Trasportistas materiales  Peligrosas</fullName>
+        <default>false</default>
+        <label>Trasportistas materiales  Peligrosas</label>
+    </customValue>
+    <customValue>
+        <fullName>Tripulación área</fullName>
+        <default>false</default>
+        <label>Tripulación área</label>
+    </customValue>
+    <customValue>
+        <fullName>Tripulación marítima, pesca, buzos</fullName>
+        <default>false</default>
+        <label>Tripulación marítima, pesca, buzos</label>
+    </customValue>
+    <customValue>
+        <fullName>Vigilantes armados o no armados</fullName>
+        <default>false</default>
+        <label>Vigilantes armados o no armados</label>
+    </customValue>
+    <customValue>
+        <fullName>Administrativos y o ejecutivos de empresas financieras, inmobiliarias, o cualquiera de servicios sin riesgo adverso</fullName>
+        <default>false</default>
+        <label>Administrativos y o ejecutivos de empresas financieras, inmobiliarias, o cualquiera de servicios sin riesgo adverso</label>
+    </customValue>
+    <customValue>
+        <fullName>Otro</fullName>
+        <default>false</default>
+        <label>Otro</label>
+    </customValue>
+    <customValue>
+        <fullName>Otros</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Otros</label>
+    </customValue>
+    <description>Actividades Asegurable</description>
+    <masterLabel>Actividades Asegurables</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

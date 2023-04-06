@@ -1,0 +1,32 @@
+<apex:page standardController="Poliza__c" extensions="DetallePolizaController">
+<apex:form >
+<apex:pageBlock title="">
+
+<apex:pageBlockSection title="Seguro: Detalle del Contrato">
+                <apex:outputText value="{!Poliza__c.N_Poliza__c}"/> <br></br>
+                 <apex:outputField value="{!Poliza__c.RecordType.Name}"/><br></br>
+                  <apex:outputField value="{!Poliza__c.Nombre_de_Producto__c}"/>
+         </apex:pageBlockSection>
+         
+         <apex:pageBlockSection title="Detalle de Póliza">
+         <apex:outputText value="Coberturas"/>
+         
+         </apex:pageBlockSection>
+         
+         </apex:pageBlock>
+         
+         <apex:pageBlock title="TODAS LAS COBERTURAS">
+         <apex:pageBlockSection title="CoberturaPolizaIndividual">
+	         <!-- ESTO SE COMENTA DEBIDO A QUE NO SEHA CREADO AUN EL METODO ListaCobertura -->
+	         <!-- 
+	         <apex:pageBlockTable value="{!ListaCobertura}" var="item">
+	           <apex:column value="{!item.Cap_Aseg}"/> 
+	             <apex:column value="{!item.Pri_Neta_Spp}"/> 
+	               <apex:column value="{!item.Iva}"/> 
+	               <apex:column value="{!item.Pri_Minima}"/> 
+	         </apex:pageBlockTable>
+	          -->
+         </apex:pageBlockSection>
+         </apex:pageBlock>
+         </apex:form>
+</apex:page>

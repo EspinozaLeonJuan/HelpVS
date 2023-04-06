@@ -1,0 +1,12 @@
+<apex:page id="pgCasoParticipante" controller="CLS_CasoParticipanteController" action="{!cargaDatosParticipante}">
+    <flow:interview name="Flujo_Caso_Aumento_Prima" interview="{!myflow}" >
+    	<apex:param name="Id_Participante" value="{!part.Id}"/>
+		<apex:param name="Id_Cuenta" value="{!part.Cuenta__c}"/>
+		<apex:param name="Id_Poliza" value="{!part.Poliza__c}"/>        
+        <apex:param name="Prima_Total_Final" value="{!part.Prima_Total_Final__c}"/>      
+        <apex:param name="Frecuencia_de_Pago" value="{!part.Frecuencia_de_Pago__c}"/>  
+    </flow:interview>
+    <apex:form id="frmCasoParticipante">
+    		<apex:commandButton action="{!ToDerivar}"  value="Derivar Caso" />
+    </apex:form>
+</apex:page>
